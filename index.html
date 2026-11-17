@@ -14,17 +14,12 @@
       -webkit-tap-highlight-color: transparent;
       padding-bottom: calc(max(env(safe-area-inset-bottom, 20px), 20px) + 4.5rem);
     }
-    /* iPhoneの時計・ノッチ・充電アイコンと被らないための上部セーフエリア余白 */
-    .safe-header {
-      padding-top: max(calc(env(safe-area-inset-top, 48px) + 8px), 52px);
-    }
+    .safe-header { padding-top: max(calc(env(safe-area-inset-top, 48px) + 8px), 52px); }
     .safe-modal {
       padding-top: max(calc(env(safe-area-inset-top, 48px) + 12px), 54px);
       padding-bottom: max(calc(env(safe-area-inset-bottom, 20px) + 16px), 32px);
     }
-    .safe-nav {
-      padding-bottom: max(env(safe-area-inset-bottom, 16px), 16px);
-    }
+    .safe-nav { padding-bottom: max(env(safe-area-inset-bottom, 16px), 16px); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     input[type="range"] { accent-color: #10b981; }
@@ -32,7 +27,7 @@
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen select-none">
 
-  <!-- 上部固定ヘッダー（safe-headerでiPhone上部バーを自動回避） -->
+  <!-- 上部固定ヘッダー -->
   <header class="safe-header sticky top-0 z-30 bg-slate-950/95 backdrop-blur border-b border-slate-800 px-3 pb-2">
     <div class="flex items-center justify-between gap-2 mb-2">
       <div class="flex items-center gap-1.5 min-w-0">
@@ -45,17 +40,11 @@
         </span>
       </div>
     </div>
-
-    <!-- 日付選択タブ -->
     <div id="dateTabs" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1"></div>
-
-    <!-- 馬場バイアス・クッション値・含水率バー -->
     <div id="biasBar" class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1.5 text-[11px]"></div>
   </header>
 
-  <!-- メインコンテンツ領域 -->
   <main class="max-w-xl mx-auto px-3 pt-3">
-
     <!-- ① レース一覧ビュー -->
     <section id="view-races" class="space-y-3">
       <div class="flex items-center justify-between gap-2">
@@ -64,8 +53,6 @@
           全レース表示: OFF
         </button>
       </div>
-
-      <!-- スクリーニング凡例バー -->
       <div class="flex items-center justify-between bg-slate-900/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-400">
         <div class="flex items-center gap-2 flex-wrap">
           <span>🔥<b class="text-rose-400">S</b>:勝負</span>
@@ -76,7 +63,6 @@
         </div>
         <span class="shrink-0 text-emerald-400 font-semibold ml-1">1時間前自動更新</span>
       </div>
-
       <div id="raceList" class="space-y-2.5"></div>
     </section>
 
@@ -93,10 +79,7 @@
             <div id="win5TotalCapture" class="text-lg font-extrabold text-emerald-400">18.4%</div>
           </div>
         </div>
-
         <p id="win5SummaryText" class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-lg p-2.5"></p>
-
-        <!-- Plan A / Plan B 切替 & 可変予算スライダー -->
         <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between">
             <span class="text-xs text-slate-400 font-medium">WIN5 予算上限（100円単位自動伸縮）</span>
@@ -104,20 +87,12 @@
           </div>
           <input id="win5BudgetSlider" type="range" min="1200" max="14400" step="600" value="3600" oninput="updateWin5Budget(this.value)" class="w-full" />
           <div class="flex gap-1.5 pt-1">
-            <button onclick="setWin5Plan('A')" id="btnPlanA" class="flex-1 text-xs py-1.5 rounded-lg font-bold border border-emerald-500 bg-emerald-500/20 text-emerald-300">
-              Plan A (純粋勝率直積)
-            </button>
-            <button onclick="setWin5Plan('B')" id="btnPlanB" class="flex-1 text-xs py-1.5 rounded-lg font-bold border border-slate-700 bg-slate-800 text-slate-300">
-              Plan B (序盤Type B+荒れ拡張)
-            </button>
+            <button onclick="setWin5Plan('A')" id="btnPlanA" class="flex-1 text-xs py-1.5 rounded-lg font-bold border border-emerald-500 bg-emerald-500/20 text-emerald-300">Plan A (純粋勝率直積)</button>
+            <button onclick="setWin5Plan('B')" id="btnPlanB" class="flex-1 text-xs py-1.5 rounded-lg font-bold border border-slate-700 bg-slate-800 text-slate-300">Plan B (序盤Type B+拡張)</button>
           </div>
         </div>
       </div>
-
-      <!-- WIN5 Leg 1〜Leg 5 リスト -->
       <div id="win5LegsContainer" class="space-y-2.5"></div>
-
-      <!-- 最終Leg 5 単勝ヘッジ定量表 -->
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-amber-300">🛡️ Leg 5「4連勝リーチ時」単勝ヘッジ目安表</h3>
@@ -141,7 +116,6 @@
           <div class="text-[11px] text-slate-400 mt-1">Pass節約: <span class="text-sky-300 font-bold">180,000円</span></div>
         </div>
       </div>
-
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
         <h3 class="text-xs font-bold text-white">📊 スクリーニング判定別・スキル別成績</h3>
         <div class="space-y-2 text-xs">
@@ -168,7 +142,6 @@
           <h2 class="text-sm font-bold text-white">🧬 アプリ専用コピー版スキル稼働状況</h2>
           <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">JSON省トークン仕様</span>
         </div>
-        <p class="text-xs text-slate-400">元のチャット用スキル（bayesian-*）と分離されたアプリ専用スキルです。週末の結果分析から改訂パッチを生成し進化させます。</p>
         <div class="space-y-2 text-xs">
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 flex justify-between items-center">
             <div><div class="font-bold text-emerald-300">app-bayesian-win5</div><div class="text-[11px] text-slate-400">芝発進乾燥ダ好位残し・7〜8枠昇格・58kg病み上がり減点</div></div>
@@ -184,29 +157,23 @@
           </div>
         </div>
       </div>
-
-      <!-- 事後3要因分解＆スキル改訂パッチ提案 -->
       <div class="bg-slate-900 border border-amber-500/40 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-amber-300">💡 事後3要因分解によるスキル改訂パッチ提案</span>
-          <span class="text-[11px] text-slate-400">日曜17:00自動生成</span>
+          <span class="text-xs font-bold text-amber-300">💡 事後3要因分解＆スキルアップデート連携</span>
+          <span class="text-[11px] text-slate-400">自動検証ログ</span>
         </div>
         <div id="skillPatchBox" class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs text-slate-300 space-y-1.5">
-          <div class="font-bold text-white">対象: app-bayesian-horse-racing-text / app-bayesian-win5</div>
-          <p class="text-slate-400">・芝スタート乾燥ダート（含水率5%以下）で名目先行馬多数の際、内2〜3番手ポケット好位馬と7〜8枠先行馬をTop3に優先保持するルールが有効稼働中。</p>
-          <p class="text-emerald-300">・リステッド/OPにおける58kg以上の長期休養・疾病明け人気馬の2頭軸固定禁止＆3歳軽量馬/最内昇級馬の優先編入を適用済み。</p>
+          <p class="text-slate-300">・芝スタート乾燥ダート戦における内ポケット好位馬と7〜8枠先行馬のTop3優先保持ルールが有効稼働中。</p>
+          <p class="text-emerald-300">・58kg以上の休養/疾病明け人気馬の2頭軸固定禁止と3歳軽量/最内昇級馬の優先昇格ルールを適用済み。</p>
         </div>
       </div>
     </section>
-
   </main>
 
-  <!-- 個別レースAI予想 ＆ 可変予算シミュレーター モーダル -->
+  <!-- 個別レースAI予想モーダル -->
   <div id="raceModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm overflow-y-auto">
     <div class="safe-modal min-h-screen px-2.5 flex items-end sm:items-center justify-center">
       <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl space-y-3 p-3.5">
-
-        <!-- モーダルヘッダー -->
         <div class="flex items-start justify-between border-b border-slate-800 pb-2.5">
           <div>
             <div class="flex items-center gap-1.5">
@@ -219,7 +186,6 @@
           <button onclick="closeRaceModal()" class="bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✕</button>
         </div>
 
-        <!-- 展開シナリオ・馬場バイアス推論 -->
         <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 space-y-1">
           <div class="flex items-center justify-between text-[11px]">
             <span class="text-emerald-400 font-bold">🧠 AI展開・馬場バイアス推論（F/E/H）</span>
@@ -228,34 +194,25 @@
           <p id="modalScenario" class="text-xs text-slate-200 leading-relaxed"></p>
         </div>
 
-        <!-- 可変予算シミュレーター（API消費ゼロ・ブラウザ内リアルタイム計算） -->
         <div class="bg-gradient-to-br from-emerald-950/60 via-slate-900 to-slate-950 border border-emerald-500/40 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between">
             <div>
               <span class="text-[11px] text-emerald-300 font-bold">💰 可変予算シミュレーター (API消費ゼロ)</span>
               <div class="text-[11px] text-slate-400">金額に合わせてPlackett-Luce最適配分を即時再計算</div>
             </div>
-            <div class="text-right">
-              <span id="modalBudgetValue" class="text-lg font-extrabold text-amber-400">10,000円</span>
-            </div>
+            <span id="modalBudgetValue" class="text-lg font-extrabold text-amber-400">10,000円</span>
           </div>
-
           <input id="modalBudgetSlider" type="range" min="1000" max="30000" step="500" value="10000" oninput="onModalBudgetChange(this.value)" class="w-full" />
-
           <div class="flex gap-1.5 flex-wrap">
             <button onclick="onModalBudgetChange(2000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">2,000円</button>
             <button onclick="onModalBudgetChange(5000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">5,000円</button>
-            <button onclick="onModalBudgetChange(10000)" class="text-[11px] bg-emerald-900/60 hover:bg-emerald-800/60 text-emerald-200 px-2.5 py-1 rounded border border-emerald-600/50">10,000円(標準)</button>
+            <button onclick="onModalBudgetChange(10000)" class="text-[11px] bg-emerald-900/60 text-emerald-200 px-2.5 py-1 rounded border border-emerald-600/50">10,000円(標準)</button>
             <button onclick="onModalBudgetChange(20000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">20,000円</button>
           </div>
-
-          <!-- 動的算出された最適買い目リスト -->
           <div id="modalTicketsList" class="space-y-1.5 pt-1"></div>
-
           <div id="modalPortfolioMetrics" class="flex items-center justify-between text-[11px] bg-slate-950/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-300"></div>
         </div>
 
-        <!-- 各馬の純粋勝率 f_i ・ 3着内率 ・ F/H評価一覧 -->
         <div class="space-y-1.5">
           <div class="flex items-center justify-between text-xs font-bold text-slate-300 px-1">
             <span>🏇 純粋勝率 $f_i$ ＆ ステージ別確率評価</span>
@@ -264,36 +221,21 @@
           <div id="modalHorsesList" class="space-y-1.5 max-h-72 overflow-y-auto pr-0.5"></div>
         </div>
 
-        <button onclick="closeRaceModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2.5 rounded-xl text-xs">
-          閉じる
-        </button>
+        <button onclick="closeRaceModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2.5 rounded-xl text-xs">閉じる</button>
       </div>
     </div>
   </div>
 
-  <!-- 下部固定ナビゲーションバー（safe-navでiPhoneホームバー領域も保護） -->
+  <!-- 下部固定ナビゲーションバー -->
   <nav class="safe-nav fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur border-t border-slate-800 px-4 pt-2">
     <div class="max-w-xl mx-auto grid grid-cols-4 gap-1 text-center">
-      <button onclick="switchMainView('races')" id="nav-races" class="flex flex-col items-center py-1 text-emerald-400 font-bold">
-        <span class="text-base">🏇</span>
-        <span class="text-[10px] mt-0.5">レース一覧</span>
-      </button>
-      <button onclick="switchMainView('win5')" id="nav-win5" class="flex flex-col items-center py-1 text-slate-400">
-        <span class="text-base">💎</span>
-        <span class="text-[10px] mt-0.5">WIN5予想</span>
-      </button>
-      <button onclick="switchMainView('stats')" id="nav-stats" class="flex flex-col items-center py-1 text-slate-400">
-        <span class="text-base">📊</span>
-        <span class="text-[10px] mt-0.5">成績・回収率</span>
-      </button>
-      <button onclick="switchMainView('skills')" id="nav-skills" class="flex flex-col items-center py-1 text-slate-400">
-        <span class="text-base">🧬</span>
-        <span class="text-[10px] mt-0.5">スキル管理</span>
-      </button>
+      <button onclick="switchMainView('races')" id="nav-races" class="flex flex-col items-center py-1 text-emerald-400 font-bold"><span class="text-base">🏇</span><span class="text-[10px] mt-0.5">レース一覧</span></button>
+      <button onclick="switchMainView('win5')" id="nav-win5" class="flex flex-col items-center py-1 text-slate-400"><span class="text-base">💎</span><span class="text-[10px] mt-0.5">WIN5予想</span></button>
+      <button onclick="switchMainView('stats')" id="nav-stats" class="flex flex-col items-center py-1 text-slate-400"><span class="text-base">📊</span><span class="text-[10px] mt-0.5">成績・回収率</span></button>
+      <button onclick="switchMainView('skills')" id="nav-skills" class="flex flex-col items-center py-1 text-slate-400"><span class="text-base">🧬</span><span class="text-[10px] mt-0.5">スキル管理</span></button>
     </div>
   </nav>
 
-  <!-- アプリケーション本体スクリプト -->
   <script>
     const DB = {
       "2026-11-15": {
@@ -311,29 +253,28 @@
             status: "🎯 的中 (払戻 30,600円)",
             scenario: "N_lead=4で流れた後、好位〜中団外目の差しが決まる展開。58kg以上の休養明け人気勢を割り引き、好位抜け出し軸のDual-Pivot構成。",
             horses: [
-              { mark: "◎", role: "1着妙味主軸", num: 14, name: "オーロラウィナー", style: "先", f: 24.5, q: 14.8, top2: 41.0, top3: 56.0, odds: 5.6, tags: ["F:後半2F 22.6s", "H:好位抜け出し+0.18"], comment: "東京1400m適性抜群。好位外から持続加速" },
-              { mark: "◯", role: "双頭対抗軸", num: 6, name: "マイネルチケット", style: "差", f: 20.2, q: 15.5, top2: 36.5, top3: 52.0, odds: 5.2, tags: ["F:3歳軽量55kg", "H:秋期3歳優遇+0.16"], comment: "3歳55kgの斤量利と末脚確実" },
-              { mark: "▲", role: "安定Connector", num: 3, name: "内枠ポケット馬", style: "先", f: 15.0, q: 16.2, top2: 30.0, top3: 47.5, odds: 4.9, tags: ["F:内枠好位", "H:3着内アンカー"], comment: "ロスなく立ち回り連対圏確保" },
-              { mark: "☆", role: "展開特注穴", num: 11, name: "外差し特注馬", style: "差", f: 11.5, q: 6.8, top2: 22.0, top3: 36.0, odds: 12.4, tags: ["F:上がり最速", "H:前崩れ浮上"], comment: "ハイペース時の外強襲候補" }
+              { mark: "◎", role: "1着妙味主軸", num: 14, name: "オーロラウィナー", style: "先", f: 24.5, q: 14.8, top2: 41.0, top3: 56.0, odds: 5.6, comment: "東京1400m適性抜群。好位外から持続加速" },
+              { mark: "◯", role: "双頭対抗軸", num: 6, name: "マイネルチケット", style: "差", f: 20.2, q: 15.5, top2: 36.5, top3: 52.0, odds: 5.2, comment: "3歳55kgの斤量利と末脚確実" },
+              { mark: "▲", role: "安定Connector", num: 3, name: "内枠ポケット馬", style: "先", f: 15.0, q: 16.2, top2: 30.0, top3: 47.5, odds: 4.9, comment: "ロスなく立ち回り連対圏確保" },
+              { mark: "☆", role: "展開特注穴", num: 11, name: "外差し特注馬", style: "差", f: 11.5, q: 6.8, top2: 22.0, top3: 36.0, odds: 12.4, comment: "ハイペース時の外強襲候補" }
             ]
           },
           {
-            id: "20261115-kyo-05", venue: "京都", r: 5, name: "2歳新馬", cond: "芝1800m", time: "12:25",
-            rank: "New", skill: "app-bayesian-make-debut", roi: "145%", hitRate: "46%", pivot: "Dual-Pivot", nLead: 2,
-            status: "AI予想済",
-            scenario: "想定RPCI 59.5のスロー瞬発力戦。4角先頭から0.6秒以内の好位を確保でき、かつ栗東CWで古馬基準＋後半2F 22.6sを突破した◎を最上位評価。",
+            id: "20261115-kyo-10", venue: "京都", r: 10, name: "アンドロメダS(L)", cond: "芝2000m", time: "15:00",
+            rank: "S", skill: "app-bayesian-horse-racing-text", roi: "338%", hitRate: "46%", pivot: "Dual-Pivot", nLead: 3,
+            status: "🎯 的中 (払戻 33,820円)",
+            scenario: "58kg病み上がり人気馬を減点し、3歳コース重賞実績馬と最内枠好位馬を上位評価。",
             horses: [
-              { mark: "◎", role: "1着突破主軸", num: 6, name: "CW基準突破新馬", style: "先", f: 29.0, q: 19.0, top2: 47.0, top3: 62.0, odds: 4.1, tags: ["F:CW 80.8-22.5s", "H:4角0.6s圏+0.20"], comment: "古馬基準時計と後半2F持続ラップを同時突破" },
-              { mark: "◯", role: "安定Connector", num: 2, name: "イン好位新馬", style: "先", f: 21.5, q: 22.0, top2: 39.0, top3: 55.0, odds: 3.6, tags: ["F:ゲート1F 11.7s", "H:イン溜め1F 11.2s"], comment: "発馬速く好位イン確保確実" },
-              { mark: "☆", role: "中穴Override", num: 9, name: "乗り込み8本特注", style: "差", f: 14.0, q: 7.5, top2: 26.0, top3: 41.0, odds: 11.2, tags: ["F:8本連続追切", "H:☆_override+0.22"], comment: "古馬2勝クラスに併せ馬先着の隠れ実力馬" },
-              { mark: "危", role: "過剰人気危", num: 1, name: "ご祝儀人気馬", style: "追", f: 7.5, q: 24.0, top2: 18.0, top3: 29.0, odds: 2.3, tags: ["F:1週前負荷不足", "H:4角後方届かず"], comment: "過剰人気6トリガー該当。1着軸禁止" }
+              { mark: "◎", role: "1着妙味主軸", num: 9, name: "バッドレイト", style: "先", f: 26.5, q: 16.0, top2: 43.0, top3: 58.0, odds: 5.4, comment: "京都2000m適性と好位持続力最上位" },
+              { mark: "◯", role: "双頭対抗軸", num: 1, name: "最内好位昇級馬", style: "先", f: 21.0, q: 14.5, top2: 37.0, top3: 52.5, odds: 6.2, comment: "1枠1番からロスなくイン抜け出し" },
+              { mark: "▲", role: "安定Connector", num: 4, name: "実力安定馬", style: "差", f: 15.5, q: 17.0, top2: 31.0, top3: 48.0, odds: 4.8, comment: "終い確実な3着内アンカー" }
             ]
           }
         ]
       }
     };
 
-    const WIN5_DATA = {
+    let WIN5_DATA = {
       summary: "前半福島10R（芝発進乾燥ダ1150m）は名目先行馬多数でも内ポケット好位馬と7〜8枠先行馬をTop3へ保持。京都10Rは58kg休養明け人気馬の2頭固定を避け、最内1枠57kg昇級馬と3歳軽量馬を本線編入。",
       legs: [
         { leg: 1, venue: "福島10R", name: "福島放送賞", cond: "ダ1150m", typeBPlus: true, note: "芝発進乾燥ダート：内ポケット好位＋7〜8枠先行残し", horses: [
@@ -348,8 +289,8 @@
           { num: 11, name: "好位持続馬", f: 14.5, odds: 8.2, note: "3番手評価" }
         ]},
         { leg: 3, venue: "京都10R", name: "アンドロメダS(L)", cond: "芝2000m", typeBPlus: false, note: "58kg病み上がり減点 × 最内57kg昇級＆3歳55kg抜擢", horses: [
-          { num: 1, name: "最内57kg連勝馬", f: 26.0, odds: 6.4, note: "F:1枠1番57kg / H:Bコース最内先行+0.18" },
-          { num: 9, name: "3歳コース重賞馬", f: 23.0, odds: 5.9, note: "F:同コース重賞覇者55kg / H:3歳優遇" },
+          { num: 9, name: "バッドレイト", f: 26.5, odds: 5.4, note: "F:京都2000m巧者 / H:好位抜け出し" },
+          { num: 1, name: "最内57kg連勝馬", f: 23.0, odds: 6.4, note: "F:1枠1番57kg / H:Bコース最内先行+0.18" },
           { num: 4, name: "好位安定馬", f: 16.0, odds: 4.8, note: "堅実駆け" }
         ]},
         { leg: 4, venue: "東京11R", name: "オーロラC(L)", cond: "芝1400m", typeBPlus: false, note: "好位抜け出し2強構成", horses: [
@@ -382,8 +323,7 @@
     function switchMainView(viewName) {
       ["races", "win5", "stats", "skills"].forEach(v => {
         document.getElementById(`view-${v}`).classList.toggle("hidden", v !== viewName);
-        const navBtn = document.getElementById(`nav-${v}`);
-        navBtn.className = v === viewName
+        document.getElementById(`nav-${v}`).className = v === viewName
           ? "flex flex-col items-center py-1 text-emerald-400 font-bold"
           : "flex flex-col items-center py-1 text-slate-400";
       });
@@ -391,8 +331,7 @@
 
     function renderDateTabs() {
       const container = document.getElementById("dateTabs");
-      const dates = Object.keys(DB);
-      container.innerHTML = dates.map(d => {
+      container.innerHTML = Object.keys(DB).map(d => {
         const active = d === state.selectedDate;
         return `<button onclick="selectDate('${d}')" class="shrink-0 text-xs px-3 py-1.5 rounded-lg font-bold transition ${
           active ? "bg-emerald-500 text-slate-950 shadow" : "bg-slate-900 text-slate-300 border border-slate-800"
@@ -403,6 +342,10 @@
     function selectDate(d) {
       state.selectedDate = d;
       state.selectedVenue = "ALL";
+      if (DB[d].win5 && DB[d].win5.legs) {
+        WIN5_DATA = DB[d].win5;
+        updateWin5Budget(state.win5Budget);
+      }
       renderDateTabs();
       renderBiasBar();
       renderVenueFilter();
@@ -425,13 +368,11 @@
     function renderVenueFilter() {
       const day = DB[state.selectedDate];
       const venues = ["ALL", ...new Set((day?.races || []).map(r => r.venue))];
-      const el = document.getElementById("venueFilter");
-      el.innerHTML = venues.map(v => {
+      document.getElementById("venueFilter").innerHTML = venues.map(v => {
         const active = v === state.selectedVenue;
-        const label = v === "ALL" ? "全会場" : v;
         return `<button onclick="selectVenue('${v}')" class="text-xs px-2.5 py-1 rounded-lg font-bold ${
           active ? "bg-slate-200 text-slate-950" : "bg-slate-900 text-slate-400 border border-slate-800"
-        }">${label}</button>`;
+        }">${v === "ALL" ? "全会場" : v}</button>`;
       }).join("");
     }
 
@@ -462,25 +403,25 @@
 
       let list = day.races.filter(r => state.selectedVenue === "ALL" || r.venue === state.selectedVenue);
       if (!state.showAllRaces && list.length > 6) {
-        const filtered = list.filter(r => ["S", "A", "New"].includes(r.rank) || r.r >= 10);
+        const filtered = list.filter(r => ["S", "A", "New"].includes(r.rank) || r.r >= 10 || r.predicted);
         if (filtered.length > 0) list = filtered;
       }
 
       container.innerHTML = list.map(r => {
         const topHorse = (r.horses && r.horses[0]) ? `${r.horses[0].mark} ${r.horses[0].num}番 ${r.horses[0].name} (f=${r.horses[0].f}%)` : "1時間前自動予想待機";
         return `
-          <div onclick="openRaceModal('${r.id}')" class="bg-slate-900 hover:bg-slate-800/90 border border-slate-800 rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-2">
+          <div onclick="openRaceModal('${r.id}')" class="bg-slate-900 hover:bg-slate-800/90 border ${r.predicted ? "border-emerald-500/40" : "border-slate-800"} rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-2">
             <div class="flex items-center justify-between">
-              <div class="flex items-center gap-2">
-                <span class="bg-slate-800 text-slate-200 font-extrabold text-xs px-2 py-0.5 rounded">${r.venue}${r.r}R</span>
-                <span class="font-bold text-sm text-white">${r.name}</span>
-                <span class="text-xs text-slate-400">${r.cond}</span>
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="shrink-0 bg-slate-800 text-slate-200 font-extrabold text-xs px-2 py-0.5 rounded">${r.venue}${r.r}R</span>
+                <span class="font-bold text-sm text-white truncate">${r.name}</span>
+                <span class="shrink-0 text-xs text-slate-400">${r.cond}</span>
               </div>
-              ${getRankBadgeHtml(r.rank)}
+              <div class="shrink-0 ml-1">${getRankBadgeHtml(r.rank)}</div>
             </div>
             <div class="flex items-center justify-between text-xs">
               <span class="text-emerald-300 font-medium truncate pr-2">${topHorse}</span>
-              <span class="text-slate-400 shrink-0">発走 ${r.time} ｜ 期待ROI <b class="text-amber-300">${r.roi || "115%"}</b></span>
+              <span class="text-slate-400 shrink-0">${r.status && r.status.includes("🎯") ? `<b class="text-emerald-400">${r.status}</b>` : `発走 ${r.time} ｜ ROI <b class="text-amber-300">${r.roi || "115%"}</b>`}</span>
             </div>
           </div>
         `;
@@ -496,7 +437,7 @@
       document.getElementById("modalRankBadge").outerHTML = getRankBadgeHtml(race.rank).replace("<span", '<span id="modalRankBadge"');
       document.getElementById("modalSkillBadge").textContent = race.skill;
       document.getElementById("modalRaceTitle").textContent = `${race.venue}${race.r}R ${race.name}`;
-      document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time} ｜ ステータス: ${race.status || "AI推論済"}`;
+      document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time} ｜ ${race.status || "AI推論済"}`;
       document.getElementById("modalPivotInfo").textContent = `${race.pivot || "Dual-Pivot"} / N_lead=${race.nLead || 3}`;
       document.getElementById("modalScenario").textContent = race.scenario;
 
@@ -510,8 +451,7 @@
     }
 
     function renderModalHorses(race) {
-      const container = document.getElementById("modalHorsesList");
-      container.innerHTML = (race.horses || []).map(h => {
+      document.getElementById("modalHorsesList").innerHTML = (race.horses || []).map(h => {
         const isDanger = h.mark === "消" || h.mark === "危";
         const badgeColor = isDanger ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-emerald-500/20 text-emerald-300 border-emerald-500/40";
         return `
@@ -520,13 +460,13 @@
               <div class="flex items-center gap-1.5">
                 <span class="text-xs font-extrabold px-1.5 py-0.5 rounded border ${badgeColor}">${h.mark}</span>
                 <span class="text-xs font-bold text-white">${h.num}番 ${h.name}</span>
-                <span class="text-[11px] text-slate-400">(${h.style}・${h.role})</span>
+                <span class="text-[11px] text-slate-400">(${h.style || "先"}・${h.role || "有力"})</span>
               </div>
-              <span class="text-xs font-mono text-amber-300 font-bold">${h.odds}倍</span>
+              <span class="text-xs font-mono text-amber-300 font-bold">${h.odds || 5.5}倍</span>
             </div>
             <div class="flex items-center justify-between text-[11px] text-slate-300">
-              <span>純粋勝率 <b class="text-emerald-400">${h.f}%</b> (市場 ${h.q}%)</span>
-              <span>2着内 <b>${h.top2}%</b> / 3着内 <b class="text-sky-300">${h.top3}%</b></span>
+              <span>純粋勝率 <b class="text-emerald-400">${h.f}%</b> (市場 ${h.q || 14}%)</span>
+              <span>2着内 <b>${h.top2 || 35}%</b> / 3着内 <b class="text-sky-300">${h.top3 || 48}%</b></span>
             </div>
             <p class="text-[11px] text-slate-400">${h.comment || ""}</p>
           </div>
@@ -558,25 +498,19 @@
         const a1 = round100(B * 0.6);
         const a2 = Math.max(100, B - a1);
         tickets = [
-          { zone: "Core", type: "ワイド", comb: `${h1.num} - ${h2.num}`, odds: "3.8倍", amt: a1, desc: "少額集中：本線ワイド元返し以上確保" },
+          { zone: "Core", type: "ワイド", comb: `${h1.num} - ${h2.num}`, odds: "3.8倍", amt: a1, desc: "少額集中：本線ワイド元返し確保" },
           { zone: "Alpha", type: "馬連", comb: `${h1.num} - ${h2.num}`, odds: "9.5倍", amt: a2, desc: "本線馬連ボーナス" }
         ];
       } else if (B <= 12000) {
-        const a1 = round100(B * 0.35);
-        const a2 = round100(B * 0.25);
-        const a3 = round100(B * 0.20);
-        const a4 = Math.max(100, B - a1 - a2 - a3);
+        const a1 = round100(B * 0.35), a2 = round100(B * 0.25), a3 = round100(B * 0.20), a4 = Math.max(100, B - a1 - a2 - a3);
         tickets = [
           { zone: "Core", type: "馬連", comb: `${h1.num} - ${h2.num}`, odds: "9.5倍", amt: a1, desc: "◎◯双頭軸本線" },
           { zone: "Core", type: "ワイド", comb: `${h1.num} - ${h3.num}`, odds: "4.6倍", amt: a2, desc: "安定Connector結線（タテ目防衛）" },
-          { zone: "Alpha", type: "単勝", comb: `${h1.num} (${h1.name})`, odds: `${h1.odds}倍`, amt: a3, desc: "純粋勝率1位アタマ期待値枠" },
+          { zone: "Alpha", type: "単勝", comb: `${h1.num} (${h1.name})`, odds: `${h1.odds || 5.0}倍`, amt: a3, desc: "純粋勝率1位アタマ期待値枠" },
           { zone: "Alpha", type: "3連複", comb: `${h1.num}-${h2.num}-(${h3.num},${h4.num})`, odds: "24.0倍", amt: a4, desc: "超過収益フォーメーション" }
         ];
       } else {
-        const a1 = round100(B * 0.30);
-        const a2 = round100(B * 0.25);
-        const a3 = round100(B * 0.25);
-        const a4 = Math.max(100, B - a1 - a2 - a3);
+        const a1 = round100(B * 0.30), a2 = round100(B * 0.25), a3 = round100(B * 0.25), a4 = Math.max(100, B - a1 - a2 - a3);
         tickets = [
           { zone: "Core", type: "馬連", comb: `${h1.num} - (${h2.num}, ${h3.num})`, odds: "8.2倍", amt: a1, desc: "主力馬連2点厚め配分" },
           { zone: "Core", type: "ワイド", comb: `${h1.num} - ${h2.num}`, odds: "3.8倍", amt: a2, desc: "高確率元返しロック" },
@@ -585,8 +519,7 @@
         ];
       }
 
-      const listEl = document.getElementById("modalTicketsList");
-      listEl.innerHTML = tickets.map((t, idx) => {
+      document.getElementById("modalTicketsList").innerHTML = tickets.map((t, idx) => {
         const key = `${race.id}-${idx}`;
         const checked = !!state.checkedTickets[key];
         return `
@@ -634,19 +567,20 @@
       const budget = Number(val);
       state.win5Budget = budget;
       const maxPoints = Math.floor(budget / 100);
+      const legs = WIN5_DATA.legs || [];
+      if (legs.length < 5) return;
       const counts = [1, 1, 1, 1, 1];
 
       while (true) {
-        let bestLeg = -1;
-        let bestScore = -1;
+        let bestLeg = -1, bestScore = -1;
         for (let r = 0; r < 5; r++) {
-          const leg = WIN5_DATA.legs[r];
+          const leg = legs[r];
           const nextIdx = counts[r];
-          if (nextIdx >= leg.horses.length) continue;
+          if (!leg.horses || nextIdx >= leg.horses.length) continue;
           const currentProd = counts.reduce((a, b) => a * b, 1);
           const newProd = (currentProd / counts[r]) * (counts[r] + 1);
           if (newProd <= maxPoints) {
-            let score = leg.horses[nextIdx].f;
+            let score = Number(leg.horses[nextIdx].f) || 10;
             if (state.win5Plan === "B" && leg.typeBPlus) score *= 1.35;
             if (score > bestScore) { bestScore = score; bestLeg = r; }
           }
@@ -657,27 +591,26 @@
 
       const actualPoints = counts.reduce((a, b) => a * b, 1);
       document.getElementById("win5BudgetLabel").textContent = `${(actualPoints * 100).toLocaleString()}円 (${actualPoints}点 / ${counts.join("×")})`;
-      document.getElementById("win5SummaryText").textContent = WIN5_DATA.summary;
+      document.getElementById("win5SummaryText").textContent = WIN5_DATA.summary || "WIN5純粋勝率順最適化フォーメーション";
 
       let jointProb = 1.0;
-      const container = document.getElementById("win5LegsContainer");
-      container.innerHTML = WIN5_DATA.legs.map((leg, idx) => {
+      document.getElementById("win5LegsContainer").innerHTML = legs.map((leg, idx) => {
         const k = counts[idx];
-        const cumF = leg.horses.slice(0, k).reduce((s, h) => s + h.f, 0);
+        const cumF = (leg.horses || []).slice(0, k).reduce((s, h) => s + (Number(h.f) || 15), 0);
         jointProb *= (cumF / 100);
         return `
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-1.5">
-                <span class="bg-indigo-500/20 text-indigo-300 text-xs font-extrabold px-2 py-0.5 rounded">Leg ${leg.leg}</span>
-                <span class="font-bold text-sm text-white">${leg.venue} ${leg.name}</span>
+                <span class="bg-indigo-500/20 text-indigo-300 text-xs font-extrabold px-2 py-0.5 rounded">Leg ${leg.leg || (idx+1)}</span>
+                <span class="font-bold text-sm text-white">${leg.venue || ""} ${leg.name || ""}</span>
                 ${leg.typeBPlus ? `<span class="bg-rose-500/20 border border-rose-500/40 text-rose-300 text-[10px] font-bold px-1.5 py-0.5 rounded">⚠️Type B+</span>` : ""}
               </div>
               <span class="text-xs font-bold text-emerald-400">${k}頭選択 (突破率 ${cumF.toFixed(1)}%)</span>
             </div>
-            <p class="text-[11px] text-slate-400">${leg.note}</p>
+            <p class="text-[11px] text-slate-400">${leg.paceNote || leg.note || ""}</p>
             <div class="space-y-1">
-              ${leg.horses.map((h, hIdx) => {
+              ${(leg.horses || []).map((h, hIdx) => {
                 const picked = hIdx < k;
                 return `
                   <div class="flex items-center justify-between text-xs px-2.5 py-1.5 rounded-lg border ${
@@ -685,9 +618,9 @@
                   }">
                     <div>
                       <span class="font-bold">${picked ? "✅" : "・"} ${h.num}番 ${h.name}</span>
-                      <span class="text-[11px] ml-1 opacity-80">(${h.note})</span>
+                      <span class="text-[11px] ml-1 opacity-80">(${h.note || ""})</span>
                     </div>
-                    <span class="font-mono font-bold ${picked ? "text-amber-300" : ""}">f=${h.f}% (${h.odds}倍)</span>
+                    <span class="font-mono font-bold ${picked ? "text-amber-300" : ""}">f=${h.f}% (${h.odds || 5.0}倍)</span>
                   </div>
                 `;
               }).join("")}
@@ -697,35 +630,29 @@
       }).join("");
 
       document.getElementById("win5TotalCapture").textContent = `${(jointProb * 100).toFixed(1)}%`;
-
-      document.getElementById("win5HedgeTable").innerHTML = WIN5_DATA.hedges.map(h => `
-        <div class="flex items-center justify-between bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-1.5">
-          <span class="font-bold text-slate-200">${h.num}番 ${h.name} (単勝 ${h.odds}倍)</span>
-          <span class="text-amber-300 font-mono">5万保証: <b>${h.hedge50k}円</b> / 10万保証: <b>${h.hedge100k}円</b></span>
-        </div>
-      `).join("");
     }
 
     async function syncGitHubLiveData() {
       const syncBadge = document.getElementById("syncStatusBadge");
       try {
         const res = await fetch(`./data/index.json?t=${Date.now()}`);
-        if (!res.ok) {
-          syncBadge.textContent = "🔄 ローカル検証モード";
-          return;
-        }
+        if (!res.ok) { syncBadge.textContent = "🔄 ローカル検証モード"; return; }
         const idx = await res.json();
         const shortSync = (idx.lastSync || "最新").replace(/^20\d\d-/, "").replace(" JST", "");
         syncBadge.textContent = `🔄 自動取得: ${shortSync}`;
         syncBadge.className = "inline-block text-[11px] bg-emerald-950 border border-emerald-500/50 text-emerald-300 px-2.5 py-0.5 rounded-full cursor-pointer whitespace-nowrap";
 
         if (!idx.availableDates) return;
+        let preferredDate = null;
 
         for (const dateKey of idx.availableDates) {
           const dayRes = await fetch(`./data/${dateKey}.json?t=${Date.now()}`);
           if (!dayRes.ok) continue;
           const liveDay = await dayRes.json();
           if (!liveDay.races || liveDay.races.length === 0) continue;
+
+          const hasPredicted = liveDay.races.some(r => r.predicted && Array.isArray(r.horses) && r.horses.length > 0);
+          if (hasPredicted) preferredDate = dateKey;
 
           const venues = [...new Set(liveDay.races.map(r => r.venue))];
           const mappedRaces = liveDay.races.map((r, i) => ({
@@ -737,48 +664,42 @@
             time: r.postTime || "15:00",
             rank: r.rank || "B",
             skill: r.skill || "app-bayesian-horse-racing-text",
-            roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "114%",
-            hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "43%",
+            roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "116%",
+            hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "44%",
             pivot: r.pivotType || "Dual-Pivot",
             nLead: r.nLead || 3,
-            status: r.predicted ? "AI本予想完了" : "スクリーニング済(1時間前待機)",
-            scenario: r.scenario || r.summary || "出馬表自動取得・スクリーニング完了。発走1時間前に本予想を自動生成します。",
+            predicted: !!r.predicted,
+            status: r.resultStatus || (r.predicted ? "AI本予想完了" : "出馬表待機(1時間前自動実行)"),
+            scenario: r.scenario || r.summary || "出馬表発表後に発走1時間前パイプラインが本予想を自動生成します。",
             horses: Array.isArray(r.horses) && r.horses.length > 0 ? r.horses.map(h => ({
               mark: h.mark || "△",
-              role: h.role || "候補",
+              role: h.role || "有力",
               num: Number(h.num) || 1,
               name: h.name || "出走馬",
               style: h.style || "先",
-              f: Number(h.f) || 12.0,
-              q: Number(h.q) || 9.0,
-              top2: Number(h.top2) || 24.0,
-              top3: Number(h.top3) || 38.0,
-              odds: Number(h.odds) || 6.0,
-              tags: Array.isArray(h.tags) ? h.tags : ["F:自動取得"],
+              f: Number(h.f) || 15.0,
+              q: Number(h.q) || 12.0,
+              top2: Number(h.top2) || 28.0,
+              top3: Number(h.top3) || 42.0,
+              odds: Number(h.odds) || 5.8,
               comment: h.comment || ""
             })) : [
-              { mark: "◎", role: "1時間前本予想待機", num: 1, name: `${r.name} 注目軸候補`, style: "先", f: 24.0, q: 16.0, top2: 40.0, top3: 55.0, odds: 4.8, tags: ["F:自動収集済"], comment: r.summary || "発走1時間前に馬柱・オッズから本予想を自動実行します" },
-              { mark: "◯", role: "対抗候補", num: 2, name: "対抗妙味候補", style: "差", f: 18.5, q: 14.0, top2: 33.0, top3: 47.0, odds: 6.2, tags: ["H:展開利"], comment: "スクリーニング上位評価" },
-              { mark: "▲", role: "安定Connector", num: 3, name: "連対アンカー候補", style: "先", f: 14.0, q: 15.0, top2: 28.0, top3: 44.0, odds: 5.5, tags: ["H:3着内安定"], comment: "2・3着安定アンカー" }
+              { mark: "◎", role: "出馬表発表待機", num: 1, name: `${r.name} (枠順確定前)`, style: "先", f: 24.0, q: 16.0, top2: 40.0, top3: 55.0, odds: 4.8, comment: r.summary || "木曜夕方の出馬表発表＆発走1時間前に実馬名へ自動更新されます" },
+              { mark: "◯", role: "対抗候補", num: 2, name: "対抗候補", style: "差", f: 18.5, q: 14.0, top2: 33.0, top3: 47.0, odds: 6.2, comment: "スクリーニング評価上位" }
             ]
           }));
 
           DB[dateKey] = {
-            label: `${dateKey.slice(5).replace("-", "/")} 自動取得`,
+            label: `${dateKey.slice(5).replace("-", "/")}${hasPredicted ? " AI予想済" : " 番組取得"}`,
             status: "live",
-            biases: venues.map(v => ({ venue: v, surf: "自動取得済", trend: "全12R出馬表・スクリーニング同期済" })),
-            races: mappedRaces
+            biases: venues.map(v => ({ venue: v, surf: "自動取得済", trend: hasPredicted ? "AI本予想・実馬名同期済" : "全12Rスクリーニング済" })),
+            races: mappedRaces,
+            win5: liveDay.win5
           };
         }
 
-        const latest = idx.availableDates[idx.availableDates.length - 1];
-        if (DB[latest]) {
-          state.selectedDate = latest;
-          renderDateTabs();
-          renderBiasBar();
-          renderVenueFilter();
-          renderRaceList();
-        }
+        const targetDate = preferredDate || idx.availableDates[idx.availableDates.length - 1];
+        if (DB[targetDate]) selectDate(targetDate);
       } catch (e) {
         console.warn("Auto sync skipped:", e);
       }
@@ -795,3 +716,4 @@
   </script>
 </body>
 </html>
+<!-- === END OF FILE === -->
