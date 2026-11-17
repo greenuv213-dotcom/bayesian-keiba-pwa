@@ -1,0 +1,103 @@
+{
+  "date": "2026-11-21",
+  "screened": false,
+  "races": [
+    {
+      "raceId": "202608050505",
+      "venue": "京都",
+      "raceNumber": 5,
+      "venueLabel": "京都5R",
+      "name": "2歳新馬",
+      "surfaceDist": "芝1600m",
+      "postTime": "",
+      "rank": "New",
+      "skill": "app-bayesian-make-debut",
+      "predicted": false
+    },
+    {
+      "raceId": "202608050506",
+      "venue": "京都",
+      "raceNumber": 6,
+      "venueLabel": "京都6R",
+      "name": "2歳新馬",
+      "surfaceDist": "ダ1200m",
+      "postTime": "",
+      "rank": "New",
+      "skill": "app-bayesian-make-debut",
+      "predicted": false
+    },
+    {
+      "raceId": "202608050509",
+      "venue": "京都",
+      "raceNumber": 9,
+      "venueLabel": "京都9R",
+      "name": "秋明菊賞",
+      "surfaceDist": "芝1400m",
+      "postTime": "14:25",
+      "rank": "B",
+      "skill": "app-bayesian-horse-racing-text",
+      "predicted": false
+    },
+    {
+      "raceId": "202608050510",
+      "venue": "京都",
+      "raceNumber": 10,
+      "venueLabel": "京都10R",
+      "name": "比叡S",
+      "surfaceDist": "芝2400m",
+      "postTime": "15:00",
+      "rank": "A",
+      "skill": "app-bayesian-horse-racing-text",
+      "predicted": false
+    },
+    {
+      "raceId": "202608050511",
+      "venue": "京都",
+      "raceNumber": 11,
+      "venueLabel": "京都11R",
+      "name": "シトリンS",
+      "surfaceDist": "ダ1900m",
+      "postTime": "15:40",
+      "rank": "A",
+      "skill": "app-bayesian-horse-racing-text",
+      "predicted": false
+    },
+    {
+      "raceId": "202603030509",
+      "venue": "福島",
+      "raceNumber": 9,
+      "venueLabel": "福島9R",
+      "name": "高湯温泉特別",
+      "surfaceDist": "芝1800m",
+      "postTime": "14:10",
+      "rank": "B",
+      "skill": "app-bayesian-horse-racing-text",
+      "predicted": false
+    },
+    {
+      "raceId": "202603030510",
+      "venue": "福島",
+      "raceNumber": 10,
+      "venueLabel": "福島10R",
+      "name": "福島放送賞",
+      "surfaceDist": "ダ1150m",
+      "postTime": "14:45",
+      "rank": "A",
+      "skill": "app-bayesian-horse-racing-text",
+      "predicted": false
+    },
+    {
+      "raceId": "202603030511",
+      "venue": "福島",
+      "raceNumber": 11,
+      "venueLabel": "福島11R",
+      "name": "福島記念",
+      "surfaceDist": "芝2000m",
+      "postTime": "15:20",
+      "rank": "A",
+      "skill": "app-bayesian-horse-racing-text",
+      "predicted": false
+    }
+  ],
+  "updatedAt": "2026-11-17 22:46 JST"
+}
