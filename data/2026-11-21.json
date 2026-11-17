@@ -1,6 +1,6 @@
 {
   "date": "2026-11-21",
-  "screened": false,
+  "screened": true,
   "races": [
     {
       "raceId": "202608050505",
@@ -99,5 +99,5 @@
       "predicted": false
     }
   ],
-  "updatedAt": "2026-11-17 22:46 JST"
+  "updatedAt": "2026-11-17 23:58 JST"
 }
