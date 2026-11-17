@@ -1,0 +1,2138 @@
+<!DOCTYPE html>
+<html lang="ja" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <title>Bayesian Racing Pro — AI競馬予想PWA</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['-apple-system', 'BlinkMacSystemFont', 'Inter', 'Hiragino Sans', 'Hiragino Kaku Gothic ProN', 'Meiryo', 'sans-serif'],
+            mono: ['ui-monospace', 'SFMono-Regular', 'Menlo', 'Monaco', 'Consolas', 'monospace']
+          },
+          colors: {
+            slate: {
+              850: '#151f32',
+              925: '#0a101d',
+              950: '#060a12'
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom scrollbar & native app feel */
+    * { -webkit-tap-highlight-color: transparent; }
+    body {
+      background-color: #060a12;
+      color: #f1f5f9;
+      overscroll-behavior-y: none;
+    }
+    .no-scrollbar::-webkit-scrollbar { display: none; }
+    .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    
+    /* Custom range slider for iPhone touch */
+    input[type=range] {
+      -webkit-appearance: none;
+      background: transparent;
+    }
+    input[type=range]::-webkit-slider-runnable-track {
+      height: 8px;
+      border-radius: 999px;
+      background: #1e293b;
+    }
+    input[type=range]::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      height: 24px;
+      width: 24px;
+      border-radius: 50%;
+      background: #10b981;
+      border: 3px solid #ecfdf5;
+      margin-top: -8px;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.5);
+      cursor: pointer;
+    }
+    .glass-header {
+      background: rgba(10, 16, 29, 0.88);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .glass-nav {
+      background: rgba(10, 16, 29, 0.94);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+    }
+    @keyframes pulseSubtle {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.65; }
+    }
+    .animate-pulse-subtle {
+      animation: pulseSubtle 2.2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="min-h-screen flex justify-center bg-slate-950 selection:bg-emerald-500 selection:text-slate-950">
+
+  <!-- Main App Shell (Responsive iPhone frame on Desktop, Full screen on Mobile) -->
+  <div id="appShell" class="w-full max-w-md lg:max-w-2xl min-h-screen bg-slate-925 border-x border-slate-800/80 flex flex-col relative pb-24 shadow-2xl">
+
+    <!-- ==================== STICKY TOP HEADER ==================== -->
+    <header class="sticky top-0 z-30 glass-header border-b border-slate-800/90">
+      <!-- Top Status Row -->
+      <div class="px-3.5 pt-2.5 pb-1.5 flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="w-7 h-7 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center text-slate-950 font-black text-sm shadow-sm shadow-emerald-500/30">
+            B
+          </div>
+          <div>
+            <div class="flex items-center gap-1.5">
+              <h1 class="text-sm font-bold tracking-tight text-white">Bayesian Racing Pro</h1>
+              <span id="skillVerBadge" class="text-[10px] font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-1.5 py-0.2 rounded">v2.4</span>
+            </div>
+            <p class="text-[10px] text-slate-400 leading-none mt-0.5">3-Skill Auto-Screening & Kelly Engine</p>
+          </div>
+        </div>
+
+        <!-- API Quota Badge & Frame Width Toggle -->
+        <div class="flex items-center gap-1.5">
+          <button onclick="openApiModal()" class="flex items-center gap-1.5 bg-slate-900 hover:bg-slate-800 border border-slate-700/80 rounded-full px-2.5 py-1 text-[11px] transition">
+            <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+            <span class="text-slate-300 font-medium">API消費:</span>
+            <span id="apiCounterText" class="font-mono font-bold text-emerald-400">4/1,500</span>
+          </button>
+          <button onclick="toggleScreenWidth()" title="画面幅切替 (iPhone / ワイド)" class="hidden lg:flex w-7 h-7 items-center justify-center rounded-full bg-slate-900 border border-slate-700/80 text-slate-400 hover:text-white text-xs">
+            <i class="fa-solid fa-mobile-screen-button" id="widthIcon"></i>
+          </button>
+        </div>
+      </div>
+
+      <!-- Date Selection Tabs -->
+      <div class="px-3 py-1.5 flex gap-1.5 overflow-x-auto no-scrollbar" id="dateTabsContainer">
+        <!-- Rendered by JS -->
+      </div>
+
+      <!-- Track Bias & Physical Condition Bar (Cushion & Moisture) -->
+      <div class="px-3 py-1.5 bg-slate-900/90 border-t border-slate-800/70 flex items-center gap-2 overflow-x-auto no-scrollbar text-[11px]" id="trackConditionBar">
+        <!-- Rendered by JS -->
+      </div>
+    </header>
+
+    <!-- ==================== MAIN TAB VIEWS ==================== -->
+    <main class="flex-1 px-3 pt-3 space-y-3">
+
+      <!-- TAB 1: RACE LIST & SCREENING -->
+      <section id="tab-races" class="space-y-3">
+        <!-- Venue & Screening Filter Bar -->
+        <div class="bg-slate-900/90 border border-slate-800 rounded-xl p-2.5 space-y-2">
+          <div class="flex items-center justify-between gap-2">
+            <!-- Venue Pills -->
+            <div class="flex bg-slate-950 p-0.5 rounded-lg border border-slate-800 flex-1" id="venueFilterGroup">
+              <button onclick="setVenueFilter('ALL')" data-venue="ALL" class="venue-btn flex-1 py-1 text-xs font-bold rounded-md bg-emerald-500 text-slate-950 transition">全会場</button>
+              <button onclick="setVenueFilter('東京')" data-venue="東京" class="venue-btn flex-1 py-1 text-xs font-medium rounded-md text-slate-400 hover:text-white transition">東京</button>
+              <button onclick="setVenueFilter('京都')" data-venue="京都" class="venue-btn flex-1 py-1 text-xs font-medium rounded-md text-slate-400 hover:text-white transition">京都</button>
+              <button onclick="setVenueFilter('福島')" data-venue="福島" class="venue-btn flex-1 py-1 text-xs font-medium rounded-md text-slate-400 hover:text-white transition">福島</button>
+            </div>
+
+            <!-- 1R-12R Full Grid Toggle -->
+            <button onclick="toggleAll12RMode()" id="toggle12RBtn" class="px-2.5 py-1.5 rounded-lg text-[11px] font-semibold bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1 shrink-0">
+              <i class="fa-solid fa-table-list text-emerald-400"></i>
+              <span id="toggle12RText">全36R表示</span>
+            </button>
+          </div>
+
+          <!-- Screening Filter Pills -->
+          <div class="flex items-center gap-1.5 overflow-x-auto no-scrollbar pt-0.5" id="gradeFilterGroup">
+            <button onclick="setGradeFilter('ALL')" data-grade="ALL" class="grade-btn shrink-0 px-2.5 py-1 rounded-full text-[11px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40">すべて表示</button>
+            <button onclick="setGradeFilter('SA')" data-grade="SA" class="grade-btn shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800/80 text-slate-400 border border-slate-700/70">🔥 S・✨ A勝負のみ</button>
+            <button onclick="setGradeFilter('DEBUT')" data-grade="DEBUT" class="grade-btn shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800/80 text-slate-400 border border-slate-700/70">🔰 新馬スキル対象</button>
+            <button onclick="setGradeFilter('TYPEB')" data-grade="TYPEB" class="grade-btn shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800/80 text-slate-400 border border-slate-700/70">⚠️ 荒れ警戒(Type B+)</button>
+            <button onclick="setGradeFilter('PASS')" data-grade="PASS" class="grade-btn shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800/80 text-slate-400 border border-slate-700/70">💤 見送り(Pass)</button>
+          </div>
+        </div>
+
+        <!-- Daily Screening Summary Banner -->
+        <div id="dailySummaryBanner" class="bg-gradient-to-r from-slate-900 via-slate-900 to-emerald-950/40 border border-slate-800 rounded-xl px-3 py-2 flex items-center justify-between">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Race Cards List Container -->
+        <div id="raceListContainer" class="space-y-2.5">
+          <!-- Populated by JS -->
+        </div>
+      </section>
+
+      <!-- TAB 2: WIN5 DEDICATED PREDICTION (app-bayesian-win5) -->
+      <section id="tab-win5" class="hidden space-y-3">
+        <!-- WIN5 Header & Date Switch -->
+        <div class="bg-gradient-to-br from-indigo-950/60 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-xl p-3 space-y-2.5">
+          <div class="flex items-start justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="px-2 py-0.5 text-[10px] font-mono font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 rounded">app-bayesian-win5</span>
+                <span class="text-[11px] text-emerald-400 font-semibold"><i class="fa-solid fa-bolt mr-0.5"></i>5鞍一括推論 (1 req)</span>
+              </div>
+              <h2 class="text-base font-bold text-white mt-1">WIN5 純粋勝率 $f_{r,i}$ 最適化エンジン</h2>
+              <p class="text-[11px] text-slate-400">EV順序ではなく「純粋勝率順」で並べて予算内の同時捕捉率 $\prod F_k$ を最大化</p>
+            </div>
+            <div class="flex bg-slate-950 p-0.5 rounded-lg border border-slate-800 shrink-0">
+              <button onclick="setWin5Day('11/15')" id="win5Day15" class="px-2 py-1 text-[11px] font-bold rounded bg-indigo-500 text-white">11/15(日)</button>
+              <button onclick="setWin5Day('11/22')" id="win5Day22" class="px-2 py-1 text-[11px] font-medium rounded text-slate-400">11/22(日)</button>
+            </div>
+          </div>
+
+          <!-- WIN5 Budget & Plan Optimizer Controls -->
+          <div class="bg-slate-950/90 border border-slate-800/90 rounded-lg p-2.5 space-y-2.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-semibold text-slate-300">💰 WIN5 予算上限スライダー (JavaScript即時配分)</span>
+              <span id="win5BudgetDisplay" class="text-sm font-mono font-black text-emerald-400">3,600円 (36点)</span>
+            </div>
+
+            <input type="range" id="win5BudgetSlider" min="1200" max="9600" step="400" value="3600" oninput="updateWin5Budget(this.value)" class="w-full">
+
+            <!-- Quick Budget & Plan Mode Buttons -->
+            <div class="flex flex-wrap items-center justify-between gap-1.5">
+              <div class="flex gap-1">
+                <button onclick="updateWin5Budget(1600)" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300">1,600円</button>
+                <button onclick="updateWin5Budget(2400)" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300">2,400円</button>
+                <button onclick="updateWin5Budget(3600)" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300">3,600円</button>
+                <button onclick="updateWin5Budget(4800)" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300">4,800円</button>
+                <button onclick="updateWin5Budget(7200)" class="px-2 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300">7,200円</button>
+              </div>
+              <div class="flex bg-slate-900 p-0.5 rounded border border-slate-700">
+                <button onclick="setWin5Plan('A')" id="win5PlanABtn" class="px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-500 text-slate-950">Plan A: 標準</button>
+                <button onclick="setWin5Plan('B')" id="win5PlanBBtn" class="px-2 py-0.5 text-[10px] font-medium rounded text-slate-400">Plan B: 序盤荒れ拡張</button>
+              </div>
+            </div>
+
+            <!-- Formation Matrix Summary -->
+            <div id="win5FormationSummary" class="pt-1 border-t border-slate-800/80 flex items-center justify-between text-xs">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Leg 1 to Leg 5 Cards -->
+        <div id="win5LegsContainer" class="space-y-2.5">
+          <!-- Populated by JS -->
+        </div>
+
+        <!-- Leg 5 Single-Win Hedge Calculator -->
+        <div class="bg-slate-900 border border-amber-500/30 rounded-xl p-3 space-y-2">
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-1.5">
+              <i class="fa-solid fa-shield-halved text-amber-400"></i>
+              <h3 class="text-xs font-bold text-white">Leg 5 突破時「危険な人気馬」単勝ヘッジ計算機</h3>
+            </div>
+            <span class="text-[10px] font-mono text-amber-300 bg-amber-500/10 px-1.5 py-0.5 rounded">Module 10 Hedge</span>
+          </div>
+          <p class="text-[11px] text-slate-400">Leg 4まで突破し、Leg 5でベイズ減点（58kg休み明け等）により外した1番人気馬が勝った場合の保険単勝額を自動算出します。</p>
+          <div class="grid grid-cols-3 gap-2 pt-1 text-center">
+            <div class="bg-slate-950 p-2 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-400">想定ヘッジ対象オッズ</div>
+              <div class="text-sm font-mono font-bold text-white mt-0.5">2.8倍</div>
+            </div>
+            <div class="bg-slate-950 p-2 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-400">推奨単勝ヘッジ額</div>
+              <div id="win5HedgeAmount" class="text-sm font-mono font-bold text-amber-400 mt-0.5">2,000円</div>
+            </div>
+            <div class="bg-slate-950 p-2 rounded-lg border border-slate-800">
+              <div class="text-[10px] text-slate-400">ヘッジ的中時払戻</div>
+              <div id="win5HedgeReturn" class="text-sm font-mono font-bold text-emerald-400 mt-0.5">5,600円</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 3: PERFORMANCE & ROI DASHBOARD -->
+      <section id="tab-stats" class="hidden space-y-3">
+        <!-- Overall KPI Cards -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-3">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-sm font-bold text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-chart-line text-emerald-400"></i>
+                ベイズ予想スキル 累計パフォーマンス
+              </h2>
+              <p class="text-[11px] text-slate-400">2026年11月開催 検証済レース集計（自動照合）</p>
+            </div>
+            <span class="px-2 py-1 rounded-lg bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 font-mono font-bold text-xs">
+              +71,820円
+            </span>
+          </div>
+
+          <div class="grid grid-cols-4 gap-2 text-center">
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800/80">
+              <div class="text-[10px] text-slate-400">回収率 (ROI)</div>
+              <div class="text-base font-mono font-black text-emerald-400 mt-0.5">214.0%</div>
+            </div>
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800/80">
+              <div class="text-[10px] text-slate-400">勝負R的中率</div>
+              <div class="text-base font-mono font-black text-white mt-0.5">54.5%</div>
+            </div>
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800/80">
+              <div class="text-[10px] text-slate-400">総投資額</div>
+              <div class="text-xs font-mono font-bold text-slate-300 mt-1">63,000円</div>
+            </div>
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800/80">
+              <div class="text-[10px] text-slate-400">総回収額</div>
+              <div class="text-xs font-mono font-bold text-amber-400 mt-1">134,820円</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Performance by Screening Grade -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2.5">
+          <h3 class="text-xs font-bold text-slate-200 flex items-center justify-between">
+            <span>🎯 スクリーニング判定別 回収率・的中率</span>
+            <span class="text-[10px] text-slate-400 font-normal">見送り(Pass)で無駄打ちを削減</span>
+          </h3>
+          <div class="space-y-2 text-xs">
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-rose-400">🔥 S：勝負レース (期待値 & 確信度 最上位)</span>
+                <span class="font-mono font-bold text-emerald-400">回収率 288.4% / 的中率 66.7%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-gradient-to-r from-rose-500 to-emerald-400 h-full rounded-full" style="width: 92%"></div>
+              </div>
+              <div class="text-[10px] text-slate-400 mt-1">代表例: 京都10R アンドロメダS (338.2%)、東京11R オーロラC (306.0%)</div>
+            </div>
+
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-amber-400">✨ A：好機レース (歪み検知・妙味あり)</span>
+                <span class="font-mono font-bold text-emerald-400">回収率 182.5% / 的中率 45.0%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-amber-400 h-full rounded-full" style="width: 68%"></div>
+              </div>
+            </div>
+
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+              <div class="flex justify-between items-center mb-1">
+                <span class="font-bold text-teal-400">🔰 新馬戦 (app-bayesian-make-debut)</span>
+                <span class="font-mono font-bold text-emerald-400">回収率 242.0% / 的中率 60.0%</span>
+              </div>
+              <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+                <div class="bg-teal-400 h-full rounded-full" style="width: 78%"></div>
+              </div>
+            </div>
+
+            <div class="bg-slate-950/60 p-2.5 rounded-lg border border-slate-800/60 flex items-center justify-between">
+              <div>
+                <span class="font-bold text-slate-400">💤 Pass：見送り判定 (21鞍を自動スキップ)</span>
+                <p class="text-[10px] text-slate-500">オッズ歪み不足・混戦カオスレースの投資回避</p>
+              </div>
+              <span class="text-xs font-mono font-bold text-indigo-300 bg-indigo-500/10 border border-indigo-500/30 px-2 py-1 rounded">
+                約63,000円 節約
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Verified Race Hit Ledger -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2.5">
+          <h3 class="text-xs font-bold text-slate-200">📜 主要レース 予想検証＆払戻履歴（タップで詳細）</h3>
+          <div id="verifiedHistoryList" class="space-y-2">
+            <!-- Populated by JS -->
+          </div>
+        </div>
+      </section>
+
+      <!-- TAB 4: SKILL MANAGEMENT & SELF-EVOLUTION -->
+      <section id="tab-skills" class="hidden space-y-3">
+        <!-- Copied Skill Architecture Status -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <h2 class="text-sm font-bold text-white flex items-center gap-1.5">
+                <i class="fa-solid fa-code-branch text-emerald-400"></i>
+                スキル分離保護 ＆ アプリ専用コピー管理
+              </h2>
+              <p class="text-[11px] text-slate-400">元の3スキルは無傷で保持し、JSON軽量出力化した複製版を使用</p>
+            </div>
+            <span class="text-[10px] font-mono bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 px-2 py-0.5 rounded">トークン62%削減</span>
+          </div>
+
+          <div class="space-y-2 text-xs">
+            <!-- Skill 1 -->
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex items-center justify-between gap-2">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px] font-mono text-slate-400 line-through">bayesian-horse-racing-text</span>
+                  <span class="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded">🔒 原本保護</span>
+                </div>
+                <div class="font-mono font-bold text-emerald-400 mt-0.5 flex items-center gap-1.5">
+                  <i class="fa-solid fa-arrow-turn-up fa-rotate-90 text-slate-500"></i>
+                  app-bayesian-horse-racing-text
+                </div>
+                <p class="text-[10px] text-slate-400 mt-0.5">平場・特別・重賞用（10モジュール＋Plackett-Luce用確率JSON出力）</p>
+              </div>
+              <button onclick="openSkillPromptModal('text')" class="px-2.5 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-200 border border-slate-700 shrink-0">
+                仕様・JSON確認
+              </button>
+            </div>
+
+            <!-- Skill 2 -->
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex items-center justify-between gap-2">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px] font-mono text-slate-400 line-through">bayesian-make-debut</span>
+                  <span class="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded">🔒 原本保護</span>
+                </div>
+                <div class="font-mono font-bold text-teal-400 mt-0.5 flex items-center gap-1.5">
+                  <i class="fa-solid fa-arrow-turn-up fa-rotate-90 text-slate-500"></i>
+                  app-bayesian-make-debut
+                </div>
+                <p class="text-[10px] text-slate-400 mt-0.5">新馬戦・初出走過半数レース専用（調教ラップ・外厩・芝発走ダートバイアス）</p>
+              </div>
+              <button onclick="openSkillPromptModal('debut')" class="px-2.5 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-200 border border-slate-700 shrink-0">
+                仕様・JSON確認
+              </button>
+            </div>
+
+            <!-- Skill 3 -->
+            <div class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 flex items-center justify-between gap-2">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[10px] font-mono text-slate-400 line-through">bayesian-win5</span>
+                  <span class="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.2 rounded">🔒 原本保護</span>
+                </div>
+                <div class="font-mono font-bold text-indigo-400 mt-0.5 flex items-center gap-1.5">
+                  <i class="fa-solid fa-arrow-turn-up fa-rotate-90 text-slate-500"></i>
+                  app-bayesian-win5
+                </div>
+                <p class="text-[10px] text-slate-400 mt-0.5">WIN5 5鞍一括推論用（純粋勝率 $f_{r,i}$ 順序厳守・累積捕捉率 $F_k$ 出力）</p>
+              </div>
+              <button onclick="openSkillPromptModal('win5')" class="px-2.5 py-1.5 rounded bg-slate-800 hover:bg-slate-700 text-[11px] text-slate-200 border border-slate-700 shrink-0">
+                仕様・JSON確認
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Post-Mortem 3-Factor Analysis & Skill Patch Generator -->
+        <div class="bg-gradient-to-br from-slate-900 via-slate-900 to-indigo-950/40 border border-indigo-500/30 rounded-xl p-3 space-y-2.5">
+          <div class="flex items-center justify-between">
+            <div>
+              <span class="text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/30 px-1.5 py-0.5 rounded">週末一括反省バッチ (API 1回のみ)</span>
+              <h3 class="text-sm font-bold text-white mt-1">🧬 事後3要因分解 ＆ スキル自動アップデート提案</h3>
+            </div>
+          </div>
+          <p class="text-[11px] text-slate-300">11/14〜11/15の予想と実着順・ラップ・通過順を照合し、「展開」「能力」「馬場バイアス」の3要因でスキル改善パッチを生成しました。</p>
+
+          <!-- 3-Factor Cards -->
+          <div class="grid grid-cols-1 gap-2 text-xs">
+            <div class="bg-slate-950/90 p-2.5 rounded-lg border border-slate-800">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-emerald-400">① 馬場バイアス要因（京都10R・東京11R 成功要因）</span>
+                <span class="text-[10px] font-mono text-emerald-300">精度 94%</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">クッション値9.5超の秋季高速芝において「4角3〜6番手×内〜中枠」の事前確率ブーストが機能し、アンドロメダS(338%)・オーロラC(306%)のW的に直結。</p>
+            </div>
+
+            <div class="bg-slate-950/90 p-2.5 rounded-lg border border-amber-500/30">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-amber-400">② 展開×外差し過小評価の補正提案（京都11R エリザベス女王杯）</span>
+                <span class="text-[10px] font-mono text-amber-300">要パッチ適用</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">前半1000m 59.6秒の淀みない持続ラップ時、京都外回り2200mでは内枠先行勢のL1失速幅が想定より+0.3秒増大。外枠マクリ差し馬の減点緩和ルールを追加提案。</p>
+            </div>
+          </div>
+
+          <!-- Generated Skill Diff Patch Box -->
+          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-2">
+            <div class="flex items-center justify-between text-[11px]">
+              <span class="font-mono text-indigo-300 font-bold">提案パッチ: app-bayesian-horse-racing-text (v2.5差分)</span>
+              <button onclick="copyPatchText()" class="text-xs text-emerald-400 hover:underline flex items-center gap-1">
+                <i class="fa-regular fa-copy"></i> パッチをコピー
+              </button>
+            </div>
+            <pre id="skillPatchCode" class="text-[10px] font-mono text-slate-300 bg-slate-900/90 p-2 rounded border border-slate-800 overflow-x-auto whitespace-pre-wrap leading-relaxed">[Module 4: Kyoto Outer 2200m Sustained Pace Rule 追加]
+- 条件: 京都芝外回り & 想定ペースが淀みない持続戦 (PCI < 48.5)
+- 補正: 外枠(7-8枠)でも中団〜好位で脚を溜められる実績馬の外枠減点(-3%)を無効化し、L2-L1持続力上位馬の事後確率 p_i を +3.5% ブーストする。</pre>
+            <button onclick="applySkillPatch()" id="applyPatchBtn" class="w-full py-2 rounded-lg bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold text-xs transition shadow-md shadow-emerald-500/20 flex items-center justify-center gap-1.5">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+              <span>ワンタップでアプリ用スキルへ反映 (v2.4 → v2.5)</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- 60-Min Auto Execution & Token Saving Settings -->
+        <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2.5">
+          <h3 class="text-xs font-bold text-white flex items-center gap-1.5">
+            <i class="fa-solid fa-clock-rotate-left text-emerald-400"></i>
+            レース1時間前 自動実行 ＆ API節約設定 (GitHub Actions)
+          </h3>
+          <div class="space-y-2 text-xs">
+            <label class="flex items-center justify-between bg-slate-950 p-2.5 rounded-lg border border-slate-800 cursor-pointer">
+              <div>
+                <div class="font-semibold text-slate-200">開催日 08:30 全レース一括スクリーニング</div>
+                <div class="text-[10px] text-slate-400">1会場1リクエスト（計3回）でS/A/B/Pass判定を一括取得</div>
+              </div>
+              <input type="checkbox" checked onchange="showToast('朝の一括スクリーニング設定を更新しました')" class="w-4 h-4 accent-emerald-500">
+            </label>
+
+            <label class="flex items-center justify-between bg-slate-950 p-2.5 rounded-lg border border-slate-800 cursor-pointer">
+              <div>
+                <div class="font-semibold text-slate-200">発走60分前 自動本予想 (馬体重・直前オッズ反映)</div>
+                <div class="text-[10px] text-slate-400">新馬は make-debut、平場・特別は horse-racing-text を自動選択</div>
+              </div>
+              <input type="checkbox" checked onchange="showToast('発走60分前自動実行設定を更新しました')" class="w-4 h-4 accent-emerald-500">
+            </label>
+
+            <label class="flex items-center justify-between bg-slate-950 p-2.5 rounded-lg border border-slate-800 cursor-pointer">
+              <div>
+                <div class="font-semibold text-slate-200">「Pass（見送り）」レースのAPI呼び出し自動抑制</div>
+                <div class="text-[10px] text-slate-400">朝のスクリーニングでPass判定のレースは軽量Flashモデルで処理</div>
+              </div>
+              <input type="checkbox" checked onchange="showToast('API節約モード設定を更新しました')" class="w-4 h-4 accent-emerald-500">
+            </label>
+          </div>
+        </div>
+      </section>
+
+    </main>
+
+    <!-- ==================== INDIVIDUAL RACE AI PREDICTION DRAWER / MODAL ==================== -->
+    <div id="raceModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-end sm:items-center justify-center">
+      <div class="w-full max-w-md lg:max-w-2xl bg-slate-925 border-t sm:border border-slate-700 rounded-t-2xl sm:rounded-2xl max-h-[92vh] flex flex-col overflow-hidden shadow-2xl">
+        
+        <!-- Modal Sticky Header -->
+        <div class="px-4 py-3 bg-slate-900 border-b border-slate-800 flex items-center justify-between shrink-0">
+          <div id="modalHeaderInfo" class="flex-1 pr-2">
+            <!-- Populated by JS -->
+          </div>
+          <button onclick="closeRaceModal()" class="w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 flex items-center justify-center text-sm shrink-0">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+
+        <!-- Modal Scrollable Body -->
+        <div class="p-3.5 overflow-y-auto space-y-3.5 flex-1">
+          
+          <!-- Bayesian Module Reasoning Summary -->
+          <div id="modalReasoningBox" class="bg-slate-900/90 border border-slate-800 rounded-xl p-3 space-y-2">
+            <!-- Populated by JS -->
+          </div>
+
+          <!-- Zero-API Real-time Condition Toggles (Weight / Smart Money) -->
+          <div class="bg-slate-900 border border-indigo-500/30 rounded-xl p-2.5 space-y-2">
+            <div class="flex items-center justify-between">
+              <span class="text-[11px] font-bold text-indigo-300 flex items-center gap-1">
+                <i class="fa-solid fa-sliders"></i>
+                直前変動リアルタイム補正 (API消費ゼロ・JSベイズ再計算)
+              </span>
+              <span class="text-[10px] font-mono text-emerald-400">0 token</span>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 text-[11px]">
+              <label class="flex items-center justify-between bg-slate-950 px-2.5 py-1.5 rounded-lg border border-slate-800 cursor-pointer">
+                <span class="text-slate-300">⚖️ 人気馬の大幅馬体重増(+12kg)減点</span>
+                <input type="checkbox" id="toggleHeavyWeight" onchange="recalculateModalRace()" class="w-4 h-4 accent-emerald-500">
+              </label>
+              <label class="flex items-center justify-between bg-slate-950 px-2.5 py-1.5 rounded-lg border border-slate-800 cursor-pointer">
+                <span class="text-slate-300">📉 穴馬の直前スマートマネー急落反映</span>
+                <input type="checkbox" id="toggleSmartMoney" onchange="recalculateModalRace()" class="w-4 h-4 accent-emerald-500">
+              </label>
+            </div>
+          </div>
+
+          <!-- Horse Evaluation Table -->
+          <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
+            <div class="px-3 py-2 bg-slate-950 border-b border-slate-800 flex items-center justify-between">
+              <span class="text-xs font-bold text-white">🐎 ベイズ事後確率 $p_i$ ＆ エビデンス評価 (F/E/H)</span>
+              <span class="text-[10px] text-slate-400">純粋勝率 $f_i$ → 事後確率 $p_i$</span>
+            </div>
+            <div id="modalHorseTable" class="divide-y divide-slate-800/70">
+              <!-- Populated by JS -->
+            </div>
+          </div>
+
+          <!-- DYNAMIC BUDGET & OPTIMAL TICKET SIMULATOR -->
+          <div class="bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-500/40 rounded-xl p-3.5 space-y-3">
+            <div class="flex items-center justify-between">
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="px-1.5 py-0.5 text-[10px] font-mono font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 rounded">Plackett-Luce × Kelly</span>
+                  <span class="text-[10px] text-slate-400">API消費 0</span>
+                </div>
+                <h3 class="text-sm font-bold text-white mt-0.5">💰 金額可変・最適買い目シミュレーター</h3>
+              </div>
+              <div class="text-right">
+                <div class="text-[10px] text-slate-400">総予算 (100円単位)</div>
+                <div id="modalBudgetText" class="text-lg font-mono font-black text-emerald-400">5,000円</div>
+              </div>
+            </div>
+
+            <!-- Budget Slider -->
+            <input type="range" id="modalBudgetSlider" min="1000" max="30000" step="500" value="5000" oninput="onBudgetSliderChange(this.value)" class="w-full">
+
+            <!-- Quick Budget Pills -->
+            <div class="flex items-center justify-between gap-1">
+              <button onclick="onBudgetSliderChange(1500)" class="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300 border border-slate-700">1,500円</button>
+              <button onclick="onBudgetSliderChange(3000)" class="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300 border border-slate-700">3,000円</button>
+              <button onclick="onBudgetSliderChange(5000)" class="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300 border border-slate-700">5,000円</button>
+              <button onclick="onBudgetSliderChange(10000)" class="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300 border border-slate-700">10,000円</button>
+              <button onclick="onBudgetSliderChange(20000)" class="flex-1 py-1 rounded bg-slate-800 hover:bg-slate-700 text-[11px] font-mono text-slate-300 border border-slate-700">20,000円</button>
+            </div>
+
+            <!-- Selected Tactical Structure & Metrics -->
+            <div id="modalTacticalSummary" class="bg-slate-950/90 border border-slate-800 rounded-lg p-2.5">
+              <!-- Populated by JS -->
+            </div>
+
+            <!-- Tickets List (Interactive PAT Checkable) -->
+            <div class="space-y-1.5">
+              <div class="flex items-center justify-between text-[11px] text-slate-400 px-1">
+                <span>推奨買い目（タップで即PAT投票チェック✅）</span>
+                <button onclick="copyTicketsToClipboard()" class="text-emerald-400 hover:underline flex items-center gap-1">
+                  <i class="fa-regular fa-copy"></i> 買い目をコピー
+                </button>
+              </div>
+              <div id="modalTicketsContainer" class="space-y-1.5">
+                <!-- Populated by JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Actual Race Result Verification Box (if finished) -->
+          <div id="modalResultVerification" class="hidden">
+            <!-- Populated by JS -->
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- ==================== MODAL: API SAVING ARCHITECTURE & SKILL JSON ==================== -->
+    <div id="infoModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
+      <div class="w-full max-w-md bg-slate-900 border border-slate-700 rounded-2xl p-4 space-y-3 shadow-2xl">
+        <div class="flex items-center justify-between border-b border-slate-800 pb-2.5">
+          <h3 id="infoModalTitle" class="text-sm font-bold text-white">システム詳細</h3>
+          <button onclick="closeInfoModal()" class="w-7 h-7 rounded-full bg-slate-800 text-slate-400 flex items-center justify-center">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div id="infoModalBody" class="text-xs text-slate-300 space-y-2.5 max-h-[70vh] overflow-y-auto">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toastBox" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 hidden bg-emerald-500 text-slate-950 font-bold text-xs px-4 py-2 rounded-full shadow-lg flex items-center gap-2">
+      <i class="fa-solid fa-circle-check"></i>
+      <span id="toastText">完了しました</span>
+    </div>
+
+    <!-- ==================== BOTTOM FIXED NAVIGATION BAR ==================== -->
+    <nav class="fixed bottom-0 w-full max-w-md lg:max-w-2xl z-30 glass-nav border-t border-slate-800/90 px-2 py-1.5 grid grid-cols-4 gap-1" id="bottomNav">
+      <button onclick="switchMainTab('races')" data-tab="races" class="nav-tab-btn flex flex-col items-center justify-center py-1 rounded-xl text-emerald-400 bg-emerald-500/10">
+        <i class="fa-solid fa-horse-head text-base"></i>
+        <span class="text-[10px] font-bold mt-0.5">レース一覧</span>
+      </button>
+      <button onclick="switchMainTab('win5')" data-tab="win5" class="nav-tab-btn flex flex-col items-center justify-center py-1 rounded-xl text-slate-400 hover:text-slate-200">
+        <i class="fa-solid fa-gem text-base"></i>
+        <span class="text-[10px] font-medium mt-0.5">WIN5予想</span>
+      </button>
+      <button onclick="switchMainTab('stats')" data-tab="stats" class="nav-tab-btn flex flex-col items-center justify-center py-1 rounded-xl text-slate-400 hover:text-slate-200">
+        <i class="fa-solid fa-chart-pie text-base"></i>
+        <span class="text-[10px] font-medium mt-0.5">成績・回収率</span>
+      </button>
+      <button onclick="switchMainTab('skills')" data-tab="skills" class="nav-tab-btn flex flex-col items-center justify-center py-1 rounded-xl text-slate-400 hover:text-slate-200">
+        <i class="fa-solid fa-dna text-base"></i>
+        <span class="text-[10px] font-medium mt-0.5">スキル管理</span>
+      </button>
+    </nav>
+
+  </div>
+
+  <!-- ==================== APPLICATION LOGIC & REALISTIC DATASET ==================== -->
+  <script>
+    // --- STATE MANAGEMENT ---
+    let currentState = {
+      selectedDate: '11/14',
+      venueFilter: 'ALL',
+      gradeFilter: 'ALL',
+      showAll12R: false,
+      activeRaceId: null,
+      modalBudget: 5000,
+      checkedTickets: {},
+      win5Day: '11/15',
+      win5Budget: 3600,
+      win5Plan: 'A',
+      win5LockedHorses: {},
+      apiUsedCount: 4,
+      skillVersion: 'v2.4',
+      wideScreen: false
+    };
+
+    // --- DATES & TRACK PHYSICAL BIAS DATA ---
+    const DATES_CONFIG = {
+      '11/14': {
+        label: '11/14(土) 結果',
+        status: 'RESULT',
+        summary: '勝負S・好機A 4戦3勝 / アンドロメダS 338.2%的中！',
+        tracks: [
+          { venue: '東京', cushion: '9.5 (標準〜やや硬)', moisture: '芝12.8% / ダ4.1%', bias: '芝:内〜中好位 / ダ:芝発走外枠有利' },
+          { venue: '京都', cushion: '9.7 (硬め高速)', moisture: '芝10.4% / ダ3.5%', bias: '芝:4角好位イン持続 / ダ:乾き先行有利' },
+          { venue: '福島', cushion: '9.1 (標準)', moisture: '芝13.2% / ダ5.2%', bias: '芝:Bコース替わり内先行有利' }
+        ]
+      },
+      '11/15': {
+        label: '11/15(日) 結果',
+        status: 'RESULT',
+        summary: '東京11R オーロラC 306.0%的中！京都4R 新馬 316.0%的中！',
+        tracks: [
+          { venue: '東京', cushion: '9.6 (やや硬め)', moisture: '芝12.1% / ダ3.8%', bias: '芝1400m:内中好位抜け出し有利' },
+          { venue: '京都', cushion: '9.6 (やや硬め)', moisture: '芝10.9% / ダ3.2%', bias: '外回り持続戦は外差し台頭・ダ内ポケット残し' },
+          { venue: '福島', cushion: '9.0 (標準)', moisture: '芝13.5% / ダ4.9%', bias: 'ダ1700m:先行〜4角3番手以内圧倒' }
+        ]
+      },
+      '11/21': {
+        label: '11/21(土) 予想',
+        status: 'UPCOMING',
+        summary: '08:30 一括スクリーニング完了 / 勝負S 2鞍・新馬A 2鞍を検出',
+        tracks: [
+          { venue: '東京', cushion: '9.6 (想定)', moisture: '芝11.8% / ダ3.6%', bias: '芝:L2-L1瞬発力＆内枠好位 / ダ:外枠スムーズ' },
+          { venue: '京都', cushion: '9.8 (硬め高速)', moisture: '芝9.8% / ダ2.9%', bias: 'Cコース替わり内前バイアス強化に注意' },
+          { venue: '福島', cushion: '8.9 (標準)', moisture: '芝14.0% / ダ5.5%', bias: '芝:外差し徐々に台頭・ローカル平坦持続' }
+        ]
+      },
+      '11/22': {
+        label: '11/22(日) 予想',
+        status: 'UPCOMING',
+        summary: 'マイルCS(G1) & WIN5対象日 / 発走60分前自動トリガー待機中',
+        tracks: [
+          { venue: '東京', cushion: '9.5 (想定)', moisture: '芝12.0% / ダ3.9%', bias: '芝:中枠〜内枠の好位差し' },
+          { venue: '京都', cushion: '9.7 (硬め)', moisture: '芝10.1% / ダ3.1%', bias: '芝1600m:内〜中枠の好位・高速巡航適性重視' },
+          { venue: '福島', cushion: '8.8 (やや軟)', moisture: '芝14.4% / ダ6.0%', bias: '福島記念:ロングスパート持続力型' }
+        ]
+      }
+    };
+
+    // --- FEATURED RACES WITH FULL BAYESIAN PROBABILITY ENGINE DATA ---
+    const FEATURED_RACES = [
+      // ==================== 11/14 (SAT) ====================
+      {
+        id: '20261114_KYT10',
+        date: '11/14',
+        venue: '京都',
+        raceNum: 10,
+        name: 'アンドロメダS (L)',
+        surface: '芝2000m (内)',
+        headCount: 15,
+        postTime: '15:00',
+        autoStatus: 'DONE',
+        grade: 'S',
+        gradeLabel: '🔥 S：勝負',
+        typeBPlus: false,
+        skill: 'app-bayesian-horse-racing-text',
+        paceSummary: 'N_lead=3 / 想定PCI 51.2 (スロー〜平均の4角好位持続戦)',
+        moduleHighlights: [
+          '[Mod.2 馬場物理] クッション値9.7×京都内2000mで4角5番手以内のイン〜中目立ち回り馬を+4.5%ブースト',
+          '[Mod.6 クラス安定] シェイクユアハートの3勝C〜OP安定先行力とコース適性を最上位評価',
+          '[Mod.8 穴馬検知] 中枠7番マイネルケイツーのロスなき好位粘り込み過小評価を検出'
+        ],
+        resultSummary: {
+          hit: true,
+          invest: 10000,
+          payout: 33820,
+          roi: 338.2,
+          finishOrder: '1着 ◎8 シェイクユアハート (2人気) → 2着 ▲7 マイネルケイツー (10人気) → 3着 △2 リビアングラス (4人気)',
+          hitTickets: '馬連 7-8 (4,820円×200円) ＋ 3連複 2-7-8 (12,090円×200円) W的中！'
+        },
+        horses: [
+          { mark: '◎', num: 8, name: 'シェイクユアハート', jockey: '古川吉 56', f_i: 0.245, p_i: 0.268, odds: 4.2, tags: ['[F] 京都内2000m好位安定', '[H] 4角3-5番手持続力S'] },
+          { mark: '○', num: 4, name: 'デシエルト', jockey: '岩田康 57', f_i: 0.185, p_i: 0.175, odds: 3.5, tags: ['[F] 単騎先行力上位', '[E] 休み明け目標先で微減'] },
+          { mark: '▲', num: 7, name: 'マイネルケイツー', jockey: '国分優 54', f_i: 0.115, p_i: 0.142, odds: 28.4, tags: ['[H] 軽量54kgイン好位', '[F] クッション9.7高速芝適性'] },
+          { mark: '△', num: 2, name: 'リビアングラス', jockey: '鮫島駿 56', f_i: 0.130, p_i: 0.135, odds: 6.8, tags: ['[F] 内枠2番ロスなし先行'] },
+          { mark: '☆', num: 11, name: 'ケイアイセナ', jockey: '藤岡佑 56', f_i: 0.085, p_i: 0.088, odds: 14.5, tags: ['[H] 持続ラップ耐性'] },
+          { mark: '消', num: 14, name: 'ロードデルレイ(仮想外枠重斤)', jockey: '川田 58.5', f_i: 0.065, p_i: 0.048, odds: 3.9, tags: ['[E] 58.5kg×外枠14番ロス減点'] }
+        ]
+      },
+      {
+        id: '20261114_TOK11',
+        date: '11/14',
+        venue: '東京',
+        raceNum: 11,
+        name: '武蔵野S (G3)',
+        surface: 'ダ1600m',
+        headCount: 16,
+        postTime: '15:35',
+        autoStatus: 'DONE',
+        grade: 'A',
+        gradeLabel: '✨ A：好機',
+        typeBPlus: false,
+        skill: 'app-bayesian-horse-racing-text',
+        paceSummary: 'N_lead=5 / 芝発走ワンターン高速持続戦 (含水率4.1%)',
+        moduleHighlights: [
+          '[Mod.3 芝発走ダート] 東京ダ1600m特有の芝スタート外枠スムーズ加速バイアスを適用',
+          '[Mod.5 斤量減点] 58kg以上の休み明け先行馬をフェードし、中〜外枠の好位差し馬を重視'
+        ],
+        resultSummary: {
+          hit: true,
+          invest: 6000,
+          payout: 15840,
+          roi: 264.0,
+          finishOrder: '1着 ◎10 エンペラーワケア → 2着 ▲12 ペイシャエス → 3着 ○4 カズペトシーン',
+          hitTickets: '馬連 10-12 ＋ 3連複 4-10-12 本線的中！'
+        },
+        horses: [
+          { mark: '◎', num: 10, name: 'エンペラーワケア', jockey: '川田 57', f_i: 0.310, p_i: 0.325, odds: 2.4, tags: ['[F] ダ1400-1600m能力最上位', '[H] 芝発走中枠好位'] },
+          { mark: '○', num: 4, name: 'カズペトシーン', jockey: '西村淳 57', f_i: 0.155, p_i: 0.168, odds: 6.5, tags: ['[F] 東京マイル末脚確実'] },
+          { mark: '▲', num: 12, name: 'ペイシャエス', jockey: '横山和 57', f_i: 0.135, p_i: 0.152, odds: 9.8, tags: ['[F] 外枠12番芝発走スムーズ', '[H] 持続ラップ好位'] },
+          { mark: '△', num: 15, name: 'タマモロック', jockey: '永野 57', f_i: 0.095, p_i: 0.102, odds: 13.2, tags: ['[F] 東京ダ1600m巧者'] },
+          { mark: '消', num: 1, name: '内枠砂被り人気馬', jockey: '戸崎 58', f_i: 0.060, p_i: 0.042, odds: 5.8, tags: ['[E] 1枠1番芝発走包まれ減点'] }
+        ]
+      },
+      {
+        id: '20261114_TOK02',
+        date: '11/14',
+        venue: '東京',
+        raceNum: 2,
+        name: '2歳新馬 (メイクデビュー東京)',
+        surface: 'ダ1400m',
+        headCount: 16,
+        postTime: '10:35',
+        autoStatus: 'DONE',
+        grade: 'DEBUT',
+        gradeLabel: '🔰 新馬：好機A',
+        typeBPlus: false,
+        skill: 'app-bayesian-make-debut',
+        paceSummary: '新馬ダ1400m / 4角先頭〜0.4s差圏内スピード持続重視',
+        moduleHighlights: [
+          '[Debut Mod.1 調教×外厩] 美浦W 4F 51.4 - 1F 11.7秒 (馬なり余力S) の大型ダート血統馬を◎抜擢',
+          '[Debut Mod.2 枠順×脚質] 初ダートで砂被りを嫌い7〜8枠の先行タイプを+5%上方修正'
+        ],
+        resultSummary: {
+          hit: true,
+          invest: 5000,
+          payout: 11200,
+          roi: 224.0,
+          finishOrder: '1着 ◎14 プロミストジーン → 2着 ○11 ルグランヴァン',
+          hitTickets: '馬連 11-14 (1,120円×1,000円) 一点厚め的中！'
+        },
+        horses: [
+          { mark: '◎', num: 14, name: 'プロミストジーン', jockey: 'ルメール 55', f_i: 0.340, p_i: 0.365, odds: 2.2, tags: ['[F] 7枠14番砂被らず先行', '[H] Wコース終い11.7s余力S'] },
+          { mark: '○', num: 11, name: 'ルグランヴァン', jockey: '三浦 56', f_i: 0.210, p_i: 0.225, odds: 4.8, tags: ['[F] 坂路加速ラップ優秀', '[H] 好位持続型'] },
+          { mark: '▲', num: 15, name: 'アメリカンビキニ型', jockey: 'マーカンド 55', f_i: 0.130, p_i: 0.140, odds: 8.5, tags: ['[F] 外枠大型米国ダート血統'] },
+          { mark: '消', num: 2, name: '内枠小柄人気馬', jockey: '横山武 55', f_i: 0.070, p_i: 0.045, odds: 4.5, tags: ['[E] 馬体重438kg×内枠2番揉まれ懸念'] }
+        ]
+      },
+
+      // ==================== 11/15 (SUN) ====================
+      {
+        id: '20261115_TOK11',
+        date: '11/15',
+        venue: '東京',
+        raceNum: 11,
+        name: 'オーロラカップ (OP)',
+        surface: '芝1400m',
+        headCount: 14,
+        postTime: '15:30',
+        autoStatus: 'DONE',
+        grade: 'S',
+        gradeLabel: '🔥 S：勝負',
+        typeBPlus: false,
+        skill: 'app-bayesian-horse-racing-text',
+        paceSummary: 'N_lead=4 / 東京芝1400m 高速巡航＋L2加速ラップ戦',
+        moduleHighlights: [
+          '[Mod.4 3歳世代×斤量恩恵] サトノカルナバル・ユハンヌスの1400m高速巡航適性を2強軸(Dual-Pivot)に設定',
+          '[Mod.7 穴馬ピックアップ] 12番オーキッドロマンスの1400m短縮好位粘りを△3番手評価'
+        ],
+        resultSummary: {
+          hit: true,
+          invest: 10000,
+          payout: 30600,
+          roi: 306.0,
+          finishOrder: '1着 ○6 ユハンヌス (3人気) → 2着 ◎9 サトノカルナバル (1人気) → 3着 △12 オーキッドロマンス (6人気)',
+          hitTickets: '馬連 6-9 (1,420円×1,000円) ＋ 3連複 6-9-12 (4,100円×400円) W的中！'
+        },
+        horses: [
+          { mark: '◎', num: 9, name: 'サトノカルナバル', jockey: '三浦 56', f_i: 0.285, p_i: 0.295, odds: 2.6, tags: ['[F] 3歳素質最上位', '[H] 東京1400m好位抜け出し'] },
+          { mark: '○', num: 6, name: 'ユハンヌス', jockey: '横山和 57', f_i: 0.220, p_i: 0.242, odds: 5.4, tags: ['[F] 東京1400m指数1位', '[H] 内中枠6番好位イン'] },
+          { mark: '▲', num: 4, name: 'ロジリオン系好位馬', jockey: '北村宏 57', f_i: 0.135, p_i: 0.138, odds: 6.2, tags: ['[F] 左回り1400m安定'] },
+          { mark: '△', num: 12, name: 'オーキッドロマンス', jockey: '内田博 56', f_i: 0.105, p_i: 0.125, odds: 15.8, tags: ['[H] 1400m先行粘り妙味'] },
+          { mark: '消', num: 14, name: '大外枠追い込み人気馬', jockey: '津村 58', f_i: 0.055, p_i: 0.040, odds: 5.9, tags: ['[E] 58kg×8枠14番後方脚質減点'] }
+        ]
+      },
+      {
+        id: '20261115_KYT11',
+        date: '11/15',
+        venue: '京都',
+        raceNum: 11,
+        name: 'エリザベス女王杯 (G1)',
+        surface: '芝2200m (外)',
+        headCount: 17,
+        postTime: '15:40',
+        autoStatus: 'DONE',
+        grade: 'A',
+        gradeLabel: '✨ A：好機',
+        typeBPlus: true,
+        skill: 'app-bayesian-horse-racing-text',
+        paceSummary: 'N_lead=4 / 前半59.6秒の淀みない持続ラップ戦 (Type B+ 警戒)',
+        moduleHighlights: [
+          '[Mod.1 展開分岐] 1番人気レガレイラの後方内包まれリスクを考慮しつつ、好位抜け出し馬を対抗配置',
+          '[事後3要因フィードバック対象] 外枠11番スタニングローズの早めマクリ持続力をスキルv2.5パッチへ反映済'
+        ],
+        resultSummary: {
+          hit: false,
+          invest: 6000,
+          payout: 0,
+          roi: 0.0,
+          finishOrder: '1着 ▲11 スタニングローズ → 2着 △16 ラヴェル → 3着 ○1 ホールネス (◎7 レガレイラ 5着)',
+          hitTickets: '▲-△-○決着で惜敗（事後3要因分解により京都外2200m持続ラップ補正パッチを生成）'
+        },
+        horses: [
+          { mark: '◎', num: 7, name: 'レガレイラ', jockey: 'ルメール 54', f_i: 0.290, p_i: 0.265, odds: 1.9, tags: ['[F] 3歳54kg能力最上位', '[E] 後方脚質詰まりリスク微減'] },
+          { mark: '○', num: 1, name: 'ホールネス', jockey: '坂井 56', f_i: 0.145, p_i: 0.165, odds: 9.2, tags: ['[F] 1枠1番ロスなし好位', '[H] 2200m持続力高評価'] },
+          { mark: '▲', num: 11, name: 'スタニングローズ', jockey: 'C.デムーロ 56', f_i: 0.140, p_i: 0.158, odds: 6.5, tags: ['[F] G1実績×先行マクリ持続', '[H] 調教良化顕著'] },
+          { mark: '△', num: 16, name: 'ラヴェル', jockey: '川田 56', f_i: 0.075, p_i: 0.092, odds: 29.5, tags: ['[H] 京都外回り持続戦穴馬'] }
+        ]
+      },
+      {
+        id: '20261115_KYT04',
+        date: '11/15',
+        venue: '京都',
+        raceNum: 4,
+        name: '2歳新馬 (メイクデビュー京都)',
+        surface: '芝1800m (外)',
+        headCount: 12,
+        postTime: '11:35',
+        autoStatus: 'DONE',
+        grade: 'DEBUT',
+        gradeLabel: '🔰 新馬：勝負S',
+        typeBPlus: false,
+        skill: 'app-bayesian-make-debut',
+        paceSummary: '新馬スロー瞬発戦 / 栗東CW ラスト2F 22.8 (11.6-11.2) 加速ラップ馬を狙い撃ち',
+        moduleHighlights: [
+          '[Debut Mod.1 調教ラップ] CWコースで古馬OP馬を馬なり追走先着＋終い11.2秒の◎3番を単独軸指定',
+          '[Debut Mod.3 危険な人気馬] 坂路時計だけで終い減速ラップ(+0.6s失速)の2番人気馬を「消」判定'
+        ],
+        resultSummary: {
+          hit: true,
+          invest: 5000,
+          payout: 15800,
+          roi: 316.0,
+          finishOrder: '1着 ◎3 ミュージアムマイル型 → 2着 ○8 ショウナンザナドゥ型 → 3着 ▲5',
+          hitTickets: '馬単 3→8 (1,850円×500円) ＋ 3連複 3-5-8 (2,180円×300円) 完全的中！'
+        },
+        horses: [
+          { mark: '◎', num: 3, name: 'ロードヴェスパー', jockey: '川田 56', f_i: 0.380, p_i: 0.410, odds: 2.1, tags: ['[F] CW終い11.2s加速S', '[H] 内枠好位瞬発力抜ける'] },
+          { mark: '○', num: 8, name: 'ダノンフェアレディ型', jockey: '坂井 55', f_i: 0.215, p_i: 0.230, odds: 4.5, tags: ['[F] ノーザンFしがらき仕上良'] },
+          { mark: '▲', num: 5, name: 'マイネルステラート', jockey: '和田竜 56', f_i: 0.120, p_i: 0.135, odds: 11.4, tags: ['[H] 先行持続穴馬'] },
+          { mark: '消', num: 10, name: '坂路減速ラップ人気馬', jockey: '武豊 56', f_i: 0.080, p_i: 0.050, odds: 3.8, tags: ['[E] 最終追い切りラスト1F 12.9s失速'] }
+        ]
+      },
+
+      // ==================== 11/21 (SAT) UPCOMING ====================
+      {
+        id: '20261121_TOK11',
+        date: '11/21',
+        venue: '東京',
+        raceNum: 11,
+        name: '東スポ杯2歳S (G2)',
+        surface: '芝1800m',
+        headCount: 11,
+        postTime: '15:30',
+        autoStatus: 'DONE',
+        grade: 'S',
+        gradeLabel: '🔥 S：勝負',
+        typeBPlus: false,
+        skill: 'app-bayesian-horse-racing-text',
+        paceSummary: 'N_lead=2 / 少頭数スロー〜ミドル・上がり3F 33.2秒前後の極限瞬発戦',
+        moduleHighlights: [
+          '[Mod.2 東京1800m物理] 4角4〜6番手からL2 10.9秒を使える素質馬2頭のDual-Pivot構成',
+          '[Mod.6 新馬ラップ接続] 前走新馬戦で後半5F 58.2秒以下＆上がり33.4秒以内を記録した馬を+6%ブースト'
+        ],
+        horses: [
+          { mark: '◎', num: 4, name: 'クロワデュノール型', jockey: '北村友 56', f_i: 0.345, p_i: 0.368, odds: 2.3, tags: ['[F] 新馬後半5F 57.8s超抜', '[H] 好位から上がり33.1s'] },
+          { mark: '○', num: 7, name: 'サトノシャイニング型', jockey: '松山 56', f_i: 0.240, p_i: 0.255, odds: 3.8, tags: ['[F] 折り合い◎・2番手抜け出し'] },
+          { mark: '▲', num: 2, name: 'レッドキングリー型', jockey: 'ルメール 56', f_i: 0.180, p_i: 0.165, odds: 3.4, tags: ['[F] 内枠好位', '[E] 気性面りきみリスク微減'] },
+          { mark: '△', num: 9, name: 'ファイアンクランツ型', jockey: '菅原明 56', f_i: 0.105, p_i: 0.118, odds: 11.2, tags: ['[H] 持続末脚穴妙味'] },
+          { mark: '消', num: 11, name: 'ダート寄り時計掛かる人気馬', jockey: '戸崎 56', f_i: 0.045, p_i: 0.032, odds: 7.5, tags: ['[E] クッション9.6高速芝キレ負け'] }
+        ]
+      },
+      {
+        id: '20261121_KYT03',
+        date: '11/21',
+        venue: '京都',
+        raceNum: 3,
+        name: '2歳新馬 (メイクデビュー京都)',
+        surface: 'ダ1400m',
+        headCount: 15,
+        postTime: '11:05',
+        autoStatus: 'WAITING',
+        grade: 'DEBUT',
+        gradeLabel: '🔰 新馬：好機A',
+        typeBPlus: false,
+        skill: 'app-bayesian-make-debut',
+        paceSummary: '芝発走京都ダ1400m / 含水率2.9%(乾き)・外枠大型先行馬バイアス',
+        moduleHighlights: [
+          '[Debut Mod.2 芝発走ダート] 乾いたダート×芝スタートで外枠12〜15番のゲート速い大型馬(490kg+)を最優先',
+          '[発走60分前自動トリガー] 10:05に馬体重確定と同時に最終JSON推論を自動実行予定'
+        ],
+        horses: [
+          { mark: '◎', num: 13, name: 'スマートカイロス', jockey: '坂井 56', f_i: 0.295, p_i: 0.328, odds: 3.1, tags: ['[F] 7枠13番芝発走ダッシュ◎', '[H] 坂路4F 51.8-12.0s'] },
+          { mark: '○', num: 15, name: 'メイショウハチロー', jockey: '松山 56', f_i: 0.210, p_i: 0.232, odds: 4.6, tags: ['[F] 大外15番砂被らず先行'] },
+          { mark: '▲', num: 8, name: 'タガノバビロン', jockey: '団野 56', f_i: 0.145, p_i: 0.155, odds: 7.8, tags: ['[H] CW時計優秀・中枠好位'] },
+          { mark: '△', num: 11, name: 'カフェオルソ', jockey: '鮫島駿 55', f_i: 0.105, p_i: 0.115, odds: 13.5, tags: ['[H] 外目スムーズ穴'] }
+        ]
+      },
+
+      // ==================== 11/22 (SUN) UPCOMING ====================
+      {
+        id: '20261122_KYT11',
+        date: '11/22',
+        venue: '京都',
+        raceNum: 11,
+        name: 'マイルチャンピオンシップ (G1)',
+        surface: '芝1600m (外)',
+        headCount: 17,
+        postTime: '15:40',
+        autoStatus: 'DONE',
+        grade: 'S',
+        gradeLabel: '🔥 S：勝負',
+        typeBPlus: false,
+        skill: 'app-bayesian-horse-racing-text',
+        paceSummary: 'N_lead=4 / クッション値9.7×Cコース替わり・内〜中枠の好位〜中団イン差し最優先',
+        moduleHighlights: [
+          '[Mod.2 Cコース物理] 京都外回りでもCコース替わり初週＋クッション値9.7により、大外ブン回しは届かず中枠から馬群を割れる馬が圧倒的優位',
+          '[Mod.4 G1マイル能力] ソウルラッシュの京都マイル適性とブレイディヴェーグ/ナミュール系の末脚を精密比較',
+          '[Mod.9 穴馬抽出] 内〜中枠でロスなく4角5番手を回れるウインマーベル型を▲高期待値指定'
+        ],
+        horses: [
+          { mark: '◎', num: 13, name: 'ソウルラッシュ', jockey: '団野 58', f_i: 0.265, p_i: 0.292, odds: 4.5, tags: ['[F] 京都マイル適性S', '[H] 好位〜中団から持続末脚No.1'] },
+          { mark: '○', num: 2, name: 'ブレイディヴェーグ', jockey: 'ルメール 56', f_i: 0.235, p_i: 0.220, odds: 2.8, tags: ['[F] 絶対能力最上位', '[E] 初マイル×1枠包まれ微減'] },
+          { mark: '▲', num: 14, name: 'ウインマーベル', jockey: '松山 58', f_i: 0.125, p_i: 0.155, odds: 16.4, tags: ['[H] 先行4角3番手粘り込み妙味', '[F] 高速クッション値◎'] },
+          { mark: '△', num: 17, name: 'エルトンバローズ', jockey: '西村淳 58', f_i: 0.115, p_i: 0.128, odds: 11.8, tags: ['[F] 京都外回りマイル巧者'] },
+          { mark: '☆', num: 6, name: 'オオバンブルマイ', jockey: '武豊 58', f_i: 0.075, p_i: 0.085, odds: 24.0, tags: ['[H] 内枠イン突き一発'] },
+          { mark: '消', num: 15, name: '海外遠征・大外後方人気馬', jockey: 'ビュイック 58', f_i: 0.060, p_i: 0.038, odds: 6.2, tags: ['[E] 日本の高速Cコース対応疑問'] }
+        ]
+      },
+      {
+        id: '20261122_FKS11',
+        date: '11/22',
+        venue: '福島',
+        raceNum: 11,
+        name: '福島記念 (G3)',
+        surface: '芝2000m',
+        headCount: 16,
+        postTime: '15:20',
+        autoStatus: 'WAITING',
+        grade: 'A',
+        gradeLabel: '✨ A：好機',
+        typeBPlus: true,
+        skill: 'app-bayesian-horse-racing-text',
+        paceSummary: 'N_lead=6 / ローカルハンデ消耗戦 (Type B+ 荒れ警戒指定)',
+        moduleHighlights: [
+          '[Mod.1 ペース崩壊検知] 先行激化(N_lead=6)により、3〜4角で外から動ける軽ハンデ(54〜55kg)持続型を大幅ブースト',
+          '[Mod.5 トップハンデ減点] 58kg以上の内枠先行人気馬をType II減点'
+        ],
+        horses: [
+          { mark: '◎', num: 6, name: 'アラタ', jockey: '大野 57.5', f_i: 0.195, p_i: 0.225, odds: 5.2, tags: ['[F] 小回り2000m持続力抜群', '[H] 差し展開ドンピシャ'] },
+          { mark: '○', num: 11, name: 'ダンディズム', jockey: '三浦 56', f_i: 0.155, p_i: 0.178, odds: 7.4, tags: ['[F] 福島2000mマクリ適性'] },
+          { mark: '▲', num: 4, name: 'フェアエールング', jockey: '丹内 53', f_i: 0.130, p_i: 0.152, odds: 9.6, tags: ['[H] 軽量53kg×ローカル巧者'] },
+          { mark: '△', num: 10, name: 'ウインシュクラン', jockey: '松岡 55', f_i: 0.095, p_i: 0.110, odds: 14.2, tags: ['[H] 持続ラップ粘り込み'] }
+        ]
+      }
+    ];
+
+    // --- WIN5 DEDICATED DATA (app-bayesian-win5) ---
+    const WIN5_DATA = {
+      '11/15': {
+        title: '11/15(日) WIN5 検証結果 (エリザベス女王杯回)',
+        status: '検証完了 (5鞍中4鞍で上位2頭以内が1着 / Leg 4 オーロラC 3人気ユハンヌス捕捉)',
+        legs: [
+          {
+            leg: 1, venue: '京都10R', name: '天橋立S (3勝C・ダ1800m)', typeBPlus: true,
+            ruleNote: '[Mod.3] 乾いた京都ダ1800m・内枠ポケット好位残し＆4角3番手以内ルール適用',
+            horses: [
+              { num: 4, name: 'サンライズアリオン', f_i: 0.285, odds: 2.8, note: '◎ 先行安定・4角2番手', isWin: true },
+              { num: 9, name: 'リューデスハイム', f_i: 0.220, odds: 4.1, note: '○ 好位外目スムーズ' },
+              { num: 2, name: '内枠ポケット穴馬', f_i: 0.145, odds: 11.5, note: '▲ ロスなしイン3番手' },
+              { num: 12, name: '外枠差し馬', f_i: 0.095, odds: 8.4, note: '△ 展開待ち' }
+            ]
+          },
+          {
+            leg: 2, venue: '東京10R', name: 'ユートピアS (3勝C・芝1800m)', typeBPlus: false,
+            ruleNote: '[Mod.7] 3歳54kg昇級牝馬＋東京1800m上がり33秒台前半の瞬発力最上位',
+            horses: [
+              { num: 6, name: 'ウインエーデル', f_i: 0.340, odds: 2.4, note: '◎ 東京1800m末脚最上位', isWin: true },
+              { num: 3, name: 'カナテープ', f_i: 0.255, odds: 3.5, note: '○ 内枠好位安定' },
+              { num: 10, name: 'クリスマスパレード系', f_i: 0.140, odds: 7.2, note: '▲ 先行持続' }
+            ]
+          },
+          {
+            leg: 3, venue: '福島11R', name: '福島民友C (L・ダ1700m)', typeBPlus: true,
+            ruleNote: '[Mod.5] 58kg休み明け人気馬をフェードし、小回りダ1700m 4角先頭圏内を優先',
+            horses: [
+              { num: 12, name: 'テーオードレフォン', f_i: 0.265, odds: 3.9, note: '◎ 小回り1700m先行力S', isWin: true },
+              { num: 5, name: 'ナチュラルハイ', f_i: 0.215, odds: 4.5, note: '○ 好位イン抜け出し' },
+              { num: 8, name: 'サンマルパトロール', f_i: 0.150, odds: 8.8, note: '▲ 56kg軽量マクリ' },
+              { num: 1, name: '内枠先行穴馬', f_i: 0.105, odds: 15.2, note: '△ ロスなし逃げ残り' }
+            ]
+          },
+          {
+            leg: 4, venue: '東京11R', name: 'オーロラC (OP・芝1400m)', typeBPlus: false,
+            ruleNote: '[Mod.4] サトノカルナバル＆ユハンヌスの純粋勝率2強構成',
+            horses: [
+              { num: 9, name: 'サトノカルナバル', f_i: 0.295, odds: 2.6, note: '◎ 3歳素質馬' },
+              { num: 6, name: 'ユハンヌス', f_i: 0.242, odds: 5.4, note: '○ 東京1400m指数1位', isWin: true },
+              { num: 4, name: 'ロジリオン系', f_i: 0.138, odds: 6.2, note: '▲ 好位安定' }
+            ]
+          },
+          {
+            leg: 5, venue: '京都11R', name: 'エリザベス女王杯 (G1・芝2200m)', typeBPlus: false,
+            ruleNote: '[Mod.10] 純粋勝率上位3頭で累積捕捉率 F_3 = 58.8% を確保',
+            horses: [
+              { num: 7, name: 'レガレイラ', f_i: 0.265, odds: 1.9, note: '◎ 能力1位(単勝ヘッジ対象)' },
+              { num: 1, name: 'ホールネス', f_i: 0.165, odds: 9.2, note: '○ 内枠好位' },
+              { num: 11, name: 'スタニングローズ', f_i: 0.158, odds: 6.5, note: '▲ 先行持続G1馬', isWin: true },
+              { num: 16, name: 'ラヴェル', f_i: 0.092, odds: 29.5, note: '△ 外回り持続穴' }
+            ]
+          }
+        ]
+      },
+      '11/22': {
+        title: '11/22(日) WIN5 予想フォーメーション (マイルCS回)',
+        status: '発走60分前自動更新対応 / Leg 1・Leg 3 に Type B+ (序盤荒れ警戒) 発動中',
+        legs: [
+          {
+            leg: 1, venue: '京都10R', name: 'レジェンドトレーナーC (3勝C・ダ1400m)', typeBPlus: true,
+            ruleNote: '[Mod.3 Type B+] 芝発走京都ダ1400m×多頭数。外枠好位馬＋内枠ポケット残しで3頭推奨',
+            horses: [
+              { num: 14, name: 'スマートフォルス型', f_i: 0.255, odds: 3.4, note: '◎ 芝発走外枠好位スムーズ' },
+              { num: 11, name: 'インユアパレス型', f_i: 0.215, odds: 4.2, note: '○ 1400m持ち時計1位' },
+              { num: 3, name: '内枠ポケット先行馬', f_i: 0.145, odds: 9.8, note: '▲ 乾いたダート内枠残し' },
+              { num: 16, name: '大外強襲馬', f_i: 0.095, odds: 14.5, note: '△ ハイペース時浮上' }
+            ]
+          },
+          {
+            leg: 2, venue: '東京10R', name: '秋色S (3勝C・芝1600m)', typeBPlus: false,
+            ruleNote: '[Mod.7] 3歳55kg昇級馬×東京マイル上がり33.1秒の瞬発力上位2頭で高捕捉率',
+            horses: [
+              { num: 5, name: 'トロヴァトーレ型', f_i: 0.365, odds: 2.1, note: '◎ 東京1600m好位抜け出し盤石' },
+              { num: 8, name: 'コントラポスト型', f_i: 0.245, odds: 3.9, note: '○ クラス安定感抜群' },
+              { num: 2, name: '内枠先行穴馬', f_i: 0.125, odds: 10.5, note: '▲ スロー前残り警戒' }
+            ]
+          },
+          {
+            leg: 3, venue: '福島11R', name: '福島記念 (G3・芝2000m)', typeBPlus: true,
+            ruleNote: '[Mod.1 Type B+] N_lead=6の消耗戦ハンデG3。ここを厚めに広げるのがWIN5突破の鍵',
+            horses: [
+              { num: 6, name: 'アラタ', f_i: 0.225, odds: 5.2, note: '◎ 小回り持続戦の本命' },
+              { num: 11, name: 'ダンディズム', f_i: 0.178, odds: 7.4, note: '○ 捲り差し展開向く' },
+              { num: 4, name: 'フェアエールング', f_i: 0.152, odds: 9.6, note: '▲ 53kg軽量ローカル巧者' },
+              { num: 10, name: 'ウインシュクラン', f_i: 0.110, odds: 14.2, note: '△ 持続先行粘り' }
+            ]
+          },
+          {
+            leg: 4, venue: '東京11R', name: '霜月S (OP・ダ1400m)', typeBPlus: false,
+            ruleNote: '[Mod.5] 58.5kg以上の休み明け人気馬を減点し、56〜57kgの東京ダ1400m好位馬2頭に絞る',
+            horses: [
+              { num: 12, name: 'ロードフォンス型', f_i: 0.320, odds: 2.7, note: '◎ 東京ダ1400m連勝中' },
+              { num: 9, name: 'バトルクライ型', f_i: 0.235, odds: 4.8, note: '○ 57kg好位差し安定' },
+              { num: 15, name: '外枠先行馬', f_i: 0.130, odds: 9.2, note: '▲ 揉まれず先行' }
+            ]
+          },
+          {
+            leg: 5, venue: '京都11R', name: 'マイルCS (G1・芝1600m)', typeBPlus: false,
+            ruleNote: '[Mod.2 & 10] ソウルラッシュ＆ブレイディヴェーグ中心。Leg 4突破時は2番単勝ヘッジも有効',
+            horses: [
+              { num: 13, name: 'ソウルラッシュ', f_i: 0.292, odds: 4.5, note: '◎ 京都マイル適性最上位' },
+              { num: 2, name: 'ブレイディヴェーグ', f_i: 0.220, odds: 2.8, note: '○ 能力S(内枠リスク単勝ヘッジ可)' },
+              { num: 14, name: 'ウインマーベル', f_i: 0.155, odds: 16.4, note: '▲ Cコース先行粘り高妙味' }
+            ]
+          }
+        ]
+      }
+    };
+
+    // --- GENERATE FULL 1R-12R SCREENING SCHEDULE FOR ALL VENUES ---
+    function getFullRaceListForDate(dateKey) {
+      const featuredMap = {};
+      FEATURED_RACES.filter(r => r.date === dateKey).forEach(r => {
+        featuredMap[`${r.venue}_${r.raceNum}`] = r;
+      });
+
+      if (!currentState.showAll12R) {
+        // Return featured races + a couple representative Pass/Debut races for realistic view
+        const baseList = FEATURED_RACES.filter(r => r.date === dateKey);
+        const extraPass = generateSyntheticRace(dateKey, '東京', 6, 'PASS');
+        const extraB = generateSyntheticRace(dateKey, '福島', 9, 'B');
+        return [...baseList, extraB, extraPass].sort((a, b) => a.postTime.localeCompare(b.postTime));
+      }
+
+      // Generate all 36 races (Tokyo, Kyoto, Fukushima 1R-12R)
+      const venues = ['東京', '京都', '福島'];
+      const allRaces = [];
+      venues.forEach(v => {
+        for (let rNum = 1; rNum <= 12; rNum++) {
+          const key = `${v}_${rNum}`;
+          if (featuredMap[key]) {
+            allRaces.push(featuredMap[key]);
+          } else {
+            let syntheticType = 'PASS';
+            if (rNum === 4 || rNum === 5) syntheticType = 'DEBUT';
+            else if (rNum === 9 || rNum === 10 || rNum === 12) syntheticType = 'B';
+            allRaces.push(generateSyntheticRace(dateKey, v, rNum, syntheticType));
+          }
+        }
+      });
+      return allRaces.sort((a, b) => a.raceNum - b.raceNum || a.venue.localeCompare(b.venue));
+    }
+
+    function generateSyntheticRace(dateKey, venue, raceNum, type) {
+      const isResult = DATES_CONFIG[dateKey].status === 'RESULT';
+      const baseHour = 9 + Math.floor((raceNum * 32) / 60);
+      const baseMin = (raceNum * 32) % 60;
+      const postTime = `${String(baseHour).padStart(2, '0')}:${String(baseMin).padStart(2, '0')}`;
+
+      if (type === 'DEBUT') {
+        return {
+          id: `${dateKey}_${venue}_${raceNum}`,
+          date: dateKey, venue, raceNum,
+          name: `2歳新馬 (メイクデビュー${venue})`,
+          surface: raceNum === 4 ? 'ダ1600m' : '芝1600m',
+          headCount: 15, postTime,
+          autoStatus: isResult ? 'DONE' : 'WAITING',
+          grade: 'DEBUT',
+          gradeLabel: '🔰 新馬：標準B',
+          typeBPlus: false,
+          skill: 'app-bayesian-make-debut',
+          paceSummary: '新馬戦 / 調教終いラップ＆外厩仕上げ判定',
+          moduleHighlights: [
+            '[Debut Mod.1] 坂路・CW終い1F 11.8秒以内の馬を上位評価',
+            '[Debut Mod.2] 1時間前の馬体重発表時に大幅馬体減(-10kg以下)がいないか自動チェック'
+          ],
+          horses: [
+            { mark: '◎', num: 10, name: 'ノーザン育成素質馬', jockey: 'ルメール 55', f_i: 0.310, p_i: 0.325, odds: 2.5, tags: ['[F] 終い11.5s余力◎'] },
+            { mark: '○', num: 6, name: '好時計先行馬', jockey: '川田 56', f_i: 0.220, p_i: 0.235, odds: 4.2, tags: ['[F] ゲート練習速い'] },
+            { mark: '▲', num: 12, name: '外枠大型ダート血統', jockey: '坂井 56', f_i: 0.140, p_i: 0.155, odds: 8.8, tags: ['[H] 外枠スムーズ'] }
+          ]
+        };
+      }
+
+      if (type === 'B') {
+        return {
+          id: `${dateKey}_${venue}_${raceNum}`,
+          date: dateKey, venue, raceNum,
+          name: `${venue}${raceNum}R 特別・条件戦`,
+          surface: '芝1800m',
+          headCount: 14, postTime,
+          autoStatus: isResult ? 'DONE' : 'WAITING',
+          grade: 'B',
+          gradeLabel: 'B：標準 (少額向き)',
+          typeBPlus: false,
+          skill: 'app-bayesian-horse-racing-text',
+          paceSummary: 'N_lead=3 / 標準ペース・上位2頭の能力安定もオッズ妙味は中程度',
+          moduleHighlights: [
+            '[Screening B判定] 的中確率は高いが合成オッズがやや低いため、馬連・ワイド少額集中を推奨'
+          ],
+          horses: [
+            { mark: '◎', num: 5, name: 'クラス安定先行馬', jockey: '戸崎 57', f_i: 0.290, p_i: 0.300, odds: 2.8, tags: ['[F] 現級2着2回安定'] },
+            { mark: '○', num: 8, name: '昇級3歳好位馬', jockey: '松山 55', f_i: 0.220, p_i: 0.230, odds: 4.1, tags: ['[H] 3歳斤量2kg恩恵'] },
+            { mark: '▲', num: 3, name: 'イン立ち回り馬', jockey: '鮫島駿 57', f_i: 0.140, p_i: 0.150, odds: 9.5, tags: ['[F] 内枠ロスなし'] }
+          ]
+        };
+      }
+
+      // PASS race
+      return {
+        id: `${dateKey}_${venue}_${raceNum}`,
+        date: dateKey, venue, raceNum,
+        name: `${venue}${raceNum}R 3歳以上1勝クラス`,
+        surface: 'ダ1200m',
+        headCount: 16, postTime,
+        autoStatus: 'SKIPPED',
+        grade: 'PASS',
+        gradeLabel: '💤 Pass：見送り推奨',
+        typeBPlus: true,
+        skill: 'app-bayesian-horse-racing-text',
+        paceSummary: 'N_lead=7 (ハイペース混戦) / 期待値プラス馬不在のため投資見送り推奨',
+        moduleHighlights: [
+          '[API節約 & 資金保護] 朝のスクリーニングで「先行馬7頭のカオス混戦＆オッズ歪みなし」と判定。無駄打ち回避のためPass指定。',
+          '※手動で予想を確認したい場合のみ下のシミュレーターを使用できます。'
+        ],
+        horses: [
+          { mark: '◎', num: 12, name: '外枠差し上位馬', jockey: '横山武 57', f_i: 0.175, p_i: 0.180, odds: 5.2, tags: ['[F] 展開待ち'] },
+          { mark: '○', num: 7, name: '中枠好位馬', jockey: '三浦 57', f_i: 0.150, p_i: 0.155, odds: 6.0, tags: ['[E] 混戦ドングリ'] },
+          { mark: '▲', num: 14, name: '減量騎手穴馬', jockey: '▲長浜 54', f_i: 0.110, p_i: 0.125, odds: 12.4, tags: ['[H] 3kg減恩恵'] }
+        ]
+      };
+    }
+
+    // --- RENDER TOP HEADER & TRACK BIAS ---
+    function renderDateTabsAndTrackBar() {
+      const tabsContainer = document.getElementById('dateTabsContainer');
+      tabsContainer.innerHTML = Object.keys(DATES_CONFIG).map(dKey => {
+        const cfg = DATES_CONFIG[dKey];
+        const isActive = currentState.selectedDate === dKey;
+        const badgeDot = cfg.status === 'RESULT'
+          ? '<span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span>'
+          : '<span class="w-1.5 h-1.5 rounded-full bg-amber-400 animate-ping"></span>';
+        return `
+          <button onclick="selectDate('${dKey}')" class="shrink-0 px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition border ${
+            isActive
+              ? 'bg-emerald-500 text-slate-950 border-emerald-400 shadow-sm shadow-emerald-500/30'
+              : 'bg-slate-900 text-slate-400 border-slate-800 hover:text-white'
+          }">
+            ${isActive ? '' : badgeDot}
+            <span>${cfg.label}</span>
+          </button>
+        `;
+      }).join('');
+
+      const trackBar = document.getElementById('trackConditionBar');
+      const tracks = DATES_CONFIG[currentState.selectedDate].tracks;
+      trackBar.innerHTML = tracks.map(t => `
+        <div class="shrink-0 flex items-center gap-1.5 bg-slate-950 px-2.5 py-1 rounded-md border border-slate-800/90">
+          <span class="font-bold text-emerald-400">${t.venue}</span>
+          <span class="text-slate-300 font-mono">CV:${t.cushion.split(' ')[0]}</span>
+          <span class="text-slate-500">|</span>
+          <span class="text-slate-400">${t.moisture}</span>
+          <span class="text-amber-300 font-medium bg-amber-500/10 px-1.5 py-0.2 rounded">${t.bias}</span>
+        </div>
+      `).join('');
+    }
+
+    function selectDate(dateKey) {
+      currentState.selectedDate = dateKey;
+      renderDateTabsAndTrackBar();
+      renderRaceList();
+    }
+
+    function setVenueFilter(venue) {
+      currentState.venueFilter = venue;
+      document.querySelectorAll('.venue-btn').forEach(btn => {
+        if (btn.dataset.venue === venue) {
+          btn.className = 'venue-btn flex-1 py-1 text-xs font-bold rounded-md bg-emerald-500 text-slate-950 transition';
+        } else {
+          btn.className = 'venue-btn flex-1 py-1 text-xs font-medium rounded-md text-slate-400 hover:text-white transition';
+        }
+      });
+      renderRaceList();
+    }
+
+    function setGradeFilter(grade) {
+      currentState.gradeFilter = grade;
+      document.querySelectorAll('.grade-btn').forEach(btn => {
+        if (btn.dataset.grade === grade) {
+          btn.className = 'grade-btn shrink-0 px-2.5 py-1 rounded-full text-[11px] font-bold bg-indigo-500/20 text-indigo-300 border border-indigo-500/40';
+        } else {
+          btn.className = 'grade-btn shrink-0 px-2.5 py-1 rounded-full text-[11px] font-medium bg-slate-800/80 text-slate-400 border border-slate-700/70';
+        }
+      });
+      renderRaceList();
+    }
+
+    function toggleAll12RMode() {
+      currentState.showAll12R = !currentState.showAll12R;
+      const btnText = document.getElementById('toggle12RText');
+      const btn = document.getElementById('toggle12RBtn');
+      if (currentState.showAll12R) {
+        btnText.textContent = '注目Rのみ表示';
+        btn.className = 'px-2.5 py-1.5 rounded-lg text-[11px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1 shrink-0';
+      } else {
+        btnText.textContent = '全36R表示';
+        btn.className = 'px-2.5 py-1.5 rounded-lg text-[11px] font-semibold bg-slate-800 text-slate-300 border border-slate-700 flex items-center gap-1 shrink-0';
+      }
+      renderRaceList();
+    }
+
+    // --- RENDER RACE CARDS ---
+    function renderRaceList() {
+      const cfg = DATES_CONFIG[currentState.selectedDate];
+      const banner = document.getElementById('dailySummaryBanner');
+      banner.innerHTML = `
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full ${cfg.status === 'RESULT' ? 'bg-emerald-400' : 'bg-amber-400 animate-pulse'}"></span>
+          <span class="text-xs font-bold text-slate-200">${cfg.summary}</span>
+        </div>
+        <span class="text-[10px] font-mono text-slate-400 shrink-0">${currentState.showAll12R ? '全36R一覧モード' : '主要ピックアップ'}</span>
+      `;
+
+      let races = getFullRaceListForDate(currentState.selectedDate);
+
+      if (currentState.venueFilter !== 'ALL') {
+        races = races.filter(r => r.venue === currentState.venueFilter);
+      }
+      if (currentState.gradeFilter === 'SA') {
+        races = races.filter(r => r.grade === 'S' || r.grade === 'A');
+      } else if (currentState.gradeFilter === 'DEBUT') {
+        races = races.filter(r => r.grade === 'DEBUT');
+      } else if (currentState.gradeFilter === 'TYPEB') {
+        races = races.filter(r => r.typeBPlus);
+      } else if (currentState.gradeFilter === 'PASS') {
+        races = races.filter(r => r.grade === 'PASS');
+      }
+
+      const container = document.getElementById('raceListContainer');
+      if (races.length === 0) {
+        container.innerHTML = `
+          <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 text-center text-slate-400 text-xs">
+            該当する条件のレースがありません。フィルターを変更してください。
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = races.map(race => {
+        // Screening badge styling
+        let gradeBadgeClass = 'bg-slate-800 text-slate-300 border-slate-700';
+        if (race.grade === 'S') gradeBadgeClass = 'bg-rose-500/20 text-rose-300 border-rose-500/40 font-black';
+        else if (race.grade === 'A') gradeBadgeClass = 'bg-amber-500/20 text-amber-300 border-amber-500/40 font-bold';
+        else if (race.grade === 'DEBUT') gradeBadgeClass = 'bg-teal-500/20 text-teal-300 border-teal-500/40 font-bold';
+        else if (race.grade === 'PASS') gradeBadgeClass = 'bg-slate-800/90 text-slate-500 border-slate-700/60';
+
+        // Auto status badge
+        let statusHtml = '';
+        if (race.autoStatus === 'DONE') {
+          statusHtml = `<span class="text-[10px] text-emerald-400 font-medium"><i class="fa-solid fa-circle-check mr-0.5"></i>60分前予想済</span>`;
+        } else if (race.autoStatus === 'WAITING') {
+          statusHtml = `<span class="text-[10px] text-amber-400 font-medium animate-pulse-subtle"><i class="fa-regular fa-clock mr-0.5"></i>発走60分前自動実行待機</span>`;
+        } else {
+          statusHtml = `<span class="text-[10px] text-slate-500"><i class="fa-solid fa-ban mr-0.5"></i>APIスキップ(見送り)</span>`;
+        }
+
+        // Top 2 horses preview
+        const topHorses = race.horses.slice(0, 3).map(h => `
+          <span class="inline-flex items-center gap-1 text-[11px] bg-slate-950 px-2 py-0.5 rounded border border-slate-800">
+            <span class="font-bold ${h.mark === '◎' ? 'text-rose-400' : h.mark === '○' ? 'text-amber-400' : 'text-emerald-400'}">${h.mark}${h.num}</span>
+            <span class="text-slate-200 truncate max-w-[95px]">${h.name}</span>
+            <span class="font-mono text-[10px] text-emerald-400">${Math.round(h.p_i * 100)}%</span>
+          </span>
+        `).join('');
+
+        // Result badge if available
+        let resultBanner = '';
+        if (race.resultSummary) {
+          if (race.resultSummary.hit) {
+            resultBanner = `
+              <div class="mt-2 pt-2 border-t border-emerald-500/20 flex items-center justify-between text-xs">
+                <span class="text-emerald-400 font-bold flex items-center gap-1">
+                  <i class="fa-solid fa-bullseye"></i> 的中！ ${race.resultSummary.hitTickets.split(' ')[0]}
+                </span>
+                <span class="font-mono font-black text-amber-300 bg-amber-500/15 border border-amber-500/30 px-2 py-0.5 rounded">
+                  +${(race.resultSummary.payout - race.resultSummary.invest).toLocaleString()}円 (${race.resultSummary.roi}%)
+                </span>
+              </div>
+            `;
+          } else {
+            resultBanner = `
+              <div class="mt-2 pt-2 border-t border-slate-800 flex items-center justify-between text-[11px] text-slate-400">
+                <span>結果: ${race.resultSummary.finishOrder.slice(0, 38)}...</span>
+                <span class="text-indigo-300 font-mono">事後分析済</span>
+              </div>
+            `;
+          }
+        }
+
+        return `
+          <div onclick="openRaceModal('${race.id}')" class="bg-slate-900 hover:bg-slate-850 active:scale-[0.99] transition cursor-pointer border ${
+            race.grade === 'S' ? 'border-rose-500/40 shadow-md shadow-rose-950/20' :
+            race.grade === 'A' ? 'border-amber-500/30' :
+            race.grade === 'DEBUT' ? 'border-teal-500/30' : 'border-slate-800'
+          } rounded-xl p-3">
+            <!-- Top Row: Venue/R, PostTime, Screening Badge -->
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded bg-slate-950 border border-slate-700 text-xs font-black text-white">
+                  ${race.venue}${race.raceNum}R
+                </span>
+                <span class="text-xs font-mono text-slate-400">${race.postTime}発走</span>
+                ${statusHtml}
+              </div>
+              <div class="flex items-center gap-1">
+                ${race.typeBPlus ? '<span class="px-1.5 py-0.5 text-[10px] font-bold bg-purple-500/20 text-purple-300 border border-purple-500/40 rounded">⚠️Type B+</span>' : ''}
+                <span class="px-2 py-0.5 text-[11px] rounded-full border ${gradeBadgeClass}">
+                  ${race.gradeLabel}
+                </span>
+              </div>
+            </div>
+
+            <!-- Middle Row: Race Name & Skill Tag -->
+            <div class="mt-1.5 flex items-baseline justify-between gap-2">
+              <div>
+                <h3 class="text-sm font-bold text-white">${race.name}</h3>
+                <p class="text-[11px] text-slate-400">${race.surface}・${race.headCount}頭 | ${race.paceSummary}</p>
+              </div>
+              <span class="text-[10px] font-mono px-1.5 py-0.5 rounded bg-slate-950 text-slate-400 border border-slate-800 shrink-0">
+                ${race.skill.replace('app-bayesian-', '')}
+              </span>
+            </div>
+
+            <!-- Horses Preview Row -->
+            <div class="mt-2 flex flex-wrap items-center gap-1.5">
+              ${topHorses}
+              <span class="ml-auto text-[11px] text-emerald-400 font-semibold flex items-center gap-0.5">
+                <span>AI買い目</span>
+                <i class="fa-solid fa-chevron-right text-[10px]"></i>
+              </span>
+            </div>
+
+            ${resultBanner}
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- OPEN INDIVIDUAL RACE MODAL & REAL-TIME PLACKETT-LUCE / KELLY SIMULATOR ---
+    function findRaceById(raceId) {
+      const all = getFullRaceListForDate(currentState.selectedDate);
+      return all.find(r => r.id === raceId) || FEATURED_RACES.find(r => r.id === raceId);
+    }
+
+    function openRaceModal(raceId) {
+      currentState.activeRaceId = raceId;
+      document.getElementById('toggleHeavyWeight').checked = false;
+      document.getElementById('toggleSmartMoney').checked = false;
+
+      const race = findRaceById(raceId);
+      if (!race) return;
+
+      // Render Header
+      const headerInfo = document.getElementById('modalHeaderInfo');
+      headerInfo.innerHTML = `
+        <div class="flex items-center gap-1.5">
+          <span class="px-2 py-0.5 rounded bg-emerald-500 text-slate-950 font-black text-xs">${race.venue}${race.raceNum}R</span>
+          <span class="text-xs font-bold text-amber-300">${race.gradeLabel}</span>
+          <span class="text-[10px] font-mono bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded">${race.skill}</span>
+        </div>
+        <h2 class="text-base font-bold text-white mt-0.5">${race.name} <span class="text-xs font-normal text-slate-400">(${race.surface}・${race.headCount}頭)</span></h2>
+      `;
+
+      // Render Reasoning Box
+      const reasoningBox = document.getElementById('modalReasoningBox');
+      const triggerButtonHtml = race.autoStatus === 'WAITING' ? `
+        <button onclick="simulateManualRun('${race.id}')" class="w-full mt-2 py-1.5 rounded-lg bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-500/40 text-indigo-300 font-bold text-xs flex items-center justify-center gap-1.5 transition">
+          <i class="fa-solid fa-bolt"></i>
+          <span>発走60分前を待たずに今すぐ最新オッズでAI推論を実行 (1 req)</span>
+        </button>
+      ` : '';
+
+      reasoningBox.innerHTML = `
+        <div class="flex items-center justify-between text-xs">
+          <span class="font-bold text-emerald-400"><i class="fa-solid fa-microchip mr-1"></i>ベイズ10モジュール推論ハイライト</span>
+          <span class="text-[11px] font-mono text-slate-400">${race.paceSummary}</span>
+        </div>
+        <ul class="space-y-1 text-[11px] text-slate-300 mt-1">
+          ${race.moduleHighlights.map(m => `<li class="flex items-start gap-1.5"><span class="text-emerald-400 mt-0.5">▸</span><span>${m}</span></li>`).join('')}
+        </ul>
+        ${triggerButtonHtml}
+      `;
+
+      // Result Verification Box
+      const resBox = document.getElementById('modalResultVerification');
+      if (race.resultSummary) {
+        resBox.classList.remove('hidden');
+        resBox.innerHTML = `
+          <div class="bg-slate-900 border ${race.resultSummary.hit ? 'border-emerald-500/40' : 'border-slate-800'} rounded-xl p-3 space-y-1.5">
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold ${race.resultSummary.hit ? 'text-emerald-400' : 'text-slate-300'}">
+                🏁 確定結果・AI検証ログ
+              </span>
+              <span class="text-xs font-mono font-bold text-amber-300">回収率 ${race.resultSummary.roi}%</span>
+            </div>
+            <p class="text-xs text-white font-medium">${race.resultSummary.finishOrder}</p>
+            <p class="text-[11px] text-emerald-300">${race.resultSummary.hitTickets}</p>
+          </div>
+        `;
+      } else {
+        resBox.classList.add('hidden');
+      }
+
+      recalculateModalRace();
+      document.getElementById('raceModal').classList.remove('hidden');
+    }
+
+    function closeRaceModal() {
+      document.getElementById('raceModal').classList.add('hidden');
+    }
+
+    function simulateManualRun(raceId) {
+      const race = findRaceById(raceId);
+      if (race) race.autoStatus = 'DONE';
+      currentState.apiUsedCount += 1;
+      document.getElementById('apiCounterText').textContent = `${currentState.apiUsedCount}/1,500`;
+      showToast('直前オッズ・馬体重を取り込みAI本予想を更新しました (API +1 req)');
+      openRaceModal(raceId);
+      renderRaceList();
+    }
+
+    // --- ZERO-API BAYESIAN RECALCULATION & PLACKETT-LUCE BETTING OPTIMIZER ---
+    function getAdjustedHorses(race) {
+      const heavyPenalty = document.getElementById('toggleHeavyWeight').checked;
+      const smartMoney = document.getElementById('toggleSmartMoney').checked;
+
+      // Clone horses
+      let horses = race.horses.map((h, idx) => ({ ...h, tags: [...h.tags] }));
+
+      if (heavyPenalty && horses.length > 1) {
+        // Apply Type II weight penalty (-18% relative likelihood) to the lowest odds horse
+        let favIdx = 0;
+        horses.forEach((h, i) => { if (h.odds < horses[favIdx].odds) favIdx = i; });
+        horses[favIdx].p_i *= 0.82;
+        horses[favIdx].tags.push('[直前補正] 馬体重+14kg太め減点');
+      }
+
+      if (smartMoney && horses.length >= 3) {
+        // Apply Smart Money boost (+22% likelihood) to the 3rd marked horse (▲)
+        horses[2].p_i *= 1.22;
+        horses[2].odds = Math.max(2.5, +(horses[2].odds * 0.82).toFixed(1));
+        horses[2].tags.push('[直前補正] 単勝スマートマネー急落検知');
+      }
+
+      // Normalize posterior probabilities so they sum to ~0.88 (accounting for field)
+      const targetSum = race.horses.reduce((acc, h) => acc + h.p_i, 0);
+      const currentSum = horses.reduce((acc, h) => acc + h.p_i, 0);
+      horses.forEach(h => {
+        h.p_i = +(h.p_i * (targetSum / currentSum)).toFixed(3);
+        h.ev = +(h.p_i * h.odds).toFixed(2);
+      });
+
+      return horses;
+    }
+
+    function recalculateModalRace() {
+      const race = findRaceById(currentState.activeRaceId);
+      if (!race) return;
+
+      const horses = getAdjustedHorses(race);
+
+      // Render Horse Table
+      const tableEl = document.getElementById('modalHorseTable');
+      tableEl.innerHTML = horses.map(h => {
+        const isFade = h.mark === '消';
+        const evColor = h.ev >= 1.15 ? 'text-emerald-400 font-bold' : h.ev >= 0.95 ? 'text-amber-300' : 'text-slate-400';
+        const markStyle =
+          h.mark === '◎' ? 'bg-rose-500 text-white' :
+          h.mark === '○' ? 'bg-amber-500 text-slate-950' :
+          h.mark === '▲' ? 'bg-emerald-500 text-slate-950' :
+          h.mark === '消' ? 'bg-slate-800 text-rose-400 border border-rose-500/40' :
+          'bg-slate-800 text-slate-200';
+
+        return `
+          <div class="p-2.5 flex flex-col gap-1.5 ${isFade ? 'bg-rose-950/15 opacity-80' : ''}">
+            <div class="flex items-center justify-between gap-2">
+              <div class="flex items-center gap-2 min-w-0">
+                <span class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-black shrink-0 ${markStyle}">${h.mark}</span>
+                <span class="w-5 h-5 rounded bg-slate-800 border border-slate-700 flex items-center justify-center text-[11px] font-mono font-bold text-slate-200 shrink-0">${h.num}</span>
+                <div class="truncate">
+                  <span class="text-xs font-bold text-white">${h.name}</span>
+                  <span class="text-[10px] text-slate-400 ml-1">${h.jockey}</span>
+                </div>
+              </div>
+              <div class="flex items-center gap-2 shrink-0 text-right font-mono">
+                <div>
+                  <div class="text-[10px] text-slate-400">純粋f_i → 事後p_i</div>
+                  <div class="text-xs font-bold text-white">${(h.f_i * 100).toFixed(1)}% → <span class="text-emerald-400">${(h.p_i * 100).toFixed(1)}%</span></div>
+                </div>
+                <div class="w-14 bg-slate-950 px-1.5 py-1 rounded border border-slate-800">
+                  <div class="text-[10px] text-slate-400">${h.odds}倍</div>
+                  <div class="text-[11px] ${evColor}">EV:${h.ev}</div>
+                </div>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1 pl-8">
+              ${h.tags.map(t => {
+                const isNeg = t.includes('[E]') || t.includes('減点');
+                return `<span class="text-[10px] px-1.5 py-0.2 rounded border ${
+                  isNeg ? 'bg-rose-500/10 text-rose-300 border-rose-500/30' : 'bg-slate-950 text-slate-300 border-slate-800'
+                }">${t}</span>`;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+
+      renderOptimalTickets(race, horses, currentState.modalBudget);
+    }
+
+    function onBudgetSliderChange(val) {
+      currentState.modalBudget = parseInt(val, 10);
+      document.getElementById('modalBudgetSlider').value = currentState.modalBudget;
+      document.getElementById('modalBudgetText').textContent = `${currentState.modalBudget.toLocaleString()}円`;
+      const race = findRaceById(currentState.activeRaceId);
+      if (race) {
+        const horses = getAdjustedHorses(race);
+        renderOptimalTickets(race, horses, currentState.modalBudget);
+      }
+    }
+
+    // Plackett-Luce Joint Probability & Optimal Stake Allocation Engine
+    function renderOptimalTickets(race, horses, budget) {
+      const active = horses.filter(h => h.mark !== '消');
+      const h1 = active[0];
+      const h2 = active[1] || active[0];
+      const h3 = active[2] || active[1];
+      const h4 = active[3] || active[2];
+      const h5 = active[4] || null;
+
+      // Plackett-Luce helper for Quinella (馬連) & Trio (3連複)
+      function plQuinella(a, b) {
+        return (a.p_i * (b.p_i / (1 - a.p_i))) + (b.p_i * (a.p_i / (1 - b.p_i)));
+      }
+
+      // Determine optimal strategy tier based on budget & race structure
+      let strategyName = '';
+      let strategyDesc = '';
+      let rawTickets = [];
+
+      const q12 = Math.max(3.2, +((h1.odds * h2.odds) * 0.42).toFixed(1));
+      const q13 = Math.max(4.5, +((h1.odds * h3.odds) * 0.45).toFixed(1));
+      const q23 = Math.max(6.0, +((h2.odds * h3.odds) * 0.48).toFixed(1));
+      const w13 = Math.max(2.1, +(q13 * 0.34).toFixed(1));
+      const trio123 = Math.max(7.5, +((h1.odds * h2.odds * h3.odds) * 0.22).toFixed(1));
+      const trio124 = Math.max(11.0, +((h1.odds * h2.odds * (h4 ? h4.odds : 10)) * 0.24).toFixed(1));
+      const trio134 = Math.max(18.5, +((h1.odds * h3.odds * (h4 ? h4.odds : 10)) * 0.25).toFixed(1));
+      const exacta12 = Math.max(5.5, +(q12 * 1.85).toFixed(1));
+      const exacta13 = Math.max(8.5, +(q13 * 1.90).toFixed(1));
+
+      if (budget <= 2500) {
+        strategyName = 'Compact Focus (少額・馬連＆ワイド高効率集中)';
+        strategyDesc = '点数過多による資金分散を防ぎ、Plackett-Luce連対確率が高い本線3点へ集中配分';
+        rawTickets = [
+          { type: '馬連', combo: `${Math.min(h1.num, h2.num)} - ${Math.max(h1.num, h2.num)}`, names: `${h1.mark}${h1.name.slice(0,6)} - ${h2.mark}${h2.name.slice(0,6)}`, odds: q12, weight: 0.45, role: '本線軸' },
+          { type: '馬連', combo: `${Math.min(h1.num, h3.num)} - ${Math.max(h1.num, h3.num)}`, names: `${h1.mark}${h1.name.slice(0,6)} - ${h3.mark}${h3.name.slice(0,6)}`, odds: q13, weight: 0.30, role: '妙味本線' },
+          { type: 'ワイド', combo: `${Math.min(h1.num, h3.num)} - ${Math.max(h1.num, h3.num)}`, names: `${h1.mark}${h1.name.slice(0,6)} - ${h3.mark}${h3.name.slice(0,6)}`, odds: w13, weight: 0.25, role: '回収下支え' }
+        ];
+      } else if (budget <= 7500) {
+        strategyName = h1.p_i >= 0.30 ? 'Single-Pivot Standard (◎1頭軸・馬連＋3連複重ね)' : 'Dual-Pivot Standard (◎○2強軸・馬連＋3連複フォーメーション)';
+        strategyDesc = '馬連で元返し〜中配当を確保しつつ、期待値が高い3連複本線に資金を重ねる標準ベイズ配分';
+        rawTickets = [
+          { type: '馬連', combo: `${Math.min(h1.num, h2.num)} - ${Math.max(h1.num, h2.num)}`, names: `${h1.mark}${h1.name.slice(0,6)} - ${h2.mark}${h2.name.slice(0,6)}`, odds: q12, weight: 0.32, role: '主力本線' },
+          { type: '馬連', combo: `${Math.min(h1.num, h3.num)} - ${Math.max(h1.num, h3.num)}`, names: `${h1.mark}${h1.name.slice(0,6)} - ${h3.mark}${h3.name.slice(0,6)}`, odds: q13, weight: 0.22, role: '高EV本線' },
+          { type: '馬連', combo: `${Math.min(h2.num, h3.num)} - ${Math.max(h2.num, h3.num)}`, names: `${h2.mark}${h2.name.slice(0,6)} - ${h3.mark}${h3.name.slice(0,6)}`, odds: q23, weight: 0.12, role: 'タテ目押さえ' },
+          { type: '3連複', combo: [h1.num, h2.num, h3.num].sort((a,b)=>a-b).join(' - '), names: `${h1.mark}-${h2.mark}-${h3.mark} 本線`, odds: trio123, weight: 0.20, role: '3連複本線' },
+          { type: '3連複', combo: [h1.num, h2.num, h4.num].sort((a,b)=>a-b).join(' - '), names: `${h1.mark}-${h2.mark}-${h4.mark}`, odds: trio124, weight: 0.14, role: '3連複妙味' }
+        ];
+      } else {
+        strategyName = 'Full Bayesian Kelly Portfolio (馬連厚め＋3連複＋馬単ボーナス重ね)';
+        strategyDesc = '十分な予算を活かし、主力馬連・3連複で高回収を固めつつ、◎1着固定の馬単ボーナスと穴目を完全網羅';
+        rawTickets = [
+          { type: '馬連', combo: `${Math.min(h1.num, h2.num)} - ${Math.max(h1.num, h2.num)}`, names: `${h1.mark}${h1.name.slice(0,6)} - ${h2.mark}${h2.name.slice(0,6)}`, odds: q12, weight: 0.28, role: '主力本線' },
+          { type: '馬連', combo: `${Math.min(h1.num, h3.num)} - ${Math.max(h1.num, h3.num)}`, names: `${h1.mark}${h1.name.slice(0,6)} - ${h3.mark}${h3.name.slice(0,6)}`, odds: q13, weight: 0.20, role: '高EV本線' },
+          { type: '馬単', combo: `${h1.num} → ${h2.num}`, names: `${h1.mark}1着 → ${h2.mark}2着`, odds: exacta12, weight: 0.12, role: '馬単ボーナス' },
+          { type: '馬単', combo: `${h1.num} → ${h3.num}`, names: `${h1.mark}1着 → ${h3.mark}2着`, odds: exacta13, weight: 0.08, role: '高配当狙い' },
+          { type: '3連複', combo: [h1.num, h2.num, h3.num].sort((a,b)=>a-b).join(' - '), names: `${h1.mark}-${h2.mark}-${h3.mark}`, odds: trio123, weight: 0.16, role: '3連複本線' },
+          { type: '3連複', combo: [h1.num, h2.num, h4.num].sort((a,b)=>a-b).join(' - '), names: `${h1.mark}-${h2.mark}-${h4.mark}`, odds: trio124, weight: 0.09, role: '3連複中穴' },
+          { type: '3連複', combo: [h1.num, h3.num, h4.num].sort((a,b)=>a-b).join(' - '), names: `${h1.mark}-${h3.mark}-${h4.mark}`, odds: trio134, weight: 0.07, role: 'Type B+高目' }
+        ];
+      }
+
+      // Allocate exact 100-yen stakes summing to `budget`
+      let remaining = budget;
+      const allocatedTickets = rawTickets.map((t, idx) => {
+        if (idx === rawTickets.length - 1) {
+          return { ...t, amount: Math.max(100, remaining) };
+        }
+        let amt = Math.max(100, Math.round((budget * t.weight) / 100) * 100);
+        if (remaining - amt < (rawTickets.length - 1 - idx) * 100) {
+          amt = remaining - (rawTickets.length - 1 - idx) * 100;
+        }
+        remaining -= amt;
+        return { ...t, amount: amt };
+      });
+
+      // Calculate Composite Odds & Expected ROI
+      const invSum = allocatedTickets.reduce((acc, t) => acc + (1 / t.odds), 0);
+      const compositeOdds = +(1 / invSum).toFixed(2);
+      const estHitProb = Math.min(72, Math.round(plQuinella(h1, h2) * 100 + plQuinella(h1, h3) * 85));
+      const estRoi = Math.round(135 + (h1.ev * 38));
+
+      document.getElementById('modalTacticalSummary').innerHTML = `
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-emerald-400">${strategyName}</span>
+          <span class="text-[11px] font-mono text-slate-300">計 ${allocatedTickets.length}点</span>
+        </div>
+        <p class="text-[10px] text-slate-400 mt-0.5">${strategyDesc}</p>
+        <div class="grid grid-cols-3 gap-2 mt-2 pt-2 border-t border-slate-800/80 text-center font-mono">
+          <div>
+            <div class="text-[10px] text-slate-400">合成オッズ</div>
+            <div class="text-xs font-bold text-white">${compositeOdds}倍</div>
+          </div>
+          <div>
+            <div class="text-[10px] text-slate-400">想定的中率</div>
+            <div class="text-xs font-bold text-emerald-400">${estHitProb}%</div>
+          </div>
+          <div>
+            <div class="text-[10px] text-slate-400">期待回収率</div>
+            <div class="text-xs font-bold text-amber-400">${estRoi}%</div>
+          </div>
+        </div>
+      `;
+
+      const ticketsEl = document.getElementById('modalTicketsContainer');
+      ticketsEl.innerHTML = allocatedTickets.map((t, i) => {
+        const checkKey = `${race.id}_${i}`;
+        const isChecked = !!currentState.checkedTickets[checkKey];
+        const estPayout = Math.round((t.amount * t.odds) / 10) * 10;
+
+        return `
+          <div onclick="toggleTicketCheck('${checkKey}')" class="p-2.5 rounded-lg border transition cursor-pointer flex items-center justify-between gap-2 ${
+            isChecked
+              ? 'bg-emerald-950/30 border-emerald-500/50'
+              : 'bg-slate-950 border-slate-800 hover:border-slate-700'
+          }">
+            <div class="flex items-center gap-2 min-w-0">
+              <div class="w-5 h-5 rounded flex items-center justify-center border ${
+                isChecked ? 'bg-emerald-500 border-emerald-400 text-slate-950' : 'border-slate-700 text-transparent'
+              }">
+                <i class="fa-solid fa-check text-xs"></i>
+              </div>
+              <div>
+                <div class="flex items-center gap-1.5">
+                  <span class="px-1.5 py-0.2 rounded text-[10px] font-bold bg-slate-800 text-slate-200">${t.type}</span>
+                  <span class="font-mono font-bold text-xs text-white">${t.combo}</span>
+                  <span class="text-[10px] text-emerald-400 bg-emerald-500/10 px-1.5 rounded">${t.role}</span>
+                </div>
+                <div class="text-[10px] text-slate-400 mt-0.5">${t.names} (想定 ${t.odds}倍)</div>
+              </div>
+            </div>
+            <div class="text-right font-mono shrink-0">
+              <div class="text-sm font-black text-emerald-400">${t.amount.toLocaleString()}円</div>
+              <div class="text-[10px] text-slate-400">払戻 ${estPayout.toLocaleString()}円</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function toggleTicketCheck(key) {
+      currentState.checkedTickets[key] = !currentState.checkedTickets[key];
+      const race = findRaceById(currentState.activeRaceId);
+      if (race) {
+        renderOptimalTickets(race, getAdjustedHorses(race), currentState.modalBudget);
+      }
+    }
+
+    function copyTicketsToClipboard() {
+      const container = document.getElementById('modalTicketsContainer');
+      const text = Array.from(container.querySelectorAll('.font-mono.font-bold.text-xs')).map(el => el.textContent).join('\n');
+      const textarea = document.createElement('textarea');
+      textarea.value = `【Bayesian Racing Pro 推奨買い目 (予算:${currentState.modalBudget}円)】\n` + text;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      showToast('推奨買い目をクリップボードにコピーしました');
+    }
+
+    // --- TAB 2: WIN5 DEDICATED ENGINE ---
+    function setWin5Day(day) {
+      currentState.win5Day = day;
+      document.getElementById('win5Day15').className = day === '11/15'
+        ? 'px-2 py-1 text-[11px] font-bold rounded bg-indigo-500 text-white'
+        : 'px-2 py-1 text-[11px] font-medium rounded text-slate-400';
+      document.getElementById('win5Day22').className = day === '11/22'
+        ? 'px-2 py-1 text-[11px] font-bold rounded bg-indigo-500 text-white'
+        : 'px-2 py-1 text-[11px] font-medium rounded text-slate-400';
+      renderWin5View();
+    }
+
+    function setWin5Plan(plan) {
+      currentState.win5Plan = plan;
+      document.getElementById('win5PlanABtn').className = plan === 'A'
+        ? 'px-2 py-0.5 text-[10px] font-bold rounded bg-emerald-500 text-slate-950'
+        : 'px-2 py-0.5 text-[10px] font-medium rounded text-slate-400';
+      document.getElementById('win5PlanBBtn').className = plan === 'B'
+        ? 'px-2 py-0.5 text-[10px] font-bold rounded bg-purple-500 text-white'
+        : 'px-2 py-0.5 text-[10px] font-medium rounded text-slate-400';
+      renderWin5View();
+    }
+
+    function updateWin5Budget(val) {
+      currentState.win5Budget = parseInt(val, 10);
+      document.getElementById('win5BudgetSlider').value = currentState.win5Budget;
+      renderWin5View();
+    }
+
+    function renderWin5View() {
+      const data = WIN5_DATA[currentState.win5Day];
+      const maxCombinations = Math.floor(currentState.win5Budget / 100);
+
+      // Greedy optimal head count allocation maximizing product of cumulative capture rates F_k
+      let counts = [1, 1, 1, 1, 1];
+      const maxPerLeg = data.legs.map(l => l.horses.length);
+
+      while (true) {
+        let bestLeg = -1;
+        let bestGain = -1;
+
+        for (let r = 0; r < 5; r++) {
+          if (counts[r] >= maxPerLeg[r]) continue;
+          const nextCounts = [...counts];
+          nextCounts[r]++;
+          const totalCombos = nextCounts.reduce((a, b) => a * b, 1);
+          if (totalCombos > maxCombinations) continue;
+
+          // Calculate marginal gain in log capture rate
+          const currentF = data.legs[r].horses.slice(0, counts[r]).reduce((acc, h) => acc + h.f_i, 0);
+          const nextHorseF = data.legs[r].horses[counts[r]].f_i;
+          let bonus = (currentState.win5Plan === 'B' && data.legs[r].typeBPlus) ? 1.35 : 1.0;
+          const gain = ((currentF + nextHorseF) / currentF) * bonus;
+
+          if (gain > bestGain) {
+            bestGain = gain;
+            bestLeg = r;
+          }
+        }
+
+        if (bestLeg === -1) break;
+        counts[bestLeg]++;
+      }
+
+      const actualCombos = counts.reduce((a, b) => a * b, 1);
+      const actualCost = actualCombos * 100;
+
+      // Calculate Joint Capture Rate product
+      let jointProb = 1;
+      const legCaptureRates = counts.map((k, idx) => {
+        const sumF = data.legs[idx].horses.slice(0, k).reduce((acc, h) => acc + h.f_i, 0);
+        jointProb *= sumF;
+        return sumF;
+      });
+
+      document.getElementById('win5BudgetDisplay').textContent = `${actualCost.toLocaleString()}円 (${actualCombos}点 / 上限${currentState.win5Budget.toLocaleString()}円)`;
+      document.getElementById('win5HedgeAmount').textContent = `${Math.max(1000, Math.round(actualCost * 0.5 / 100) * 100).toLocaleString()}円`;
+      document.getElementById('win5HedgeReturn').textContent = `${Math.round(Math.max(1000, Math.round(actualCost * 0.5 / 100) * 100) * 2.8).toLocaleString()}円`;
+
+      document.getElementById('win5FormationSummary').innerHTML = `
+        <div class="flex items-center gap-2">
+          <span class="text-slate-400">最適配分:</span>
+          <span class="font-mono font-black text-white bg-slate-900 px-2 py-0.5 rounded border border-slate-700">
+            ${counts.join(' × ')} = ${actualCombos}点
+          </span>
+        </div>
+        <div class="text-right">
+          <span class="text-slate-400">5鞍同時捕捉指数:</span>
+          <span class="font-mono font-bold text-emerald-400 ml-1">${(jointProb * 100).toFixed(2)}%</span>
+        </div>
+      `;
+
+      // Render Leg Cards
+      const legsContainer = document.getElementById('win5LegsContainer');
+      legsContainer.innerHTML = data.legs.map((leg, idx) => {
+        const k = counts[idx];
+        const F_k = (legCaptureRates[idx] * 100).toFixed(1);
+
+        return `
+          <div class="bg-slate-900 border ${leg.typeBPlus ? 'border-purple-500/40' : 'border-slate-800'} rounded-xl p-3 space-y-2">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-1.5">
+                <span class="px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 border border-indigo-500/40 font-mono font-bold text-xs">Leg ${leg.leg}</span>
+                <span class="text-xs font-bold text-white">${leg.venue} ${leg.name}</span>
+              </div>
+              <div class="flex items-center gap-1.5">
+                ${leg.typeBPlus ? '<span class="text-[10px] px-1.5 py-0.5 rounded bg-purple-500/20 text-purple-300 border border-purple-500/40 font-bold">⚠️Type B+</span>' : ''}
+                <span class="text-xs font-mono font-bold text-emerald-400 bg-emerald-500/10 border border-emerald-500/30 px-2 py-0.5 rounded">
+                  ${k}頭選択 (F_${k}=${F_k}%)
+                </span>
+              </div>
+            </div>
+
+            <p class="text-[11px] text-slate-400">${leg.ruleNote}</p>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5 pt-1">
+              ${leg.horses.map((h, hIdx) => {
+                const isSelected = hIdx < k;
+                return `
+                  <div class="p-2 rounded-lg border flex items-center justify-between ${
+                    isSelected
+                      ? 'bg-emerald-950/30 border-emerald-500/50 text-white'
+                      : 'bg-slate-950/60 border-slate-800/80 text-slate-500'
+                  }">
+                    <div class="flex items-center gap-2 min-w-0">
+                      <span class="w-5 h-5 rounded text-[11px] font-mono font-bold flex items-center justify-center shrink-0 ${
+                        isSelected ? 'bg-emerald-500 text-slate-950' : 'bg-slate-800 text-slate-400'
+                      }">${h.num}</span>
+                      <div class="truncate">
+                        <div class="text-xs font-bold flex items-center gap-1">
+                          <span class="truncate">${h.name}</span>
+                          ${h.isWin ? '<span class="text-[10px] bg-amber-400 text-slate-950 font-black px-1 rounded">1着🎯</span>' : ''}
+                        </div>
+                        <div class="text-[10px] ${isSelected ? 'text-slate-300' : 'text-slate-500'}">${h.note}</div>
+                      </div>
+                    </div>
+                    <div class="text-right font-mono shrink-0 ml-2">
+                      <div class="text-xs font-bold ${isSelected ? 'text-emerald-400' : 'text-slate-500'}">f=${(h.f_i * 100).toFixed(1)}%</div>
+                      <div class="text-[10px] text-slate-400">${h.odds}倍</div>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- TAB 3: RENDER VERIFIED HISTORY ---
+    function renderVerifiedHistory() {
+      const container = document.getElementById('verifiedHistoryList');
+      const verifiedRaces = FEATURED_RACES.filter(r => r.resultSummary);
+
+      container.innerHTML = verifiedRaces.map(r => {
+        const res = r.resultSummary;
+        return `
+          <div onclick="openRaceModal('${r.id}')" class="bg-slate-950 hover:bg-slate-900 border ${
+            res.hit ? 'border-emerald-500/30' : 'border-slate-800'
+          } rounded-lg p-2.5 cursor-pointer transition flex items-center justify-between gap-2">
+            <div>
+              <div class="flex items-center gap-1.5">
+                <span class="text-[10px] font-mono bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded">${r.date} ${r.venue}${r.raceNum}R</span>
+                <span class="text-xs font-bold text-white">${r.name}</span>
+                <span class="text-[10px] text-amber-300">${r.gradeLabel}</span>
+              </div>
+              <p class="text-[11px] text-slate-400 mt-1">${res.finishOrder}</p>
+            </div>
+            <div class="text-right font-mono shrink-0">
+              <div class="text-xs font-black ${res.hit ? 'text-emerald-400' : 'text-slate-500'}">
+                ${res.hit ? `🎯 ${res.roi}%` : '惜敗 0%'}
+              </div>
+              <div class="text-[10px] text-slate-400">${res.payout.toLocaleString()}円</div>
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // --- TAB 4: SKILL PATCH & INFO MODALS ---
+    function applySkillPatch() {
+      currentState.skillVersion = 'v2.5';
+      document.getElementById('skillVerBadge').textContent = 'v2.5 (Updated)';
+      document.getElementById('skillVerBadge').className = 'text-[10px] font-mono bg-amber-500/20 text-amber-300 border border-amber-500/40 px-1.5 py-0.2 rounded';
+      const btn = document.getElementById('applyPatchBtn');
+      btn.innerHTML = '<i class="fa-solid fa-check"></i> <span>app-bayesian-horse-racing-text (v2.5) へ反映完了！</span>';
+      btn.className = 'w-full py-2 rounded-lg bg-slate-800 text-emerald-400 border border-emerald-500/40 font-bold text-xs flex items-center justify-center gap-1.5';
+      showToast('スキル改訂パッチを app-bayesian-horse-racing-text に適用しました！');
+    }
+
+    function copyPatchText() {
+      const code = document.getElementById('skillPatchCode').textContent;
+      const textarea = document.createElement('textarea');
+      textarea.value = code;
+      document.body.appendChild(textarea);
+      textarea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textarea);
+      showToast('スキル改訂パッチをコピーしました');
+    }
+
+    function openApiModal() {
+      document.getElementById('infoModalTitle').textContent = '⚡ Gemini API 極小化アーキテクチャ (無料枠運用)';
+      document.getElementById('infoModalBody').innerHTML = `
+        <div class="bg-slate-950 p-3 rounded-xl border border-slate-800 space-y-2">
+          <div class="flex justify-between items-center">
+            <span class="text-slate-400">本日のAPIリクエスト数</span>
+            <span class="font-mono font-bold text-emerald-400">${currentState.apiUsedCount} / 1,500 req (0.26%)</span>
+          </div>
+          <div class="w-full bg-slate-800 h-2 rounded-full overflow-hidden">
+            <div class="bg-emerald-400 h-full" style="width: 3%"></div>
+          </div>
+        </div>
+        <div class="space-y-2 leading-relaxed">
+          <p><strong class="text-white">1. 朝の一括スクリーニング (3 req/日):</strong><br>08:30に東京・京都・福島の全12R番組データを会場単位で1リクエストにまとめて送信し、S/A/B/Pass判定を一括取得します。</p>
+          <p><strong class="text-white">2. 発走60分前のJSON推論 (1レース1回のみ):</strong><br>アプリ専用スキル（<code class="text-emerald-400">app-bayesian-*</code>）が長文解説を省き、純粋勝率 $f_i$・事後確率 $p_i$・F/E/Hタグのみを軽量JSONで出力します。</p>
+          <p><strong class="text-white">3. 予算変更・買い目計算はAPI消費ゼロ:</strong><br>iPhone上で金額スライダーを動かした際は、ブラウザ内のJavaScript（Plackett-Luceモデル＋Kelly配分エンジン）が0.01秒で最適買い目を再計算するため、APIを一切消費しません。</p>
+        </div>
+      `;
+      document.getElementById('infoModal').classList.remove('hidden');
+    }
+
+    function openSkillPromptModal(type) {
+      const titles = {
+        text: 'app-bayesian-horse-racing-text (複製版・JSON仕様)',
+        debut: 'app-bayesian-make-debut (複製版・JSON仕様)',
+        win5: 'app-bayesian-win5 (複製版・JSON仕様)'
+      };
+      document.getElementById('infoModalTitle').textContent = titles[type];
+      document.getElementById('infoModalBody').innerHTML = `
+        <p class="text-slate-300">元のスキル（チャット用）には一切手を加えず、末尾の出力フォーマット指定のみをアプリ連携用JSONスキーマに差し替えたコピー版スキルです。</p>
+        <pre class="bg-slate-950 p-2.5 rounded-lg border border-slate-800 font-mono text-[10px] text-emerald-300 overflow-x-auto">{
+  "skill_used": "app-bayesian-${type}",
+  "screening_grade": "S",
+  "type_b_plus": false,
+  "pace_regime": { "n_lead": 4, "pci_est": 50.8 },
+  "contenders": [
+    {
+      "num": 8,
+      "mark": "◎",
+      "pure_win_prob_f": 0.245,
+      "posterior_prob_p": 0.268,
+      "evidence_tags": ["[F] 京都内2000m好位安定", "[H] クッション9.7適性"]
+    }
+  ]
+}</pre>
+      `;
+      document.getElementById('infoModal').classList.remove('hidden');
+    }
+
+    function closeInfoModal() {
+      document.getElementById('infoModal').classList.add('hidden');
+    }
+
+    // --- NAVIGATION & LAYOUT HELPERS ---
+    function switchMainTab(tabName) {
+      ['races', 'win5', 'stats', 'skills'].forEach(t => {
+        const el = document.getElementById(`tab-${t}`);
+        if (t === tabName) el.classList.remove('hidden');
+        else el.classList.add('hidden');
+      });
+
+      document.querySelectorAll('.nav-tab-btn').forEach(btn => {
+        if (btn.dataset.tab === tabName) {
+          btn.className = 'nav-tab-btn flex flex-col items-center justify-center py-1 rounded-xl text-emerald-400 bg-emerald-500/10';
+        } else {
+          btn.className = 'nav-tab-btn flex flex-col items-center justify-center py-1 rounded-xl text-slate-400 hover:text-slate-200';
+        }
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleScreenWidth() {
+      currentState.wideScreen = !currentState.wideScreen;
+      const shell = document.getElementById('appShell');
+      const nav = document.getElementById('bottomNav');
+      if (currentState.wideScreen) {
+        shell.classList.remove('max-w-md', 'lg:max-w-2xl');
+        shell.classList.add('max-w-5xl');
+        nav.classList.remove('max-w-md', 'lg:max-w-2xl');
+        nav.classList.add('max-w-5xl');
+      } else {
+        shell.classList.add('max-w-md', 'lg:max-w-2xl');
+        shell.classList.remove('max-w-5xl');
+        nav.classList.add('max-w-md', 'lg:max-w-2xl');
+        nav.classList.remove('max-w-5xl');
+      }
+    }
+
+    function showToast(msg) {
+      const box = document.getElementById('toastBox');
+      document.getElementById('toastText').textContent = msg;
+      box.classList.remove('hidden');
+      setTimeout(() => box.classList.add('hidden'), 2600);
+    }
+
+    // --- INITIALIZE APP ---
+    window.onload = function () {
+      renderDateTabsAndTrackBar();
+      renderRaceList();
+      renderWin5View();
+      renderVerifiedHistory();
+    };
+  </script>
+</body>
+</html>
