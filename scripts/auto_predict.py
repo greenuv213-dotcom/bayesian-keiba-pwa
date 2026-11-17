@@ -1,4 +1,6 @@
 import os
+import re
+import time
 import json
 import glob
 from datetime import datetime, timedelta, timezone
@@ -6,85 +8,115 @@ from google import genai
 from google.genai import types
 
 JST = timezone(timedelta(hours=9))
-client = genai.Client(api_key=os.environ["GEMINI_API_KEY"])
+API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+client = genai.Client(api_key=API_KEY) if API_KEY else None
 
-# 作成したアプリ専用スキルのプロンプト定義ファイルを読み込む関数
+# dataフォルダとinputsフォルダが存在しない場合は自動で作成する
+os.makedirs("data", exist_ok=True)
+os.makedirs("inputs", exist_ok=True)
+
 def load_skill_prompt(skill_name: str) -> str:
     path = f"skills/{skill_name}/SKILL.md"
-    with open(path, "r", encoding="utf-8") as f:
-        return f.read()
+    if os.path.exists(path):
+        with open(path, "r", encoding="utf-8") as f:
+            return f.read()
+    return "Output valid JSON only."
 
-def call_gemini_json(skill_name: str, race_input: str, use_pro: bool = True) -> dict:
-    """構造化JSONのみを返させて出力トークンを最小化する"""
-    model_id = "gemini-2.5-pro" if use_pro else "gemini-2.5-flash"
+def call_gemini_json(skill_name: str, prompt_text: str, prefer_pro: bool = False) -> dict:
+    if not client:
+        return {"error": "GEMINI_API_KEY is not set"}
+
     system_instruction = load_skill_prompt(skill_name)
-    
-    response = client.models.generate_content(
-        model=model_id,
-        contents=race_input,
-        config=types.GenerateContentConfig(
-            system_instruction=system_instruction,
-            response_mime_type="application/json",
-            temperature=0.1,
-        ),
-    )
-    return json.loads(response.text)
+    models_to_try = ["gemini-2.5-pro", "gemini-2.5-flash"] if prefer_pro else ["gemini-2.5-flash"]
 
-def run_morning_screening(date_str: str, card_data: dict) -> dict:
-    """【朝1回のみ実行】会場ごとに全12Rを一括スクリーニング（計2〜3リクエスト）"""
-    skill_prompt = "app-bayesian-horse-racing-text"
-    screened_races = []
-    for venue, venue_payload in card_data["venues"].items():
-        prompt = f"【モード: スクリーニング】日付:{date_str} 会場:{venue}\n{json.dumps(venue_payload, ensure_ascii=False)}"
-        res = call_gemini_json(skill_prompt, prompt, use_pro=False)
-        screened_races.extend(res.get("races", []))
-    return screened_races
+    for model_id in models_to_try:
+        try:
+            time.sleep(4)
+            response = client.models.generate_content(
+                model=model_id,
+                contents=prompt_text,
+                config=types.GenerateContentConfig(
+                    system_instruction=system_instruction,
+                    response_mime_type="application/json",
+                    temperature=0.1,
+                ),
+            )
+            text = (response.text or "").strip()
+            if text.startswith("```"):
+                text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text, flags=re.DOTALL)
+            return json.loads(text)
+        except Exception as e:
+            print(f"[Warn] {model_id} failed: {e}")
+            continue
+    return {"error": "API limit or error"}
 
-def run_one_hour_before(date_str: str):
-    """【発走1時間前チェック】現在時刻から45〜75分後に発走するレースのみ本予想を実行"""
+def load_target_inputs(date_str: str) -> str:
+    texts = []
+    for ext in ("*.csv", "*.txt", "*.json"):
+        for fp in glob.glob(os.path.join("inputs", ext)):
+            if date_str.replace("-", "") in fp or date_str in fp or "target" in fp.lower():
+                try:
+                    with open(fp, "r", encoding="utf-8", errors="ignore") as f:
+                        texts.append(f"--- File: {os.path.basename(fp)} ---\n" + f.read()[:15000])
+                except Exception:
+                    pass
+    return "\n".join(texts)
+
+def run_pipeline():
     now = datetime.now(JST)
+    date_str = now.strftime("%Y-%m-%d")
     db_path = f"data/{date_str}.json"
-    with open(db_path, "r", encoding="utf-8") as f:
-        day_db = json.load(f)
+    target_extra = load_target_inputs(date_str)
 
-    updated = False
-    for race in day_db["races"]:
-        # すでに本予想済み、または見送り(Pass)設定のレースはAPI節約のためスキップ
+    if os.path.exists(db_path):
+        with open(db_path, "r", encoding="utf-8") as f:
+            day_db = json.load(f)
+    else:
+        day_db = {
+            "date": date_str,
+            "updatedAt": now.strftime("%Y-%m-%d %H:%M JST"),
+            "screened": False,
+            "audited": False,
+            "races": [],
+            "win5": {},
+            "skillPatches": []
+        }
+
+    if target_extra and not day_db.get("screened"):
+        prompt = f"【モード: スクリーニング】日付:{date_str}\n{target_extra}"
+        res = call_gemini_json("app-bayesian-horse-racing-text", prompt, prefer_pro=False)
+        if "races" in res:
+            day_db["races"] = res["races"]
+            day_db["trackBias"] = res.get("trackBias", {})
+            day_db["screened"] = True
+
+    for race in day_db.get("races", []):
         if race.get("predicted") or race.get("rank") == "Pass":
             continue
-
-        post_dt = datetime.strptime(f"{date_str} {race['postTime']}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
+        post_time = race.get("postTime", "")
+        if not re.match(r"^\d{2}:\d{2}$", post_time):
+            continue
+        post_dt = datetime.strptime(f"{date_str} {post_time}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
         mins_to_post = (post_dt - now).total_seconds() / 60.0
-
-        if 45 <= mins_to_post <= 75:
-            is_debut = "新馬" in race["name"]
+        if 40 <= mins_to_post <= 80:
+            is_debut = "新馬" in race.get("name", "") or race.get("rank") == "New"
             skill_name = "app-bayesian-make-debut" if is_debut else "app-bayesian-horse-racing-text"
-            use_pro = race.get("rank") in ("S", "A", "New")
+            prompt = f"【モード: 標準】日付:{date_str}\n対象レース:{json.dumps(race, ensure_ascii=False)}\n{target_extra[:8000]}"
+            pred = call_gemini_json(skill_name, prompt, prefer_pro=(race.get("rank") == "S"))
+            if "horses" in pred:
+                race.update(pred)
+                race["predicted"] = True
+                race["predictedAt"] = now.strftime("%H:%M")
 
-            # TARGET出力テキストまたは直前オッズ・馬体重データを結合
-            race_raw = race.get("rawInput", json.dumps(race, ensure_ascii=False))
-            pred_json = call_gemini_json(skill_name, f"【モード: 標準】\n{race_raw}", use_pro=use_pro)
+    day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
+    with open(db_path, "w", encoding="utf-8") as f:
+        json.dump(day_db, f, ensure_ascii=False, indent=2)
 
-            race.update(pred_json)
-            race["predicted"] = True
-            race["updatedAt"] = now.strftime("%H:%M")
-            updated = True
+    all_files = sorted([os.path.basename(p).replace(".json", "") for p in glob.glob("data/20*.json")])
+    with open("data/index.json", "w", encoding="utf-8") as f:
+        json.dump({"availableDates": all_files, "lastSync": day_db["updatedAt"]}, f, ensure_ascii=False, indent=2)
 
-    # WIN5（Leg 1発走の1時間前に5鞍一括で1リクエスト実行）
-    win5_info = day_db.get("win5", {})
-    if win5_info and not win5_info.get("predicted"):
-        leg1_dt = datetime.strptime(f"{date_str} {win5_info['leg1PostTime']}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
-        if 45 <= (leg1_dt - now).total_seconds() / 60.0 <= 75:
-            win5_res = call_gemini_json("app-bayesian-win5", json.dumps(win5_info["rawInput"], ensure_ascii=False), use_pro=True)
-            day_db["win5"].update(win5_res)
-            day_db["win5"]["predicted"] = True
-            updated = True
-
-    if updated:
-        with open(db_path, "w", encoding="utf-8") as f:
-            json.dump(day_db, f, ensure_ascii=False, indent=2)
+    print(f"Success: Updated {db_path}")
 
 if __name__ == "__main__":
-    today_str = datetime.now(JST).strftime("%Y-%m-%d")
-    if os.path.exists(f"data/{today_str}.json"):
-        run_one_hour_before(today_str)
+    run_pipeline()
