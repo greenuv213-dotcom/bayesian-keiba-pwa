@@ -12,24 +12,35 @@
     body {
       font-family: -apple-system, BlinkMacSystemFont, "Hiragino Sans", "Yu Gothic UI", sans-serif;
       -webkit-tap-highlight-color: transparent;
-      padding-bottom: env(safe-area-inset-bottom);
+      padding-bottom: calc(max(env(safe-area-inset-bottom, 20px), 20px) + 4.5rem);
+    }
+    /* iPhoneの時計・ノッチ・充電アイコンと被らないための上部セーフエリア余白 */
+    .safe-header {
+      padding-top: max(calc(env(safe-area-inset-top, 48px) + 8px), 52px);
+    }
+    .safe-modal {
+      padding-top: max(calc(env(safe-area-inset-top, 48px) + 12px), 54px);
+      padding-bottom: max(calc(env(safe-area-inset-bottom, 20px) + 16px), 32px);
+    }
+    .safe-nav {
+      padding-bottom: max(env(safe-area-inset-bottom, 16px), 16px);
     }
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     input[type="range"] { accent-color: #10b981; }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen select-none pb-24">
+<body class="bg-slate-950 text-slate-100 min-h-screen select-none">
 
-  <!-- 上部固定ヘッダー -->
-  <header class="sticky top-0 z-30 bg-slate-950/95 backdrop-blur border-b border-slate-800 px-3 pt-3 pb-2">
-    <div class="flex items-center justify-between mb-2">
-      <div class="flex items-center gap-2">
-        <span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-xs font-bold px-2 py-0.5 rounded-md">Bayesian AI v9.3</span>
-        <h1 class="text-sm font-bold tracking-tight text-white">階層ベイズ競馬予想 PWA</h1>
+  <!-- 上部固定ヘッダー（safe-headerでiPhone上部バーを自動回避） -->
+  <header class="safe-header sticky top-0 z-30 bg-slate-950/95 backdrop-blur border-b border-slate-800 px-3 pb-2">
+    <div class="flex items-center justify-between gap-2 mb-2">
+      <div class="flex items-center gap-1.5 min-w-0">
+        <span class="shrink-0 bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[11px] font-bold px-2 py-0.5 rounded-md">v9.3</span>
+        <h1 class="text-sm font-bold tracking-tight text-white truncate">階層ベイズ競馬予想 PWA</h1>
       </div>
-      <div class="flex items-center gap-1.5">
-        <span id="syncStatusBadge" onclick="location.reload()" class="text-[11px] bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded-full cursor-pointer">
+      <div class="shrink-0">
+        <span id="syncStatusBadge" onclick="location.reload()" class="inline-block text-[11px] bg-slate-800 border border-slate-700 text-slate-300 px-2.5 py-0.5 rounded-full cursor-pointer whitespace-nowrap">
           🔄 同期確認中...
         </span>
       </div>
@@ -63,7 +74,7 @@
           <span><b class="text-slate-300">B</b>:標準</span>
           <span>💤<b class="text-slate-500">Pass</b>:見送り</span>
         </div>
-        <span class="text-emerald-400 font-semibold">1時間前自動更新</span>
+        <span class="shrink-0 text-emerald-400 font-semibold ml-1">1時間前自動更新</span>
       </div>
 
       <div id="raceList" class="space-y-2.5"></div>
@@ -192,7 +203,7 @@
 
   <!-- 個別レースAI予想 ＆ 可変予算シミュレーター モーダル -->
   <div id="raceModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm overflow-y-auto">
-    <div class="min-h-screen px-2.5 py-4 flex items-end sm:items-center justify-center">
+    <div class="safe-modal min-h-screen px-2.5 flex items-end sm:items-center justify-center">
       <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl space-y-3 p-3.5">
 
         <!-- モーダルヘッダー -->
@@ -260,8 +271,8 @@
     </div>
   </div>
 
-  <!-- 下部固定ナビゲーションバー（iPhone最適化） -->
-  <nav class="fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur border-t border-slate-800 px-4 py-2">
+  <!-- 下部固定ナビゲーションバー（safe-navでiPhoneホームバー領域も保護） -->
+  <nav class="safe-nav fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur border-t border-slate-800 px-4 pt-2">
     <div class="max-w-xl mx-auto grid grid-cols-4 gap-1 text-center">
       <button onclick="switchMainView('races')" id="nav-races" class="flex flex-col items-center py-1 text-emerald-400 font-bold">
         <span class="text-base">🏇</span>
@@ -284,7 +295,6 @@
 
   <!-- アプリケーション本体スクリプト -->
   <script>
-    // 初期サンプルデータ（GitHub Actionsの自動取得データがあればそちらが自動追加・優先選択されます）
     const DB = {
       "2026-11-15": {
         label: "11/15(日) 検証済",
@@ -626,7 +636,6 @@
       const maxPoints = Math.floor(budget / 100);
       const counts = [1, 1, 1, 1, 1];
 
-      // 予算上限内で純粋勝率の限界ゲインが最も高いLegから頭数を拡張
       while (true) {
         let bestLeg = -1;
         let bestScore = -1;
@@ -697,7 +706,6 @@
       `).join("");
     }
 
-    // GitHub Actionsが自動収集・生成した data/*.json を読み込んでアプリへ反映する同期関数
     async function syncGitHubLiveData() {
       const syncBadge = document.getElementById("syncStatusBadge");
       try {
@@ -707,8 +715,9 @@
           return;
         }
         const idx = await res.json();
-        syncBadge.textContent = `🔄 自動取得済: ${idx.lastSync || "最新"}`;
-        syncBadge.className = "text-[11px] bg-emerald-950 border border-emerald-500/50 text-emerald-300 px-2.5 py-0.5 rounded-full cursor-pointer";
+        const shortSync = (idx.lastSync || "最新").replace(/^20\d\d-/, "").replace(" JST", "");
+        syncBadge.textContent = `🔄 自動取得: ${shortSync}`;
+        syncBadge.className = "inline-block text-[11px] bg-emerald-950 border border-emerald-500/50 text-emerald-300 px-2.5 py-0.5 rounded-full cursor-pointer whitespace-nowrap";
 
         if (!idx.availableDates) return;
 
