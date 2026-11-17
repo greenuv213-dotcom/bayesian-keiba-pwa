@@ -2133,6 +2133,32 @@
       renderWin5View();
       renderVerifiedHistory();
     };
-  </script>
+  </script><script>
+// GitHub Actionsが生成した data/*.json を自動同期するスクリプト
+async function syncGitHubLiveData() {
+  try {
+    const res = await fetch(`./data/index.json?t=${Date.now()}`);
+    if (!res.ok) return;
+    const idx = await res.json();
+    const badge = document.createElement('div');
+    badge.className = 'fixed bottom-16 right-3 z-50 bg-emerald-900/90 border border-emerald-500/50 text-emerald-200 text-[11px] px-2.5 py-1 rounded-full shadow-lg flex items-center gap-1.5 cursor-pointer';
+    badge.innerHTML = `<span>🔄 最終同期: ${idx.lastSync || '完了'}</span>`;
+    badge.onclick = () => location.reload();
+    document.body.appendChild(badge);
+
+    if (idx.availableDates && idx.availableDates.length > 0) {
+      const latestDate = idx.availableDates[idx.availableDates.length - 1];
+      const dayRes = await fetch(`./data/${latestDate}.json?t=${Date.now()}`);
+      if (dayRes.ok) {
+        window.LIVE_GITHUB_DATA = await dayRes.json();
+        console.log('Loaded live prediction data:', window.LIVE_GITHUB_DATA);
+      }
+    }
+  } catch (e) {
+    console.warn('Live sync skipped:', e);
+  }
+}
+window.addEventListener('DOMContentLoaded', syncGitHubLiveData);
+</script>
 </body>
 </html>
