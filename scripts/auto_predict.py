@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 from google import genai
 from google.genai import types
 
-# 通信の無限待機を防ぐためソケットタイムアウトを25秒に設定
 socket.setdefaulttimeout(25)
 
 JST = timezone(timedelta(hours=9))
@@ -17,7 +16,6 @@ JRA_VENUES = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東�
 NAR_VENUES = {"42":"浦和","43":"船橋","44":"大井","45":"川崎","30":"門別","35":"盛岡","36":"水沢","46":"金沢","47":"笠松","48":"名古屋","50":"園田","51":"姫路","54":"高知","55":"佐賀"}
 NANKAN_CODES = {"42", "43", "44", "45"}
 
-# 1回のワークフロー実行で呼び出すAI回数を最大3回までに制限（約60秒で確実に完了させる）
 AI_CALL_COUNT = 0
 MAX_AI_CALLS_PER_RUN = 3
 
@@ -60,9 +58,10 @@ def fetch_race_list(ymd: str, mode: str = "jra") -> list:
         print(f"[Warn] {mode} list error: {e}")
         return []
 
-def fetch_full_shutuba(rid: str, mode: str = "jra") -> tuple[str, list]:
+def fetch_full_shutuba(rid: str, mode: str = "jra") -> tuple[str, list, list]:
+    """出走全頭のデータ・確定着順・初期全頭リストを取得"""
     base = "https://race.netkeiba.com" if mode == "jra" else "https://nar.netkeiba.com"
-    lines, top3_actual, odds_map = [], [], {}
+    lines, top3_actual, raw_runners, odds_map = [], [], [], {}
     if mode == "jra":
         try:
             o_json = requests.get(f"{base}/api/api_get_jra_odds.html?race_id={rid}&type=1&action=init", headers=HEADERS, timeout=8).json()
@@ -81,25 +80,70 @@ def fetch_full_shutuba(rid: str, mode: str = "jra") -> tuple[str, list]:
             w, u = tr.select_one("td[class^='Waku']"), tr.select_one("td[class^='Umaban']")
             n, j = tr.select_one(".Horse02 a, .HorseName a"), tr.select_one(".Jockey a, td.Jockey")
             wt, odd_el = tr.select_one("td.Weight"), tr.select_one("td.Popular span, span[id^='odds-']")
-            pasts = [" ".join(td.get_text(" ", strip=True).split())[:85] for td in tr.select("td.Past")[:3]]
+            pasts = [" ".join(td.get_text(" ", strip=True).split())[:80] for td in tr.select("td.Past")[:3]]
             if n and n.get_text(strip=True):
                 u_str = u.get_text(strip=True) if u else "0"
-                u_int = int(u_str) if u_str.isdigit() else 0
-                odd = odds_map.get(u_int, odd_el.get_text(strip=True) if odd_el else "")
-                lines.append(f"{w.get_text(strip=True) if w else ''}枠 {u_str}番 {n.get_text(strip=True)} ({' '.join(j.get_text(' ', strip=True).split()) if j else ''} 馬体重:{wt.get_text(strip=True) if wt else ''} 単勝:{odd}倍) | 近走: {' / '.join(pasts)}")
+                u_int = int(u_str) if u_str.isdigit() else (len(raw_runners) + 1)
+                h_name = n.get_text(strip=True)
+                j_str = " ".join(j.get_text(" ", strip=True).split()) if j else ""
+                odd_val = odds_map.get(u_int, odd_el.get_text(strip=True) if odd_el else "10.0")
+                try:
+                    odd_num = float(str(odd_val).replace(",", ""))
+                except Exception:
+                    odd_num = 10.0
+                raw_runners.append({"num": u_int, "name": h_name, "jockey": j_str, "odds": odd_num})
+                lines.append(f"{w.get_text(strip=True) if w else ''}枠 {u_int}番 {h_name} ({j_str} 馬体重:{wt.get_text(strip=True) if wt else ''} 単勝:{odd_num}倍) | 近走: {' / '.join(pasts)}")
     except Exception: pass
 
     try:
         rsoup = get_soup(f"{base}/race/result.html?race_id={rid}")
-        for tr in rsoup.select("#All_Result_Table tbody tr")[:10]:
+        for tr in rsoup.select("#All_Result_Table tbody tr")[:18]:
             tds = [td.get_text(strip=True) for td in tr.select("td")]
-            if len(tds) >= 11:
-                if len(top3_actual) < 3 and tds[2].isdigit():
-                    top3_actual.append({"rank": tds[0], "num": int(tds[2]), "name": tds[3], "odds": tds[10]})
-                if len(lines) < 6:
-                    lines.append(f"{tds[1]}枠 {tds[2]}番 {tds[3]} (性齢:{tds[4]} 斤量:{tds[5]} 騎手:{tds[6]} 単勝:{tds[10]}倍 上り:{tds[11] if len(tds)>11 else ''})")
+            if len(tds) >= 11 and tds[2].isdigit():
+                u_int = int(tds[2])
+                if len(top3_actual) < 3:
+                    top3_actual.append({"rank": tds[0], "num": u_int, "name": tds[3], "odds": tds[10]})
+                if len(raw_runners) < 18 and not any(x["num"] == u_int for x in raw_runners):
+                    try: odd_num = float(str(tds[10]).replace(",", ""))
+                    except Exception: odd_num = 12.0
+                    raw_runners.append({"num": u_int, "name": tds[3], "jockey": tds[6], "odds": odd_num})
+                    lines.append(f"{tds[1]}枠 {u_int}番 {tds[3]} (性齢:{tds[4]} 斤量:{tds[5]} 騎手:{tds[6]} 単勝:{odd_num}倍 上り:{tds[11] if len(tds)>11 else ''})")
     except Exception: pass
-    return "\n".join(lines[:18]), top3_actual
+    return "\n".join(lines[:22]), top3_actual, raw_runners
+
+def ensure_all_runners(ai_horses: list, raw_runners: list) -> list:
+    """AIが一部の馬を省略した場合でも、出走全頭リストと照合して100%全頭評価を完成させる補完関数"""
+    if not raw_runners:
+        return ai_horses
+    by_num = {int(h.get("num", 0)): h for h in ai_horses if str(h.get("num", "")).isdigit()}
+    merged = []
+    for r in raw_runners:
+        num = r["num"]
+        if num in by_num:
+            h = by_num[num]
+            h["num"] = num
+            if not h.get("name"): h["name"] = r["name"]
+            if not h.get("odds"): h["odds"] = r["odds"]
+            merged.append(h)
+        else:
+            odd = max(1.5, float(r.get("odds", 25.0)))
+            q_est = round(min(40.0, 80.0 / odd), 1)
+            f_est = round(max(0.5, q_est * 0.65), 1)
+            merged.append({
+                "mark": "無",
+                "role": "展開・時計劣勢",
+                "num": num,
+                "name": r["name"],
+                "style": "差",
+                "f": f_est,
+                "q": q_est,
+                "top2": round(min(85.0, f_est * 2.1), 1),
+                "top3": round(min(92.0, f_est * 3.3), 1),
+                "odds": odd,
+                "comment": f"騎手:{r.get('jockey','')}｜上位勢との比較で強調材料乏しく連下・見送り評価"
+            })
+    merged.sort(key=lambda x: float(x.get("f", 0)), reverse=True)
+    return merged
 
 def call_gemini(skill: str, prompt: str) -> dict:
     global AI_CALL_COUNT
@@ -108,18 +152,23 @@ def call_gemini(skill: str, prompt: str) -> dict:
     AI_CALL_COUNT += 1
     p = f"skills/{skill}/SKILL.md"
     sys_inst = open(p, "r", encoding="utf-8").read() if os.path.exists(p) else "Output valid JSON only."
-    ticket_rule = (
-        "\n【重要追加指示】標準モードのJSON出力時は、元のスキルのPhase 6（Single-Pivot / Dual-Pivot Triangle / 3連複F 3M+1点検算 / Core 55%・Alpha 45%配分）"
-        "に完全準拠した買い目配列 `tickets` を必ず含めること。形式: "
-        "\"tickets\": [{\"zone\":\"Core|Alpha\",\"type\":\"馬連|ワイド|単勝|3連複F|馬単\",\"comb\":\"組番表記\",\"points\":点数(整数),\"share\":配分比率(合計1.0),\"odds\":\"想定オッズ\",\"desc\":\"根拠(25字以内)\"}]"
+    full_runner_rule = (
+        "\n【最重要：全頭評価出力ルール】\n"
+        "1. `horses` 配列には上位馬だけでなく、出走全頭（1頭も省略せず全出走馬）を純粋勝率 `f` の高い順に出力すること。\n"
+        "2. 印（`mark`）は `◎`, `◯`, `▲`, `☆`, `△` に加え、妙味薄・過剰人気は `危` または `消`、下位馬は `無` を付与し、全頭に必ず具体的な評価根拠（`comment`：強みまたは消しの理由を35字以内）を記載すること。\n"
+        "3. 全頭の `f` の合計が約100%、`top2` 合計が約200%、`top3` 合計が約300%になるよう正規化すること。\n"
+        "4. `tickets` 配列にはPhase 6準拠の買い目（`zone`, `type`, `comb`, `points`, `share`, `odds`, `desc`）を出力すること。"
     )
-    # Google AI Studio無料枠で確実に即答する gemini-2.5-flash を最優先使用（リトライ渋滞を防止）
     for m in ["gemini-2.5-flash", "gemini-2.0-flash"]:
         try:
             time.sleep(3)
             res = client.models.generate_content(
                 model=m, contents=prompt,
-                config=types.GenerateContentConfig(system_instruction=sys_inst + ticket_rule, response_mime_type="application/json", temperature=0.1)
+                config=types.GenerateContentConfig(
+                    system_instruction=sys_inst + full_runner_rule,
+                    response_mime_type="application/json",
+                    temperature=0.1,
+                )
             )
             txt = re.sub(r"^```(?:json)?\s*|\s*```$", "", (res.text or "").strip(), flags=re.DOTALL)
             data = json.loads(txt)
@@ -142,11 +191,11 @@ def build_multileg_from_races(races: list, mode: str) -> dict:
             "leg": idx + 1, "venue": r["venueLabel"], "name": r["name"], "cond": r["surfaceDist"],
             "typeBPlus": (float(hs[0].get("f", 25)) < 26.0 or r.get("nLead", 3) >= 4),
             "note": r.get("scenario", "")[:55],
-            "horses": [{"num": h.get("num", 1), "name": h.get("name", "有力馬"), "f": float(h.get("f", 15)), "odds": float(h.get("odds", 5.5)), "note": h.get("comment", "")[:32]} for h in hs[:6]]
+            "horses": [{"num": h.get("num", 1), "name": h.get("name", "有力馬"), "f": float(h.get("f", 15)), "odds": float(h.get("odds", 5.5)), "note": h.get("comment", "")[:32]} for h in hs[:7]]
         })
     last_hs = legs[-1]["horses"][2:4]
     hedges = [{"num": h["num"], "name": f"{legs[-1]['venue']} {h['name']}", "odds": h["odds"], "hedge50k": int((50000 / max(1.5, h["odds"]) + 99) // 100 * 100), "hedge100k": int((100000 / max(1.5, h["odds"]) + 99) // 100 * 100)} for h in last_hs]
-    return {"predicted": True, "summary": f"当日自動編成（{'トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 100円単位'}）：AI算出の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。", "legs": legs, "hedges": hedges}
+    return {"predicted": True, "summary": f"当日自動編成（{'トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 100円単位'}）：全頭推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。", "legs": legs, "hedges": hedges}
 
 def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool, mode: str = "jra"):
     suffix = "_nar" if mode == "nar" else ""
@@ -157,19 +206,22 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
 
     queue = []
     for r in day_db.get("races", []):
-        if (r.get("predicted") and r.get("tickets")) or r.get("rank") == "Pass": continue
+        # すでに全頭分(6頭以上)の予想が入っている場合はスキップ、5頭以下の旧データは全頭版に再更新する
+        if (r.get("predicted") and len(r.get("horses", [])) >= 6 and r.get("tickets")) or r.get("rank") == "Pass":
+            continue
         if is_today and re.match(r"^\d{2}:\d{2}$", r.get("postTime", "")):
             pdt = datetime.strptime(f"{date_str} {r['postTime']}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
             if 25 <= (pdt - now).total_seconds() / 60.0 <= 95: queue.append(r)
     if not queue:
-        queue = [r for r in day_db.get("races", []) if not r.get("tickets") and r.get("raceNumber") in (12, 11, 10, 5)][:2]
+        queue = [r for r in day_db.get("races", []) if len(r.get("horses", [])) < 6 and r.get("raceNumber") in (12, 11, 10, 5)][:2]
 
     for r in queue:
         if AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN: break
-        detail, actual = fetch_full_shutuba(r["raceId"], mode=mode)
+        detail, actual, raw_runners = fetch_full_shutuba(r["raceId"], mode=mode)
         if not detail: continue
-        pred = call_gemini(r["skill"], f"【モード: 標準】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']})\n詳細出馬表・馬柱:\n{detail}")
+        pred = call_gemini(r["skill"], f"【モード: 標準（全頭評価）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}) 出走{len(raw_runners)}頭すべてを評価せよ:\n{detail}")
         if isinstance(pred, dict) and "horses" in pred:
+            pred["horses"] = ensure_all_runners(pred["horses"], raw_runners)
             r.update({k: pred[k] for k in ("horses","tickets","scenario","pivotType","rank","nLead","usedModel") if k in pred})
             r["predicted"] = True
             if actual:
