@@ -1,14 +1,18 @@
-name: JRA Bayesian Auto-Predictor
+name: JRA & NAR Bayesian Auto-Predictor
 
 on:
   schedule:
-    # 土日の 08:30 JST (金曜・土曜 23:30 UTC): 朝一括スクリーニング
+    # 【JRA 土日】08:30 JST (金・土 23:30 UTC): JRA朝一括スクリーニング
     - cron: '30 23 * * 5,6'
-    # 土日の 09:00〜15:30 JST (00:00〜06:30 UTC): 20分おきに「発走1時間前レース」をチェック
-    - cron: '*/20 0-6 * * 6,0'
-    # 土日の 17:00 JST (08:00 UTC): 結果照合・回収率更新・スキル改訂パッチ生成
-    - cron: '0 8 * * 6,0'
-  workflow_dispatch: # iPhoneやPCから手動で即時実行したい時用
+    # 【JRA 土日】09:00〜16:30 JST (00:00〜07:30 UTC): JRA 1時間前本予想（JRA完全優先ロック時間帯）
+    - cron: '*/20 0-7 * * 6,0'
+    # 【NAR 平日】12:30 JST (03:30 UTC): 南関4場・DG競走 昼スクリーニング
+    - cron: '30 3 * * 1-5'
+    # 【NAR 平日ナイター/後半】14:00〜20:30 JST (05:00〜11:30 UTC): 1時間前本予想＆トリプル馬単
+    - cron: '*/30 5-11 * * 1-5'
+    # 【結果照合】毎日 17:15 JST (08:15 UTC) ＆ 21:15 JST (12:15 UTC)
+    - cron: '15 8,12 * * *'
+  workflow_dispatch:
 
 jobs:
   predict:
@@ -21,7 +25,7 @@ jobs:
         with:
           python-version: '3.11'
       - run: pip install google-genai requests beautifulsoup4
-      - name: Run Prediction Pipeline
+      - name: Run JRA & NAR Prediction Pipeline
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
         run: python scripts/auto_predict.py
@@ -30,5 +34,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/*.json
-          git diff --staged --quiet || git commit -m "Auto-update predictions"
+          git diff --staged --quiet || git commit -m "Auto-update JRA/NAR predictions"
           git push
