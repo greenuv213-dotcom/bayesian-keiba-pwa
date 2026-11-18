@@ -1,8 +1,11 @@
-import os, re, time, json, glob, requests
+import os, re, time, json, glob, socket, requests
 from datetime import datetime, timedelta, timezone
 from bs4 import BeautifulSoup
 from google import genai
 from google.genai import types
+
+# 通信の無限待機を防ぐためソケットタイムアウトを25秒に設定
+socket.setdefaulttimeout(25)
 
 JST = timezone(timedelta(hours=9))
 API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
@@ -13,10 +16,13 @@ HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0
 JRA_VENUES = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","06":"中山","07":"中京","08":"京都","09":"阪神","10":"小倉"}
 NAR_VENUES = {"42":"浦和","43":"船橋","44":"大井","45":"川崎","30":"門別","35":"盛岡","36":"水沢","46":"金沢","47":"笠松","48":"名古屋","50":"園田","51":"姫路","54":"高知","55":"佐賀"}
 NANKAN_CODES = {"42", "43", "44", "45"}
-MODELS = ["gemini-4-argon", "gemini-4-hydrogen", "gemini-3.8-flash", "gemini-2.5-flash"]
+
+# 1回のワークフロー実行で呼び出すAI回数を最大3回までに制限（約60秒で確実に完了させる）
+AI_CALL_COUNT = 0
+MAX_AI_CALLS_PER_RUN = 3
 
 def get_soup(url: str) -> BeautifulSoup:
-    res = requests.get(url, headers=HEADERS, timeout=15)
+    res = requests.get(url, headers=HEADERS, timeout=12)
     raw = res.content
     txt = raw.decode("utf-8", errors="ignore") if b"utf-8" in raw[:1024].lower() else raw.decode("euc_jp", errors="ignore")
     return BeautifulSoup(txt, "html.parser")
@@ -54,12 +60,12 @@ def fetch_race_list(ymd: str, mode: str = "jra") -> list:
         print(f"[Warn] {mode} list error: {e}")
         return []
 
-def fetch_full_shutuba(rid: str, mode: str = "jra") -> tuple[str, list, int]:
+def fetch_full_shutuba(rid: str, mode: str = "jra") -> tuple[str, list]:
     base = "https://race.netkeiba.com" if mode == "jra" else "https://nar.netkeiba.com"
-    lines, top3_actual, odds_map, win_pay = [], [], {}, 0
+    lines, top3_actual, odds_map = [], [], {}
     if mode == "jra":
         try:
-            o_json = requests.get(f"{base}/api/api_get_jra_odds.html?race_id={rid}&type=1&action=init", headers=HEADERS, timeout=10).json()
+            o_json = requests.get(f"{base}/api/api_get_jra_odds.html?race_id={rid}&type=1&action=init", headers=HEADERS, timeout=8).json()
             o_dict = (o_json.get("data") or {}).get("odds", {}).get("1", {})
             if isinstance(o_dict, dict):
                 for k, val in o_dict.items():
@@ -75,12 +81,12 @@ def fetch_full_shutuba(rid: str, mode: str = "jra") -> tuple[str, list, int]:
             w, u = tr.select_one("td[class^='Waku']"), tr.select_one("td[class^='Umaban']")
             n, j = tr.select_one(".Horse02 a, .HorseName a"), tr.select_one(".Jockey a, td.Jockey")
             wt, odd_el = tr.select_one("td.Weight"), tr.select_one("td.Popular span, span[id^='odds-']")
-            pasts = [" ".join(td.get_text(" ", strip=True).split())[:90] for td in tr.select("td.Past")[:4]]
+            pasts = [" ".join(td.get_text(" ", strip=True).split())[:85] for td in tr.select("td.Past")[:3]]
             if n and n.get_text(strip=True):
                 u_str = u.get_text(strip=True) if u else "0"
                 u_int = int(u_str) if u_str.isdigit() else 0
                 odd = odds_map.get(u_int, odd_el.get_text(strip=True) if odd_el else "")
-                lines.append(f"{w.get_text(strip=True) if w else ''}枠 {u_str}番 {n.get_text(strip=True)} ({' '.join(j.get_text(' ', strip=True).split()) if j else ''} 馬体重:{wt.get_text(strip=True) if wt else ''} 単勝:{odd}倍) | 近4走: {' / '.join(pasts)}")
+                lines.append(f"{w.get_text(strip=True) if w else ''}枠 {u_str}番 {n.get_text(strip=True)} ({' '.join(j.get_text(' ', strip=True).split()) if j else ''} 馬体重:{wt.get_text(strip=True) if wt else ''} 単勝:{odd}倍) | 近走: {' / '.join(pasts)}")
     except Exception: pass
 
     try:
@@ -92,16 +98,14 @@ def fetch_full_shutuba(rid: str, mode: str = "jra") -> tuple[str, list, int]:
                     top3_actual.append({"rank": tds[0], "num": int(tds[2]), "name": tds[3], "odds": tds[10]})
                 if len(lines) < 6:
                     lines.append(f"{tds[1]}枠 {tds[2]}番 {tds[3]} (性齢:{tds[4]} 斤量:{tds[5]} 騎手:{tds[6]} 単勝:{tds[10]}倍 上り:{tds[11] if len(tds)>11 else ''})")
-        if top3_actual:
-            try:
-                win_pay = int(float(top3_actual[0]["odds"]) * 100)
-            except Exception:
-                win_pay = 450
     except Exception: pass
-    return "\n".join(lines[:20]), top3_actual, win_pay
+    return "\n".join(lines[:18]), top3_actual
 
 def call_gemini(skill: str, prompt: str) -> dict:
-    if not client: return {}
+    global AI_CALL_COUNT
+    if not client or AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN:
+        return {}
+    AI_CALL_COUNT += 1
     p = f"skills/{skill}/SKILL.md"
     sys_inst = open(p, "r", encoding="utf-8").read() if os.path.exists(p) else "Output valid JSON only."
     ticket_rule = (
@@ -109,9 +113,10 @@ def call_gemini(skill: str, prompt: str) -> dict:
         "に完全準拠した買い目配列 `tickets` を必ず含めること。形式: "
         "\"tickets\": [{\"zone\":\"Core|Alpha\",\"type\":\"馬連|ワイド|単勝|3連複F|馬単\",\"comb\":\"組番表記\",\"points\":点数(整数),\"share\":配分比率(合計1.0),\"odds\":\"想定オッズ\",\"desc\":\"根拠(25字以内)\"}]"
     )
-    for m in MODELS:
+    # Google AI Studio無料枠で確実に即答する gemini-2.5-flash を最優先使用（リトライ渋滞を防止）
+    for m in ["gemini-2.5-flash", "gemini-2.0-flash"]:
         try:
-            time.sleep(4)
+            time.sleep(3)
             res = client.models.generate_content(
                 model=m, contents=prompt,
                 config=types.GenerateContentConfig(system_instruction=sys_inst + ticket_rule, response_mime_type="application/json", temperature=0.1)
@@ -125,9 +130,8 @@ def call_gemini(skill: str, prompt: str) -> dict:
     return {}
 
 def build_multileg_from_races(races: list, mode: str) -> dict:
-    """当日の予測済みメインレースからWIN5(5鞍)またはトリプル馬単(最終10-12R)を自動編成"""
     target_nums = (10, 11, 12) if mode == "nar" else (10, 11)
-    cand = [r for r in races if r.get("raceNumber") in target_nums and Array_check(r.get("horses"))]
+    cand = [r for r in races if r.get("raceNumber") in target_nums and isinstance(r.get("horses"), list) and len(r["horses"]) >= 2]
     need = 3 if mode == "nar" else 5
     if len(cand) < need: return {}
     selected = cand[-need:]
@@ -144,9 +148,6 @@ def build_multileg_from_races(races: list, mode: str) -> dict:
     hedges = [{"num": h["num"], "name": f"{legs[-1]['venue']} {h['name']}", "odds": h["odds"], "hedge50k": int((50000 / max(1.5, h["odds"]) + 99) // 100 * 100), "hedge100k": int((100000 / max(1.5, h["odds"]) + 99) // 100 * 100)} for h in last_hs]
     return {"predicted": True, "summary": f"当日自動編成（{'トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 100円単位'}）：AI算出の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。", "legs": legs, "hedges": hedges}
 
-def Array_check(val):
-    return isinstance(val, list) and len(val) >= 2
-
 def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool, mode: str = "jra"):
     suffix = "_nar" if mode == "nar" else ""
     db_path = f"data/{date_str}{suffix}.json"
@@ -154,33 +155,18 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
     if not day_db.get("races") and races: day_db["races"] = races
     day_db["mode"] = mode
 
-    if day_db.get("races") and not day_db.get("screened"):
-        sc_skill = "app-bayesian-nar" if mode == "nar" else "app-bayesian-horse-racing-text"
-        for v in sorted(list({r["venue"] for r in day_db["races"]})):
-            vr = [r for r in day_db["races"] if r["venue"] == v]
-            res = call_gemini(sc_skill, f"【モード: スクリーニング】日付:{date_str} 会場:{v}\n{json.dumps(vr, ensure_ascii=False)}")
-            if isinstance(res, dict) and "races" in res:
-                rmap = {int(x.get("raceNumber", 0)): x for x in res["races"] if isinstance(x, dict)}
-                for r in day_db["races"]:
-                    if r["venue"] == v and r["raceNumber"] in rmap:
-                        sc = rmap[r["raceNumber"]]
-                        if r["rank"] != "New": r["rank"] = sc.get("rank", r["rank"])
-                        r["expectedRoi"] = sc.get("expectedRoi", 122)
-                        r["hitRate"] = sc.get("hitRate", 45)
-                        r["summary"] = sc.get("summary", "")
-        day_db["screened"] = True
-
     queue = []
     for r in day_db.get("races", []):
         if (r.get("predicted") and r.get("tickets")) or r.get("rank") == "Pass": continue
         if is_today and re.match(r"^\d{2}:\d{2}$", r.get("postTime", "")):
             pdt = datetime.strptime(f"{date_str} {r['postTime']}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
-            if 30 <= (pdt - now).total_seconds() / 60.0 <= 90: queue.append(r)
+            if 25 <= (pdt - now).total_seconds() / 60.0 <= 95: queue.append(r)
     if not queue:
-        queue = [r for r in day_db.get("races", []) if not r.get("tickets") and r.get("raceNumber") in (12, 11, 10, 5)][:3]
+        queue = [r for r in day_db.get("races", []) if not r.get("tickets") and r.get("raceNumber") in (12, 11, 10, 5)][:2]
 
     for r in queue:
-        detail, actual, win_pay = fetch_full_shutuba(r["raceId"], mode=mode)
+        if AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN: break
+        detail, actual = fetch_full_shutuba(r["raceId"], mode=mode)
         if not detail: continue
         pred = call_gemini(r["skill"], f"【モード: 標準】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']})\n詳細出馬表・馬柱:\n{detail}")
         if isinstance(pred, dict) and "horses" in pred:
@@ -200,12 +186,11 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
 
     mleg = build_multileg_from_races(day_db.get("races", []), mode)
     if mleg: day_db["multiLeg"] = mleg
-
+    day_db["screened"] = True
     day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
     json.dump(day_db, open(db_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 
 def update_global_stats_and_patches(now: datetime):
-    """全保存データから的中率・回収率・Pass防衛額・スキル改訂パッチを自動集計して data/stats.json を更新"""
     stats = {
         "updatedAt": now.strftime("%Y-%m-%d %H:%M JST"),
         "jra": {"races": 68, "hits": 31, "invest": 680000, "ret": 1010400, "passSaved": 180000},
@@ -222,14 +207,14 @@ def update_global_stats_and_patches(now: datetime):
                 "id": "patch-v9.4",
                 "target": "bayesian-horse-racing-text / app-bayesian-horse-racing-text",
                 "title": "芝スタート乾燥ダート戦の好位ポケット＆7〜8枠先行馬Top3固定則",
-                "factor": "【事後3要因分解：展開＆枠順バイアス】含水率5%以下の芝発進ダートで名目先行馬多数時、差し一辺倒にならず内2〜3番手ポケット馬と7〜8枠先行馬が残存。",
+                "factor": "【事後3要因分解：展開＆枠順バイアス】含水率5%以下の芝発進ダートで名目先行馬多数時、内2〜3番手ポケット馬と7〜8枠先行馬が残存。",
                 "prompt": "改善点をもとにスキルをアップデートしてください：bayesian-horse-racing-text と app-bayesian-horse-racing-text に「芝スタート乾燥ダート(含水率5%以下)ではN_lead>=5でも内2〜3番手ポケット好位馬と7〜8枠先行馬を必ず純粋勝率Top3に保持するルール」を強化反映してください。"
             },
             {
                 "id": "patch-nar-v2.1",
                 "target": "bayesian-nar / app-bayesian-nar",
                 "title": "南関1800m+における大幅馬体増(+12kg以上)1着軸除外＆南関トップ騎手3着Anchor則",
-                "factor": "【事後3要因分解：馬体重＆騎手補正】中長距離ダートでの+12kg以上人気馬の終い失速と、ハイペース時の矢野・御神本・笹川・吉原騎手の3着内突入を確認。",
+                "factor": "【事後3要因分解：馬体重＆騎手補正】中長距離ダートでの+12kg以上人気馬の失速と、矢野・御神本・笹川・吉原騎手の3着内突入を確認。",
                 "prompt": "改善点をもとにスキルをアップデートしてください：bayesian-nar と app-bayesian-nar に「1800m以上で馬体重+12kg以上の人気馬はType II減点として1着軸から外し、南関トップ4騎手(矢野・御神本・笹川・吉原)のコース巧者を3着内Connectorに固定するルール」を強化反映してください。"
             }
         ]
@@ -266,7 +251,7 @@ def run_pipeline():
         rs = fetch_race_list(dt.strftime("%Y%m%d"), "jra")
         if len(rs) >= 6: process_kaisai_day(dt.strftime("%Y-%m-%d"), rs, now, off == 0, "jra"); break
     if not is_weekend_jra_hours:
-        for off in [0, -1, 1, -2]:
+        for off in [0, -1, 1]:
             dt = now + timedelta(days=off)
             n_races = fetch_race_list(dt.strftime("%Y%m%d"), "nar")
             if len(n_races) >= 3: process_kaisai_day(dt.strftime("%Y-%m-%d"), n_races, now, off == 0, "nar"); break
