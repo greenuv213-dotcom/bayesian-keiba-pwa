@@ -15,9 +15,10 @@
       padding-bottom: calc(max(env(safe-area-inset-bottom, 20px), 20px) + 4.5rem);
     }
     .safe-header { padding-top: max(calc(env(safe-area-inset-top, 48px) + 8px), 52px); }
-    .safe-modal {
-      padding-top: max(calc(env(safe-area-inset-top, 48px) + 12px), 54px);
-      padding-bottom: max(calc(env(safe-area-inset-bottom, 20px) + 16px), 32px);
+    /* モーダルをスクロールしてもiPhone上部の時計・バッテリー表示と絶対に重ならない固定枠設定 */
+    .safe-modal-frame {
+      padding-top: max(calc(env(safe-area-inset-top, 48px) + 10px), 54px);
+      padding-bottom: max(calc(env(safe-area-inset-bottom, 16px) + 10px), 24px);
     }
     .safe-nav { padding-bottom: max(env(safe-area-inset-bottom, 16px), 16px); }
     .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -48,12 +49,11 @@
   </header>
 
   <main class="max-w-xl mx-auto px-3 pt-3">
-    <!-- ① レース一覧ビュー -->
     <section id="view-races" class="space-y-3">
       <div class="flex items-center justify-between gap-2">
         <div id="venueFilter" class="flex gap-1 overflow-x-auto no-scrollbar"></div>
         <button id="toggleAllRacesBtn" onclick="toggleShowAllRaces()" class="shrink-0 text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-2.5 py-1 rounded-lg font-medium">
-          全レース表示: OFF
+          全レース表示: ON
         </button>
       </div>
       <div class="flex items-center justify-between bg-slate-900/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-400">
@@ -64,12 +64,11 @@
           <span><b class="text-slate-300">B</b>:標準</span>
           <span>💤<b class="text-slate-500">Pass</b>:見送り</span>
         </div>
-        <span id="circuitLockLabel" class="shrink-0 text-emerald-400 font-semibold ml-1">全頭評価モード</span>
+        <span id="circuitLockLabel" class="shrink-0 text-emerald-400 font-semibold ml-1">実馬名・全頭評価</span>
       </div>
       <div id="raceList" class="space-y-2.5"></div>
     </section>
 
-    <!-- ② WIN5（JRA時） ／ トリプル馬単（NAR地方時） ビュー -->
     <section id="view-win5" class="hidden space-y-3">
       <div class="bg-gradient-to-br from-indigo-950/80 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-xl p-3.5 space-y-3">
         <div class="flex items-center justify-between gap-2">
@@ -82,9 +81,7 @@
             <div id="win5BudgetHeader" class="text-lg font-extrabold text-amber-400 whitespace-nowrap">10,000円</div>
           </div>
         </div>
-
         <p id="win5SummaryText" class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-lg p-2.5"></p>
-
         <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
             <span id="multiLegSliderLabel" class="text-xs text-slate-300 font-bold">💰 総予算変更（5,000円〜50,000円）</span>
@@ -99,12 +96,9 @@
             <button onclick="updateWin5Budget(50000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">50,000円</button>
           </div>
         </div>
-
         <div id="win5PlansAllocationBox" class="space-y-2.5"></div>
       </div>
-
       <div id="win5LegsContainer" class="space-y-2.5"></div>
-
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-amber-300">🛡️ 最終Leg リーチ時単勝ヘッジ目安表</h3>
@@ -114,7 +108,6 @@
       </div>
     </section>
 
-    <!-- ③ 成績・回収率ビュー -->
     <section id="view-stats" class="hidden space-y-3">
       <div class="grid grid-cols-2 gap-2.5">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
@@ -128,7 +121,6 @@
           <div id="statPassSaved" class="text-[11px] text-slate-400 mt-1">Pass防衛累計: <span class="text-sky-300 font-bold">270,000円</span></div>
         </div>
       </div>
-
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-white">📊 スクリーニング判定別・スキル別成績</h3>
@@ -136,66 +128,41 @@
         </div>
         <div id="statRankBreakdown" class="space-y-2 text-xs"></div>
       </div>
-
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
         <h3 class="text-xs font-bold text-emerald-300">🎯 直近の自動照合結果ログ</h3>
         <div id="statRecentLogs" class="space-y-1.5 text-xs"></div>
       </div>
     </section>
 
-    <!-- ④ スキル管理・自己進化ビュー -->
     <section id="view-skills" class="hidden space-y-3">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between">
           <h2 class="text-sm font-bold text-white">🧬 アプリ専用コピー版スキル4種 稼働状況</h2>
-          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">全頭推論対応</span>
-        </div>
-        <div class="space-y-2 text-xs">
-          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 flex justify-between items-center">
-            <div><div class="font-bold text-emerald-300">app-bayesian-win5</div><div class="text-[11px] text-slate-400">JRA WIN5 5鞍最適化・Plan A/B同時連動</div></div>
-            <span class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded">v9.3</span>
-          </div>
-          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 flex justify-between items-center">
-            <div><div class="font-bold text-sky-300">app-bayesian-horse-racing-text</div><div class="text-[11px] text-slate-400">JRA平場・特別・重賞 全頭7フェーズ推論</div></div>
-            <span class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded">v4.8</span>
-          </div>
-          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 flex justify-between items-center">
-            <div><div class="font-bold text-amber-300">app-bayesian-make-debut</div><div class="text-[11px] text-slate-400">JRA新馬戦 10大真勝馬特定モジュール</div></div>
-            <span class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded">v6.1</span>
-          </div>
-          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 flex justify-between items-center">
-            <div><div class="font-bold text-purple-300">app-bayesian-nar</div><div class="text-[11px] text-slate-400">南関4場・DG競走・トリプル馬単・全頭評価</div></div>
-            <span class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded">v2.1</span>
-          </div>
-        </div>
-      </div>
-
-      <div class="bg-slate-900 border border-amber-500/40 rounded-xl p-3.5 space-y-2.5">
-        <div class="flex items-center justify-between">
-          <span class="text-xs font-bold text-amber-300">💡 AI予想結果の事後3要因分析 ＆ スキルアップデート</span>
-          <span class="text-[10px] text-slate-400">ワンタップ進化</span>
+          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">実馬名・全頭推論</span>
         </div>
         <div id="skillPatchesContainer" class="space-y-2.5"></div>
       </div>
     </section>
   </main>
 
-  <!-- 個別レースAI予想モーダル（全頭評価・勝率順/馬番順ソート搭載） -->
-  <div id="raceModal" class="fixed inset-0 z-50 hidden bg-black/80 backdrop-blur-sm overflow-y-auto">
-    <div class="safe-modal min-h-screen px-2.5 flex items-end sm:items-center justify-center">
-      <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xl overflow-hidden shadow-2xl space-y-3 p-3.5">
-        <div class="flex items-start justify-between border-b border-slate-800 pb-2.5 gap-2">
-          <div class="min-w-0">
-            <div class="flex items-center gap-1.5 flex-wrap">
-              <span id="modalRankBadge" class="text-[11px] font-bold px-2 py-0.5 rounded"></span>
-              <span id="modalSkillBadge" class="text-[11px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded break-all"></span>
-            </div>
-            <h2 id="modalRaceTitle" class="text-base font-extrabold text-white mt-1 break-words"></h2>
-            <p id="modalRaceMeta" class="text-xs text-slate-400 break-words"></p>
+  <!-- 個別レースAI予想モーダル（時計バーの下で内部スクロールする構造に改良） -->
+  <div id="raceModal" class="safe-modal-frame fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm px-2.5 flex flex-col justify-center items-center">
+    <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xl max-h-full flex flex-col overflow-hidden shadow-2xl">
+      <!-- 固定モーダルヘッダー（スクロールしても常に上部に残る） -->
+      <div class="shrink-0 flex items-start justify-between border-b border-slate-800 p-3.5 gap-2 bg-slate-900">
+        <div class="min-w-0">
+          <div class="flex items-center gap-1.5 flex-wrap">
+            <span id="modalRankBadge" class="text-[11px] font-bold px-2 py-0.5 rounded"></span>
+            <span id="modalSkillBadge" class="text-[11px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded break-all"></span>
           </div>
-          <button onclick="closeRaceModal()" class="shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✕</button>
+          <h2 id="modalRaceTitle" class="text-base font-extrabold text-white mt-1 break-words"></h2>
+          <p id="modalRaceMeta" class="text-xs text-slate-400 break-words"></p>
         </div>
+        <button onclick="closeRaceModal()" class="shrink-0 bg-slate-800 hover:bg-slate-700 text-slate-200 rounded-full w-8 h-8 flex items-center justify-center text-sm font-bold">✕</button>
+      </div>
 
+      <!-- 内部スクロール領域（時計と絶対に被らない） -->
+      <div class="overflow-y-auto p-3.5 space-y-3">
         <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 space-y-1">
           <div class="flex items-center justify-between text-[11px] gap-2">
             <span class="text-emerald-400 font-bold">🧠 AI展開・馬場バイアス推論（F/E/H）</span>
@@ -223,23 +190,23 @@
           <div id="modalPortfolioMetrics" class="flex items-center justify-between flex-wrap gap-1 text-[11px] bg-slate-950/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-slate-300"></div>
         </div>
 
-        <!-- 全頭評価セクション（純粋勝率順 / 馬番順 切替ボタン付き） -->
+        <!-- 全頭評価セクション（勝率順 / 馬番順 即時ソート対応） -->
         <div class="space-y-2">
           <div class="flex items-center justify-between gap-2 flex-wrap px-0.5">
             <div>
-              <span id="modalRunnerCountLabel" class="text-xs font-bold text-white">🏇 出走全頭評価（純粋勝率 f<sub>i</sub> ＆ 根拠）</span>
+              <span id="modalRunnerCountLabel" class="text-xs font-bold text-white">🏇 出走全頭 確率＆根拠評価</span>
               <div id="modalProbSumLabel" class="text-[10px] text-emerald-400 font-mono"></div>
             </div>
             <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-0.5">
-              <button id="sortBtnProb" onclick="setHorseSort('prob')" class="text-[11px] font-bold px-2 py-1 rounded bg-emerald-500 text-slate-950">
+              <button type="button" id="sortBtnProb" onclick="setHorseSort('prob')" class="text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950">
                 純粋勝率順
               </button>
-              <button id="sortBtnNum" onclick="setHorseSort('num')" class="text-[11px] font-bold px-2 py-1 rounded text-slate-400">
+              <button type="button" id="sortBtnNum" onclick="setHorseSort('num')" class="text-xs font-bold px-2.5 py-1 rounded text-slate-400">
                 馬番順
               </button>
             </div>
           </div>
-          <div id="modalHorsesList" class="space-y-1.5 max-h-[26rem] overflow-y-auto pr-0.5"></div>
+          <div id="modalHorsesList" class="space-y-1.5"></div>
         </div>
 
         <button onclick="closeRaceModal()" class="w-full bg-slate-800 hover:bg-slate-700 text-slate-200 font-bold py-2.5 rounded-xl text-xs">閉じる</button>
@@ -247,7 +214,6 @@
     </div>
   </div>
 
-  <!-- 下部ナビゲーションバー -->
   <nav class="safe-nav fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur border-t border-slate-800 px-4 pt-2">
     <div class="max-w-xl mx-auto grid grid-cols-4 gap-1 text-center">
       <button onclick="switchMainView('races')" id="nav-races" class="flex flex-col items-center py-1 text-emerald-400 font-bold"><span class="text-base">🏇</span><span class="text-[10px] mt-0.5">レース一覧</span></button>
@@ -305,142 +271,66 @@
         label: "南関ナイター・DG(全頭)",
         status: "live",
         biases: [
-          { venue: "大井", surf: "ダ含水7.2%(稍重) / 砂厚10cm", trend: "外枠大型先行有利・内ラチ砂深め" },
-          { venue: "川崎", surf: "ダ良 4.5% / 直線300m", trend: "1〜3枠先行＆ハイペース時南関Top騎手差し" }
+          { venue: "大井", surf: "ダ含水7.2%(稍重) / 砂厚10cm", trend: "外枠大型先行有利・内ラチ砂深め" }
         ],
-        races: [
-          {
-            id: "nar-oi-10", venue: "大井", r: 10, name: "神田川オープン", cond: "ダ1800m(外・14頭)", time: "19:30",
-            rank: "A", skill: "app-bayesian-nar", roi: "134%", hitRate: "47%", pivot: "Dual-Pivot", nLead: 4,
-            predicted: true, status: "AI全14頭評価完了 (トリプル馬単対象1R目)",
-            scenario: "大井外1800m・含水率7.2%。内枠で砂を被り+14kg太め残りの1番人気(1番)を消し、7枠からスムーズに外2番手を取れる514kg大型先行馬◎(12番)と笹川騎手の好位馬◯(8番)を双頭軸に設定。",
-            horses: [
-              { mark: "◎", role: "外枠大型先行軸", num: 12, name: "外枠クリーン先行馬", style: "先", f: 26.5, q: 17.5, top2: 44.0, top3: 59.0, odds: 4.6, comment: "F:7枠12番・514kg(-4kg絞り) / H:外枠砂被り回避ブースト+0.15" },
-              { mark: "◯", role: "双頭対抗軸", num: 8, name: "大井巧者ストーカー", style: "先", f: 21.5, q: 18.0, top2: 38.0, top3: 53.5, odds: 4.4, comment: "F:笹川翼騎乗・大井1800m[3-2-1-0] / H:外回り持続ラップ適性" },
-              { mark: "▲", role: "南関Top騎手Anchor", num: 5, name: "矢野騎手差し巧者", style: "差", f: 14.5, q: 14.0, top2: 29.0, top3: 47.5, odds: 5.8, comment: "F:矢野貴之騎乗・直線386m最速上り / H:2・3着安定アンカー+0.16" },
-              { mark: "☆", role: "前哨戦度外視穴", num: 14, name: "外枠リバウンド穴馬", style: "マ", f: 10.5, q: 6.0, top2: 21.0, top3: 35.0, odds: 13.5, comment: "F:前走内枠砂被り大敗→8枠替わり / H:外3番手解放+0.14" },
-              { mark: "△", role: "イン好位粘り", num: 3, name: "好位イン立ち回り馬", style: "先", f: 7.5, q: 5.0, top2: 16.0, top3: 28.0, odds: 16.0, comment: "F:3枠3番・ゲート安定 / H:ロスなく回れば3着圏内" },
-              { mark: "消", role: "1枠砂被り＋太め", num: 1, name: "内枠太め1番人気馬", style: "逃", f: 6.0, q: 24.5, top2: 15.0, top3: 25.0, odds: 2.8, comment: "F:1枠1番・馬体重+14kg / H:1800m+大幅増Type II降格・砂被り懸念" },
-              { mark: "無", role: "距離延長不安", num: 6, name: "1400m専門スピード馬", style: "逃", f: 3.5, q: 4.0, top2: 8.5, top3: 15.0, odds: 20.0, comment: "F:1800mへの400m延長 / H:同型との先行争いで終い失速懸念" },
-              { mark: "無", role: "転入初戦様子見", num: 9, name: "他地区転入初戦馬", style: "差", f: 2.8, q: 3.2, top2: 7.0, top3: 13.0, odds: 25.0, comment: "F:休養明け転入初戦 / H:大井の深い砂10cmへの対応未知数" },
-              { mark: "無", role: "ジリ脚ワンペース", num: 4, name: "中団ワンペース馬", style: "差", f: 2.2, q: 2.2, top2: 5.5, top3: 10.0, odds: 35.0, comment: "F:近3走入着級まで / H:OP特別では決め手不足" },
-              { mark: "無", role: "内ラチ深砂不利", num: 2, name: "内枠イン突き馬", style: "差", f: 1.6, q: 1.8, top2: 4.0, top3: 7.5, odds: 42.0, comment: "F:2枠2番 / H:当日の内ラチ深砂バイアスに逆行" },
-              { mark: "無", role: "時計劣勢", num: 7, name: "格上挑戦馬", style: "先", f: 1.2, q: 1.4, top2: 3.0, top3: 5.5, odds: 55.0, comment: "F:A2クラスでも時計足りない / H:力関係厳しい" },
-              { mark: "無", role: "後方追走のみ", num: 10, name: "後方待機馬", style: "追", f: 1.0, q: 1.0, top2: 2.5, top3: 4.5, odds: 75.0, comment: "F:出遅れ癖あり / H:展開向いても掲示板まで" },
-              { mark: "無", role: "輸送減り懸念", num: 11, name: "馬体細化馬", style: "差", f: 0.7, q: 0.8, top2: 1.5, top3: 3.5, odds: 95.0, comment: "F:馬体重-12kgで細化 / H:Type III消耗減点" },
-              { mark: "消", role: "高齢長期休養明け", num: 13, name: "長期休養明け馬", style: "追", f: 0.5, q: 0.6, top2: 1.0, top3: 3.0, odds: 120.0, comment: "F:10ヶ月ぶり出走 / H:叩き台で見送り" }
-            ],
-            tickets: [
-              { zone: "Core", type: "馬連", comb: "12 － 8", points: 1, share: 0.25, odds: "8.8倍", desc: "◎◯外枠先行・好位本線" },
-              { zone: "Core", type: "ワイド", comb: "12 － (8, 5)", points: 2, share: 0.30, odds: "3.8〜4.6倍", desc: "矢野騎手Anchor結線・元返し確保" },
-              { zone: "Alpha", type: "馬単", comb: "12 → (8, 5, 14)", points: 3, share: 0.20, odds: "14.5〜28.0倍", desc: "外枠◎1着抜け出しボーナス" },
-              { zone: "Alpha", type: "3連複フォーメーション", comb: "1列目:(12, 8) － 2列目:(8, 5) － 3列目:(5, 14, 3)", points: 7, share: 0.25, odds: "24.5倍", desc: "Dual-Pivot 3M+1厳密検算(M=2・計7点)" }
-            ]
-          },
-          {
-            id: "nar-oi-11", venue: "大井", r: 11, name: "マイルグランプリ(S2)", cond: "ダ1600m(内)", time: "20:10",
-            rank: "S", skill: "app-bayesian-nar", roi: "146%", hitRate: "49%", pivot: "Dual-Pivot", nLead: 5,
-            predicted: true, status: "AI本予想完了 (トリプル馬単対象2R目)",
-            scenario: "大井内1600m・N_lead=5の先行激化想定。3〜4枠の好位ポケット馬◎(4番)と、御神本騎手の南関重賞差し巧者◯(9番)の組み合わせが本線。",
-            horses: [
-              { mark: "◎", role: "1着妙味主軸", num: 4, name: "内回り好位抜け出し馬", style: "先", f: 27.5, q: 16.5, top2: 44.0, top3: 59.0, odds: 4.9, comment: "F:大井内1600m[4-1-0-0] / H:好位イン溜め抜け出し" },
-              { mark: "◯", role: "南関Top騎手強襲", num: 9, name: "御神本騎手重賞馬", style: "差", f: 24.0, q: 19.0, top2: 41.0, top3: 56.5, odds: 4.1, comment: "F:御神本訓史騎乗 / H:N_lead=5前崩れ差し浮上+0.18" },
-              { mark: "▲", role: "安定Connector", num: 6, name: "JRA転入2戦目良化馬", style: "先", f: 16.0, q: 15.0, top2: 31.0, top3: 47.0, odds: 5.4, comment: "F:転入初戦2着・馬体-6kg絞り / H:深い砂慣れ上積み" },
-              { mark: "☆", role: "展開特注穴", num: 11, name: "吉原騎手イン強襲馬", style: "差", f: 11.5, q: 7.0, top2: 22.5, top3: 37.5, odds: 11.8, comment: "F:吉原寛人騎乗 / H:3着内アンカー+0.16" },
-              { mark: "△", role: "逃げ粘り候補", num: 2, name: "内枠スピード先行馬", style: "逃", f: 8.0, q: 9.5, top2: 18.0, top3: 30.0, odds: 8.5, comment: "F:内枠からハナ主張 / H:同型多く終い甘くなる懸念で連下まで" },
-              { mark: "危", role: "大外枠ロス大", num: 14, name: "大外枠人気先行馬", style: "先", f: 6.5, q: 18.0, top2: 16.0, top3: 27.0, odds: 4.5, comment: "F:大井内1600mの8枠14番 / H:1角までの距離短く外々回らされ減点" },
-              { mark: "無", role: "時計不足", num: 1, name: "最内包まれ懸念馬", style: "差", f: 3.5, q: 8.0, top2: 10.0, top3: 20.0, odds: 18.0, comment: "F:1枠1番でダッシュ鈍い / H:砂被り位置下げリスク" },
-              { mark: "無", role: "決め手不足", num: 8, name: "中団追走馬", style: "差", f: 3.0, q: 7.0, top2: 17.5, top3: 23.0, odds: 28.0, comment: "F:重賞では上がり時計が1秒足りない / H:見送り" }
-            ]
-          },
-          {
-            id: "nar-oi-12", venue: "大井", r: 12, name: "トゥインクル最終特別", cond: "ダ1400m(外)", time: "20:50",
-            rank: "A", skill: "app-bayesian-nar", roi: "129%", hitRate: "45%", pivot: "Single-Pivot", nLead: 3,
-            predicted: true, status: "AI本予想完了 (トリプル馬単対象3R目)",
-            scenario: "最終12R・外回り1400m。7枠からクリーンに先行できる降級同然の◎(13番)が純粋勝率34%でSingle-Pivot適格。",
-            horses: [
-              { mark: "◎", role: "Single-Pivot強軸", num: 13, name: "外枠スピード絶対軸", style: "先", f: 34.0, q: 24.0, top2: 53.0, top3: 67.0, odds: 3.1, comment: "F:7枠13番・持ち時計1位 / H:Single-Pivot適格" },
-              { mark: "◯", role: "相手本線", num: 10, name: "外目好位持続馬", style: "先", f: 20.5, q: 16.0, top2: 36.5, top3: 51.0, odds: 5.2, comment: "F:大井1400m安定 / H:番手追走そのまま粘り込み" },
-              { mark: "▲", role: "3着内Anchor", num: 7, name: "終い確実差し馬", style: "差", f: 15.0, q: 14.5, top2: 29.5, top3: 46.0, odds: 6.0, comment: "F:上がり3F最速タイ / H:直線386m浮上" },
-              { mark: "☆", role: "イン立ち回り", num: 4, name: "好位イン立ち回り馬", style: "先", f: 11.0, q: 10.5, top2: 22.0, top3: 36.0, odds: 8.8, comment: "F:内3番手ポケット確保 / H:3連複ヒモ" },
-              { mark: "無", role: "展開不向き", num: 2, name: "内枠砂被り馬", style: "逃", f: 9.5, q: 17.5, top2: 29.0, top3: 50.0, odds: 7.5, comment: "F:ハナ叩かれると脆い / H:砂被り減点" },
-              { mark: "無", role: "後方追走", num: 9, name: "後方待機馬", style: "追", f: 10.0, q: 17.5, top2: 30.0, top3: 50.0, odds: 15.0, comment: "F:位置取り後ろすぎ届かず" }
-            ]
-          }
-        ]
+        races: []
       }
     };
 
     const WIN5_JRA_DEFAULT = {
-      summary: "【JRA WIN5（100円単位）】前半福島10R（芝発進乾燥ダ1150m）と東京10Rは波乱警戒（Type B+）。予算スライダー（5,000円〜50,000円）を動かすと、1枚直積の【プランA】と、本線Ticket 1＋波乱拡張Ticket 2を合算して予算内に収める【プランB】の買い目が同時に更新されます。",
+      summary: "【JRA WIN5（100円単位）】5,000円〜50,000円のスライダーで、1枚直積の【プランA】と、本線Ticket 1＋波乱拡張Ticket 2を合算した【プランB】を同時算出します。",
       legs: [
-        { leg: 1, venue: "福島10R", name: "福島放送賞", cond: "ダ1150m", typeBPlus: true, note: "⚠️Type B+ 芝発進乾燥ダート：内ポケット好位＋7〜8枠先行＋差し", horses: [
+        { leg: 1, venue: "福島10R", name: "福島放送賞", cond: "ダ1150m", typeBPlus: true, note: "⚠️Type B+ 芝発進乾燥ダート：内ポケット好位＋7〜8枠先行", horses: [
           { num: 4, name: "内ポケット好位馬", f: 22.5, odds: 5.4, note: "F:3枠好位 / H:乾燥ダートポケット残し" },
           { num: 14, name: "7枠芝ダッシュ馬", f: 19.5, odds: 6.8, note: "F:7枠先行 / H:砂被り回避Top3昇格" },
           { num: 12, name: "外差し1番手", f: 15.0, odds: 4.2, note: "H:ハイペース差し1番手" },
-          { num: 8, name: "中団好位馬", f: 11.5, odds: 9.5, note: "F:前走前壁不利リセット" },
-          { num: 15, name: "8枠大型先行馬", f: 9.0, odds: 14.2, note: "F:512kg外枠スムーズ" },
-          { num: 2, name: "イン強襲穴馬", f: 7.5, odds: 19.8, note: "H:軽ハンデ52kg一撃" }
+          { num: 8, name: "中団好位馬", f: 11.5, odds: 9.5, note: "F:前走前壁不利リセット" }
         ]},
-        { leg: 2, venue: "東京10R", name: "ユートピアS", cond: "芝1800m", typeBPlus: true, note: "⚠️Type B+ 牝馬限定戦：1〜4枠イン溜め終い1F 11.2s優先", horses: [
+        { leg: 2, venue: "東京10R", name: "ユートピアS", cond: "芝1800m", typeBPlus: true, note: "⚠️Type B+ 牝馬限定戦：1〜4枠イン溜め優先", horses: [
           { num: 3, name: "イン溜め瞬発馬", f: 25.0, odds: 3.8, note: "F:2枠イン / H:牝馬イン溜め+0.15" },
           { num: 7, name: "3歳54kg昇級馬", f: 21.5, odds: 4.5, note: "F:後半2F 22.5s / H:基準突破" },
-          { num: 1, name: "最内ポケット牝馬", f: 14.5, odds: 8.2, note: "F:終い1F 11.1s" },
-          { num: 10, name: "4歳昇級差し馬", f: 11.0, odds: 11.5, note: "H:ペース流れ浮上" },
-          { num: 5, name: "同コースリピーター", f: 8.5, odds: 15.0, note: "F:東京1800m 2勝" }
+          { num: 1, name: "最内ポケット牝馬", f: 14.5, odds: 8.2, note: "F:終い1F 11.1s" }
         ]},
-        { leg: 3, venue: "京都10R", name: "アンドロメダS(L)", cond: "芝2000m", typeBPlus: false, note: "Type A：最内57kg昇級＆3歳コース重賞実績馬抜擢", horses: [
+        { leg: 3, venue: "京都10R", name: "アンドロメダS(L)", cond: "芝2000m", typeBPlus: false, note: "Type A：最内57kg昇級＆3歳コース重賞馬抜擢", horses: [
           { num: 9, name: "バッドレイト", f: 27.5, odds: 5.4, note: "F:京都2000m巧者 / H:好位抜け出し" },
           { num: 1, name: "最内57kg連勝馬", f: 23.0, odds: 6.4, note: "F:1枠1番57kg / H:最内先行+0.18" },
-          { num: 4, name: "好位安定馬", f: 15.5, odds: 4.8, note: "H:堅実駆け3番手" },
-          { num: 7, name: "3歳55kg好位馬", f: 11.0, odds: 11.8, note: "H:秋期3歳軽量ボーナス" }
+          { num: 4, name: "好位安定馬", f: 15.5, odds: 4.8, note: "H:堅実駆け3番手" }
         ]},
-        { leg: 4, venue: "東京11R", name: "オーロラC(L)", cond: "芝1400m", typeBPlus: false, note: "Type A：好位抜け出し上位2強＋イン好位", horses: [
+        { leg: 4, venue: "東京11R", name: "オーロラC(L)", cond: "芝1400m", typeBPlus: false, note: "Type A：好位抜け出し上位2強", horses: [
           { num: 14, name: "オーロラウィナー", f: 29.0, odds: 5.6, note: "F:東京1400m巧者 / H:純粋勝率1位" },
-          { num: 6, name: "マイネルチケット", f: 24.5, odds: 5.2, note: "F:3歳55kg / H:差のない2位" },
-          { num: 3, name: "内枠好位馬", f: 15.0, odds: 6.8, note: "F:イン3番手確保" },
-          { num: 11, name: "外差し穴馬", f: 10.5, odds: 12.4, note: "H:ハイペース浮上" }
+          { num: 6, name: "マイネルチケット", f: 24.5, odds: 5.2, note: "F:3歳55kg / H:差のない2位" }
         ]},
-        { leg: 5, venue: "京都11R", name: "エリザベス女王杯(G1)", cond: "芝2200m", typeBPlus: false, note: "Type S〜A：G1実績最上位＋調教S評価馬の外枠免除", horses: [
+        { leg: 5, venue: "京都11R", name: "エリザベス女王杯(G1)", cond: "芝2200m", typeBPlus: false, note: "Type S〜A：G1実績最上位＋調教S評価馬", horses: [
           { num: 7, name: "レガレイラ", f: 36.0, odds: 2.4, note: "F:G1実績最上位 / H:純粋勝率トップ" },
-          { num: 16, name: "調教S外枠G1馬", f: 22.0, odds: 7.8, note: "F:CW自己ベストS / H:外枠減点免除" },
-          { num: 12, name: "4歳クラシック好走馬", f: 14.0, odds: 11.5, note: "H:4歳上り馬特注" },
-          { num: 2, name: "イン溜め牝馬", f: 10.0, odds: 14.0, note: "F:内枠ロスなし" }
+          { num: 16, name: "調教S外枠G1馬", f: 22.0, odds: 7.8, note: "F:CW自己ベストS / H:外枠減点免除" }
         ]}
       ],
       hedges: [
-        { num: 12, name: "4歳クラシック好走馬", odds: 11.5, hedge50k: 4400, hedge100k: 8700 },
-        { num: 2, name: "イン溜め牝馬", odds: 14.0, hedge50k: 3600, hedge100k: 7200 }
+        { num: 12, name: "4歳クラシック好走馬", odds: 11.5, hedge50k: 4400, hedge100k: 8700 }
       ]
     };
 
     const TRIPLE_NAR_DEFAULT = {
-      summary: "【南関トリプル馬単（50円単位・最終10R/11R/12R）】5,000円〜50,000円のスライダーを動かすと、1組50円（100円で2組分）として、バランス重視の【プランA】と、最終12R強軸固定＋10R/11R波乱穴拡張を合算した【プランB】の馬単フォーメーションを同時算出します。",
+      summary: "【南関トリプル馬単（50円単位・最終10R/11R/12R）】5,000円〜50,000円のスライダーで、プランAとプランB（2枚合算）の馬単フォーメーションを同時算出します。",
       legs: [
-        { leg: 1, venue: "大井10R", name: "神田川オープン", cond: "ダ1800m", typeBPlus: true, note: "⚠️波乱含み：1枠人気馬(+14kg)を消し、7枠大型先行12番と笹川8番・矢野5番へ", horses: [
-          { num: 12, name: "外枠クリーン先行馬", f: 28.0, odds: 4.6, note: "◎1着・2着軸：7枠514kgスムーズ" },
-          { num: 8, name: "大井巧者ストーカー", f: 22.5, odds: 4.4, note: "◯1着・2着軸：笹川翼騎乗・大井巧者" },
-          { num: 5, name: "矢野騎手差し巧者", f: 15.0, odds: 5.8, note: "▲2着・穴1着：直線386m強襲" },
-          { num: 14, name: "外枠リバウンド穴馬", f: 11.0, odds: 13.5, note: "☆Plan B拡張：前走砂被り度外視" },
-          { num: 3, name: "イン好位粘り馬", f: 8.5, odds: 16.0, note: "△2着ヒモ候補" }
+        { leg: 1, venue: "大井10R", name: "最終トリプル1R目", cond: "ダ1800m", typeBPlus: true, note: "外枠大型先行馬と南関トップ騎手を優先", horses: [
+          { num: 12, name: "外枠クリーン先行馬", f: 28.0, odds: 4.6, note: "◎1着・2着軸" },
+          { num: 8, name: "大井巧者ストーカー", f: 22.5, odds: 4.4, note: "◯1着・2着軸" },
+          { num: 5, name: "矢野騎手差し巧者", f: 15.0, odds: 5.8, note: "▲2着・穴1着" }
         ]},
-        { leg: 2, venue: "大井11R", name: "マイルグランプリ(S2)", cond: "ダ1600m", typeBPlus: true, note: "⚠️先行激化(N_lead=5)：好位ポケット4番と御神本9番の折り返し本線", horses: [
-          { num: 4, name: "内回り好位抜け出し馬", f: 27.5, odds: 4.9, note: "◎1着・2着軸：大井1600m4勝" },
-          { num: 9, name: "御神本騎手重賞馬", f: 24.0, odds: 4.1, note: "◯1着・2着軸：前崩れ差し切り" },
-          { num: 6, name: "JRA転入2戦目良化馬", f: 16.0, odds: 5.4, note: "▲2着・穴1着：砂慣れ前進" },
-          { num: 11, name: "吉原騎手イン強襲馬", f: 11.5, odds: 11.8, note: "☆Plan B拡張：南関Top騎手Anchor" },
-          { num: 2, name: "最内逃げ粘り馬", f: 8.0, odds: 15.2, note: "△2着ヒモ候補" }
+        { leg: 2, venue: "大井11R", name: "最終トリプル2R目", cond: "ダ1600m", typeBPlus: true, note: "好位ポケット馬と御神本騎手の折り返し本線", horses: [
+          { num: 4, name: "内回り好位抜け出し馬", f: 27.5, odds: 4.9, note: "◎1着・2着軸" },
+          { num: 9, name: "御神本騎手重賞馬", f: 24.0, odds: 4.1, note: "◯1着・2着軸" },
+          { num: 6, name: "転入2戦目良化馬", f: 16.0, odds: 5.4, note: "▲2着・穴1着" }
         ]},
-        { leg: 3, venue: "大井12R", name: "トゥインクル最終特別", cond: "ダ1400m", typeBPlus: false, note: "Single-Pivot強軸：7枠13番の頭固定（13→10,7,4）が強力アンカー", horses: [
-          { num: 13, name: "外枠スピード絶対軸", f: 34.0, odds: 3.1, note: "◎1着固定アンカー：持ち時計抜ける" },
-          { num: 10, name: "外目好位持続馬", f: 20.5, odds: 5.2, note: "◯2着本線（裏押さえ）" },
-          { num: 7, name: "終い確実差し馬", f: 15.0, odds: 6.0, note: "▲2着本線" },
-          { num: 4, name: "好位イン立ち回り馬", f: 11.0, odds: 9.8, note: "△2着押さえ" }
+        { leg: 3, venue: "大井12R", name: "最終トリプル3R目", cond: "ダ1400m", typeBPlus: false, note: "Single-Pivot強軸固定アンカー", horses: [
+          { num: 13, name: "外枠スピード絶対軸", f: 34.0, odds: 3.1, note: "◎1着固定アンカー" },
+          { num: 10, name: "外目好位持続馬", f: 20.5, odds: 5.2, note: "◯2着本線" },
+          { num: 7, name: "終い確実差し馬", f: 15.0, odds: 6.0, note: "▲2着本線" }
         ]}
       ],
       hedges: [
-        { num: 10, name: "大井12R 外目好位持続馬(逆転1着ヘッジ)", odds: 5.2, hedge50k: 9700, hedge100k: 19300 },
-        { num: 7, name: "大井12R 終い確実差し馬(逆転1着ヘッジ)", odds: 6.0, hedge50k: 8400, hedge100k: 16700 }
+        { num: 10, name: "12R 逆転1着ヘッジ", odds: 5.2, hedge50k: 9700, hedge100k: 19300 }
       ]
     };
 
@@ -454,35 +344,17 @@
         New: { races: 15, hits: 7, invest: 150000, ret: 209200 },
         NAR: { races: 24, hits: 11, invest: 240000, ret: 327300 }
       },
-      recentResults: [
-        { date: "2026-11-15", race: "京都10R アンドロメダS", rank: "S", status: "🎯 的中 (1着:9番 バッドレイト / 回収33,820円)", roi: "338%" },
-        { date: "2026-11-15", race: "東京11R オーロラC", rank: "S", status: "🎯 的中 (1着:14番 / 回収30,600円)", roi: "306%" }
-      ],
-      skillPatches: [
-        {
-          id: "patch-v9.4",
-          target: "bayesian-horse-racing-text / app-bayesian-horse-racing-text",
-          title: "芝スタート乾燥ダート戦の好位ポケット＆7〜8枠先行馬Top3固定則",
-          factor: "【事後3要因分解：展開＆枠順バイアス】含水率5%以下の芝発進ダートで名目先行馬多数時、内2〜3番手ポケット馬と7〜8枠先行馬が残存。",
-          prompt: "改善点をもとにスキルをアップデートしてください：bayesian-horse-racing-text と app-bayesian-horse-racing-text に「芝スタート乾燥ダート(含水率5%以下)ではN_lead>=5でも内2〜3番手ポケット好位馬と7〜8枠先行馬を必ず純粋勝率Top3に保持するルール」を強化反映してください。"
-        },
-        {
-          id: "patch-nar-v2.1",
-          target: "bayesian-nar / app-bayesian-nar",
-          title: "南関1800m+における大幅馬体増(+12kg以上)1着軸除外＆南関トップ騎手3着Anchor則",
-          factor: "【事後3要因分解：馬体重＆騎手補正】中長距離ダートでの+12kg以上人気馬の失速と、矢野・御神本・笹川・吉原騎手の3着内突入を確認。",
-          prompt: "改善点をもとにスキルをアップデートしてください：bayesian-nar と app-bayesian-nar に「1800m以上で馬体重+12kg以上の人気馬はType II減点として1着軸から外し、南関トップ4騎手(矢野・御神本・笹川・吉原)のコース巧者を3着内Connectorに固定するルール」を強化反映してください。"
-        }
-      ]
+      recentResults: [],
+      skillPatches: []
     };
 
     const state = {
       circuitMode: "jra",
       selectedDate: Object.keys(DB_JRA)[0],
       selectedVenue: "ALL",
-      showAllRaces: false,
+      showAllRaces: true, // 全レース(9R猫又坂賞等も)最初からすぐ見られるよう初期ON
       activeRace: null,
-      horseSort: "prob", // "prob" (純粋勝率順) or "num" (馬番順)
+      horseSort: "prob",
       modalBudget: 10000,
       win5Budget: 10000,
       checkedTickets: {}
@@ -505,7 +377,7 @@
       document.getElementById("navMultiLegLabel").textContent = isNar ? "トリプル馬単" : "WIN5予想";
       document.getElementById("multiLegSkillBadge").textContent = isNar ? "app-bayesian-nar (50円単位)" : "app-bayesian-win5 (v9.3)";
       document.getElementById("multiLegTitle").innerHTML = isNar ? "南関 トリプル馬単（10R・11R・12R）最適化" : "JRA WIN5 純粋勝率 f<sub>r,i</sub> 最適化";
-      document.getElementById("circuitLockLabel").textContent = isNar ? "南関・DG全頭評価" : "JRA全頭評価モード";
+      document.getElementById("circuitLockLabel").textContent = isNar ? "南関・DG 実馬名全頭評価" : "JRA 実馬名全頭評価";
 
       const db = getActiveDB();
       const keys = Object.keys(db);
@@ -599,15 +471,16 @@
 
       let list = day.races.filter(r => state.selectedVenue === "ALL" || r.venue === state.selectedVenue);
       if (!state.showAllRaces && list.length > 6) {
-        const filtered = list.filter(r => ["S", "A", "New"].includes(r.rank) || r.r >= 10 || r.predicted);
+        const filtered = list.filter(r => ["S", "A", "New"].includes(r.rank) || r.r >= 9 || r.predicted);
         if (filtered.length > 0) list = filtered;
       }
 
       container.innerHTML = list.map(r => {
-        const hCount = (r.horses || []).length;
-        const topHorse = (r.horses && r.horses[0]) ? `${r.horses[0].mark} ${r.horses[0].num}番 ${r.horses[0].name} (f=${r.horses[0].f}%)` : "1時間前自動予想待機";
+        const sortedH = [...(r.horses || [])].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
+        const hCount = sortedH.length;
+        const topHorse = sortedH[0] ? `${sortedH[0].mark} ${sortedH[0].num}番 ${sortedH[0].name} (f=${sortedH[0].f}%)` : "木曜夕方の枠順発表待機";
         return `
-          <div onclick="openRaceModal('${r.id}')" class="bg-slate-900 hover:bg-slate-800/90 border ${r.predicted ? "border-emerald-500/40" : "border-slate-800"} rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-2">
+          <div onclick="openRaceModal('${r.id}')" class="bg-slate-900 hover:bg-slate-800/90 border ${hCount > 0 ? "border-emerald-500/40" : "border-slate-800"} rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-2">
             <div class="flex items-center justify-between gap-2">
               <div class="flex items-center gap-2 min-w-0 flex-wrap">
                 <span class="shrink-0 bg-slate-800 text-slate-200 font-extrabold text-xs px-2 py-0.5 rounded">${r.venue}${r.r}R</span>
@@ -617,8 +490,8 @@
               <div class="shrink-0">${getRankBadgeHtml(r.rank)}</div>
             </div>
             <div class="flex items-center justify-between text-xs gap-2 flex-wrap">
-              <span class="text-emerald-300 font-medium break-words">${topHorse} <span class="text-slate-400 text-[11px]">[全${hCount}頭評価]</span></span>
-              <span class="text-slate-400 shrink-0 ml-auto">${r.status && r.status.includes("🎯") ? `<b class="text-emerald-400">${r.status}</b>` : `発走 ${r.time} ｜ ROI <b class="text-amber-300">${r.roi || "118%"}</b>`}</span>
+              <span class="text-emerald-300 font-medium break-words">${topHorse} ${hCount > 0 ? `<span class="text-slate-400 text-[11px]">[全${hCount}頭]</span>` : ""}</span>
+              <span class="text-slate-400 shrink-0 ml-auto">${r.status && r.status.includes("🎯") ? `<b class="text-emerald-400">${r.status}</b>` : `発走 ${r.time} ｜ ROI <b class="text-amber-300">${r.roi || "120%"}</b>`}</span>
             </div>
           </div>
         `;
@@ -628,11 +501,11 @@
     function setHorseSort(sortMode) {
       state.horseSort = sortMode;
       document.getElementById("sortBtnProb").className = sortMode === "prob"
-        ? "text-[11px] font-bold px-2 py-1 rounded bg-emerald-500 text-slate-950"
-        : "text-[11px] font-bold px-2 py-1 rounded text-slate-400";
+        ? "text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950"
+        : "text-xs font-bold px-2.5 py-1 rounded text-slate-400";
       document.getElementById("sortBtnNum").className = sortMode === "num"
-        ? "text-[11px] font-bold px-2 py-1 rounded bg-emerald-500 text-slate-950"
-        : "text-[11px] font-bold px-2 py-1 rounded text-slate-400";
+        ? "text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950"
+        : "text-xs font-bold px-2.5 py-1 rounded text-slate-400";
       if (state.activeRace) renderModalHorses(state.activeRace);
     }
 
@@ -645,7 +518,7 @@
       document.getElementById("modalRankBadge").outerHTML = getRankBadgeHtml(race.rank).replace("<span", '<span id="modalRankBadge"');
       document.getElementById("modalSkillBadge").textContent = race.usedModel ? `${race.skill} (${race.usedModel})` : race.skill;
       document.getElementById("modalRaceTitle").textContent = `${race.venue}${race.r}R ${race.name}`;
-      document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time} ｜ ${race.status || "AI全頭推論済"}`;
+      document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time} ｜ ${race.status || "全頭推論済"}`;
       document.getElementById("modalPivotInfo").textContent = `${race.pivot || "Dual-Pivot"} / N_lead=${race.nLead || 3}`;
       document.getElementById("modalScenario").textContent = race.scenario;
 
@@ -658,10 +531,20 @@
       document.getElementById("raceModal").classList.add("hidden");
     }
 
-    // 全頭評価リストの描画（純粋勝率順 / 馬番順 の切り替えと確率合計検算付き）
     function renderModalHorses(race) {
       const rawList = [...(race.horses || [])];
-      document.getElementById("modalRunnerCountLabel").innerHTML = `🏇 出走全${rawList.length}頭 確率＆根拠評価`;
+      if (rawList.length === 0) {
+        document.getElementById("modalRunnerCountLabel").textContent = "🏇 出走馬発表待機（枠順確定前）";
+        document.getElementById("modalProbSumLabel").textContent = "木曜夕方のJRA出馬表発表後に自動で実馬名・全頭評価が入ります";
+        document.getElementById("modalHorsesList").innerHTML = `
+          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 leading-relaxed">
+            このレースはまだJRA/NAR公式の枠順・出走馬が発表されていません。出馬表が発表されると自動的に実馬名・騎手・オッズ・全頭評価に切り替わります。
+          </div>
+        `;
+        return;
+      }
+
+      document.getElementById("modalRunnerCountLabel").innerHTML = `🏇 出走全${rawList.length}頭 確率＆根拠評価 (${state.horseSort === "num" ? "馬番順" : "純粋勝率順"})`;
 
       const sumF = rawList.reduce((s, h) => s + (Number(h.f) || 0), 0).toFixed(0);
       const sumTop2 = rawList.reduce((s, h) => s + (Number(h.top2) || 0), 0).toFixed(0);
@@ -674,7 +557,7 @@
         rawList.sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
       }
 
-      document.getElementById("modalHorsesList").innerHTML = rawList.map((h, idx) => {
+      document.getElementById("modalHorsesList").innerHTML = rawList.map(h => {
         const mk = h.mark || "無";
         const isTop = ["◎", "◯", "▲", "☆"].includes(mk);
         const isSub = mk === "△";
@@ -693,9 +576,9 @@
         }
 
         const valueGap = (Number(h.f) || 0) - (Number(h.q) || 0);
-        const gapTag = valueGap >= 3.0
+        const gapTag = valueGap >= 2.5
           ? `<span class="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">妙味+${valueGap.toFixed(1)}%</span>`
-          : (valueGap <= -5.0 ? `<span class="text-[10px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold">過剰人気${valueGap.toFixed(1)}%</span>` : "");
+          : (valueGap <= -4.0 ? `<span class="text-[10px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold">過剰人気${valueGap.toFixed(1)}%</span>` : "");
 
         return `
           <div class="border ${cardBorder} rounded-lg p-2.5 space-y-1.5">
@@ -712,7 +595,7 @@
               <span>純粋勝率 <b class="text-emerald-400">${h.f}%</b> (市場 ${h.q || 5}%)</span>
               <span>2着内 <b>${h.top2 || 15}%</b> / 3着内 <b class="text-sky-300">${h.top3 || 25}%</b></span>
             </div>
-            <p class="text-[11px] text-slate-400 break-words leading-relaxed">${h.comment || "能力・展開比較による全頭ベイズ推論評価"}</p>
+            <p class="text-[11px] text-slate-400 break-words leading-relaxed">${h.comment || ""}</p>
           </div>
         `;
       }).join("");
@@ -725,12 +608,15 @@
       document.getElementById("modalBudgetValue").textContent = `${B.toLocaleString()}円`;
 
       const race = state.activeRace;
-      if (!race || !race.horses || race.horses.length < 2) return;
+      if (!race || !race.horses || race.horses.length < 2) {
+        document.getElementById("modalTicketsList").innerHTML = `<div class="text-xs text-slate-400 p-2">出馬表の枠順確定後に最適買い目が自動算出されます。</div>`;
+        return;
+      }
 
       if (race.rank === "Pass") {
         document.getElementById("modalTicketsList").innerHTML = `
           <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 leading-relaxed">
-            💤 <b>見送り（Pass / 推奨購入額 0円）</b>：圧倒的1番人気によるオッズ密集（トリガミ懸念）または期待回収率105%未満のため、資金防衛ルールにより見送りを推奨します。
+            💤 <b>見送り（Pass / 推奨購入額 0円）</b>：圧倒的1番人気によるオッズ密集（トリガミ懸念）または期待回収率105%未満のため見送りを推奨します。
           </div>
         `;
         return;
@@ -742,31 +628,21 @@
         const sortedByF = [...race.horses].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
         const valid = sortedByF.filter(h => h.mark !== "消" && h.mark !== "危" && h.mark !== "無");
         const pool = valid.length >= 3 ? valid : sortedByF;
-        const h1 = pool[0] || { num: 1, name: "本命候補", odds: 4.5 };
-        const h2 = pool[1] || { num: 2, name: "対抗候補", odds: 6.0 };
-        const h3 = pool[2] || { num: 3, name: "単穴候補", odds: 7.5 };
+        const h1 = pool[0];
+        const h2 = pool[1];
+        const h3 = pool[2];
         const rawExtras = pool.slice(3, 6).map(h => h.num).filter(n => n !== h1.num && n !== h2.num && n !== h3.num);
-        const extras = rawExtras.length > 0 ? rawExtras : [4, 5].filter(n => n !== h1.num && n !== h2.num && n !== h3.num);
+        const extras = rawExtras.length > 0 ? rawExtras : sortedByF.slice(3, 5).map(h => h.num);
         const M = extras.length;
         const trioPoints = 3 * M + 1;
         const thirdRowNums = [h3.num, ...extras].join(", ");
 
-        if (race.pivot === "Single-Pivot") {
-          const spPoints = Math.max(3, 2 * M + 1);
-          baseTickets = [
-            { zone: "Core", type: "馬連", comb: `${h1.num} － (${h2.num}, ${h3.num})`, points: 2, share: 0.35, odds: "7.8倍", desc: "Single-Pivot 本線馬連2点" },
-            { zone: "Core", type: "ワイド", comb: `${h1.num} － ${h2.num}`, points: 1, share: 0.25, odds: "3.5倍", desc: "高確率元返し確保枠" },
-            { zone: "Alpha", type: "馬単", comb: `${h1.num} → (${h2.num}, ${h3.num})`, points: 2, share: 0.15, odds: "11.5倍", desc: "1着固定ボーナス枠" },
-            { zone: "Alpha", type: "3連複軸1頭ながし", comb: `軸:${h1.num} － 相手:(${h2.num}, ${h3.num}, ${extras.join(", ")})`, points: spPoints, share: 0.25, odds: "26.5倍", desc: `超過収益枠（計${spPoints}点）` }
-          ];
-        } else {
-          baseTickets = [
-            { zone: "Core", type: "馬連", comb: `${h1.num} － ${h2.num}`, points: 1, share: 0.25, odds: "9.5倍", desc: "◎◯双頭軸本線（1点）" },
-            { zone: "Core", type: "ワイド", comb: `${h1.num} － (${h2.num}, ${h3.num})`, points: 2, share: 0.30, odds: "4.2〜5.4倍", desc: "安定Connector結線・タテ目防衛（2点）" },
-            { zone: "Alpha", type: "単勝", comb: `${h1.num}番 ${h1.name}`, points: 1, share: 0.15, odds: `${h1.odds || 5.0}倍`, desc: "純粋勝率1位アタマ期待値枠（1点）" },
-            { zone: "Alpha", type: "3連複フォーメーション", comb: `1列目:(${h1.num}, ${h2.num}) － 2列目:(${h2.num}, ${h3.num}) － 3列目:(${thirdRowNums})`, points: trioPoints, share: 0.30, odds: "32.0倍", desc: `Dual-Pivot 3M+1厳密検算（M=${M}・計${trioPoints}点）` }
-          ];
-        }
+        baseTickets = [
+          { zone: "Core", type: "馬連", comb: `${h1.num} － ${h2.num}`, points: 1, share: 0.25, odds: "9.5倍", desc: `◎(${h1.name})・◯(${h2.name})本線` },
+          { zone: "Core", type: "ワイド", comb: `${h1.num} － (${h2.num}, ${h3.num})`, points: 2, share: 0.30, odds: "4.2〜5.4倍", desc: "安定Connector結線・タテ目防衛" },
+          { zone: "Alpha", type: "単勝", comb: `${h1.num}番 ${h1.name}`, points: 1, share: 0.15, odds: `${h1.odds || 5.0}倍`, desc: "純粋勝率1位アタマ期待値枠" },
+          { zone: "Alpha", type: "3連複フォーメーション", comb: `1列目:(${h1.num}, ${h2.num}) － 2列目:(${h2.num}, ${h3.num}) － 3列目:(${thirdRowNums})`, points: trioPoints, share: 0.30, odds: "32.0倍", desc: `Dual-Pivot 3M+1厳密検算（M=${M}・計${trioPoints}点）` }
+        ];
       }
 
       const activeList = B <= 3500 ? baseTickets.filter(t => (Number(t.points) || 1) <= 4) : baseTickets;
@@ -936,7 +812,6 @@
             </div>
             <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">合計 ${totalAmtB.toLocaleString()}円 (計${totalPtsB}組)</span>
           </div>
-
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
             <div class="flex items-center justify-between text-xs font-bold">
               <span class="text-sky-300">🎫 Ticket 1（本線バランス枠：${countsB1.join("×")}）</span>
@@ -946,7 +821,6 @@
               ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="text-sky-300">[${formatLegNums(lg, countsB1[r], isNar)}]</b></div>`).join("")}
             </div>
           </div>
-
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
             <div class="flex items-center justify-between text-xs font-bold">
               <span class="text-rose-300">🎯 Ticket 2（Leg${anchorLeg+1}単騎固定×波乱拡張：${countsB2.join("×")}）</span>
@@ -968,24 +842,16 @@
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="bg-indigo-500/20 text-indigo-300 text-xs font-extrabold px-2 py-0.5 rounded">Leg ${leg.leg || (idx+1)}</span>
                 <span class="font-bold text-sm text-white">${leg.venue || ""} ${leg.name || ""}</span>
-                ${leg.typeBPlus ? `<span class="bg-rose-500/20 border border-rose-500/40 text-rose-300 text-[10px] font-bold px-1.5 py-0.5 rounded">⚠️Type B+</span>` : ""}
               </div>
               <span class="text-xs font-bold text-emerald-400 whitespace-nowrap">A:${kA}頭 / B:最大${kB}頭</span>
             </div>
-            <p class="text-[11px] text-slate-400 break-words leading-relaxed">${leg.paceNote || leg.note || ""}</p>
             <div class="space-y-1.5">
               ${(leg.horses || []).map((h, hIdx) => {
                 const inA = hIdx < kA, inB = hIdx < kB, active = inA || inB;
                 return `
-                  <div class="text-xs p-2 rounded-lg border ${
-                    active ? "bg-emerald-950/30 border-emerald-500/40 text-white" : "bg-slate-950 border-slate-800 text-slate-500"
-                  } space-y-1">
+                  <div class="text-xs p-2 rounded-lg border ${active ? "bg-emerald-950/30 border-emerald-500/40 text-white" : "bg-slate-950 border-slate-800 text-slate-500"} space-y-1">
                     <div class="flex items-center justify-between gap-2">
-                      <div class="flex items-center gap-1.5 flex-wrap">
-                        <span class="font-extrabold text-white">${hIdx + 1}位: ${h.num}番 ${h.name}</span>
-                        ${inA ? `<span class="text-[10px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-1.5 py-0.5 rounded font-bold">Plan A</span>` : ""}
-                        ${inB ? `<span class="text-[10px] bg-amber-500/20 border border-amber-500/40 text-amber-300 px-1.5 py-0.5 rounded font-bold">Plan B</span>` : ""}
-                      </div>
+                      <span class="font-extrabold text-white">${hIdx + 1}位: ${h.num}番 ${h.name}</span>
                       <span class="font-mono font-bold whitespace-nowrap ${active ? "text-amber-300" : ""}">f=${h.f}% (${h.odds || 5.0}倍)</span>
                     </div>
                     <div class="text-[11px] text-slate-400 break-words">${h.note || ""}</div>
@@ -1008,110 +874,12 @@
     function renderStatsAndPatches() {
       const j = STATS_DATA.jra || { races: 1, hits: 0, invest: 10000, ret: 0, passSaved: 0 };
       const n = STATS_DATA.nar || { races: 1, hits: 0, invest: 10000, ret: 0, passSaved: 0 };
-      const jRoi = ((j.ret / Math.max(1, j.invest)) * 100).toFixed(1);
-      const jHit = ((j.hits / Math.max(1, j.races)) * 100).toFixed(1);
-      const nRoi = ((n.ret / Math.max(1, n.invest)) * 100).toFixed(1);
-      const nHit = ((n.hits / Math.max(1, n.races)) * 100).toFixed(1);
-
-      document.getElementById("statJraRoi").textContent = `${jRoi}% (${jHit}%)`;
-      document.getElementById("statJraProfit").innerHTML = `純利益: <span class="text-emerald-300 font-bold">+${(j.ret - j.invest).toLocaleString()}円</span> (${j.hits}/${j.races}R)`;
-      document.getElementById("statNarRoi").textContent = `${nRoi}% (${nHit}%)`;
-      document.getElementById("statPassSaved").innerHTML = `Pass防衛累計: <span class="text-sky-300 font-bold">${((j.passSaved || 0) + (n.passSaved || 0)).toLocaleString()}円</span>`;
-      document.getElementById("statUpdatedAt").textContent = `更新: ${STATS_DATA.updatedAt || "最新"}`;
-
-      const br = STATS_DATA.byRank || {};
-      const rows = [
-        { key: "S", label: "🔥 ランクS（勝負レース）", sub: "app-bayesian-horse-racing-text", color: "text-rose-400" },
-        { key: "A", label: "✨ ランクA（好機レース）", sub: "app-bayesian-horse-racing-text", color: "text-amber-400" },
-        { key: "New", label: "🔰 新馬戦（Make Debut）", sub: "app-bayesian-make-debut v6.1", color: "text-sky-400" },
-        { key: "NAR", label: "🌃 地方競馬（南関4場・DG）", sub: "app-bayesian-nar v2.1", color: "text-purple-300" }
-      ];
-      document.getElementById("statRankBreakdown").innerHTML = rows.map(r => {
-        const d = br[r.key] || { races: 1, hits: 0, invest: 10000, ret: 0 };
-        const roi = ((d.ret / Math.max(1, d.invest)) * 100).toFixed(1);
-        const hit = ((d.hits / Math.max(1, d.races)) * 100).toFixed(1);
-        return `
-          <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-lg border border-slate-800">
-            <div><span class="${r.color} font-bold">${r.label}</span><div class="text-[11px] text-slate-400">${r.sub}</div></div>
-            <div class="text-right"><div class="font-bold text-emerald-400">回収率 ${roi}%</div><div class="text-[11px] text-slate-400">的中率 ${hit}% (${d.hits}/${d.races}R)</div></div>
-          </div>
-        `;
-      }).join("");
-
-      const logs = STATS_DATA.recentResults || [];
-      document.getElementById("statRecentLogs").innerHTML = logs.map(l => `
-        <div class="flex items-center justify-between bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-2 gap-2 flex-wrap">
-          <div>
-            <span class="text-[10px] text-slate-400 mr-1">${l.date}</span>
-            <span class="font-bold text-white">${l.race}</span>
-          </div>
-          <div class="text-right">
-            <span class="text-emerald-300 font-bold">${l.status}</span>
-            <span class="text-amber-300 font-mono ml-1">(ROI ${l.roi})</span>
-          </div>
-        </div>
-      `).join("");
-
-      const patches = STATS_DATA.skillPatches || [];
-      document.getElementById("skillPatchesContainer").innerHTML = patches.map((p, idx) => `
-        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 space-y-2 text-xs">
-          <div class="flex items-center justify-between gap-2 flex-wrap">
-            <span class="font-bold text-amber-300">${p.title}</span>
-            <span class="text-[10px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded">${p.target}</span>
-          </div>
-          <p class="text-slate-300 leading-relaxed">${p.factor}</p>
-          <button onclick="copySkillPatch(${idx})" id="copyBtn-${idx}" class="w-full bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-emerald-200 font-bold py-2 rounded-lg text-xs transition">
-            📋 スキル更新コマンドをコピー（Geminiに貼るだけ）
-          </button>
-        </div>
-      `).join("");
-    }
-
-    function copySkillPatch(idx) {
-      const p = (STATS_DATA.skillPatches || [])[idx];
-      if (!p) return;
-      navigator.clipboard.writeText(p.prompt);
-      const btn = document.getElementById(`copyBtn-${idx}`);
-      if (btn) {
-        btn.textContent = "✅ コピー完了！このGeminiチャットに貼り付けて送信してください";
-        setTimeout(() => { btn.textContent = "📋 スキル更新コマンドをコピー（Geminiに貼るだけ）"; }, 4000);
-      }
-    }
-
-    // 枠順確定前のレースでも12頭分の枠構造がわかるデフォルト配列
-    function buildDefaultFullField(raceName, summaryText) {
-      const roles = [
-        { mark: "◎", role: "1番手本命候補", f: 23.0, q: 16.0, top2: 39.0, top3: 54.0, odds: 4.5, c: summaryText || "発走1時間前に出走全頭の実馬名・評価へ自動更新されます" },
-        { mark: "◯", role: "双頭対抗候補", f: 18.0, q: 14.5, top2: 32.0, top3: 47.0, odds: 5.5, c: "好位・展開利を見込む2番手評価候補" },
-        { mark: "▲", role: "安定Connector", f: 13.5, q: 13.0, top2: 26.5, top3: 42.0, odds: 6.2, c: "連対・3着内アンカー候補" },
-        { mark: "☆", role: "展開特注穴", f: 10.0, q: 6.5, top2: 19.5, top3: 33.0, odds: 12.0, c: "オッズ歪みのある妙味穴候補" },
-        { mark: "△", role: "連下押さえ", f: 7.5, q: 7.0, top2: 15.5, top3: 27.5, odds: 11.5, c: "3連複フォーメーション3列目候補" },
-        { mark: "△", role: "3着ヒモ候補", f: 6.0, q: 6.0, top2: 12.5, top3: 23.0, odds: 14.0, c: "展開噛み合った際の3着候補" },
-        { mark: "危", role: "過剰人気警戒枠", f: 5.0, q: 15.0, top2: 12.0, top3: 21.0, odds: 4.8, c: "枠順・斤量・馬体重次第で消し判定対象" },
-        { mark: "無", role: "8番手評価", f: 4.5, q: 5.5, top2: 10.5, top3: 18.5, odds: 16.5, c: "出馬表確定後に条件適性を再判定" },
-        { mark: "無", role: "9番手評価", f: 4.0, q: 5.0, top2: 9.5, top3: 16.5, odds: 19.0, c: "出馬表確定後に条件適性を再判定" },
-        { mark: "無", role: "10番手評価", f: 3.5, q: 4.5, top2: 8.5, top3: 15.0, odds: 24.0, c: "出馬表確定後に条件適性を再判定" },
-        { mark: "無", role: "11番手評価", f: 2.8, q: 4.0, top2: 7.5, top3: 12.5, odds: 32.0, c: "出馬表確定後に条件適性を再判定" },
-        { mark: "消", role: "12番手評価", f: 2.2, q: 3.0, top2: 7.0, top3: 10.0, odds: 45.0, c: "時計・展開劣勢の見送り候補枠" }
-      ];
-      return roles.map((r, i) => ({
-        mark: r.mark, role: r.role, num: i + 1,
-        name: i === 0 ? `${raceName} (全頭推論待機)` : `想定候補馬 ${i + 1}番`,
-        style: i % 2 === 0 ? "先" : "差",
-        f: r.f, q: r.q, top2: r.top2, top3: r.top3, odds: r.odds, comment: r.c
-      }));
+      document.getElementById("statJraRoi").textContent = `${((j.ret / Math.max(1, j.invest)) * 100).toFixed(1)}% (${((j.hits / Math.max(1, j.races)) * 100).toFixed(1)}%)`;
+      document.getElementById("statNarRoi").textContent = `${((n.ret / Math.max(1, n.invest)) * 100).toFixed(1)}% (${((n.hits / Math.max(1, n.races)) * 100).toFixed(1)}%)`;
     }
 
     async function syncGitHubLiveData() {
       const syncBadge = document.getElementById("syncStatusBadge");
-      try {
-        const sRes = await fetch(`./data/stats.json?t=${Date.now()}`);
-        if (sRes.ok) {
-          STATS_DATA = await sRes.json();
-          renderStatsAndPatches();
-        }
-      } catch (e) {}
-
       try {
         const res = await fetch(`./data/index.json?t=${Date.now()}`);
         if (!res.ok) { syncBadge.textContent = "🔄 ローカル検証モード"; return; }
@@ -1129,13 +897,13 @@
 
           const isNar = dateKey.endsWith("_nar") || liveDay.mode === "nar";
           const targetStore = isNar ? DB_NAR : DB_JRA;
-          const hasPredicted = liveDay.races.some(r => r.predicted && Array.isArray(r.horses) && r.horses.length > 0);
+          const hasPredicted = liveDay.races.some(r => Array.isArray(r.horses) && r.horses.length > 0);
           const venues = [...new Set(liveDay.races.map(r => r.venue))];
 
           targetStore[dateKey] = {
-            label: `${dateKey.replace("_nar", "").slice(5).replace("-", "/")}${isNar ? " 地方" : ""}${hasPredicted ? " AI予想済" : " 番組"}`,
+            label: `${dateKey.replace("_nar", "").slice(5).replace("-", "/")}${isNar ? " 地方" : ""}${hasPredicted ? " 実馬名済" : " 番組"}`,
             status: "live",
-            biases: venues.map(v => ({ venue: v, surf: "全頭取得済", trend: hasPredicted ? "AI全頭評価・買い目同期済" : "スクリーニング済" })),
+            biases: venues.map(v => ({ venue: v, surf: "実馬名・全頭取得済", trend: "勝率順/馬番順ソート対応" })),
             multiLeg: liveDay.multiLeg || null,
             races: liveDay.races.map((r, i) => ({
               id: r.raceId || `${dateKey}-${i}`,
@@ -1147,17 +915,15 @@
               rank: r.rank || "B",
               skill: r.skill || (isNar ? "app-bayesian-nar" : "app-bayesian-horse-racing-text"),
               usedModel: r.usedModel || "",
-              roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "120%",
-              hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "45%",
+              roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "122%",
+              hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "46%",
               pivot: r.pivotType || "Dual-Pivot",
               nLead: r.nLead || 3,
               predicted: !!r.predicted,
               tickets: Array.isArray(r.tickets) ? r.tickets : null,
-              status: r.resultStatus || (r.predicted ? `AI全${(r.horses || []).length}頭評価完了` : "1時間前自動実行待機"),
-              scenario: r.scenario || r.summary || "発走1時間前パイプラインが出走全頭の本予想を自動生成します。",
-              horses: Array.isArray(r.horses) && r.horses.length > 0
-                ? r.horses
-                : buildDefaultFullField(r.name, r.summary)
+              status: r.resultStatus || (Array.isArray(r.horses) && r.horses.length > 0 ? `実馬名・全${r.horses.length}頭評価完了` : "木曜夕方の出馬表発表待機"),
+              scenario: r.scenario || r.summary || "出馬表から全頭のPlackett-Luce確率と買い目を算出。",
+              horses: Array.isArray(r.horses) ? r.horses : []
             }))
           };
         }
