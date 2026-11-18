@@ -4,19 +4,25 @@ on:
   schedule:
     # 【JRA 土日】08:30 JST (金・土 23:30 UTC): JRA朝一括スクリーニング
     - cron: '30 23 * * 5,6'
-    # 【JRA 土日】09:00〜16:30 JST (00:00〜07:30 UTC): JRA 1時間前本予想（JRA完全優先ロック時間帯）
+    # 【JRA 土日】09:00〜16:30 JST: JRA 1時間前本予想
     - cron: '*/20 0-7 * * 6,0'
-    # 【NAR 平日】12:30 JST (03:30 UTC): 南関4場・DG競走 昼スクリーニング
+    # 【NAR 平日】12:30 JST: 南関4場・DG競走 昼スクリーニング
     - cron: '30 3 * * 1-5'
-    # 【NAR 平日ナイター/後半】14:00〜20:30 JST (05:00〜11:30 UTC): 1時間前本予想＆トリプル馬単
+    # 【NAR 平日ナイター】14:00〜20:30 JST: 1時間前本予想＆トリプル馬単
     - cron: '*/30 5-11 * * 1-5'
-    # 【結果照合】毎日 17:15 JST (08:15 UTC) ＆ 21:15 JST (12:15 UTC)
+    # 【結果照合】毎日 17:15 JST ＆ 21:15 JST
     - cron: '15 8,12 * * *'
   workflow_dispatch:
+
+# 前の実行が終わっていない時は重複起動させない設定
+concurrency:
+  group: bayesian-keiba-pipeline
+  cancel-in-progress: true
 
 jobs:
   predict:
     runs-on: ubuntu-latest
+    timeout-minutes: 5
     permissions:
       contents: write
     steps:
