@@ -19,39 +19,39 @@
           "role": "1着妙味主軸",
           "num": 1,
           "name": "アウダチェ",
-          "style": "先",
-          "f": 41.9,
-          "q": 50.0,
-          "top2": 80.8,
+          "style": "差",
+          "f": 44.4,
+          "q": 52.0,
+          "top2": 86.1,
           "top3": 96.0,
           "odds": 4.3,
-          "comment": "F:牝2鹿騎手 / F:最内1枠(H:包まれ・砂被り注意)"
+          "comment": "F:父:キタサンブラック/(H:血統適性+0.08)"
         },
         {
           "mark": "◯",
           "role": "双頭対抗軸",
           "num": 2,
           "name": "オーケーファイター",
-          "style": "先",
-          "f": 30.8,
-          "q": 27.6,
-          "top2": 64.4,
-          "top3": 96.0,
+          "style": "差",
+          "f": 29.4,
+          "q": 27.3,
+          "top2": 62.9,
+          "top3": 94.4,
           "odds": 7.8,
-          "comment": "F:牝2鹿騎手起用(H:上位アンカー+0.15) / F:最内1枠(H:包まれ・砂被"
+          "comment": "F:牝2鹿 騎手(H:Top騎手Anchor+0.16)"
         },
         {
           "mark": "▲",
-          "role": "3着内Anchor",
+          "role": "安定Connector",
           "num": 4,
           "name": "[馬記号]馬名[ブリンカー]",
-          "style": "先",
-          "f": 15.2,
-          "q": 12.9,
-          "top2": 30.5,
-          "top3": 45.8,
+          "style": "差",
+          "f": 14.7,
+          "q": 12.1,
+          "top2": 28.5,
+          "top3": 42.7,
           "odds": 16.6,
-          "comment": "F:性齢、騎手"
+          "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
         },
         {
           "mark": "☆",
@@ -59,19 +59,25 @@
           "num": 3,
           "name": "オースミエターナ",
           "style": "差",
-          "f": 12.1,
-          "q": 9.5,
-          "top2": 24.2,
-          "top3": 36.3,
+          "f": 11.6,
+          "q": 8.7,
+          "top2": 22.5,
+          "top3": 33.8,
           "odds": 22.6,
-          "comment": "F:牝2鹿騎手"
+          "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
         }
       ],
       "tickets": [],
-      "scenario": "枠順未定・追切時計未発表・馬体重不明かつ16頭中3頭のみ掲載のため確定前見送り(Pass)。",
+      "scenario": "京都5R(芝1600m・良) 実測N_lead=1頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全4頭を推論。",
       "pivotType": "Pass",
-      "nLead": 0,
-      "usedModel": "gemini-4-hydrogen"
+      "nLead": 1,
+      "usedModel": "gemini-4-hydrogen",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202608050506",
@@ -90,13 +96,13 @@
           "role": "1着妙味主軸",
           "num": 4,
           "name": "[馬記号]馬名[ブリンカー]",
-          "style": "先",
-          "f": 30.7,
-          "q": 32.5,
-          "top2": 62.4,
-          "top3": 93.6,
+          "style": "差",
+          "f": 30.8,
+          "q": 33.1,
+          "top2": 61.5,
+          "top3": 92.3,
           "odds": 4.8,
-          "comment": "F:性齢、騎手"
+          "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
         },
         {
           "mark": "◯",
@@ -105,40 +111,47 @@
           "name": "サンダージョー",
           "style": "差",
           "f": 27.0,
-          "q": 27.4,
-          "top2": 54.9,
-          "top3": 82.3,
+          "q": 27.5,
+          "top2": 54.0,
+          "top3": 81.0,
           "odds": 5.7,
-          "comment": "F:牡2栗騎手"
+          "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
         },
         {
           "mark": "▲",
-          "role": "3着内Anchor",
+          "role": "安定Connector",
           "num": 2,
           "name": "コパノハーバード",
-          "style": "先",
+          "style": "差",
           "f": 25.6,
           "q": 25.6,
-          "top2": 50.1,
-          "top3": 75.1,
+          "top2": 51.3,
+          "top3": 76.9,
           "odds": 6.1,
-          "comment": "F:牝2黒騎手 / F:最内1枠(H:包まれ・砂被り注意)"
+          "comment": "F:1枠・脚質[差](H:3シナリオ混合推論)"
         },
         {
           "mark": "☆",
           "role": "展開特注穴",
           "num": 1,
           "name": "オートドライブ",
-          "style": "先",
-          "f": 16.7,
-          "q": 14.5,
-          "top2": 32.6,
-          "top3": 49.0,
+          "style": "差",
+          "f": 16.6,
+          "q": 13.8,
+          "top2": 33.2,
+          "top3": 49.8,
           "odds": 10.8,
-          "comment": "F:牝2鹿騎手 / F:最内1枠(H:包まれ・砂被り注意)"
+          "comment": "F:1枠・脚質[差](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "京都6R(ダ1200m) 全4頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。"
+      "scenario": "京都6R(ダ1200m・良) 実測N_lead=1頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全4頭を推論。",
+      "nLead": 1,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202608050509",
@@ -296,7 +309,14 @@
           "comment": "F:牝2鹿騎手 / F:最内1枠(H:包まれ・砂被り注意)"
         }
       ],
-      "scenario": "京都9R(芝1400m) 全11頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。"
+      "scenario": "京都9R(芝1400m) 全11頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
+      "nLead": 4,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202608050510",
@@ -577,8 +597,14 @@
       ],
       "scenario": "先行勢が多く平均〜やや速めの流れ。京都外回りCコースで持続力とコース取りが鍵。実績上位9と斤量利ある3歳15の双頭軸＋安定11への差し込み本線。",
       "pivotType": "Dual-Pivot",
-      "nLead": 4,
-      "usedModel": "gemini-4-hydrogen"
+      "nLead": 5,
+      "usedModel": "gemini-4-hydrogen",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202608050511",
@@ -894,8 +920,14 @@
       ],
       "scenario": "先行勢が揃い平均〜やや速めの流れ。55kgのJpnI3着馬とJpnII連対馬の2強に昇級初戦の逃げ馬が絡む(※仮馬番は出馬表順)。",
       "pivotType": "Dual-Pivot",
-      "nLead": 4,
-      "usedModel": "gemini-4-hydrogen"
+      "nLead": 6,
+      "usedModel": "gemini-4-hydrogen",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202603030509",
@@ -1144,7 +1176,14 @@
           "comment": "F:牡6鹿騎手 / F:最内1枠(H:包まれ・砂被り注意)"
         }
       ],
-      "scenario": "福島9R(芝1800m) 全18頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。"
+      "scenario": "福島9R(芝1800m) 全18頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
+      "nLead": 8,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030510",
@@ -1393,7 +1432,14 @@
           "comment": "F:牝4黒騎手"
         }
       ],
-      "scenario": "福島10R(ダ1150m) 全18頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。"
+      "scenario": "福島10R(ダ1150m) 全18頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
+      "nLead": 8,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030511",
@@ -1700,10 +1746,28 @@
       ],
       "scenario": "ショウナンマグマ牽引で締まったペース。Bコース持続力と斤量恩恵の3歳馬・小回り実績先行馬が台頭。",
       "pivotType": "Dual-Pivot",
-      "nLead": 4,
-      "usedModel": "gemini-3.8-flash"
+      "nLead": 3,
+      "usedModel": "gemini-3.8-flash",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     }
   ],
-  "updatedAt": "2026-11-18 22:26 JST",
-  "mode": "jra"
+  "updatedAt": "2026-11-18 22:31 JST",
+  "mode": "jra",
+  "trackBiases": [
+    {
+      "venue": "京都",
+      "surf": "実測N_lead・3シナリオ混合",
+      "trend": "京都: 前半確定レースなし（標準バイアス想定）"
+    },
+    {
+      "venue": "福島",
+      "surf": "実測N_lead・3シナリオ混合",
+      "trend": "福島: 前半確定レースなし（標準バイアス想定）"
+    }
+  ]
 }

@@ -177,27 +177,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 12,
           "name": "シンティラガール",
-          "odds": "6.5"
+          "odds": "6.5",
+          "passing": "大井 高橋清顕"
         },
         {
           "rank": "2",
+          "waku": 5,
           "num": 6,
           "name": "タリース",
-          "odds": "3.2"
+          "odds": "3.2",
+          "passing": "大井 藤田輝信"
         },
         {
           "rank": "3",
+          "waku": 6,
           "num": 8,
           "name": "ヤマメセイリュウ",
-          "odds": "1.7"
+          "odds": "1.7",
+          "passing": "大井 月岡健二"
         }
       ],
       "investedYen": 10000,
       "returnYen": 29250,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:12番 シンティラガール / 回収29,250円)"
+      "resultStatus": "🎯 的中 (1着:12番 シンティラガール / 回収29,250円)",
+      "nLead": 1,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202644111802",
@@ -336,27 +349,39 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 2,
           "num": 2,
           "name": "マイネルシュラハト",
-          "odds": "1.3"
+          "odds": "1.3",
+          "passing": "大井 阪本一栄"
         },
         {
           "rank": "2",
+          "waku": 3,
           "num": 3,
           "name": "カリビアンダンサー",
-          "odds": "8.0"
+          "odds": "8.0",
+          "passing": "大井 松浦裕之"
         },
         {
           "rank": "3",
+          "waku": 1,
           "num": 1,
           "name": "トネタロウ",
-          "odds": "63.7"
+          "odds": "63.7",
+          "passing": "大井 朝倉実"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:2番 マイネルシュラハト / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:2番 マイネルシュラハト / 回収13,000円)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202644111803",
@@ -538,32 +563,44 @@
       ],
       "scenario": "不良の大井外1200m。叩き2走目の8枠逃げ12と好位5の先行有利決着に、時計上位1・4の差しが絡む展開。",
       "pivotType": "Dual-Pivot",
-      "nLead": 4,
+      "nLead": 5,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 12,
           "name": "オンマイビート",
-          "odds": "3.1"
+          "odds": "3.1",
+          "passing": "大井 的場直之"
         },
         {
           "rank": "2",
+          "waku": 4,
           "num": 4,
           "name": "クリムゾンバースト",
-          "odds": "6.6"
+          "odds": "6.6",
+          "passing": "大井 立花伸"
         },
         {
           "rank": "3",
+          "waku": 5,
           "num": 7,
           "name": "アリハム",
-          "odds": "5.3"
+          "odds": "5.3",
+          "passing": "大井 坂井英光"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:12番 オンマイビート / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:12番 オンマイビート / 回収11,500円)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202644111804",
@@ -797,32 +834,44 @@
       ],
       "scenario": "不良の大井内回り1600m。1〜4枠の先行勢が極めて有利。矢野騎乗の休み明け実績馬と好枠反転の3歳馬の2軸で勝負。",
       "pivotType": "Dual-Pivot",
-      "nLead": 5,
+      "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 2,
           "num": 2,
           "name": "テンシノトリブン",
-          "odds": "1.2"
+          "odds": "1.2",
+          "passing": "大井 澤佳宏"
         },
         {
           "rank": "2",
+          "waku": 5,
           "num": 6,
           "name": "ヴォーグアルタイル",
-          "odds": "18.1"
+          "odds": "18.1",
+          "passing": "大井 真島大輔"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 10,
           "name": "コウフウセイゲツ",
-          "odds": "30.9"
+          "odds": "30.9",
+          "passing": "大井 田中正人"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:2番 テンシノトリブン / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:2番 テンシノトリブン / 回収11,500円)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202644111805",
@@ -978,32 +1027,44 @@
       ],
       "scenario": "大井1400外回り不良馬場。内枠砂被りを避け外目好位から運べる7枠8番と充実の5番の双頭軸。",
       "pivotType": "Dual-Pivot",
-      "nLead": 4,
+      "nLead": 2,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 6,
           "num": 7,
           "name": "ジーティーウララ",
-          "odds": "7.5"
+          "odds": "7.5",
+          "passing": "大井 高岩孝敏"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 8,
           "name": "ナックジャスパー",
-          "odds": "5.4"
+          "odds": "5.4",
+          "passing": "大井 立花伸"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 10,
           "name": "ヴァルディ",
-          "odds": "15.1"
+          "odds": "15.1",
+          "passing": "大井 朝倉実"
         }
       ],
       "investedYen": 10000,
       "returnYen": 33750,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:7番 ジーティーウララ / 回収33,750円)"
+      "resultStatus": "🎯 的中 (1着:7番 ジーティーウララ / 回収33,750円)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202644111806",
@@ -1241,32 +1302,44 @@
       ],
       "scenario": "不良馬場の大井外回り1200m。前走1:14.0のキタノプレミアムが軸。大外大型先行カシマショウリュウと外差し勢が絡む展開。",
       "pivotType": "Single-Pivot",
-      "nLead": 4,
+      "nLead": 6,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 6,
           "name": "キタノプレミアム",
-          "odds": "1.2"
+          "odds": "1.2",
+          "passing": "大井 田中正人"
         },
         {
           "rank": "2",
+          "waku": 4,
           "num": 5,
           "name": "エレパイオ",
-          "odds": "21.6"
+          "odds": "21.6",
+          "passing": "大井 宗形竹見"
         },
         {
           "rank": "3",
+          "waku": 3,
           "num": 3,
           "name": "シルエットライド",
-          "odds": "55.9"
+          "odds": "55.9",
+          "passing": "大井 蛯名雄太"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:6番 キタノプレミアム / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:6番 キタノプレミアム / 回収11,500円)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202644111807",
@@ -1422,32 +1495,44 @@
       ],
       "scenario": "不良馬場の外回り1200m。同型多数で前速く、外目から砂被りを避けられる大型先行と門別転入の好位差しが優位。",
       "pivotType": "Dual-Pivot",
-      "nLead": 4,
+      "nLead": 10,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 12,
           "name": "スターオブムーラン",
-          "odds": "3.2"
+          "odds": "3.2",
+          "passing": "大井 的場直之"
         },
         {
           "rank": "2",
+          "waku": 4,
           "num": 6,
           "name": "コトリノサエズリ",
-          "odds": "2.2"
+          "odds": "2.2",
+          "passing": "大井 鷹見浩"
         },
         {
           "rank": "3",
+          "waku": 6,
           "num": 9,
           "name": "エレノアクイーン",
-          "odds": "5.4"
+          "odds": "5.4",
+          "passing": "大井 中道啓二"
         }
       ],
       "investedYen": 10000,
       "returnYen": 14400,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:12番 スターオブムーラン / 回収14,400円)"
+      "resultStatus": "🎯 的中 (1着:12番 スターオブムーラン / 回収14,400円)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202644111808",
@@ -1610,27 +1695,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 4,
           "name": "ランニングビーチ",
-          "odds": "2.7"
+          "odds": "2.7",
+          "passing": "大井 福田真広"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 8,
           "name": "ハーレムシャフル",
-          "odds": "17.1"
+          "odds": "17.1",
+          "passing": "大井 大宮和也"
         },
         {
           "rank": "3",
+          "waku": 1,
           "num": 1,
           "name": "エルツ",
-          "odds": "27.4"
+          "odds": "27.4",
+          "passing": "大井 月岡健二"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:4番 ランニングビーチ / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:4番 ランニングビーチ / 回収11,500円)",
+      "nLead": 5,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202644111809",
@@ -1851,32 +1949,44 @@
       ],
       "scenario": "不良の大井2000mは外枠好位が砂被り回避で有利。7枠ツートンショコラと6枠大型馬ナインフォルドが好位で主導権を握る。",
       "pivotType": "Dual-Pivot",
-      "nLead": 4,
+      "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 10,
           "name": "グランマローネ",
-          "odds": "2.7"
+          "odds": "2.7",
+          "passing": "大井 蛯名雄太"
         },
         {
           "rank": "2",
+          "waku": 6,
           "num": 7,
           "name": "ナインフォルド",
-          "odds": "3.6"
+          "odds": "3.6",
+          "passing": "大井 藤田輝信"
         },
         {
           "rank": "3",
+          "waku": 4,
           "num": 4,
           "name": "マオノジーニー",
-          "odds": "48.0"
+          "odds": "48.0",
+          "passing": "大井 橋本和馬"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:10番 グランマローネ)"
+      "resultStatus": "結果確定 (1着:10番 グランマローネ)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202644111810",
@@ -2041,32 +2151,44 @@
       ],
       "scenario": "不良の大井外回り1200m。1枠マスターは砂被り懸念。8枠537kgハチメンと5枠カガヤキの外目先行勢が物理有利。",
       "pivotType": "Dual-Pivot",
-      "nLead": 4,
+      "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 1,
           "num": 1,
           "name": "マスターオブライフ",
-          "odds": "1.3"
+          "odds": "1.3",
+          "passing": "大井 藤田輝信"
         },
         {
           "rank": "2",
+          "waku": 8,
           "num": 12,
           "name": "ハチメンロッピ",
-          "odds": "9.6"
+          "odds": "9.6",
+          "passing": "大井 米田英世"
         },
         {
           "rank": "3",
+          "waku": 5,
           "num": 6,
           "name": "カガヤキテンマ",
-          "odds": "3.4"
+          "odds": "3.4",
+          "passing": "大井 上杉昌宏"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:1番 マスターオブライフ / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:1番 マスターオブライフ / 回収13,000円)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202644111811",
@@ -2242,27 +2364,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 1,
           "num": 1,
           "name": "ケテンパッション",
-          "odds": "2.2"
+          "odds": "2.2",
+          "passing": "大井 上杉昌宏"
         },
         {
           "rank": "2",
+          "waku": 8,
           "num": 11,
           "name": "ブラフキャッチ",
-          "odds": "4.8"
+          "odds": "4.8",
+          "passing": "川崎 高月賢一"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 12,
           "name": "ケンシリウス",
-          "odds": "44.5"
+          "odds": "44.5",
+          "passing": "浦和 繁田健一"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:1番 ケテンパッション / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:1番 ケテンパッション / 回収13,000円)",
+      "nLead": 5,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202644111812",
@@ -2451,27 +2586,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 11,
           "name": "ロッソナブア",
-          "odds": "3.4"
+          "odds": "3.4",
+          "passing": "大井 須田和伸"
         },
         {
           "rank": "2",
+          "waku": 1,
           "num": 1,
           "name": "シビックフォイル",
-          "odds": "22.5"
+          "odds": "22.5",
+          "passing": "大井 米田英世"
         },
         {
           "rank": "3",
+          "waku": 3,
           "num": 3,
           "name": "サイカンサンユウ",
-          "odds": "1.7"
+          "odds": "1.7",
+          "passing": "大井 坂井英光"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:11番 ロッソナブア / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:11番 ロッソナブア / 回収11,500円)",
+      "nLead": 6,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202647111810",
@@ -2621,27 +2769,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 4,
           "name": "ピンネシリ",
-          "odds": "1.9"
+          "odds": "1.9",
+          "passing": "笠松 伊藤強一"
         },
         {
           "rank": "2",
+          "waku": 8,
           "num": 10,
           "name": "チュウワエース",
-          "odds": "34.5"
+          "odds": "34.5",
+          "passing": "笠松 加藤幸保"
         },
         {
           "rank": "3",
+          "waku": 3,
           "num": 3,
           "name": "セイウォリアー",
-          "odds": "9.4"
+          "odds": "9.4",
+          "passing": "笠松 田口輝彦"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:4番 ピンネシリ / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:4番 ピンネシリ / 回収11,500円)",
+      "nLead": 1,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202647111811",
@@ -2791,27 +2952,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 8,
           "name": "ミルキープリンセス",
-          "odds": "1.4"
+          "odds": "1.4",
+          "passing": "笠松 笹野博司"
         },
         {
           "rank": "2",
+          "waku": 8,
           "num": 10,
           "name": "オールウェズキズナ",
-          "odds": "20.9"
+          "odds": "20.9",
+          "passing": "笠松 川嶋弘吉"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 9,
           "name": "アオレレ",
-          "odds": "23.0"
+          "odds": "23.0",
+          "passing": "笠松 伊藤強一"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:8番 ミルキープリンセス / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:8番 ミルキープリンセス / 回収11,500円)",
+      "nLead": 2,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202647111812",
@@ -2987,27 +3161,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 9,
           "name": "グランゲレーロ",
-          "odds": "7.4"
+          "odds": "7.4",
+          "passing": "笠松 藤田正治"
         },
         {
           "rank": "2",
+          "waku": 6,
           "num": 7,
           "name": "ヴァネロペ",
-          "odds": "7.7"
+          "odds": "7.7",
+          "passing": "笠松 森山広大"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 12,
           "name": "コスモジョセフ",
-          "odds": "3.7"
+          "odds": "3.7",
+          "passing": "笠松 笹野博司"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:9番 グランゲレーロ)"
+      "resultStatus": "結果確定 (1着:9番 グランゲレーロ)",
+      "nLead": 5,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202650111810",
@@ -3189,32 +3376,44 @@
       ],
       "scenario": "重馬場の園田1400m。JRAダート実績上位の1が下原騎手で好位抜け出し。外枠先行勢と初ダートの大型馬5が相手本線。",
       "pivotType": "Single-Pivot",
-      "nLead": 4,
+      "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 5,
           "num": 5,
           "name": "ジゼルアリーナ",
-          "odds": "3.5"
+          "odds": "3.5",
+          "passing": "栗東 井上智史"
         },
         {
           "rank": "2",
+          "waku": 6,
           "num": 6,
           "name": "ベラジオパルーザ",
-          "odds": "3.4"
+          "odds": "3.4",
+          "passing": "兵庫 諏訪貴正"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 7,
           "name": "カクシンゴールド",
-          "odds": "11.2"
+          "odds": "11.2",
+          "passing": "栗東 中竹和也"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:5番 ジゼルアリーナ / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:5番 ジゼルアリーナ / 回収11,500円)",
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202650111811",
@@ -3390,27 +3589,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 6,
           "num": 8,
           "name": "ゴーゴーツヨシ",
-          "odds": "1.6"
+          "odds": "1.6",
+          "passing": "兵庫 小牧毅"
         },
         {
           "rank": "2",
+          "waku": 4,
           "num": 4,
           "name": "エイシンケプラー",
-          "odds": "10.9"
+          "odds": "10.9",
+          "passing": "兵庫 坂本和也"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 12,
           "name": "アストラッド",
-          "odds": "10.1"
+          "odds": "10.1",
+          "passing": "兵庫 田中一巧"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:8番 ゴーゴーツヨシ / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:8番 ゴーゴーツヨシ / 回収11,500円)",
+      "nLead": 3,
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202650111812",
@@ -3586,40 +3798,53 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 6,
           "num": 8,
           "name": "ラガークイン",
-          "odds": "1.2"
+          "odds": "1.2",
+          "passing": "兵庫 有馬澄男"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 10,
           "name": "タオロマイ",
-          "odds": "24.8"
+          "odds": "24.8",
+          "passing": "兵庫 盛本信春"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 12,
           "name": "グロリアスアポイ",
-          "odds": "14.5"
+          "odds": "14.5",
+          "passing": "兵庫 柏原誠路"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:8番 ラガークイン / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:8番 ラガークイン / 回収11,500円)",
+      "nLead": 1,
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     }
   ],
-  "updatedAt": "2026-11-18 22:26 JST",
+  "updatedAt": "2026-11-18 22:31 JST",
   "multiLeg": {
     "predicted": true,
-    "summary": "当日実馬名編成（トリプル馬単50円単位）：全頭推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。",
+    "summary": "当日実馬名編成（トリプル馬単50円単位）：全頭3シナリオ混合推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。",
     "legs": [
       {
         "leg": 1,
         "venue": "園田10R",
         "name": "JRA交流 水晶山...",
         "cond": "ダ1600m",
-        "typeBPlus": true,
+        "typeBPlus": false,
         "note": "重馬場の園田1400m。JRAダート実績上位の1が下原騎手で好位抜け出し。外枠先行勢と初ダートの大型馬5が相手",
         "horses": [
           {
@@ -3627,14 +3852,14 @@
             "name": "マイフレダ",
             "f": 31.0,
             "odds": 3.1,
-            "note": "阪神ダ1400m1:28.6は一枚上。園田リーディング下原配し前"
+            "note": "阪神ダ1400m1:28.6は一枚上。園田リーディング下原配し前付け"
           },
           {
             "num": 5,
             "name": "ジゼルアリーナ",
             "f": 22.0,
             "odds": 4.5,
-            "note": "482kgの好馬体でダート替わり歓迎。新馬戦3番手の先行力で重馬"
+            "note": "482kgの好馬体でダート替わり歓迎。新馬戦3番手の先行力で重馬場も"
           },
           {
             "num": 8,
@@ -3648,28 +3873,28 @@
             "name": "カクシンゴールド",
             "f": 11.5,
             "odds": 8.5,
-            "note": "JRAダート4戦の経験値と54kgの斤量利。外枠からスムーズに捲"
+            "note": "JRAダート4戦の経験値と54kgの斤量利。外枠からスムーズに捲れれ"
           },
           {
             "num": 4,
             "name": "オーシンヒマワリ",
             "f": 9.0,
             "odds": 10.5,
-            "note": "札幌芝1500mで2番手追走のスピード有。田口騎手で初ダート一変"
+            "note": "札幌芝1500mで2番手追走のスピード有。田口騎手で初ダート一変に注"
           },
           {
             "num": 6,
             "name": "ベラジオパルーザ",
             "f": 5.5,
             "odds": 18.0,
-            "note": "491kgの大型で叩き2戦目。地元勢最上位の地力ありJRA勢崩れ"
+            "note": "491kgの大型で叩き2戦目。地元勢最上位の地力ありJRA勢崩れで3"
           },
           {
             "num": 9,
             "name": "チョトツモウシン",
             "f": 3.0,
             "odds": 28.0,
-            "note": "中山重ダ1800m経験も終い甘く、1400mの追走ペースに戸惑う"
+            "note": "中山重ダ1800m経験も終い甘く、1400mの追走ペースに戸惑う懸念"
           }
         ]
       },
@@ -3686,21 +3911,21 @@
             "name": "ゴーゴーツヨシ",
             "f": 41.1,
             "odds": 1.6,
-            "note": "F:牝3鹿騎手 / F:6枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牝3鹿騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 7,
             "name": "ゼンダンノハゲミ",
             "f": 27.7,
             "odds": 2.7,
-            "note": "F:牡5栗騎手 / F:6枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡5栗騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 12,
             "name": "アストラッド",
             "f": 10.3,
             "odds": 10.1,
-            "note": "F:牝5黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牝5黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 4,
@@ -3714,7 +3939,7 @@
             "name": "キングヴァージル",
             "f": 5.3,
             "odds": 24.6,
-            "note": "F:セ5芦騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:セ5芦騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 1,
@@ -3745,7 +3970,7 @@
             "name": "ラガークイン",
             "f": 49.9,
             "odds": 1.2,
-            "note": "F:牝5青騎手 / F:6枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牝5青騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 3,
@@ -3759,28 +3984,28 @@
             "name": "ギユウ",
             "f": 10.4,
             "odds": 9.7,
-            "note": "F:牡7青騎手 / F:6枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡7青騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 12,
             "name": "グロリアスアポイ",
             "f": 7.7,
             "odds": 14.5,
-            "note": "F:牝7鹿騎手 / F:8枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牝7鹿騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 11,
             "name": "エイシンビルボード",
             "f": 5.5,
             "odds": 22.8,
-            "note": "F:牡3黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡3黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 10,
             "name": "タオロマイ",
             "f": 5.2,
             "odds": 24.8,
-            "note": "F:牡6黒騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡6黒騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 2,
@@ -3808,5 +4033,22 @@
         "hedge100k": 6900
       }
     ]
-  }
+  },
+  "trackBiases": [
+    {
+      "venue": "園田",
+      "surf": "実測N_lead・3シナリオ混合",
+      "trend": "園田当日実測(3R集計): 1着内枠0回/外枠2回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
+    },
+    {
+      "venue": "大井",
+      "surf": "実測N_lead・3シナリオ混合",
+      "trend": "大井当日実測(12R集計): 1着内枠4回/外枠6回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
+    },
+    {
+      "venue": "笠松",
+      "surf": "実測N_lead・3シナリオ混合",
+      "trend": "笠松当日実測(3R集計): 1着内枠0回/外枠2回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
+    }
+  ]
 }

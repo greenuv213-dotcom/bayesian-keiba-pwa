@@ -240,27 +240,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 7,
           "name": "オーケーエース",
-          "odds": "1.9"
+          "odds": "1.9",
+          "passing": "3-4"
         },
         {
           "rank": "2",
+          "waku": 6,
           "num": 12,
           "name": "ケッパレ",
-          "odds": "8.2"
+          "odds": "8.2",
+          "passing": "9-7"
         },
         {
           "rank": "3",
+          "waku": 5,
           "num": 9,
           "name": "コールレスポンス",
-          "odds": "19.2"
+          "odds": "19.2",
+          "passing": "2-2"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:7番 オーケーエース / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:7番 オーケーエース / 回収13,000円)",
+      "nLead": 4,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202605050402",
@@ -513,27 +526,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 8,
           "name": "オンザボー",
-          "odds": "3.1"
+          "odds": "3.1",
+          "passing": "8-9-10"
         },
         {
           "rank": "2",
+          "waku": 6,
           "num": 11,
           "name": "シュートザワークス",
-          "odds": "4.2"
+          "odds": "4.2",
+          "passing": "4-4-5"
         },
         {
           "rank": "3",
+          "waku": 1,
           "num": 1,
           "name": "シネファイル",
-          "odds": "3.0"
+          "odds": "3.0",
+          "passing": "11-9-11"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13950,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:8番 オンザボー / 回収13,950円)"
+      "resultStatus": "🎯 的中 (1着:8番 オンザボー / 回収13,950円)",
+      "nLead": 3,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202605050403",
@@ -773,27 +799,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 6,
           "num": 11,
           "name": "ドミナートル",
-          "odds": "2.8"
+          "odds": "2.8",
+          "passing": "8-6"
         },
         {
           "rank": "2",
+          "waku": 5,
           "num": 9,
           "name": "ダブルスプリング",
-          "odds": "11.7"
+          "odds": "11.7",
+          "passing": "3-4"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 14,
           "name": "シュプレヒコール",
-          "odds": "5.8"
+          "odds": "5.8",
+          "passing": "10-8"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:11番 ドミナートル / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:11番 ドミナートル / 回収11,500円)",
+      "nLead": 3,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202605050404",
@@ -981,27 +1020,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 12,
           "name": "ホウオウマジカル",
-          "odds": "1.9"
+          "odds": "1.9",
+          "passing": "2-2"
         },
         {
           "rank": "2",
+          "waku": 6,
           "num": 8,
           "name": "ドラゴンスマイル",
-          "odds": "8.8"
+          "odds": "8.8",
+          "passing": "6-7"
         },
         {
           "rank": "3",
+          "waku": 4,
           "num": 4,
           "name": "フェスティヴスノー",
-          "odds": "156.2"
+          "odds": "156.2",
+          "passing": "6-4"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:12番 ホウオウマジカル / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:12番 ホウオウマジカル / 回収13,000円)",
+      "nLead": 2,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202605050405",
@@ -1146,24 +1198,39 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 5,
           "num": 5,
           "name": "ラディオーサ",
-          "odds": "4.1"
+          "odds": "4.1",
+          "passing": "1-1"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 8,
           "name": "スターリーグロウ",
-          "odds": "5.4"
+          "odds": "5.4",
+          "passing": "5-5"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 10,
           "name": "ロンドンレガシー",
-          "odds": "2.4"
+          "odds": "2.4",
+          "passing": "3-3"
         }
       ],
-      "resultStatus": "🎯 的中 (1着:5番 ラディオーサ)"
+      "resultStatus": "🎯 的中 (1着:5番 ラディオーサ / 回収18,450円)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      },
+      "investedYen": 10000,
+      "returnYen": 18450,
+      "isHit": true
     },
     {
       "raceId": "202605050406",
@@ -1403,27 +1470,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 2,
           "num": 3,
           "name": "テイクオンミー",
-          "odds": "12.4"
+          "odds": "12.4",
+          "passing": "5-4"
         },
         {
           "rank": "2",
+          "waku": 3,
           "num": 5,
           "name": "モンスターラッシュ",
-          "odds": "8.6"
+          "odds": "8.6",
+          "passing": "2-2"
         },
         {
           "rank": "3",
+          "waku": 4,
           "num": 7,
           "name": "カフェラジェム",
-          "odds": "6.8"
+          "odds": "6.8",
+          "passing": "16-16"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:3番 テイクオンミー)"
+      "resultStatus": "結果確定 (1着:3番 テイクオンミー)",
+      "nLead": 5,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202605050407",
@@ -1637,27 +1717,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 5,
           "num": 7,
           "name": "バルダンツァ",
-          "odds": "3.4"
+          "odds": "3.4",
+          "passing": "10-10"
         },
         {
           "rank": "2",
+          "waku": 5,
           "num": 8,
           "name": "トラヴェリンバンド",
-          "odds": "4.0"
+          "odds": "4.0",
+          "passing": "4-4"
         },
         {
           "rank": "3",
+          "waku": 4,
           "num": 6,
           "name": "エムティエスターテ",
-          "odds": "28.8"
+          "odds": "28.8",
+          "passing": "9-9"
         }
       ],
       "investedYen": 10000,
       "returnYen": 15300,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:7番 バルダンツァ / 回収15,300円)"
+      "resultStatus": "🎯 的中 (1着:7番 バルダンツァ / 回収15,300円)",
+      "nLead": 3,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202605050408",
@@ -1845,27 +1938,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 5,
           "num": 5,
           "name": "リッツパーティー",
-          "odds": "1.7"
+          "odds": "1.7",
+          "passing": "7-5-6"
         },
         {
           "rank": "2",
+          "waku": 6,
           "num": 8,
           "name": "マイネルアズーロ",
-          "odds": "9.6"
+          "odds": "9.6",
+          "passing": "6-5-6"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 10,
           "name": "グレーヌドジョワ",
-          "odds": "40.6"
+          "odds": "40.6",
+          "passing": "2-2-2"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:5番 リッツパーティー / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:5番 リッツパーティー / 回収11,500円)",
+      "nLead": 3,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202605050409",
@@ -2105,27 +2211,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 8,
           "name": "トヨサカエ",
-          "odds": "1.9"
+          "odds": "1.9",
+          "passing": "12-12"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 14,
           "name": "サンマルノヴェル",
-          "odds": "9.3"
+          "odds": "9.3",
+          "passing": "6-6"
         },
         {
           "rank": "3",
+          "waku": 1,
           "num": 1,
           "name": "キョウエイカンセ",
-          "odds": "10.3"
+          "odds": "10.3",
+          "passing": "14-13"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:8番 トヨサカエ / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:8番 トヨサカエ / 回収13,000円)",
+      "nLead": 5,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202605050410",
@@ -2334,29 +2453,44 @@
       ],
       "scenario": "3歳昇級11の1:44.0時計と1枠内溜め1が双頭軸。先行3頭で平均ペース、直線追風で内・前と良馬場高速上り型が優勢。",
       "pivotType": "Dual-Pivot",
-      "nLead": 3,
+      "nLead": 4,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 10,
           "name": "ハニーコム",
-          "odds": "52.4"
+          "odds": "52.4",
+          "passing": "7-7-7"
         },
         {
           "rank": "2",
+          "waku": 4,
           "num": 4,
           "name": "ハートメテオ",
-          "odds": "18.3"
+          "odds": "18.3",
+          "passing": "5-5-5"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 9,
           "name": "タイセイプランセス",
-          "odds": "5.1"
+          "odds": "5.1",
+          "passing": "10-9-10"
         }
       ],
-      "resultStatus": "結果確定 (1着:10番)"
+      "resultStatus": "結果確定 (1着:10番 ハニーコム)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false
     },
     {
       "raceId": "202605050411",
@@ -2609,27 +2743,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 15,
           "name": "エコロアルバ",
-          "odds": "3.5"
+          "odds": "3.5",
+          "passing": "17-17"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 14,
           "name": "ロジケープ",
-          "odds": "7.8"
+          "odds": "7.8",
+          "passing": "3-5"
         },
         {
           "rank": "3",
+          "waku": 5,
           "num": 10,
           "name": "セフィロ",
-          "odds": "8.5"
+          "odds": "8.5",
+          "passing": "17-17"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:15番 エコロアルバ / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:15番 エコロアルバ / 回収11,500円)",
+      "nLead": 2,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202605050412",
@@ -2830,32 +2977,44 @@
       ],
       "scenario": "Bコース良無風で内立ち回り有利だが末脚比較も重要。内好位の3と能力最上位18の双頭軸。",
       "pivotType": "Dual-Pivot",
-      "nLead": 3,
+      "nLead": 4,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 1,
           "num": 1,
           "name": "プラウディッツ",
-          "odds": "2.7"
+          "odds": "2.7",
+          "passing": "5-5-5"
         },
         {
           "rank": "2",
+          "waku": 2,
           "num": 4,
           "name": "ディアボリカドンナ",
-          "odds": "76.1"
+          "odds": "76.1",
+          "passing": "3-2-2"
         },
         {
           "rank": "3",
+          "waku": 1,
           "num": 2,
           "name": "エリュグレイス",
-          "odds": "75.5"
+          "odds": "75.5",
+          "passing": "6-6-5"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:1番 プラウディッツ)"
+      "resultStatus": "結果確定 (1着:1番 プラウディッツ)",
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202608050401",
@@ -3004,27 +3163,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 9,
           "name": "ダイナビルド",
-          "odds": "20.7"
+          "odds": "20.7",
+          "passing": "9-9-9-8"
         },
         {
           "rank": "2",
+          "waku": 3,
           "num": 3,
           "name": "ハレムスビ",
-          "odds": "8.6"
+          "odds": "8.6",
+          "passing": "4-5-3-3"
         },
         {
           "rank": "3",
+          "waku": 2,
           "num": 2,
           "name": "ケーリュケイオン",
-          "odds": "1.3"
+          "odds": "1.3",
+          "passing": "1-1-1-1"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:9番 ダイナビルド)"
+      "resultStatus": "結果確定 (1着:9番 ダイナビルド)",
+      "nLead": 2,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202608050402",
@@ -3212,27 +3384,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 4,
           "name": "ジーティーハルカゼ",
-          "odds": "13.1"
+          "odds": "13.1",
+          "passing": "1-1"
         },
         {
           "rank": "2",
+          "waku": 2,
           "num": 2,
           "name": "リーベラーリア",
-          "odds": "2.7"
+          "odds": "2.7",
+          "passing": "2-2"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 10,
           "name": "シャトンダンス",
-          "odds": "6.2"
+          "odds": "6.2",
+          "passing": "10-10"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:4番 ジーティーハルカゼ)"
+      "resultStatus": "結果確定 (1着:4番 ジーティーハルカゼ)",
+      "nLead": 2,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202608050403",
@@ -3394,27 +3579,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 6,
           "num": 6,
           "name": "ナリタトップライト",
-          "odds": "8.1"
+          "odds": "8.1",
+          "passing": "1-1-1-1"
         },
         {
           "rank": "2",
+          "waku": 8,
           "num": 9,
           "name": "ホウオウビースト",
-          "odds": "5.5"
+          "odds": "5.5",
+          "passing": "4-5-3-5"
         },
         {
           "rank": "3",
+          "waku": 1,
           "num": 1,
           "name": "エフティヒア",
-          "odds": "1.8"
+          "odds": "1.8",
+          "passing": "4-4-3-5"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:6番 ナリタトップライト)"
+      "resultStatus": "結果確定 (1着:6番 ナリタトップライト)",
+      "nLead": 3,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202608050404",
@@ -3654,27 +3852,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 13,
           "name": "レイオウロンド",
-          "odds": "11.7"
+          "odds": "11.7",
+          "passing": "5-5"
         },
         {
           "rank": "2",
+          "waku": 2,
           "num": 3,
           "name": "ドラゴンジョルノ",
-          "odds": "10.2"
+          "odds": "10.2",
+          "passing": "1-1"
         },
         {
           "rank": "3",
+          "waku": 6,
           "num": 12,
           "name": "ユーキャンダンス",
-          "odds": "1.5"
+          "odds": "1.5",
+          "passing": "3-3"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:13番 レイオウロンド)"
+      "resultStatus": "結果確定 (1着:13番 レイオウロンド)",
+      "nLead": 3,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202608050405",
@@ -3927,27 +4138,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 8,
           "name": "ルミナレーヌ",
-          "odds": "15.0"
+          "odds": "15.0",
+          "passing": "8-7"
         },
         {
           "rank": "2",
+          "waku": 8,
           "num": 18,
           "name": "ナジュム",
-          "odds": "4.9"
+          "odds": "4.9",
+          "passing": "13-7"
         },
         {
           "rank": "3",
+          "waku": 5,
           "num": 10,
           "name": "ランスオブアグア",
-          "odds": "54.0"
+          "odds": "54.0",
+          "passing": "11-12"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:8番 ルミナレーヌ)"
+      "resultStatus": "結果確定 (1着:8番 ルミナレーヌ)",
+      "nLead": 3,
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202608050406",
@@ -4187,27 +4411,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 1,
           "num": 2,
           "name": "モスカテル",
-          "odds": "2.4"
+          "odds": "2.4",
+          "passing": "2-2-2-2"
         },
         {
           "rank": "2",
+          "waku": 5,
           "num": 9,
           "name": "ナムラヒナギク",
-          "odds": "20.9"
+          "odds": "20.9",
+          "passing": "3-3-2-3"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 13,
           "name": "アキノビューティー",
-          "odds": "11.2"
+          "odds": "11.2",
+          "passing": "8-8-7-6"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:2番 モスカテル / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:2番 モスカテル / 回収11,500円)",
+      "nLead": 2,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202608050407",
@@ -4460,27 +4697,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 3,
           "num": 6,
           "name": "ミラキュラスアース",
-          "odds": "28.1"
+          "odds": "28.1",
+          "passing": "6-6"
         },
         {
           "rank": "2",
+          "waku": 8,
           "num": 17,
           "name": "ルーチェブリラーレ",
-          "odds": "4.9"
+          "odds": "4.9",
+          "passing": "10-6"
         },
         {
           "rank": "3",
+          "waku": 4,
           "num": 7,
           "name": "ロードレジェロ",
-          "odds": "3.4"
+          "odds": "3.4",
+          "passing": "1-1"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:6番 ミラキュラスアース)"
+      "resultStatus": "結果確定 (1着:6番 ミラキュラスアース)",
+      "nLead": 6,
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202608050408",
@@ -4629,27 +4879,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 3,
           "num": 3,
           "name": "ブルーマッキンジー",
-          "odds": "2.0"
+          "odds": "2.0",
+          "passing": "1-1"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 7,
           "name": "リアルアルバ",
-          "odds": "12.4"
+          "odds": "12.4",
+          "passing": "3-3"
         },
         {
           "rank": "3",
+          "waku": 1,
           "num": 1,
           "name": "ショウナンタハティ",
-          "odds": "5.6"
+          "odds": "5.6",
+          "passing": "5-3"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:3番 ブルーマッキンジー / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:3番 ブルーマッキンジー / 回収11,500円)",
+      "nLead": 4,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202608050409",
@@ -4798,27 +5061,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 1,
           "num": 1,
           "name": "サイモンレガシー",
-          "odds": "3.8"
+          "odds": "3.8",
+          "passing": "6-6-5-5"
         },
         {
           "rank": "2",
+          "waku": 2,
           "num": 2,
           "name": "モナークスヴァラー",
-          "odds": "18.8"
+          "odds": "18.8",
+          "passing": "8-8-9-9"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 9,
           "name": "フランソワーズ",
-          "odds": "7.6"
+          "odds": "7.6",
+          "passing": "3-4-4-4"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:1番 サイモンレガシー / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:1番 サイモンレガシー / 回収11,500円)",
+      "nLead": 5,
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 25,
+        "s2": 35,
+        "s3": 40
+      }
     },
     {
       "raceId": "202608050410",
@@ -4980,27 +5256,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 9,
           "name": "タイセイドラード",
-          "odds": "1.7"
+          "odds": "1.7",
+          "passing": "1-1-1-1"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 7,
           "name": "シーミハットク",
-          "odds": "5.8"
+          "odds": "5.8",
+          "passing": "3-3-3-3"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 8,
           "name": "セイントホース",
-          "odds": "3.5"
+          "odds": "3.5",
+          "passing": "6-6-6-5"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:9番 タイセイドラード / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:9番 タイセイドラード / 回収13,000円)",
+      "nLead": 1,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202608050411",
@@ -5253,27 +5542,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 15,
           "name": "ラフターラインズ",
-          "odds": "12.6"
+          "odds": "12.6",
+          "passing": "14-15-15-14"
         },
         {
           "rank": "2",
+          "waku": 4,
           "num": 7,
           "name": "カムニャック",
-          "odds": "4.2"
+          "odds": "4.2",
+          "passing": "4-3-2-2"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 16,
           "name": "アクアヴァーナル",
-          "odds": "7.3"
+          "odds": "7.3",
+          "passing": "5-5-4-3"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:15番 ラフターラインズ)"
+      "resultStatus": "結果確定 (1着:15番 ラフターラインズ)",
+      "nLead": 3,
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202608050412",
@@ -5513,27 +5815,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 16,
           "name": "アイスグリーン",
-          "odds": "8.4"
+          "odds": "8.4",
+          "passing": "2-2"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 14,
           "name": "スパークリシャール",
-          "odds": "9.3"
+          "odds": "9.3",
+          "passing": "6-4"
         },
         {
           "rank": "3",
+          "waku": 2,
           "num": 4,
           "name": "マトラコーニッシュ",
-          "odds": "10.8"
+          "odds": "10.8",
+          "passing": "14-14"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:16番 アイスグリーン)"
+      "resultStatus": "結果確定 (1着:16番 アイスグリーン)",
+      "nLead": 3,
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202603030401",
@@ -5773,27 +6088,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 8,
           "name": "エコロメジャー",
-          "odds": "2.6"
+          "odds": "2.6",
+          "passing": "7-5"
         },
         {
           "rank": "2",
+          "waku": 3,
           "num": 5,
           "name": "ポッドハンター",
-          "odds": "35.7"
+          "odds": "35.7",
+          "passing": "1-1"
         },
         {
           "rank": "3",
+          "waku": 4,
           "num": 7,
           "name": "クリスタルシャイン",
-          "odds": "3.8"
+          "odds": "3.8",
+          "passing": "9-8"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:8番 エコロメジャー / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:8番 エコロメジャー / 回収11,500円)",
+      "nLead": 6,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030402",
@@ -6033,27 +6361,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 6,
           "num": 11,
           "name": "イテルム",
-          "odds": "7.5"
+          "odds": "7.5",
+          "passing": "2-2-3-3"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 14,
           "name": "プレママドンナ",
-          "odds": "13.6"
+          "odds": "13.6",
+          "passing": "2-2-2-2"
         },
         {
           "rank": "3",
+          "waku": 2,
           "num": 4,
           "name": "セレスタイト",
-          "odds": "11.0"
+          "odds": "11.0",
+          "passing": "4-4-3-3"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:11番 イテルム / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:11番 イテルム / 回収11,500円)",
+      "nLead": 4,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202603030403",
@@ -6280,27 +6621,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 2,
           "num": 3,
           "name": "ラブインアクション",
-          "odds": "2.3"
+          "odds": "2.3",
+          "passing": "2-2-2-1"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 12,
           "name": "レボルシオン",
-          "odds": "6.1"
+          "odds": "6.1",
+          "passing": "4-4-4-3"
         },
         {
           "rank": "3",
+          "waku": 5,
           "num": 8,
           "name": "タイセイサーブル",
-          "odds": "31.8"
+          "odds": "31.8",
+          "passing": "13-14-1-2"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:3番 ラブインアクション / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:3番 ラブインアクション / 回収13,000円)",
+      "nLead": 7,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030404",
@@ -6488,27 +6842,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 1,
           "num": 1,
           "name": "ブランフォルテ",
-          "odds": "5.0"
+          "odds": "5.0",
+          "passing": "1-1-1-1"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 10,
           "name": "フレイムジョーカー",
-          "odds": "6.8"
+          "odds": "6.8",
+          "passing": "2-2-2-2"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 12,
           "name": "バトラーズワーフ",
-          "odds": "3.0"
+          "odds": "3.0",
+          "passing": "5-5-5-5"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:1番 ブランフォルテ / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:1番 ブランフォルテ / 回収11,500円)",
+      "nLead": 5,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030405",
@@ -6657,27 +7024,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 6,
           "num": 6,
           "name": "キャプテンシー",
-          "odds": "1.5"
+          "odds": "1.5",
+          "passing": "3-3-2-2"
         },
         {
           "rank": "2",
+          "waku": 2,
           "num": 2,
           "name": "アップストローク",
-          "odds": "2.9"
+          "odds": "2.9",
+          "passing": "7-6-4-3"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 9,
           "name": "マイレーヌ",
-          "odds": "41.3"
+          "odds": "41.3",
+          "passing": "1-1-1-1"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:6番 キャプテンシー / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:6番 キャプテンシー / 回収13,000円)",
+      "nLead": 3,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202603030406",
@@ -6839,27 +7219,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 4,
           "name": "ストライクアロー",
-          "odds": "1.9"
+          "odds": "1.9",
+          "passing": "2-2-2-2"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 8,
           "name": "グラスアステール",
-          "odds": "3.5"
+          "odds": "3.5",
+          "passing": "3-4-3-2"
         },
         {
           "rank": "3",
+          "waku": 3,
           "num": 3,
           "name": "コーズダンサー",
-          "odds": "8.2"
+          "odds": "8.2",
+          "passing": "1-1-1-1"
         }
       ],
       "investedYen": 10000,
       "returnYen": 13000,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:4番 ストライクアロー / 回収13,000円)"
+      "resultStatus": "🎯 的中 (1着:4番 ストライクアロー / 回収13,000円)",
+      "nLead": 2,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     },
     {
       "raceId": "202603030407",
@@ -7099,27 +7492,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 15,
           "name": "リアライズブラーヴ",
-          "odds": "3.5"
+          "odds": "3.5",
+          "passing": "6-5"
         },
         {
           "rank": "2",
+          "waku": 6,
           "num": 11,
           "name": "ダイユウルミナス",
-          "odds": "11.7"
+          "odds": "11.7",
+          "passing": "10-8"
         },
         {
           "rank": "3",
+          "waku": 3,
           "num": 6,
           "name": "シヴィータス",
-          "odds": "2.6"
+          "odds": "2.6",
+          "passing": "1-1"
         }
       ],
       "investedYen": 10000,
       "returnYen": 15750,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:15番 リアライズブラーヴ / 回収15,750円)"
+      "resultStatus": "🎯 的中 (1着:15番 リアライズブラーヴ / 回収15,750円)",
+      "nLead": 5,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030408",
@@ -7346,27 +7752,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 7,
           "num": 12,
           "name": "リトセア",
-          "odds": "15.5"
+          "odds": "15.5",
+          "passing": "6-5"
         },
         {
           "rank": "2",
+          "waku": 7,
           "num": 13,
           "name": "アパレイユ",
-          "odds": "3.8"
+          "odds": "3.8",
+          "passing": "2-2"
         },
         {
           "rank": "3",
+          "waku": 6,
           "num": 11,
           "name": "ブルーレース",
-          "odds": "2.6"
+          "odds": "2.6",
+          "passing": "9-9"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:12番 リトセア)"
+      "resultStatus": "結果確定 (1着:12番 リトセア)",
+      "nLead": 8,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030409",
@@ -7554,27 +7973,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 1,
           "num": 1,
           "name": "ジャスパートレノ",
-          "odds": "6.0"
+          "odds": "6.0",
+          "passing": "1-1"
         },
         {
           "rank": "2",
+          "waku": 3,
           "num": 3,
           "name": "ラヴィサンエール",
-          "odds": "14.3"
+          "odds": "14.3",
+          "passing": "5-3"
         },
         {
           "rank": "3",
+          "waku": 8,
           "num": 12,
           "name": "ダイシンドラゴン",
-          "odds": "3.1"
+          "odds": "3.1",
+          "passing": "2-2"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:1番 ジャスパートレノ)"
+      "resultStatus": "結果確定 (1着:1番 ジャスパートレノ)",
+      "nLead": 5,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030410",
@@ -7814,27 +8246,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 5,
           "num": 9,
           "name": "ドッビアーコ",
-          "odds": "22.3"
+          "odds": "22.3",
+          "passing": "1-1-1-1"
         },
         {
           "rank": "2",
+          "waku": 4,
           "num": 7,
           "name": "バースライト",
-          "odds": "8.0"
+          "odds": "8.0",
+          "passing": "2-2-2-2"
         },
         {
           "rank": "3",
+          "waku": 7,
           "num": 13,
           "name": "ヴァイザーバルコ",
-          "odds": "39.3"
+          "odds": "39.3",
+          "passing": "6-6-5-5"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:9番 ドッビアーコ)"
+      "resultStatus": "結果確定 (1着:9番 ドッビアーコ)",
+      "nLead": 3,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 35,
+        "s2": 40,
+        "s3": 25
+      }
     },
     {
       "raceId": "202603030411",
@@ -8061,27 +8506,40 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 4,
           "num": 7,
           "name": "ゴッドブルービー",
-          "odds": "7.0"
+          "odds": "7.0",
+          "passing": "7-6-6-4"
         },
         {
           "rank": "2",
+          "waku": 8,
           "num": 15,
           "name": "サンライズアリオン",
-          "odds": "75.9"
+          "odds": "75.9",
+          "passing": "2-2-1-1"
         },
         {
           "rank": "3",
+          "waku": 3,
           "num": 4,
           "name": "スナークラファエロ",
-          "odds": "8.9"
+          "odds": "8.9",
+          "passing": "4-3-6-5"
         }
       ],
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:7番 ゴッドブルービー)"
+      "resultStatus": "結果確定 (1着:7番 ゴッドブルービー)",
+      "nLead": 7,
+      "trackCond": "良",
+      "scenarioWeights": {
+        "s1": 30,
+        "s2": 35,
+        "s3": 35
+      }
     },
     {
       "raceId": "202603030412",
@@ -8321,35 +8779,48 @@
       "actualTop3": [
         {
           "rank": "1",
+          "waku": 8,
           "num": 15,
           "name": "ミッドセンチュリー",
-          "odds": "5.7"
+          "odds": "5.7",
+          "passing": "5-5-5-2"
         },
         {
           "rank": "2",
+          "waku": 1,
           "num": 2,
           "name": "アルマリブレ",
-          "odds": "14.3"
+          "odds": "14.3",
+          "passing": "16-14-10-2"
         },
         {
           "rank": "3",
+          "waku": 3,
           "num": 5,
           "name": "エイシンイグニース",
-          "odds": "4.2"
+          "odds": "4.2",
+          "passing": "11-11-13-11"
         }
       ],
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:15番 ミッドセンチュリー / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:15番 ミッドセンチュリー / 回収11,500円)",
+      "nLead": 2,
+      "trackCond": "重",
+      "scenarioWeights": {
+        "s1": 50,
+        "s2": 35,
+        "s3": 15
+      }
     }
   ],
   "win5": {},
-  "updatedAt": "2026-11-18 22:26 JST",
+  "updatedAt": "2026-11-18 22:31 JST",
   "mode": "jra",
   "multiLeg": {
     "predicted": true,
-    "summary": "当日実馬名編成（JRA WIN5 100円単位）：全頭推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。",
+    "summary": "当日実馬名編成（JRA WIN5 100円単位）：全頭3シナリオ混合推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。",
     "legs": [
       {
         "leg": 1,
@@ -8364,28 +8835,28 @@
             "name": "エコロアルバ",
             "f": 18.1,
             "odds": 3.5,
-            "note": "F:牡3栗騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡3栗騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 5,
             "name": "マイネルチケット",
             "f": 14.6,
             "odds": 5.4,
-            "note": "F:牡4鹿騎手起用(H:上位アンカー+0.15) / F:近走連"
+            "note": "F:牡4鹿騎手起用(H:上位アンカー+0.15) / F:近走連対実"
           },
           {
             "num": 18,
             "name": "フォーチュンタイム",
             "f": 12.1,
             "odds": 6.5,
-            "note": "F:牡5栗騎手起用(H:上位アンカー+0.15) / F:8枠外"
+            "note": "F:牡5栗騎手起用(H:上位アンカー+0.15) / F:8枠外目("
           },
           {
             "num": 14,
             "name": "ロジケープ",
             "f": 9.2,
             "odds": 7.8,
-            "note": "F:牡3鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡3鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 10,
@@ -8399,7 +8870,7 @@
             "name": "サンダーストラックB",
             "f": 6.7,
             "odds": 10.0,
-            "note": "F:牡3鹿騎手 / F:馬体+12kg(H:大幅増TypeII減"
+            "note": "F:牡3鹿騎手 / F:馬体+12kg(H:大幅増TypeII減点)"
           },
           {
             "num": 7,
@@ -8423,49 +8894,49 @@
             "name": "タイセイドラード",
             "f": 33.2,
             "odds": 1.7,
-            "note": "F:牡4黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡4黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 8,
             "name": "セイントホース",
             "f": 17.9,
             "odds": 3.5,
-            "note": "F:牡3黒騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡3黒騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 7,
             "name": "シーミハットク",
             "f": 12.2,
             "odds": 5.8,
-            "note": "F:牡3鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡3鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 6,
             "name": "アートレスマインド",
             "f": 8.1,
             "odds": 10.0,
-            "note": "F:牡4栗騎手 / F:6枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡4栗騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 4,
             "name": "テーオーライマン",
             "f": 7.7,
             "odds": 12.5,
-            "note": "F:牡4黒騎手起用(H:上位アンカー+0.15) / F:馬体-"
+            "note": "F:牡4黒騎手起用(H:上位アンカー+0.15) / F:馬体-6k"
           },
           {
             "num": 11,
             "name": "[馬記号]馬名[ブリンカー]",
             "f": 5.2,
             "odds": 18.2,
-            "note": "F:性齢、騎手 / F:6枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:性齢、騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 10,
             "name": "トモジャザーン",
             "f": 4.1,
             "odds": 24.5,
-            "note": "F:牡5鹿騎手 / F:8枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡5鹿騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
           }
         ]
       },
@@ -8482,21 +8953,21 @@
             "name": "カムニャック",
             "f": 16.8,
             "odds": 4.2,
-            "note": "F:牝4鹿騎手起用(H:上位アンカー+0.15) / F:近走連"
+            "note": "F:牝4鹿騎手起用(H:上位アンカー+0.15) / F:近走連対実"
           },
           {
             "num": 16,
             "name": "アクアヴァーナル",
             "f": 11.4,
             "odds": 7.3,
-            "note": "F:牝5芦騎手起用(H:上位アンカー+0.15) / F:8枠外"
+            "note": "F:牝5芦騎手起用(H:上位アンカー+0.15) / F:8枠外目("
           },
           {
             "num": 13,
             "name": "ジョスラン",
             "f": 9.6,
             "odds": 9.4,
-            "note": "F:牝4鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牝4鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 9,
@@ -8510,14 +8981,14 @@
             "name": "ジュウリョクピエロ",
             "f": 8.9,
             "odds": 6.0,
-            "note": "F:牝3栗騎手 / F:6枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牝3栗騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 15,
             "name": "ラフターラインズ",
             "f": 7.0,
             "odds": 12.6,
-            "note": "F:牝3黒騎手起用(H:上位アンカー+0.15) / F:7枠外"
+            "note": "F:牝3黒騎手起用(H:上位アンカー+0.15) / F:7枠外目("
           },
           {
             "num": 6,
@@ -8548,14 +9019,14 @@
             "name": "アスクデッドヒート",
             "f": 11.8,
             "odds": 7.6,
-            "note": "F:牡4鹿騎手 / F:6枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡4鹿騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 16,
             "name": "ゲンジ",
             "f": 11.3,
             "odds": 6.6,
-            "note": "F:牡4鹿騎手 / F:8枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡4鹿騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 7,
@@ -8614,14 +9085,14 @@
             "name": "ゲイルライダー",
             "f": 11.0,
             "odds": 7.6,
-            "note": "F:牡4黒騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡4黒騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 14,
             "name": "ドバイブルースB",
             "f": 10.5,
             "odds": 7.4,
-            "note": "F:牡5青騎手 / F:8枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:牡5青騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
           },
           {
             "num": 7,
@@ -8642,7 +9113,7 @@
             "name": "ホールシバン",
             "f": 5.8,
             "odds": 14.8,
-            "note": "F:セ8鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.1"
+            "note": "F:セ8鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
           }
         ]
       }
@@ -8663,5 +9134,22 @@
         "hedge100k": 13600
       }
     ]
-  }
+  },
+  "trackBiases": [
+    {
+      "venue": "京都",
+      "surf": "実測N_lead・3シナリオ混合",
+      "trend": "京都当日実測(12R集計): 1着内枠4回/外枠6回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
+    },
+    {
+      "venue": "東京",
+      "surf": "実測N_lead・3シナリオ混合",
+      "trend": "東京当日実測(12R集計): 1着内枠2回/外枠4回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
+    },
+    {
+      "venue": "福島",
+      "surf": "実測N_lead・3シナリオ混合",
+      "trend": "福島当日実測(12R集計): 1着内枠3回/外枠5回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
+    }
+  ]
 }
