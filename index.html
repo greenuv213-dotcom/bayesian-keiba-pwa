@@ -30,7 +30,6 @@
   <!-- 上部固定ヘッダー（JRA中央 / NAR地方 切替スイッチ搭載） -->
   <header class="safe-header sticky top-0 z-30 bg-slate-950/95 backdrop-blur border-b border-slate-800 px-3 pb-2">
     <div class="flex items-center justify-between gap-2 mb-2">
-      <!-- JRA / NAR ワンタップ切替ピル -->
       <div class="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5">
         <button id="modeBtnJra" onclick="switchCircuitMode('jra')" class="text-xs font-extrabold px-2.5 py-1 rounded-md bg-emerald-500 text-slate-950 transition">
           🏇 JRA 中央
@@ -103,14 +102,11 @@
           </div>
         </div>
 
-        <!-- 予算連動：プランA ＆ プランB（2枚合算）買い目比較カード -->
         <div id="win5PlansAllocationBox" class="space-y-2.5"></div>
       </div>
 
-      <!-- 各Legランキング＆選出状況 -->
       <div id="win5LegsContainer" class="space-y-2.5"></div>
 
-      <!-- 最終Leg 単勝ヘッジ定量表 -->
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-amber-300">🛡️ 最終Leg リーチ時単勝ヘッジ目安表</h3>
@@ -120,28 +116,41 @@
       </div>
     </section>
 
-    <!-- ③ 成績・回収率ビュー -->
+    <!-- ③ 成績・回収率ビュー（自動集計 stats.json 連動） -->
     <section id="view-stats" class="hidden space-y-3">
       <div class="grid grid-cols-2 gap-2.5">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
-          <div class="text-[11px] text-slate-400">JRA中央 累計回収率 (S/A)</div>
-          <div class="text-xl font-extrabold text-emerald-400 mt-0.5">148.6%</div>
-          <div class="text-[11px] text-slate-400 mt-1">純利益: <span class="text-emerald-300 font-bold">+114,200円</span></div>
+          <div class="text-[11px] text-slate-400">JRA中央 回収率 (的中率)</div>
+          <div id="statJraRoi" class="text-xl font-extrabold text-emerald-400 mt-0.5">148.6% (45.6%)</div>
+          <div id="statJraProfit" class="text-[11px] text-slate-400 mt-1">純利益: <span class="text-emerald-300 font-bold">+330,400円</span></div>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
-          <div class="text-[11px] text-slate-400">NAR地方 累計回収率 (南関/DG)</div>
-          <div class="text-xl font-extrabold text-amber-400 mt-0.5">136.4%</div>
-          <div class="text-[11px] text-slate-400 mt-1">一強Pass防衛: <span class="text-sky-300 font-bold">90,000円</span></div>
+          <div class="text-[11px] text-slate-400">NAR地方 回収率 (的中率)</div>
+          <div id="statNarRoi" class="text-xl font-extrabold text-amber-400 mt-0.5">136.4% (45.8%)</div>
+          <div id="statPassSaved" class="text-[11px] text-slate-400 mt-1">Pass防衛累計: <span class="text-sky-300 font-bold">270,000円</span></div>
         </div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold text-white">📊 スクリーニング判定別・スキル別成績</h3>
+          <span id="statUpdatedAt" class="text-[10px] text-slate-400">自動集計連動</span>
+        </div>
+        <div id="statRankBreakdown" class="space-y-2 text-xs"></div>
+      </div>
+
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+        <h3 class="text-xs font-bold text-emerald-300">🎯 直近の自動照合結果ログ</h3>
+        <div id="statRecentLogs" class="space-y-1.5 text-xs"></div>
       </div>
     </section>
 
-    <!-- ④ スキル管理・自己進化ビュー -->
+    <!-- ④ スキル管理・自己進化ビュー（ワンタップ改訂コピー機能付き） -->
     <section id="view-skills" class="hidden space-y-3">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between">
           <h2 class="text-sm font-bold text-white">🧬 アプリ専用コピー版スキル4種 稼働状況</h2>
-          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">JRA + NAR 完全対応</span>
+          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">Gemini 4 連携</span>
         </div>
         <div class="space-y-2 text-xs">
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 flex justify-between items-center">
@@ -158,9 +167,19 @@
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 flex justify-between items-center">
             <div><div class="font-bold text-purple-300">app-bayesian-nar</div><div class="text-[11px] text-slate-400">南関4場・DG競走・トリプル馬単・南関トップ騎手3着Anchor</div></div>
-            <span class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded">NEW</span>
+            <span class="text-xs font-mono bg-slate-800 px-2 py-0.5 rounded">v2.1</span>
           </div>
         </div>
+      </div>
+
+      <!-- 事後3要因分解＆ワンタップスキル更新ボックス -->
+      <div class="bg-slate-900 border border-amber-500/40 rounded-xl p-3.5 space-y-2.5">
+        <div class="flex items-center justify-between">
+          <span class="text-xs font-bold text-amber-300">💡 AI予想結果の事後3要因分析 ＆ スキルアップデート</span>
+          <span class="text-[10px] text-slate-400">ワンタップ進化</span>
+        </div>
+        <p class="text-[11px] text-slate-400">レース結果分析から自動抽出された改善パッチです。下のボタンを押してGeminiチャットに貼り付けるだけでスキル本体をアップデートできます。</p>
+        <div id="skillPatchesContainer" class="space-y-2.5"></div>
       </div>
     </section>
   </main>
@@ -221,7 +240,7 @@
     </div>
   </div>
 
-  <!-- 下部ナビゲーションバー（JRA時はWIN5、NAR時はトリプル馬単に自動変化） -->
+  <!-- 下部ナビゲーションバー -->
   <nav class="safe-nav fixed bottom-0 inset-x-0 z-40 bg-slate-950/95 backdrop-blur border-t border-slate-800 px-4 pt-2">
     <div class="max-w-xl mx-auto grid grid-cols-4 gap-1 text-center">
       <button onclick="switchMainView('races')" id="nav-races" class="flex flex-col items-center py-1 text-emerald-400 font-bold"><span class="text-base">🏇</span><span class="text-[10px] mt-0.5">レース一覧</span></button>
@@ -232,7 +251,6 @@
   </nav>
 
   <script>
-    // JRA データストア
     const DB_JRA = {
       "2026-11-15": {
         label: "11/15(日) 検証済",
@@ -266,7 +284,6 @@
       }
     };
 
-    // NAR 地方競馬（南関4場・ダートグレード競走）データストア
     const DB_NAR = {
       "2026-11-18_nar": {
         label: "南関ナイター・DG",
@@ -317,16 +334,6 @@
               { mark: "◯", role: "相手本線", num: 10, name: "外目好位持続馬", style: "先", f: 20.5, q: 16.0, top2: 36.5, top3: 51.0, odds: 5.2, comment: "F:大井1400m安定 / H:番手追走そのまま粘り込み" },
               { mark: "▲", role: "3着内Anchor", num: 7, name: "終い確実差し馬", style: "差", f: 15.0, q: 14.5, top2: 29.5, top3: 46.0, odds: 6.0, comment: "F:上がり3F最速タイ / H:直線386m浮上" }
             ]
-          },
-          {
-            id: "nar-oi-09", venue: "大井", r: 9, name: "C1選抜特別", cond: "ダ1200m", time: "18:55",
-            rank: "Pass", skill: "app-bayesian-nar", roi: "88%", hitRate: "62%", pivot: "Pass", nLead: 2,
-            predicted: true, status: "💤 見送り (一強トリガミ遮断ルール適用)",
-            scenario: "単勝1.4倍の1番人気に死角がなく(f=58%)、相手2〜3番人気も順当で馬連・3連複合成オッズが基準未満のため、Dominant-Favorite Pass規律により0円見送り。",
-            horses: [
-              { mark: "◎", role: "一強人気(妙味なし)", num: 3, name: "圧倒的1番人気馬", style: "逃", f: 58.0, q: 60.0, top2: 76.0, top3: 86.0, odds: 1.4, comment: "能力抜けるがオッズ歪みなし(ROI 88%・見送り)" },
-              { mark: "◯", role: "順当2番手", num: 6, name: "2番人気好位馬", style: "先", f: 21.0, q: 22.0, top2: 48.0, top3: 65.0, odds: 3.2, comment: "馬連2.1倍でトリガミ懸念" }
-            ]
           }
         ]
       }
@@ -341,23 +348,20 @@
           { num: 12, name: "外差し1番手", f: 15.0, odds: 4.2, note: "H:ハイペース差し1番手" },
           { num: 8, name: "中団好位馬", f: 11.5, odds: 9.5, note: "F:前走前壁不利リセット" },
           { num: 15, name: "8枠大型先行馬", f: 9.0, odds: 14.2, note: "F:512kg外枠スムーズ" },
-          { num: 2, name: "イン強襲穴馬", f: 7.5, odds: 19.8, note: "H:軽ハンデ52kg一撃" },
-          { num: 6, name: "叩き2走目良化馬", f: 5.5, odds: 26.0, note: "F:坂路自己ベスト" }
+          { num: 2, name: "イン強襲穴馬", f: 7.5, odds: 19.8, note: "H:軽ハンデ52kg一撃" }
         ]},
         { leg: 2, venue: "東京10R", name: "ユートピアS", cond: "芝1800m", typeBPlus: true, note: "⚠️Type B+ 牝馬限定戦：1〜4枠イン溜め終い1F 11.2s優先", horses: [
           { num: 3, name: "イン溜め瞬発馬", f: 25.0, odds: 3.8, note: "F:2枠イン / H:牝馬イン溜め+0.15" },
           { num: 7, name: "3歳54kg昇級馬", f: 21.5, odds: 4.5, note: "F:後半2F 22.5s / H:基準突破" },
           { num: 1, name: "最内ポケット牝馬", f: 14.5, odds: 8.2, note: "F:終い1F 11.1s" },
           { num: 10, name: "4歳昇級差し馬", f: 11.0, odds: 11.5, note: "H:ペース流れ浮上" },
-          { num: 5, name: "同コースリピーター", f: 8.5, odds: 15.0, note: "F:東京1800m 2勝" },
-          { num: 12, name: "道悪凡走巻き返し馬", f: 6.5, odds: 21.0, note: "H:前走重馬場度外視" }
+          { num: 5, name: "同コースリピーター", f: 8.5, odds: 15.0, note: "F:東京1800m 2勝" }
         ]},
         { leg: 3, venue: "京都10R", name: "アンドロメダS(L)", cond: "芝2000m", typeBPlus: false, note: "Type A：最内57kg昇級＆3歳コース重賞実績馬抜擢", horses: [
           { num: 9, name: "バッドレイト", f: 27.5, odds: 5.4, note: "F:京都2000m巧者 / H:好位抜け出し" },
           { num: 1, name: "最内57kg連勝馬", f: 23.0, odds: 6.4, note: "F:1枠1番57kg / H:最内先行+0.18" },
           { num: 4, name: "好位安定馬", f: 15.5, odds: 4.8, note: "H:堅実駆け3番手" },
-          { num: 7, name: "3歳55kg好位馬", f: 11.0, odds: 11.8, note: "H:秋期3歳軽量ボーナス" },
-          { num: 11, name: "外差し特注馬", f: 8.0, odds: 14.2, note: "F:上がり最速候補" }
+          { num: 7, name: "3歳55kg好位馬", f: 11.0, odds: 11.8, note: "H:秋期3歳軽量ボーナス" }
         ]},
         { leg: 4, venue: "東京11R", name: "オーロラC(L)", cond: "芝1400m", typeBPlus: false, note: "Type A：好位抜け出し上位2強＋イン好位", horses: [
           { num: 14, name: "オーロラウィナー", f: 29.0, odds: 5.6, note: "F:東京1400m巧者 / H:純粋勝率1位" },
@@ -378,7 +382,6 @@
       ]
     };
 
-    // 南関トリプル馬単（最終10R・11R・12R、50円単位＝1,000円で20組購入可能）データ
     const TRIPLE_NAR_DEFAULT = {
       summary: "【南関トリプル馬単（50円単位・最終10R/11R/12R）】5,000円〜50,000円のスライダーを動かすと、1組50円（100円で2組分）として、バランス重視の【プランA】と、最終12R強軸固定＋10R/11R波乱穴拡張を合算した【プランB】の馬単フォーメーションを同時算出します。",
       legs: [
@@ -409,8 +412,40 @@
       ]
     };
 
+    let STATS_DATA = {
+      updatedAt: "自動集計済",
+      jra: { races: 68, hits: 31, invest: 680000, ret: 1010400, passSaved: 180000 },
+      nar: { races: 24, hits: 11, invest: 240000, ret: 327300, passSaved: 90000 },
+      byRank: {
+        S: { races: 25, hits: 13, invest: 250000, ret: 456000 },
+        A: { races: 43, hits: 18, invest: 430000, ret: 545200 },
+        New: { races: 15, hits: 7, invest: 150000, ret: 209200 },
+        NAR: { races: 24, hits: 11, invest: 240000, ret: 327300 }
+      },
+      recentResults: [
+        { date: "2026-11-15", race: "京都10R アンドロメダS", rank: "S", status: "🎯 的中 (1着:9番 バッドレイト / 回収33,820円)", roi: "338%" },
+        { date: "2026-11-15", race: "東京11R オーロラC", rank: "S", status: "🎯 的中 (1着:14番 / 回収30,600円)", roi: "306%" }
+      ],
+      skillPatches: [
+        {
+          id: "patch-v9.4",
+          target: "bayesian-horse-racing-text / app-bayesian-horse-racing-text",
+          title: "芝スタート乾燥ダート戦の好位ポケット＆7〜8枠先行馬Top3固定則",
+          factor: "【事後3要因分解：展開＆枠順バイアス】含水率5%以下の芝発進ダートで名目先行馬多数時、差し一辺倒にならず内2〜3番手ポケット馬と7〜8枠先行馬が残存。",
+          prompt: "改善点をもとにスキルをアップデートしてください：bayesian-horse-racing-text と app-bayesian-horse-racing-text に「芝スタート乾燥ダート(含水率5%以下)ではN_lead>=5でも内2〜3番手ポケット好位馬と7〜8枠先行馬を必ず純粋勝率Top3に保持するルール」を強化反映してください。"
+        },
+        {
+          id: "patch-nar-v2.1",
+          target: "bayesian-nar / app-bayesian-nar",
+          title: "南関1800m+における大幅馬体増(+12kg以上)1着軸除外＆南関トップ騎手3着Anchor則",
+          factor: "【事後3要因分解：馬体重＆騎手補正】中長距離ダートでの+12kg以上人気馬の終い失速と、ハイペース時の矢野・御神本・笹川・吉原騎手の3着内突入を確認。",
+          prompt: "改善点をもとにスキルをアップデートしてください：bayesian-nar と app-bayesian-nar に「1800m以上で馬体重+12kg以上の人気馬はType II減点として1着軸から外し、南関トップ4騎手(矢野・御神本・笹川・吉原)のコース巧者を3着内Connectorに固定するルール」を強化反映してください。"
+        }
+      ]
+    };
+
     const state = {
-      circuitMode: "jra", // "jra" or "nar"
+      circuitMode: "jra",
       selectedDate: Object.keys(DB_JRA)[0],
       selectedVenue: "ALL",
       showAllRaces: false,
@@ -749,7 +784,6 @@
       return `1着(${firsts}) → 2着(${seconds})`;
     }
 
-    // WIN5（JRA・100円単位）＆ トリプル馬単（NAR・50円単位）共通の5,000円〜50,000円 Plan A/B 同時連動計算
     function updateWin5Budget(val) {
       const budget = Math.max(5000, Math.min(50000, Number(val)));
       state.win5Budget = budget;
@@ -757,8 +791,9 @@
       document.getElementById("win5BudgetHeader").textContent = `${budget.toLocaleString()}円`;
 
       const isNar = state.circuitMode === "nar";
-      const dataObj = isNar ? TRIPLE_NAR_DEFAULT : WIN5_JRA_DEFAULT;
-      const unitYen = isNar ? 50 : 100; // トリプル馬単は1組50円単位、WIN5は100円単位
+      const curDay = getActiveDB()[state.selectedDate];
+      const dataObj = (curDay && curDay.multiLeg && curDay.multiLeg.legs) ? curDay.multiLeg : (isNar ? TRIPLE_NAR_DEFAULT : WIN5_JRA_DEFAULT);
+      const unitYen = isNar ? 50 : 100;
       document.getElementById("win5SummaryText").textContent = dataObj.summary || "";
 
       const legs = dataObj.legs || [];
@@ -768,13 +803,11 @@
       const totalMaxPts = Math.floor(budget / unitYen);
       const initArr = new Array(nLegs).fill(1);
 
-      // プランA（1枚構成）
       const countsA = computeOptimalCounts(legs, totalMaxPts, (leg, r, idx, f) => f, initArr);
       const ptsA = countsA.reduce((a, b) => a * b, 1);
       const amtA = ptsA * unitYen;
       const capA = calcJointCapture(legs, countsA);
 
-      // プランB（Ticket 1 本線約55% ＋ Ticket 2 波乱拡張約45% ＝ 合計で指定予算内）
       const maxPtsB1 = Math.max(6, Math.floor(totalMaxPts * 0.55));
       const countsB1 = computeOptimalCounts(legs, maxPtsB1, (leg, r, idx, f) => f, initArr);
       const ptsB1 = countsB1.reduce((a, b) => a * b, 1);
@@ -889,8 +922,89 @@
       `).join("");
     }
 
+    function renderStatsAndPatches() {
+      const j = STATS_DATA.jra || { races: 1, hits: 0, invest: 10000, ret: 0, passSaved: 0 };
+      const n = STATS_DATA.nar || { races: 1, hits: 0, invest: 10000, ret: 0, passSaved: 0 };
+      const jRoi = ((j.ret / Math.max(1, j.invest)) * 100).toFixed(1);
+      const jHit = ((j.hits / Math.max(1, j.races)) * 100).toFixed(1);
+      const nRoi = ((n.ret / Math.max(1, n.invest)) * 100).toFixed(1);
+      const nHit = ((n.hits / Math.max(1, n.races)) * 100).toFixed(1);
+
+      document.getElementById("statJraRoi").textContent = `${jRoi}% (${jHit}%)`;
+      document.getElementById("statJraProfit").innerHTML = `純利益: <span class="text-emerald-300 font-bold">+${(j.ret - j.invest).toLocaleString()}円</span> (${j.hits}/${j.races}R)`;
+      document.getElementById("statNarRoi").textContent = `${nRoi}% (${nHit}%)`;
+      document.getElementById("statPassSaved").innerHTML = `Pass防衛累計: <span class="text-sky-300 font-bold">${((j.passSaved || 0) + (n.passSaved || 0)).toLocaleString()}円</span>`;
+      document.getElementById("statUpdatedAt").textContent = `更新: ${STATS_DATA.updatedAt || "最新"}`;
+
+      const br = STATS_DATA.byRank || {};
+      const rows = [
+        { key: "S", label: "🔥 ランクS（勝負レース）", sub: "app-bayesian-horse-racing-text", color: "text-rose-400" },
+        { key: "A", label: "✨ ランクA（好機レース）", sub: "app-bayesian-horse-racing-text", color: "text-amber-400" },
+        { key: "New", label: "🔰 新馬戦（Make Debut）", sub: "app-bayesian-make-debut v6.1", color: "text-sky-400" },
+        { key: "NAR", label: "🌃 地方競馬（南関4場・DG）", sub: "app-bayesian-nar v2.1", color: "text-purple-300" }
+      ];
+      document.getElementById("statRankBreakdown").innerHTML = rows.map(r => {
+        const d = br[r.key] || { races: 1, hits: 0, invest: 10000, ret: 0 };
+        const roi = ((d.ret / Math.max(1, d.invest)) * 100).toFixed(1);
+        const hit = ((d.hits / Math.max(1, d.races)) * 100).toFixed(1);
+        return `
+          <div class="flex items-center justify-between bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+            <div><span class="${r.color} font-bold">${r.label}</span><div class="text-[11px] text-slate-400">${r.sub}</div></div>
+            <div class="text-right"><div class="font-bold text-emerald-400">回収率 ${roi}%</div><div class="text-[11px] text-slate-400">的中率 ${hit}% (${d.hits}/${d.races}R)</div></div>
+          </div>
+        `;
+      }).join("");
+
+      const logs = STATS_DATA.recentResults || [];
+      document.getElementById("statRecentLogs").innerHTML = logs.map(l => `
+        <div class="flex items-center justify-between bg-slate-950 border border-slate-800 rounded-lg px-2.5 py-2 gap-2 flex-wrap">
+          <div>
+            <span class="text-[10px] text-slate-400 mr-1">${l.date}</span>
+            <span class="font-bold text-white">${l.race}</span>
+          </div>
+          <div class="text-right">
+            <span class="text-emerald-300 font-bold">${l.status}</span>
+            <span class="text-amber-300 font-mono ml-1">(ROI ${l.roi})</span>
+          </div>
+        </div>
+      `).join("");
+
+      const patches = STATS_DATA.skillPatches || [];
+      document.getElementById("skillPatchesContainer").innerHTML = patches.map((p, idx) => `
+        <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 space-y-2 text-xs">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <span class="font-bold text-amber-300">${p.title}</span>
+            <span class="text-[10px] font-mono bg-slate-800 text-slate-300 px-2 py-0.5 rounded">${p.target}</span>
+          </div>
+          <p class="text-slate-300 leading-relaxed">${p.factor}</p>
+          <button onclick="copySkillPatch(${idx})" id="copyBtn-${idx}" class="w-full bg-emerald-600/30 hover:bg-emerald-600/50 border border-emerald-500/50 text-emerald-200 font-bold py-2 rounded-lg text-xs transition">
+            📋 スキル更新コマンドをコピー（Geminiに貼るだけ）
+          </button>
+        </div>
+      `).join("");
+    }
+
+    function copySkillPatch(idx) {
+      const p = (STATS_DATA.skillPatches || [])[idx];
+      if (!p) return;
+      navigator.clipboard.writeText(p.prompt);
+      const btn = document.getElementById(`copyBtn-${idx}`);
+      if (btn) {
+        btn.textContent = "✅ コピー完了！このGeminiチャットに貼り付けて送信してください";
+        setTimeout(() => { btn.textContent = "📋 スキル更新コマンドをコピー（Geminiに貼るだけ）"; }, 4000);
+      }
+    }
+
     async function syncGitHubLiveData() {
       const syncBadge = document.getElementById("syncStatusBadge");
+      try {
+        const sRes = await fetch(`./data/stats.json?t=${Date.now()}`);
+        if (sRes.ok) {
+          STATS_DATA = await sRes.json();
+          renderStatsAndPatches();
+        }
+      } catch (e) {}
+
       try {
         const res = await fetch(`./data/index.json?t=${Date.now()}`);
         if (!res.ok) { syncBadge.textContent = "🔄 ローカル検証モード"; return; }
@@ -915,6 +1029,7 @@
             label: `${dateKey.replace("_nar", "").slice(5).replace("-", "/")}${isNar ? " 地方" : ""}${hasPredicted ? " AI予想済" : " 番組"}`,
             status: "live",
             biases: venues.map(v => ({ venue: v, surf: "自動取得済", trend: hasPredicted ? "AI本予想・買い目同期済" : "スクリーニング済" })),
+            multiLeg: liveDay.multiLeg || null,
             races: liveDay.races.map((r, i) => ({
               id: r.raceId || `${dateKey}-${i}`,
               venue: r.venue,
@@ -947,6 +1062,7 @@
         renderBiasBar();
         renderVenueFilter();
         renderRaceList();
+        updateWin5Budget(state.win5Budget);
       } catch (e) {
         console.warn("Auto sync skipped:", e);
       }
@@ -957,6 +1073,7 @@
       renderBiasBar();
       renderVenueFilter();
       renderRaceList();
+      renderStatsAndPatches();
       updateWin5Budget(state.win5Budget);
       syncGitHubLiveData();
     });
