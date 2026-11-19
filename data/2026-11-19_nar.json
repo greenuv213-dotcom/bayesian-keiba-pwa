@@ -17,7 +17,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 4,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
@@ -194,7 +194,37 @@
           "comment": "F:6枠・脚質[先](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "大井1R(ダ1600m・良) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全13頭を推論。"
+      "scenario": "大井1R(ダ1600m・良) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全13頭を推論。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 3,
+          "num": 3,
+          "name": "ハリヤード",
+          "odds": "2.9",
+          "passing": "大井 赤嶺亮"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 8,
+          "name": "マイライフ",
+          "odds": "3.8",
+          "passing": "大井 荒山勝徳"
+        },
+        {
+          "rank": "3",
+          "waku": 4,
+          "num": 4,
+          "name": "ライプニッツ",
+          "odds": "3.3",
+          "passing": "大井 高橋清顕"
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "結果確定 (1着:3番 ハリヤード)"
     },
     {
       "raceId": "202644111902",
@@ -210,7 +240,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 1,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
@@ -390,7 +420,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 8,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
@@ -557,7 +587,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 7,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
@@ -763,7 +793,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 1,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
@@ -917,7 +947,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 5,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
@@ -1123,7 +1153,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 3,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
@@ -1303,7 +1333,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 2,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
@@ -1509,7 +1539,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 3,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
@@ -1728,7 +1758,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 6,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
@@ -1908,7 +1938,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 1,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
@@ -2049,7 +2079,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 4,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
@@ -2367,7 +2397,37 @@
           "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "笠松9R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全10頭を推論。"
+      "scenario": "笠松9R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全10頭を推論。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 8,
+          "name": "メイプルラブリー",
+          "odds": "1.5",
+          "passing": "笠松 伊藤強一"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 6,
+          "name": "レディソフィア",
+          "odds": "2.5",
+          "passing": "笠松 加藤幸保"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 9,
+          "name": "ビートウマザンマイ",
+          "odds": "10.6",
+          "passing": "笠松 後藤佑耶"
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 11500,
+      "isHit": true,
+      "resultStatus": "🎯 的中 (1着:8番 メイプルラブリー / 回収11,500円)"
     },
     {
       "raceId": "202647111910",
@@ -2983,7 +3043,37 @@
           "comment": "F:7枠・脚質[差](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "園田9R(ダ1600m・重) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全9頭を推論。"
+      "scenario": "園田9R(ダ1600m・重) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全9頭を推論。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 9,
+          "name": "エイシンビシャモン",
+          "odds": "1.4",
+          "passing": "兵庫 坂本和也"
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 8,
+          "name": "トゥームレイダー",
+          "odds": "3.5",
+          "passing": "兵庫 諏訪貴正"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 6,
+          "name": "イテマエバファロー",
+          "odds": "88.2",
+          "passing": "兵庫 徳本慶一"
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "結果確定 (1着:9番 エイシンビシャモン)"
     },
     {
       "raceId": "202650111910",
@@ -3491,17 +3581,17 @@
     {
       "venue": "園田",
       "surf": "実測N_lead・3シナリオ混合",
-      "trend": "園田: 前半確定レースなし（標準バイアス想定）"
+      "trend": "園田当日実測(1R集計): 1着内枠0回/外枠1回 → 【内外フラット】"
     },
     {
       "venue": "大井",
       "surf": "実測N_lead・3シナリオ混合",
-      "trend": "大井: 前半確定レースなし（標準バイアス想定）"
+      "trend": "大井当日実測(1R集計): 1着内枠1回/外枠0回 → 【内外フラット】"
     },
     {
       "venue": "笠松",
       "surf": "実測N_lead・3シナリオ混合",
-      "trend": "笠松: 前半確定レースなし（標準バイアス想定）"
+      "trend": "笠松当日実測(1R集計): 1着内枠0回/外枠1回 → 【内外フラット】"
     }
   ],
   "multiLeg": {
@@ -3703,5 +3793,5 @@
       }
     ]
   },
-  "updatedAt": "2026-11-19 13:28 JST"
+  "updatedAt": "2026-11-19 14:58 JST"
 }
