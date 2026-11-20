@@ -1399,7 +1399,7 @@
       ],
       "scenario": "福島9R(芝1800m) 全18頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
       "nLead": 7,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 30,
         "s2": 35,
@@ -1969,7 +1969,7 @@
       "pivotType": "Dual-Pivot",
       "nLead": 1,
       "usedModel": "gemini-3.8-flash",
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
@@ -1977,7 +1977,7 @@
       }
     }
   ],
-  "updatedAt": "2026-11-20 14:58 JST",
+  "updatedAt": "2026-11-20 18:15 JST",
   "mode": "jra",
   "trackBiases": [
     {
