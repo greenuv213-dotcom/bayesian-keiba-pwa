@@ -4,15 +4,25 @@ from bs4 import BeautifulSoup
 from google import genai
 from google.genai import types
 
-socket.setdefaulttimeout(90)
+socket.setdefaulttimeout(45)
+START_TS = time.time()
+# 10分タイムアウトを絶対に踏まないよう、5分30秒で新規通信を切り上げて確実に保存完了させる
+MAX_RUNTIME_SEC = 330
 
 JST = timezone(timedelta(hours=9))
 API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-client = genai.Client(api_key=API_KEY) if API_KEY else None
+try:
+    client = genai.Client(api_key=API_KEY, http_options=types.HttpOptions(timeout=55000)) if API_KEY else None
+except Exception:
+    client = genai.Client(api_key=API_KEY) if API_KEY else None
+
 os.makedirs("data", exist_ok=True)
 
-ENGINE_VER = "v10.3"
+ENGINE_VER = "v10.4"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}
+SESSION = requests.Session()
+SESSION.headers.update(HEADERS)
+
 JRA_VENUES = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","06":"中山","07":"中京","08":"京都","09":"阪神","10":"小倉"}
 NAR_VENUES = {"42":"浦和","43":"船橋","44":"大井","45":"川崎","30":"門別","35":"盛岡","36":"水沢","46":"金沢","47":"笠松","48":"名古屋","50":"園田","51":"姫路","54":"高知","55":"佐賀"}
 NANKAN_CODES = {"42", "43", "44", "45"}
@@ -22,10 +32,16 @@ TURF_START_DIRT = {("東京",1300),("東京",1400),("東京",1600),("中山",120
 GRADED_KEYWORDS = ("Jpn", "G1", "G2", "G3", "S1", "S2", "S3", "杯", "記念", "賞", "マイルCS", "ジャパンC", "有馬", "天皇賞", "ダービー", "オークス", "皐月", "桜花", "菊花", "秋華")
 
 AI_CALL_COUNT = 0
-MAX_AI_CALLS_PER_RUN = 5
+MAX_AI_CALLS_PER_RUN = 3
+
+def log(msg: str):
+    print(f"[{int(time.time() - START_TS):03d}s] {msg}", flush=True)
+
+def time_exceeded() -> bool:
+    return (time.time() - START_TS) >= MAX_RUNTIME_SEC
 
 def get_soup(url: str) -> BeautifulSoup:
-    res = requests.get(url, headers=HEADERS, timeout=15)
+    res = SESSION.get(url, timeout=8)
     raw = res.content
     txt = raw.decode("utf-8", errors="ignore") if b"utf-8" in raw[:1024].lower() else raw.decode("euc_jp", errors="ignore")
     return BeautifulSoup(txt, "html.parser")
@@ -63,7 +79,7 @@ def fetch_race_list(ymd: str, mode: str = "jra") -> list:
             })
         return races
     except Exception as e:
-        print(f"[Warn] {mode} list error: {e}")
+        log(f"[Warn] {mode} list error: {e}")
         return []
 
 def parse_payout_table(rsoup: BeautifulSoup) -> dict:
@@ -93,118 +109,120 @@ def parse_payout_table(rsoup: BeautifulSoup) -> dict:
                 payouts[key].append({"nums": num_groups[idx], "pay": pay})
     return payouts
 
-def fetch_full_shutuba(rid: str, mode: str = "jra") -> tuple[str, list, list, str, str, dict]:
+def fetch_full_shutuba(rid: str, mode: str = "jra", need_shutuba: bool = True, need_result: bool = True) -> tuple[str, list, list, str, str, dict]:
     base = "https://race.netkeiba.com" if mode == "jra" else "https://nar.netkeiba.com"
     lines, top3_actual, raw_runners, odds_map = [], [], [], {}
     track_cond, post_time, payouts = "良", "", {}
 
-    api_path = "api_get_jra_odds.html" if mode == "jra" else "api_get_nar_odds.html"
-    try:
-        o_json = requests.get(f"{base}/api/{api_path}?race_id={rid}&type=1&action=init", headers=HEADERS, timeout=6).json()
-        o_dict = (o_json.get("data") or {}).get("odds", {}).get("1", {})
-        if isinstance(o_dict, dict):
-            for k, val in o_dict.items():
-                if isinstance(val, list) and val and str(val[0]).replace(".", "").isdigit():
-                    odds_map[int(k)] = float(val[0])
-    except Exception: pass
+    if need_shutuba:
+        api_path = "api_get_jra_odds.html" if mode == "jra" else "api_get_nar_odds.html"
+        try:
+            o_json = SESSION.get(f"{base}/api/{api_path}?race_id={rid}&type=1&action=init", timeout=5).json()
+            o_dict = (o_json.get("data") or {}).get("odds", {}).get("1", {})
+            if isinstance(o_dict, dict):
+                for k, val in o_dict.items():
+                    if isinstance(val, list) and val and str(val[0]).replace(".", "").isdigit():
+                        odds_map[int(k)] = float(val[0])
+        except Exception: pass
 
-    try:
-        soup = get_soup(f"{base}/race/shutuba.html?race_id={rid}")
-        r1, r2 = soup.select_one(".RaceData01"), soup.select_one(".RaceData02")
-        if r1:
-            r1_txt = " ".join(r1.get_text(" ", strip=True).split())
-            m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", r1_txt)
-            if m_pt: post_time = m_pt.group(1).zfill(5)
-            for c in ("不良", "重", "稍重", "良"):
-                if c in r1_txt: track_cond = c; break
-            lines.append("【条件・馬場】" + r1_txt)
-        if r2: lines.append("【コース・クラス】" + " ".join(r2.get_text(" ", strip=True).split()))
-        for idx, tr in enumerate(soup.select("tr.HorseList")[:18]):
-            n_el = tr.select_one("span.HorseName a, .HorseName a, td.HorseInfo a")
-            if not n_el: continue
-            h_name = n_el.get_text(strip=True)
-            if not h_name: continue
-            w_el, u_el = tr.select_one("td[class*='Waku']"), tr.select_one("td[class*='Umaban'], td.Num")
-            u_txt = re.sub(r"\D", "", u_el.get_text(strip=True)) if u_el else ""
-            u_int = int(u_txt) if u_txt.isdigit() else (idx + 1)
-            w_txt = re.sub(r"\D", "", w_el.get_text(strip=True)) if w_el else ""
-            w_int = int(w_txt) if w_txt.isdigit() else ((u_int - 1) // 2 + 1)
-            sex_age = tr.select_one("td.Barei, span.Barei")
-            futan = tr.select_one("td.Futan")
-            j_el = tr.select_one("td.Jockey a, td.Jockey")
-            wt_el = tr.select_one("td.Weight")
-            odd_el = tr.select_one("td.Popular span[id^='odds-'], span[id^='odds-'], td.Odds")
-            odd_val = odds_map.get(u_int, 0.0)
-            if odd_val <= 1.0 and odd_el:
-                m_o = re.search(r"(\d+\.\d+)", odd_el.get_text())
-                if m_o: odd_val = float(m_o.group(1))
-            raw_runners.append({
-                "waku": w_int, "num": u_int, "name": h_name,
-                "sexAge": sex_age.get_text(strip=True) if sex_age else "",
-                "futan": futan.get_text(strip=True) if futan else "",
-                "pedigree": "", "jockey": j_el.get_text(" ", strip=True) if j_el else "",
-                "weight": wt_el.get_text(strip=True) if wt_el else "", "odds": odd_val, "past": ""
-            })
-    except Exception: pass
-
-    try:
-        psoup = get_soup(f"{base}/race/shutuba_past.html?race_id={rid}")
-        if not post_time:
-            pr1 = psoup.select_one(".RaceData01")
-            if pr1:
-                m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", pr1.get_text(" ", strip=True))
+        try:
+            soup = get_soup(f"{base}/race/shutuba.html?race_id={rid}")
+            r1, r2 = soup.select_one(".RaceData01"), soup.select_one(".RaceData02")
+            if r1:
+                r1_txt = " ".join(r1.get_text(" ", strip=True).split())
+                m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", r1_txt)
                 if m_pt: post_time = m_pt.group(1).zfill(5)
-        for idx, tr in enumerate(psoup.select("tr.HorseList")[:18]):
-            n_el = tr.select_one(".Horse02 a, .HorseName a, .Horse02")
-            if not n_el: continue
-            h_name = n_el.get_text(strip=True).split()[0]
-            f_sire, m_sire = tr.select_one(".Horse01"), tr.select_one(".Horse03")
-            ped = f"父:{f_sire.get_text(strip=True) if f_sire else ''}/母父:{m_sire.get_text(strip=True) if m_sire else ''}" if (f_sire or m_sire) else ""
-            pasts = " / ".join([" ".join(td.get_text(" ", strip=True).split())[:95] for td in tr.select("td.Past")[:4]])
-            target = next((x for x in raw_runners if x["name"] == h_name), None)
-            if target:
-                if ped: target["pedigree"] = ped
-                if pasts: target["past"] = pasts
-            else:
-                u_el = tr.select_one("td[class*='Umaban'], td.Num")
+                for c in ("不良", "重", "稍重", "良"):
+                    if c in r1_txt: track_cond = c; break
+                lines.append("【条件・馬場】" + r1_txt)
+            if r2: lines.append("【コース・クラス】" + " ".join(r2.get_text(" ", strip=True).split()))
+            for idx, tr in enumerate(soup.select("tr.HorseList")[:18]):
+                n_el = tr.select_one("span.HorseName a, .HorseName a, td.HorseInfo a")
+                if not n_el: continue
+                h_name = n_el.get_text(strip=True)
+                if not h_name: continue
+                w_el, u_el = tr.select_one("td[class*='Waku']"), tr.select_one("td[class*='Umaban'], td.Num")
                 u_txt = re.sub(r"\D", "", u_el.get_text(strip=True)) if u_el else ""
                 u_int = int(u_txt) if u_txt.isdigit() else (idx + 1)
-                raw_runners.append({"waku": (u_int-1)//2+1, "num": u_int, "name": h_name, "sexAge": "", "futan": "", "pedigree": ped, "jockey": "", "weight": "", "odds": odds_map.get(u_int, 0.0), "past": pasts})
-    except Exception: pass
+                w_txt = re.sub(r"\D", "", w_el.get_text(strip=True)) if w_el else ""
+                w_int = int(w_txt) if w_txt.isdigit() else ((u_int - 1) // 2 + 1)
+                sex_age = tr.select_one("td.Barei, span.Barei")
+                futan = tr.select_one("td.Futan")
+                j_el = tr.select_one("td.Jockey a, td.Jockey")
+                wt_el = tr.select_one("td.Weight")
+                odd_el = tr.select_one("td.Popular span[id^='odds-'], span[id^='odds-'], td.Odds")
+                odd_val = odds_map.get(u_int, 0.0)
+                if odd_val <= 1.0 and odd_el:
+                    m_o = re.search(r"(\d+\.\d+)", odd_el.get_text())
+                    if m_o: odd_val = float(m_o.group(1))
+                raw_runners.append({
+                    "waku": w_int, "num": u_int, "name": h_name,
+                    "sexAge": sex_age.get_text(strip=True) if sex_age else "",
+                    "futan": futan.get_text(strip=True) if futan else "",
+                    "pedigree": "", "jockey": j_el.get_text(" ", strip=True) if j_el else "",
+                    "weight": wt_el.get_text(strip=True) if wt_el else "", "odds": odd_val, "past": ""
+                })
+        except Exception: pass
 
-    try:
-        rsoup = get_soup(f"{base}/race/result.html?race_id={rid}")
-        rd1 = rsoup.select_one(".RaceData01")
-        if rd1:
-            rd1_txt = rd1.get_text(" ", strip=True)
+        try:
+            psoup = get_soup(f"{base}/race/shutuba_past.html?race_id={rid}")
             if not post_time:
-                m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", rd1_txt)
-                if m_pt: post_time = m_pt.group(1).zfill(5)
-            for c in ("不良", "重", "稍重", "良"):
-                if c in rd1_txt: track_cond = c; break
-        for tr in rsoup.select("#All_Result_Table tbody tr, table.RaceTable01 tbody tr")[:18]:
-            tds = [td.get_text(" ", strip=True) for td in tr.select("td")]
-            if len(tds) < 8: continue
-            rank_s, w_s, u_s = re.sub(r"\D", "", tds[0]), re.sub(r"\D", "", tds[1]), re.sub(r"\D", "", tds[2])
-            if not u_s.isdigit(): continue
-            u_int, w_int = int(u_s), (int(w_s) if w_s.isdigit() else 4)
-            n_el = tr.select_one("span.Horse_Name a, .Horse_Name, td.Horse_Info a")
-            h_name = n_el.get_text(strip=True) if n_el else tds[3].split()[0]
-            odd_num = odds_map.get(u_int, 0.0)
-            for cell in tds[8:]:
-                if re.match(r"^\d{1,4}\.\d$", cell.replace(",", "")):
-                    odd_num = float(cell.replace(",", "")); break
-            ex = next((x for x in raw_runners if x["name"] == h_name), None)
-            if ex:
-                ex["num"], ex["waku"] = u_int, w_int
-                if odd_num > 1.0: ex["odds"] = odd_num
-            else:
-                raw_runners.append({"waku": w_int, "num": u_int, "name": h_name, "sexAge": tds[4] if len(tds)>4 else "", "futan": tds[5] if len(tds)>5 else "", "pedigree": "", "jockey": tds[6].split()[0] if len(tds)>6 else "", "weight": tds[14] if len(tds)>14 else "", "odds": odd_num or 0.0, "past": ""})
-            if len(top3_actual) < 3 and rank_s.isdigit():
-                top3_actual.append({"rank": rank_s, "waku": w_int, "num": u_int, "name": h_name, "odds": str(odd_num or 10.0)})
-        if top3_actual:
-            payouts = parse_payout_table(rsoup)
-    except Exception: pass
+                pr1 = psoup.select_one(".RaceData01")
+                if pr1:
+                    m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", pr1.get_text(" ", strip=True))
+                    if m_pt: post_time = m_pt.group(1).zfill(5)
+            for idx, tr in enumerate(psoup.select("tr.HorseList")[:18]):
+                n_el = tr.select_one(".Horse02 a, .HorseName a, .Horse02")
+                if not n_el: continue
+                h_name = n_el.get_text(strip=True).split()[0]
+                f_sire, m_sire = tr.select_one(".Horse01"), tr.select_one(".Horse03")
+                ped = f"父:{f_sire.get_text(strip=True) if f_sire else ''}/母父:{m_sire.get_text(strip=True) if m_sire else ''}" if (f_sire or m_sire) else ""
+                pasts = " / ".join([" ".join(td.get_text(" ", strip=True).split())[:95] for td in tr.select("td.Past")[:4]])
+                target = next((x for x in raw_runners if x["name"] == h_name), None)
+                if target:
+                    if ped: target["pedigree"] = ped
+                    if pasts: target["past"] = pasts
+                else:
+                    u_el = tr.select_one("td[class*='Umaban'], td.Num")
+                    u_txt = re.sub(r"\D", "", u_el.get_text(strip=True)) if u_el else ""
+                    u_int = int(u_txt) if u_txt.isdigit() else (idx + 1)
+                    raw_runners.append({"waku": (u_int-1)//2+1, "num": u_int, "name": h_name, "sexAge": "", "futan": "", "pedigree": ped, "jockey": "", "weight": "", "odds": odds_map.get(u_int, 0.0), "past": pasts})
+        except Exception: pass
+
+    if need_result:
+        try:
+            rsoup = get_soup(f"{base}/race/result.html?race_id={rid}")
+            rd1 = rsoup.select_one(".RaceData01")
+            if rd1:
+                rd1_txt = rd1.get_text(" ", strip=True)
+                if not post_time:
+                    m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", rd1_txt)
+                    if m_pt: post_time = m_pt.group(1).zfill(5)
+                for c in ("不良", "重", "稍重", "良"):
+                    if c in rd1_txt: track_cond = c; break
+            for tr in rsoup.select("#All_Result_Table tbody tr, table.RaceTable01 tbody tr")[:18]:
+                tds = [td.get_text(" ", strip=True) for td in tr.select("td")]
+                if len(tds) < 8: continue
+                rank_s, w_s, u_s = re.sub(r"\D", "", tds[0]), re.sub(r"\D", "", tds[1]), re.sub(r"\D", "", tds[2])
+                if not u_s.isdigit(): continue
+                u_int, w_int = int(u_s), (int(w_s) if w_s.isdigit() else 4)
+                n_el = tr.select_one("span.Horse_Name a, .Horse_Name, td.Horse_Info a")
+                h_name = n_el.get_text(strip=True) if n_el else tds[3].split()[0]
+                odd_num = odds_map.get(u_int, 0.0)
+                for cell in tds[8:]:
+                    if re.match(r"^\d{1,4}\.\d$", cell.replace(",", "")):
+                        odd_num = float(cell.replace(",", "")); break
+                ex = next((x for x in raw_runners if x["name"] == h_name), None)
+                if ex:
+                    ex["num"], ex["waku"] = u_int, w_int
+                    if odd_num > 1.0: ex["odds"] = odd_num
+                elif need_shutuba:
+                    raw_runners.append({"waku": w_int, "num": u_int, "name": h_name, "sexAge": tds[4] if len(tds)>4 else "", "futan": tds[5] if len(tds)>5 else "", "pedigree": "", "jockey": tds[6].split()[0] if len(tds)>6 else "", "weight": tds[14] if len(tds)>14 else "", "odds": odd_num or 0.0, "past": ""})
+                if len(top3_actual) < 3 and rank_s.isdigit():
+                    top3_actual.append({"rank": rank_s, "waku": w_int, "num": u_int, "name": h_name, "odds": str(odd_num or 10.0)})
+            if top3_actual:
+                payouts = parse_payout_table(rsoup)
+        except Exception: pass
 
     raw_runners.sort(key=lambda x: x["num"])
     for r in raw_runners:
@@ -360,39 +378,45 @@ def classify_race_tier(r: dict) -> str:
 
 def call_gemini(skill: str, prompt: str, tier: str = "flash") -> dict:
     global AI_CALL_COUNT
-    if not client or AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN: return {}
+    if not client or AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN or time_exceeded():
+        return {}
     AI_CALL_COUNT += 1
     p = f"skills/{skill}/SKILL.md"
     sys_inst = open(p, "r", encoding="utf-8").read() if os.path.exists(p) else "Output valid JSON only."
 
     if tier == "high_h":
-        candidates = [("gemini-4-hydrogen", "HIGH"), ("gemini-3.8-flash", "MEDIUM")]
+        candidates = [("gemini-4-hydrogen", "HIGH"), ("gemini-3.8-flash", "MEDIUM"), ("gemini-2.5-flash", "")]
     elif tier == "med_h":
-        candidates = [("gemini-4-hydrogen", "MEDIUM"), ("gemini-3.8-flash", "MEDIUM")]
+        candidates = [("gemini-4-hydrogen", "MEDIUM"), ("gemini-3.8-flash", "MEDIUM"), ("gemini-2.5-flash", "")]
     else:
-        candidates = [("gemini-3.8-flash", "MEDIUM")]
+        candidates = [("gemini-3.8-flash", "MEDIUM"), ("gemini-2.5-flash", "")]
 
     for m, think_lvl in candidates:
+        if time_exceeded():
+            log("Time cap reached during AI fallback; stopping cleanly.")
+            return {}
         try:
-            time.sleep(2)
-            try:
-                cfg = types.GenerateContentConfig(
-                    system_instruction=sys_inst,
-                    response_mime_type="application/json",
-                    thinking_config=types.ThinkingConfig(thinking_level=think_lvl),
-                )
-            except Exception:
-                cfg = types.GenerateContentConfig(
-                    system_instruction=sys_inst,
-                    response_mime_type="application/json",
-                )
+            log(f"Calling AI: {skill} -> {m}({think_lvl or 'STD'})")
+            time.sleep(1)
+            if think_lvl:
+                try:
+                    cfg = types.GenerateContentConfig(
+                        system_instruction=sys_inst,
+                        response_mime_type="application/json",
+                        thinking_config=types.ThinkingConfig(thinking_level=think_lvl),
+                    )
+                except Exception:
+                    cfg = types.GenerateContentConfig(system_instruction=sys_inst, response_mime_type="application/json")
+            else:
+                cfg = types.GenerateContentConfig(system_instruction=sys_inst, response_mime_type="application/json")
+
             res = client.models.generate_content(model=m, contents=prompt, config=cfg)
             data = json.loads(re.sub(r"^```(?:json)?\s*|\s*```$", "", (res.text or "").strip(), flags=re.DOTALL))
-            data["usedModel"] = f"{m}({think_lvl})"
-            print(f"[AI Success] {skill} -> {data['usedModel']}")
+            data["usedModel"] = f"{m}({think_lvl})" if think_lvl else m
+            log(f"[AI Success] {skill} -> {data['usedModel']}")
             return data
         except Exception as e:
-            print(f"[Fallback] {m}({think_lvl}): {e}")
+            log(f"[Fallback] {m}: {str(e)[:120]}")
     return {}
 
 def fetch_official_win5_ids() -> list:
@@ -407,7 +431,6 @@ def fetch_official_win5_ids() -> list:
     return []
 
 def fetch_official_win5_payout(target_race_ids: list) -> int:
-    """netkeibaのWIN5ページから公式払戻金(100円あたり)を取得"""
     try:
         soup = get_soup("https://race.netkeiba.com/top/win5.html")
         page_ids = re.findall(r"race_id=(\d{12})", str(soup))
@@ -422,7 +445,6 @@ def fetch_official_win5_payout(target_race_ids: list) -> int:
     return 0
 
 def sync_multileg_results(day_db: dict, mode: str):
-    """確定レースの1〜3着結果とWIN5公式払戻金を multiLeg の各Legへ常時同期（API消費ゼロ）"""
     ml = day_db.get("multiLeg")
     if not isinstance(ml, dict) or not isinstance(ml.get("legs"), list):
         return
@@ -430,8 +452,7 @@ def sync_multileg_results(day_db: dict, mode: str):
     by_id = {r.get("raceId"): r for r in races if r.get("raceId")}
     by_vlabel = {r.get("venueLabel"): r for r in races if r.get("venueLabel")}
 
-    finished = 0
-    leg_rids = []
+    finished, leg_rids = 0, []
     for leg in ml["legs"]:
         r = by_id.get(leg.get("raceId")) or by_vlabel.get(leg.get("venue")) or next((x for x in races if x.get("name") == leg.get("name")), None)
         if not r: continue
@@ -445,8 +466,7 @@ def sync_multileg_results(day_db: dict, mode: str):
     ml["finishedLegs"] = finished
     if mode == "jra" and finished == len(ml["legs"]) and finished == 5 and not ml.get("officialPayout"):
         pay = fetch_official_win5_payout(leg_rids)
-        if pay > 0:
-            ml["officialPayout"] = pay
+        if pay > 0: ml["officialPayout"] = pay
 
 def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
     dt = datetime.strptime(date_str, "%Y-%m-%d")
@@ -467,7 +487,7 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
             selected = sorted(pool[:5], key=lambda x: x.get("postTime") or "15:00")
 
     all_finished = all(bool(r.get("actualTop3")) for r in selected)
-    if mode == "jra" and len(selected) == 5 and not all_finished:
+    if mode == "jra" and len(selected) == 5 and not all_finished and not time_exceeded():
         blocks = []
         for idx, r in enumerate(selected):
             h_txt = "\n".join([f" {h['num']}番{h['name']}(脚質:{h['style']} 単勝:{h['odds']}倍 {h['comment']})" for h in r["horses"][:16]])
@@ -479,18 +499,12 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
         )
         ai_w = call_gemini("app-bayesian-win5", w_prompt, tier="high_h")
         if isinstance(ai_w, dict) and isinstance(ai_w.get("legs"), list) and len(ai_w["legs"]) == 5:
-            ai_w["predicted"] = True
-            ai_w["aiPredicted"] = True
-            ai_w["date"] = date_str
-            ai_w["engineVer"] = ENGINE_VER
+            ai_w["predicted"] = True; ai_w["aiPredicted"] = True; ai_w["date"] = date_str; ai_w["engineVer"] = ENGINE_VER
             for idx, r in enumerate(selected):
                 leg_obj = ai_w["legs"][idx]
-                leg_obj["raceId"] = r["raceId"]
-                leg_obj["venue"] = r["venueLabel"]
-                leg_obj["name"] = r["name"]
+                leg_obj["raceId"], leg_obj["venue"], leg_obj["name"] = r["raceId"], r["venueLabel"], r["name"]
                 leg_obj["postTime"] = r.get("postTime", leg_obj.get("postTime", ""))
-                leg_hs = leg_obj.get("horses", [])
-                by_num = {int(h["num"]): h for h in leg_hs if str(h.get("num","")).isdigit()}
+                by_num = {int(h["num"]): h for h in leg_obj.get("horses", []) if str(h.get("num","")).isdigit()}
                 if by_num:
                     for h in r["horses"]:
                         if h["num"] in by_num:
@@ -523,39 +537,49 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
     hedges = [{"num": h["num"], "name": f"{legs[-1]['venue']} {h['name']}", "odds": h["odds"], "hedge50k": int((50000 / max(1.5, h["odds"]) + 99) // 100 * 100), "hedge100k": int((100000 / max(1.5, h["odds"]) + 99) // 100 * 100)} for h in last_hs]
     return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} 実力ベースライン編成（{'トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 100円単位'}）】", "legs": legs, "hedges": hedges}
 
+def should_check_result(date_str: str, post_time: str, now: datetime) -> bool:
+    today_str = now.strftime("%Y-%m-%d")
+    if date_str < today_str: return True
+    if date_str > today_str: return False
+    if re.match(r"^\d{2}:\d{2}$", post_time or ""):
+        pdt = datetime.strptime(f"{date_str} {post_time}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
+        return now >= (pdt + timedelta(minutes=5))
+    return now.hour >= 10
+
 def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool, mode: str = "jra"):
+    log(f"Processing {date_str} ({mode}, {len(races)} races)")
     suffix = "_nar" if mode == "nar" else ""
     db_path = f"data/{date_str}{suffix}.json"
     day_db = json.load(open(db_path, "r", encoding="utf-8")) if os.path.exists(db_path) else {"date": date_str, "mode": mode, "races": races}
     if not day_db.get("races") and races: day_db["races"] = races
     day_db["mode"] = mode
-    need_upgrade = (day_db.get("engineVer") != ENGINE_VER)
 
     dt = datetime.strptime(date_str, "%Y-%m-%d")
     if mode == "jra" and dt.weekday() != 6:
         day_db.pop("multiLeg", None)
 
     for r in day_db.get("races", []):
-        needs_fix = need_upgrade or (not r.get("postTime") or (r.get("postTime") == "15:00" and r.get("raceNumber", 11) < 10))
-        needs_payout = (not r.get("payouts")) or (not r.get("actualTop3"))
+        if time_exceeded():
+            log("Time cap reached in scraping loop; saving progress.")
+            break
         has_real = isinstance(r.get("horses"), list) and len(r["horses"]) >= 5
-        if has_real and not needs_fix and not needs_payout and r.get("evalDone"):
+        bad_time = (not r.get("postTime")) or (r.get("postTime") == "15:00" and r.get("raceNumber", 11) < 10)
+        can_have_result = should_check_result(date_str, r.get("postTime", ""), now)
+        need_res = can_have_result and ((not r.get("evalDone")) or (not r.get("actualTop3")))
+        need_sh = (not has_real) or bad_time
+
+        if not need_sh and not need_res:
             continue
-        detail, actual, raw_runners, track_cond, ptime, payouts = fetch_full_shutuba(r["raceId"], mode=mode)
+
+        detail, actual, raw_runners, track_cond, ptime, payouts = fetch_full_shutuba(r["raceId"], mode=mode, need_shutuba=need_sh, need_result=need_res)
         if ptime: r["postTime"] = ptime
-        if raw_runners:
+        if raw_runners and need_sh:
             base_horses, n_lead, scen_w = compute_bayesian_full_field(raw_runners, r, track_cond=track_cond)
             r["nLead"], r["trackCond"], r["scenarioWeights"] = n_lead, track_cond, scen_w
-            if not has_real or (need_upgrade and not r.get("aiPredicted")):
+            if not has_real or not r.get("aiPredicted"):
                 r["horses"] = base_horses
                 r["predicted"] = True
                 r["scenario"] = f"{r['venueLabel']}({r['surfaceDist']}・{track_cond}) 実測N_lead={n_lead}頭。3シナリオ混合(S1前残り{scen_w['s1']}% / S2標準{scen_w['s2']}% / S3前崩れ{scen_w['s3']}%)で全{len(base_horses)}頭を推論。"
-            else:
-                by_name = {x["name"]: x for x in raw_runners}
-                for h in r["horses"]:
-                    if h.get("name") in by_name:
-                        h["num"] = by_name[h["name"]]["num"]
-                        if by_name[h["name"]]["odds"] > 1.0: h["odds"] = by_name[h["name"]]["odds"]
             r["detailText"] = detail
         if actual: r["actualTop3"] = actual
         if payouts and any(payouts.values()):
@@ -566,13 +590,15 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
                 prof = ev["returnYen"] - ev["investedYen"]
                 r["resultStatus"] = f"🎯 的中 払戻{ev['returnYen']:,}円 (回収率{ev['actualRoi']}% / {prof:+,}円)" if ev["isHit"] else f"❌ 不的中 回収率0.0%"
 
-    if (mode == "jra" and dt.weekday() == 6) or mode == "nar":
+    # 1. 日曜WIN5（Gemini 4 Hydrogen HIGH 一括）または地方トリプル馬単
+    if ((mode == "jra" and dt.weekday() == 6) or mode == "nar") and not time_exceeded():
         cur_ml = day_db.get("multiLeg") or {}
-        need_ml_ai = (not cur_ml.get("aiPredicted")) or (need_upgrade and "hydrogen" not in str(cur_ml.get("usedModel", "")))
+        need_ml_ai = (not cur_ml.get("aiPredicted")) or (cur_ml.get("engineVer") != ENGINE_VER and "hydrogen" not in str(cur_ml.get("usedModel", "")))
         if need_ml_ai:
             mleg = build_multileg_with_ai(day_db.get("races", []), mode, date_str)
             if mleg: day_db["multiLeg"] = mleg
 
+    # 2. 未発走の勝負レースへハイブリッドAI本推論を適用
     ai_candidates = []
     for r in day_db.get("races", []):
         if not r.get("horses") or r.get("actualTop3") or r.get("rank") == "Pass":
@@ -581,7 +607,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             continue
         tier = classify_race_tier(r)
         used = str(r.get("usedModel", ""))
-        needs_ai = (not r.get("aiPredicted")) or (need_upgrade and tier in ("high_h", "med_h") and "hydrogen" not in used)
+        needs_ai = (not r.get("aiPredicted")) or (tier in ("high_h", "med_h") and "hydrogen" not in used)
         if not needs_ai:
             continue
         prio = 0 if tier == "high_h" else (1 if tier == "med_h" else 2)
@@ -592,10 +618,10 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         ai_candidates.append((prio, tier, r))
 
     ai_candidates.sort(key=lambda x: x[0])
-    for _, tier, r in ai_candidates[:4]:
-        if AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN: break
+    for _, tier, r in ai_candidates[:2]:
+        if AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN or time_exceeded(): break
         bias_info = summarize_intraday_track_bias(day_db.get("races", []), r["venue"])
-        detail = r.pop("detailText", "") or f"{r['venueLabel']} {r['name']}"
+        detail = r.pop("detailText", "") or "\n".join([f"{h['num']}番{h['name']}(脚質:{h['style']} 単勝:{h['odds']}倍 {h['comment']})" for h in r["horses"]])
         pred = call_gemini(
             r["skill"],
             f"【モード: 標準（全頭評価）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')})\n"
@@ -624,7 +650,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
                 if k in pred: r[k] = pred[k]
             r["aiPredicted"] = True
 
-    # 最後に全レースの確定結果を multiLeg（WIN5 / トリプル馬単）へ同期
     sync_multileg_results(day_db, mode)
 
     for r in day_db.get("races", []): r.pop("detailText", None)
@@ -633,6 +658,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
     day_db["engineVer"] = ENGINE_VER
     day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
     json.dump(day_db, open(db_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    log(f"Saved {db_path}")
 
 def empty_scope_stats() -> dict:
     return {
@@ -641,7 +667,6 @@ def empty_scope_stats() -> dict:
     }
 
 def update_global_stats(now: datetime):
-    """全体 / JRA / NAR ごと、さらに S / A / New / B のランク別成績・回収率を自動集計"""
     scopes = {"all": empty_scope_stats(), "jra": empty_scope_stats(), "nar": empty_scope_stats()}
     recent = []
     for fp in sorted(glob.glob("data/20*.json"), reverse=True):
@@ -678,9 +703,11 @@ def update_global_stats(now: datetime):
         except Exception: pass
     payload = {"updatedAt": now.strftime("%Y-%m-%d %H:%M JST"), **scopes, "recentResults": recent}
     json.dump(payload, open("data/stats.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    log("Updated data/stats.json")
 
 def run_pipeline():
     now = datetime.now(JST)
+    log(f"Pipeline start ({ENGINE_VER}) at {now.strftime('%Y-%m-%d %H:%M JST')}")
     is_weekend = now.weekday() in (5, 6)
     is_weekend_jra_hours = is_weekend and (8 <= now.hour < 17)
 
@@ -694,23 +721,31 @@ def run_pipeline():
 
     upcoming_days.sort(key=lambda x: 0 if x[0].weekday() == 6 else 1)
     for dt, rs, is_td in upcoming_days:
+        if time_exceeded(): break
         process_kaisai_day(dt.strftime("%Y-%m-%d"), rs, now, is_td, "jra")
 
     for off in [-1, -2, -3, -4, -5]:
+        if time_exceeded(): break
         dt = now + timedelta(days=off)
         rs = fetch_race_list(dt.strftime("%Y%m%d"), "jra")
-        if len(rs) >= 6: process_kaisai_day(dt.strftime("%Y-%m-%d"), rs, now, False, "jra"); break
+        if len(rs) >= 6:
+            process_kaisai_day(dt.strftime("%Y-%m-%d"), rs, now, False, "jra")
+            break
 
-    if not is_weekend_jra_hours:
+    if not is_weekend_jra_hours and not time_exceeded():
         for off in [0, -1, 1]:
+            if time_exceeded(): break
             dt = now + timedelta(days=off)
             n_races = fetch_race_list(dt.strftime("%Y%m%d"), "nar")
-            if len(n_races) >= 3: process_kaisai_day(dt.strftime("%Y-%m-%d"), n_races, now, off == 0, "nar"); break
+            if len(n_races) >= 3:
+                process_kaisai_day(dt.strftime("%Y-%m-%d"), n_races, now, off == 0, "nar")
+                break
 
     update_global_stats(now)
     jra_files = sorted([os.path.basename(p).replace(".json", "") for p in glob.glob("data/20*.json") if not p.endswith("_nar.json")])
     nar_files = sorted([os.path.basename(p).replace(".json", "") for p in glob.glob("data/20*_nar.json")])
     json.dump({"availableDates": jra_files, "narDates": nar_files, "lastSync": now.strftime("%Y-%m-%d %H:%M JST")}, open("data/index.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    log("Pipeline finished successfully.")
 
 if __name__ == "__main__":
     run_pipeline()
