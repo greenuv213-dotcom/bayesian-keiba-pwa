@@ -4,7 +4,6 @@ from bs4 import BeautifulSoup
 from google import genai
 from google.genai import types
 
-# Gemini 4 Hydrogen (HIGH) の深い思考時間に対応するためタイムアウトを90秒へ拡張
 socket.setdefaulttimeout(90)
 
 JST = timezone(timedelta(hours=9))
@@ -353,7 +352,6 @@ def evaluate_10k_payout(race: dict) -> dict:
     return {"investedYen": B, "returnYen": total_ret, "actualRoi": round(total_ret * 100.0 / B, 1), "isHit": total_ret > 0, "hitTickets": hit_labels}
 
 def classify_race_tier(r: dict) -> str:
-    """ハイブリッド振り分け: WIN5・重賞・S・メイン11R=high_h / 新馬=med_h / その他A=flash"""
     if r.get("rank") == "New":
         return "med_h"
     if r.get("rank") == "S" or r.get("raceNumber") == 11 or any(g in r.get("name", "") for g in GRADED_KEYWORDS):
@@ -361,12 +359,6 @@ def classify_race_tier(r: dict) -> str:
     return "flash"
 
 def call_gemini(skill: str, prompt: str, tier: str = "flash") -> dict:
-    """
-    無料枠計40回/日のハイブリッド呼び出し:
-      - tier='high_h': WIN5・重賞・Sランク・メイン11R -> gemini-4-hydrogen (HIGH) -> 3.8 Flash
-      - tier='med_h' : 新馬戦                        -> gemini-4-hydrogen (MEDIUM) -> 3.8 Flash
-      - tier='flash' : その他のAランク等              -> gemini-3.8-flash (MEDIUM) のみ（Hydrogen枠を温存）
-    """
     global AI_CALL_COUNT
     if not client or AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN: return {}
     AI_CALL_COUNT += 1
@@ -414,8 +406,49 @@ def fetch_official_win5_ids() -> list:
     except Exception: pass
     return []
 
+def fetch_official_win5_payout(target_race_ids: list) -> int:
+    """netkeibaのWIN5ページから公式払戻金(100円あたり)を取得"""
+    try:
+        soup = get_soup("https://race.netkeiba.com/top/win5.html")
+        page_ids = re.findall(r"race_id=(\d{12})", str(soup))
+        if target_race_ids and not any(rid in page_ids for rid in target_race_ids):
+            return 0
+        txt = soup.get_text(" ", strip=True)
+        m = re.search(r"(?:払戻金|配当)[^\d]{0,15}([\d,]{3,12})\s*円", txt)
+        if m:
+            val = int(m.group(1).replace(",", ""))
+            if val >= 100: return val
+    except Exception: pass
+    return 0
+
+def sync_multileg_results(day_db: dict, mode: str):
+    """確定レースの1〜3着結果とWIN5公式払戻金を multiLeg の各Legへ常時同期（API消費ゼロ）"""
+    ml = day_db.get("multiLeg")
+    if not isinstance(ml, dict) or not isinstance(ml.get("legs"), list):
+        return
+    races = day_db.get("races") or []
+    by_id = {r.get("raceId"): r for r in races if r.get("raceId")}
+    by_vlabel = {r.get("venueLabel"): r for r in races if r.get("venueLabel")}
+
+    finished = 0
+    leg_rids = []
+    for leg in ml["legs"]:
+        r = by_id.get(leg.get("raceId")) or by_vlabel.get(leg.get("venue")) or next((x for x in races if x.get("name") == leg.get("name")), None)
+        if not r: continue
+        leg["raceId"] = r.get("raceId", leg.get("raceId", ""))
+        if r.get("postTime"): leg["postTime"] = r["postTime"]
+        if leg["raceId"]: leg_rids.append(leg["raceId"])
+        if r.get("actualTop3"):
+            leg["actualTop3"] = r["actualTop3"]
+            leg["actualWinner"] = r["actualTop3"][0]
+            finished += 1
+    ml["finishedLegs"] = finished
+    if mode == "jra" and finished == len(ml["legs"]) and finished == 5 and not ml.get("officialPayout"):
+        pay = fetch_official_win5_payout(leg_rids)
+        if pay > 0:
+            ml["officialPayout"] = pay
+
 def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
-    """JRA日曜WIN5は app-bayesian-win5 を Gemini 4 Hydrogen (HIGH) で5鞍一括推論"""
     dt = datetime.strptime(date_str, "%Y-%m-%d")
     if mode == "nar":
         cand = [r for r in races if r.get("raceNumber") in (10, 11, 12) and isinstance(r.get("horses"), list) and len(r["horses"]) >= 2]
@@ -433,7 +466,6 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
             if len(pool) < 5: return {}
             selected = sorted(pool[:5], key=lambda x: x.get("postTime") or "15:00")
 
-    # すでに全対象レースが終了している過去日はAPI消費せずスキップ
     all_finished = all(bool(r.get("actualTop3")) for r in selected)
     if mode == "jra" and len(selected) == 5 and not all_finished:
         blocks = []
@@ -452,7 +484,12 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
             ai_w["date"] = date_str
             ai_w["engineVer"] = ENGINE_VER
             for idx, r in enumerate(selected):
-                leg_hs = ai_w["legs"][idx].get("horses", [])
+                leg_obj = ai_w["legs"][idx]
+                leg_obj["raceId"] = r["raceId"]
+                leg_obj["venue"] = r["venueLabel"]
+                leg_obj["name"] = r["name"]
+                leg_obj["postTime"] = r.get("postTime", leg_obj.get("postTime", ""))
+                leg_hs = leg_obj.get("horses", [])
                 by_num = {int(h["num"]): h for h in leg_hs if str(h.get("num","")).isdigit()}
                 if by_num:
                     for h in r["horses"]:
@@ -470,14 +507,14 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
                         x["mark"] = ["◎","◯","▲","☆","△","△","△"][rk] if rk < 7 else "無"
                     r["aiPredicted"] = True
                     r["usedModel"] = ai_w.get("usedModel", "gemini-4-hydrogen(HIGH)")
-                    if ai_w["legs"][idx].get("note"): r["scenario"] = ai_w["legs"][idx]["note"]
+                    if leg_obj.get("note"): r["scenario"] = leg_obj["note"]
             return ai_w
 
     legs = []
     for idx, r in enumerate(selected):
         hs = sorted(r["horses"], key=lambda x: float(x.get("f", 10)), reverse=True)
         legs.append({
-            "leg": idx + 1, "venue": r["venueLabel"], "name": r["name"], "cond": r["surfaceDist"],
+            "leg": idx + 1, "raceId": r["raceId"], "venue": r["venueLabel"], "name": r["name"], "cond": r["surfaceDist"],
             "postTime": r.get("postTime", ""), "typeBPlus": (float(hs[0].get("f", 25)) < 25.5 or r.get("nLead", 3) >= 4),
             "note": r.get("scenario", "")[:55],
             "horses": [{"num": h.get("num", 1), "name": h.get("name", "有力馬"), "f": float(h.get("f", 15)), "odds": float(h.get("odds", 5.5)), "note": h.get("comment", "")[:34]} for h in hs[:7]]
@@ -529,7 +566,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
                 prof = ev["returnYen"] - ev["investedYen"]
                 r["resultStatus"] = f"🎯 的中 払戻{ev['returnYen']:,}円 (回収率{ev['actualRoi']}% / {prof:+,}円)" if ev["isHit"] else f"❌ 不的中 回収率0.0%"
 
-    # 1. 日曜WIN5（Hydrogen HIGH 一括）または地方トリプル馬単
     if (mode == "jra" and dt.weekday() == 6) or mode == "nar":
         cur_ml = day_db.get("multiLeg") or {}
         need_ml_ai = (not cur_ml.get("aiPredicted")) or (need_upgrade and "hydrogen" not in str(cur_ml.get("usedModel", "")))
@@ -537,7 +573,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             mleg = build_multileg_with_ai(day_db.get("races", []), mode, date_str)
             if mleg: day_db["multiLeg"] = mleg
 
-    # 2. 未発走の勝負レースへハイブリッドAI本推論を適用（重賞・S・11R・新馬 -> Hydrogen / その他A -> 3.8 Flash）
     ai_candidates = []
     for r in day_db.get("races", []):
         if not r.get("horses") or r.get("actualTop3") or r.get("rank") == "Pass":
@@ -549,7 +584,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         needs_ai = (not r.get("aiPredicted")) or (need_upgrade and tier in ("high_h", "med_h") and "hydrogen" not in used)
         if not needs_ai:
             continue
-        # 発走1時間前優先、それ以外は重要度順（重賞/11R -> 新馬 -> その他A）
         prio = 0 if tier == "high_h" else (1 if tier == "med_h" else 2)
         if is_today and re.match(r"^\d{2}:\d{2}$", r.get("postTime", "")):
             pdt = datetime.strptime(f"{date_str} {r['postTime']}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
@@ -590,6 +624,9 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
                 if k in pred: r[k] = pred[k]
             r["aiPredicted"] = True
 
+    # 最後に全レースの確定結果を multiLeg（WIN5 / トリプル馬単）へ同期
+    sync_multileg_results(day_db, mode)
+
     for r in day_db.get("races", []): r.pop("detailText", None)
     venues = sorted(list({r["venue"] for r in day_db.get("races", [])}))
     day_db["trackBiases"] = [{"venue": v, "surf": "Gemini 4 Hybrid・実配当照合済", "trend": summarize_intraday_track_bias(day_db.get("races", []), v)} for v in venues]
@@ -597,24 +634,50 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
     day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
     json.dump(day_db, open(db_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 
+def empty_scope_stats() -> dict:
+    return {
+        "races": 0, "hits": 0, "invest": 0, "ret": 0, "passCount": 0, "passSaved": 0,
+        "byRank": {rk: {"races": 0, "hits": 0, "invest": 0, "ret": 0} for rk in ("S", "A", "New", "B")}
+    }
+
 def update_global_stats(now: datetime):
-    jra, nar = {"races": 0, "hits": 0, "invest": 0, "ret": 0, "passSaved": 0}, {"races": 0, "hits": 0, "invest": 0, "ret": 0, "passSaved": 0}
+    """全体 / JRA / NAR ごと、さらに S / A / New / B のランク別成績・回収率を自動集計"""
+    scopes = {"all": empty_scope_stats(), "jra": empty_scope_stats(), "nar": empty_scope_stats()}
     recent = []
     for fp in sorted(glob.glob("data/20*.json"), reverse=True):
         try:
             d = json.load(open(fp, "r", encoding="utf-8"))
             is_nar = d.get("mode") == "nar" or fp.endswith("_nar.json")
-            b = nar if is_nar else jra
+            mode_key = "nar" if is_nar else "jra"
             for r in d.get("races", []):
-                if r.get("rank") == "Pass": b["passSaved"] += 10000
+                rk_raw = r.get("rank", "B")
+                if rk_raw == "Pass":
+                    for sk in ("all", mode_key):
+                        scopes[sk]["passCount"] += 1
+                        scopes[sk]["passSaved"] += 10000
                 elif r.get("evalDone") and r.get("investedYen"):
+                    rk = rk_raw if rk_raw in ("S", "A", "New", "B") else "B"
                     inv, ret = int(r["investedYen"]), int(r.get("returnYen", 0))
-                    b["races"] += 1; b["invest"] += inv; b["ret"] += ret
-                    if ret > 0: b["hits"] += 1
-                    if len(recent) < 12:
-                        recent.append({"date": d.get("date",""), "race": f"{r['venueLabel']} {r['name']}", "status": r.get("resultStatus",""), "roi": f"{r.get('actualRoi',0)}%", "hits": r.get("hitTickets", [])})
+                    is_hit = ret > 0
+                    for sk in ("all", mode_key):
+                        b = scopes[sk]
+                        b["races"] += 1; b["invest"] += inv; b["ret"] += ret
+                        if is_hit: b["hits"] += 1
+                        rb = b["byRank"][rk]
+                        rb["races"] += 1; rb["invest"] += inv; rb["ret"] += ret
+                        if is_hit: rb["hits"] += 1
+                    if len(recent) < 40:
+                        recent.append({
+                            "date": d.get("date", ""), "mode": mode_key, "rank": rk,
+                            "race": f"{r['venueLabel']} {r['name']}",
+                            "status": r.get("resultStatus", ""),
+                            "roi": float(r.get("actualRoi", 0)),
+                            "returnYen": ret, "investedYen": inv, "isHit": is_hit,
+                            "hits": r.get("hitTickets", [])
+                        })
         except Exception: pass
-    json.dump({"updatedAt": now.strftime("%Y-%m-%d %H:%M JST"), "jra": jra, "nar": nar, "recentResults": recent}, open("data/stats.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
+    payload = {"updatedAt": now.strftime("%Y-%m-%d %H:%M JST"), **scopes, "recentResults": recent}
+    json.dump(payload, open("data/stats.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
 
 def run_pipeline():
     now = datetime.now(JST)
@@ -629,7 +692,6 @@ def run_pipeline():
             upcoming_days.append((dt, rs, off == 0))
             if len(upcoming_days) >= 2: break
 
-    # 日曜WIN5対象日を最優先で処理し、Gemini 4 Hydrogen枠を確実に確保する
     upcoming_days.sort(key=lambda x: 0 if x[0].weekday() == 6 else 1)
     for dt, rs, is_td in upcoming_days:
         process_kaisai_day(dt.strftime("%Y-%m-%d"), rs, now, is_td, "jra")
