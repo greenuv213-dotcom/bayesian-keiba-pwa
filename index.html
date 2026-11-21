@@ -48,6 +48,7 @@
   </header>
 
   <main class="max-w-xl mx-auto px-3 pt-3">
+    <!-- ① レース一覧ビュー -->
     <section id="view-races" class="space-y-3">
       <div class="flex items-center justify-between gap-2">
         <div id="venueFilter" class="flex gap-1 overflow-x-auto no-scrollbar"></div>
@@ -63,11 +64,12 @@
           <span><b class="text-slate-300">B</b>:標準</span>
           <span>💤<b class="text-slate-500">Pass</b>:見送り</span>
         </div>
-        <span id="circuitLockLabel" class="shrink-0 text-emerald-400 font-semibold ml-1">3シナリオ混合・直前補正付</span>
+        <span id="circuitLockLabel" class="shrink-0 text-emerald-400 font-semibold ml-1">1万円実配当照合対応</span>
       </div>
       <div id="raceList" class="space-y-2.5"></div>
     </section>
 
+    <!-- ② WIN5（JRA時） ／ トリプル馬単（NAR地方時） ビュー -->
     <section id="view-win5" class="hidden space-y-3">
       <div class="bg-gradient-to-br from-indigo-950/80 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-xl p-3.5 space-y-3">
         <div class="flex items-center justify-between gap-2">
@@ -83,7 +85,7 @@
         <p id="win5SummaryText" class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-lg p-2.5"></p>
         <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
-            <span id="multiLegSliderLabel" class="text-xs text-slate-300 font-bold">💰 総予算変更（5,000円〜50,000円）</span>
+            <span class="text-xs text-slate-300 font-bold">💰 総予算変更（5,000円〜50,000円）</span>
             <span class="text-[11px] text-emerald-400 whitespace-nowrap">プランA・B同時再計算</span>
           </div>
           <input id="win5BudgetSlider" type="range" min="5000" max="50000" step="1000" value="10000" oninput="updateWin5Budget(this.value)" class="w-full" />
@@ -107,33 +109,40 @@
       </div>
     </section>
 
+    <!-- ③ 成績・回収率ビュー（1万円実配当集計） -->
     <section id="view-stats" class="hidden space-y-3">
       <div class="grid grid-cols-2 gap-2.5">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
-          <div class="text-[11px] text-slate-400">JRA中央 回収率 (的中率)</div>
-          <div id="statJraRoi" class="text-xl font-extrabold text-emerald-400 mt-0.5">148.6% (45.6%)</div>
-          <div id="statJraProfit" class="text-[11px] text-slate-400 mt-1">純利益: <span class="text-emerald-300 font-bold">+330,400円</span></div>
+          <div class="text-[11px] text-slate-400">JRA中央 確定回収率 (1万円基準)</div>
+          <div id="statJraRoi" class="text-xl font-extrabold text-emerald-400 mt-0.5">--%</div>
+          <div id="statJraProfit" class="text-[11px] text-slate-400 mt-1">集計中...</div>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
-          <div class="text-[11px] text-slate-400">NAR地方 回収率 (的中率)</div>
-          <div id="statNarRoi" class="text-xl font-extrabold text-amber-400 mt-0.5">136.4% (45.8%)</div>
-          <div id="statPassSaved" class="text-[11px] text-slate-400 mt-1">Pass防衛累計: <span class="text-sky-300 font-bold">270,000円</span></div>
+          <div class="text-[11px] text-slate-400">NAR地方 確定回収率 (1万円基準)</div>
+          <div id="statNarRoi" class="text-xl font-extrabold text-amber-400 mt-0.5">--%</div>
+          <div id="statNarProfit" class="text-[11px] text-slate-400 mt-1">集計中...</div>
         </div>
+      </div>
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold text-emerald-300">🎯 レース別 1万円実配当・回収率ログ</h3>
+          <span id="statUpdatedAt" class="text-[10px] text-slate-400">公式払戻金照合</span>
+        </div>
+        <div id="statRecentLogs" class="space-y-2 text-xs"></div>
       </div>
     </section>
 
+    <!-- ④ スキル管理ビュー -->
     <section id="view-skills" class="hidden space-y-3">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between">
-          <h2 class="text-sm font-bold text-white">🧬 全6大精度アップ要素・完全統合済</h2>
-          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">チャット版100%同期</span>
+          <h2 class="text-sm font-bold text-white">🧬 実配当照合・WIN5最新化 稼働状況</h2>
+          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">v10.0 完全版</span>
         </div>
         <ul class="text-xs text-slate-300 space-y-1.5 leading-relaxed list-disc pl-4">
-          <li><b>実測 $N_{\text{lead}}$ ＆真の脚質解析</b>：過去走コーナー通過順から先行激化度と脚質を自動特定。</li>
-          <li><b>3シナリオ混合 Plackett-Luce</b>：$S_1$前残り・$S_2$標準・$S_3$前崩れの3展開を混合推論。画面上でワンタップ展開切替も可能。</li>
-          <li><b>善戦マン＆現級0.2s差巻き返し検知</b>：勝ち味に遅い善戦馬を2・3着Anchor(`▲`)へ自動配置し、前走異条件凡走の実力馬を`☆`特注抜擢。</li>
-          <li><b>芝発進ダート＆道悪500kg外枠物理</b>：内ポケット残しと7〜8枠先行昇格、1800m+での+12kg太め減点を自動適用。</li>
-          <li><b>直前パドック・スマートマネー1タップ補正</b>：各馬カードのボタンで発走5分前の気配・オッズ急落を即座に全9行買い目へ反映。</li>
+          <li><b>土日2開催日同時取得</b>：土曜夜時点で翌日曜のWIN5対象5鞍と出馬表を自動取得。</li>
+          <li><b>正確な発走時刻・馬番同期</b>：`shutuba.html` と確定結果を馬名照合してズレを完全解消。</li>
+          <li><b>1万円前提の実配当・的中馬券照合</b>：公式払戻金テーブルから各買い目の的中／不的中とレース別回収率を厳密計算。</li>
         </ul>
       </div>
     </section>
@@ -155,37 +164,29 @@
       </div>
 
       <div class="overflow-y-auto p-3 space-y-3">
-        <!-- 展開シナリオ推論 ＆ ワンタップ3シナリオ切替バー -->
+        <!-- 確定結果 ＆ 1万円購入実配当バナー（結果確定レースのみ表示） -->
+        <div id="modalResultBanner" class="hidden rounded-xl p-3 space-y-2 border"></div>
+
+        <!-- 展開シナリオ推論 ＆ 3シナリオ切替 -->
         <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 space-y-2">
           <div class="flex items-center justify-between text-[11px] gap-2">
             <span class="text-emerald-400 font-bold">🧠 3シナリオ混合ベイズ展開推論（F/E/H）</span>
             <span id="modalPivotInfo" class="text-slate-400 font-mono shrink-0"></span>
           </div>
           <p id="modalScenario" class="text-xs text-slate-200 leading-relaxed break-words"></p>
-          <div class="pt-1 border-t border-slate-800/80 space-y-1">
-            <div class="flex items-center justify-between text-[10px] text-slate-400">
-              <span>⚡ 展開シナリオ切替シミュレーション（タップで全頭勝率＆9行買い目を即時再計算）</span>
-            </div>
-            <div class="grid grid-cols-3 gap-1.5">
-              <button type="button" id="scenBtnMix" onclick="setScenarioMode('mix')" class="text-[11px] font-extrabold py-1 px-1.5 rounded-lg bg-emerald-500 text-slate-950">
-                標準3展開混合
-              </button>
-              <button type="button" id="scenBtnS1" onclick="setScenarioMode('s1')" class="text-[11px] font-bold py-1 px-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300">
-                S1:前残り/内有利
-              </button>
-              <button type="button" id="scenBtnS3" onclick="setScenarioMode('s3')" class="text-[11px] font-bold py-1 px-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300">
-                S3:前崩れ/外差し
-              </button>
-            </div>
+          <div class="pt-1 border-t border-slate-800/80 grid grid-cols-3 gap-1.5">
+            <button type="button" id="scenBtnMix" onclick="setScenarioMode('mix')" class="text-[11px] font-extrabold py-1 px-1.5 rounded-lg bg-emerald-500 text-slate-950">標準3展開混合</button>
+            <button type="button" id="scenBtnS1" onclick="setScenarioMode('s1')" class="text-[11px] font-bold py-1 px-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300">S1:前残り/内</button>
+            <button type="button" id="scenBtnS3" onclick="setScenarioMode('s3')" class="text-[11px] font-bold py-1 px-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300">S3:前崩れ/外</button>
           </div>
         </div>
 
-        <!-- スキル完全準拠・多展開カバー買い目テーブル -->
+        <!-- 買い目テーブル（結果確定時は各馬券の的中バッジ・確定払戻を表示） -->
         <div class="bg-gradient-to-br from-emerald-950/50 via-slate-900 to-slate-950 border border-emerald-500/40 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
             <div class="min-w-0">
-              <div id="modalTicketHeaderTitle" class="text-xs text-emerald-300 font-bold">💰 チャット版スキル完全再現・多展開カバー配分表</div>
-              <div class="text-[11px] text-slate-400">Plackett-Luce結合確率・損益分岐・1/4 Kelly参考額併記</div>
+              <div id="modalTicketHeaderTitle" class="text-xs text-emerald-300 font-bold">💰 多展開カバー配分表（基準1万円）</div>
+              <div class="text-[11px] text-slate-400">結果確定後は公式払戻金で各馬券の的中・実回収率を自動判定</div>
             </div>
             <span id="modalBudgetValue" class="shrink-0 text-lg font-extrabold text-amber-400 whitespace-nowrap">10,000円</span>
           </div>
@@ -197,25 +198,20 @@
             <button onclick="onModalBudgetChange(20000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">20,000円</button>
             <button onclick="onModalBudgetChange(30000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">30,000円</button>
           </div>
-
           <div id="modalTicketsList" class="space-y-2 pt-1"></div>
           <div id="modalPortfolioMetrics" class="bg-slate-950/90 border border-slate-800 rounded-lg p-2.5 text-[11px] text-slate-300 space-y-1"></div>
         </div>
 
-        <!-- 全頭評価セクション（直前パドック・スマートマネー1タップ補正ボタン付き） -->
+        <!-- 全頭評価 -->
         <div class="space-y-2">
           <div class="flex items-center justify-between gap-2 flex-wrap px-0.5">
             <div>
-              <span id="modalRunnerCountLabel" class="text-xs font-bold text-white">🏇 出走全頭 確率＆直前パドック・オッズ補正</span>
+              <span id="modalRunnerCountLabel" class="text-xs font-bold text-white">🏇 出走全頭 確率＆直前補正</span>
               <div id="modalProbSumLabel" class="text-[10px] text-emerald-400 font-mono"></div>
             </div>
             <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-0.5">
-              <button type="button" id="sortBtnProb" onclick="setHorseSort('prob')" class="text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950">
-                純粋勝率順
-              </button>
-              <button type="button" id="sortBtnNum" onclick="setHorseSort('num')" class="text-xs font-bold px-2.5 py-1 rounded text-slate-400">
-                馬番順
-              </button>
+              <button type="button" id="sortBtnProb" onclick="setHorseSort('prob')" class="text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950">純粋勝率順</button>
+              <button type="button" id="sortBtnNum" onclick="setHorseSort('num')" class="text-xs font-bold px-2.5 py-1 rounded text-slate-400">馬番順</button>
             </div>
           </div>
           <div id="modalHorsesList" class="space-y-1.5"></div>
@@ -236,116 +232,19 @@
   </nav>
 
   <script>
-    const DB_JRA = {
-      "2026-11-15": {
-        label: "11/15(日) 検証済(全9行)",
-        status: "result",
-        biases: [
-          { venue: "京都", surf: "芝CV 9.2 / Bコース", trend: "3歳軽量・最内好位抜け出し" },
-          { venue: "東京", surf: "芝CV 9.5 / ダ含水3.8%", trend: "芝フラット・ダ外枠好位有利" }
-        ],
-        races: [
-          {
-            id: "20261115-kyo-10", venue: "京都", r: 10, name: "アンドロメダS(L)", cond: "芝2000m (15頭)", time: "15:00",
-            rank: "S", skill: "app-bayesian-horse-racing-text", roi: "173%", hitRate: "48%", pivot: "Dual-Pivot", nLead: 3,
-            status: "🎯 的中 (払戻 33,820円)",
-            scenario: "58kg病み上がり人気馬を割り引き、◎1番バッデレイト・◯2番レクスノヴァスの内枠双頭軸と▲5番のトライアングル構成。Coreワイド3本線＋Alpha単勝2本・馬連3本・3連複15点の計9行で全展開をカバー。",
-            horses: [
-              { mark: "◎", role: "1着妙味主軸", num: 1, name: "バッデレイト", style: "先", f: 17.5, q: 11.5, top2: 32.5, top3: 48.0, odds: 7.6, comment: "F:1枠1番・京都2000m好位持続力最上位 / H:内枠ポケット抜け出し" },
-              { mark: "◯", role: "双頭対抗軸", num: 2, name: "レクスノヴァス", style: "先", f: 15.0, q: 10.8, top2: 29.0, top3: 44.5, odds: 8.0, comment: "F:3歳軽量・後半2F優秀 / H:◎との内枠双頭軸" },
-              { mark: "▲", role: "安定Connector", num: 5, name: "実力安定アンカー", style: "差", f: 14.0, q: 15.5, top2: 28.5, top3: 46.5, odds: 5.2, comment: "F:同級安定勢力 / H:◎-▲および◯-▲タテ目防衛の要" },
-              { mark: "☆", role: "2列目・展開穴", num: 3, name: "イン溜め特注馬", style: "先", f: 10.5, q: 7.0, top2: 21.0, top3: 35.0, odds: 11.8, comment: "F:2枠3番ロスなし / H:3連複2列目・3列目強化" },
-              { mark: "△", role: "3列目連下", num: 6, name: "中団持続候補", style: "差", f: 7.5, q: 6.5, top2: 16.0, top3: 28.0, odds: 13.5, comment: "F:上がり確実 / H:3連複フォーメーション3列目" },
-              { mark: "△", role: "3列目連下", num: 7, name: "好位粘り込み馬", style: "先", f: 6.8, q: 5.8, top2: 14.5, top3: 25.5, odds: 15.2, comment: "F:持続ラップ対応 / H:3連複3列目" },
-              { mark: "△", role: "3列目穴", num: 10, name: "外差し穴候補", style: "差", f: 5.5, q: 4.5, top2: 12.0, top3: 22.0, odds: 19.5, comment: "F:展開流れた際の浮上枠" },
-              { mark: "△", role: "3列目大穴", num: 13, name: "コース巧者伏兵", style: "差", f: 4.7, q: 3.5, top2: 10.5, top3: 19.0, odds: 24.8, comment: "F:京都芝2000m実績あり / H:高配当使者" },
-              { mark: "危", role: "58kg休養明け", num: 4, name: "過重斤量人気馬", style: "先", f: 5.0, q: 18.0, top2: 12.0, top3: 21.0, odds: 4.2, comment: "F:58kg長期休養明け / H:妙味なく軸除外" },
-              { mark: "無", role: "展開不向き", num: 8, name: "ワンペース先行", style: "逃", f: 3.5, q: 4.5, top2: 8.0, top3: 14.0, odds: 22.0, comment: "F:同型との兼ね合い厳しい" },
-              { mark: "無", role: "時計不足", num: 9, name: "昇級初戦馬", style: "差", f: 3.0, q: 3.8, top2: 6.5, top3: 11.5, odds: 28.0, comment: "F:クラス壁あり" },
-              { mark: "無", role: "位置取り後方", num: 11, name: "後方待機馬", style: "追", f: 2.5, q: 3.0, top2: 5.5, top3: 10.0, odds: 35.0, comment: "F:Bコースでは届かず" },
-              { mark: "無", role: "距離延長課題", num: 12, name: "マイラー転戦馬", style: "先", f: 2.0, q: 2.5, top2: 4.5, top3: 8.0, odds: 45.0, comment: "F:2000m長い" },
-              { mark: "無", role: "外枠ロス", num: 14, name: "外枠ジリ脚馬", style: "差", f: 1.5, q: 1.8, top2: 3.5, top3: 6.0, odds: 60.0, comment: "F:外々回らされロス大" },
-              { mark: "消", role: "時計劣勢", num: 15, name: "大外枠苦戦馬", style: "追", f: 1.0, q: 1.3, top2: 2.0, top3: 4.5, odds: 85.0, comment: "F:時計・展開ともに強調材料なし" }
-            ]
-          }
-        ]
-      }
-    };
-
-    const DB_NAR = {
-      "2026-11-18_nar": {
-        label: "南関ナイター・DG",
-        status: "live",
-        biases: [
-          { venue: "大井", surf: "実測N_lead・3シナリオ混合", trend: "当日実測トラックバイアス自動集計" }
-        ],
-        races: []
-      }
-    };
-
-    const WIN5_JRA_DEFAULT = {
-      summary: "【JRA WIN5（100円単位）】5,000円〜50,000円のスライダーで、1枚直積の【プランA】と、本線Ticket 1＋波乱拡張Ticket 2を合算した【プランB】を同時算出します。",
-      legs: [
-        { leg: 1, venue: "福島10R", name: "福島放送賞", cond: "ダ1150m", typeBPlus: true, note: "芝発進乾燥ダート：内ポケット好位＋7〜8枠先行", horses: [
-          { num: 4, name: "内ポケット好位馬", f: 22.5, odds: 5.4, note: "F:3枠好位" },
-          { num: 14, name: "7枠芝ダッシュ馬", f: 19.5, odds: 6.8, note: "F:7枠先行" },
-          { num: 12, name: "外差し1番手", f: 15.0, odds: 4.2, note: "H:差し保険" }
-        ]},
-        { leg: 2, venue: "東京10R", name: "ユートピアS", cond: "芝1800m", typeBPlus: true, note: "牝馬限定戦：1〜4枠イン溜め優先", horses: [
-          { num: 3, name: "イン溜め瞬発馬", f: 25.0, odds: 3.8, note: "F:2枠イン" },
-          { num: 7, name: "3歳54kg昇級馬", f: 21.5, odds: 4.5, note: "F:後半2F優秀" }
-        ]},
-        { leg: 3, venue: "京都10R", name: "アンドロメダS(L)", cond: "芝2000m", typeBPlus: false, note: "内枠双頭軸抜擢", horses: [
-          { num: 1, name: "バッデレイト", f: 24.5, odds: 7.6, note: "F:最内好位" },
-          { num: 2, name: "レクスノヴァス", f: 21.0, odds: 8.0, note: "F:3歳軽量" }
-        ]},
-        { leg: 4, venue: "東京11R", name: "オーロラC(L)", cond: "芝1400m", typeBPlus: false, note: "好位抜け出し上位2強", horses: [
-          { num: 14, name: "オーロラウィナー", f: 29.0, odds: 5.6, note: "F:コース巧者" },
-          { num: 6, name: "マイネルチケット", f: 24.5, odds: 5.2, note: "F:3歳55kg" }
-        ]},
-        { leg: 5, venue: "京都11R", name: "エリザベス女王杯(G1)", cond: "芝2200m", typeBPlus: false, note: "G1実績馬＋調教S評価馬", horses: [
-          { num: 7, name: "レガレイラ", f: 36.0, odds: 2.4, note: "F:G1実績最上位" },
-          { num: 16, name: "調教S外枠G1馬", f: 22.0, odds: 7.8, note: "F:CW自己ベスト" }
-        ]}
-      ],
-      hedges: [
-        { num: 12, name: "4歳クラシック好走馬", odds: 11.5, hedge50k: 4400, hedge100k: 8700 }
-      ]
-    };
-
-    const TRIPLE_NAR_DEFAULT = {
-      summary: "【南関トリプル馬単（50円単位・最終10R/11R/12R）】5,000円〜50,000円のスライダーで、プランAとプランB（2枚合算）の馬単フォーメーションを同時算出します。",
-      legs: [
-        { leg: 1, venue: "大井10R", name: "最終トリプル1R目", cond: "ダ1800m", typeBPlus: true, note: "外枠大型先行馬と南関トップ騎手を優先", horses: [
-          { num: 12, name: "外枠クリーン先行馬", f: 28.0, odds: 4.6, note: "◎1着・2着軸" },
-          { num: 8, name: "大井巧者ストーカー", f: 22.5, odds: 4.4, note: "◯1着・2着軸" },
-          { num: 5, name: "矢野騎手差し巧者", f: 15.0, odds: 5.8, note: "▲2着・穴1着" }
-        ]},
-        { leg: 2, venue: "大井11R", name: "最終トリプル2R目", cond: "ダ1600m", typeBPlus: true, note: "好位ポケット馬と御神本騎手の折り返し本線", horses: [
-          { num: 4, name: "内回り好位抜け出し馬", f: 27.5, odds: 4.9, note: "◎1着・2着軸" },
-          { num: 9, name: "御神本騎手重賞馬", f: 24.0, odds: 4.1, note: "◯1着・2着軸" },
-          { num: 6, name: "転入2戦目良化馬", f: 16.0, odds: 5.4, note: "▲2着・穴1着" }
-        ]},
-        { leg: 3, venue: "大井12R", name: "最終トリプル3R目", cond: "ダ1400m", typeBPlus: false, note: "Single-Pivot強軸固定アンカー", horses: [
-          { num: 13, name: "外枠スピード絶対軸", f: 34.0, odds: 3.1, note: "◎1着固定アンカー" },
-          { num: 10, name: "外目好位持続馬", f: 20.5, odds: 5.2, note: "◯2着本線" },
-          { num: 7, name: "終い確実差し馬", f: 15.0, odds: 6.0, note: "▲2着本線" }
-        ]}
-      ],
-      hedges: [
-        { num: 10, name: "12R 逆転1着ヘッジ", odds: 5.2, hedge50k: 9700, hedge100k: 19300 }
-      ]
-    };
+    const DB_JRA = {};
+    const DB_NAR = {};
+    let STATS_DATA = { jra: { races: 0, hits: 0, invest: 0, ret: 0 }, nar: { races: 0, hits: 0, invest: 0, ret: 0 }, recentResults: [] };
 
     const state = {
       circuitMode: "jra",
-      selectedDate: Object.keys(DB_JRA)[0],
+      selectedDate: "",
       selectedVenue: "ALL",
       showAllRaces: true,
       activeRace: null,
       horseSort: "prob",
-      scenarioMode: "mix", // "mix" | "s1" (前残り) | "s3" (前崩れ差し)
-      liveOverrides: {},   // { "raceId-horseNum": "boost" | "fade" | "erase" }
+      scenarioMode: "mix",
+      liveOverrides: {},
       modalBudget: 10000,
       win5Budget: 10000,
       checkedTickets: {}
@@ -355,38 +254,24 @@
       return state.circuitMode === "nar" ? DB_NAR : DB_JRA;
     }
 
-    // 展開シナリオ切替＆直前パドック/スマートマネー補正を反映した最新の全頭配列をリアルタイム生成
     function getEffectiveHorses(race) {
       const raw = (race.horses || []).map(h => ({ ...h }));
       if (raw.length === 0) return [];
-
       let changed = state.scenarioMode !== "mix";
       raw.forEach(h => {
-        const key = `${race.id}-${h.num}`;
-        const ov = state.liveOverrides[key];
+        const ov = state.liveOverrides[`${race.id}-${h.num}`];
         if (ov) changed = true;
-
         let mult = 1.0;
         const st = h.style || "先";
-        if (state.scenarioMode === "s1") {
-          mult *= (st === "逃" || st === "先") ? 1.38 : 0.72;
-        } else if (state.scenarioMode === "s3") {
-          mult *= (st === "差" || st === "追" || st === "マ") ? 1.42 : 0.68;
-        }
-
-        if (ov === "boost") {
-          mult *= 1.48; // スマートマネー30%急落・パドックS気配ブースト
-        } else if (ov === "fade") {
-          mult *= 0.55; // 馬体重+12kg太め・パドック割引
-        } else if (ov === "erase") {
-          mult = 0.02;  // 直前消し
-        }
+        if (state.scenarioMode === "s1") mult *= (st === "逃" || st === "先") ? 1.38 : 0.72;
+        else if (state.scenarioMode === "s3") mult *= (st === "差" || st === "追" || st === "マ") ? 1.42 : 0.68;
+        if (ov === "boost") mult *= 1.48;
+        else if (ov === "fade") mult *= 0.55;
+        else if (ov === "erase") mult = 0.02;
         h._w = Math.max(0.1, (Number(h.f) || 1.0) * mult);
         h._ov = ov || "";
       });
-
       if (!changed) return raw;
-
       const sumW = raw.reduce((s, h) => s + h._w, 0);
       raw.forEach(h => {
         const ratio = (h._w / sumW * 100.0) / Math.max(0.5, Number(h.f) || 1.0);
@@ -394,23 +279,21 @@
         h.top2 = Number(Math.min(94.0, (Number(h.top2) || 15) * Math.pow(ratio, 0.75)).toFixed(1));
         h.top3 = Number(Math.min(97.0, (Number(h.top3) || 25) * Math.pow(ratio, 0.60)).toFixed(1));
       });
-
       const s2 = Math.max(1, raw.reduce((s, h) => s + h.top2, 0));
       const s3 = Math.max(1, raw.reduce((s, h) => s + h.top3, 0));
       raw.forEach(h => {
         h.top2 = Number(Math.min(94.0, h.top2 * 200.0 / s2).toFixed(1));
         h.top3 = Number(Math.min(97.0, h.top3 * 300.0 / s3).toFixed(1));
       });
-
       const byF = [...raw].sort((a, b) => b.f - a.f);
       byF.forEach((h, idx) => {
         if (h._ov === "erase") { h.mark = "消"; h.role = "直前手動消し"; }
         else if (idx === 0) { h.mark = "◎"; h.role = "1着妙味主軸"; }
         else if (idx === 1) { h.mark = "◯"; h.role = "双頭対抗軸"; }
         else if (idx === 2) { h.mark = "▲"; h.role = "安定Connector"; }
-        else if (idx === 3 || h._ov === "boost") { h.mark = "☆"; h.role = "直前急落/特注"; }
+        else if (idx === 3 || h._ov === "boost") { h.mark = "☆"; h.role = "展開特注"; }
         else if (idx <= 6) { h.mark = "△"; h.role = "3列目連下"; }
-        else if (h._ov === "fade") { h.mark = "危"; h.role = "直前気配割引"; }
+        else if (h._ov === "fade") { h.mark = "危"; h.role = "直前割引"; }
         else { h.mark = "無"; }
       });
       return raw;
@@ -419,18 +302,12 @@
     function setScenarioMode(mode) {
       state.scenarioMode = mode;
       ["Mix", "S1", "S3"].forEach(k => {
-        const mKey = k.toLowerCase();
         const el = document.getElementById(`scenBtn${k}`);
-        if (el) {
-          el.className = (mode === mKey)
-            ? "text-[11px] font-extrabold py-1 px-1.5 rounded-lg bg-emerald-500 text-slate-950"
-            : "text-[11px] font-bold py-1 px-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300";
-        }
+        if (el) el.className = (mode === k.toLowerCase())
+          ? "text-[11px] font-extrabold py-1 px-1.5 rounded-lg bg-emerald-500 text-slate-950"
+          : "text-[11px] font-bold py-1 px-1.5 rounded-lg bg-slate-900 border border-slate-700 text-slate-300";
       });
-      if (state.activeRace) {
-        renderModalHorses(state.activeRace);
-        onModalBudgetChange(state.modalBudget);
-      }
+      if (state.activeRace) { renderModalHorses(state.activeRace); onModalBudgetChange(state.modalBudget); }
     }
 
     function toggleHorseOverride(horseNum, mode) {
@@ -444,36 +321,24 @@
     function switchCircuitMode(mode) {
       state.circuitMode = mode;
       const isNar = mode === "nar";
-      document.getElementById("modeBtnJra").className = !isNar
-        ? "text-xs font-extrabold px-2.5 py-1 rounded-md bg-emerald-500 text-slate-950 transition"
-        : "text-xs font-bold px-2.5 py-1 rounded-md text-slate-400 transition";
-      document.getElementById("modeBtnNar").className = isNar
-        ? "text-xs font-extrabold px-2.5 py-1 rounded-md bg-amber-400 text-slate-950 transition"
-        : "text-xs font-bold px-2.5 py-1 rounded-md text-slate-400 transition";
-
+      document.getElementById("modeBtnJra").className = !isNar ? "text-xs font-extrabold px-2.5 py-1 rounded-md bg-emerald-500 text-slate-950 transition" : "text-xs font-bold px-2.5 py-1 rounded-md text-slate-400 transition";
+      document.getElementById("modeBtnNar").className = isNar ? "text-xs font-extrabold px-2.5 py-1 rounded-md bg-amber-400 text-slate-950 transition" : "text-xs font-bold px-2.5 py-1 rounded-md text-slate-400 transition";
       document.getElementById("navMultiLegLabel").textContent = isNar ? "トリプル馬単" : "WIN5予想";
       document.getElementById("multiLegSkillBadge").textContent = isNar ? "app-bayesian-nar (50円単位)" : "app-bayesian-win5 (v9.3)";
       document.getElementById("multiLegTitle").innerHTML = isNar ? "南関 トリプル馬単（10R・11R・12R）最適化" : "JRA WIN5 純粋勝率 f<sub>r,i</sub> 最適化";
 
-      const db = getActiveDB();
-      const keys = Object.keys(db);
-      state.selectedDate = keys[keys.length - 1];
+      const keys = Object.keys(getActiveDB());
+      state.selectedDate = keys[keys.length - 1] || "";
       state.selectedVenue = "ALL";
-
-      renderDateTabs();
-      renderBiasBar();
-      renderVenueFilter();
-      renderRaceList();
-      updateWin5Budget(state.win5Budget);
+      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRaceList(); updateWin5Budget(state.win5Budget);
     }
 
     function switchMainView(viewName) {
       ["races", "win5", "stats", "skills"].forEach(v => {
         document.getElementById(`view-${v}`).classList.toggle("hidden", v !== viewName);
-        document.getElementById(`nav-${v}`).className = v === viewName
-          ? "flex flex-col items-center py-1 text-emerald-400 font-bold"
-          : "flex flex-col items-center py-1 text-slate-400";
+        document.getElementById(`nav-${v}`).className = v === viewName ? "flex flex-col items-center py-1 text-emerald-400 font-bold" : "flex flex-col items-center py-1 text-slate-400";
       });
+      if (viewName === "win5") updateWin5Budget(state.win5Budget);
     }
 
     function renderDateTabs() {
@@ -490,10 +355,7 @@
       state.selectedDate = d;
       state.selectedVenue = "ALL";
       updateWin5Budget(state.win5Budget);
-      renderDateTabs();
-      renderBiasBar();
-      renderVenueFilter();
-      renderRaceList();
+      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRaceList();
     }
 
     function renderBiasBar() {
@@ -514,18 +376,11 @@
       const venues = ["ALL", ...new Set((day?.races || []).map(r => r.venue))];
       document.getElementById("venueFilter").innerHTML = venues.map(v => {
         const active = v === state.selectedVenue;
-        return `<button onclick="selectVenue('${v}')" class="text-xs px-2.5 py-1 rounded-lg font-bold ${
-          active ? "bg-slate-200 text-slate-950" : "bg-slate-900 text-slate-400 border border-slate-800"
-        }">${v === "ALL" ? "全会場" : v}</button>`;
+        return `<button onclick="selectVenue('${v}')" class="text-xs px-2.5 py-1 rounded-lg font-bold ${active ? "bg-slate-200 text-slate-950" : "bg-slate-900 text-slate-400 border border-slate-800"}">${v === "ALL" ? "全会場" : v}</button>`;
       }).join("");
     }
 
-    function selectVenue(v) {
-      state.selectedVenue = v;
-      renderVenueFilter();
-      renderRaceList();
-    }
-
+    function selectVenue(v) { state.selectedVenue = v; renderVenueFilter(); renderRaceList(); }
     function toggleShowAllRaces() {
       state.showAllRaces = !state.showAllRaces;
       document.getElementById("toggleAllRacesBtn").textContent = `全レース表示: ${state.showAllRaces ? "ON" : "OFF"}`;
@@ -540,10 +395,51 @@
       return `<span class="bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold px-2 py-0.5 rounded whitespace-nowrap">B:標準</span>`;
     }
 
+    // 公式払戻金テーブルと1買い目を照合して的中判定＆実払戻額を返す
+    function checkTicketHit(ticket, amt, payouts) {
+      if (!payouts) return { checked: false, hit: false, payoutYen: 0, dividend: 0 };
+      const list = payouts[ticket.poolKey] || [];
+      const hasAnyPayout = Object.values(payouts).some(arr => Array.isArray(arr) && arr.length > 0);
+      if (!hasAnyPayout) return { checked: false, hit: false, payoutYen: 0, dividend: 0 };
+
+      if (ticket.poolKey === "sanrenpuku") {
+        const set = new Set();
+        for (const a of ticket.row1) {
+          for (const b of ticket.row2) {
+            if (a === b) continue;
+            for (const c of ticket.row3) {
+              if (c !== a && c !== b) set.add([a, b, c].sort((x, y) => x - y).join("-"));
+            }
+          }
+        }
+        const perPt = Math.max(100, Math.floor((amt / ticket.points) / 100) * 100);
+        for (const e of list) {
+          const k = [...e.nums].sort((x, y) => x - y).join("-");
+          if (set.has(k)) {
+            return { checked: true, hit: true, payoutYen: Math.round((perPt / 100) * e.pay), dividend: e.pay };
+          }
+        }
+        return { checked: true, hit: false, payoutYen: 0, dividend: 0 };
+      }
+
+      for (const e of list) {
+        const matched = (ticket.poolKey === "win" || ticket.poolKey === "umatan")
+          ? JSON.stringify(e.nums) === JSON.stringify(ticket.nums)
+          : JSON.stringify([...e.nums].sort((a,b)=>a-b)) === JSON.stringify([...ticket.nums].sort((a,b)=>a-b));
+        if (matched) {
+          return { checked: true, hit: true, payoutYen: Math.round((amt / 100) * e.pay), dividend: e.pay };
+        }
+      }
+      return { checked: true, hit: false, payoutYen: 0, dividend: 0 };
+    }
+
     function renderRaceList() {
       const day = getActiveDB()[state.selectedDate];
       const container = document.getElementById("raceList");
-      if (!day || !day.races) { container.innerHTML = ""; return; }
+      if (!day || !day.races || day.races.length === 0) {
+        container.innerHTML = `<div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-xs text-slate-400">開催データを読み込み中、または次回開催待機中です。</div>`;
+        return;
+      }
 
       let list = day.races.filter(r => state.selectedVenue === "ALL" || r.venue === state.selectedVenue);
       if (!state.showAllRaces && list.length > 6) {
@@ -554,9 +450,39 @@
       container.innerHTML = list.map(r => {
         const sortedH = [...(r.horses || [])].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
         const hCount = sortedH.length;
-        const topHorse = sortedH[0] ? `${sortedH[0].mark} ${sortedH[0].num}番 ${sortedH[0].name} (f=${sortedH[0].f}%)` : "木曜夕方の枠順発表待機";
+        const topHorse = sortedH[0] ? `${sortedH[0].mark} ${sortedH[0].num}番 ${sortedH[0].name} (f=${sortedH[0].f}%)` : "出馬表発表待機";
+        const hasResult = r.actualTop3 && r.actualTop3.length > 0;
+        const evalResult = r.evalDone ? {
+          isHit: r.isHit, ret: r.returnYen || 0, roi: r.actualRoi || 0, hits: r.hitTickets || []
+        } : null;
+
+        let bottomHtml = `<span class="text-slate-400 shrink-0 ml-auto">発走 <b class="text-slate-200">${r.time || "未定"}</b> ｜ 期待ROI <b class="text-amber-300">${r.roi || "155%"}</b></span>`;
+        let resultBlock = "";
+        if (hasResult) {
+          const top3Str = r.actualTop3.map(a => `${a.rank}着:${a.num}番${a.name}`).join(" / ");
+          if (evalResult) {
+            const prof = evalResult.ret - 10000;
+            const roiColor = evalResult.roi >= 100 ? "text-emerald-400" : (evalResult.isHit ? "text-amber-300" : "text-rose-400");
+            const hitBadges = evalResult.hits.length > 0
+              ? evalResult.hits.map(ht => `<span class="bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 text-[10px] font-bold px-1.5 py-0.5 rounded">🎯 ${ht}</span>`).join(" ")
+              : `<span class="text-[10px] text-slate-500">的中馬券なし</span>`;
+            resultBlock = `
+              <div class="bg-slate-950/90 border border-slate-800 rounded-lg p-2 space-y-1 text-[11px]">
+                <div class="text-slate-300 break-words">🏁 確定: ${top3Str}</div>
+                <div class="flex items-center justify-between flex-wrap gap-1">
+                  <span class="font-bold ${roiColor}">1万円 → 払戻 ${evalResult.ret.toLocaleString()}円 (回収率 ${evalResult.roi}% / ${prof >= 0 ? "+" : ""}${prof.toLocaleString()}円)</span>
+                </div>
+                <div class="flex items-center gap-1 flex-wrap pt-0.5">${hitBadges}</div>
+              </div>
+            `;
+            bottomHtml = `<span class="text-slate-400 shrink-0 ml-auto">発走 ${r.time || "--:--"} ｜ <b class="${roiColor}">回収率 ${evalResult.roi}%</b></span>`;
+          } else {
+            resultBlock = `<div class="text-[11px] text-slate-400 bg-slate-950 rounded px-2 py-1">🏁 確定: ${top3Str}</div>`;
+          }
+        }
+
         return `
-          <div onclick="openRaceModal('${r.id}')" class="bg-slate-900 hover:bg-slate-800/90 border ${hCount > 0 ? "border-emerald-500/40" : "border-slate-800"} rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-2">
+          <div onclick="openRaceModal('${r.id}')" class="bg-slate-900 hover:bg-slate-800/90 border ${evalResult?.isHit ? "border-emerald-500/60" : (hCount > 0 ? "border-slate-700" : "border-slate-800")} rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-2">
             <div class="flex items-center justify-between gap-2">
               <div class="flex items-center gap-2 min-w-0 flex-wrap">
                 <span class="shrink-0 bg-slate-800 text-slate-200 font-extrabold text-xs px-2 py-0.5 rounded">${r.venue}${r.r}R</span>
@@ -566,9 +492,10 @@
               <div class="shrink-0">${getRankBadgeHtml(r.rank)}</div>
             </div>
             <div class="flex items-center justify-between text-xs gap-2 flex-wrap">
-              <span class="text-emerald-300 font-medium break-words">${topHorse} ${hCount > 0 ? `<span class="text-slate-400 text-[11px]">[全${hCount}頭・N_lead=${r.nLead||3}]</span>` : ""}</span>
-              <span class="text-slate-400 shrink-0 ml-auto">${r.status && r.status.includes("🎯") ? `<b class="text-emerald-400">${r.status}</b>` : `発走 ${r.time} ｜ ROI <b class="text-amber-300">${r.roi || "158%"}</b>`}</span>
+              <span class="text-emerald-300 font-medium break-words">${topHorse} ${hCount > 0 ? `<span class="text-slate-400 text-[11px]">[全${hCount}頭]</span>` : ""}</span>
+              ${bottomHtml}
             </div>
+            ${resultBlock}
           </div>
         `;
       }).join("");
@@ -576,12 +503,8 @@
 
     function setHorseSort(sortMode) {
       state.horseSort = sortMode;
-      document.getElementById("sortBtnProb").className = sortMode === "prob"
-        ? "text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950"
-        : "text-xs font-bold px-2.5 py-1 rounded text-slate-400";
-      document.getElementById("sortBtnNum").className = sortMode === "num"
-        ? "text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950"
-        : "text-xs font-bold px-2.5 py-1 rounded text-slate-400";
+      document.getElementById("sortBtnProb").className = sortMode === "prob" ? "text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950" : "text-xs font-bold px-2.5 py-1 rounded text-slate-400";
+      document.getElementById("sortBtnNum").className = sortMode === "num" ? "text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950" : "text-xs font-bold px-2.5 py-1 rounded text-slate-400";
       if (state.activeRace) renderModalHorses(state.activeRace);
     }
 
@@ -596,7 +519,7 @@
       document.getElementById("modalRankBadge").outerHTML = getRankBadgeHtml(race.rank).replace("<span", '<span id="modalRankBadge"');
       document.getElementById("modalSkillBadge").textContent = race.usedModel ? `${race.skill} (${race.usedModel})` : race.skill;
       document.getElementById("modalRaceTitle").textContent = `${race.venue}${race.r}R ${race.name}`;
-      document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time} ｜ ${race.status || "全頭推論済"}`;
+      document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time || "未定"}`;
 
       const eff = getEffectiveHorses(race);
       const sorted = [...eff].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
@@ -609,69 +532,45 @@
       document.getElementById("raceModal").classList.remove("hidden");
     }
 
-    function closeRaceModal() {
-      document.getElementById("raceModal").classList.add("hidden");
-    }
+    function closeRaceModal() { document.getElementById("raceModal").classList.add("hidden"); }
 
     function renderModalHorses(race) {
       const rawList = getEffectiveHorses(race);
       if (rawList.length === 0) {
-        document.getElementById("modalRunnerCountLabel").textContent = "🏇 出走馬発表待機（枠順確定前）";
-        document.getElementById("modalProbSumLabel").textContent = "木曜夕方のJRA出馬表発表後に自動で実馬名・全頭評価が入ります";
-        document.getElementById("modalHorsesList").innerHTML = `
-          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 leading-relaxed">
-            このレースはまだJRA/NAR公式の枠順・出走馬が発表されていません。出馬表が発表されると自動的に実馬名・騎手・オッズ・全頭評価に切り替わります。
-          </div>
-        `;
+        document.getElementById("modalRunnerCountLabel").textContent = "🏇 出走馬発表待機";
+        document.getElementById("modalProbSumLabel").textContent = "";
+        document.getElementById("modalHorsesList").innerHTML = `<div class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300">出馬表確定後に自動で実馬名・全頭評価が入ります。</div>`;
         return;
       }
 
       document.getElementById("modalRunnerCountLabel").innerHTML = `🏇 出走全${rawList.length}頭 確率＆直前補正 (${state.horseSort === "num" ? "馬番順" : "純粋勝率順"})`;
-
       const sumF = rawList.reduce((s, h) => s + (Number(h.f) || 0), 0).toFixed(0);
-      const sumTop2 = rawList.reduce((s, h) => s + (Number(h.top2) || 0), 0).toFixed(0);
-      const sumTop3 = rawList.reduce((s, h) => s + (Number(h.top3) || 0), 0).toFixed(0);
-      document.getElementById("modalProbSumLabel").textContent = `検算合計: 勝率${sumF}% / 2着内${sumTop2}% / 3着内${sumTop3}%`;
+      const sum2 = rawList.reduce((s, h) => s + (Number(h.top2) || 0), 0).toFixed(0);
+      const sum3 = rawList.reduce((s, h) => s + (Number(h.top3) || 0), 0).toFixed(0);
+      document.getElementById("modalProbSumLabel").textContent = `検算合計: 勝率${sumF}% / 2着内${sum2}% / 3着内${sum3}%`;
 
-      if (state.horseSort === "num") {
-        rawList.sort((a, b) => (Number(a.num) || 0) - (Number(b.num) || 0));
-      } else {
-        rawList.sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
-      }
+      if (state.horseSort === "num") rawList.sort((a, b) => (Number(a.num) || 0) - (Number(b.num) || 0));
+      else rawList.sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
+
+      const actualMap = {};
+      (race.actualTop3 || []).forEach(a => { actualMap[a.num] = `${a.rank}着`; });
 
       document.getElementById("modalHorsesList").innerHTML = rawList.map(h => {
         const mk = h.mark || "無";
         const isTop = ["◎", "◯", "▲", "☆"].includes(mk);
-        const isSub = mk === "△";
         const isDanger = mk === "消" || mk === "危";
-        let badgeStyle = "bg-slate-800 text-slate-400 border-slate-700";
-        let cardBorder = "border-slate-800/90 bg-slate-950/80";
-        if (isTop) {
-          badgeStyle = "bg-emerald-500/20 text-emerald-300 border-emerald-500/50";
-          cardBorder = "border-emerald-500/30 bg-slate-950";
-        } else if (isSub) {
-          badgeStyle = "bg-sky-500/20 text-sky-300 border-sky-500/40";
-          cardBorder = "border-slate-800 bg-slate-950";
-        } else if (isDanger) {
-          badgeStyle = "bg-rose-500/20 text-rose-300 border-rose-500/40";
-          cardBorder = "border-rose-500/30 bg-slate-950";
-        }
-
-        const valueGap = (Number(h.f) || 0) - (Number(h.q) || 0);
-        const gapTag = valueGap >= 2.5
-          ? `<span class="text-[10px] bg-amber-500/20 text-amber-300 px-1.5 py-0.5 rounded font-bold">妙味+${valueGap.toFixed(1)}%</span>`
-          : (valueGap <= -4.0 ? `<span class="text-[10px] bg-rose-500/20 text-rose-300 px-1.5 py-0.5 rounded font-bold">過剰人気${valueGap.toFixed(1)}%</span>` : "");
-
+        const badgeStyle = isTop ? "bg-emerald-500/20 text-emerald-300 border-emerald-500/50" : (mk === "△" ? "bg-sky-500/20 text-sky-300 border-sky-500/40" : (isDanger ? "bg-rose-500/20 text-rose-300 border-rose-500/40" : "bg-slate-800 text-slate-400 border-slate-700"));
         const ov = state.liveOverrides[`${race.id}-${h.num}`] || "";
+        const finBadge = actualMap[h.num] ? `<span class="text-[10px] bg-amber-400 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">🏁 ${actualMap[h.num]}</span>` : "";
 
         return `
-          <div class="border ${cardBorder} rounded-lg p-2.5 space-y-1.5">
+          <div class="border ${actualMap[h.num] ? "border-amber-400/60 bg-amber-950/20" : "border-slate-800 bg-slate-950"} rounded-lg p-2.5 space-y-1.5">
             <div class="flex items-start justify-between gap-2">
               <div class="flex items-center gap-1.5 flex-wrap min-w-0">
                 <span class="shrink-0 text-xs font-extrabold px-1.5 py-0.5 rounded border ${badgeStyle}">${mk}</span>
                 <span class="text-xs font-bold text-white break-words">${h.num}番 ${h.name}</span>
                 <span class="text-[11px] text-slate-400 whitespace-nowrap">(${h.style || "先"}・${h.role || "評価"})</span>
-                ${gapTag}
+                ${finBadge}
               </div>
               <span class="shrink-0 text-xs font-mono text-amber-300 font-bold whitespace-nowrap">${h.odds || 10.0}倍</span>
             </div>
@@ -681,7 +580,6 @@
             </div>
             <div class="flex items-center justify-between gap-2 pt-0.5">
               <p class="text-[11px] text-slate-400 break-words leading-relaxed">${h.comment || ""}</p>
-              <!-- 直前パドック・スマートマネー1タップ補正ボタン -->
               <div class="shrink-0 flex items-center gap-1">
                 <button type="button" onclick="toggleHorseOverride(${h.num}, 'boost')" class="text-[10px] px-1.5 py-0.5 rounded border ${ov==='boost' ? 'bg-emerald-500 text-slate-950 border-emerald-400 font-extrabold' : 'bg-slate-900 text-slate-400 border-slate-700'}">🔥急落↑</button>
                 <button type="button" onclick="toggleHorseOverride(${h.num}, 'fade')" class="text-[10px] px-1.5 py-0.5 rounded border ${ov==='fade' ? 'bg-amber-400 text-slate-950 border-amber-300 font-extrabold' : 'bg-slate-900 text-slate-400 border-slate-700'}">⚠️割引↓</button>
@@ -694,152 +592,81 @@
     }
 
     function buildPlackettLuceEngine(horses) {
-      const list = horses.map(h => {
-        const w1 = Math.max(0.2, Number(h.f) || 1.0);
-        const w23 = Math.max(0.2, ((Number(h.top3) || (w1 * 2.8)) / 3.0));
-        return { num: Number(h.num), w1, w23, odds: Math.max(1.2, Number(h.odds) || 8.0), name: h.name };
-      });
-      const sumW1 = list.reduce((s, x) => s + x.w1, 0);
-      const sumW23 = list.reduce((s, x) => s + x.w23, 0);
-      const byNum = {};
-      list.forEach(x => { byNum[x.num] = x; });
+      const list = horses.map(h => ({ num: Number(h.num), w1: Math.max(0.2, Number(h.f) || 1.0), w23: Math.max(0.2, (Number(h.top3) || 5.0) / 3.0) }));
+      const sumW1 = list.reduce((s, x) => s + x.w1, 0), sumW23 = list.reduce((s, x) => s + x.w23, 0);
+      const byNum = {}; list.forEach(x => { byNum[x.num] = x; });
 
-      function probExacta(aNum, bNum) {
-        if (aNum === bNum || !byNum[aNum] || !byNum[bNum]) return 0;
-        const a = byNum[aNum], b = byNum[bNum];
-        return (a.w1 / sumW1) * (b.w23 / Math.max(0.1, sumW23 - a.w23)) * 100.0;
-      }
-
-      function probQuinella(aNum, bNum) {
-        return probExacta(aNum, bNum) + probExacta(bNum, aNum);
-      }
-
-      function probTrioSingle(aNum, bNum, cNum) {
-        const perms = [[aNum,bNum,cNum],[aNum,cNum,bNum],[bNum,aNum,cNum],[bNum,cNum,aNum],[cNum,aNum,bNum],[cNum,bNum,aNum]];
-        let total = 0;
-        for (const [x, y, z] of perms) {
+      const probExacta = (a, b) => (a === b || !byNum[a] || !byNum[b]) ? 0 : (byNum[a].w1 / sumW1) * (byNum[b].w23 / Math.max(0.1, sumW23 - byNum[a].w23)) * 100.0;
+      const probQuinella = (a, b) => probExacta(a, b) + probExacta(b, a);
+      const probTrioSingle = (a, b, c) => {
+        let tot = 0;
+        for (const [x, y, z] of [[a,b,c],[a,c,b],[b,a,c],[b,c,a],[c,a,b],[c,b,a]]) {
           if (!byNum[x] || !byNum[y] || !byNum[z]) continue;
-          const p1 = byNum[x].w1 / sumW1;
-          const p2 = byNum[y].w23 / Math.max(0.1, sumW23 - byNum[x].w23);
-          const p3 = byNum[z].w23 / Math.max(0.1, sumW23 - byNum[x].w23 - byNum[y].w23);
-          total += p1 * p2 * p3;
+          tot += (byNum[x].w1 / sumW1) * (byNum[y].w23 / Math.max(0.1, sumW23 - byNum[x].w23)) * (byNum[z].w23 / Math.max(0.1, sumW23 - byNum[x].w23 - byNum[y].w23));
         }
-        return total * 100.0;
-      }
-
-      function probWide(aNum, bNum) {
-        if (aNum === bNum || !byNum[aNum] || !byNum[bNum]) return 0;
-        let sum = 0;
-        for (const h of list) {
-          if (h.num === aNum || h.num === bNum) continue;
-          sum += probTrioSingle(aNum, bNum, h.num);
+        return tot * 100.0;
+      };
+      const probWide = (a, b) => {
+        let s = 0;
+        for (const h of list) if (h.num !== a && h.num !== b) s += probTrioSingle(a, b, h.num);
+        return Math.min(45.0, s);
+      };
+      const evalTrio = (r1, r2, r3) => {
+        const seen = new Set(); let ps = 0;
+        for (const a of r1) for (const b of r2) if (a !== b) for (const c of r3) if (c !== a && c !== b) {
+          const k = [a, b, c].sort((x, y) => x - y).join("-");
+          if (!seen.has(k)) { seen.add(k); ps += probTrioSingle(a, b, c); }
         }
-        return Math.min(45.0, sum);
-      }
-
-      function evalTrioFormation(row1, row2, row3) {
-        const seen = new Set();
-        let probSum = 0;
-        for (const a of row1) {
-          for (const b of row2) {
-            if (a === b) continue;
-            for (const c of row3) {
-              if (c === a || c === b) continue;
-              const key = [a, b, c].sort((x, y) => x - y).join("-");
-              if (!seen.has(key)) {
-                seen.add(key);
-                probSum += probTrioSingle(a, b, c);
-              }
-            }
-          }
-        }
-        return { points: Math.max(1, seen.size), hitProb: Math.min(48.0, Math.max(12.0, probSum)) };
-      }
-
-      return { probExacta, probQuinella, probWide, evalTrioFormation };
+        return { points: Math.max(1, seen.size), hitProb: Math.min(48.0, Math.max(12.0, ps)) };
+      };
+      return { probExacta, probQuinella, probWide, evalTrio };
     }
 
     function buildFullSkillTickets(race) {
-      const effHorses = getEffectiveHorses(race);
-      const sorted = [...effHorses].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
-      const valid = sorted.filter(h => h.mark !== "消" && h.mark !== "危" && h.mark !== "無");
+      const sorted = [...getEffectiveHorses(race)].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
+      const valid = sorted.filter(h => !["消", "危", "無"].includes(h.mark));
       const pool = valid.length >= 4 ? valid : sorted.filter(h => h.mark !== "消");
-
-      const h1 = pool[0] || { num: 1, name: "本命馬", f: 17.5, top2: 32.5, top3: 48.0, odds: 7.6 };
-      const h2 = pool[1] || { num: 2, name: "対抗馬", f: 15.0, top2: 29.0, top3: 44.5, odds: 8.0 };
-      const h3 = pool[2] || { num: 5, name: "単穴馬", f: 14.0, top2: 28.5, top3: 46.5, odds: 5.2 };
-      const h4 = pool[3] || { num: 3, name: "特注馬", f: 10.5, top2: 21.0, top3: 35.0, odds: 11.8 };
+      const h1 = pool[0], h2 = pool[1], h3 = pool[2] || h2, h4 = pool[3] || h3;
       const himos = sorted.filter(h => ![h1.num, h2.num, h3.num, h4.num].includes(h.num) && h.mark !== "消").slice(0, 4);
-
       const pl = buildPlackettLuceEngine(sorted);
-      const o1 = Math.max(1.5, Number(h1.odds) || 7.6);
-      const o2 = Math.max(1.8, Number(h2.odds) || 8.0);
-      const o3 = Math.max(1.8, Number(h3.odds) || 5.2);
+      const o1 = Math.max(1.5, Number(h1.odds) || 6.0), o2 = Math.max(1.8, Number(h2.odds) || 7.0), o3 = Math.max(1.8, Number(h3.odds) || 5.5);
 
-      const isSinglePivot = (Number(h1.f) >= 28.0 && race.pivot !== "Dual-Pivot") || race.pivot === "Single-Pivot";
-      document.getElementById("modalTicketHeaderTitle").textContent = isSinglePivot
-        ? "💰 Single-Pivot（単独強軸・アタマ強化8行構成）"
-        : "💰 Dual-Pivot（双頭軸・タテ目防衛＆多展開網羅9行構成）";
+      const isSingle = (Number(h1.f) >= 28.0 && race.pivot !== "Dual-Pivot") || race.pivot === "Single-Pivot";
+      document.getElementById("modalTicketHeaderTitle").textContent = isSingle ? "💰 Single-Pivot（単独強軸・8行構成）" : "💰 Dual-Pivot（双頭軸・タテ目防衛9行構成）";
 
-      if (isSinglePivot) {
-        const pW12 = Math.max(16.0, pl.probWide(h1.num, h2.num));
-        const pW13 = Math.max(14.0, pl.probWide(h1.num, h3.num));
-        const pU12 = Math.max(8.0, pl.probQuinella(h1.num, h2.num));
-        const pU13 = Math.max(7.0, pl.probQuinella(h1.num, h3.num));
-        const pE12 = Math.max(5.5, pl.probExacta(h1.num, h2.num));
-        const pE13 = Math.max(4.8, pl.probExacta(h1.num, h3.num));
-        const row1 = [h1.num], row2 = [h2.num, h3.num, h4.num], row3 = [h2.num, h3.num, h4.num, ...himos.map(x => x.num)];
-        const trio = pl.evalTrioFormation(row1, row2, row3);
-
+      if (isSingle) {
+        const row1 = [h1.num], row2 = [h2.num, h3.num, h4.num], row3 = [...new Set([h2.num, h3.num, h4.num, ...himos.map(x => x.num)])];
+        const trio = pl.evalTrio(row1, row2, row3);
         return [
-          { zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h1.num} － ${h2.num} (◎ － ◯ 本線)`, points: 1, share: 0.24, hitProb: pW12, baseOdds: Number((Math.sqrt(o1*o2)*0.95).toFixed(1)), isSynthetic: false },
-          { zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h1.num} － ${h3.num} (◎ － ▲ Connector)`, points: 1, share: 0.18, hitProb: pW13, baseOdds: Number((Math.sqrt(o1*o3)*1.05).toFixed(1)), isSynthetic: false },
-          { zone: "Alpha (超過収益)", type: "単勝", comb: `${h1.num} (◎ ${h1.name} 強軸)`, points: 1, share: 0.14, hitProb: Number(h1.f), baseOdds: o1, isSynthetic: false },
-          { zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h2.num} (◎ － ◯)`, points: 1, share: 0.10, hitProb: pU12, baseOdds: Number((Math.sqrt(o1*o2)*2.3).toFixed(1)), isSynthetic: false },
-          { zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h3.num} (◎ － ▲)`, points: 1, share: 0.08, hitProb: pU13, baseOdds: Number((Math.sqrt(o1*o3)*2.5).toFixed(1)), isSynthetic: false },
-          { zone: "Alpha (超過収益)", type: "馬単", comb: `${h1.num} → ${h2.num} (◎ → ◯ 1着固定)`, points: 1, share: 0.06, hitProb: pE12, baseOdds: Number((Math.sqrt(o1*o2)*3.8).toFixed(1)), isSynthetic: false },
-          { zone: "Alpha (超過収益)", type: "馬単", comb: `${h1.num} → ${h3.num} (◎ → ▲ 1着固定)`, points: 1, share: 0.05, hitProb: pE13, baseOdds: Number((Math.sqrt(o1*o3)*4.2).toFixed(1)), isSynthetic: false },
-          { zone: "Alpha (超過収益)", type: "3連複F", comb: `${h1.num} － (${row2.join(",")}) － (${row3.join(",")})`, points: trio.points, share: 0.15, hitProb: trio.hitProb, baseOdds: Number((235.0/trio.hitProb).toFixed(1)), isSynthetic: true }
+          { poolKey: "wide", nums: [h1.num, h2.num], zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h1.num} － ${h2.num} (◎－◯)`, points: 1, share: 0.24, hitProb: Math.max(16, pl.probWide(h1.num, h2.num)), baseOdds: Number((Math.sqrt(o1*o2)*0.95).toFixed(1)), isSynthetic: false },
+          { poolKey: "wide", nums: [h1.num, h3.num], zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h1.num} － ${h3.num} (◎－▲)`, points: 1, share: 0.18, hitProb: Math.max(14, pl.probWide(h1.num, h3.num)), baseOdds: Number((Math.sqrt(o1*o3)*1.05).toFixed(1)), isSynthetic: false },
+          { poolKey: "win", nums: [h1.num], zone: "Alpha (超過収益)", type: "単勝", comb: `${h1.num} (◎ ${h1.name})`, points: 1, share: 0.14, hitProb: Number(h1.f), baseOdds: o1, isSynthetic: false },
+          { poolKey: "umaren", nums: [h1.num, h2.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h2.num} (◎－◯)`, points: 1, share: 0.10, hitProb: Math.max(8, pl.probQuinella(h1.num, h2.num)), baseOdds: Number((Math.sqrt(o1*o2)*2.3).toFixed(1)), isSynthetic: false },
+          { poolKey: "umaren", nums: [h1.num, h3.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h3.num} (◎－▲)`, points: 1, share: 0.08, hitProb: Math.max(7, pl.probQuinella(h1.num, h3.num)), baseOdds: Number((Math.sqrt(o1*o3)*2.5).toFixed(1)), isSynthetic: false },
+          { poolKey: "umatan", nums: [h1.num, h2.num], zone: "Alpha (超過収益)", type: "馬単", comb: `${h1.num} → ${h2.num} (◎→◯)`, points: 1, share: 0.06, hitProb: Math.max(5.5, pl.probExacta(h1.num, h2.num)), baseOdds: Number((Math.sqrt(o1*o2)*3.8).toFixed(1)), isSynthetic: false },
+          { poolKey: "umatan", nums: [h1.num, h3.num], zone: "Alpha (超過収益)", type: "馬単", comb: `${h1.num} → ${h3.num} (◎→▲)`, points: 1, share: 0.05, hitProb: Math.max(4.8, pl.probExacta(h1.num, h3.num)), baseOdds: Number((Math.sqrt(o1*o3)*4.2).toFixed(1)), isSynthetic: false },
+          { poolKey: "sanrenpuku", row1, row2, row3, zone: "Alpha (超過収益)", type: "3連複F", comb: `${h1.num} － (${row2.join(",")}) － (${row3.join(",")})`, points: trio.points, share: 0.15, hitProb: trio.hitProb, baseOdds: Number((235.0/trio.hitProb).toFixed(1)), isSynthetic: true }
         ];
       }
 
-      const isDefaultAndromeda = (race.id === "20261115-kyo-10" && state.scenarioMode === "mix" && Object.keys(state.liveOverrides).length === 0);
-      const pWide13 = isDefaultAndromeda ? 23.5 : Math.max(15.0, pl.probWide(h1.num, h3.num));
-      const pWide23 = isDefaultAndromeda ? 19.5 : Math.max(13.0, pl.probWide(h2.num, h3.num));
-      const pWide12 = isDefaultAndromeda ? 18.0 : Math.max(12.5, pl.probWide(h1.num, h2.num));
-
-      const oWide13 = isDefaultAndromeda ? 6.2 : Math.max(2.4, Number((Math.sqrt(o1 * o3) * 0.98).toFixed(1)));
-      const oWide23 = isDefaultAndromeda ? 10.2 : Math.max(2.8, Number((Math.sqrt(o2 * o3) * 1.45).toFixed(1)));
-      const oWide12 = isDefaultAndromeda ? 10.4 : Math.max(2.8, Number((Math.sqrt(o1 * o2) * 1.35).toFixed(1)));
-
-      const pWin1 = Number(h1.f) || 17.5;
-      const pWin2 = Number(h2.f) || 15.0;
-
-      const pUmaren13 = isDefaultAndromeda ? 9.2 : Math.max(5.5, pl.probQuinella(h1.num, h3.num));
-      const pUmaren23 = isDefaultAndromeda ? 7.8 : Math.max(4.8, pl.probQuinella(h2.num, h3.num));
-      const pUmaren12 = isDefaultAndromeda ? 7.2 : Math.max(4.5, pl.probQuinella(h1.num, h2.num));
-
-      const oUmaren13 = isDefaultAndromeda ? 14.9 : Math.max(5.0, Number((oWide13 * 2.40).toFixed(1)));
-      const oUmaren23 = isDefaultAndromeda ? 20.0 : Math.max(6.0, Number((oWide23 * 1.98).toFixed(1)));
-      const oUmaren12 = isDefaultAndromeda ? 26.2 : Math.max(6.0, Number((oWide12 * 2.50).toFixed(1)));
-
       const row1 = [h1.num, h2.num];
-      const row2 = [h2.num, h3.num, h4.num].sort((a,b)=>a-b);
-      const row3 = [h3.num, h4.num, ...himos.map(x => x.num)].sort((a,b)=>a-b);
-      const trio = pl.evalTrioFormation(row1, row2, row3);
-      const pTrio = isDefaultAndromeda ? 26.8 : trio.hitProb;
-      const synOddsTrio = isDefaultAndromeda ? 9.1 : Math.max(4.5, Number((243.9 / pTrio).toFixed(1)));
+      const row2 = [...new Set([h2.num, h3.num, h4.num])].sort((a,b)=>a-b);
+      const row3 = [...new Set([h3.num, h4.num, ...himos.map(x => x.num)])].sort((a,b)=>a-b);
+      const trio = pl.evalTrio(row1, row2, row3);
+      const oW13 = Math.max(2.4, Number((Math.sqrt(o1*o3)*0.98).toFixed(1)));
+      const oW23 = Math.max(2.8, Number((Math.sqrt(o2*o3)*1.45).toFixed(1)));
+      const oW12 = Math.max(2.8, Number((Math.sqrt(o1*o2)*1.35).toFixed(1)));
 
       return [
-        { zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h1.num} － ${h3.num} (◎ － ▲)`, points: 1, share: 0.22, hitProb: pWide13, baseOdds: oWide13, isSynthetic: false },
-        { zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h2.num} － ${h3.num} (◯ － ▲ タテ目防衛)`, points: 1, share: 0.15, hitProb: pWide23, baseOdds: oWide23, isSynthetic: false },
-        { zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h1.num} － ${h2.num} (◎ － ◯ 双頭軸)`, points: 1, share: 0.15, hitProb: pWide12, baseOdds: oWide12, isSynthetic: false },
-        { zone: "Alpha (超過収益)", type: "単勝", comb: `${h1.num} (◎ ${h1.name})`, points: 1, share: 0.08, hitProb: pWin1, baseOdds: o1, isSynthetic: false },
-        { zone: "Alpha (超過収益)", type: "単勝", comb: `${h2.num} (◯ ${h2.name})`, points: 1, share: 0.05, hitProb: pWin2, baseOdds: o2, isSynthetic: false },
-        { zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h3.num} (◎ － ▲)`, points: 1, share: 0.09, hitProb: pUmaren13, baseOdds: oUmaren13, isSynthetic: false },
-        { zone: "Alpha (超過収益)", type: "馬連", comb: `${h2.num} － ${h3.num} (◯ － ▲)`, points: 1, share: 0.06, hitProb: pUmaren23, baseOdds: oUmaren23, isSynthetic: false },
-        { zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h2.num} (◎ － ◯)`, points: 1, share: 0.05, hitProb: pUmaren12, baseOdds: oUmaren12, isSynthetic: false },
-        { zone: "Alpha (超過収益)", type: "3連複F", comb: `(${row1.join(",")}) － (${row2.join(",")}) － (${row3.join(",")})`, points: trio.points, share: 0.15, hitProb: pTrio, baseOdds: synOddsTrio, isSynthetic: true }
+        { poolKey: "wide", nums: [h1.num, h3.num], zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h1.num} － ${h3.num} (◎－▲)`, points: 1, share: 0.22, hitProb: Math.max(15, pl.probWide(h1.num, h3.num)), baseOdds: oW13, isSynthetic: false },
+        { poolKey: "wide", nums: [h2.num, h3.num], zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h2.num} － ${h3.num} (◯－▲ タテ目防衛)`, points: 1, share: 0.15, hitProb: Math.max(13, pl.probWide(h2.num, h3.num)), baseOdds: oW23, isSynthetic: false },
+        { poolKey: "wide", nums: [h1.num, h2.num], zone: "Core (基礎・防衛)", type: "ワイド", comb: `${h1.num} － ${h2.num} (◎－◯ 双頭軸)`, points: 1, share: 0.15, hitProb: Math.max(12.5, pl.probWide(h1.num, h2.num)), baseOdds: oW12, isSynthetic: false },
+        { poolKey: "win", nums: [h1.num], zone: "Alpha (超過収益)", type: "単勝", comb: `${h1.num} (◎ ${h1.name})`, points: 1, share: 0.08, hitProb: Number(h1.f), baseOdds: o1, isSynthetic: false },
+        { poolKey: "win", nums: [h2.num], zone: "Alpha (超過収益)", type: "単勝", comb: `${h2.num} (◯ ${h2.name})`, points: 1, share: 0.05, hitProb: Number(h2.f), baseOdds: o2, isSynthetic: false },
+        { poolKey: "umaren", nums: [h1.num, h3.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h3.num} (◎－▲)`, points: 1, share: 0.09, hitProb: Math.max(5.5, pl.probQuinella(h1.num, h3.num)), baseOdds: Number((oW13*2.4).toFixed(1)), isSynthetic: false },
+        { poolKey: "umaren", nums: [h2.num, h3.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h2.num} － ${h3.num} (◯－▲)`, points: 1, share: 0.06, hitProb: Math.max(4.8, pl.probQuinella(h2.num, h3.num)), baseOdds: Number((oW23*2.0).toFixed(1)), isSynthetic: false },
+        { poolKey: "umaren", nums: [h1.num, h2.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h2.num} (◎－◯)`, points: 1, share: 0.05, hitProb: Math.max(4.5, pl.probQuinella(h1.num, h2.num)), baseOdds: Number((oW12*2.5).toFixed(1)), isSynthetic: false },
+        { poolKey: "sanrenpuku", row1, row2, row3, zone: "Alpha (超過収益)", type: "3連複F", comb: `(${row1.join(",")}) － (${row2.join(",")}) － (${row3.join(",")})`, points: trio.points, share: 0.15, hitProb: trio.hitProb, baseOdds: Number((243.0/trio.hitProb).toFixed(1)), isSynthetic: true }
       ];
     }
 
@@ -850,17 +677,15 @@
       document.getElementById("modalBudgetValue").textContent = `${B.toLocaleString()}円`;
 
       const race = state.activeRace;
-      if (!race || !race.horses || race.horses.length < 2) {
-        document.getElementById("modalTicketsList").innerHTML = `<div class="text-xs text-slate-400 p-2">出馬表の枠順確定後に全9行の最適買い目が自動算出されます。</div>`;
+      const bannerEl = document.getElementById("modalResultBanner");
+      bannerEl.classList.add("hidden");
+
+      if (!race || !race.horses || race.horses.length < 3) {
+        document.getElementById("modalTicketsList").innerHTML = `<div class="text-xs text-slate-400 p-2">出馬表確定後に買い目が自動算出されます。</div>`;
         return;
       }
-
       if (race.rank === "Pass") {
-        document.getElementById("modalTicketsList").innerHTML = `
-          <div class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300 leading-relaxed">
-            💤 <b>見送り（Pass / 推奨購入額 0円）</b>：圧倒的1番人気によるオッズ密集（トリガミ懸念）または期待回収率105%未満のため見送りを推奨します。
-          </div>
-        `;
+        document.getElementById("modalTicketsList").innerHTML = `<div class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300">💤 見送り（Pass / 推奨購入額 0円）</div>`;
         return;
       }
 
@@ -869,26 +694,22 @@
       const trioUnit = trioRow.points * 100;
       const mult = B >= 18000 ? Math.max(1, Math.floor((B * 0.18) / trioUnit)) : 1;
       const trioAmt = Math.min(B - 800, trioUnit * mult);
-
       const remainForOthers = Math.max(800, B - trioAmt);
       const otherRows = fullRows.slice(0, fullRows.length - 1);
       const sumShare = otherRows.reduce((s, t) => s + t.share, 0);
 
       let runningRem = remainForOthers;
       const scaledOthers = otherRows.map((t, idx) => {
-        if (idx === otherRows.length - 1) {
-          const amt = Math.max(100, Math.round(runningRem / 100) * 100);
-          return { ...t, amt };
-        }
-        const raw = remainForOthers * (t.share / sumShare);
-        const amt = Math.max(100, Math.round(raw / 100) * 100);
+        if (idx === otherRows.length - 1) return { ...t, amt: Math.max(100, Math.round(runningRem / 100) * 100) };
+        const amt = Math.max(100, Math.round((remainForOthers * (t.share / sumShare)) / 100) * 100);
         runningRem = Math.max(100, runningRem - amt);
         return { ...t, amt };
       });
-
       const allScaled = [...scaledOthers, { ...trioRow, amt: trioAmt }];
+
       const totalInvest = allScaled.reduce((s, t) => s + t.amt, 0);
-      let totalExpectedReturn = 0;
+      let totalExpectedReturn = 0, totalActualReturn = 0, hitCount = 0;
+      const hasResult = race.actualTop3 && race.actualTop3.length > 0 && race.payouts;
 
       document.getElementById("modalTicketsList").innerHTML = allScaled.map((t, idx) => {
         const key = `${race.id}-row-${idx}`;
@@ -899,69 +720,89 @@
         const expPayout = Math.round(t.amt * (Number(expRoi) / 100));
         totalExpectedReturn += expPayout;
 
+        const res = hasResult ? checkTicketHit(t, t.amt, race.payouts) : { checked: false, hit: false, payoutYen: 0, dividend: 0 };
+        if (res.hit) { totalActualReturn += res.payoutYen; hitCount++; }
+
         const perPt = Math.max(100, Math.round((t.amt / t.points) / 100) * 100);
         const ptLabel = t.points > 1 ? ` (計${t.points}点×${perPt}円)` : "";
 
+        const borderCls = res.checked
+          ? (res.hit ? "border-emerald-400 bg-emerald-950/40 shadow-lg" : "border-slate-800/80 bg-slate-950/60 opacity-65")
+          : (checked ? "border-emerald-500/60 bg-slate-950 opacity-60" : "border-slate-800 bg-slate-950");
+
+        const resultTag = res.checked
+          ? (res.hit
+            ? `<div class="bg-emerald-500/20 border border-emerald-400/60 text-emerald-200 rounded-lg px-2.5 py-1 text-xs font-extrabold flex items-center justify-between"><span>🎯 的中！（公式配当 ${res.dividend.toLocaleString()}円）</span><span class="text-amber-300">確定払戻 ${res.payoutYen.toLocaleString()}円</span></div>`
+            : `<div class="text-[11px] text-slate-500 font-medium px-1">❌ 不的中（払戻 0円）</div>`)
+          : "";
+
         return `
-          <div onclick="toggleTicketCheck('${key}')" class="bg-slate-950 border ${checked ? "border-emerald-500/60 opacity-60" : "border-slate-800"} rounded-xl p-2.5 cursor-pointer space-y-1.5">
+          <div onclick="toggleTicketCheck('${key}')" class="border ${borderCls} rounded-xl p-2.5 cursor-pointer space-y-1.5">
             <div class="flex items-center justify-between gap-2">
               <div class="flex items-center gap-1.5 flex-wrap">
-                <span class="text-xs">${checked ? "✅" : "⬜"}</span>
+                <span class="text-xs">${res.checked ? (res.hit ? "🎯" : "❌") : (checked ? "✅" : "⬜")}</span>
                 <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${isCore ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40" : "bg-amber-500/20 text-amber-300 border border-amber-500/40"}">${t.zone}</span>
               </div>
               <div class="text-right shrink-0 whitespace-nowrap">
                 <span class="text-xs text-slate-400">購入額</span>
                 <span class="text-sm font-extrabold text-white ml-0.5">${t.amt.toLocaleString()}円</span>
-                <span class="text-xs text-emerald-300 font-bold ml-1.5">期待払戻 ${expPayout.toLocaleString()}円</span>
+                ${!res.checked ? `<span class="text-xs text-emerald-300 font-bold ml-1.5">期待払戻 ${expPayout.toLocaleString()}円</span>` : ""}
               </div>
             </div>
             <div class="font-mono text-xs font-extrabold text-emerald-300 bg-slate-900/90 border border-slate-800/80 rounded-lg px-2.5 py-1.5 break-words leading-relaxed">
               ${t.type} ${t.comb}${ptLabel}
             </div>
+            ${resultTag}
             <div class="grid grid-cols-3 gap-1 text-[11px] bg-slate-900/50 rounded-lg px-2 py-1 border border-slate-800/60">
-              <div><span class="text-slate-400">推定的中率:</span> <b class="text-white">${t.hitProb.toFixed(1)}%</b></div>
-              <div><span class="text-slate-400">オッズ(分岐):</span> <b class="text-amber-300">${t.isSynthetic ? "合成 " : ""}${t.baseOdds}倍</b> <span class="text-[10px] text-slate-400">(${breakEvenOdds}倍)</span></div>
-              <div class="text-right"><span class="text-slate-400">期待回収率:</span> <b class="text-emerald-400">${expRoi}%</b></div>
+              <div><span class="text-slate-400">的中率:</span> <b class="text-white">${t.hitProb.toFixed(1)}%</b></div>
+              <div><span class="text-slate-400">オッズ:</span> <b class="text-amber-300">${t.isSynthetic ? "合成" : ""}${t.baseOdds}倍</b> <span class="text-[10px] text-slate-400">(${breakEvenOdds})</span></div>
+              <div class="text-right"><span class="text-slate-400">期待ROI:</span> <b class="text-emerald-400">${expRoi}%</b></div>
             </div>
           </div>
         `;
       }).join("");
 
+      // 結果確定バナーの描画（設定予算・1万円基準の確定回収率を明示）
+      if (hasResult) {
+        const actRoi = ((totalActualReturn / Math.max(1, totalInvest)) * 100).toFixed(1);
+        const actProf = totalActualReturn - totalInvest;
+        const isPlus = actProf >= 0;
+        const top3Html = race.actualTop3.map(a => `<span class="bg-slate-900 border border-slate-700 px-2 py-0.5 rounded font-bold">${a.rank}着: ${a.num}番 ${a.name}</span>`).join(" ");
+        bannerEl.className = `rounded-xl p-3 space-y-2 border ${isPlus ? "bg-emerald-950/60 border-emerald-400/60" : (hitCount > 0 ? "bg-amber-950/50 border-amber-400/50" : "bg-rose-950/40 border-rose-500/40")}`;
+        bannerEl.innerHTML = `
+          <div class="flex items-center justify-between flex-wrap gap-1">
+            <span class="text-xs font-extrabold text-white">🏁 レース結果確定 ＆ 実配当照合（購入 ${totalInvest.toLocaleString()}円）</span>
+            <span class="text-base font-extrabold ${isPlus ? "text-emerald-300" : (hitCount > 0 ? "text-amber-300" : "text-rose-300")}">確定回収率 ${actRoi}%</span>
+          </div>
+          <div class="flex items-center gap-1.5 flex-wrap text-xs text-slate-200">${top3Html}</div>
+          <div class="flex items-center justify-between text-xs bg-slate-950/80 rounded-lg px-2.5 py-1.5 flex-wrap gap-1">
+            <span>的中馬券: <b class="text-emerald-300">${hitCount}行 / 全${allScaled.length}行</b></span>
+            <span>確定払戻合計: <b class="text-amber-300">${totalActualReturn.toLocaleString()}円</b> (${actProf >= 0 ? "+" : ""}${actProf.toLocaleString()}円)</span>
+          </div>
+        `;
+      }
+
       const overallRoi = ((totalExpectedReturn / Math.max(1, totalInvest)) * 100).toFixed(1);
-      const netExpected = totalExpectedReturn - totalInvest;
-      const kellyRef = Math.min(totalInvest, Math.round((totalInvest * Math.max(0.5, (Number(overallRoi) - 100) / 80)) / 100) * 100);
       document.getElementById("modalPortfolioMetrics").innerHTML = `
         <div class="flex items-center justify-between flex-wrap gap-1">
           <span>合計購入額: <b class="text-white">${totalInvest.toLocaleString()}円 (全${allScaled.length}行)</b></span>
-          <span>期待払戻総額: <b class="text-emerald-400">${totalExpectedReturn.toLocaleString()}円 (${netExpected >= 0 ? "+" : ""}${netExpected.toLocaleString()}円)</b></span>
-        </div>
-        <div class="flex items-center justify-between flex-wrap gap-1 text-[10px] text-slate-400">
-          <span>全体期待ROI: <b class="text-amber-300">${overallRoi}%</b></span>
-          <span>1/4 Kelly参考総額: <b class="text-sky-300">${kellyRef.toLocaleString()}円</b></span>
-          <span>-15%オッズ下落耐性: <b class="text-emerald-300">クリア</b></span>
+          <span>${hasResult ? `確定払戻合計: <b class="text-amber-300">${totalActualReturn.toLocaleString()}円 (実ROI ${((totalActualReturn/Math.max(1,totalInvest))*100).toFixed(1)}%)</b>` : `期待払戻総額: <b class="text-emerald-400">${totalExpectedReturn.toLocaleString()}円 (期待ROI ${overallRoi}%)</b>`}</span>
         </div>
       `;
     }
 
-    function toggleTicketCheck(key) {
-      state.checkedTickets[key] = !state.checkedTickets[key];
-      onModalBudgetChange(state.modalBudget);
-    }
+    function toggleTicketCheck(key) { state.checkedTickets[key] = !state.checkedTickets[key]; onModalBudgetChange(state.modalBudget); }
 
     function computeOptimalCounts(legs, maxPoints, weightFn, initCounts) {
-      const nLegs = legs.length;
-      const counts = initCounts.slice(0, nLegs);
+      const nLegs = legs.length, counts = initCounts.slice(0, nLegs);
       while (true) {
         let bestLeg = -1, bestScore = -1;
         for (let r = 0; r < nLegs; r++) {
-          const leg = legs[r];
-          const nextIdx = counts[r];
+          const leg = legs[r], nextIdx = counts[r];
           if (!leg.horses || nextIdx >= leg.horses.length) continue;
-          const currentProd = counts.reduce((a, b) => a * b, 1);
-          const newProd = (currentProd / counts[r]) * (counts[r] + 1);
+          const newProd = (counts.reduce((a, b) => a * b, 1) / counts[r]) * (counts[r] + 1);
           if (newProd <= maxPoints) {
-            const baseF = Number(leg.horses[nextIdx].f) || 8;
-            const score = weightFn(leg, r, nextIdx, baseF);
+            const score = weightFn(leg, r, nextIdx, Number(leg.horses[nextIdx].f) || 8);
             if (score > bestScore) { bestScore = score; bestLeg = r; }
           }
         }
@@ -974,9 +815,7 @@
     function calcJointCapture(legs, counts) {
       let p = 1.0;
       for (let r = 0; r < legs.length; r++) {
-        const k = counts[r];
-        const sumF = (legs[r].horses || []).slice(0, k).reduce((s, h) => s + (Number(h.f) || 10), 0);
-        p *= Math.min(0.99, sumF / 100);
+        p *= Math.min(0.99, (legs[r].horses || []).slice(0, counts[r]).reduce((s, h) => s + (Number(h.f) || 10), 0) / 100);
       }
       return (p * 100).toFixed(1);
     }
@@ -984,9 +823,19 @@
     function formatLegNums(leg, k, isTriple) {
       const hs = (leg.horses || []).slice(0, k);
       if (!isTriple) return hs.map(h => `${h.num}番`).join(", ");
-      const firsts = hs.slice(0, Math.max(1, Math.ceil(k / 2))).map(h => h.num).join(",");
-      const seconds = hs.map(h => h.num).join(",");
-      return `1着(${firsts}) → 2着(${seconds})`;
+      return `1着(${hs.slice(0, Math.max(1, Math.ceil(k/2))).map(h=>h.num).join(",")}) → 2着(${hs.map(h=>h.num).join(",")})`;
+    }
+
+    // 選択日にWIN5がない場合（土曜日など）は、DB内の最新WIN5開催日（日曜日）を自動で探して表示
+    function findActiveMultiLeg() {
+      const db = getActiveDB();
+      const curDay = db[state.selectedDate];
+      if (curDay && curDay.multiLeg && curDay.multiLeg.legs) return curDay.multiLeg;
+      const keys = Object.keys(db).sort().reverse();
+      for (const k of keys) {
+        if (db[k].multiLeg && db[k].multiLeg.legs) return db[k].multiLeg;
+      }
+      return null;
     }
 
     function updateWin5Budget(val) {
@@ -996,114 +845,80 @@
       document.getElementById("win5BudgetHeader").textContent = `${budget.toLocaleString()}円`;
 
       const isNar = state.circuitMode === "nar";
-      const curDay = getActiveDB()[state.selectedDate];
-      const dataObj = (curDay && curDay.multiLeg && curDay.multiLeg.legs) ? curDay.multiLeg : (isNar ? TRIPLE_NAR_DEFAULT : WIN5_JRA_DEFAULT);
+      const dataObj = findActiveMultiLeg();
+      if (!dataObj) {
+        document.getElementById("win5SummaryText").textContent = isNar
+          ? "地方開催の最終10R〜12R出馬表を取得するとトリプル馬単が自動編成されます。"
+          : "次回WIN5開催日（日曜）の出馬表を取得すると対象5レースが自動編成されます（ActionsのRun workflowで今すぐ取得可能です）。";
+        document.getElementById("win5PlansAllocationBox").innerHTML = "";
+        document.getElementById("win5LegsContainer").innerHTML = "";
+        document.getElementById("win5HedgeTable").innerHTML = "";
+        return;
+      }
+
       const unitYen = isNar ? 50 : 100;
       document.getElementById("win5SummaryText").textContent = dataObj.summary || "";
+      const legs = dataObj.legs || [], nLegs = legs.length;
+      const totalMaxPts = Math.floor(budget / unitYen), initArr = new Array(nLegs).fill(1);
 
-      const legs = dataObj.legs || [];
-      const nLegs = legs.length;
-      if (nLegs < 3) return;
-
-      const totalMaxPts = Math.floor(budget / unitYen);
-      const initArr = new Array(nLegs).fill(1);
-
-      const countsA = computeOptimalCounts(legs, totalMaxPts, (leg, r, idx, f) => f, initArr);
+      const countsA = computeOptimalCounts(legs, totalMaxPts, (l, r, i, f) => f, initArr);
       const ptsA = countsA.reduce((a, b) => a * b, 1);
-      const amtA = ptsA * unitYen;
-      const capA = calcJointCapture(legs, countsA);
 
-      const maxPtsB1 = Math.max(6, Math.floor(totalMaxPts * 0.55));
-      const countsB1 = computeOptimalCounts(legs, maxPtsB1, (leg, r, idx, f) => f, initArr);
+      const countsB1 = computeOptimalCounts(legs, Math.max(6, Math.floor(totalMaxPts * 0.55)), (l, r, i, f) => f, initArr);
       const ptsB1 = countsB1.reduce((a, b) => a * b, 1);
-
-      const remainPtsB2 = Math.max(4, totalMaxPts - ptsB1);
-      let anchorLeg = nLegs - 1;
-      let maxTopF = -1;
-      legs.forEach((lg, idx) => {
-        const topF = Number(lg.horses?.[0]?.f) || 0;
-        if (!lg.typeBPlus && topF > maxTopF) { maxTopF = topF; anchorLeg = idx; }
-      });
-
-      const countsB2 = computeOptimalCounts(legs, remainPtsB2, (leg, r, idx, f) => {
-        if (r === anchorLeg) return -1;
-        return leg.typeBPlus ? f * 1.65 : f * 0.9;
-      }, initArr);
+      let anchorLeg = nLegs - 1, maxTopF = -1;
+      legs.forEach((lg, idx) => { const tf = Number(lg.horses?.[0]?.f) || 0; if (!lg.typeBPlus && tf > maxTopF) { maxTopF = tf; anchorLeg = idx; } });
+      const countsB2 = computeOptimalCounts(legs, Math.max(4, totalMaxPts - ptsB1), (lg, r, i, f) => (r === anchorLeg ? -1 : (lg.typeBPlus ? f * 1.65 : f * 0.9)), initArr);
       const ptsB2 = countsB2.reduce((a, b) => a * b, 1);
-      const totalPtsB = ptsB1 + ptsB2;
-      const totalAmtB = totalPtsB * unitYen;
-
-      const maxCountsB = countsB1.map((c, r) => Math.max(c, countsB2[r]));
-      const capB = calcJointCapture(legs, maxCountsB);
 
       document.getElementById("win5PlansAllocationBox").innerHTML = `
         <div class="bg-slate-900 border border-emerald-500/40 rounded-xl p-3 space-y-2">
           <div class="flex items-center justify-between gap-2 flex-wrap">
-            <div>
-              <span class="bg-emerald-500/20 text-emerald-300 text-[11px] font-extrabold px-2 py-0.5 rounded">プランA（標準・1枚直積構成）</span>
-              <span class="text-xs text-slate-300 font-bold ml-1">突破指標 ${capA}%</span>
-            </div>
-            <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">${amtA.toLocaleString()}円 (${ptsA}組×${unitYen}円)</span>
+            <div><span class="bg-emerald-500/20 text-emerald-300 text-[11px] font-extrabold px-2 py-0.5 rounded">プランA（標準・1枚構成）</span> <span class="text-xs text-slate-300 font-bold ml-1">突破指標 ${calcJointCapture(legs, countsA)}%</span></div>
+            <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">${(ptsA*unitYen).toLocaleString()}円 (${ptsA}組×${unitYen}円)</span>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs space-y-1 font-mono leading-relaxed break-words">
-            ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}(${lg.venue}):</span> <b class="text-emerald-300">[${formatLegNums(lg, countsA[r], isNar)}]</b></div>`).join("")}
+            ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}(${lg.venue} ${lg.postTime||""}):</span> <b class="text-emerald-300">[${formatLegNums(lg, countsA[r], isNar)}]</b></div>`).join("")}
           </div>
         </div>
-
         <div class="bg-slate-900 border border-amber-500/40 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2 flex-wrap">
-            <div>
-              <span class="bg-amber-500/20 text-amber-300 text-[11px] font-extrabold px-2 py-0.5 rounded">プランB（2枚合算・波乱Leg拡張構成）</span>
-              <span class="text-xs text-slate-300 font-bold ml-1">最大突破指標 ${capB}%</span>
-            </div>
-            <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">合計 ${totalAmtB.toLocaleString()}円 (計${totalPtsB}組)</span>
+            <div><span class="bg-amber-500/20 text-amber-300 text-[11px] font-extrabold px-2 py-0.5 rounded">プランB（2枚合算・波乱拡張）</span> <span class="text-xs text-slate-300 font-bold ml-1">最大指標 ${calcJointCapture(legs, countsB1.map((c,r)=>Math.max(c,countsB2[r])))}%</span></div>
+            <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">合計 ${((ptsB1+ptsB2)*unitYen).toLocaleString()}円 (計${ptsB1+ptsB2}組)</span>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
-            <div class="flex items-center justify-between text-xs font-bold">
-              <span class="text-sky-300">🎫 Ticket 1（本線バランス枠：${countsB1.join("×")}）</span>
-              <span class="text-amber-300 whitespace-nowrap">${(ptsB1 * unitYen).toLocaleString()}円 (${ptsB1}組)</span>
-            </div>
-            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words leading-relaxed">
-              ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="text-sky-300">[${formatLegNums(lg, countsB1[r], isNar)}]</b></div>`).join("")}
-            </div>
+            <div class="flex items-center justify-between text-xs font-bold"><span class="text-sky-300">🎫 Ticket 1（本線：${countsB1.join("×")}）</span><span class="text-amber-300">${(ptsB1*unitYen).toLocaleString()}円 (${ptsB1}組)</span></div>
+            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="text-sky-300">[${formatLegNums(lg, countsB1[r], isNar)}]</b></div>`).join("")}</div>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
-            <div class="flex items-center justify-between text-xs font-bold">
-              <span class="text-rose-300">🎯 Ticket 2（Leg${anchorLeg+1}単騎固定×波乱拡張：${countsB2.join("×")}）</span>
-              <span class="text-amber-300 whitespace-nowrap">${(ptsB2 * unitYen).toLocaleString()}円 (${ptsB2}組)</span>
-            </div>
-            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words leading-relaxed">
-              ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="${lg.typeBPlus ? "text-rose-300" : "text-slate-200"}">[${formatLegNums(lg, countsB2[r], isNar)}]</b></div>`).join("")}
-            </div>
+            <div class="flex items-center justify-between text-xs font-bold"><span class="text-rose-300">🎯 Ticket 2（Leg${anchorLeg+1}固定×拡張：${countsB2.join("×")}）</span><span class="text-amber-300">${(ptsB2*unitYen).toLocaleString()}円 (${ptsB2}組)</span></div>
+            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="${lg.typeBPlus ? "text-rose-300" : "text-slate-200"}">[${formatLegNums(lg, countsB2[r], isNar)}]</b></div>`).join("")}</div>
           </div>
         </div>
       `;
 
       document.getElementById("win5LegsContainer").innerHTML = legs.map((leg, idx) => {
-        const kA = countsA[idx];
-        const kB = Math.max(countsB1[idx], countsB2[idx]);
+        const kA = countsA[idx], kB = Math.max(countsB1[idx], countsB2[idx]);
         return `
           <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
             <div class="flex items-center justify-between gap-2 flex-wrap">
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="bg-indigo-500/20 text-indigo-300 text-xs font-extrabold px-2 py-0.5 rounded">Leg ${leg.leg || (idx+1)}</span>
-                <span class="font-bold text-sm text-white">${leg.venue || ""} ${leg.name || ""}</span>
+                <span class="font-bold text-sm text-white">${leg.venue} ${leg.name}</span>
+                <span class="text-xs text-slate-400">${leg.postTime || ""}</span>
               </div>
               <span class="text-xs font-bold text-emerald-400 whitespace-nowrap">A:${kA}頭 / B:最大${kB}頭</span>
             </div>
             <div class="space-y-1.5">
-              ${(leg.horses || []).map((h, hIdx) => {
-                const inA = hIdx < kA, inB = hIdx < kB, active = inA || inB;
-                return `
-                  <div class="text-xs p-2 rounded-lg border ${active ? "bg-emerald-950/30 border-emerald-500/40 text-white" : "bg-slate-950 border-slate-800 text-slate-500"} space-y-1">
-                    <div class="flex items-center justify-between gap-2">
-                      <span class="font-extrabold text-white">${hIdx + 1}位: ${h.num}番 ${h.name}</span>
-                      <span class="font-mono font-bold whitespace-nowrap ${active ? "text-amber-300" : ""}">f=${h.f}% (${h.odds || 5.0}倍)</span>
-                    </div>
-                    <div class="text-[11px] text-slate-400 break-words">${h.note || ""}</div>
+              ${(leg.horses || []).map((h, hIdx) => `
+                <div class="text-xs p-2 rounded-lg border ${(hIdx < kA || hIdx < kB) ? "bg-emerald-950/30 border-emerald-500/40 text-white" : "bg-slate-950 border-slate-800 text-slate-500"} space-y-1">
+                  <div class="flex items-center justify-between gap-2">
+                    <span class="font-extrabold text-white">${hIdx + 1}位: ${h.num}番 ${h.name}</span>
+                    <span class="font-mono font-bold whitespace-nowrap ${(hIdx < kA || hIdx < kB) ? "text-amber-300" : ""}">f=${h.f}% (${h.odds}倍)</span>
                   </div>
-                `;
-              }).join("")}
+                  <div class="text-[11px] text-slate-400 break-words">${h.note || ""}</div>
+                </div>
+              `).join("")}
             </div>
           </div>
         `;
@@ -1117,11 +932,40 @@
       `).join("");
     }
 
+    function renderStats() {
+      const j = STATS_DATA.jra || { races: 0, hits: 0, invest: 0, ret: 0 };
+      const n = STATS_DATA.nar || { races: 0, hits: 0, invest: 0, ret: 0 };
+      const jRoi = j.invest > 0 ? ((j.ret / j.invest) * 100).toFixed(1) : "--";
+      const nRoi = n.invest > 0 ? ((n.ret / n.invest) * 100).toFixed(1) : "--";
+      document.getElementById("statJraRoi").textContent = `${jRoi}%`;
+      document.getElementById("statJraProfit").innerHTML = `${j.hits}/${j.races}R的中 ｜ 収支 <b class="${(j.ret-j.invest)>=0?'text-emerald-300':'text-rose-300'}">${(j.ret-j.invest)>=0?'+':''}${(j.ret-j.invest).toLocaleString()}円</b>`;
+      document.getElementById("statNarRoi").textContent = `${nRoi}%`;
+      document.getElementById("statNarProfit").innerHTML = `${n.hits}/${n.races}R的中 ｜ 収支 <b class="${(n.ret-n.invest)>=0?'text-emerald-300':'text-rose-300'}">${(n.ret-n.invest)>=0?'+':''}${(n.ret-n.invest).toLocaleString()}円</b>`;
+      document.getElementById("statUpdatedAt").textContent = `更新: ${STATS_DATA.updatedAt || "最新"}`;
+
+      const logs = STATS_DATA.recentResults || [];
+      document.getElementById("statRecentLogs").innerHTML = logs.length > 0 ? logs.map(l => `
+        <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
+          <div class="flex items-center justify-between gap-2 flex-wrap">
+            <div><span class="text-[10px] text-slate-400 mr-1">${l.date}</span><span class="font-bold text-white">${l.race}</span></div>
+            <span class="font-extrabold ${parseFloat(l.roi)>=100?'text-emerald-400':'text-amber-300'}">回収率 ${l.roi}</span>
+          </div>
+          <div class="text-[11px] text-slate-300">${l.status}</div>
+          ${l.hits && l.hits.length ? `<div class="flex gap-1 flex-wrap">${l.hits.map(h=>`<span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded">🎯 ${h}</span>`).join("")}</div>` : ""}
+        </div>
+      `).join("") : `<div class="text-slate-400 p-2">確定レースが蓄積されると自動で表示されます。</div>`;
+    }
+
     async function syncGitHubLiveData() {
       const syncBadge = document.getElementById("syncStatusBadge");
       try {
+        const sRes = await fetch(`./data/stats.json?t=${Date.now()}`);
+        if (sRes.ok) { STATS_DATA = await sRes.json(); renderStats(); }
+      } catch (e) {}
+
+      try {
         const res = await fetch(`./data/index.json?t=${Date.now()}`);
-        if (!res.ok) { syncBadge.textContent = "🔄 ローカル検証モード"; return; }
+        if (!res.ok) { syncBadge.textContent = "🔄 データ待機中"; return; }
         const idx = await res.json();
         const shortSync = (idx.lastSync || "最新").replace(/^20\d\d-/, "").replace(" JST", "");
         syncBadge.textContent = `🔄 自動取得: ${shortSync}`;
@@ -1136,60 +980,43 @@
 
           const isNar = dateKey.endsWith("_nar") || liveDay.mode === "nar";
           const targetStore = isNar ? DB_NAR : DB_JRA;
-          const hasPredicted = liveDay.races.some(r => Array.isArray(r.horses) && r.horses.length > 0 && !String(r.horses[0]?.name || "").includes("推論待機"));
           const venues = [...new Set(liveDay.races.map(r => r.venue))];
+          const win5Tag = (!isNar && liveDay.multiLeg && liveDay.multiLeg.legs) ? " 💎WIN5" : "";
 
           targetStore[dateKey] = {
-            label: `${dateKey.replace("_nar", "").slice(5).replace("-", "/")}${isNar ? " 地方" : ""}${hasPredicted ? " 実馬名済" : " 番組"}`,
+            label: `${dateKey.replace("_nar", "").slice(5).replace("-", "/")}${isNar ? " 地方" : ""}${win5Tag}`,
             status: "live",
             biases: Array.isArray(liveDay.trackBiases) && liveDay.trackBiases.length > 0
               ? liveDay.trackBiases
-              : venues.map(v => ({ venue: v, surf: "3シナリオ混合・実馬名取得済", trend: "直前パドック1タップ補正対応" })),
+              : venues.map(v => ({ venue: v, surf: "実馬名・実配当照合済", trend: "3シナリオ混合推論" })),
             multiLeg: liveDay.multiLeg || null,
-            races: liveDay.races.map((r, i) => {
-              const validHorses = Array.isArray(r.horses) && !String(r.horses[0]?.name || "").includes("推論待機") ? r.horses : [];
-              return {
-                id: r.raceId || `${dateKey}-${i}`,
-                venue: r.venue,
-                r: r.raceNumber,
-                name: r.name,
-                cond: r.surfaceDist || "ダ1600m",
-                time: r.postTime || "15:00",
-                rank: r.rank || "B",
-                skill: r.skill || (isNar ? "app-bayesian-nar" : "app-bayesian-horse-racing-text"),
-                usedModel: r.usedModel || "",
-                roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "165%",
-                hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "48%",
-                pivot: r.pivotType || "Dual-Pivot",
-                nLead: r.nLead || 3,
-                predicted: validHorses.length > 0,
-                tickets: Array.isArray(r.tickets) ? r.tickets : null,
-                status: r.resultStatus || (validHorses.length > 0 ? `実馬名・全${validHorses.length}頭＆9行買い目完了` : "木曜夕方の出馬表発表待機"),
-                scenario: r.scenario || r.summary || "3シナリオ混合Plackett-Luceモデルから全頭確率と9行買い目を算出。",
-                horses: validHorses
-              };
-            })
+            races: liveDay.races.map((r, i) => ({
+              id: r.raceId || `${dateKey}-${i}`,
+              venue: r.venue, r: r.raceNumber, name: r.name, cond: r.surfaceDist || "ダ1600m",
+              time: r.postTime || "", rank: r.rank || "B",
+              skill: r.skill || (isNar ? "app-bayesian-nar" : "app-bayesian-horse-racing-text"),
+              usedModel: r.usedModel || "", roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "162%",
+              hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "48%",
+              pivot: r.pivotType || "Dual-Pivot", nLead: r.nLead || 3,
+              predicted: Array.isArray(r.horses) && r.horses.length > 0,
+              actualTop3: r.actualTop3 || [], payouts: r.payouts || null,
+              evalDone: !!r.evalDone, isHit: !!r.isHit,
+              investedYen: r.investedYen || 10000, returnYen: r.returnYen || 0,
+              actualRoi: r.actualRoi || 0, hitTickets: r.hitTickets || [],
+              status: r.resultStatus || "",
+              scenario: r.scenario || r.summary || "3シナリオ混合Plackett-Luceモデルから全頭確率と9行買い目を算出。",
+              horses: Array.isArray(r.horses) ? r.horses : []
+            }))
           };
         }
 
-        renderDateTabs();
-        renderBiasBar();
-        renderVenueFilter();
-        renderRaceList();
-        updateWin5Budget(state.win5Budget);
-      } catch (e) {
-        console.warn("Auto sync skipped:", e);
-      }
+        const keys = Object.keys(getActiveDB()).sort();
+        if (keys.length > 0) state.selectedDate = keys[keys.length - 1];
+        renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRaceList(); updateWin5Budget(state.win5Budget);
+      } catch (e) { console.warn("Sync skipped:", e); }
     }
 
-    window.addEventListener("DOMContentLoaded", () => {
-      renderDateTabs();
-      renderBiasBar();
-      renderVenueFilter();
-      renderRaceList();
-      updateWin5Budget(state.win5Budget);
-      syncGitHubLiveData();
-    });
+    window.addEventListener("DOMContentLoaded", () => { syncGitHubLiveData(); });
   </script>
 </body>
 </html>
