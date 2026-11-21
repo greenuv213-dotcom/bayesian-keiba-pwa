@@ -246,7 +246,37 @@
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 5,
+          "num": 10,
+          "name": "アウダチェ",
+          "odds": "1.7",
+          "passing": ""
+        },
+        {
+          "rank": "2",
+          "waku": 4,
+          "num": 8,
+          "name": "ペプチドヘドウィグ",
+          "odds": "19.7",
+          "passing": ""
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 16,
+          "name": "ルージュアルミーラ",
+          "odds": "15.0",
+          "passing": ""
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "結果確定 (1着:10番 アウダチェ)"
     },
     {
       "raceId": "202608050506",
@@ -372,7 +402,37 @@
         "s1": 50,
         "s2": 35,
         "s3": 15
-      }
+      },
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 5,
+          "num": 5,
+          "name": "セレクトルビー",
+          "odds": "3.1",
+          "passing": ""
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 1,
+          "name": "サンダージョー",
+          "odds": "3.7",
+          "passing": ""
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 6,
+          "name": "ファルディルーチェ",
+          "odds": "4.6",
+          "passing": ""
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "結果確定 (1着:5番 セレクトルビー)"
     },
     {
       "raceId": "202608050509",
@@ -537,7 +597,37 @@
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 7,
+          "name": "カレンハウ",
+          "odds": "1.9",
+          "passing": ""
+        },
+        {
+          "rank": "2",
+          "waku": 3,
+          "num": 3,
+          "name": "アンムート",
+          "odds": "1.7",
+          "passing": ""
+        },
+        {
+          "rank": "3",
+          "waku": 1,
+          "num": 1,
+          "name": "ミハテヌユメ",
+          "odds": "21.5",
+          "passing": ""
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 11500,
+      "isHit": true,
+      "resultStatus": "🎯 的中 (1着:7番 カレンハウ / 回収11,500円)"
     },
     {
       "raceId": "202608050510",
@@ -825,7 +915,37 @@
         "s1": 25,
         "s2": 35,
         "s3": 40
-      }
+      },
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 4,
+          "num": 7,
+          "name": "ロードフィレール",
+          "odds": "2.4",
+          "passing": ""
+        },
+        {
+          "rank": "2",
+          "waku": 3,
+          "num": 5,
+          "name": "ベトルス",
+          "odds": "3.7",
+          "passing": ""
+        },
+        {
+          "rank": "3",
+          "waku": 5,
+          "num": 9,
+          "name": "オメガナビゲーター",
+          "odds": "29.6",
+          "passing": ""
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 11500,
+      "isHit": true,
+      "resultStatus": "🎯 的中 (1着:7番 ロードフィレール / 回収11,500円)"
     },
     {
       "raceId": "202608050511",
@@ -1148,7 +1268,37 @@
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 12,
+          "name": "メルカントゥール",
+          "odds": "4.0",
+          "passing": ""
+        },
+        {
+          "rank": "2",
+          "waku": 5,
+          "num": 10,
+          "name": "テーオーマルコーニ",
+          "odds": "3.3",
+          "passing": ""
+        },
+        {
+          "rank": "3",
+          "waku": 5,
+          "num": 9,
+          "name": "レッドプロフェシー",
+          "odds": "20.2",
+          "passing": ""
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "結果確定 (1着:12番 メルカントゥール)"
     },
     {
       "raceId": "202603030509",
@@ -1399,12 +1549,42 @@
       ],
       "scenario": "福島9R(芝1800m) 全18頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
       "nLead": 7,
-      "trackCond": "重",
+      "trackCond": "良",
       "scenarioWeights": {
         "s1": 30,
         "s2": 35,
         "s3": 35
-      }
+      },
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 15,
+          "name": "バンオンタイム",
+          "odds": "9.8",
+          "passing": ""
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 16,
+          "name": "メリザンド",
+          "odds": "35.0",
+          "passing": ""
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 13,
+          "name": "ベネディクション",
+          "odds": "59.9",
+          "passing": ""
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "結果確定 (1着:15番 バンオンタイム)"
     },
     {
       "raceId": "202603030510",
@@ -1660,7 +1840,37 @@
         "s1": 30,
         "s2": 35,
         "s3": 35
-      }
+      },
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 2,
+          "num": 3,
+          "name": "ビーマックス",
+          "odds": "11.1",
+          "passing": ""
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 1,
+          "name": "ソニックブレイカー",
+          "odds": "4.7",
+          "passing": ""
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 14,
+          "name": "ゼファーテソーロ",
+          "odds": "10.6",
+          "passing": ""
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "結果確定 (1着:3番 ビーマックス)"
     },
     {
       "raceId": "202603030511",
@@ -1969,26 +2179,56 @@
       "pivotType": "Dual-Pivot",
       "nLead": 1,
       "usedModel": "gemini-3.8-flash",
-      "trackCond": "重",
+      "trackCond": "良",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
         "s3": 15
-      }
+      },
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 13,
+          "name": "マリアイリダータ",
+          "odds": "3.3",
+          "passing": ""
+        },
+        {
+          "rank": "2",
+          "waku": 2,
+          "num": 3,
+          "name": "ゼンダンハヤブサ",
+          "odds": "28.5",
+          "passing": ""
+        },
+        {
+          "rank": "3",
+          "waku": 1,
+          "num": 1,
+          "name": "カラマティアノス",
+          "odds": "8.1",
+          "passing": ""
+        }
+      ],
+      "investedYen": 10000,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "結果確定 (1着:13番 マリアイリダータ)"
     }
   ],
-  "updatedAt": "2026-11-21 09:56 JST",
+  "updatedAt": "2026-11-21 17:08 JST",
   "mode": "jra",
   "trackBiases": [
     {
       "venue": "京都",
       "surf": "実測N_lead・3シナリオ混合",
-      "trend": "京都: 前半確定レースなし（標準バイアス想定）"
+      "trend": "京都当日実測(5R集計): 1着内枠0回/外枠2回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
     },
     {
       "venue": "福島",
       "surf": "実測N_lead・3シナリオ混合",
-      "trend": "福島: 前半確定レースなし（標準バイアス想定）"
+      "trend": "福島当日実測(3R集計): 1着内枠1回/外枠2回 → 【内外フラット】"
     }
   ]
 }

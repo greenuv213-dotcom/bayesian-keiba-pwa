@@ -685,7 +685,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 2,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
@@ -839,7 +839,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 1,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
@@ -993,7 +993,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 2,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
@@ -2005,5 +2005,5 @@
       }
     ]
   },
-  "updatedAt": "2026-11-21 05:20 JST"
+  "updatedAt": "2026-11-21 17:08 JST"
 }
