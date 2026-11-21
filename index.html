@@ -43,38 +43,34 @@
         </span>
       </div>
     </div>
+    <!-- 日付タブ（WIN5の文字なし・シンプル表記） -->
     <div id="dateTabs" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1"></div>
     <div id="biasBar" class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1.5 text-[11px]"></div>
   </header>
 
   <main class="max-w-xl mx-auto px-3 pt-3">
-    <!-- ① レース一覧ビュー -->
-    <section id="view-races" class="space-y-3">
+    <!-- ① レース一覧ビュー（会場フィルタ ＋ ランク別絞り込み） -->
+    <section id="view-races" class="space-y-2.5">
       <div class="flex items-center justify-between gap-2">
         <div id="venueFilter" class="flex gap-1 overflow-x-auto no-scrollbar"></div>
         <button id="toggleAllRacesBtn" onclick="toggleShowAllRaces()" class="shrink-0 text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-2.5 py-1 rounded-lg font-medium">
           全レース表示: ON
         </button>
       </div>
-      <div class="flex items-center justify-between bg-slate-900/90 border border-slate-800 rounded-lg px-2.5 py-1.5 text-[11px] text-slate-400">
-        <div class="flex items-center gap-2 flex-wrap">
-          <span>🔥<b class="text-rose-400">S</b>:勝負</span>
-          <span>✨<b class="text-amber-400">A</b>:好機</span>
-          <span>🔰<b class="text-sky-400">新馬</b></span>
-          <span><b class="text-slate-300">B</b>:標準</span>
-          <span>💤<b class="text-slate-500">Pass</b>:見送り</span>
-        </div>
-        <span id="circuitLockLabel" class="shrink-0 text-emerald-400 font-semibold ml-1">1万円実配当照合対応</span>
-      </div>
+      <!-- ランク別ワンタップ絞り込みバー -->
+      <div id="rankFilterBar" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5"></div>
       <div id="raceList" class="space-y-2.5"></div>
     </section>
 
-    <!-- ② WIN5（JRA時） ／ トリプル馬単（NAR地方時） ビュー -->
+    <!-- ② WIN5（JRA時） ／ トリプル馬単（NAR地方時） ビュー（結果・的中判定付き） -->
     <section id="view-win5" class="hidden space-y-3">
       <div class="bg-gradient-to-br from-indigo-950/80 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-xl p-3.5 space-y-3">
         <div class="flex items-center justify-between gap-2">
           <div>
-            <span id="multiLegSkillBadge" class="text-[11px] bg-indigo-500/20 border border-indigo-400/40 text-indigo-300 px-2 py-0.5 rounded font-semibold">app-bayesian-win5 (v9.3)</span>
+            <div class="flex items-center gap-1.5 flex-wrap">
+              <span id="multiLegSkillBadge" class="text-[11px] bg-indigo-500/20 border border-indigo-400/40 text-indigo-300 px-2 py-0.5 rounded font-semibold">app-bayesian-win5 (v9.3)</span>
+              <span id="multiLegAiBadge" class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold">読込中</span>
+            </div>
             <h2 id="multiLegTitle" class="text-base font-bold text-white mt-1">JRA WIN5 純粋勝率 f<sub>r,i</sub> 最適化</h2>
           </div>
           <div class="text-right shrink-0">
@@ -82,6 +78,10 @@
             <div id="win5BudgetHeader" class="text-lg font-extrabold text-amber-400 whitespace-nowrap">10,000円</div>
           </div>
         </div>
+
+        <!-- WIN5 / トリプル馬単 結果・的中サマリーバナー -->
+        <div id="win5ResultSummary" class="hidden rounded-xl p-3 space-y-2 border"></div>
+
         <p id="win5SummaryText" class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-lg p-2.5"></p>
         <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
@@ -109,24 +109,46 @@
       </div>
     </section>
 
-    <!-- ③ 成績・回収率ビュー（1万円実配当集計） -->
+    <!-- ③ 成績・回収率ビュー（全体/JRA/NAR切替 ＋ ランク別成績・ログ絞り込み） -->
     <section id="view-stats" class="hidden space-y-3">
+      <!-- 対象切替（全体 / JRA中央 / NAR地方） -->
+      <div class="flex items-center justify-between gap-2">
+        <div class="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5">
+          <button id="statScopeAll" onclick="setStatsCircuit('all')" class="text-xs font-extrabold px-2.5 py-1 rounded-md bg-emerald-500 text-slate-950">全体</button>
+          <button id="statScopeJra" onclick="setStatsCircuit('jra')" class="text-xs font-bold px-2.5 py-1 rounded-md text-slate-400">🏇 JRA</button>
+          <button id="statScopeNar" onclick="setStatsCircuit('nar')" class="text-xs font-bold px-2.5 py-1 rounded-md text-slate-400">🌃 NAR</button>
+        </div>
+        <span id="statUpdatedAt" class="text-[10px] text-slate-400">1万円実配当照合</span>
+      </div>
+
+      <!-- 総合サマリー2カード -->
       <div class="grid grid-cols-2 gap-2.5">
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
-          <div class="text-[11px] text-slate-400">JRA中央 確定回収率 (1万円基準)</div>
-          <div id="statJraRoi" class="text-xl font-extrabold text-emerald-400 mt-0.5">--%</div>
-          <div id="statJraProfit" class="text-[11px] text-slate-400 mt-1">集計中...</div>
+          <div class="text-[11px] text-slate-400">総合回収率（1万円基準）</div>
+          <div id="statTotalRoi" class="text-2xl font-extrabold text-emerald-400 mt-0.5">--%</div>
+          <div id="statTotalProfit" class="text-[11px] text-slate-400 mt-1">集計中...</div>
         </div>
         <div class="bg-slate-900 border border-slate-800 rounded-xl p-3">
-          <div class="text-[11px] text-slate-400">NAR地方 確定回収率 (1万円基準)</div>
-          <div id="statNarRoi" class="text-xl font-extrabold text-amber-400 mt-0.5">--%</div>
-          <div id="statNarProfit" class="text-[11px] text-slate-400 mt-1">集計中...</div>
+          <div class="text-[11px] text-slate-400">的中率 ／ Pass見送り防衛</div>
+          <div id="statTotalHit" class="text-2xl font-extrabold text-amber-400 mt-0.5">--%</div>
+          <div id="statPassSaved" class="text-[11px] text-slate-400 mt-1">見送り防衛: 0円</div>
         </div>
       </div>
+
+      <!-- ランク別成績・回収率カード（S / A / 新馬 / B） -->
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
         <div class="flex items-center justify-between">
-          <h3 class="text-xs font-bold text-emerald-300">🎯 レース別 1万円実配当・回収率ログ</h3>
-          <span id="statUpdatedAt" class="text-[10px] text-slate-400">公式払戻金照合</span>
+          <h3 class="text-xs font-bold text-white">📊 ランク別 成績・回収率（1万円購入前提）</h3>
+          <span class="text-[10px] text-slate-400">タップで下部ログ絞り込み</span>
+        </div>
+        <div id="statRankBreakdown" class="space-y-2 text-xs"></div>
+      </div>
+
+      <!-- レース別ログ（ランク絞り込み付き） -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+        <div class="flex items-center justify-between gap-2 flex-wrap">
+          <h3 class="text-xs font-bold text-emerald-300">🎯 レース別 1万円実配当ログ</h3>
+          <div id="statLogRankFilter" class="flex gap-1 flex-wrap"></div>
         </div>
         <div id="statRecentLogs" class="space-y-2 text-xs"></div>
       </div>
@@ -136,13 +158,14 @@
     <section id="view-skills" class="hidden space-y-3">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between">
-          <h2 class="text-sm font-bold text-white">🧬 実配当照合・WIN5最新化 稼働状況</h2>
-          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">v10.0 完全版</span>
+          <h2 class="text-sm font-bold text-white">🧬 無料枠ハイブリッド稼働状況</h2>
+          <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">Hydrogen ＋ 3.8 Flash</span>
         </div>
         <ul class="text-xs text-slate-300 space-y-1.5 leading-relaxed list-disc pl-4">
-          <li><b>土日2開催日同時取得</b>：土曜夜時点で翌日曜のWIN5対象5鞍と出馬表を自動取得。</li>
-          <li><b>正確な発走時刻・馬番同期</b>：`shutuba.html` と確定結果を馬名照合してズレを完全解消。</li>
-          <li><b>1万円前提の実配当・的中馬券照合</b>：公式払戻金テーブルから各買い目の的中／不的中とレース別回収率を厳密計算。</li>
+          <li><b>WIN5・重賞・S・メイン11R</b>：`gemini-4-hydrogen (HIGH)` で最上位推論。</li>
+          <li><b>新馬戦（Make Debut）</b>：`gemini-4-hydrogen (MEDIUM)` で初戦10大モジュール推論。</li>
+          <li><b>その他のAランク等</b>：`gemini-3.8-flash (MEDIUM)` へ自動分散し無料枠の上限到達を防止。</li>
+          <li><b>結果・回収率照合</b>：個別レース（ランク別）およびWIN5各Legの的中・回収率を公式払戻金から自動計算。</li>
         </ul>
       </div>
     </section>
@@ -164,10 +187,8 @@
       </div>
 
       <div class="overflow-y-auto p-3 space-y-3">
-        <!-- 確定結果 ＆ 1万円購入実配当バナー（結果確定レースのみ表示） -->
         <div id="modalResultBanner" class="hidden rounded-xl p-3 space-y-2 border"></div>
 
-        <!-- 展開シナリオ推論 ＆ 3シナリオ切替 -->
         <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 space-y-2">
           <div class="flex items-center justify-between text-[11px] gap-2">
             <span class="text-emerald-400 font-bold">🧠 3シナリオ混合ベイズ展開推論（F/E/H）</span>
@@ -181,7 +202,6 @@
           </div>
         </div>
 
-        <!-- 買い目テーブル（結果確定時は各馬券の的中バッジ・確定払戻を表示） -->
         <div class="bg-gradient-to-br from-emerald-950/50 via-slate-900 to-slate-950 border border-emerald-500/40 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
             <div class="min-w-0">
@@ -202,7 +222,6 @@
           <div id="modalPortfolioMetrics" class="bg-slate-950/90 border border-slate-800 rounded-lg p-2.5 text-[11px] text-slate-300 space-y-1"></div>
         </div>
 
-        <!-- 全頭評価 -->
         <div class="space-y-2">
           <div class="flex items-center justify-between gap-2 flex-wrap px-0.5">
             <div>
@@ -234,12 +253,13 @@
   <script>
     const DB_JRA = {};
     const DB_NAR = {};
-    let STATS_DATA = { jra: { races: 0, hits: 0, invest: 0, ret: 0 }, nar: { races: 0, hits: 0, invest: 0, ret: 0 }, recentResults: [] };
+    let STATS_DATA = null;
 
     const state = {
       circuitMode: "jra",
       selectedDate: "",
       selectedVenue: "ALL",
+      selectedRank: "ALL",   // レース一覧のランク絞り込み
       showAllRaces: true,
       activeRace: null,
       horseSort: "prob",
@@ -247,12 +267,12 @@
       liveOverrides: {},
       modalBudget: 10000,
       win5Budget: 10000,
-      checkedTickets: {}
+      checkedTickets: {},
+      statsCircuit: "all",   // 成績タブ: all / jra / nar
+      statsRankFilter: "ALL" // 成績ログのランク絞り込み
     };
 
-    function getActiveDB() {
-      return state.circuitMode === "nar" ? DB_NAR : DB_JRA;
-    }
+    function getActiveDB() { return state.circuitMode === "nar" ? DB_NAR : DB_JRA; }
 
     function getEffectiveHorses(race) {
       const raw = (race.horses || []).map(h => ({ ...h }));
@@ -327,10 +347,11 @@
       document.getElementById("multiLegSkillBadge").textContent = isNar ? "app-bayesian-nar (50円単位)" : "app-bayesian-win5 (v9.3)";
       document.getElementById("multiLegTitle").innerHTML = isNar ? "南関 トリプル馬単（10R・11R・12R）最適化" : "JRA WIN5 純粋勝率 f<sub>r,i</sub> 最適化";
 
-      const keys = Object.keys(getActiveDB());
+      const keys = Object.keys(getActiveDB()).sort();
       state.selectedDate = keys[keys.length - 1] || "";
       state.selectedVenue = "ALL";
-      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRaceList(); updateWin5Budget(state.win5Budget);
+      state.selectedRank = "ALL";
+      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList(); updateWin5Budget(state.win5Budget);
     }
 
     function switchMainView(viewName) {
@@ -339,11 +360,12 @@
         document.getElementById(`nav-${v}`).className = v === viewName ? "flex flex-col items-center py-1 text-emerald-400 font-bold" : "flex flex-col items-center py-1 text-slate-400";
       });
       if (viewName === "win5") updateWin5Budget(state.win5Budget);
+      if (viewName === "stats") renderStats();
     }
 
     function renderDateTabs() {
       const db = getActiveDB();
-      document.getElementById("dateTabs").innerHTML = Object.keys(db).map(d => {
+      document.getElementById("dateTabs").innerHTML = Object.keys(db).sort().map(d => {
         const active = d === state.selectedDate;
         return `<button onclick="selectDate('${d}')" class="shrink-0 text-xs px-3 py-1.5 rounded-lg font-bold transition ${
           active ? (state.circuitMode === "nar" ? "bg-amber-400 text-slate-950 shadow" : "bg-emerald-500 text-slate-950 shadow") : "bg-slate-900 text-slate-300 border border-slate-800"
@@ -354,8 +376,9 @@
     function selectDate(d) {
       state.selectedDate = d;
       state.selectedVenue = "ALL";
+      state.selectedRank = "ALL";
       updateWin5Budget(state.win5Budget);
-      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRaceList();
+      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList();
     }
 
     function renderBiasBar() {
@@ -376,11 +399,41 @@
       const venues = ["ALL", ...new Set((day?.races || []).map(r => r.venue))];
       document.getElementById("venueFilter").innerHTML = venues.map(v => {
         const active = v === state.selectedVenue;
-        return `<button onclick="selectVenue('${v}')" class="text-xs px-2.5 py-1 rounded-lg font-bold ${active ? "bg-slate-200 text-slate-950" : "bg-slate-900 text-slate-400 border border-slate-800"}">${v === "ALL" ? "全会場" : v}</button>`;
+        return `<button onclick="selectVenue('${v}')" class="shrink-0 text-xs px-2.5 py-1 rounded-lg font-bold ${active ? "bg-slate-200 text-slate-950" : "bg-slate-900 text-slate-400 border border-slate-800"}">${v === "ALL" ? "全会場" : v}</button>`;
       }).join("");
     }
 
-    function selectVenue(v) { state.selectedVenue = v; renderVenueFilter(); renderRaceList(); }
+    function selectVenue(v) { state.selectedVenue = v; renderVenueFilter(); renderRankFilter(); renderRaceList(); }
+
+    // レース一覧のランク絞り込みバー（件数付き）
+    function renderRankFilter() {
+      const day = getActiveDB()[state.selectedDate];
+      const base = (day?.races || []).filter(r => state.selectedVenue === "ALL" || r.venue === state.selectedVenue);
+      const cnt = { ALL: base.length, S: 0, A: 0, New: 0, B: 0, Pass: 0 };
+      base.forEach(r => { const rk = cnt[r.rank] !== undefined ? r.rank : "B"; cnt[rk]++; });
+
+      const items = [
+        { k: "ALL", label: "全ランク", activeCls: "bg-emerald-500 text-slate-950 border-emerald-400" },
+        { k: "S", label: "🔥 S", activeCls: "bg-rose-500 text-white border-rose-400" },
+        { k: "A", label: "✨ A", activeCls: "bg-amber-400 text-slate-950 border-amber-300" },
+        { k: "New", label: "🔰 新馬", activeCls: "bg-sky-400 text-slate-950 border-sky-300" },
+        { k: "B", label: "B", activeCls: "bg-slate-200 text-slate-950 border-slate-100" },
+        { k: "Pass", label: "💤 Pass", activeCls: "bg-slate-600 text-white border-slate-500" }
+      ];
+      document.getElementById("rankFilterBar").innerHTML = items.map(it => {
+        const active = state.selectedRank === it.k;
+        return `<button onclick="selectRank('${it.k}')" class="shrink-0 text-xs px-2.5 py-1 rounded-lg font-bold border transition ${
+          active ? it.activeCls : "bg-slate-900 text-slate-300 border-slate-800"
+        }">${it.label} <span class="opacity-75 text-[10px]">(${cnt[it.k]})</span></button>`;
+      }).join("");
+    }
+
+    function selectRank(rk) {
+      state.selectedRank = rk;
+      renderRankFilter();
+      renderRaceList();
+    }
+
     function toggleShowAllRaces() {
       state.showAllRaces = !state.showAllRaces;
       document.getElementById("toggleAllRacesBtn").textContent = `全レース表示: ${state.showAllRaces ? "ON" : "OFF"}`;
@@ -395,7 +448,6 @@
       return `<span class="bg-slate-800 border border-slate-700 text-slate-300 text-xs font-bold px-2 py-0.5 rounded whitespace-nowrap">B:標準</span>`;
     }
 
-    // 公式払戻金テーブルと1買い目を照合して的中判定＆実払戻額を返す
     function checkTicketHit(ticket, amt, payouts) {
       if (!payouts) return { checked: false, hit: false, payoutYen: 0, dividend: 0 };
       const list = payouts[ticket.poolKey] || [];
@@ -404,20 +456,10 @@
 
       if (ticket.poolKey === "sanrenpuku") {
         const set = new Set();
-        for (const a of ticket.row1) {
-          for (const b of ticket.row2) {
-            if (a === b) continue;
-            for (const c of ticket.row3) {
-              if (c !== a && c !== b) set.add([a, b, c].sort((x, y) => x - y).join("-"));
-            }
-          }
-        }
+        for (const a of ticket.row1) for (const b of ticket.row2) if (a !== b) for (const c of ticket.row3) if (c !== a && c !== b) set.add([a, b, c].sort((x, y) => x - y).join("-"));
         const perPt = Math.max(100, Math.floor((amt / ticket.points) / 100) * 100);
         for (const e of list) {
-          const k = [...e.nums].sort((x, y) => x - y).join("-");
-          if (set.has(k)) {
-            return { checked: true, hit: true, payoutYen: Math.round((perPt / 100) * e.pay), dividend: e.pay };
-          }
+          if (set.has([...e.nums].sort((x, y) => x - y).join("-"))) return { checked: true, hit: true, payoutYen: Math.round((perPt / 100) * e.pay), dividend: e.pay };
         }
         return { checked: true, hit: false, payoutYen: 0, dividend: 0 };
       }
@@ -426,9 +468,7 @@
         const matched = (ticket.poolKey === "win" || ticket.poolKey === "umatan")
           ? JSON.stringify(e.nums) === JSON.stringify(ticket.nums)
           : JSON.stringify([...e.nums].sort((a,b)=>a-b)) === JSON.stringify([...ticket.nums].sort((a,b)=>a-b));
-        if (matched) {
-          return { checked: true, hit: true, payoutYen: Math.round((amt / 100) * e.pay), dividend: e.pay };
-        }
+        if (matched) return { checked: true, hit: true, payoutYen: Math.round((amt / 100) * e.pay), dividend: e.pay };
       }
       return { checked: true, hit: false, payoutYen: 0, dividend: 0 };
     }
@@ -442,21 +482,29 @@
       }
 
       let list = day.races.filter(r => state.selectedVenue === "ALL" || r.venue === state.selectedVenue);
-      if (!state.showAllRaces && list.length > 6) {
-        const filtered = list.filter(r => ["S", "A", "New"].includes(r.rank) || r.r >= 9 || r.predicted);
+      if (state.selectedRank !== "ALL") {
+        list = list.filter(r => (r.rank || "B") === state.selectedRank);
+      } else if (!state.showAllRaces && list.length > 6) {
+        const filtered = list.filter(r => ["S", "A", "New"].includes(r.rank) || r.r >= 9 || r.aiPredicted);
         if (filtered.length > 0) list = filtered;
+      }
+
+      if (list.length === 0) {
+        container.innerHTML = `<div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-xs text-slate-400">選択中の条件に一致するレースはありません。</div>`;
+        return;
       }
 
       container.innerHTML = list.map(r => {
         const sortedH = [...(r.horses || [])].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
         const hCount = sortedH.length;
         const topHorse = sortedH[0] ? `${sortedH[0].mark} ${sortedH[0].num}番 ${sortedH[0].name} (f=${sortedH[0].f}%)` : "出馬表発表待機";
+        const aiTag = r.aiPredicted
+          ? `<span class="text-[10px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-1.5 py-0.5 rounded font-bold">🧠 AI本推論</span>`
+          : `<span class="text-[10px] bg-slate-800 border border-slate-700 text-slate-400 px-1.5 py-0.5 rounded">📊 事前算出</span>`;
         const hasResult = r.actualTop3 && r.actualTop3.length > 0;
-        const evalResult = r.evalDone ? {
-          isHit: r.isHit, ret: r.returnYen || 0, roi: r.actualRoi || 0, hits: r.hitTickets || []
-        } : null;
+        const evalResult = r.evalDone ? { isHit: r.isHit, ret: r.returnYen || 0, roi: r.actualRoi || 0, hits: r.hitTickets || [] } : null;
 
-        let bottomHtml = `<span class="text-slate-400 shrink-0 ml-auto">発走 <b class="text-slate-200">${r.time || "未定"}</b> ｜ 期待ROI <b class="text-amber-300">${r.roi || "155%"}</b></span>`;
+        let bottomHtml = `<span class="text-slate-400 shrink-0 ml-auto">発走 <b class="text-slate-200">${r.time || "未定"}</b></span>`;
         let resultBlock = "";
         if (hasResult) {
           const top3Str = r.actualTop3.map(a => `${a.rank}着:${a.num}番${a.name}`).join(" / ");
@@ -469,9 +517,7 @@
             resultBlock = `
               <div class="bg-slate-950/90 border border-slate-800 rounded-lg p-2 space-y-1 text-[11px]">
                 <div class="text-slate-300 break-words">🏁 確定: ${top3Str}</div>
-                <div class="flex items-center justify-between flex-wrap gap-1">
-                  <span class="font-bold ${roiColor}">1万円 → 払戻 ${evalResult.ret.toLocaleString()}円 (回収率 ${evalResult.roi}% / ${prof >= 0 ? "+" : ""}${prof.toLocaleString()}円)</span>
-                </div>
+                <div class="font-bold ${roiColor}">1万円 → 払戻 ${evalResult.ret.toLocaleString()}円 (回収率 ${evalResult.roi}% / ${prof >= 0 ? "+" : ""}${prof.toLocaleString()}円)</div>
                 <div class="flex items-center gap-1 flex-wrap pt-0.5">${hitBadges}</div>
               </div>
             `;
@@ -482,12 +528,13 @@
         }
 
         return `
-          <div onclick="openRaceModal('${r.id}')" class="bg-slate-900 hover:bg-slate-800/90 border ${evalResult?.isHit ? "border-emerald-500/60" : (hCount > 0 ? "border-slate-700" : "border-slate-800")} rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-2">
+          <div onclick="openRaceModal('${r.id}')" class="bg-slate-900 hover:bg-slate-800/90 border ${evalResult?.isHit ? "border-emerald-500/60" : (r.aiPredicted ? "border-emerald-500/40" : "border-slate-800")} rounded-xl p-3 cursor-pointer transition active:scale-[0.99] space-y-2">
             <div class="flex items-center justify-between gap-2">
-              <div class="flex items-center gap-2 min-w-0 flex-wrap">
+              <div class="flex items-center gap-1.5 min-w-0 flex-wrap">
                 <span class="shrink-0 bg-slate-800 text-slate-200 font-extrabold text-xs px-2 py-0.5 rounded">${r.venue}${r.r}R</span>
                 <span class="font-bold text-sm text-white break-words">${r.name}</span>
                 <span class="shrink-0 text-xs text-slate-400">${r.cond}</span>
+                ${aiTag}
               </div>
               <div class="shrink-0">${getRankBadgeHtml(r.rank)}</div>
             </div>
@@ -517,7 +564,7 @@
       setScenarioMode("mix");
 
       document.getElementById("modalRankBadge").outerHTML = getRankBadgeHtml(race.rank).replace("<span", '<span id="modalRankBadge"');
-      document.getElementById("modalSkillBadge").textContent = race.usedModel ? `${race.skill} (${race.usedModel})` : race.skill;
+      document.getElementById("modalSkillBadge").textContent = race.aiPredicted ? `🧠 ${race.skill} (${race.usedModel || "AI"})` : `📊 ${race.skill} (事前算出)`;
       document.getElementById("modalRaceTitle").textContent = `${race.venue}${race.r}R ${race.name}`;
       document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time || "未定"}`;
 
@@ -762,7 +809,6 @@
         `;
       }).join("");
 
-      // 結果確定バナーの描画（設定予算・1万円基準の確定回収率を明示）
       if (hasResult) {
         const actRoi = ((totalActualReturn / Math.max(1, totalInvest)) * 100).toFixed(1);
         const actProf = totalActualReturn - totalInvest;
@@ -826,16 +872,39 @@
       return `1着(${hs.slice(0, Math.max(1, Math.ceil(k/2))).map(h=>h.num).join(",")}) → 2着(${hs.map(h=>h.num).join(",")})`;
     }
 
-    // 選択日にWIN5がない場合（土曜日など）は、DB内の最新WIN5開催日（日曜日）を自動で探して表示
-    function findActiveMultiLeg() {
+    function findActiveMultiLegWithDay() {
       const db = getActiveDB();
       const curDay = db[state.selectedDate];
-      if (curDay && curDay.multiLeg && curDay.multiLeg.legs) return curDay.multiLeg;
+      if (curDay && curDay.isWin5Day && curDay.multiLeg && curDay.multiLeg.legs) return { ml: curDay.multiLeg, day: curDay };
+      if (state.circuitMode === "nar" && curDay && curDay.multiLeg && curDay.multiLeg.legs) return { ml: curDay.multiLeg, day: curDay };
       const keys = Object.keys(db).sort().reverse();
       for (const k of keys) {
-        if (db[k].multiLeg && db[k].multiLeg.legs) return db[k].multiLeg;
+        if ((state.circuitMode === "nar" || db[k].isWin5Day) && db[k].multiLeg && db[k].multiLeg.legs) {
+          return { ml: db[k].multiLeg, day: db[k] };
+        }
       }
       return null;
+    }
+
+    // Legの確定着順を multiLeg 本体または当日レース一覧から解決
+    function resolveLegActualTop3(leg, day) {
+      if (Array.isArray(leg.actualTop3) && leg.actualTop3.length > 0) return leg.actualTop3;
+      if (leg.actualWinner) return [leg.actualWinner];
+      const races = day?.races || [];
+      const r = races.find(x => (leg.raceId && x.id === leg.raceId) || (`${x.venue}${x.r}R` === leg.venue) || (x.name === leg.name));
+      return (r && Array.isArray(r.actualTop3) && r.actualTop3.length > 0) ? r.actualTop3 : [];
+    }
+
+    function isLegPickedHit(leg, k, actualTop3, isTriple) {
+      if (!actualTop3 || actualTop3.length === 0) return null;
+      const hs = (leg.horses || []).slice(0, k);
+      const w1 = Number(actualTop3[0].num);
+      if (!isTriple) return hs.some(h => Number(h.num) === w1);
+      if (actualTop3.length < 2) return null;
+      const w2 = Number(actualTop3[1].num);
+      const firsts = hs.slice(0, Math.max(1, Math.ceil(k / 2))).map(h => Number(h.num));
+      const seconds = hs.map(h => Number(h.num));
+      return firsts.includes(w1) && seconds.includes(w2);
     }
 
     function updateWin5Budget(val) {
@@ -845,16 +914,28 @@
       document.getElementById("win5BudgetHeader").textContent = `${budget.toLocaleString()}円`;
 
       const isNar = state.circuitMode === "nar";
-      const dataObj = findActiveMultiLeg();
-      if (!dataObj) {
+      const found = findActiveMultiLegWithDay();
+      const aiBadge = document.getElementById("multiLegAiBadge");
+      const resBanner = document.getElementById("win5ResultSummary");
+      resBanner.classList.add("hidden");
+
+      if (!found) {
+        aiBadge.textContent = "待機中";
         document.getElementById("win5SummaryText").textContent = isNar
           ? "地方開催の最終10R〜12R出馬表を取得するとトリプル馬単が自動編成されます。"
-          : "次回WIN5開催日（日曜）の出馬表を取得すると対象5レースが自動編成されます（ActionsのRun workflowで今すぐ取得可能です）。";
+          : "日曜WIN5対象5レースの出馬表を取得すると自動編成されます。";
         document.getElementById("win5PlansAllocationBox").innerHTML = "";
         document.getElementById("win5LegsContainer").innerHTML = "";
         document.getElementById("win5HedgeTable").innerHTML = "";
         return;
       }
+
+      const dataObj = found.ml;
+      const dayRef = found.day;
+      aiBadge.className = dataObj.aiPredicted
+        ? "text-[10px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded font-bold"
+        : "text-[10px] bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded font-bold";
+      aiBadge.textContent = dataObj.aiPredicted ? `🧠 AI本推論済 (${dataObj.usedModel || "Hydrogen"})` : "📊 事前実力算出";
 
       const unitYen = isNar ? 50 : 100;
       document.getElementById("win5SummaryText").textContent = dataObj.summary || "";
@@ -871,36 +952,98 @@
       const countsB2 = computeOptimalCounts(legs, Math.max(4, totalMaxPts - ptsB1), (lg, r, i, f) => (r === anchorLeg ? -1 : (lg.typeBPlus ? f * 1.65 : f * 0.9)), initArr);
       const ptsB2 = countsB2.reduce((a, b) => a * b, 1);
 
+      // 各Legの確定結果と Plan A / Plan B (Ticket1, Ticket2) の的中判定を計算
+      const legResults = legs.map((lg, r) => {
+        const top3 = resolveLegActualTop3(lg, dayRef);
+        const hA = isLegPickedHit(lg, countsA[r], top3, isNar);
+        const hB1 = isLegPickedHit(lg, countsB1[r], top3, isNar);
+        const hB2 = isLegPickedHit(lg, countsB2[r], top3, isNar);
+        return { top3, done: top3.length > 0, hA, hB1, hB2 };
+      });
+      const doneCnt = legResults.filter(x => x.done).length;
+      const hitCntA = legResults.filter(x => x.hA === true).length;
+      const hitCntB1 = legResults.filter(x => x.hB1 === true).length;
+      const hitCntB2 = legResults.filter(x => x.hB2 === true).length;
+      const winA = (doneCnt === nLegs && hitCntA === nLegs);
+      const winB = (doneCnt === nLegs && (hitCntB1 === nLegs || hitCntB2 === nLegs));
+
+      if (doneCnt > 0) {
+        const anyJackpot = winA || winB;
+        const payNum = Number(dataObj.officialPayout) || 0;
+        const labelName = isNar ? "トリプル馬単" : "WIN5";
+        resBanner.className = `rounded-xl p-3 space-y-2 border ${anyJackpot ? "bg-emerald-950/70 border-emerald-400" : "bg-slate-950/90 border-slate-700"}`;
+        resBanner.innerHTML = `
+          <div class="flex items-center justify-between flex-wrap gap-1">
+            <span class="text-xs font-extrabold text-white">🏁 ${dataObj.date || ""} ${labelName} 結果速報（${doneCnt}/${nLegs}R確定）</span>
+            ${anyJackpot
+              ? `<span class="text-xs bg-emerald-400 text-slate-950 font-extrabold px-2 py-0.5 rounded">🏆 ${labelName} 的中！！</span>`
+              : `<span class="text-xs text-amber-300 font-bold">${doneCnt === nLegs ? "全レース確定" : "進行中"}</span>`}
+          </div>
+          <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-slate-900 border ${winA ? "border-emerald-400" : "border-slate-800"} rounded-lg p-2">
+              <div class="text-[10px] text-slate-400">プランA (${(ptsA*unitYen).toLocaleString()}円)</div>
+              <div class="font-extrabold ${winA ? "text-emerald-300" : "text-white"} mt-0.5">${winA ? "🏆 全勝的中！" : `${hitCntA} / ${doneCnt} 確定R的中`}</div>
+            </div>
+            <div class="bg-slate-900 border ${winB ? "border-emerald-400" : "border-slate-800"} rounded-lg p-2">
+              <div class="text-[10px] text-slate-400">プランB (${((ptsB1+ptsB2)*unitYen).toLocaleString()}円)</div>
+              <div class="font-extrabold ${winB ? "text-emerald-300" : "text-white"} mt-0.5">${winB ? "🏆 全勝的中！" : `T1:${hitCntB1}/${doneCnt} ・ T2:${hitCntB2}/${doneCnt}`}</div>
+            </div>
+          </div>
+          ${payNum > 0 ? `<div class="text-xs bg-amber-500/15 border border-amber-400/40 text-amber-200 rounded-lg px-2.5 py-1.5 font-bold flex items-center justify-between"><span>💰 公式${labelName}払戻金</span><span>${payNum.toLocaleString()}円</span></div>` : ""}
+        `;
+      }
+
+      const markIcon = (val) => val === true ? " 🎯" : (val === false ? " ❌" : "");
+
       document.getElementById("win5PlansAllocationBox").innerHTML = `
-        <div class="bg-slate-900 border border-emerald-500/40 rounded-xl p-3 space-y-2">
+        <div class="bg-slate-900 border ${winA ? "border-emerald-400" : "border-emerald-500/40"} rounded-xl p-3 space-y-2">
           <div class="flex items-center justify-between gap-2 flex-wrap">
             <div><span class="bg-emerald-500/20 text-emerald-300 text-[11px] font-extrabold px-2 py-0.5 rounded">プランA（標準・1枚構成）</span> <span class="text-xs text-slate-300 font-bold ml-1">突破指標 ${calcJointCapture(legs, countsA)}%</span></div>
             <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">${(ptsA*unitYen).toLocaleString()}円 (${ptsA}組×${unitYen}円)</span>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs space-y-1 font-mono leading-relaxed break-words">
-            ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}(${lg.venue} ${lg.postTime||""}):</span> <b class="text-emerald-300">[${formatLegNums(lg, countsA[r], isNar)}]</b></div>`).join("")}
+            ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}(${lg.venue} ${lg.postTime||""}):</span> <b class="text-emerald-300">[${formatLegNums(lg, countsA[r], isNar)}]</b>${markIcon(legResults[r].hA)}</div>`).join("")}
           </div>
         </div>
-        <div class="bg-slate-900 border border-amber-500/40 rounded-xl p-3 space-y-2.5">
+        <div class="bg-slate-900 border ${winB ? "border-emerald-400" : "border-amber-500/40"} rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2 flex-wrap">
             <div><span class="bg-amber-500/20 text-amber-300 text-[11px] font-extrabold px-2 py-0.5 rounded">プランB（2枚合算・波乱拡張）</span> <span class="text-xs text-slate-300 font-bold ml-1">最大指標 ${calcJointCapture(legs, countsB1.map((c,r)=>Math.max(c,countsB2[r])))}%</span></div>
             <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">合計 ${((ptsB1+ptsB2)*unitYen).toLocaleString()}円 (計${ptsB1+ptsB2}組)</span>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
             <div class="flex items-center justify-between text-xs font-bold"><span class="text-sky-300">🎫 Ticket 1（本線：${countsB1.join("×")}）</span><span class="text-amber-300">${(ptsB1*unitYen).toLocaleString()}円 (${ptsB1}組)</span></div>
-            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="text-sky-300">[${formatLegNums(lg, countsB1[r], isNar)}]</b></div>`).join("")}</div>
+            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="text-sky-300">[${formatLegNums(lg, countsB1[r], isNar)}]</b>${markIcon(legResults[r].hB1)}</div>`).join("")}</div>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
             <div class="flex items-center justify-between text-xs font-bold"><span class="text-rose-300">🎯 Ticket 2（Leg${anchorLeg+1}固定×拡張：${countsB2.join("×")}）</span><span class="text-amber-300">${(ptsB2*unitYen).toLocaleString()}円 (${ptsB2}組)</span></div>
-            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="${lg.typeBPlus ? "text-rose-300" : "text-slate-200"}">[${formatLegNums(lg, countsB2[r], isNar)}]</b></div>`).join("")}</div>
+            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="${lg.typeBPlus ? "text-rose-300" : "text-slate-200"}">[${formatLegNums(lg, countsB2[r], isNar)}]</b>${markIcon(legResults[r].hB2)}</div>`).join("")}</div>
           </div>
         </div>
       `;
 
       document.getElementById("win5LegsContainer").innerHTML = legs.map((leg, idx) => {
         const kA = countsA[idx], kB = Math.max(countsB1[idx], countsB2[idx]);
+        const lr = legResults[idx];
+        const winNum = lr.done ? Number(lr.top3[0].num) : -1;
+        const secNum = (lr.done && lr.top3.length > 1) ? Number(lr.top3[1].num) : -1;
+        let legResultHtml = "";
+        if (lr.done) {
+          const wInfo = isNar && lr.top3.length > 1
+            ? `1着:${lr.top3[0].num}番${lr.top3[0].name} → 2着:${lr.top3[1].num}番${lr.top3[1].name}`
+            : `1着:${lr.top3[0].num}番 ${lr.top3[0].name} (単勝${lr.top3[0].odds}倍)`;
+          const hitB = lr.hB1 || lr.hB2;
+          legResultHtml = `
+            <div class="bg-slate-950 border ${lr.hA || hitB ? "border-emerald-500/60" : "border-rose-500/40"} rounded-lg p-2 text-xs space-y-1">
+              <div class="font-bold text-amber-300">🏁 確定: ${wInfo}</div>
+              <div class="flex items-center gap-2 text-[11px] flex-wrap">
+                <span class="${lr.hA ? "text-emerald-300 font-bold" : "text-slate-400"}">Plan A: ${lr.hA ? "🎯的中" : "❌不的中"}</span>
+                <span class="${hitB ? "text-emerald-300 font-bold" : "text-slate-400"}">Plan B: ${hitB ? "🎯的中" : "❌不的中"}</span>
+              </div>
+            </div>
+          `;
+        }
         return `
-          <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+          <div class="bg-slate-900 border ${lr.done && (lr.hA || lr.hB1 || lr.hB2) ? "border-emerald-500/50" : "border-slate-800"} rounded-xl p-3 space-y-2">
             <div class="flex items-center justify-between gap-2 flex-wrap">
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="bg-indigo-500/20 text-indigo-300 text-xs font-extrabold px-2 py-0.5 rounded">Leg ${leg.leg || (idx+1)}</span>
@@ -909,16 +1052,27 @@
               </div>
               <span class="text-xs font-bold text-emerald-400 whitespace-nowrap">A:${kA}頭 / B:最大${kB}頭</span>
             </div>
+            ${legResultHtml}
+            <p class="text-[11px] text-slate-400 break-words">${leg.note || ""}</p>
             <div class="space-y-1.5">
-              ${(leg.horses || []).map((h, hIdx) => `
-                <div class="text-xs p-2 rounded-lg border ${(hIdx < kA || hIdx < kB) ? "bg-emerald-950/30 border-emerald-500/40 text-white" : "bg-slate-950 border-slate-800 text-slate-500"} space-y-1">
-                  <div class="flex items-center justify-between gap-2">
-                    <span class="font-extrabold text-white">${hIdx + 1}位: ${h.num}番 ${h.name}</span>
-                    <span class="font-mono font-bold whitespace-nowrap ${(hIdx < kA || hIdx < kB) ? "text-amber-300" : ""}">f=${h.f}% (${h.odds}倍)</span>
+              ${(leg.horses || []).map((h, hIdx) => {
+                const isWin = Number(h.num) === winNum;
+                const isSec = isNar && Number(h.num) === secNum;
+                const picked = (hIdx < kA || hIdx < kB);
+                return `
+                  <div class="text-xs p-2 rounded-lg border ${isWin ? "bg-amber-500/20 border-amber-400 text-white" : (picked ? "bg-emerald-950/30 border-emerald-500/40 text-white" : "bg-slate-950 border-slate-800 text-slate-500")} space-y-1">
+                    <div class="flex items-center justify-between gap-2">
+                      <div class="flex items-center gap-1.5 flex-wrap">
+                        <span class="font-extrabold text-white">${hIdx + 1}位: ${h.num}番 ${h.name}</span>
+                        ${isWin ? `<span class="text-[10px] bg-amber-400 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">🏁 1着</span>` : ""}
+                        ${isSec ? `<span class="text-[10px] bg-sky-400 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">🏁 2着</span>` : ""}
+                      </div>
+                      <span class="font-mono font-bold whitespace-nowrap ${picked || isWin ? "text-amber-300" : ""}">f=${h.f}% (${h.odds}倍)</span>
+                    </div>
+                    <div class="text-[11px] text-slate-400 break-words">${h.note || ""}</div>
                   </div>
-                  <div class="text-[11px] text-slate-400 break-words">${h.note || ""}</div>
-                </div>
-              `).join("")}
+                `;
+              }).join("")}
             </div>
           </div>
         `;
@@ -932,35 +1086,124 @@
       `).join("");
     }
 
-    function renderStats() {
-      const j = STATS_DATA.jra || { races: 0, hits: 0, invest: 0, ret: 0 };
-      const n = STATS_DATA.nar || { races: 0, hits: 0, invest: 0, ret: 0 };
-      const jRoi = j.invest > 0 ? ((j.ret / j.invest) * 100).toFixed(1) : "--";
-      const nRoi = n.invest > 0 ? ((n.ret / n.invest) * 100).toFixed(1) : "--";
-      document.getElementById("statJraRoi").textContent = `${jRoi}%`;
-      document.getElementById("statJraProfit").innerHTML = `${j.hits}/${j.races}R的中 ｜ 収支 <b class="${(j.ret-j.invest)>=0?'text-emerald-300':'text-rose-300'}">${(j.ret-j.invest)>=0?'+':''}${(j.ret-j.invest).toLocaleString()}円</b>`;
-      document.getElementById("statNarRoi").textContent = `${nRoi}%`;
-      document.getElementById("statNarProfit").innerHTML = `${n.hits}/${n.races}R的中 ｜ 収支 <b class="${(n.ret-n.invest)>=0?'text-emerald-300':'text-rose-300'}">${(n.ret-n.invest)>=0?'+':''}${(n.ret-n.invest).toLocaleString()}円</b>`;
-      document.getElementById("statUpdatedAt").textContent = `更新: ${STATS_DATA.updatedAt || "最新"}`;
+    // 成績・回収率ビュー（stats.json または読み込み済みDBからランク別集計を算出）
+    function buildClientStatsFallback() {
+      const mk = () => ({ races: 0, hits: 0, invest: 0, ret: 0, passCount: 0, passSaved: 0, byRank: { S: {races:0,hits:0,invest:0,ret:0}, A: {races:0,hits:0,invest:0,ret:0}, New: {races:0,hits:0,invest:0,ret:0}, B: {races:0,hits:0,invest:0,ret:0} } });
+      const res = { updatedAt: "アプリ内集計", all: mk(), jra: mk(), nar: mk(), recentResults: [] };
+      const feed = (db, modeKey) => {
+        Object.keys(db).sort().reverse().forEach(dk => {
+          (db[dk].races || []).forEach(r => {
+            if (r.rank === "Pass") {
+              ["all", modeKey].forEach(sk => { res[sk].passCount++; res[sk].passSaved += 10000; });
+            } else if (r.evalDone) {
+              const rk = ["S","A","New","B"].includes(r.rank) ? r.rank : "B";
+              const inv = Number(r.investedYen) || 10000, ret = Number(r.returnYen) || 0, hit = ret > 0;
+              ["all", modeKey].forEach(sk => {
+                const b = res[sk]; b.races++; b.invest += inv; b.ret += ret; if (hit) b.hits++;
+                const rb = b.byRank[rk]; rb.races++; rb.invest += inv; rb.ret += ret; if (hit) rb.hits++;
+              });
+              res.recentResults.push({ date: dk.replace("_nar",""), mode: modeKey, rank: rk, race: `${r.venue}${r.r}R ${r.name}`, status: r.status, roi: Number(r.actualRoi)||0, returnYen: ret, investedYen: inv, isHit: hit, hits: r.hitTickets || [] });
+            }
+          });
+        });
+      };
+      feed(DB_JRA, "jra"); feed(DB_NAR, "nar");
+      return res;
+    }
 
-      const logs = STATS_DATA.recentResults || [];
-      document.getElementById("statRecentLogs").innerHTML = logs.length > 0 ? logs.map(l => `
-        <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
-          <div class="flex items-center justify-between gap-2 flex-wrap">
-            <div><span class="text-[10px] text-slate-400 mr-1">${l.date}</span><span class="font-bold text-white">${l.race}</span></div>
-            <span class="font-extrabold ${parseFloat(l.roi)>=100?'text-emerald-400':'text-amber-300'}">回収率 ${l.roi}</span>
+    function setStatsCircuit(scope) {
+      state.statsCircuit = scope;
+      ["All", "Jra", "Nar"].forEach(k => {
+        const el = document.getElementById(`statScope${k}`);
+        if (el) el.className = (scope === k.toLowerCase())
+          ? "text-xs font-extrabold px-2.5 py-1 rounded-md bg-emerald-500 text-slate-950"
+          : "text-xs font-bold px-2.5 py-1 rounded-md text-slate-400";
+      });
+      renderStats();
+    }
+
+    function setStatsRankFilter(rk) {
+      state.statsRankFilter = rk;
+      renderStats();
+    }
+
+    function renderStats() {
+      const src = (STATS_DATA && STATS_DATA.all && STATS_DATA.all.byRank) ? STATS_DATA : buildClientStatsFallback();
+      const sc = src[state.statsCircuit] || src.all;
+      const roi = sc.invest > 0 ? ((sc.ret / sc.invest) * 100).toFixed(1) : "--";
+      const hitRate = sc.races > 0 ? ((sc.hits / sc.races) * 100).toFixed(1) : "--";
+      const prof = (sc.ret || 0) - (sc.invest || 0);
+
+      document.getElementById("statTotalRoi").textContent = `${roi}%`;
+      document.getElementById("statTotalRoi").className = `text-2xl font-extrabold mt-0.5 ${Number(roi) >= 100 ? "text-emerald-400" : "text-amber-400"}`;
+      document.getElementById("statTotalProfit").innerHTML = `収支 <b class="${prof >= 0 ? "text-emerald-300" : "text-rose-300"}">${prof >= 0 ? "+" : ""}${prof.toLocaleString()}円</b> (${(sc.invest||0).toLocaleString()}→${(sc.ret||0).toLocaleString()}円)`;
+      document.getElementById("statTotalHit").textContent = `${hitRate}%`;
+      document.getElementById("statPassSaved").innerHTML = `${sc.hits||0}/${sc.races||0}R的中 ｜ Pass防衛 <b class="text-sky-300">${(sc.passSaved||0).toLocaleString()}円</b>`;
+      document.getElementById("statUpdatedAt").textContent = `更新: ${src.updatedAt || "最新"}`;
+
+      const br = sc.byRank || {};
+      const rankDefs = [
+        { k: "S", label: "🔥 S：勝負レース", cls: "text-rose-300" },
+        { k: "A", label: "✨ A：好機レース", cls: "text-amber-300" },
+        { k: "New", label: "🔰 新馬戦（Make Debut）", cls: "text-sky-300" },
+        { k: "B", label: "B：標準レース", cls: "text-slate-200" }
+      ];
+      document.getElementById("statRankBreakdown").innerHTML = rankDefs.map(rd => {
+        const d = br[rd.k] || { races: 0, hits: 0, invest: 0, ret: 0 };
+        const rRoi = d.invest > 0 ? ((d.ret / d.invest) * 100).toFixed(1) : "--";
+        const rHit = d.races > 0 ? ((d.hits / d.races) * 100).toFixed(1) : "--";
+        const rProf = d.ret - d.invest;
+        const active = state.statsRankFilter === rd.k;
+        return `
+          <div onclick="setStatsRankFilter('${active ? "ALL" : rd.k}')" class="cursor-pointer bg-slate-950 border ${active ? "border-emerald-400 bg-emerald-950/20" : "border-slate-800"} rounded-lg p-2.5 space-y-1 transition">
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-extrabold ${rd.cls}">${rd.label}</span>
+              <span class="text-sm font-extrabold ${Number(rRoi) >= 100 ? "text-emerald-400" : (d.races > 0 ? "text-amber-300" : "text-slate-500")}">回収率 ${rRoi}%</span>
+            </div>
+            <div class="flex items-center justify-between text-[11px] text-slate-400 flex-wrap gap-1">
+              <span>的中率 <b class="text-white">${rHit}%</b> (${d.hits}/${d.races}R)</span>
+              <span>投資 ${d.invest.toLocaleString()}円 → 払戻 <b class="text-slate-200">${d.ret.toLocaleString()}円</b> (<b class="${rProf >= 0 ? "text-emerald-300" : "text-rose-300"}">${rProf >= 0 ? "+" : ""}${rProf.toLocaleString()}円</b>)</span>
+            </div>
           </div>
-          <div class="text-[11px] text-slate-300">${l.status}</div>
-          ${l.hits && l.hits.length ? `<div class="flex gap-1 flex-wrap">${l.hits.map(h=>`<span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded">🎯 ${h}</span>`).join("")}</div>` : ""}
-        </div>
-      `).join("") : `<div class="text-slate-400 p-2">確定レースが蓄積されると自動で表示されます。</div>`;
+        `;
+      }).join("");
+
+      const filterBtns = [
+        { k: "ALL", label: "全" }, { k: "S", label: "S" }, { k: "A", label: "A" }, { k: "New", label: "新馬" }, { k: "B", label: "B" }
+      ];
+      document.getElementById("statLogRankFilter").innerHTML = filterBtns.map(b => `
+        <button onclick="setStatsRankFilter('${b.k}')" class="text-[10px] px-2 py-0.5 rounded font-bold border ${state.statsRankFilter === b.k ? "bg-emerald-500 text-slate-950 border-emerald-400" : "bg-slate-950 text-slate-400 border-slate-800"}">${b.label}</button>
+      `).join("");
+
+      const logs = (src.recentResults || []).filter(l => {
+        if (state.statsCircuit !== "all" && l.mode && l.mode !== state.statsCircuit) return false;
+        if (state.statsRankFilter !== "ALL" && (l.rank || "B") !== state.statsRankFilter) return false;
+        return true;
+      });
+      document.getElementById("statRecentLogs").innerHTML = logs.length > 0 ? logs.map(l => {
+        const roiNum = parseFloat(String(l.roi).replace("%", "")) || 0;
+        return `
+          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
+            <div class="flex items-center justify-between gap-2 flex-wrap">
+              <div class="flex items-center gap-1.5 flex-wrap">
+                <span class="text-[10px] text-slate-400">${l.date}</span>
+                ${getRankBadgeHtml(l.rank || "B")}
+                <span class="font-bold text-white">${l.race}</span>
+              </div>
+              <span class="font-extrabold ${roiNum >= 100 ? "text-emerald-400" : (roiNum > 0 ? "text-amber-300" : "text-rose-400")}">回収率 ${roiNum}%</span>
+            </div>
+            <div class="text-[11px] text-slate-300">${l.status || ""}</div>
+            ${l.hits && l.hits.length ? `<div class="flex gap-1 flex-wrap">${l.hits.map(h=>`<span class="text-[10px] bg-emerald-500/20 text-emerald-300 px-1.5 py-0.5 rounded">🎯 ${h}</span>`).join("")}</div>` : ""}
+          </div>
+        `;
+      }).join("") : `<div class="text-slate-400 p-2">該当する確定レースログはまだありません。</div>`;
     }
 
     async function syncGitHubLiveData() {
       const syncBadge = document.getElementById("syncStatusBadge");
       try {
         const sRes = await fetch(`./data/stats.json?t=${Date.now()}`);
-        if (sRes.ok) { STATS_DATA = await sRes.json(); renderStats(); }
+        if (sRes.ok) { STATS_DATA = await sRes.json(); }
       } catch (e) {}
 
       try {
@@ -972,6 +1215,8 @@
         syncBadge.className = "inline-block text-[11px] bg-emerald-950 border border-emerald-500/50 text-emerald-300 px-2.5 py-0.5 rounded-full cursor-pointer whitespace-nowrap";
 
         const allKeys = [...(idx.availableDates || []), ...(idx.narDates || [])];
+        const wdays = ["日", "月", "火", "水", "木", "金", "土"];
+
         for (const dateKey of allKeys) {
           const dayRes = await fetch(`./data/${dateKey}.json?t=${Date.now()}`);
           if (!dayRes.ok) continue;
@@ -980,22 +1225,29 @@
 
           const isNar = dateKey.endsWith("_nar") || liveDay.mode === "nar";
           const targetStore = isNar ? DB_NAR : DB_JRA;
+          const cleanDate = dateKey.replace("_nar", "");
+          const dObj = new Date(`${cleanDate}T12:00:00+09:00`);
+          const wday = isNaN(dObj.getTime()) ? "" : `(${wdays[dObj.getDay()]})`;
+          const isSunday = !isNaN(dObj.getTime()) && dObj.getDay() === 0;
+          const isWin5Day = !isNar && isSunday && liveDay.multiLeg && Array.isArray(liveDay.multiLeg.legs) && liveDay.multiLeg.legs.length === 5;
           const venues = [...new Set(liveDay.races.map(r => r.venue))];
-          const win5Tag = (!isNar && liveDay.multiLeg && liveDay.multiLeg.legs) ? " 💎WIN5" : "";
 
+          // 上部タブからWIN5の文字を削除し、日付＋曜日のみのすっきりした表示へ統一
           targetStore[dateKey] = {
-            label: `${dateKey.replace("_nar", "").slice(5).replace("-", "/")}${isNar ? " 地方" : ""}${win5Tag}`,
+            label: `${cleanDate.slice(5).replace("-", "/")}${wday}${isNar ? " 地方" : ""}`,
+            isWin5Day,
             status: "live",
             biases: Array.isArray(liveDay.trackBiases) && liveDay.trackBiases.length > 0
               ? liveDay.trackBiases
-              : venues.map(v => ({ venue: v, surf: "実馬名・実配当照合済", trend: "3シナリオ混合推論" })),
-            multiLeg: liveDay.multiLeg || null,
+              : venues.map(v => ({ venue: v, surf: "AI本推論・実配当照合済", trend: "3シナリオ混合推論" })),
+            multiLeg: isWin5Day || isNar ? (liveDay.multiLeg || null) : null,
             races: liveDay.races.map((r, i) => ({
               id: r.raceId || `${dateKey}-${i}`,
               venue: r.venue, r: r.raceNumber, name: r.name, cond: r.surfaceDist || "ダ1600m",
               time: r.postTime || "", rank: r.rank || "B",
               skill: r.skill || (isNar ? "app-bayesian-nar" : "app-bayesian-horse-racing-text"),
-              usedModel: r.usedModel || "", roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "162%",
+              usedModel: r.usedModel || "", aiPredicted: !!r.aiPredicted,
+              roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "162%",
               hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "48%",
               pivot: r.pivotType || "Dual-Pivot", nLead: r.nLead || 3,
               predicted: Array.isArray(r.horses) && r.horses.length > 0,
@@ -1012,7 +1264,7 @@
 
         const keys = Object.keys(getActiveDB()).sort();
         if (keys.length > 0) state.selectedDate = keys[keys.length - 1];
-        renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRaceList(); updateWin5Budget(state.win5Budget);
+        renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList(); updateWin5Budget(state.win5Budget); renderStats();
       } catch (e) { console.warn("Sync skipped:", e); }
     }
 
