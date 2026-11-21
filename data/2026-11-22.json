@@ -4925,22 +4925,25 @@
   "trackBiases": [
     {
       "venue": "京都",
-      "surf": "実測N_lead・実配当照合済",
+      "surf": "Gemini 4 Hybrid・実配当照合済",
       "trend": "京都: 前半確定レースなし（標準バイアス想定）"
     },
     {
       "venue": "東京",
-      "surf": "実測N_lead・実配当照合済",
+      "surf": "Gemini 4 Hybrid・実配当照合済",
       "trend": "東京: 前半確定レースなし（標準バイアス想定）"
     }
   ],
   "multiLeg": {
     "predicted": true,
+    "aiPredicted": false,
     "date": "2026-11-22",
-    "summary": "【2026-11-22 実馬名自動編成（JRA WIN5 100円単位）】全頭3シナリオ混合推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。",
+    "engineVer": "v10.4",
+    "summary": "【2026-11-22 実力ベースライン編成（JRA WIN5 100円単位）】",
     "legs": [
       {
         "leg": 1,
+        "raceId": "202608050609",
         "venue": "京都9R",
         "name": "花見小路特別",
         "cond": "芝1600m",
@@ -5001,6 +5004,7 @@
       },
       {
         "leg": 2,
+        "raceId": "202605050510",
         "venue": "東京10R",
         "name": "秋色S",
         "cond": "芝1600m",
@@ -5061,6 +5065,7 @@
       },
       {
         "leg": 3,
+        "raceId": "202608050610",
         "venue": "京都10R",
         "name": "西陣S",
         "cond": "ダ1400m",
@@ -5121,6 +5126,7 @@
       },
       {
         "leg": 4,
+        "raceId": "202605050511",
         "venue": "東京11R",
         "name": "霜月S",
         "cond": "ダ1400m",
@@ -5181,6 +5187,7 @@
       },
       {
         "leg": 5,
+        "raceId": "202608050611",
         "venue": "京都11R",
         "name": "マイルCS",
         "cond": "芝1600m",
@@ -5255,7 +5262,9 @@
         "hedge50k": 6200,
         "hedge100k": 12400
       }
-    ]
+    ],
+    "finishedLegs": 0
   },
-  "updatedAt": "2026-11-21 23:13 JST"
+  "updatedAt": "2026-11-22 00:35 JST",
+  "engineVer": "v10.4"
 }

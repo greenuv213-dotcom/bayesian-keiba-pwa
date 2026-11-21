@@ -1,69 +1,192 @@
 {
-  "updatedAt": "2026-11-21 23:13 JST",
+  "updatedAt": "2026-11-22 00:35 JST",
+  "all": {
+    "races": 19,
+    "hits": 7,
+    "invest": 190000,
+    "ret": 124800,
+    "passCount": 0,
+    "passSaved": 0,
+    "byRank": {
+      "S": {
+        "races": 0,
+        "hits": 0,
+        "invest": 0,
+        "ret": 0
+      },
+      "A": {
+        "races": 15,
+        "hits": 5,
+        "invest": 150000,
+        "ret": 107400
+      },
+      "New": {
+        "races": 2,
+        "hits": 2,
+        "invest": 20000,
+        "ret": 17400
+      },
+      "B": {
+        "races": 2,
+        "hits": 0,
+        "invest": 20000,
+        "ret": 0
+      }
+    }
+  },
   "jra": {
     "races": 8,
     "hits": 3,
     "invest": 80000,
     "ret": 19080,
-    "passSaved": 0
+    "passCount": 0,
+    "passSaved": 0,
+    "byRank": {
+      "S": {
+        "races": 0,
+        "hits": 0,
+        "invest": 0,
+        "ret": 0
+      },
+      "A": {
+        "races": 4,
+        "hits": 1,
+        "invest": 40000,
+        "ret": 1680
+      },
+      "New": {
+        "races": 2,
+        "hits": 2,
+        "invest": 20000,
+        "ret": 17400
+      },
+      "B": {
+        "races": 2,
+        "hits": 0,
+        "invest": 20000,
+        "ret": 0
+      }
+    }
   },
   "nar": {
     "races": 11,
     "hits": 4,
     "invest": 110000,
     "ret": 105720,
-    "passSaved": 0
+    "passCount": 0,
+    "passSaved": 0,
+    "byRank": {
+      "S": {
+        "races": 0,
+        "hits": 0,
+        "invest": 0,
+        "ret": 0
+      },
+      "A": {
+        "races": 11,
+        "hits": 4,
+        "invest": 110000,
+        "ret": 105720
+      },
+      "New": {
+        "races": 0,
+        "hits": 0,
+        "invest": 0,
+        "ret": 0
+      },
+      "B": {
+        "races": 0,
+        "hits": 0,
+        "invest": 0,
+        "ret": 0
+      }
+    }
   },
   "recentResults": [
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "高知9R Bー4",
       "status": "❌ 不的中 回収率0.0% (1着:10番 メイショウカズサ)",
-      "roi": "0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
       "hits": []
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "高知10R Bー3",
       "status": "❌ 不的中 回収率0.0% (1着:1番 トサノシュジンコウ)",
-      "roi": "0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
       "hits": []
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "高知11R Bー2",
       "status": "❌ 不的中 回収率0.0% (1着:8番 ストーミーデイ)",
-      "roi": "0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
       "hits": []
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "高知12R ファイナルレース(C3)",
       "status": "❌ 不的中 回収率0.0% (1着:11番 ジョウショーブリエ)",
-      "roi": "0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
       "hits": []
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "佐賀9R 世界ハロー・デー賞",
       "status": "🎯 的中 払戻910円 (回収率9.1% / -9,090円)",
-      "roi": "9.1%",
+      "roi": 9.1,
+      "returnYen": 910,
+      "investedYen": 10000,
+      "isHit": true,
       "hits": [
         "単勝 3 (910円)"
       ]
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "佐賀10R SAGAリベンジャ...(C2)",
       "status": "❌ 不的中 回収率0.0% (1着:10番 ウインポラリス)",
-      "roi": "0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
       "hits": []
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "佐賀11R SAGAリベFEV...(C2)",
       "status": "🎯 的中 払戻11,180円 (回収率111.8% / +1,180円)",
-      "roi": "111.8%",
+      "roi": 111.8,
+      "returnYen": 11180,
+      "investedYen": 10000,
+      "isHit": true,
       "hits": [
         "ワイド 11-4 (4,680円)",
         "単勝 11 (1,820円)",
@@ -72,9 +195,14 @@
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "地方9R 浅草マリモ 今日も...",
       "status": "🎯 的中 払戻84,290円 (回収率842.9% / +74,290円)",
-      "roi": "842.9%",
+      "roi": 842.9,
+      "returnYen": 84290,
+      "investedYen": 10000,
+      "isHit": true,
       "hits": [
         "ワイド 8-9 (24,400円)",
         "単勝 8 (7,980円)",
@@ -84,23 +212,38 @@
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "地方10R 遅ればせながらマリ...",
       "status": "❌ 不的中 回収率0.0% (1着:7番 フクノエル)",
-      "roi": "0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
       "hits": []
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "地方11R 摩周湖特別",
       "status": "❌ 不的中 回収率0.0% (1着:5番 エクレール)",
-      "roi": "0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
       "hits": []
     },
     {
       "date": "2026-11-21",
+      "mode": "nar",
+      "rank": "A",
       "race": "地方12R C1ー3",
       "status": "🎯 的中 払戻9,340円 (回収率93.4% / -660円)",
-      "roi": "93.4%",
+      "roi": 93.4,
+      "returnYen": 9340,
+      "investedYen": 10000,
+      "isHit": true,
       "hits": [
         "ワイド 8-9 (7,200円)",
         "3連複F (2,140円)"
@@ -108,13 +251,109 @@
     },
     {
       "date": "2026-11-21",
+      "mode": "jra",
+      "rank": "New",
       "race": "京都5R 2歳新馬",
       "status": "🎯 的中 払戻8,280円 (回収率82.8% / -1,720円)",
-      "roi": "82.8%",
+      "roi": 82.8,
+      "returnYen": 8280,
+      "investedYen": 10000,
+      "isHit": true,
       "hits": [
         "単勝 10 (2,380円)",
         "3連複F (5,900円)"
       ]
+    },
+    {
+      "date": "2026-11-21",
+      "mode": "jra",
+      "rank": "New",
+      "race": "京都6R 2歳新馬",
+      "status": "🎯 的中 払戻9,120円 (回収率91.2% / -880円)",
+      "roi": 91.2,
+      "returnYen": 9120,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 5-1 (3,500円)",
+        "単勝 5 (1,550円)",
+        "馬連 5-1 (3,540円)",
+        "3連複F (530円)"
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "mode": "jra",
+      "rank": "B",
+      "race": "京都9R 秋明菊賞",
+      "status": "❌ 不的中 回収率0.0% (1着:7番 カレンハウ)",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-21",
+      "mode": "jra",
+      "rank": "A",
+      "race": "京都10R 比叡S",
+      "status": "🎯 的中 払戻1,680円 (回収率16.8% / -8,320円)",
+      "roi": 16.8,
+      "returnYen": 1680,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "単勝 7 (1,680円)"
+      ]
+    },
+    {
+      "date": "2026-11-21",
+      "mode": "jra",
+      "rank": "A",
+      "race": "京都11R シトリンS",
+      "status": "❌ 不的中 回収率0.0% (1着:12番 メルカントゥール)",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-21",
+      "mode": "jra",
+      "rank": "B",
+      "race": "福島9R 高湯温泉特別",
+      "status": "❌ 不的中 回収率0.0% (1着:15番 バンオンタイム)",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-21",
+      "mode": "jra",
+      "rank": "A",
+      "race": "福島10R 福島放送賞",
+      "status": "❌ 不的中 回収率0.0% (1着:3番 ビーマックス)",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-21",
+      "mode": "jra",
+      "rank": "A",
+      "race": "福島11R 福島記念",
+      "status": "❌ 不的中 回収率0.0% (1着:13番 マリアイリダータ)",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
     }
   ]
 }
