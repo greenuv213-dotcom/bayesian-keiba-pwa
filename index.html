@@ -207,6 +207,13 @@
       margin-top: 2px;
     }
 
+    .head-badges {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 4px;
+    }
+
     .rank-badge {
       font-size: 11px;
       font-weight: 800;
@@ -220,6 +227,17 @@
     .rank-B { background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid rgba(56, 189, 248, 0.45); }
     .rank-New { background: rgba(168, 85, 247, 0.22); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.5); }
     .rank-Pass { background: rgba(148, 163, 184, 0.16); color: #94a3b8; border: 1px solid var(--border); }
+
+    .stage-pill {
+      font-size: 9.5px;
+      font-weight: 700;
+      padding: 1px 6px;
+      border-radius: 999px;
+      white-space: nowrap;
+    }
+
+    .stage-final { background: rgba(16, 185, 129, 0.18); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.35); }
+    .stage-screened { background: rgba(245, 158, 11, 0.16); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.35); }
 
     .neon-meta-row {
       display: flex;
@@ -589,7 +607,6 @@
   </div>
 
   <script>
-    // ===== 設定（リポジトリ構成に合わせて変更可能）=====
     const DATA_URL = './data/latest.json';
     const DEFAULT_BUDGET = 10000;
     const DEFAULT_WIN5_BUDGET = 10000;
@@ -604,14 +621,14 @@
       tripleBudget: DEFAULT_TRIPLE_BUDGET
     };
 
-    // ===== サンプルフォールバック（data/latest.json 未配置時のプレビュー用）=====
     const SAMPLE_DATA = {
       date: '2026-11-22',
-      updatedAt: '2026-11-22 14:25 JST',
+      updatedAt: '2026-11-22 14:25 JST (プレビュー)',
       races: [
         {
           raceId: '20261122-tok-11',
           org: 'JRA',
+          stage: 'final',
           venue: '東京11R',
           name: '霜月ステークス(OP)',
           surfaceDist: 'ダ1400m',
@@ -665,7 +682,7 @@
     }
 
     function detectOrg(race) {
-      if (race.org) return race.org.toUpperCase();
+      if (race.org) return String(race.org).toUpperCase();
       if ((race.skill || '').includes('nar')) return 'NAR';
       const narVenues = ['大井', '川崎', '船橋', '浦和', '門別', '盛岡', '水沢', '金沢', '笠松', '名古屋', '園田', '姫路', '高知', '佐賀'];
       if (narVenues.some(v => (race.venue || '').includes(v))) return 'NAR';
@@ -679,6 +696,16 @@
       }
       const r = race.rank || 'B';
       return { text: r === 'Pass' ? '見送り' : `Rank ${r}`, cls: `rank-${r}` };
+    }
+
+    function renderStagePill(race) {
+      if (race.stage === 'final') {
+        return '<span class="stage-pill stage-final">本予想確定</span>';
+      }
+      if (race.stage === 'screened') {
+        return '<span class="stage-pill stage-screened">朝スクリーニング</span>';
+      }
+      return '';
     }
 
     function renderNeonMetaBadges(race) {
@@ -725,11 +752,24 @@
       return `<div><strong>${fText}</strong>${clampTag}</div>${fundSub}`;
     }
 
+    function adjustTotalToBudget(tickets, budget) {
+      if (!tickets.length) return tickets;
+      const sum = tickets.reduce((s, t) => s + t.total, 0);
+      const diff = budget - sum;
+      if (diff !== 0) {
+        const singlePt = tickets.find(t => t.points === 1) || tickets[0];
+        if (singlePt.points === 1 && singlePt.total + diff >= 100) {
+          singlePt.unit += diff;
+          singlePt.total += diff;
+        }
+      }
+      return tickets;
+    }
+
     function buildScaledTickets(race, budget) {
       const isPass = race.rank === 'Pass' || race.subRank === 'Pass' || race.pivotType === 'Pass';
       if (isPass) return [];
 
-      // 1) JSONにticketsがある場合は share 比率で動的スケーリング
       if (Array.isArray(race.tickets) && race.tickets.length > 0) {
         const scaled = race.tickets.map(t => {
           const pts = Math.max(1, Number(t.points || 1));
@@ -749,7 +789,6 @@
         return adjustTotalToBudget(scaled, budget);
       }
 
-      // 2) ticketsが無い場合は coreConnections + portfolioRules からDrop-Bufferedダッチング自動構成
       const rules = race.portfolioRules || { coreRatio: 0.75, dutchTargetReturn: 11800, singleLongshotCapPct: 0.30 };
       const horsesByNum = {};
       (race.horses || []).forEach(h => { horsesByNum[h.num] = h; });
@@ -799,7 +838,6 @@
         };
       });
 
-      // Alpha / Win-Reach Hedge枠
       if (alphaBudget >= 200) {
         const hedges = Array.isArray(race.winReachHedge) ? race.winReachHedge : [];
         let remain = alphaBudget;
@@ -834,20 +872,6 @@
       }
 
       return adjustTotalToBudget(tickets, budget);
-    }
-
-    function adjustTotalToBudget(tickets, budget) {
-      if (!tickets.length) return tickets;
-      const sum = tickets.reduce((s, t) => s + t.total, 0);
-      const diff = budget - sum;
-      if (diff !== 0) {
-        const singlePt = tickets.find(t => t.points === 1) || tickets[0];
-        if (singlePt.points === 1 && singlePt.total + diff >= 100) {
-          singlePt.unit += diff;
-          singlePt.total += diff;
-        }
-      }
-      return tickets;
     }
 
     function renderNeonAuditPanel(race, currentBudget) {
@@ -957,7 +981,10 @@
               <h2 class="race-title">${escapeHtml(race.venue || '')} ${escapeHtml(race.name || '')}</h2>
               <div class="race-sub">${escapeHtml(race.surfaceDist || '')} ｜ 発走 ${escapeHtml(race.postTime || '-')} ｜ ${escapeHtml(race.pivotType || '-')} ${race.nLead != null ? `｜ 先行${race.nLead}頭` : ''}</div>
             </div>
-            <span class="rank-badge ${badge.cls}">${badge.text}</span>
+            <div class="head-badges">
+              <span class="rank-badge ${badge.cls}">${badge.text}</span>
+              ${renderStagePill(race)}
+            </div>
           </div>
 
           ${renderNeonMetaBadges(race)}
@@ -1139,7 +1166,7 @@
     function renderStatsTab(races) {
       const settled = races.filter(r => r.result && r.result.settled && r.rank !== 'Pass' && r.subRank !== 'Pass');
       if (!settled.length) {
-        return '<div class="empty-state">確定済みの成績データはまだありません。レース後に auto_predict.py --mode audit を実行すると1万円基準の的中率・回収率が自動集計されます。</div>';
+        return '<div class="empty-state">確定済みの成績データはまだありません。レース後に audit が実行されると1万円基準の的中率・回収率が自動集計されます。</div>';
       }
 
       const groups = { ALL: { n: 0, hit: 0, inv: 0, ret: 0 } };
