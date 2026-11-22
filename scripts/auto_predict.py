@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
 """
-Bayesian Keiba AI — Automated Prediction & Audit Pipeline (Neon v7.0 / v11.1 Edition)
+Bayesian Keiba AI — Automated Prediction & Audit Pipeline (Neon v7.0 / v11.1 Hybrid Edition)
 
-Fully compatible with .github/workflows/race_pipeline.yml:
-  --mode screening : Morning/Noon batch screening (JRA / NAR / ALL)
-  --mode hourly    : 1-hour-before full prediction for due non-Pass races (+ Nankan Triple Umatan)
-  --mode predict   : Single-race direct full prediction
-  --mode win5      : JRA WIN5 Plan C (v11.1) orthogonal shell prediction
-  --mode audit     : Post-race official result & 10,000 JPY baseline ROI audit
+Model Routing:
+  - High Tier (WIN5 / Grade / Make Debut / Triple Umatan): gemini-4-hydrogen (thinking_level="high")
+  - Fast Tier (Screening / Standard Races / Audit)       : gemini-3.8-flash  (thinking_level="medium")
 """
 
 from __future__ import annotations
@@ -26,8 +23,8 @@ from google import genai
 from google.genai import types
 
 # ===== 設定（環境変数・GitHub Variables で上書き可能）=====
-HIGH_TIER_MODEL = os.getenv("GEMINI_HIGH_TIER_MODEL", "gemini-2.5-pro")
-FAST_MODEL = os.getenv("GEMINI_FAST_MODEL", "gemini-2.5-flash")
+HIGH_TIER_MODEL = os.getenv("GEMINI_HIGH_TIER_MODEL", "gemini-4-hydrogen")
+FAST_MODEL = os.getenv("GEMINI_FAST_MODEL", "gemini-3.8-flash")
 DATA_DIR = Path(os.getenv("KEIBA_DATA_DIR", "data"))
 LATEST_JSON_PATH = DATA_DIR / "latest.json"
 HISTORY_DIR = DATA_DIR / "history"
@@ -65,14 +62,14 @@ def detect_org(race: dict[str, Any]) -> str:
     return "JRA"
 
 
-def select_model(skill: str, race_name: str = "") -> str:
-    """WIN5・重賞・新馬戦・ダートグレードは上位モデル、それ以外は高速モデルへ振り分け"""
+def select_model_and_thinking(skill: str, race_name: str = "", rank: str = "") -> tuple[str, str]:
+    """WIN5・重賞・新馬戦・S/A勝負レースは Hydrogen(high)、それ以外は 3.8-Flash(medium)"""
     high_keywords = ("G1", "G2", "G3", "GI", "GII", "GIII", "Jpn", "重賞", "新馬", "WIN5", "記念", "賞", "杯")
     if skill in ("app-bayesian-win5", "app-bayesian-make-debut"):
-        return HIGH_TIER_MODEL
-    if any(k in race_name for k in high_keywords):
-        return HIGH_TIER_MODEL
-    return FAST_MODEL
+        return HIGH_TIER_MODEL, "high"
+    if rank in ("S", "A") or any(k in race_name for k in high_keywords):
+        return HIGH_TIER_MODEL, "high"
+    return FAST_MODEL, "medium"
 
 
 def parse_post_datetime(date_str: str, post_time: str) -> dt.datetime | None:
@@ -477,29 +474,51 @@ def call_gemini_json(
     client: genai.Client,
     model: str,
     prompt: str,
+    thinking_level: str = "medium",
     retries: int = 2,
 ) -> dict[str, Any]:
+    """ThinkingConfig付きでAPI呼出。429上限時は相方モデルへ自動フォールバック"""
+    fallback_model = FAST_MODEL if model == HIGH_TIER_MODEL else HIGH_TIER_MODEL
+    candidates: list[tuple[str, str]] = [(model, thinking_level)]
+    if fallback_model != model:
+        fb_level = "medium" if fallback_model == FAST_MODEL else "high"
+        candidates.append((fallback_model, fb_level))
+
     last_err: Exception | None = None
-    for attempt in range(retries + 1):
-        try:
-            response = client.models.generate_content(
-                model=model,
-                contents=prompt,
-                config=types.GenerateContentConfig(
-                    tools=[types.Tool(google_search=types.GoogleSearch())],
-                    temperature=0.2,
-                ),
-            )
-            if not response.text:
-                raise RuntimeError("Gemini API returned empty text.")
-            return extract_json(response.text)
-        except Exception as exc:
-            last_err = exc
-            if attempt < retries:
-                wait_sec = 3 * (attempt + 1)
-                print(f"[RETRY {attempt + 1}/{retries}] {exc} -> sleep {wait_sec}s", file=sys.stderr)
-                time.sleep(wait_sec)
-    raise RuntimeError(f"Gemini call failed after {retries + 1} attempts: {last_err}") from last_err
+    for idx, (cur_model, cur_level) in enumerate(candidates):
+        for attempt in range(retries + 1):
+            try:
+                config_kwargs: dict[str, Any] = {
+                    "tools": [types.Tool(google_search=types.GoogleSearch())],
+                    "temperature": 0.2,
+                }
+                try:
+                    config_kwargs["thinking_config"] = types.ThinkingConfig(
+                        thinking_level=cur_level
+                    )
+                except Exception:
+                    pass
+
+                response = client.models.generate_content(
+                    model=cur_model,
+                    contents=prompt,
+                    config=types.GenerateContentConfig(**config_kwargs),
+                )
+                if not response.text:
+                    raise RuntimeError("Gemini API returned empty text.")
+                return extract_json(response.text)
+            except Exception as exc:
+                last_err = exc
+                err_str = str(exc)
+                # 429 (レート上限) や 404 (モデル不在) は即座にフォールバックモデルへ切替
+                if ("429" in err_str or "RESOURCE_EXHAUSTED" in err_str or "404" in err_str) and idx < len(candidates) - 1:
+                    print(f"[FALLBACK] {cur_model} failed ({err_str[:120]}) -> switching to {candidates[idx + 1][0]}", file=sys.stderr)
+                    break
+                if attempt < retries:
+                    wait_sec = 3 * (attempt + 1)
+                    print(f"[RETRY {attempt + 1}/{retries}] {cur_model}: {exc} -> sleep {wait_sec}s", file=sys.stderr)
+                    time.sleep(wait_sec)
+    raise RuntimeError(f"Gemini call failed across models: {last_err}") from last_err
 
 
 def validate_and_normalize_race(
@@ -602,9 +621,9 @@ def resolve_orgs(org_arg: str) -> list[str]:
 
 def run_screening(client: genai.Client, store: dict[str, Any], org_arg: str, date_str: str) -> None:
     for org in resolve_orgs(org_arg):
-        print(f"[SCREENING] {date_str} {org} ({FAST_MODEL})")
+        print(f"[SCREENING] {date_str} {org} ({FAST_MODEL}, thinking=medium)")
         prompt = build_screening_prompt(org, date_str)
-        res = call_gemini_json(client, FAST_MODEL, prompt)
+        res = call_gemini_json(client, FAST_MODEL, prompt, thinking_level="medium")
         if res.get("hasHolding") is False:
             print(f"[INFO] No {org} races scheduled on {date_str}.")
             continue
@@ -670,11 +689,11 @@ def run_hourly(
             else ("app-bayesian-make-debut" if "新馬" in str(race.get("name", "")) else "app-bayesian-horse-racing-text")
         )
         race_query = f"{race.get('venue', '')} {race.get('name', '')} ({race.get('surfaceDist', '')} 発走{race.get('postTime', '')})".strip()
-        model = select_model(skill, race_query)
-        print(f"[HOURLY-PREDICT] {skill} ({model}) -> {race_query}")
+        model, t_level = select_model_and_thinking(skill, race_query, str(race.get("rank") or ""))
+        print(f"[HOURLY-PREDICT] {skill} ({model}, thinking={t_level}) -> {race_query}")
         try:
             prompt = build_prompt_for_skill(skill, race_query, date_str)
-            pred = call_gemini_json(client, model, prompt)
+            pred = call_gemini_json(client, model, prompt, thinking_level=t_level)
             if race.get("raceId"):
                 pred["raceId"] = race["raceId"]
             normalized = validate_and_normalize_race(pred, skill, stage="final")
@@ -696,10 +715,10 @@ def run_hourly(
                 mins = minutes_until_post(date_str, str(r10.get("postTime") or ""), ref_now)
                 if force_all or (mins is not None and HOURLY_WINDOW_MIN <= mins <= HOURLY_WINDOW_MAX):
                     venue_name = next(v for v in NANKAN_VENUES if v in str(r10.get("venue", "")))
-                    print(f"[TRIPLE-UMATAN] Generating for {venue_name} ({HIGH_TIER_MODEL})")
+                    print(f"[TRIPLE-UMATAN] Generating for {venue_name} ({HIGH_TIER_MODEL}, thinking=high)")
                     try:
                         t_prompt = build_triple_umatan_prompt(venue_name, date_str)
-                        store["tripleUmatan"] = call_gemini_json(client, HIGH_TIER_MODEL, t_prompt)
+                        store["tripleUmatan"] = call_gemini_json(client, HIGH_TIER_MODEL, t_prompt, thinking_level="high")
                         save_store(store)
                     except Exception as exc:
                         print(f"[WARN] Triple Umatan generation failed: {exc}", file=sys.stderr)
@@ -739,7 +758,7 @@ def run_audit(client: genai.Client, store: dict[str, Any], org_arg: str) -> None
 }}
 """.strip()
         try:
-            res = call_gemini_json(client, FAST_MODEL, prompt)
+            res = call_gemini_json(client, FAST_MODEL, prompt, thinking_level="medium")
             if res.get("settled"):
                 res["payout10k"] = int(round(float(res.get("payout10k", 0))))
                 res["hit"] = bool(res.get("hit", res["payout10k"] > 0))
@@ -754,7 +773,7 @@ def run_audit(client: genai.Client, store: dict[str, Any], org_arg: str) -> None
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Bayesian Keiba AI Neon Pipeline (v7.0 / v11.1)")
+    parser = argparse.ArgumentParser(description="Bayesian Keiba AI Neon Pipeline (Hydrogen Hybrid)")
     parser.add_argument(
         "--mode",
         choices=["screening", "hourly", "predict", "win5", "audit"],
@@ -787,19 +806,18 @@ def main() -> None:
     elif args.mode == "predict":
         if not args.race:
             raise ValueError("--race is required for predict mode.")
-        model = select_model(args.skill, args.race)
-        print(f"[RUN] {args.skill} ({model}) -> {args.race}")
+        model, t_level = select_model_and_thinking(args.skill, args.race, rank="A")
+        print(f"[RUN] {args.skill} ({model}, thinking={t_level}) -> {args.race}")
         prompt = build_prompt_for_skill(args.skill, args.race, args.date)
-        race_json = call_gemini_json(client, model, prompt)
+        race_json = call_gemini_json(client, model, prompt, thinking_level=t_level)
         normalized = validate_and_normalize_race(race_json, args.skill, stage="final")
         upsert_race(store, normalized, allow_downgrade=True)
         save_store(store)
 
     elif args.mode == "win5":
-        model = select_model("app-bayesian-win5", "WIN5")
-        print(f"[RUN] app-bayesian-win5 ({model}) -> {args.date}")
+        print(f"[RUN] app-bayesian-win5 ({HIGH_TIER_MODEL}, thinking=high) -> {args.date}")
         prompt = build_prompt_for_skill("app-bayesian-win5", "WIN5", args.date)
-        store["win5"] = call_gemini_json(client, model, prompt)
+        store["win5"] = call_gemini_json(client, HIGH_TIER_MODEL, prompt, thinking_level="high")
         save_store(store)
 
     elif args.mode == "audit":
