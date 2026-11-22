@@ -1,752 +1,464 @@
-import os, re, math, time, json, glob, socket, requests
-from datetime import datetime, timedelta, timezone
-from bs4 import BeautifulSoup
+#!/usr/bin/env python3
+"""
+Bayesian Keiba AI — Automated Prediction & Audit Pipeline (Neon v7.0 / v11.1 Edition)
+
+Supports:
+  - JRA Flat / Grade (app-bayesian-horse-racing-text)
+  - JRA Make Debut (app-bayesian-make-debut)
+  - NAR Local / Nankan / Triple Umatan (app-bayesian-nar)
+  - JRA WIN5 Plan C (app-bayesian-win5)
+  - Post-Race 10,000 JPY Baseline Audit & ROI Tracking
+"""
+
+from __future__ import annotations
+
+import argparse
+import datetime as dt
+import json
+import os
+import re
+import sys
+from pathlib import Path
+from typing import Any
+
 from google import genai
 from google.genai import types
 
-socket.setdefaulttimeout(45)
-START_TS = time.time()
-# 10分タイムアウトを絶対に踏まないよう、5分30秒で新規通信を切り上げて確実に保存完了させる
-MAX_RUNTIME_SEC = 330
+# ===== 設定（環境変数で上書き可能）=====
+HIGH_TIER_MODEL = os.getenv("GEMINI_HIGH_TIER_MODEL", "gemini-2.5-pro")
+FAST_MODEL = os.getenv("GEMINI_FAST_MODEL", "gemini-2.5-flash")
+DATA_DIR = Path(os.getenv("KEIBA_DATA_DIR", "data"))
+LATEST_JSON_PATH = DATA_DIR / "latest.json"
+HISTORY_DIR = DATA_DIR / "history"
+JST = dt.timezone(dt.timedelta(hours=9))
 
-JST = timezone(timedelta(hours=9))
-API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
-try:
-    client = genai.Client(api_key=API_KEY, http_options=types.HttpOptions(timeout=55000)) if API_KEY else None
-except Exception:
-    client = genai.Client(api_key=API_KEY) if API_KEY else None
 
-os.makedirs("data", exist_ok=True)
+def now_jst_str() -> str:
+    return dt.datetime.now(JST).strftime("%Y-%m-%d %H:%M JST")
 
-ENGINE_VER = "v10.4"
-HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}
-SESSION = requests.Session()
-SESSION.headers.update(HEADERS)
 
-JRA_VENUES = {"01":"札幌","02":"函館","03":"福島","04":"新潟","05":"東京","06":"中山","07":"中京","08":"京都","09":"阪神","10":"小倉"}
-NAR_VENUES = {"42":"浦和","43":"船橋","44":"大井","45":"川崎","30":"門別","35":"盛岡","36":"水沢","46":"金沢","47":"笠松","48":"名古屋","50":"園田","51":"姫路","54":"高知","55":"佐賀"}
-NANKAN_CODES = {"42", "43", "44", "45"}
-TOP_RIDERS = ("矢野", "御神本", "笹川", "吉原", "森泰斗", "ルメール", "川田", "戸崎", "坂井", "武豊", "松山", "横山武", "鮫島克", "C.デム", "モレイラ", "レーン", "マーカン")
-POWER_SIRES = ("ナダル", "クリソベリル", "ゴールドアリュール", "ルヴァンスレーヴ", "シニスターミニスター", "ヘニーヒューズ", "ドレフォン", "パイロ", "マインドユアビスケッツ", "キズナ", "キタサンブラック", "エピファネイア", "ロードカナロア", "コントレイル", "モーリス")
-TURF_START_DIRT = {("東京",1300),("東京",1400),("東京",1600),("中山",1200),("京都",1400),("阪神",1400),("中京",1400),("福島",1150),("新潟",1200)}
-GRADED_KEYWORDS = ("Jpn", "G1", "G2", "G3", "S1", "S2", "S3", "杯", "記念", "賞", "マイルCS", "ジャパンC", "有馬", "天皇賞", "ダービー", "オークス", "皐月", "桜花", "菊花", "秋華")
+def select_model(skill: str, race_name: str = "") -> str:
+    """WIN5・重賞・新馬戦・ダートグレードは上位モデル、それ以外は高速モデルへ振り分け"""
+    high_keywords = ("G1", "G2", "G3", "GI", "GII", "GIII", "Jpn", "重賞", "新馬", "WIN5")
+    if skill in ("app-bayesian-win5", "app-bayesian-make-debut"):
+        return HIGH_TIER_MODEL
+    if any(k in race_name for k in high_keywords):
+        return HIGH_TIER_MODEL
+    return FAST_MODEL
 
-AI_CALL_COUNT = 0
-MAX_AI_CALLS_PER_RUN = 3
 
-def log(msg: str):
-    print(f"[{int(time.time() - START_TS):03d}s] {msg}", flush=True)
+def build_common_neon_rules() -> str:
+    return """
+【Neon v7.0 Maximum Hit-Rate 共通絶対規約】
+1. 全頭取得必須ゲート: Google検索で全出走馬（枠・馬番・馬名・斤量・騎手・最新オッズ・発表済なら公式馬体重増減）、馬場（クッション値/含水率/砂厚/風向）、当日1R〜直前Rの結果を必ず確認する。未発表項目は捏造せず triggers に「未発表」と明記。
+2. 2-Stage Benter ベイジアン融合: まずオッズ完全遮断の基礎勝率 fFund を算出し、FLB Power法で補正した市場確率 q と適応重み wR で融合した事後勝率 f を算出する。危険人気馬/中穴Override/大幅増Type II/ダート1-2枠未経験人気馬等は wUsed を 0.10〜0.15 以下へ非対称クランプ。
+3. 当日バイアス3レース一致ガード: 同一馬場・同ペース系統で3R以上一致時のみシナリオ重みを±10〜20%更新。2R一致は±6〜10%、1Rのみ・ペース不一致は±5%上限。
+4. 全頭厳密Plackett-Luce＆保存則: 全N頭を内部演算し、sum(f)=100.0%、sum(top2)=200.0%、sum(top3)=300.0% を厳密に満たすこと（下位馬は tailSummary に集約）。総シフト幅は |sum(Δθ)| <= 0.45 にソフトクランプ。
+5. 的中率最大化 Core Shield 規約:
+   - strategyProfile は "hit_rate_max" をデフォルトとする。
+   - ◎は融合後3着内率最上位の安全軸とし、上位2〜4頭へ必ず直結（coreConnections、飛び石結線禁止）。
+   - Core比率 0.70〜0.80、単発目標払戻 dutchTargetReturn = 11500〜12500（-15%下落耐性）。
+   - 単一穴馬（単勝10倍以上）への合計配分上限 singleLongshotCapPct <= 0.30。
+   - 反実仮想セルフ監査（◎破綻時の○-▲防衛状態と消し人気馬の復活条件）を counterfactualAudit に明記。
+6. 出力は有効な単一JSONオブジェクトのみ。前置きや解説文は一切出力しないこと。
+""".strip()
 
-def time_exceeded() -> bool:
-    return (time.time() - START_TS) >= MAX_RUNTIME_SEC
 
-def get_soup(url: str) -> BeautifulSoup:
-    res = SESSION.get(url, timeout=8)
-    raw = res.content
-    txt = raw.decode("utf-8", errors="ignore") if b"utf-8" in raw[:1024].lower() else raw.decode("euc_jp", errors="ignore")
-    return BeautifulSoup(txt, "html.parser")
+def build_prompt_for_skill(skill: str, race_query: str, date_str: str) -> str:
+    common = build_common_neon_rules()
 
-def fetch_race_list(ymd: str, mode: str = "jra") -> list:
-    base = "https://race.netkeiba.com" if mode == "jra" else "https://nar.netkeiba.com"
-    vmap = JRA_VENUES if mode == "jra" else NAR_VENUES
-    try:
-        soup = get_soup(f"{base}/top/race_list_sub.html?kaisai_date={ymd}")
-        races = []
-        for li in soup.select("li.RaceList_DataItem"):
-            a = li.select_one("a[href*='race_id=']")
-            m = re.search(r"race_id=(\d{12})", a.get("href", "")) if a else None
-            if not m: continue
-            rid = m.group(1)
-            vcode = rid[4:6]
-            v = vmap.get(vcode, "地方" if mode == "nar" else "JRA")
-            rnum = int(rid[10:12])
-            name = (li.select_one(".ItemTitle") or li).get_text(strip=True)[:18]
-            if mode == "nar" and (vcode not in NANKAN_CODES) and ("Jpn" not in name and rnum < 9):
-                continue
-            tm_el = li.select_one(".RaceList_Itemtime, .RaceData")
-            m_tm = re.search(r"(\d{1,2}:\d{2})", tm_el.get_text(" ", strip=True) if tm_el else li.get_text(" ", strip=True))
-            ptime = m_tm.group(1).zfill(5) if m_tm else ""
-            lg = li.select_one(".RaceList_ItemLong")
-            is_new = ("新馬" in name) or ("メイクデビュー" in name)
-            is_graded = any(g in name for g in GRADED_KEYWORDS)
-            skill = "app-bayesian-nar" if mode == "nar" else ("app-bayesian-make-debut" if is_new else "app-bayesian-horse-racing-text")
-            races.append({
-                "raceId": rid, "mode": mode, "venue": v, "raceNumber": rnum, "venueLabel": f"{v}{rnum}R",
-                "name": name, "surfaceDist": lg.get_text(strip=True) if lg else "ダ1600m",
-                "postTime": ptime,
-                "rank": "New" if is_new else ("S" if is_graded else ("A" if rnum >= 9 else "B")),
-                "skill": skill, "predicted": False, "aiPredicted": False
-            })
-        return races
-    except Exception as e:
-        log(f"[Warn] {mode} list error: {e}")
-        return []
+    if skill == "app-bayesian-make-debut":
+        return f"""
+あなたは JRA新馬戦専用「app-bayesian-make-debut (v7.0 Neon)」エンジンです。
+対象日: {date_str} / 対象レース: {race_query}
+{common}
 
-def parse_payout_table(rsoup: BeautifulSoup) -> dict:
-    payouts = {"win": [], "umaren": [], "wide": [], "umatan": [], "sanrenpuku": []}
-    class_map = {"Tansho": ("win", 1), "Umaren": ("umaren", 2), "Wide": ("wide", 2), "Umatan": ("umatan", 2), "Fuku3": ("sanrenpuku", 3)}
-    for tr in rsoup.select("table.Payout_Detail_Table tr"):
-        cls_list = tr.get("class") or []
-        matched = next((class_map[c] for c in cls_list if c in class_map), None)
-        if not matched: continue
-        key, group_sz = matched
-        res_td, pay_td = tr.select_one("td.Result"), tr.select_one("td.Payout")
-        if not res_td or not pay_td: continue
-        pays = [int(p.replace(",", "")) for p in re.findall(r"([\d,]+)円", pay_td.get_text(" ", strip=True))]
-        if not pays: continue
-        num_groups = []
-        uls = res_td.select("ul")
-        if uls:
-            for ul in uls:
-                nums = [int(x) for x in re.findall(r"\d+", ul.get_text(" ", strip=True))]
-                if len(nums) >= group_sz: num_groups.append(nums[:group_sz])
-        else:
-            all_nums = [int(x) for x in re.findall(r"\d+", res_td.get_text(" ", strip=True))]
-            for i in range(0, len(all_nums) - group_sz + 1, group_sz):
-                num_groups.append(all_nums[i:i+group_sz])
-        for idx, pay in enumerate(pays):
-            if idx < len(num_groups):
-                payouts[key].append({"nums": num_groups[idx], "pay": pay})
-    return payouts
+【新馬戦10モジュール固有ルール】
+- ダート1〜2枠の砂被り未経験人気馬は Δθ∈[-0.22,-0.35], wUsed<=0.10, Single-Pivot禁止（ゲート1F<=11.8s単騎ハナ or 500kg以上3頭併せ内確認済のみ緩和）。外6〜8枠大型馬は+0.15〜+0.25。
+- 4角0.6秒射程圏ゲート（スロー想定RPCI>=58.5） vs 先行4頭以上前崩れ差し（☆_closer）。
+- 古馬基準時計×後半2F持続加速突破馬（CW 6F<=81.5&2F<=22.8 / 美W 5F<=65.8&2F<=22.8 / 坂路4F<=52.2-52.5&2F<=24.4-24.6）は wUsed<=0.10 で上位抜擢。
+- 過剰人気6大フィルター該当馬は mark="危", wUsed<=0.10, Single-Pivot禁止。
+- 中穴仕上がり早オーバーライド（☆_override）は wUsed<=0.10。
+- 目標: hitRate>=55%（フルゲート>=50%）, breakEvenRate>=42%, expectedRoi>=102%（未達なら subRank="Pass", pivotType="Pass"）。
 
-def fetch_full_shutuba(rid: str, mode: str = "jra", need_shutuba: bool = True, need_result: bool = True) -> tuple[str, list, list, str, str, dict]:
-    base = "https://race.netkeiba.com" if mode == "jra" else "https://nar.netkeiba.com"
-    lines, top3_actual, raw_runners, odds_map = [], [], [], {}
-    track_cond, post_time, payouts = "良", "", {}
+【厳守JSONスキーマ】
+{{
+  "raceId": "YYYYMMDD-venue-RR",
+  "org": "JRA",
+  "venue": "東京5R",
+  "name": "2歳新馬",
+  "surfaceDist": "芝1800m",
+  "postTime": "12:15",
+  "skill": "app-bayesian-make-debut",
+  "strategyProfile": "hit_rate_max",
+  "rank": "New",
+  "subRank": "A | B | Pass",
+  "chaosType": "Type S | Type A | Type B | Type B+",
+  "pivotType": "Single-Pivot | Dual-Pivot | Plan B 2-Zone | Pass",
+  "nLead": 2,
+  "rpci": 59.5,
+  "wR": 0.42,
+  "m3": 56.2,
+  "intradayBiasConsistentR": 2,
+  "expectedRoi": 112.4,
+  "hitRate": 59.8,
+  "breakEvenRate": 49.5,
+  "scenario": "午前バイアス・想定RPCI・3〜4MECEシナリオ要約(80字以内)",
+  "activeModules": ["M2:高CV開幕イン", "M3:4角0.6sゲート", "M8:後半2F突破"],
+  "horses": [
+    {{
+      "mark": "◎ | ◯ | ▲ | △ | ☆ | 危",
+      "role": "役割(15字以内)",
+      "num": 6,
+      "name": "実馬名",
+      "style": "逃 | 先 | 差 | 追",
+      "f": 26.8,
+      "fFund": 28.5,
+      "q": 18.0,
+      "wUsed": 0.42,
+      "top2": 45.2,
+      "top3": 61.0,
+      "odds": 4.2,
+      "tags": ["F:調教/枠事実", "H:補正理由"],
+      "comment": "45字以内の核心根拠"
+    }}
+  ],
+  "tailSummary": {{ "count": 8, "sumF": 11.2, "sumTop3": 36.5 }},
+  "coreConnections": [[6, 3], [6, 11], [6, 2], [3, 11]],
+  "portfolioRules": {{ "coreRatio": 0.75, "dutchTargetReturn": 11800, "singleLongshotCapPct": 0.30, "maxLongshotAllocPct": 0.22 }},
+  "winReachHedge": [{{ "num": 11, "name": "馬名", "odds": 12.5, "hedge10k": 800, "hedge20k": 1600 }}],
+  "counterfactualAudit": "◎破綻時の○-▲防衛状態と危人気馬の復活条件(60字以内)",
+  "triggers": ["直前馬体重(週中比-8kg超Type III警戒)・実オッズ確認"]
+}}
+""".strip()
 
-    if need_shutuba:
-        api_path = "api_get_jra_odds.html" if mode == "jra" else "api_get_nar_odds.html"
-        try:
-            o_json = SESSION.get(f"{base}/api/{api_path}?race_id={rid}&type=1&action=init", timeout=5).json()
-            o_dict = (o_json.get("data") or {}).get("odds", {}).get("1", {})
-            if isinstance(o_dict, dict):
-                for k, val in o_dict.items():
-                    if isinstance(val, list) and val and str(val[0]).replace(".", "").isdigit():
-                        odds_map[int(k)] = float(val[0])
-        except Exception: pass
+    if skill == "app-bayesian-nar":
+        return f"""
+あなたは 地方競馬・南関東専用「app-bayesian-nar (v7.0 Neon)」エンジンです。
+対象日: {date_str} / 対象レース: {race_query}
+{common}
 
-        try:
-            soup = get_soup(f"{base}/race/shutuba.html?race_id={rid}")
-            r1, r2 = soup.select_one(".RaceData01"), soup.select_one(".RaceData02")
-            if r1:
-                r1_txt = " ".join(r1.get_text(" ", strip=True).split())
-                m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", r1_txt)
-                if m_pt: post_time = m_pt.group(1).zfill(5)
-                for c in ("不良", "重", "稍重", "良"):
-                    if c in r1_txt: track_cond = c; break
-                lines.append("【条件・馬場】" + r1_txt)
-            if r2: lines.append("【コース・クラス】" + " ".join(r2.get_text(" ", strip=True).split()))
-            for idx, tr in enumerate(soup.select("tr.HorseList")[:18]):
-                n_el = tr.select_one("span.HorseName a, .HorseName a, td.HorseInfo a")
-                if not n_el: continue
-                h_name = n_el.get_text(strip=True)
-                if not h_name: continue
-                w_el, u_el = tr.select_one("td[class*='Waku']"), tr.select_one("td[class*='Umaban'], td.Num")
-                u_txt = re.sub(r"\D", "", u_el.get_text(strip=True)) if u_el else ""
-                u_int = int(u_txt) if u_txt.isdigit() else (idx + 1)
-                w_txt = re.sub(r"\D", "", w_el.get_text(strip=True)) if w_el else ""
-                w_int = int(w_txt) if w_txt.isdigit() else ((u_int - 1) // 2 + 1)
-                sex_age = tr.select_one("td.Barei, span.Barei")
-                futan = tr.select_one("td.Futan")
-                j_el = tr.select_one("td.Jockey a, td.Jockey")
-                wt_el = tr.select_one("td.Weight")
-                odd_el = tr.select_one("td.Popular span[id^='odds-'], span[id^='odds-'], td.Odds")
-                odd_val = odds_map.get(u_int, 0.0)
-                if odd_val <= 1.0 and odd_el:
-                    m_o = re.search(r"(\d+\.\d+)", odd_el.get_text())
-                    if m_o: odd_val = float(m_o.group(1))
-                raw_runners.append({
-                    "waku": w_int, "num": u_int, "name": h_name,
-                    "sexAge": sex_age.get_text(strip=True) if sex_age else "",
-                    "futan": futan.get_text(strip=True) if futan else "",
-                    "pedigree": "", "jockey": j_el.get_text(" ", strip=True) if j_el else "",
-                    "weight": wt_el.get_text(strip=True) if wt_el else "", "odds": odd_val, "past": ""
-                })
-        except Exception: pass
+【NAR固有ルール】
+- 重・不良馬場の二極化: 外枠6-8枠大型先行(500kg以上)ブースト、および2000m以上不良消耗戦での軽量絞り差し(-4〜-8kg)1着突き抜け補正。
+- 外枠JRA重賞複数勝馬の単騎ハナ強奪＆斤量/距離延長免除。
+- 1800m以上での+12kg以上馬体増は人気馬でも無条件Type II降格（wUsed<=0.15, 1着軸禁止）。
+- 浦和/川崎前崩れ時および南関DG戦での地元トップ騎手（矢野・御神本・笹川・吉原）3着アンカー補正。
+- 一強堅軸（単勝2.2倍以下・死角なし・コアオッズ4倍未満）は厳格に rank="Pass"。
+- 目標: hitRate>=60%（14頭以上>=55%）, breakEvenRate>=45%, expectedRoi>=102%。
 
-        try:
-            psoup = get_soup(f"{base}/race/shutuba_past.html?race_id={rid}")
-            if not post_time:
-                pr1 = psoup.select_one(".RaceData01")
-                if pr1:
-                    m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", pr1.get_text(" ", strip=True))
-                    if m_pt: post_time = m_pt.group(1).zfill(5)
-            for idx, tr in enumerate(psoup.select("tr.HorseList")[:18]):
-                n_el = tr.select_one(".Horse02 a, .HorseName a, .Horse02")
-                if not n_el: continue
-                h_name = n_el.get_text(strip=True).split()[0]
-                f_sire, m_sire = tr.select_one(".Horse01"), tr.select_one(".Horse03")
-                ped = f"父:{f_sire.get_text(strip=True) if f_sire else ''}/母父:{m_sire.get_text(strip=True) if m_sire else ''}" if (f_sire or m_sire) else ""
-                pasts = " / ".join([" ".join(td.get_text(" ", strip=True).split())[:95] for td in tr.select("td.Past")[:4]])
-                target = next((x for x in raw_runners if x["name"] == h_name), None)
-                if target:
-                    if ped: target["pedigree"] = ped
-                    if pasts: target["past"] = pasts
-                else:
-                    u_el = tr.select_one("td[class*='Umaban'], td.Num")
-                    u_txt = re.sub(r"\D", "", u_el.get_text(strip=True)) if u_el else ""
-                    u_int = int(u_txt) if u_txt.isdigit() else (idx + 1)
-                    raw_runners.append({"waku": (u_int-1)//2+1, "num": u_int, "name": h_name, "sexAge": "", "futan": "", "pedigree": ped, "jockey": "", "weight": "", "odds": odds_map.get(u_int, 0.0), "past": pasts})
-        except Exception: pass
+【厳守JSONスキーマ】
+{{
+  "raceId": "YYYYMMDD-nar-RR",
+  "org": "NAR",
+  "venue": "大井11R",
+  "name": "レース名",
+  "surfaceDist": "ダ1600m",
+  "postTime": "20:10",
+  "skill": "app-bayesian-nar",
+  "strategyProfile": "hit_rate_max",
+  "rank": "S | A | B | Pass",
+  "pivotType": "Single-Pivot | Dual-Pivot | Pass",
+  "nLead": 4,
+  "wR": 0.35,
+  "m3": 54.8,
+  "intradayBiasConsistentR": 3,
+  "expectedRoi": 116.5,
+  "hitRate": 62.4,
+  "breakEvenRate": 53.0,
+  "scenario": "ナイター含水率・砂厚・当日バイアス・3〜4MECEシナリオ要約(80字以内)",
+  "horses": [
+    {{
+      "mark": "◎ | ◯ | ▲ | △ | ☆ | 消",
+      "role": "役割(15字以内)",
+      "num": 12,
+      "name": "実馬名",
+      "style": "逃 | 先 | 差 | マ",
+      "f": 24.8,
+      "fFund": 27.0,
+      "q": 18.0,
+      "wUsed": 0.35,
+      "top2": 44.5,
+      "top3": 60.2,
+      "odds": 4.5,
+      "tags": ["F:実績/馬場", "H:補正根拠"],
+      "comment": "45字以内の核心根拠"
+    }}
+  ],
+  "tailSummary": {{ "count": 8, "sumF": 9.8, "sumTop3": 28.4 }},
+  "coreConnections": [[12, 7], [12, 3], [12, 9], [7, 3]],
+  "portfolioRules": {{ "coreRatio": 0.76, "dutchTargetReturn": 11800, "singleLongshotCapPct": 0.30, "maxLongshotAllocPct": 0.20 }},
+  "tickets": [
+    {{ "zone": "Core", "type": "ワイド", "comb": "12 - 7", "points": 1, "share": 0.28, "odds": "4.3倍", "desc": "◎-◯本線元返し防衛" }}
+  ],
+  "counterfactualAudit": "◎破綻時の○-▲防衛状態と消し人気馬の復活条件(60字以内)",
+  "triggers": ["直前馬体重(1800m+の+12kg+警戒)・-30%急落検知"]
+}}
+""".strip()
 
-    if need_result:
-        try:
-            rsoup = get_soup(f"{base}/race/result.html?race_id={rid}")
-            rd1 = rsoup.select_one(".RaceData01")
-            if rd1:
-                rd1_txt = rd1.get_text(" ", strip=True)
-                if not post_time:
-                    m_pt = re.search(r"(\d{1,2}:\d{2})\s*発走", rd1_txt)
-                    if m_pt: post_time = m_pt.group(1).zfill(5)
-                for c in ("不良", "重", "稍重", "良"):
-                    if c in rd1_txt: track_cond = c; break
-            for tr in rsoup.select("#All_Result_Table tbody tr, table.RaceTable01 tbody tr")[:18]:
-                tds = [td.get_text(" ", strip=True) for td in tr.select("td")]
-                if len(tds) < 8: continue
-                rank_s, w_s, u_s = re.sub(r"\D", "", tds[0]), re.sub(r"\D", "", tds[1]), re.sub(r"\D", "", tds[2])
-                if not u_s.isdigit(): continue
-                u_int, w_int = int(u_s), (int(w_s) if w_s.isdigit() else 4)
-                n_el = tr.select_one("span.Horse_Name a, .Horse_Name, td.Horse_Info a")
-                h_name = n_el.get_text(strip=True) if n_el else tds[3].split()[0]
-                odd_num = odds_map.get(u_int, 0.0)
-                for cell in tds[8:]:
-                    if re.match(r"^\d{1,4}\.\d$", cell.replace(",", "")):
-                        odd_num = float(cell.replace(",", "")); break
-                ex = next((x for x in raw_runners if x["name"] == h_name), None)
-                if ex:
-                    ex["num"], ex["waku"] = u_int, w_int
-                    if odd_num > 1.0: ex["odds"] = odd_num
-                elif need_shutuba:
-                    raw_runners.append({"waku": w_int, "num": u_int, "name": h_name, "sexAge": tds[4] if len(tds)>4 else "", "futan": tds[5] if len(tds)>5 else "", "pedigree": "", "jockey": tds[6].split()[0] if len(tds)>6 else "", "weight": tds[14] if len(tds)>14 else "", "odds": odd_num or 0.0, "past": ""})
-                if len(top3_actual) < 3 and rank_s.isdigit():
-                    top3_actual.append({"rank": rank_s, "waku": w_int, "num": u_int, "name": h_name, "odds": str(odd_num or 10.0)})
-            if top3_actual:
-                payouts = parse_payout_table(rsoup)
-        except Exception: pass
+    if skill == "app-bayesian-win5":
+        return f"""
+あなたは JRA WIN5専用「app-bayesian-win5 (v11.1 Neon Plan C)」エンジンです。
+対象日: {date_str}
+{common}
 
-    raw_runners.sort(key=lambda x: x["num"])
-    for r in raw_runners:
-        lines.append(f"{r['waku']}枠 {r['num']}番 {r['name']} (性齢:{r.get('sexAge','')} 斤量:{r.get('futan','')} {r.get('pedigree','')} 騎手:{r['jockey']} 馬体:{r['weight']} 単勝:{r['odds'] if r['odds']>1 else '未発売'}倍) | 近4走:{r['past']}")
-    return "\n".join(lines[:22]), top3_actual, raw_runners, track_cond, post_time, payouts
+【WIN5 v11.1固有ルール】
+- 全5レースの全出走馬を並列取得し、2-Stage Benter融合（来日トップ外国馬参戦レースは wR=0.55〜0.60）で各レースの勝率 f, fFund, q を算出。
+- 乾燥ダート戦は上位4頭内に差し馬枠（closer）を最低1頭確保。
+- Plan C 確率シェル直交分解（T1 Core は予算上限45%厳守、T2〜T4 Wing は重複ゼロの3〜4チケット構成）。
+- 5レース目の単勝ヘッジ候補 hedgeCandidates も出力。
 
-def summarize_intraday_track_bias(races: list, venue: str) -> str:
-    finished = [r for r in races if r.get("venue") == venue and r.get("actualTop3")]
-    if not finished: return f"{venue}: 前半確定レースなし（標準バイアス想定）"
-    inner_w = sum(1 for r in finished if r["actualTop3"][0].get("waku", 4) <= 3)
-    outer_w = sum(1 for r in finished if r["actualTop3"][0].get("waku", 4) >= 6)
-    trend = "外枠(6〜8枠)優勢" if outer_w >= inner_w + 2 else ("内枠(1〜3枠)優勢" if inner_w >= outer_w + 2 else "内外フラット")
-    return f"{venue}当日実測({len(finished)}R集計): 1着内枠{inner_w}回/外枠{outer_w}回 → 【{trend}】"
+【厳守JSONスキーマ】
+{{
+  "date": "{date_str}",
+  "skill": "app-bayesian-win5",
+  "difficulty": "A | B | C",
+  "legs": [
+    {{
+      "venue": "東京10R",
+      "name": "レース名",
+      "surfaceDist": "芝1600m",
+      "wR": 0.40,
+      "grade": "堅 | 中 | 波乱",
+      "horses": [
+        {{ "mark": "◎", "num": 5, "name": "馬名", "shell": "Core | Wing", "f": 28.5, "fFund": 30.0, "q": 25.0, "wUsed": 0.40, "odds": 3.2, "comment": "35字以内" }}
+      ]
+    }}
+  ],
+  "planC": {{
+    "tickets": [
+      {{ "id": "T1", "label": "Core本線(45%上限)", "formation": "5,8 × 2,4 × 1,9 × 6 × 3,7", "points": 32, "hitProb": 8.4 }}
+    ]
+  }},
+  "hedgeCandidates": [{{ "num": 11, "name": "馬名", "odds": 14.5 }}]
+}}
+""".strip()
 
-def parse_past_metrics(past_text: str, waku: int) -> dict:
-    corners = re.findall(r"\b(\d{1,2})-(\d{1,2})(?:-(\d{1,2}))?(?:-(\d{1,2}))?\b", past_text)
-    c1s = [int(c[0]) for c in corners if c[0].isdigit() and 1 <= int(c[0]) <= 18]
-    avg_1c = (sum(c1s) / len(c1s)) if c1s else (4.0 if waku >= 5 else 6.0)
-    is_leader = any(c <= 2 for c in c1s[:2]) if c1s else False
-    style = "逃" if avg_1c <= 2.3 else ("先" if avg_1c <= 5.2 else ("差" if avg_1c <= 9.5 else "追"))
+    # Default: app-bayesian-horse-racing-text (JRA平場・重賞)
+    return f"""
+あなたは JRA平場・重賞専用「app-bayesian-horse-racing-text (v7.0 Neon)」エンジンです。
+対象日: {date_str} / 対象レース: {race_query}
+{common}
 
-    ranks = [int(m[0] or m[1]) for m in re.findall(r"(?:^|\s)(\d{1,2})着|\s(\d{1,2})\s+[芝ダ]", past_text) if (m[0] or m[1]).isdigit()]
-    ranks = [rk for rk in ranks if 1 <= rk <= 18][:4]
-    avg_rank = (sum(ranks) / len(ranks)) if ranks else 7.5
-    margins = [float(m) for m in re.findall(r"\((\d+\.\d)\)", past_text)]
-    is_silver = (sum(1 for rk in ranks if rk in (2, 3)) >= 2 and 1 not in ranks)
-    has_rebound = (any(m <= 0.2 for m in margins) and len(margins) >= 2 and margins[0] >= 0.6)
-    return {"style": style, "isLeader": is_leader, "avgRank": avg_rank, "ranks": ranks, "isSilver": is_silver, "hasRebound": has_rebound}
+【JRA平場・重賞固有ルール】
+- 来日トップ外国馬と日本馬の海外大敗帰りを厳密分離（来日トップ外国馬には疲労上限を適用せず wR>=0.40 で独立評価）。
+- 3〜4歳ダート2連勝以上昇級馬・小幅距離延長の成長余地加点則（△/☆_riser）。
+- 目標: hitRate>=60%（16〜18頭重賞>=55%）, breakEvenRate>=45%, expectedRoi>=102%（未達なら rank="Pass", pivotType="Pass"）。
 
-def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: str = "良") -> tuple[list, int, dict]:
-    if not raw_runners: return [], 3, {"s1": 35, "s2": 40, "s3": 25}
-    n = len(raw_runners)
-    venue, sdist, mode = race_meta.get("venue", "東京"), race_meta.get("surfaceDist", "ダ1600m"), race_meta.get("mode", "jra")
-    m_dist = re.search(r"(\d{3,4})", sdist)
-    dist = int(m_dist.group(1)) if m_dist else 1600
-    is_dirt = ("ダ" in sdist) or (mode == "nar")
-    is_turf_start = is_dirt and ((venue, dist) in TURF_START_DIRT)
-    is_wet, is_tight = (track_cond in ("重", "不良")), (venue in ("浦和", "川崎", "中山", "福島", "小倉"))
+【厳守JSONスキーマ】
+{{
+  "raceId": "YYYYMMDD-jra-RR",
+  "org": "JRA",
+  "venue": "東京11R",
+  "name": "レース名",
+  "surfaceDist": "芝1600m",
+  "postTime": "15:40",
+  "skill": "app-bayesian-horse-racing-text",
+  "strategyProfile": "hit_rate_max",
+  "rank": "S | A | B | Pass",
+  "pivotType": "Single-Pivot | Dual-Pivot | Pass",
+  "nLead": 3,
+  "rpci": 50.5,
+  "wR": 0.35,
+  "m3": 52.4,
+  "intradayBiasConsistentR": 3,
+  "intradayBias3R": true,
+  "expectedRoi": 111.5,
+  "hitRate": 61.2,
+  "breakEvenRate": 54.0,
+  "scenario": "当日バイアス・展開・3〜4MECEシナリオ重み要約(80字以内)",
+  "activeModules": ["2-Stage Benter融合", "当日3R一致バイアス"],
+  "horses": [
+    {{
+      "mark": "◎ | ◯ | ▲ | △ | ☆ | 消",
+      "role": "役割(15字以内)",
+      "num": 5,
+      "name": "実馬名",
+      "style": "逃 | 先 | 差 | 追",
+      "f": 19.6,
+      "fFund": 21.5,
+      "q": 16.0,
+      "wUsed": 0.35,
+      "top2": 38.8,
+      "top3": 55.4,
+      "odds": 5.2,
+      "tags": ["F:実績/時計", "H:補正理由"],
+      "comment": "45字以内の核心根拠"
+    }}
+  ],
+  "tailSummary": {{ "count": 10, "sumF": 14.2, "sumTop3": 38.5 }},
+  "coreConnections": [[5, 6], [5, 1], [5, 14], [6, 14]],
+  "portfolioRules": {{ "coreRatio": 0.76, "dutchTargetReturn": 11800, "singleLongshotCapPct": 0.30, "maxLongshotAllocPct": 0.24 }},
+  "counterfactualAudit": "◎破綻時の○-▲防衛状態と消し人気馬の復活条件(60字以内)",
+  "triggers": ["直前馬体重(Type I-III)・実オッズ下限確認"]
+}}
+""".strip()
 
-    parsed = [parse_past_metrics(r.get("past", ""), r.get("waku", 4)) for r in raw_runners]
-    n_lead = max(1, sum(1 for p in parsed if p["isLeader"]))
-    pi_s1, pi_s2, pi_s3 = ((0.25, 0.35, 0.40) if not is_tight else (0.30, 0.35, 0.35)) if n_lead >= 5 else ((0.50, 0.35, 0.15) if n_lead <= 2 else (0.35, 0.40, 0.25))
-    scen_w = {"s1": int(pi_s1*100), "s2": int(pi_s2*100), "s3": int(pi_s3*100)}
 
-    has_live_odds = sum(1 for r in raw_runners if r.get("odds", 0) > 1.0) >= max(3, n // 2)
-    logits, place_deltas, notes, styles = [], [], [], []
-
-    for idx, r in enumerate(raw_runners):
-        waku, jockey, wt, sex_age, futan, ped = r.get("waku", 4), r.get("jockey", ""), r.get("weight", ""), r.get("sexAge", ""), r.get("futan", ""), r.get("pedigree", "")
-        pm, style = parsed[idx], parsed[idx]["style"]
-        odd = float(r.get("odds", 0))
-
-        if has_live_odds and odd > 1.0:
-            base_theta = -0.82 * math.log(odd)
-        else:
-            win_bonus = 0.45 if (pm["ranks"] and pm["ranks"][0] == 1) else (0.25 if (pm["ranks"] and pm["ranks"][0] <= 3) else 0.0)
-            base_theta = -0.26 * (pm["avgRank"] - 6.0) + win_bonus
-
-        delta_th, delta_pl, reasons = 0.0, 0.0, []
-        m_ft = re.search(r"(\d{2}\.?\d?)", str(futan))
-        ft_val = float(m_ft.group(1)) if m_ft else 56.0
-        if "3" in sex_age and ft_val <= 55.0: delta_th += 0.18; delta_pl += 0.12; reasons.append(f"F:3歳{ft_val}kg(H:軽量優遇)")
-        elif ft_val >= 58.0: delta_th -= 0.14; delta_pl -= 0.10; reasons.append(f"F:斤量{ft_val}kg(H:酷量減点)")
-        if is_turf_start:
-            if waku >= 7 and style in ("逃", "先"): delta_th += 0.20; delta_pl += 0.15; reasons.append(f"F:芝発進{waku}枠先行(H:Top3昇格)")
-            elif waku <= 3 and style == "先" and not is_wet: delta_th += 0.15; delta_pl += 0.16; reasons.append("F:乾燥ダ内好位(H:ポケット残し)")
-        m_bw = re.search(r"(\d{3})\(([+-]?\d+)\)", wt)
-        body_w, diff_w = (int(m_bw.group(1)), int(m_bw.group(2))) if m_bw else (480, 0)
-        if dist >= 1800 and diff_w >= 12: delta_th -= 0.22; delta_pl -= 0.16; reasons.append(f"F:馬体+{diff_w}kg(H:TypeII減点)")
-        elif is_wet and is_dirt and waku >= 6 and body_w >= 500 and style in ("逃", "先"): delta_th += 0.18; delta_pl += 0.14; reasons.append(f"F:{waku}枠{body_w}kg(H:道悪外枠大型先行)")
-        elif -8 <= diff_w <= -2: delta_th += 0.10; reasons.append(f"F:馬体{diff_w}kg絞り(H:好仕上)")
-        if pm["isSilver"]: delta_th -= 0.08; delta_pl += 0.22; reasons.append("F:近走2・3着連続(H:善戦Anchor)")
-        elif pm["hasRebound"]: delta_th += 0.20; delta_pl += 0.14; reasons.append("F:現級0.2s差実績(H:巻き返し)")
-        if any(tr in jockey for tr in TOP_RIDERS): delta_th += 0.22; delta_pl += 0.20; reasons.append(f"F:{jockey[:4]}騎手(H:Top騎手)")
-        if any(s in ped for s in POWER_SIRES): delta_th += 0.12; reasons.append(f"F:{ped[:10]}(H:血統適性)")
-        scen_shift = (0.14 * pi_s1 - 0.10 * pi_s3) if style in ("逃", "先") else (-0.10 * pi_s1 + 0.16 * pi_s3)
-        if not reasons: reasons.append(f"F:{waku}枠・近走平均{pm['avgRank']:.1f}着")
-        logits.append(base_theta + delta_th + scen_shift); place_deltas.append(delta_pl); notes.append(" / ".join(reasons)[:46]); styles.append(style)
-
-    max_l = max(logits)
-    w1 = [math.exp((x - max_l) * 1.15) for x in logits]
-    f_probs = [x / sum(w1) * 100.0 for x in w1]
-    w2 = [math.exp(((logits[i] + place_deltas[i]) - max_l) * 1.05) for i in range(n)]
-    p2_raw = [0.46 * f_probs[i] + 0.54 * (w2[i] / sum(w2) * 100.0) for i in range(n)]
-    top2_probs = [min(92.0, x * (200.0 / max(1.0, sum(p2_raw)))) for x in p2_raw]
-    top3_probs = [min(96.0, x * (300.0 / max(1.0, sum(top2_probs)))) for x in top2_probs]
-
-    final_odds = [round(float(r["odds"]), 1) if (has_live_odds and r.get("odds", 0) > 1.0) else round(max(1.5, min(99.9, 80.0 / max(0.8, f_probs[i]))), 1) for i, r in enumerate(raw_runners)]
-    inv_power = [math.pow(max(1.1, o), -1.08) for o in final_odds]
-    q_probs = [x / sum(inv_power) * 100.0 for x in inv_power]
-
-    order = sorted(range(n), key=lambda i: f_probs[i], reverse=True)
-    if len(order) >= 2 and parsed[order[0]]["isSilver"]: order[0], order[1] = order[1], order[0]
-    marks_map, roles_map = {}, {}
-    for rk, i in enumerate(order):
-        gap = f_probs[i] - q_probs[i]
-        if rk == 0: marks_map[i], roles_map[i] = "◎", "1着妙味主軸"
-        elif rk == 1: marks_map[i], roles_map[i] = "◯", "双頭対抗軸"
-        elif rk == 2: marks_map[i], roles_map[i] = "▲", "安定Connector"
-        elif rk == 3 or (rk <= 5 and (gap >= 2.0 or parsed[i]["hasRebound"])): marks_map[i], roles_map[i] = "☆", "展開特注穴"
-        elif rk <= 6: marks_map[i], roles_map[i] = "△", "3列目連下"
-        elif q_probs[i] >= 12.0 and gap <= -3.5: marks_map[i], roles_map[i] = "危", "過剰人気警戒"
-        elif rk >= n - 2: marks_map[i], roles_map[i] = "消", "時計・展開劣勢"
-        else: marks_map[i], roles_map[i] = "無", "強調材料乏しい"
-
-    return [{
-        "mark": marks_map[i], "role": roles_map[i], "num": raw_runners[i]["num"], "name": raw_runners[i]["name"],
-        "style": styles[i], "f": round(f_probs[i], 1), "q": round(q_probs[i], 1),
-        "top2": round(top2_probs[i], 1), "top3": round(top3_probs[i], 1),
-        "odds": final_odds[i], "comment": notes[i]
-    } for i in order], n_lead, scen_w
-
-def evaluate_10k_payout(race: dict) -> dict:
-    payouts, horses = race.get("payouts") or {}, race.get("horses") or []
-    if not payouts or len(horses) < 3 or race.get("rank") == "Pass": return {}
-    sorted_h = sorted(horses, key=lambda x: float(x.get("f", 0)), reverse=True)
-    valid = [h for h in sorted_h if h.get("mark") not in ("消", "危", "無")]
-    pool = valid if len(valid) >= 4 else [h for h in sorted_h if h.get("mark") != "消"]
-    if len(pool) < 3: pool = sorted_h
-    h1, h2, h3, h4 = pool[0], pool[1], pool[2], (pool[3] if len(pool) > 3 else pool[2])
-    himos = [h for h in sorted_h if h["num"] not in (h1["num"], h2["num"], h3["num"], h4["num"]) and h.get("mark") != "消"][:4]
-    is_sp = (float(h1.get("f", 0)) >= 28.0 and race.get("pivotType") != "Dual-Pivot") or race.get("pivotType") == "Single-Pivot"
-    B = 10000
-    if is_sp:
-        row1, row2, row3 = [h1["num"]], [h2["num"], h3["num"], h4["num"]], [h2["num"], h3["num"], h4["num"]] + [x["num"] for x in himos]
-        specs = [("wide",[h1["num"],h2["num"]],0.24,f"ワイド {h1['num']}-{h2['num']}"),("wide",[h1["num"],h3["num"]],0.18,f"ワイド {h1['num']}-{h3['num']}"),("win",[h1["num"]],0.14,f"単勝 {h1['num']}"),("umaren",[h1["num"],h2["num"]],0.10,f"馬連 {h1['num']}-{h2['num']}"),("umaren",[h1["num"],h3["num"]],0.08,f"馬連 {h1['num']}-{h3['num']}"),("umatan",[h1["num"],h2["num"]],0.06,f"馬単 {h1['num']}→{h2['num']}"),("umatan",[h1["num"],h3["num"]],0.05,f"馬単 {h1['num']}→{h3['num']}")]
+def extract_json(raw_text: str) -> dict[str, Any]:
+    """モデル出力からJSONオブジェクトを安全に抽出"""
+    text = raw_text.strip()
+    fence = re.search(r"```(?:json)?\s*(\{.*\})\s*```", text, re.DOTALL)
+    if fence:
+        text = fence.group(1)
     else:
-        row1, row2, row3 = [h1["num"], h2["num"]], sorted({h2["num"], h3["num"], h4["num"]}), sorted({h3["num"], h4["num"]} | {x["num"] for x in himos})
-        specs = [("wide",[h1["num"],h3["num"]],0.22,f"ワイド {h1['num']}-{h3['num']}"),("wide",[h2["num"],h3["num"]],0.15,f"ワイド {h2['num']}-{h3['num']}"),("wide",[h1["num"],h2["num"]],0.15,f"ワイド {h1['num']}-{h2['num']}"),("win",[h1["num"]],0.08,f"単勝 {h1['num']}"),("win",[h2["num"]],0.05,f"単勝 {h2['num']}"),("umaren",[h1["num"],h3["num"]],0.09,f"馬連 {h1['num']}-{h3['num']}"),("umaren",[h2["num"],h3["num"]],0.06,f"馬連 {h2['num']}-{h3['num']}"),("umaren",[h1["num"],h2["num"]],0.05,f"馬連 {h1['num']}-{h2['num']}")]
-    trio_set = {tuple(sorted((a, b, c))) for a in row1 for b in row2 if a != b for c in row3 if c != a and c != b}
-    trio_pts = max(1, len(trio_set))
-    trio_amt = min(B - 800, trio_pts * 100)
-    rem, sum_sh = max(800, B - trio_amt), sum(s[2] for s in specs)
-    run_rem, total_ret, hit_labels = rem, 0, []
-    for idx, (tk, nums, sh, label) in enumerate(specs):
-        amt = max(100, round(run_rem / 100) * 100) if idx == len(specs) - 1 else max(100, round((rem * sh / sum_sh) / 100) * 100)
-        run_rem = max(100, run_rem - amt)
-        for entry in payouts.get(tk, []):
-            if (entry["nums"] == nums if tk in ("win", "umatan") else sorted(entry["nums"]) == sorted(nums)):
-                pay_yen = int((amt // 100) * entry["pay"]); total_ret += pay_yen; hit_labels.append(f"{label} ({pay_yen:,}円)")
-    per_pt = max(100, (trio_amt // trio_pts) // 100 * 100)
-    for entry in payouts.get("sanrenpuku", []):
-        if tuple(sorted(entry["nums"])) in trio_set:
-            pay_yen = int((per_pt // 100) * entry["pay"]); total_ret += pay_yen; hit_labels.append(f"3連複F ({pay_yen:,}円)")
-    return {"investedYen": B, "returnYen": total_ret, "actualRoi": round(total_ret * 100.0 / B, 1), "isHit": total_ret > 0, "hitTickets": hit_labels}
+        start = text.find("{")
+        end = text.rfind("}")
+        if start != -1 and end != -1:
+            text = text[start : end + 1]
+    return json.loads(text)
 
-def classify_race_tier(r: dict) -> str:
-    if r.get("rank") == "New":
-        return "med_h"
-    if r.get("rank") == "S" or r.get("raceNumber") == 11 or any(g in r.get("name", "") for g in GRADED_KEYWORDS):
-        return "high_h"
-    return "flash"
 
-def call_gemini(skill: str, prompt: str, tier: str = "flash") -> dict:
-    global AI_CALL_COUNT
-    if not client or AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN or time_exceeded():
-        return {}
-    AI_CALL_COUNT += 1
-    p = f"skills/{skill}/SKILL.md"
-    sys_inst = open(p, "r", encoding="utf-8").read() if os.path.exists(p) else "Output valid JSON only."
+def validate_and_normalize_race(race: dict[str, Any], skill: str) -> dict[str, Any]:
+    """Neon v7.0 新フィールドを透過保持しつつ後方互換キーを正規化"""
+    race.setdefault("skill", skill)
+    race.setdefault("strategyProfile", "hit_rate_max")
+    race.setdefault("org", "NAR" if "nar" in skill else "JRA")
 
-    if tier == "high_h":
-        candidates = [("gemini-4-hydrogen", "HIGH"), ("gemini-3.8-flash", "MEDIUM"), ("gemini-2.5-flash", "")]
-    elif tier == "med_h":
-        candidates = [("gemini-4-hydrogen", "MEDIUM"), ("gemini-3.8-flash", "MEDIUM"), ("gemini-2.5-flash", "")]
-    else:
-        candidates = [("gemini-3.8-flash", "MEDIUM"), ("gemini-2.5-flash", "")]
+    if "intradayBiasConsistentR" not in race and "intradayBias3R" in race:
+        race["intradayBiasConsistentR"] = 3 if race["intradayBias3R"] else 1
 
-    for m, think_lvl in candidates:
-        if time_exceeded():
-            log("Time cap reached during AI fallback; stopping cleanly.")
-            return {}
-        try:
-            log(f"Calling AI: {skill} -> {m}({think_lvl or 'STD'})")
-            time.sleep(1)
-            if think_lvl:
-                try:
-                    cfg = types.GenerateContentConfig(
-                        system_instruction=sys_inst,
-                        response_mime_type="application/json",
-                        thinking_config=types.ThinkingConfig(thinking_level=think_lvl),
-                    )
-                except Exception:
-                    cfg = types.GenerateContentConfig(system_instruction=sys_inst, response_mime_type="application/json")
-            else:
-                cfg = types.GenerateContentConfig(system_instruction=sys_inst, response_mime_type="application/json")
+    rules = race.get("portfolioRules") or {}
+    rules.setdefault("coreRatio", 0.75)
+    rules.setdefault("dutchTargetReturn", 11800)
+    rules["singleLongshotCapPct"] = min(0.30, float(rules.get("singleLongshotCapPct", 0.30)))
+    race["portfolioRules"] = rules
 
-            res = client.models.generate_content(model=m, contents=prompt, config=cfg)
-            data = json.loads(re.sub(r"^```(?:json)?\s*|\s*```$", "", (res.text or "").strip(), flags=re.DOTALL))
-            data["usedModel"] = f"{m}({think_lvl})" if think_lvl else m
-            log(f"[AI Success] {skill} -> {data['usedModel']}")
+    horses = race.get("horses") or []
+    for h in horses:
+        if "fFund" not in h and "f" in h:
+            h["fFund"] = h["f"]
+        if "wUsed" not in h and "wR" in race:
+            h["wUsed"] = race["wR"]
+    horses.sort(key=lambda x: float(x.get("f", 0.0)), reverse=True)
+    race["horses"] = horses
+
+    if "m3" not in race and len(horses) >= 3:
+        race["m3"] = round(sum(float(h.get("f", 0.0)) for h in horses[:3]), 1)
+
+    return race
+
+
+def call_gemini_json(client: genai.Client, model: str, prompt: str) -> dict[str, Any]:
+    response = client.models.generate_content(
+        model=model,
+        contents=prompt,
+        config=types.GenerateContentConfig(
+            tools=[types.Tool(google_search=types.GoogleSearch())],
+            temperature=0.2,
+        ),
+    )
+    if not response.text:
+        raise RuntimeError("Gemini API returned empty text.")
+    return extract_json(response.text)
+
+
+def load_store(date_str: str) -> dict[str, Any]:
+    if LATEST_JSON_PATH.exists():
+        data = json.loads(LATEST_JSON_PATH.read_text(encoding="utf-8"))
+        if data.get("date") == date_str:
             return data
-        except Exception as e:
-            log(f"[Fallback] {m}: {str(e)[:120]}")
-    return {}
-
-def fetch_official_win5_ids() -> list:
-    try:
-        soup = get_soup("https://race.netkeiba.com/top/win5.html")
-        ids = []
-        for a in soup.select("a[href*='race_id=']"):
-            m = re.search(r"race_id=(\d{12})", a.get("href", ""))
-            if m and m.group(1) not in ids: ids.append(m.group(1))
-        if len(ids) >= 5: return ids[:5]
-    except Exception: pass
-    return []
-
-def fetch_official_win5_payout(target_race_ids: list) -> int:
-    try:
-        soup = get_soup("https://race.netkeiba.com/top/win5.html")
-        page_ids = re.findall(r"race_id=(\d{12})", str(soup))
-        if target_race_ids and not any(rid in page_ids for rid in target_race_ids):
-            return 0
-        txt = soup.get_text(" ", strip=True)
-        m = re.search(r"(?:払戻金|配当)[^\d]{0,15}([\d,]{3,12})\s*円", txt)
-        if m:
-            val = int(m.group(1).replace(",", ""))
-            if val >= 100: return val
-    except Exception: pass
-    return 0
-
-def sync_multileg_results(day_db: dict, mode: str):
-    ml = day_db.get("multiLeg")
-    if not isinstance(ml, dict) or not isinstance(ml.get("legs"), list):
-        return
-    races = day_db.get("races") or []
-    by_id = {r.get("raceId"): r for r in races if r.get("raceId")}
-    by_vlabel = {r.get("venueLabel"): r for r in races if r.get("venueLabel")}
-
-    finished, leg_rids = 0, []
-    for leg in ml["legs"]:
-        r = by_id.get(leg.get("raceId")) or by_vlabel.get(leg.get("venue")) or next((x for x in races if x.get("name") == leg.get("name")), None)
-        if not r: continue
-        leg["raceId"] = r.get("raceId", leg.get("raceId", ""))
-        if r.get("postTime"): leg["postTime"] = r["postTime"]
-        if leg["raceId"]: leg_rids.append(leg["raceId"])
-        if r.get("actualTop3"):
-            leg["actualTop3"] = r["actualTop3"]
-            leg["actualWinner"] = r["actualTop3"][0]
-            finished += 1
-    ml["finishedLegs"] = finished
-    if mode == "jra" and finished == len(ml["legs"]) and finished == 5 and not ml.get("officialPayout"):
-        pay = fetch_official_win5_payout(leg_rids)
-        if pay > 0: ml["officialPayout"] = pay
-
-def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
-    dt = datetime.strptime(date_str, "%Y-%m-%d")
-    if mode == "nar":
-        cand = [r for r in races if r.get("raceNumber") in (10, 11, 12) and isinstance(r.get("horses"), list) and len(r["horses"]) >= 2]
-        if len(cand) < 3: return {}
-        selected = sorted(cand[-3:], key=lambda x: x.get("postTime") or "20:00")
-    else:
-        if dt.weekday() != 6: return {}
-        off_ids = fetch_official_win5_ids()
-        matched = [r for r in races if r["raceId"] in off_ids and isinstance(r.get("horses"), list) and len(r["horses"]) >= 2]
-        if len(matched) == 5:
-            selected = sorted(matched, key=lambda x: x.get("postTime") or "15:00")
-        else:
-            pool = [r for r in races if r.get("raceNumber") in (9, 10, 11) and isinstance(r.get("horses"), list) and len(r["horses"]) >= 2]
-            pool.sort(key=lambda x: (x["raceNumber"], x.get("postTime") or "14:30"), reverse=True)
-            if len(pool) < 5: return {}
-            selected = sorted(pool[:5], key=lambda x: x.get("postTime") or "15:00")
-
-    all_finished = all(bool(r.get("actualTop3")) for r in selected)
-    if mode == "jra" and len(selected) == 5 and not all_finished and not time_exceeded():
-        blocks = []
-        for idx, r in enumerate(selected):
-            h_txt = "\n".join([f" {h['num']}番{h['name']}(脚質:{h['style']} 単勝:{h['odds']}倍 {h['comment']})" for h in r["horses"][:16]])
-            blocks.append(f"=== Leg{idx+1} {r['venueLabel']} {r['name']} ({r['surfaceDist']} 発走{r.get('postTime','')}) ===\n{h_txt}")
-        w_prompt = (
-            f"日付:{date_str} のJRA WIN5対象5レースを10大モジュールで一括推論し、以下のJSONスキーマで出力せよ:\n"
-            "{\"summary\":\"5レース全体の攻略総括(100字以内)\",\"legs\":[{\"leg\":1,\"venue\":\"会場R\",\"name\":\"レース名\",\"postTime\":\"HH:MM\",\"typeBPlus\":true/false,\"note\":\"展開・バイアス見解(45字以内)\",\"horses\":[{\"num\":馬番,\"name\":\"馬名\",\"f\":純粋勝率(合計100%のうち上位7頭で80〜92%程度),\"odds\":オッズ,\"note\":\"F/H根拠(30字以内)\"}]}],\"hedges\":[{\"num\":馬番,\"name\":\"Leg5伏兵名\",\"odds\":オッズ,\"hedge50k\":円,\"hedge100k\":円}]}\n\n"
-            + "\n".join(blocks)
-        )
-        ai_w = call_gemini("app-bayesian-win5", w_prompt, tier="high_h")
-        if isinstance(ai_w, dict) and isinstance(ai_w.get("legs"), list) and len(ai_w["legs"]) == 5:
-            ai_w["predicted"] = True; ai_w["aiPredicted"] = True; ai_w["date"] = date_str; ai_w["engineVer"] = ENGINE_VER
-            for idx, r in enumerate(selected):
-                leg_obj = ai_w["legs"][idx]
-                leg_obj["raceId"], leg_obj["venue"], leg_obj["name"] = r["raceId"], r["venueLabel"], r["name"]
-                leg_obj["postTime"] = r.get("postTime", leg_obj.get("postTime", ""))
-                by_num = {int(h["num"]): h for h in leg_obj.get("horses", []) if str(h.get("num","")).isdigit()}
-                if by_num:
-                    for h in r["horses"]:
-                        if h["num"] in by_num:
-                            ah = by_num[h["num"]]
-                            if ah.get("f"): h["f"] = round(float(ah["f"]), 1)
-                            if ah.get("note"): h["comment"] = ah["note"]
-                    sf = max(1.0, sum(float(x["f"]) for x in r["horses"]))
-                    for x in r["horses"]:
-                        x["f"] = round(float(x["f"]) * 100.0 / sf, 1)
-                        x["top2"] = round(min(92.0, x["f"] * 1.9), 1)
-                        x["top3"] = round(min(96.0, x["f"] * 2.8), 1)
-                    r["horses"].sort(key=lambda x: float(x["f"]), reverse=True)
-                    for rk, x in enumerate(r["horses"]):
-                        x["mark"] = ["◎","◯","▲","☆","△","△","△"][rk] if rk < 7 else "無"
-                    r["aiPredicted"] = True
-                    r["usedModel"] = ai_w.get("usedModel", "gemini-4-hydrogen(HIGH)")
-                    if leg_obj.get("note"): r["scenario"] = leg_obj["note"]
-            return ai_w
-
-    legs = []
-    for idx, r in enumerate(selected):
-        hs = sorted(r["horses"], key=lambda x: float(x.get("f", 10)), reverse=True)
-        legs.append({
-            "leg": idx + 1, "raceId": r["raceId"], "venue": r["venueLabel"], "name": r["name"], "cond": r["surfaceDist"],
-            "postTime": r.get("postTime", ""), "typeBPlus": (float(hs[0].get("f", 25)) < 25.5 or r.get("nLead", 3) >= 4),
-            "note": r.get("scenario", "")[:55],
-            "horses": [{"num": h.get("num", 1), "name": h.get("name", "有力馬"), "f": float(h.get("f", 15)), "odds": float(h.get("odds", 5.5)), "note": h.get("comment", "")[:34]} for h in hs[:7]]
-        })
-    last_hs = legs[-1]["horses"][2:4]
-    hedges = [{"num": h["num"], "name": f"{legs[-1]['venue']} {h['name']}", "odds": h["odds"], "hedge50k": int((50000 / max(1.5, h["odds"]) + 99) // 100 * 100), "hedge100k": int((100000 / max(1.5, h["odds"]) + 99) // 100 * 100)} for h in last_hs]
-    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} 実力ベースライン編成（{'トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 100円単位'}）】", "legs": legs, "hedges": hedges}
-
-def should_check_result(date_str: str, post_time: str, now: datetime) -> bool:
-    today_str = now.strftime("%Y-%m-%d")
-    if date_str < today_str: return True
-    if date_str > today_str: return False
-    if re.match(r"^\d{2}:\d{2}$", post_time or ""):
-        pdt = datetime.strptime(f"{date_str} {post_time}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
-        return now >= (pdt + timedelta(minutes=5))
-    return now.hour >= 10
-
-def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool, mode: str = "jra"):
-    log(f"Processing {date_str} ({mode}, {len(races)} races)")
-    suffix = "_nar" if mode == "nar" else ""
-    db_path = f"data/{date_str}{suffix}.json"
-    day_db = json.load(open(db_path, "r", encoding="utf-8")) if os.path.exists(db_path) else {"date": date_str, "mode": mode, "races": races}
-    if not day_db.get("races") and races: day_db["races"] = races
-    day_db["mode"] = mode
-
-    dt = datetime.strptime(date_str, "%Y-%m-%d")
-    if mode == "jra" and dt.weekday() != 6:
-        day_db.pop("multiLeg", None)
-
-    for r in day_db.get("races", []):
-        if time_exceeded():
-            log("Time cap reached in scraping loop; saving progress.")
-            break
-        has_real = isinstance(r.get("horses"), list) and len(r["horses"]) >= 5
-        bad_time = (not r.get("postTime")) or (r.get("postTime") == "15:00" and r.get("raceNumber", 11) < 10)
-        can_have_result = should_check_result(date_str, r.get("postTime", ""), now)
-        need_res = can_have_result and ((not r.get("evalDone")) or (not r.get("actualTop3")))
-        need_sh = (not has_real) or bad_time
-
-        if not need_sh and not need_res:
-            continue
-
-        detail, actual, raw_runners, track_cond, ptime, payouts = fetch_full_shutuba(r["raceId"], mode=mode, need_shutuba=need_sh, need_result=need_res)
-        if ptime: r["postTime"] = ptime
-        if raw_runners and need_sh:
-            base_horses, n_lead, scen_w = compute_bayesian_full_field(raw_runners, r, track_cond=track_cond)
-            r["nLead"], r["trackCond"], r["scenarioWeights"] = n_lead, track_cond, scen_w
-            if not has_real or not r.get("aiPredicted"):
-                r["horses"] = base_horses
-                r["predicted"] = True
-                r["scenario"] = f"{r['venueLabel']}({r['surfaceDist']}・{track_cond}) 実測N_lead={n_lead}頭。3シナリオ混合(S1前残り{scen_w['s1']}% / S2標準{scen_w['s2']}% / S3前崩れ{scen_w['s3']}%)で全{len(base_horses)}頭を推論。"
-            r["detailText"] = detail
-        if actual: r["actualTop3"] = actual
-        if payouts and any(payouts.values()):
-            r["payouts"] = payouts
-            ev = evaluate_10k_payout(r)
-            if ev:
-                r.update(ev); r["evalDone"] = True
-                prof = ev["returnYen"] - ev["investedYen"]
-                r["resultStatus"] = f"🎯 的中 払戻{ev['returnYen']:,}円 (回収率{ev['actualRoi']}% / {prof:+,}円)" if ev["isHit"] else f"❌ 不的中 回収率0.0%"
-
-    # 1. 日曜WIN5（Gemini 4 Hydrogen HIGH 一括）または地方トリプル馬単
-    if ((mode == "jra" and dt.weekday() == 6) or mode == "nar") and not time_exceeded():
-        cur_ml = day_db.get("multiLeg") or {}
-        need_ml_ai = (not cur_ml.get("aiPredicted")) or (cur_ml.get("engineVer") != ENGINE_VER and "hydrogen" not in str(cur_ml.get("usedModel", "")))
-        if need_ml_ai:
-            mleg = build_multileg_with_ai(day_db.get("races", []), mode, date_str)
-            if mleg: day_db["multiLeg"] = mleg
-
-    # 2. 未発走の勝負レースへハイブリッドAI本推論を適用
-    ai_candidates = []
-    for r in day_db.get("races", []):
-        if not r.get("horses") or r.get("actualTop3") or r.get("rank") == "Pass":
-            continue
-        if not (r.get("rank") in ("S", "A", "New") or r.get("raceNumber") in (12, 11, 10, 9, 5)):
-            continue
-        tier = classify_race_tier(r)
-        used = str(r.get("usedModel", ""))
-        needs_ai = (not r.get("aiPredicted")) or (tier in ("high_h", "med_h") and "hydrogen" not in used)
-        if not needs_ai:
-            continue
-        prio = 0 if tier == "high_h" else (1 if tier == "med_h" else 2)
-        if is_today and re.match(r"^\d{2}:\d{2}$", r.get("postTime", "")):
-            pdt = datetime.strptime(f"{date_str} {r['postTime']}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
-            mins = (pdt - now).total_seconds() / 60.0
-            if 15 <= mins <= 95: prio -= 10
-        ai_candidates.append((prio, tier, r))
-
-    ai_candidates.sort(key=lambda x: x[0])
-    for _, tier, r in ai_candidates[:2]:
-        if AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN or time_exceeded(): break
-        bias_info = summarize_intraday_track_bias(day_db.get("races", []), r["venue"])
-        detail = r.pop("detailText", "") or "\n".join([f"{h['num']}番{h['name']}(脚質:{h['style']} 単勝:{h['odds']}倍 {h['comment']})" for h in r["horses"]])
-        pred = call_gemini(
-            r["skill"],
-            f"【モード: 標準（全頭評価）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')})\n"
-            f"【当日バイアス】{bias_info}\n"
-            f"全頭について mark, role, style, f(勝率), top2(2着内率), top3(3着内率), comment(35字以内) と scenario, pivotType, rank をJSON出力せよ:\n{detail}",
-            tier=tier,
-        )
-        if isinstance(pred, dict) and "horses" in pred:
-            by_name = {h["name"]: h for h in r["horses"]}
-            for ah in pred["horses"]:
-                t = by_name.get(ah.get("name")) or next((x for x in r["horses"] if str(x["num"]) == str(ah.get("num"))), None)
-                if t:
-                    for k in ("mark", "role", "style", "comment"):
-                        if ah.get(k): t[k] = ah[k]
-                    for k in ("f", "top2", "top3"):
-                        if ah.get(k): t[k] = round(float(ah[k]), 1)
-            sf = max(1.0, sum(float(x["f"]) for x in r["horses"]))
-            s2 = max(1.0, sum(float(x["top2"]) for x in r["horses"]))
-            s3 = max(1.0, sum(float(x["top3"]) for x in r["horses"]))
-            for x in r["horses"]:
-                x["f"] = round(float(x["f"]) * 100.0 / sf, 1)
-                x["top2"] = round(min(94.0, float(x["top2"]) * 200.0 / s2), 1)
-                x["top3"] = round(min(97.0, float(x["top3"]) * 300.0 / s3), 1)
-            r["horses"].sort(key=lambda x: float(x["f"]), reverse=True)
-            for k in ("scenario", "pivotType", "rank", "usedModel"):
-                if k in pred: r[k] = pred[k]
-            r["aiPredicted"] = True
-
-    sync_multileg_results(day_db, mode)
-
-    for r in day_db.get("races", []): r.pop("detailText", None)
-    venues = sorted(list({r["venue"] for r in day_db.get("races", [])}))
-    day_db["trackBiases"] = [{"venue": v, "surf": "Gemini 4 Hybrid・実配当照合済", "trend": summarize_intraday_track_bias(day_db.get("races", []), v)} for v in venues]
-    day_db["engineVer"] = ENGINE_VER
-    day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
-    json.dump(day_db, open(db_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    log(f"Saved {db_path}")
-
-def empty_scope_stats() -> dict:
     return {
-        "races": 0, "hits": 0, "invest": 0, "ret": 0, "passCount": 0, "passSaved": 0,
-        "byRank": {rk: {"races": 0, "hits": 0, "invest": 0, "ret": 0} for rk in ("S", "A", "New", "B")}
+        "date": date_str,
+        "updatedAt": now_jst_str(),
+        "races": [],
+        "win5": None,
+        "tripleUmatan": None,
     }
 
-def update_global_stats(now: datetime):
-    scopes = {"all": empty_scope_stats(), "jra": empty_scope_stats(), "nar": empty_scope_stats()}
-    recent = []
-    for fp in sorted(glob.glob("data/20*.json"), reverse=True):
+
+def save_store(store: dict[str, Any]) -> None:
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    HISTORY_DIR.mkdir(parents=True, exist_ok=True)
+    store["updatedAt"] = now_jst_str()
+    payload = json.dumps(store, ensure_ascii=False, indent=2)
+    LATEST_JSON_PATH.write_text(payload, encoding="utf-8")
+    hist_path = HISTORY_DIR / f"{store['date']}.json"
+    hist_path.write_text(payload, encoding="utf-8")
+    print(f"[OK] Saved {LATEST_JSON_PATH} & {hist_path}")
+
+
+def upsert_race(store: dict[str, Any], new_race: dict[str, Any]) -> None:
+    rid = new_race.get("raceId")
+    races = store.setdefault("races", [])
+    for idx, existing in enumerate(races):
+        if existing.get("raceId") == rid:
+            if "result" in existing and "result" not in new_race:
+                new_race["result"] = existing["result"]
+            races[idx] = new_race
+            return
+    races.append(new_race)
+
+
+def run_audit(client: genai.Client, store: dict[str, Any]) -> None:
+    """確定レースの公式着順・払戻を自動取得し、1万円基準の的中・払戻金を更新"""
+    targets = [
+        r for r in store.get("races", [])
+        if r.get("rank") != "Pass" and r.get("subRank") != "Pass" and not (r.get("result") or {}).get("settled")
+    ]
+    if not targets:
+        print("[INFO] No unsettled races to audit.")
+        return
+
+    for race in targets:
+        prompt = f"""
+以下のレースの公式確定結果と払戻金をGoogle検索で確認し、10,000円基準の推定払戻金を算出して単一JSONのみで返してください。
+対象日: {store['date']} / レース: {race.get('venue')} {race.get('name')}
+推奨Core結線: {race.get('coreConnections')} / 推奨馬券: {race.get('tickets')}
+
+未確定の場合は {{"settled": false}} を返してください。確定済みの場合は以下の形式で返してください:
+{{
+  "settled": true,
+  "order": "1着番-2着番-3着番",
+  "payout10k": 12400,
+  "note": "30字以内の結果・3要因振り返り"
+}}
+""".strip()
         try:
-            d = json.load(open(fp, "r", encoding="utf-8"))
-            is_nar = d.get("mode") == "nar" or fp.endswith("_nar.json")
-            mode_key = "nar" if is_nar else "jra"
-            for r in d.get("races", []):
-                rk_raw = r.get("rank", "B")
-                if rk_raw == "Pass":
-                    for sk in ("all", mode_key):
-                        scopes[sk]["passCount"] += 1
-                        scopes[sk]["passSaved"] += 10000
-                elif r.get("evalDone") and r.get("investedYen"):
-                    rk = rk_raw if rk_raw in ("S", "A", "New", "B") else "B"
-                    inv, ret = int(r["investedYen"]), int(r.get("returnYen", 0))
-                    is_hit = ret > 0
-                    for sk in ("all", mode_key):
-                        b = scopes[sk]
-                        b["races"] += 1; b["invest"] += inv; b["ret"] += ret
-                        if is_hit: b["hits"] += 1
-                        rb = b["byRank"][rk]
-                        rb["races"] += 1; rb["invest"] += inv; rb["ret"] += ret
-                        if is_hit: rb["hits"] += 1
-                    if len(recent) < 40:
-                        recent.append({
-                            "date": d.get("date", ""), "mode": mode_key, "rank": rk,
-                            "race": f"{r['venueLabel']} {r['name']}",
-                            "status": r.get("resultStatus", ""),
-                            "roi": float(r.get("actualRoi", 0)),
-                            "returnYen": ret, "investedYen": inv, "isHit": is_hit,
-                            "hits": r.get("hitTickets", [])
-                        })
-        except Exception: pass
-    payload = {"updatedAt": now.strftime("%Y-%m-%d %H:%M JST"), **scopes, "recentResults": recent}
-    json.dump(payload, open("data/stats.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    log("Updated data/stats.json")
+            res = call_gemini_json(client, FAST_MODEL, prompt)
+            if res.get("settled"):
+                race["result"] = res
+                print(f"[AUDIT] {race.get('venue')} {race.get('name')} -> {res.get('order')} / ¥{res.get('payout10k')}")
+        except Exception as exc:
+            print(f"[WARN] Audit failed for {race.get('raceId')}: {exc}", file=sys.stderr)
 
-def run_pipeline():
-    now = datetime.now(JST)
-    log(f"Pipeline start ({ENGINE_VER}) at {now.strftime('%Y-%m-%d %H:%M JST')}")
-    is_weekend = now.weekday() in (5, 6)
-    is_weekend_jra_hours = is_weekend and (8 <= now.hour < 17)
 
-    upcoming_days = []
-    for off in [0, 1, 2, 3, 4, 5]:
-        dt = now + timedelta(days=off)
-        rs = fetch_race_list(dt.strftime("%Y%m%d"), "jra")
-        if len(rs) >= 6:
-            upcoming_days.append((dt, rs, off == 0))
-            if len(upcoming_days) >= 2: break
+def main() -> None:
+    parser = argparse.ArgumentParser(description="Bayesian Keiba AI Neon Pipeline")
+    parser.add_argument("--mode", choices=["predict", "win5", "audit"], required=True)
+    parser.add_argument("--date", default=dt.datetime.now(JST).strftime("%Y-%m-%d"))
+    parser.add_argument("--skill", default="app-bayesian-horse-racing-text")
+    parser.add_argument("--race", default="", help="例: 東京11R 霜月S / 大井11R サンタアニタT")
+    args = parser.parse_args()
 
-    upcoming_days.sort(key=lambda x: 0 if x[0].weekday() == 6 else 1)
-    for dt, rs, is_td in upcoming_days:
-        if time_exceeded(): break
-        process_kaisai_day(dt.strftime("%Y-%m-%d"), rs, now, is_td, "jra")
+    api_key = os.getenv("GEMINI_API_KEY")
+    if not api_key:
+        raise EnvironmentError("GEMINI_API_KEY is not set.")
 
-    for off in [-1, -2, -3, -4, -5]:
-        if time_exceeded(): break
-        dt = now + timedelta(days=off)
-        rs = fetch_race_list(dt.strftime("%Y%m%d"), "jra")
-        if len(rs) >= 6:
-            process_kaisai_day(dt.strftime("%Y-%m-%d"), rs, now, False, "jra")
-            break
+    client = genai.Client(api_key=api_key)
+    store = load_store(args.date)
 
-    if not is_weekend_jra_hours and not time_exceeded():
-        for off in [0, -1, 1]:
-            if time_exceeded(): break
-            dt = now + timedelta(days=off)
-            n_races = fetch_race_list(dt.strftime("%Y%m%d"), "nar")
-            if len(n_races) >= 3:
-                process_kaisai_day(dt.strftime("%Y-%m-%d"), n_races, now, off == 0, "nar")
-                break
+    if args.mode == "predict":
+        if not args.race:
+            raise ValueError("--race is required for predict mode.")
+        model = select_model(args.skill, args.race)
+        print(f"[RUN] {args.skill} ({model}) -> {args.race}")
+        prompt = build_prompt_for_skill(args.skill, args.race, args.date)
+        race_json = call_gemini_json(client, model, prompt)
+        normalized = validate_and_normalize_race(race_json, args.skill)
+        upsert_race(store, normalized)
+        save_store(store)
 
-    update_global_stats(now)
-    jra_files = sorted([os.path.basename(p).replace(".json", "") for p in glob.glob("data/20*.json") if not p.endswith("_nar.json")])
-    nar_files = sorted([os.path.basename(p).replace(".json", "") for p in glob.glob("data/20*_nar.json")])
-    json.dump({"availableDates": jra_files, "narDates": nar_files, "lastSync": now.strftime("%Y-%m-%d %H:%M JST")}, open("data/index.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
-    log("Pipeline finished successfully.")
+    elif args.mode == "win5":
+        model = select_model("app-bayesian-win5", "WIN5")
+        print(f"[RUN] app-bayesian-win5 ({model}) -> {args.date}")
+        prompt = build_prompt_for_skill("app-bayesian-win5", "WIN5", args.date)
+        store["win5"] = call_gemini_json(client, model, prompt)
+        save_store(store)
+
+    elif args.mode == "audit":
+        run_audit(client, store)
+        save_store(store)
+
 
 if __name__ == "__main__":
-    run_pipeline()
-# === END OF FILE ===
+    main()
