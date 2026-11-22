@@ -1,227 +1,44 @@
-name: JRA & NAR Bayesian Auto-Predictor (Neon v7.0 / Hydrogen Hybrid)
+name: JRA & NAR Bayesian Auto-Predictor
 
 on:
   schedule:
-    # ===== JRA 土日（UTC表記 / JST = UTC+9）=====
-    # 土日 08:30 JST: JRA朝一括スクリーニング（日曜はWIN5事前生成も併走）
+    # 【JRA 土日】08:30 JST (金・土 23:30 UTC): JRA朝一括スクリーニング
     - cron: '30 23 * * 5,6'
-    # 土日 09:00〜15:30 JST 毎時00分: JRA発走1時間前本予想
-    - cron: '0 0-6 * * 6,0'
-    # 日曜 13:30 JST: WIN5 Plan C 発走1時間前本更新
-    - cron: '30 4 * * 0'
-    # 土日 17:15 JST: JRA事後集計・1万円基準の的中/回収率確定
-    - cron: '15 8 * * 6,0'
-
-    # ===== NAR 平日（南関4場・DG競走）=====
-    # 平日 12:30 JST: NAR昼一括スクリーニング
+    # 【JRA 土日】09:00〜16:30 JST: JRA 1時間前本予想
+    - cron: '*/20 0-7 * * 6,0'
+    # 【NAR 平日】12:30 JST: 南関4場・DG競走 昼スクリーニング
     - cron: '30 3 * * 1-5'
-    # 平日 14:00〜19:30 JST 毎時00分: NAR発走1時間前本予想＆トリプル馬単
-    - cron: '0 5-10 * * 1-5'
-    # 平日 21:15 JST: NAR事後集計・回収率確定
-    - cron: '15 12 * * 1-5'
-
+    # 【NAR 平日ナイター】14:00〜20:30 JST: 1時間前本予想＆トリプル馬単
+    - cron: '*/30 5-11 * * 1-5'
+    # 【結果照合】毎日 17:15 JST ＆ 21:15 JST
+    - cron: '15 8,12 * * *'
   workflow_dispatch:
-    inputs:
-      mode:
-        description: '実行モード'
-        required: true
-        default: 'screening'
-        type: choice
-        options:
-          - screening
-          - hourly
-          - predict
-          - win5
-          - audit
-      org:
-        description: '対象区分（screening / hourly / audit 用）'
-        required: true
-        default: 'JRA'
-        type: choice
-        options:
-          - JRA
-          - NAR
-          - ALL
-      skill:
-        description: '使用スキル（predict モード時のみ）'
-        required: false
-        default: 'app-bayesian-horse-racing-text'
-        type: choice
-        options:
-          - app-bayesian-horse-racing-text
-          - app-bayesian-make-debut
-          - app-bayesian-nar
-          - app-bayesian-win5
-      race:
-        description: 'レース指定（predict モード時 例: 東京11R 霜月S / 大井11R サンタアニタT）'
-        required: false
-        default: ''
-        type: string
-      date:
-        description: '対象日 YYYY-MM-DD（空欄ならJST当日）'
-        required: false
-        default: ''
-        type: string
-      force:
-        description: 'hourly モード時に発走時刻ウィンドウを無視して全対象レースを本予想化'
-        required: false
-        default: false
-        type: boolean
 
-permissions:
-  contents: write
-
+# 前の実行が終わっていない時は重複起動させない設定
 concurrency:
   group: bayesian-keiba-pipeline
-  cancel-in-progress: false
-
-env:
-  TZ: Asia/Tokyo
-  GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-  # ハイブリッド構成: 勝負・WIN5・新馬=Hydrogen(HIGH) / その他=3.8-Flash(MEDIUM)
-  # Repository Variables でいつでも上書き可能
-  GEMINI_HIGH_TIER_MODEL: ${{ vars.GEMINI_HIGH_TIER_MODEL || 'gemini-4-hydrogen' }}
-  GEMINI_FAST_MODEL: ${{ vars.GEMINI_FAST_MODEL || 'gemini-3.8-flash' }}
-  KEIBA_DATA_DIR: data
+  cancel-in-progress: true
 
 jobs:
   predict:
     runs-on: ubuntu-latest
-    timeout-minutes: 20
-
+    timeout-minutes: 10
+    permissions:
+      contents: write
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - name: Set up Python 3.11
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
           python-version: '3.11'
-
-      - name: Install dependencies
-        run: pip install -U google-genai requests beautifulsoup4
-
-      - name: Resolve execution parameters (JST)
-        id: resolve
-        run: |
-          TARGET_DATE="${{ inputs.date }}"
-          if [ -z "$TARGET_DATE" ]; then
-            TARGET_DATE="$(date +%Y-%m-%d)"
-          fi
-          DOW_JST="$(date +%u)" # 1=Mon ... 6=Sat, 7=Sun
-
-          EVENT_NAME="${{ github.event_name }}"
-          CRON_EXPR="${{ github.event.schedule }}"
-          MODE=""
-          ORG="JRA"
-          SKILL="${{ inputs.skill }}"
-          RACE="${{ inputs.race }}"
-          FORCE="${{ inputs.force }}"
-          ALSO_WIN5="false"
-
-          if [ "$EVENT_NAME" = "workflow_dispatch" ]; then
-            MODE="${{ inputs.mode }}"
-            ORG="${{ inputs.org }}"
-          else
-            case "$CRON_EXPR" in
-              "30 23 * * 5,6")
-                MODE="screening"
-                ORG="JRA"
-                if [ "$DOW_JST" = "7" ]; then
-                  ALSO_WIN5="true"
-                fi
-                ;;
-              "0 0-6 * * 6,0")
-                MODE="hourly"
-                ORG="JRA"
-                ;;
-              "30 4 * * 0")
-                MODE="win5"
-                ORG="JRA"
-                ;;
-              "15 8 * * 6,0")
-                MODE="audit"
-                ORG="JRA"
-                ;;
-              "30 3 * * 1-5")
-                MODE="screening"
-                ORG="NAR"
-                ;;
-              "0 5-10 * * 1-5")
-                MODE="hourly"
-                ORG="NAR"
-                ;;
-              "15 12 * * 1-5")
-                MODE="audit"
-                ORG="NAR"
-                ;;
-              *)
-                echo "Unknown schedule: $CRON_EXPR"
-                exit 1
-                ;;
-            esac
-          fi
-
-          echo "date=$TARGET_DATE" >> "$GITHUB_OUTPUT"
-          echo "mode=$MODE" >> "$GITHUB_OUTPUT"
-          echo "org=$ORG" >> "$GITHUB_OUTPUT"
-          echo "skill=$SKILL" >> "$GITHUB_OUTPUT"
-          echo "race=$RACE" >> "$GITHUB_OUTPUT"
-          echo "force=$FORCE" >> "$GITHUB_OUTPUT"
-          echo "also_win5=$ALSO_WIN5" >> "$GITHUB_OUTPUT"
-
-          echo "=== Resolved Pipeline Config ==="
-          echo "Date: $TARGET_DATE (JST DOW=$DOW_JST) | Mode: $MODE | Org: $ORG | Also WIN5: $ALSO_WIN5"
-          echo "Models: HIGH=$GEMINI_HIGH_TIER_MODEL / FAST=$GEMINI_FAST_MODEL"
-
-      - name: Run JRA & NAR Neon Prediction Pipeline
-        run: |
-          MODE="${{ steps.resolve.outputs.mode }}"
-          DATE="${{ steps.resolve.outputs.date }}"
-          ORG="${{ steps.resolve.outputs.org }}"
-          SKILL="${{ steps.resolve.outputs.skill }}"
-          RACE="${{ steps.resolve.outputs.race }}"
-          FORCE="${{ steps.resolve.outputs.force }}"
-          ALSO_WIN5="${{ steps.resolve.outputs.also_win5 }}"
-
-          if [ "$MODE" = "predict" ]; then
-            if [ -z "$RACE" ]; then
-              echo "ERROR: predict モードでは race の指定が必要です。"
-              exit 1
-            fi
-            python scripts/auto_predict.py --mode predict --date "$DATE" --skill "$SKILL" --race "$RACE"
-
-          elif [ "$MODE" = "win5" ]; then
-            python scripts/auto_predict.py --mode win5 --date "$DATE"
-
-          elif [ "$MODE" = "audit" ]; then
-            python scripts/auto_predict.py --mode audit --date "$DATE" --org "$ORG"
-
-          elif [ "$MODE" = "screening" ]; then
-            python scripts/auto_predict.py --mode screening --date "$DATE" --org "$ORG"
-            if [ "$ALSO_WIN5" = "true" ]; then
-              python scripts/auto_predict.py --mode win5 --date "$DATE"
-            fi
-
-          elif [ "$MODE" = "hourly" ]; then
-            if [ "$FORCE" = "true" ]; then
-              python scripts/auto_predict.py --mode hourly --date "$DATE" --org "$ORG" --force
-            else
-              python scripts/auto_predict.py --mode hourly --date "$DATE" --org "$ORG"
-            fi
-          fi
-
+      - run: pip install -U google-genai requests beautifulsoup4
+      - name: Run JRA & NAR Prediction Pipeline
+        env:
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+        run: python scripts/auto_predict.py
       - name: Commit & Push Updated JSON to PWA
         run: |
           git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/
-          if git diff --cached --quiet; then
-            echo "No data changes to commit."
-            exit 0
-          fi
-          git commit -m "chore(predict): ${{ steps.resolve.outputs.date }} ${{ steps.resolve.outputs.org }} ${{ steps.resolve.outputs.mode }} (Neon v7.0)"
-          git pull --rebase origin "${{ github.ref_name }}"
-          git push origin "${{ github.ref_name }}"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add data/*.json
+          git diff --staged --quiet || git commit -m "Auto-update JRA/NAR predictions"
+          git push
