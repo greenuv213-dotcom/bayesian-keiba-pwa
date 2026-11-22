@@ -1,10 +1,10 @@
 {
-  "updatedAt": "2026-11-22 01:09 JST",
+  "updatedAt": "2026-11-22 12:19 JST",
   "all": {
-    "races": 19,
-    "hits": 7,
-    "invest": 190000,
-    "ret": 124800,
+    "races": 28,
+    "hits": 14,
+    "invest": 280000,
+    "ret": 213610,
     "passCount": 0,
     "passSaved": 0,
     "byRank": {
@@ -21,24 +21,24 @@
         "ret": 107400
       },
       "New": {
-        "races": 2,
-        "hits": 2,
-        "invest": 20000,
-        "ret": 17400
+        "races": 5,
+        "hits": 3,
+        "invest": 50000,
+        "ret": 22970
       },
       "B": {
-        "races": 2,
-        "hits": 0,
-        "invest": 20000,
-        "ret": 0
+        "races": 8,
+        "hits": 6,
+        "invest": 80000,
+        "ret": 83240
       }
     }
   },
   "jra": {
-    "races": 8,
-    "hits": 3,
-    "invest": 80000,
-    "ret": 19080,
+    "races": 17,
+    "hits": 10,
+    "invest": 170000,
+    "ret": 107890,
     "passCount": 0,
     "passSaved": 0,
     "byRank": {
@@ -55,16 +55,16 @@
         "ret": 1680
       },
       "New": {
-        "races": 2,
-        "hits": 2,
-        "invest": 20000,
-        "ret": 17400
+        "races": 5,
+        "hits": 3,
+        "invest": 50000,
+        "ret": 22970
       },
       "B": {
-        "races": 2,
-        "hits": 0,
-        "invest": 20000,
-        "ret": 0
+        "races": 8,
+        "hits": 6,
+        "invest": 80000,
+        "ret": 83240
       }
     }
   },
@@ -103,6 +103,140 @@
     }
   },
   "recentResults": [
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "B",
+      "race": "東京1R 2歳未勝利",
+      "status": "🎯 的中 払戻6,120円 (回収率61.2% / -3,880円)",
+      "roi": 61.2,
+      "returnYen": 6120,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 7-8 (4,320円)",
+        "3連複F (1,800円)"
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "B",
+      "race": "東京2R 2歳未勝利",
+      "status": "🎯 的中 払戻9,460円 (回収率94.6% / -540円)",
+      "roi": 94.6,
+      "returnYen": 9460,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 12-13 (4,320円)",
+        "馬連 12-13 (2,300円)",
+        "3連複F (2,840円)"
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "B",
+      "race": "東京3R 2歳未勝利",
+      "status": "🎯 的中 払戻43,100円 (回収率431.0% / +33,100円)",
+      "roi": 431.0,
+      "returnYen": 43100,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 10-18 (19,240円)",
+        "単勝 10 (4,160円)",
+        "馬連 10-18 (19,700円)"
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "New",
+      "race": "東京4R 2歳新馬",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "New",
+      "race": "東京5R 2歳新馬",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "B",
+      "race": "京都1R 2歳未勝利",
+      "status": "🎯 的中 払戻7,480円 (回収率74.8% / -2,520円)",
+      "roi": 74.8,
+      "returnYen": 7480,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 8-2 (5,200円)",
+        "3連複F (2,280円)"
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "B",
+      "race": "京都2R 2歳未勝利",
+      "status": "🎯 的中 払戻2,630円 (回収率26.3% / -7,370円)",
+      "roi": 26.3,
+      "returnYen": 2630,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "3連複F (2,630円)"
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "B",
+      "race": "京都3R 2歳未勝利",
+      "status": "🎯 的中 払戻14,450円 (回収率144.5% / +4,450円)",
+      "roi": 144.5,
+      "returnYen": 14450,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 5-7 (4,000円)",
+        "ワイド 5-4 (2,850円)",
+        "単勝 5 (2,100円)",
+        "馬連 5-4 (2,480円)",
+        "馬単 5→4 (2,640円)",
+        "3連複F (380円)"
+      ]
+    },
+    {
+      "date": "2026-11-22",
+      "mode": "jra",
+      "rank": "New",
+      "race": "京都4R 2歳新馬",
+      "status": "🎯 的中 払戻5,570円 (回収率55.7% / -4,430円)",
+      "roi": 55.7,
+      "returnYen": 5570,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 6-1 (4,680円)",
+        "3連複F (890円)"
+      ]
+    },
     {
       "date": "2026-11-21",
       "mode": "nar",
