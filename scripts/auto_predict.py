@@ -2,12 +2,12 @@
 """
 Bayesian Keiba AI — Automated Prediction & Audit Pipeline (Neon v7.0 / v11.1 Edition)
 
-Supports:
-  - JRA Flat / Grade (app-bayesian-horse-racing-text)
-  - JRA Make Debut (app-bayesian-make-debut)
-  - NAR Local / Nankan / Triple Umatan (app-bayesian-nar)
-  - JRA WIN5 Plan C (app-bayesian-win5)
-  - Post-Race 10,000 JPY Baseline Audit & ROI Tracking
+Fully compatible with .github/workflows/race_pipeline.yml:
+  --mode screening : Morning/Noon batch screening (JRA / NAR / ALL)
+  --mode hourly    : 1-hour-before full prediction for due non-Pass races (+ Nankan Triple Umatan)
+  --mode predict   : Single-race direct full prediction
+  --mode win5      : JRA WIN5 Plan C (v11.1) orthogonal shell prediction
+  --mode audit     : Post-race official result & 10,000 JPY baseline ROI audit
 """
 
 from __future__ import annotations
@@ -18,13 +18,14 @@ import json
 import os
 import re
 import sys
+import time
 from pathlib import Path
 from typing import Any
 
 from google import genai
 from google.genai import types
 
-# ===== 設定（環境変数で上書き可能）=====
+# ===== 設定（環境変数・GitHub Variables で上書き可能）=====
 HIGH_TIER_MODEL = os.getenv("GEMINI_HIGH_TIER_MODEL", "gemini-2.5-pro")
 FAST_MODEL = os.getenv("GEMINI_FAST_MODEL", "gemini-2.5-flash")
 DATA_DIR = Path(os.getenv("KEIBA_DATA_DIR", "data"))
@@ -32,19 +33,68 @@ LATEST_JSON_PATH = DATA_DIR / "latest.json"
 HISTORY_DIR = DATA_DIR / "history"
 JST = dt.timezone(dt.timedelta(hours=9))
 
+# 発走1時間前パイプラインの許容ウィンドウ（分）
+HOURLY_WINDOW_MIN = 20
+HOURLY_WINDOW_MAX = 105
+
+NAR_VENUES = (
+    "大井", "川崎", "船橋", "浦和",
+    "門別", "盛岡", "水沢", "金沢", "笠松", "名古屋", "園田", "姫路", "高知", "佐賀",
+)
+NANKAN_VENUES = ("大井", "川崎", "船橋", "浦和")
+
+
+def now_jst() -> dt.datetime:
+    return dt.datetime.now(JST)
+
 
 def now_jst_str() -> str:
-    return dt.datetime.now(JST).strftime("%Y-%m-%d %H:%M JST")
+    return now_jst().strftime("%Y-%m-%d %H:%M JST")
+
+
+def detect_org(race: dict[str, Any]) -> str:
+    org = str(race.get("org") or "").upper()
+    if org in ("JRA", "NAR"):
+        return org
+    skill = str(race.get("skill") or "")
+    if "nar" in skill:
+        return "NAR"
+    venue = str(race.get("venue") or "")
+    if any(v in venue for v in NAR_VENUES):
+        return "NAR"
+    return "JRA"
 
 
 def select_model(skill: str, race_name: str = "") -> str:
     """WIN5・重賞・新馬戦・ダートグレードは上位モデル、それ以外は高速モデルへ振り分け"""
-    high_keywords = ("G1", "G2", "G3", "GI", "GII", "GIII", "Jpn", "重賞", "新馬", "WIN5")
+    high_keywords = ("G1", "G2", "G3", "GI", "GII", "GIII", "Jpn", "重賞", "新馬", "WIN5", "記念", "賞", "杯")
     if skill in ("app-bayesian-win5", "app-bayesian-make-debut"):
         return HIGH_TIER_MODEL
     if any(k in race_name for k in high_keywords):
         return HIGH_TIER_MODEL
     return FAST_MODEL
+
+
+def parse_post_datetime(date_str: str, post_time: str) -> dt.datetime | None:
+    if not post_time:
+        return None
+    m = re.search(r"(\d{1,2})\s*[:：時]\s*(\d{2})", str(post_time))
+    if not m:
+        return None
+    try:
+        year, month, day = map(int, date_str.split("-"))
+        hour, minute = int(m.group(1)), int(m.group(2))
+        return dt.datetime(year, month, day, hour, minute, tzinfo=JST)
+    except ValueError:
+        return None
+
+
+def minutes_until_post(date_str: str, post_time: str, ref_now: dt.datetime | None = None) -> float | None:
+    post_dt = parse_post_datetime(date_str, post_time)
+    if post_dt is None:
+        return None
+    ref = ref_now or now_jst()
+    return (post_dt - ref).total_seconds() / 60.0
 
 
 def build_common_neon_rules() -> str:
@@ -61,6 +111,121 @@ def build_common_neon_rules() -> str:
    - 単一穴馬（単勝10倍以上）への合計配分上限 singleLongshotCapPct <= 0.30。
    - 反実仮想セルフ監査（◎破綻時の○-▲防衛状態と消し人気馬の復活条件）を counterfactualAudit に明記。
 6. 出力は有効な単一JSONオブジェクトのみ。前置きや解説文は一切出力しないこと。
+""".strip()
+
+
+def build_screening_prompt(org: str, date_str: str) -> str:
+    if org == "NAR":
+        target_desc = "本日開催の南関東（大井・川崎・船橋・浦和）および主要ダートグレード競走（非開催なら主要NAR会場のメイン・準メイン）"
+        skill_hint = "全レース skill は 'app-bayesian-nar' を設定"
+        criteria = "S/A判定: hitRate>=60%（14頭以上>=55%）, breakEvenRate>=45%, expectedRoi>=105%。一強堅軸トリガミ(O<=2.2かつ死角なし)や混戦カオス(M3<38%)は rank='Pass'"
+    else:
+        target_desc = "本日開催のJRA全会場から、重賞・メイン(9R〜12R)・新馬戦・勝負妙味の高い注目レース（合計最大16レース）"
+        skill_hint = "新馬戦は skill='app-bayesian-make-debut' & rank='New' & subRank='A|B|Pass'、それ以外は skill='app-bayesian-horse-racing-text' & rank='S|A|B|Pass'"
+        criteria = "S/A判定: 平場重賞は hitRate>=60%（16頭以上重賞>=55%）, breakEvenRate>=45%, expectedRoi>=105%。新馬戦は hitRate>=55%（フルゲート>=50%）, breakEvenRate>=42%, expectedRoi>=105%。混戦カオス(M3<38%/新馬<36%)やトリガミ過密は Pass"
+
+    return f"""
+あなたは Bayesian Keiba AI（Neon v7.0）の「朝一括スクリーニング」エンジンです。
+対象日: {date_str} / 対象区分: {org}
+対象範囲: {target_desc}
+
+【実行手順】
+1. Google検索で {date_str} の {org} 開催会場・発走時刻・レース名・距離・出馬表・最新馬場状態（クッション値/含水率/砂厚）および主要人気馬・オッズを取得する。
+2. 開催がない場合は `"hasHolding": false, "races": []` を返すこと（架空のレースを絶対に捏造しないこと）。
+3. 各対象レースについて Top-3融合集中度 M3、先行頭数 nLead、推定的中率 hitRate、元返し率 breakEvenRate、期待ROI expectedRoi を評価し、上位3〜4頭のプレビュー候補馬を付与する。
+4. {skill_hint}。
+5. {criteria}。
+6. 出力は有効な単一JSONオブジェクトのみ。前置き・解説は一切禁止。
+
+【厳守JSONスキーマ】
+{{
+  "date": "{date_str}",
+  "org": "{org}",
+  "hasHolding": true,
+  "strategyProfile": "hit_rate_max",
+  "trackBias": {{
+    "summary": "全会場の馬場傾向・クッション値/含水率/砂厚の要約(80字以内)",
+    "intradayBiasConsistentR": 0
+  }},
+  "races": [
+    {{
+      "raceId": "20261122-tok-11",
+      "org": "{org}",
+      "venue": "東京11R",
+      "raceNumber": 11,
+      "name": "実レース名",
+      "surfaceDist": "芝1600m",
+      "postTime": "15:40",
+      "skill": "app-bayesian-horse-racing-text | app-bayesian-make-debut | app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "S | A | B | New | Pass",
+      "subRank": "A | B | Pass",
+      "chaosType": "Type S | Type A | Type B | Type B+",
+      "pivotType": "Single-Pivot | Dual-Pivot | Pass",
+      "nLead": 3,
+      "m3": 54.0,
+      "expectedRoi": 110.5,
+      "hitRate": 61.5,
+      "breakEvenRate": 49.0,
+      "scenario": "朝時点の馬場・展開・注目ポイント(70字以内)",
+      "horses": [
+        {{
+          "mark": "◎",
+          "role": "朝スクリーニング本命候補",
+          "num": 5,
+          "name": "実馬名",
+          "style": "先",
+          "f": 22.0,
+          "fFund": 23.5,
+          "q": 18.0,
+          "top2": 40.0,
+          "top3": 56.0,
+          "odds": 4.2,
+          "comment": "35字以内の事前根拠"
+        }}
+      ],
+      "triggers": ["発走1時間前本予想で公式馬体重・当日3Rバイアス・実オッズを反映予定"]
+    }}
+  ]
+}}
+""".strip()
+
+
+def build_triple_umatan_prompt(venue_name: str, date_str: str) -> str:
+    return f"""
+あなたは 南関トリプル馬単専用「app-bayesian-nar (v7.0 Neon Probability-Shell Edition)」エンジンです。
+対象日: {date_str} / 対象場: {venue_name}（最終3レース: 10R・11R・12R）
+
+【トリプル馬単 Neon v7.0 規約】
+1. Google検索で {date_str} {venue_name} の最終3レース（通常10R・11R・12R）の全出走馬・最新オッズ・公式馬体重・当日含水率/砂厚・当日1R〜9Rのバイアス（3R一致ガード）を取得する。
+2. 各レースで 2-Stage Benter 融合 Plackett-Luce により 1着確率 f、2着内率 top2、および上位馬単ペア確率を厳密算出する。
+3. 予算目安 3,000円（50円単位・計60点前後）を Probability-Shell 直交分解し、重複ゼロの T1_Core（本線シェル）と T2_Wing（高エントロピー戦の穴差し込みシェル）に分割する。
+4. 出力は有効な単一JSONオブジェクトのみ。
+
+【厳守JSONスキーマ】
+{{
+  "date": "{date_str}",
+  "venue": "{venue_name}",
+  "skill": "app-bayesian-nar",
+  "hitRate": 6.8,
+  "expectedRoi": 132.0,
+  "legs": [
+    {{
+      "raceNumber": 10,
+      "venue": "{venue_name}10R",
+      "name": "実レース名",
+      "surfaceDist": "ダ1400m",
+      "wR": 0.35,
+      "exactaPairs": [
+        {{ "first": 5, "second": 8, "prob": 11.2, "note": "先行粘り→差し" }}
+      ]
+    }}
+  ],
+  "shellTickets": [
+    {{ "id": "T1_Core", "formation": "10R(5→8,2) × 11R(12→7,3) × 12R(4→1,9)", "points": 8, "unit": 150 }},
+    {{ "id": "T2_Wing", "formation": "10R(8→5,2) × 11R(12,7→3,9) × 12R(4,1→9,6)", "points": 24, "unit": 50 }}
+  ]
+}}
 """.strip()
 
 
@@ -204,6 +369,7 @@ def build_prompt_for_skill(skill: str, race_query: str, date_str: str) -> str:
 【WIN5 v11.1固有ルール】
 - 全5レースの全出走馬を並列取得し、2-Stage Benter融合（来日トップ外国馬参戦レースは wR=0.55〜0.60）で各レースの勝率 f, fFund, q を算出。
 - 乾燥ダート戦は上位4頭内に差し馬枠（closer）を最低1頭確保。
+- 当日1R〜8Rバイアス同化は3R以上一致・ラップ整合時のみ反映（未満は±5%上限）。
 - Plan C 確率シェル直交分解（T1 Core は予算上限45%厳守、T2〜T4 Wing は重複ゼロの3〜4チケット構成）。
 - 5レース目の単勝ヘッジ候補 hedgeCandidates も出力。
 
@@ -220,7 +386,7 @@ def build_prompt_for_skill(skill: str, race_query: str, date_str: str) -> str:
       "wR": 0.40,
       "grade": "堅 | 中 | 波乱",
       "horses": [
-        {{ "mark": "◎", "num": 5, "name": "馬名", "shell": "Core | Wing", "f": 28.5, "fFund": 30.0, "q": 25.0, "wUsed": 0.40, "odds": 3.2, "comment": "35字以内" }}
+        {{ "mark": "◎", "num": 5, "name": "実馬名", "shell": "Core | Wing", "f": 28.5, "fFund": 30.0, "q": 25.0, "wUsed": 0.40, "odds": 3.2, "comment": "35字以内" }}
       ]
     }}
   ],
@@ -229,7 +395,7 @@ def build_prompt_for_skill(skill: str, race_query: str, date_str: str) -> str:
       {{ "id": "T1", "label": "Core本線(45%上限)", "formation": "5,8 × 2,4 × 1,9 × 6 × 3,7", "points": 32, "hitProb": 8.4 }}
     ]
   }},
-  "hedgeCandidates": [{{ "num": 11, "name": "馬名", "odds": 14.5 }}]
+  "hedgeCandidates": [{{ "num": 11, "name": "実馬名", "odds": 14.5 }}]
 }}
 """.strip()
 
@@ -295,7 +461,6 @@ def build_prompt_for_skill(skill: str, race_query: str, date_str: str) -> str:
 
 
 def extract_json(raw_text: str) -> dict[str, Any]:
-    """モデル出力からJSONオブジェクトを安全に抽出"""
     text = raw_text.strip()
     fence = re.search(r"```(?:json)?\s*(\{.*\})\s*```", text, re.DOTALL)
     if fence:
@@ -308,14 +473,54 @@ def extract_json(raw_text: str) -> dict[str, Any]:
     return json.loads(text)
 
 
-def validate_and_normalize_race(race: dict[str, Any], skill: str) -> dict[str, Any]:
-    """Neon v7.0 新フィールドを透過保持しつつ後方互換キーを正規化"""
+def call_gemini_json(
+    client: genai.Client,
+    model: str,
+    prompt: str,
+    retries: int = 2,
+) -> dict[str, Any]:
+    last_err: Exception | None = None
+    for attempt in range(retries + 1):
+        try:
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    tools=[types.Tool(google_search=types.GoogleSearch())],
+                    temperature=0.2,
+                ),
+            )
+            if not response.text:
+                raise RuntimeError("Gemini API returned empty text.")
+            return extract_json(response.text)
+        except Exception as exc:
+            last_err = exc
+            if attempt < retries:
+                wait_sec = 3 * (attempt + 1)
+                print(f"[RETRY {attempt + 1}/{retries}] {exc} -> sleep {wait_sec}s", file=sys.stderr)
+                time.sleep(wait_sec)
+    raise RuntimeError(f"Gemini call failed after {retries + 1} attempts: {last_err}") from last_err
+
+
+def validate_and_normalize_race(
+    race: dict[str, Any],
+    skill: str,
+    stage: str = "final",
+) -> dict[str, Any]:
     race.setdefault("skill", skill)
     race.setdefault("strategyProfile", "hit_rate_max")
-    race.setdefault("org", "NAR" if "nar" in skill else "JRA")
+    race["org"] = detect_org(race)
+    race["stage"] = stage
+    race["updatedAt"] = now_jst_str()
+
+    if not race.get("raceId"):
+        slug = re.sub(r"\s+", "-", f"{race.get('venue', 'race')}-{race.get('name', 'unknown')}")
+        race["raceId"] = slug
 
     if "intradayBiasConsistentR" not in race and "intradayBias3R" in race:
         race["intradayBiasConsistentR"] = 3 if race["intradayBias3R"] else 1
+    elif "intradayBiasConsistentR" in race and "intradayBias3R" not in race:
+        race["intradayBias3R"] = int(race["intradayBiasConsistentR"]) >= 3
 
     rules = race.get("portfolioRules") or {}
     rules.setdefault("coreRatio", 0.75)
@@ -338,28 +543,20 @@ def validate_and_normalize_race(race: dict[str, Any], skill: str) -> dict[str, A
     return race
 
 
-def call_gemini_json(client: genai.Client, model: str, prompt: str) -> dict[str, Any]:
-    response = client.models.generate_content(
-        model=model,
-        contents=prompt,
-        config=types.GenerateContentConfig(
-            tools=[types.Tool(google_search=types.GoogleSearch())],
-            temperature=0.2,
-        ),
-    )
-    if not response.text:
-        raise RuntimeError("Gemini API returned empty text.")
-    return extract_json(response.text)
-
-
 def load_store(date_str: str) -> dict[str, Any]:
     if LATEST_JSON_PATH.exists():
-        data = json.loads(LATEST_JSON_PATH.read_text(encoding="utf-8"))
-        if data.get("date") == date_str:
-            return data
+        try:
+            data = json.loads(LATEST_JSON_PATH.read_text(encoding="utf-8"))
+            if data.get("date") == date_str:
+                data.setdefault("races", [])
+                data.setdefault("trackBias", {})
+                return data
+        except Exception as exc:
+            print(f"[WARN] Could not load existing latest.json: {exc}", file=sys.stderr)
     return {
         "date": date_str,
         "updatedAt": now_jst_str(),
+        "trackBias": {},
         "races": [],
         "win5": None,
         "tripleUmatan": None,
@@ -370,18 +567,26 @@ def save_store(store: dict[str, Any]) -> None:
     DATA_DIR.mkdir(parents=True, exist_ok=True)
     HISTORY_DIR.mkdir(parents=True, exist_ok=True)
     store["updatedAt"] = now_jst_str()
+    store["races"].sort(key=lambda r: (str(r.get("postTime") or "99:99"), str(r.get("venue") or "")))
     payload = json.dumps(store, ensure_ascii=False, indent=2)
     LATEST_JSON_PATH.write_text(payload, encoding="utf-8")
     hist_path = HISTORY_DIR / f"{store['date']}.json"
     hist_path.write_text(payload, encoding="utf-8")
-    print(f"[OK] Saved {LATEST_JSON_PATH} & {hist_path}")
+    print(f"[OK] Saved {LATEST_JSON_PATH} & {hist_path} (races={len(store['races'])})")
 
 
-def upsert_race(store: dict[str, Any], new_race: dict[str, Any]) -> None:
+def upsert_race(store: dict[str, Any], new_race: dict[str, Any], allow_downgrade: bool = False) -> None:
     rid = new_race.get("raceId")
+    v_key = f"{new_race.get('venue', '')}|{new_race.get('name', '')}"
     races = store.setdefault("races", [])
+
     for idx, existing in enumerate(races):
-        if existing.get("raceId") == rid:
+        same_id = rid and existing.get("raceId") == rid
+        same_vn = f"{existing.get('venue', '')}|{existing.get('name', '')}" == v_key
+        if same_id or same_vn:
+            if not allow_downgrade and new_race.get("stage") == "screened":
+                if existing.get("stage") == "final" or (existing.get("result") or {}).get("settled"):
+                    return
             if "result" in existing and "result" not in new_race:
                 new_race["result"] = existing["result"]
             races[idx] = new_race
@@ -389,45 +594,181 @@ def upsert_race(store: dict[str, Any], new_race: dict[str, Any]) -> None:
     races.append(new_race)
 
 
-def run_audit(client: genai.Client, store: dict[str, Any]) -> None:
-    """確定レースの公式着順・払戻を自動取得し、1万円基準の的中・払戻金を更新"""
+def resolve_orgs(org_arg: str) -> list[str]:
+    if org_arg.upper() == "ALL":
+        return ["JRA", "NAR"]
+    return [org_arg.upper()]
+
+
+def run_screening(client: genai.Client, store: dict[str, Any], org_arg: str, date_str: str) -> None:
+    for org in resolve_orgs(org_arg):
+        print(f"[SCREENING] {date_str} {org} ({FAST_MODEL})")
+        prompt = build_screening_prompt(org, date_str)
+        res = call_gemini_json(client, FAST_MODEL, prompt)
+        if res.get("hasHolding") is False:
+            print(f"[INFO] No {org} races scheduled on {date_str}.")
+            continue
+
+        if res.get("trackBias"):
+            store.setdefault("trackBias", {})[org] = res["trackBias"]
+
+        screened_races = res.get("races") or []
+        for raw_race in screened_races:
+            raw_race["org"] = org
+            skill = raw_race.get("skill")
+            if not skill:
+                if org == "NAR":
+                    skill = "app-bayesian-nar"
+                elif "新馬" in str(raw_race.get("name", "")) or raw_race.get("rank") == "New":
+                    skill = "app-bayesian-make-debut"
+                else:
+                    skill = "app-bayesian-horse-racing-text"
+            normalized = validate_and_normalize_race(raw_race, skill, stage="screened")
+            upsert_race(store, normalized, allow_downgrade=False)
+
+        print(f"[SCREENING] Upserted {len(screened_races)} {org} races.")
+        save_store(store)
+
+
+def run_hourly(
+    client: genai.Client,
+    store: dict[str, Any],
+    org_arg: str,
+    date_str: str,
+    force_all: bool = False,
+) -> None:
+    target_orgs = resolve_orgs(org_arg)
+
+    for org in target_orgs:
+        has_org_races = any(detect_org(r) == org for r in store.get("races", []))
+        if not has_org_races:
+            print(f"[INFO] No screened {org} races in store -> running screening first.")
+            run_screening(client, store, org, date_str)
+
+    ref_now = now_jst()
+    due_races: list[dict[str, Any]] = []
+    for race in store.get("races", []):
+        if detect_org(race) not in target_orgs:
+            continue
+        if race.get("stage") == "final":
+            continue
+        if race.get("rank") == "Pass" or race.get("subRank") == "Pass":
+            continue
+
+        mins = minutes_until_post(date_str, str(race.get("postTime") or ""), ref_now)
+        if force_all:
+            due_races.append(race)
+        elif mins is not None and HOURLY_WINDOW_MIN <= mins <= HOURLY_WINDOW_MAX:
+            due_races.append(race)
+        else:
+            print(f"[SKIP] {race.get('venue')} {race.get('name')} (post={race.get('postTime')}, delta={mins})")
+
+    print(f"[HOURLY] Due races to finalize: {len(due_races)}")
+    for race in due_races:
+        skill = race.get("skill") or (
+            "app-bayesian-nar" if detect_org(race) == "NAR"
+            else ("app-bayesian-make-debut" if "新馬" in str(race.get("name", "")) else "app-bayesian-horse-racing-text")
+        )
+        race_query = f"{race.get('venue', '')} {race.get('name', '')} ({race.get('surfaceDist', '')} 発走{race.get('postTime', '')})".strip()
+        model = select_model(skill, race_query)
+        print(f"[HOURLY-PREDICT] {skill} ({model}) -> {race_query}")
+        try:
+            prompt = build_prompt_for_skill(skill, race_query, date_str)
+            pred = call_gemini_json(client, model, prompt)
+            if race.get("raceId"):
+                pred["raceId"] = race["raceId"]
+            normalized = validate_and_normalize_race(pred, skill, stage="final")
+            upsert_race(store, normalized, allow_downgrade=True)
+            save_store(store)
+        except Exception as exc:
+            print(f"[WARN] Failed hourly prediction for {race_query}: {exc}", file=sys.stderr)
+
+    if "NAR" in target_orgs:
+        existing_triple = store.get("tripleUmatan") or {}
+        if existing_triple.get("date") != date_str:
+            nankan_10r = [
+                r for r in store.get("races", [])
+                if detect_org(r) == "NAR"
+                and any(v in str(r.get("venue", "")) for v in NANKAN_VENUES)
+                and ("10R" in str(r.get("venue", "")) or r.get("raceNumber") == 10)
+            ]
+            for r10 in nankan_10r:
+                mins = minutes_until_post(date_str, str(r10.get("postTime") or ""), ref_now)
+                if force_all or (mins is not None and HOURLY_WINDOW_MIN <= mins <= HOURLY_WINDOW_MAX):
+                    venue_name = next(v for v in NANKAN_VENUES if v in str(r10.get("venue", "")))
+                    print(f"[TRIPLE-UMATAN] Generating for {venue_name} ({HIGH_TIER_MODEL})")
+                    try:
+                        t_prompt = build_triple_umatan_prompt(venue_name, date_str)
+                        store["tripleUmatan"] = call_gemini_json(client, HIGH_TIER_MODEL, t_prompt)
+                        save_store(store)
+                    except Exception as exc:
+                        print(f"[WARN] Triple Umatan generation failed: {exc}", file=sys.stderr)
+                    break
+
+
+def run_audit(client: genai.Client, store: dict[str, Any], org_arg: str) -> None:
+    target_orgs = resolve_orgs(org_arg)
     targets = [
         r for r in store.get("races", [])
-        if r.get("rank") != "Pass" and r.get("subRank") != "Pass" and not (r.get("result") or {}).get("settled")
+        if detect_org(r) in target_orgs
+        and r.get("rank") != "Pass"
+        and r.get("subRank") != "Pass"
+        and not (r.get("result") or {}).get("settled")
     ]
     if not targets:
-        print("[INFO] No unsettled races to audit.")
+        print(f"[INFO] No unsettled {org_arg} races to audit.")
         return
 
+    updated_any = False
     for race in targets:
         prompt = f"""
-以下のレースの公式確定結果と払戻金をGoogle検索で確認し、10,000円基準の推定払戻金を算出して単一JSONのみで返してください。
+以下のレースの公式確定結果（1〜3着馬番）と公式払戻金をGoogle検索で確認し、10,000円基準の推定払戻金（Drop-Buffered Core Shield配分）を算出して単一JSONのみで返してください。
 対象日: {store['date']} / レース: {race.get('venue')} {race.get('name')}
-推奨Core結線: {race.get('coreConnections')} / 推奨馬券: {race.get('tickets')}
+推奨◎○▲☆: {[f"{h.get('mark')}{h.get('num')}{h.get('name')}" for h in (race.get('horses') or [])[:5]]}
+推奨Core結線: {race.get('coreConnections')}
+推奨馬券: {race.get('tickets')}
+配分ルール: {race.get('portfolioRules')}
 
-未確定の場合は {{"settled": false}} を返してください。確定済みの場合は以下の形式で返してください:
+未確定・中止の場合は {{"settled": false}} を返してください。確定済みの場合は以下の形式で返してください:
 {{
   "settled": true,
   "order": "1着番-2着番-3着番",
   "payout10k": 12400,
-  "note": "30字以内の結果・3要因振り返り"
+  "hit": true,
+  "note": "35字以内の結果・3要因振り返り"
 }}
 """.strip()
         try:
             res = call_gemini_json(client, FAST_MODEL, prompt)
             if res.get("settled"):
+                res["payout10k"] = int(round(float(res.get("payout10k", 0))))
+                res["hit"] = bool(res.get("hit", res["payout10k"] > 0))
                 race["result"] = res
-                print(f"[AUDIT] {race.get('venue')} {race.get('name')} -> {res.get('order')} / ¥{res.get('payout10k')}")
+                updated_any = True
+                print(f"[AUDIT] {race.get('venue')} {race.get('name')} -> {res.get('order')} / ¥{res['payout10k']}")
         except Exception as exc:
             print(f"[WARN] Audit failed for {race.get('raceId')}: {exc}", file=sys.stderr)
 
+    if updated_any:
+        save_store(store)
+
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Bayesian Keiba AI Neon Pipeline")
-    parser.add_argument("--mode", choices=["predict", "win5", "audit"], required=True)
-    parser.add_argument("--date", default=dt.datetime.now(JST).strftime("%Y-%m-%d"))
+    parser = argparse.ArgumentParser(description="Bayesian Keiba AI Neon Pipeline (v7.0 / v11.1)")
+    parser.add_argument(
+        "--mode",
+        choices=["screening", "hourly", "predict", "win5", "audit"],
+        required=True,
+    )
+    parser.add_argument("--date", default=now_jst().strftime("%Y-%m-%d"))
+    parser.add_argument("--org", choices=["JRA", "NAR", "ALL"], default="JRA")
     parser.add_argument("--skill", default="app-bayesian-horse-racing-text")
     parser.add_argument("--race", default="", help="例: 東京11R 霜月S / 大井11R サンタアニタT")
+    parser.add_argument(
+        "--force",
+        action="store_true",
+        help="hourly モードで発走時刻ウィンドウを無視して未確定レースをすべて本予想化",
+    )
     args = parser.parse_args()
 
     api_key = os.getenv("GEMINI_API_KEY")
@@ -437,15 +778,21 @@ def main() -> None:
     client = genai.Client(api_key=api_key)
     store = load_store(args.date)
 
-    if args.mode == "predict":
+    if args.mode == "screening":
+        run_screening(client, store, args.org, args.date)
+
+    elif args.mode == "hourly":
+        run_hourly(client, store, args.org, args.date, force_all=args.force)
+
+    elif args.mode == "predict":
         if not args.race:
             raise ValueError("--race is required for predict mode.")
         model = select_model(args.skill, args.race)
         print(f"[RUN] {args.skill} ({model}) -> {args.race}")
         prompt = build_prompt_for_skill(args.skill, args.race, args.date)
         race_json = call_gemini_json(client, model, prompt)
-        normalized = validate_and_normalize_race(race_json, args.skill)
-        upsert_race(store, normalized)
+        normalized = validate_and_normalize_race(race_json, args.skill, stage="final")
+        upsert_race(store, normalized, allow_downgrade=True)
         save_store(store)
 
     elif args.mode == "win5":
@@ -456,8 +803,7 @@ def main() -> None:
         save_store(store)
 
     elif args.mode == "audit":
-        run_audit(client, store)
-        save_store(store)
+        run_audit(client, store, args.org)
 
 
 if __name__ == "__main__":
