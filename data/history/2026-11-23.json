@@ -1,0 +1,398 @@
+{
+  "date": "2026-11-23",
+  "updatedAt": "2026-11-22 21:09 JST",
+  "trackBias": {
+    "NAR": {
+      "summary": "水沢・金沢・佐賀とも含水率やや高めの先行有利馬場を想定。内前残りに注意",
+      "intradayBiasConsistentR": 0
+    }
+  },
+  "races": [
+    {
+      "raceId": "202636112309",
+      "org": "NAR",
+      "venue": "水沢9R",
+      "raceNumber": 9,
+      "name": "C1三組",
+      "surfaceDist": "ダ1600m",
+      "postTime": "16:20",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "Pass",
+      "subRank": "Pass",
+      "chaosType": "Type B+",
+      "pivotType": "Pass",
+      "nLead": 5,
+      "m3": 35.8,
+      "expectedRoi": 88.5,
+      "hitRate": 42.0,
+      "breakEvenRate": 36.0,
+      "scenario": "C1平場戦で実力差が乏しく先行勢も乱立し混戦カオス判定",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202646112306",
+      "org": "NAR",
+      "venue": "金沢6R",
+      "raceNumber": 6,
+      "name": "夢見る社会人三年目...(B1特別)",
+      "surfaceDist": "ダ1500m",
+      "postTime": "16:30",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "B",
+      "subRank": "B",
+      "chaosType": "Type B",
+      "pivotType": "Dual-Pivot",
+      "nLead": 3,
+      "m3": 46.2,
+      "expectedRoi": 102.5,
+      "hitRate": 57.5,
+      "breakEvenRate": 44.5,
+      "scenario": "B1特別の1500m戦。昇級馬と現級安定勢力の力関係見極めが鍵",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202636112310",
+      "org": "NAR",
+      "venue": "水沢10R",
+      "raceNumber": 10,
+      "name": "イーストスタッド特...(C1)",
+      "surfaceDist": "ダ1600m",
+      "postTime": "16:55",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "A",
+      "subRank": "A",
+      "chaosType": "Type A",
+      "pivotType": "Dual-Pivot",
+      "nLead": 3,
+      "m3": 53.4,
+      "expectedRoi": 107.8,
+      "hitRate": 60.5,
+      "breakEvenRate": 47.0,
+      "scenario": "特別戦で上位能力馬が明確。先行2軸の折り合いから堅実な本線形成",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202636112311",
+      "org": "NAR",
+      "venue": "水沢11R",
+      "raceNumber": 11,
+      "name": "ラナンキュラス賞(C1)",
+      "surfaceDist": "ダ1600m",
+      "postTime": "17:30",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "B",
+      "subRank": "B",
+      "chaosType": "Type B",
+      "pivotType": "Dual-Pivot",
+      "nLead": 4,
+      "m3": 45.5,
+      "expectedRoi": 101.2,
+      "hitRate": 56.0,
+      "breakEvenRate": 44.0,
+      "scenario": "中位拮抗のC1特別。展開次第で差し馬浮上の余地ありオッズ精査待ち",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202646112308",
+      "org": "NAR",
+      "venue": "金沢8R",
+      "raceNumber": 8,
+      "name": "B13特別編成(B1特別)",
+      "surfaceDist": "ダ1500m",
+      "postTime": "17:40",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "Pass",
+      "subRank": "Pass",
+      "chaosType": "Type S",
+      "pivotType": "Pass",
+      "nLead": 2,
+      "m3": 62.0,
+      "expectedRoi": 92.0,
+      "hitRate": 72.0,
+      "breakEvenRate": 65.0,
+      "scenario": "特別編成で一強堅軸濃厚だが低配当トリガミ懸念のためスクリーニング見送り",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202636112312",
+      "org": "NAR",
+      "venue": "水沢12R",
+      "raceNumber": 12,
+      "name": "トウケイニセイ記念",
+      "surfaceDist": "ダ1600m",
+      "postTime": "18:05",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "A",
+      "subRank": "A",
+      "chaosType": "Type A",
+      "pivotType": "Single-Pivot",
+      "nLead": 3,
+      "m3": 55.2,
+      "expectedRoi": 112.4,
+      "hitRate": 63.0,
+      "breakEvenRate": 51.0,
+      "scenario": "重賞マイル戦で実績上位馬が中心。前受け有利な水沢コースで高期待値",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202655112306",
+      "org": "NAR",
+      "venue": "佐賀6R",
+      "raceNumber": 6,
+      "name": "霜月特別(B)",
+      "surfaceDist": "ダ1750m",
+      "postTime": "18:10",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "A",
+      "subRank": "A",
+      "chaosType": "Type A",
+      "pivotType": "Single-Pivot",
+      "nLead": 2,
+      "m3": 54.0,
+      "expectedRoi": 110.0,
+      "hitRate": 62.0,
+      "breakEvenRate": 49.0,
+      "scenario": "佐賀1750mの中距離特別。スタミナと地力上位馬が素直に浮上する条件",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202646112309",
+      "org": "NAR",
+      "venue": "金沢9R",
+      "raceNumber": 9,
+      "name": "MRO金賞(3歳)",
+      "surfaceDist": "ダ1400m",
+      "postTime": "18:15",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "A",
+      "subRank": "A",
+      "chaosType": "Type A",
+      "pivotType": "Dual-Pivot",
+      "nLead": 3,
+      "m3": 52.8,
+      "expectedRoi": 109.0,
+      "hitRate": 61.5,
+      "breakEvenRate": 48.5,
+      "scenario": "3歳重賞1400m戦。能力序列と先行ポジションの利が噛み合い狙い目",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202646112310",
+      "org": "NAR",
+      "venue": "金沢10R",
+      "raceNumber": 10,
+      "name": "C216",
+      "surfaceDist": "ダ1500m",
+      "postTime": "18:55",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "Pass",
+      "subRank": "Pass",
+      "chaosType": "Type B+",
+      "pivotType": "Pass",
+      "nLead": 5,
+      "m3": 34.5,
+      "expectedRoi": 86.0,
+      "hitRate": 40.0,
+      "breakEvenRate": 35.0,
+      "scenario": "C2下級条件で近走不安定馬が多くM3低水準の混戦カオス判定",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202655112308",
+      "org": "NAR",
+      "venue": "佐賀8R",
+      "raceNumber": 8,
+      "name": "AIさがのうまこ賞(C1)",
+      "surfaceDist": "ダ1300m",
+      "postTime": "19:15",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "B",
+      "subRank": "B",
+      "chaosType": "Type B",
+      "pivotType": "Dual-Pivot",
+      "nLead": 4,
+      "m3": 44.8,
+      "expectedRoi": 99.5,
+      "hitRate": 55.0,
+      "breakEvenRate": 43.0,
+      "scenario": "1300m短距離戦でテンの先行争いが激化しやすい。枠順精査後に最終判断",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202655112309",
+      "org": "NAR",
+      "venue": "佐賀9R",
+      "raceNumber": 9,
+      "name": "長崎街道小田宿特選(C1)",
+      "surfaceDist": "ダ1400m",
+      "postTime": "19:45",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "A",
+      "subRank": "A",
+      "chaosType": "Type A",
+      "pivotType": "Dual-Pivot",
+      "nLead": 3,
+      "m3": 52.5,
+      "expectedRoi": 108.2,
+      "hitRate": 61.0,
+      "breakEvenRate": 47.5,
+      "scenario": "C1特選1400mで上位勢の安定度が高い。佐賀特有のイン外差し馬場に適合",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    },
+    {
+      "raceId": "202655112310",
+      "org": "NAR",
+      "venue": "佐賀10R",
+      "raceNumber": 10,
+      "name": "勤労感謝の日賞(A2)",
+      "surfaceDist": "ダ1400m",
+      "postTime": "20:20",
+      "skill": "app-bayesian-nar",
+      "strategyProfile": "hit_rate_max",
+      "rank": "S",
+      "subRank": "A",
+      "chaosType": "Type S",
+      "pivotType": "Single-Pivot",
+      "nLead": 2,
+      "m3": 58.0,
+      "expectedRoi": 116.5,
+      "hitRate": 66.0,
+      "breakEvenRate": 53.0,
+      "scenario": "A2特別で中心軸の信頼度と相手候補の絞込み精度が極めて高く勝負度S",
+      "horses": [],
+      "triggers": [
+        "発走1時間前本予想で全頭出馬表・馬体重・実オッズを反映予定"
+      ],
+      "stage": "screened",
+      "updatedAt": "2026-11-22 21:09 JST",
+      "portfolioRules": {
+        "coreRatio": 0.75,
+        "dutchTargetReturn": 11800,
+        "singleLongshotCapPct": 0.3
+      }
+    }
+  ],
+  "win5": null,
+  "tripleUmatan": null
+}
