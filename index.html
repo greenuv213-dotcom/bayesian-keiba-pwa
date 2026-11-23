@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Bayesian競馬AI" />
-  <title>Bayesian Keiba AI — JRA/NAR 階層ベイズ予想PWA (Neon v7.0)</title>
+  <title>Bayesian Keiba AI — JRA/NAR 階層ベイズ予想PWA (Neon v11.2)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -23,9 +23,15 @@
     .no-scrollbar::-webkit-scrollbar { display: none; }
     .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     input[type="range"] { accent-color: #10b981; }
+    #toastBanner {
+      transition: opacity 0.25s ease, transform 0.25s ease;
+    }
   </style>
 </head>
 <body class="bg-slate-950 text-slate-100 min-h-screen select-none">
+
+  <!-- ワンタップ操作フィードバック用トースト -->
+  <div id="toastBanner" class="fixed top-16 left-1/2 -translate-x-1/2 z-[70] pointer-events-none opacity-0 -translate-y-2 bg-emerald-500 text-slate-950 font-extrabold text-xs px-3.5 py-2 rounded-full shadow-xl whitespace-nowrap"></div>
 
   <header class="safe-header sticky top-0 z-30 bg-slate-950/95 backdrop-blur border-b border-slate-800 px-3 pb-2">
     <div class="flex items-center justify-between gap-2 mb-2">
@@ -38,31 +44,34 @@
         </button>
       </div>
       <div class="shrink-0">
-        <span id="syncStatusBadge" onclick="location.reload()" class="inline-block text-[11px] bg-slate-800 border border-slate-700 text-slate-300 px-2.5 py-0.5 rounded-full cursor-pointer whitespace-nowrap">
+        <span id="syncStatusBadge" onclick="syncGitHubLiveData(true)" class="inline-block text-[11px] bg-slate-800 border border-slate-700 text-slate-300 px-2.5 py-0.5 rounded-full cursor-pointer whitespace-nowrap active:scale-95 transition">
           🔄 同期確認中...
         </span>
       </div>
     </div>
-    <!-- 日付タブ（シンプル表記） -->
     <div id="dateTabs" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-1"></div>
     <div id="biasBar" class="flex gap-1.5 overflow-x-auto no-scrollbar pt-1.5 text-[11px]"></div>
   </header>
 
   <main class="max-w-xl mx-auto px-3 pt-3">
-    <!-- ① レース一覧ビュー（会場フィルタ ＋ ランク別絞り込み） -->
+    <!-- ① レース一覧ビュー（会場フィルタ ＋ 未発走絞込 ＋ ランク絞り込み） -->
     <section id="view-races" class="space-y-2.5">
-      <div class="flex items-center justify-between gap-2">
+      <div class="flex items-center justify-between gap-1.5">
         <div id="venueFilter" class="flex gap-1 overflow-x-auto no-scrollbar"></div>
-        <button id="toggleAllRacesBtn" onclick="toggleShowAllRaces()" class="shrink-0 text-xs bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-2.5 py-1 rounded-lg font-medium">
-          全レース表示: ON
-        </button>
+        <div class="shrink-0 flex items-center gap-1">
+          <button id="toggleUpcomingBtn" onclick="toggleUpcomingOnly()" class="text-[11px] bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 px-2 py-1 rounded-lg font-bold whitespace-nowrap">
+            未発走のみ
+          </button>
+          <button id="toggleAllRacesBtn" onclick="toggleShowAllRaces()" class="text-[11px] bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 px-2 py-1 rounded-lg font-medium whitespace-nowrap">
+            全R: ON
+          </button>
+        </div>
       </div>
-      <!-- ランク別ワンタップ絞り込みバー -->
       <div id="rankFilterBar" class="flex gap-1.5 overflow-x-auto no-scrollbar pb-0.5"></div>
       <div id="raceList" class="space-y-2.5"></div>
     </section>
 
-    <!-- ② WIN5（JRA時） ／ トリプル馬単（NAR地方時） ビュー（Plan A/B/C＋的中判定付き） -->
+    <!-- ② WIN5（JRA時） ／ トリプル馬単（NAR地方時） ビュー（Plan C直交3枚＋Plan A＋コピー機能） -->
     <section id="view-win5" class="hidden space-y-3">
       <div class="bg-gradient-to-br from-indigo-950/80 via-slate-900 to-slate-900 border border-indigo-500/30 rounded-xl p-3.5 space-y-3">
         <div class="flex items-center justify-between gap-2">
@@ -71,7 +80,7 @@
               <span id="multiLegSkillBadge" class="text-[11px] bg-indigo-500/20 border border-indigo-400/40 text-indigo-300 px-2 py-0.5 rounded font-semibold">app-bayesian-win5 (v11.1 Neon)</span>
               <span id="multiLegAiBadge" class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold">読込中</span>
             </div>
-            <h2 id="multiLegTitle" class="text-base font-bold text-white mt-1">JRA WIN5 2-Stage融合＆Plan C最適化</h2>
+            <h2 id="multiLegTitle" class="text-base font-bold text-white mt-1">JRA WIN5 2-Stage融合＆Plan C直交最適化</h2>
           </div>
           <div class="text-right shrink-0">
             <div class="text-[11px] text-slate-400">指定予算上限</div>
@@ -79,14 +88,13 @@
           </div>
         </div>
 
-        <!-- WIN5 / トリプル馬単 結果・的中サマリーバナー -->
         <div id="win5ResultSummary" class="hidden rounded-xl p-3 space-y-2 border"></div>
 
         <p id="win5SummaryText" class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-lg p-2.5"></p>
         <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
             <span class="text-xs text-slate-300 font-bold">💰 総予算変更（5,000円〜50,000円）</span>
-            <span class="text-[11px] text-emerald-400 whitespace-nowrap">Plan A・B・C 同時再計算</span>
+            <span class="text-[11px] text-emerald-400 whitespace-nowrap">Plan C(直交3枚)・A 同時計算</span>
           </div>
           <input id="win5BudgetSlider" type="range" min="5000" max="50000" step="1000" value="10000" oninput="updateWin5Budget(this.value)" class="w-full" />
           <div class="flex gap-1.5 flex-wrap">
@@ -109,7 +117,7 @@
       </div>
     </section>
 
-    <!-- ③ 成績・回収率ビュー（全体/JRA/NAR切替 ＋ ランク別成績・ログ絞り込み） -->
+    <!-- ③ 成績・回収率ビュー（AI比較 ＋ 日別推移グラフ ＋ ランク別成績 ＋ ログ） -->
     <section id="view-stats" class="hidden space-y-3">
       <div class="flex items-center justify-between gap-2">
         <div class="flex items-center bg-slate-900 border border-slate-800 rounded-lg p-0.5">
@@ -133,6 +141,24 @@
         </div>
       </div>
 
+      <!-- AI本推論 vs 事前算出 精度比較 -->
+      <div id="statSourceCompareBox" class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold text-indigo-300">🧠 AI本推論 vs 📊 事前算出 精度比較</h3>
+          <span class="text-[10px] text-slate-400">モデル効果検証</span>
+        </div>
+        <div id="statSourceCompare" class="grid grid-cols-2 gap-2 text-xs"></div>
+      </div>
+
+      <!-- 日別回収率トレンド -->
+      <div id="statDailyTrendBox" class="hidden bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold text-white">📈 開催日別 回収率推移</h3>
+          <span class="text-[10px] text-slate-400">緑=100%超</span>
+        </div>
+        <div id="statDailyTrend" class="space-y-1.5 text-[11px]"></div>
+      </div>
+
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3 space-y-2">
         <div class="flex items-center justify-between">
           <h3 class="text-xs font-bold text-white">📊 ランク別 成績・回収率（1万円購入前提）</h3>
@@ -150,25 +176,47 @@
       </div>
     </section>
 
-    <!-- ④ スキル管理ビュー -->
+    <!-- ④ スキル管理ビュー（＋事後検証プロンプト自動生成） -->
     <section id="view-skills" class="hidden space-y-3">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between">
-          <h2 class="text-sm font-bold text-white">🧬 Neon v7.0 / v11.1 ハイブリッド稼働</h2>
+          <h2 class="text-sm font-bold text-white">🧬 Neon v11.2 ハイブリッド稼働</h2>
           <span class="text-[11px] bg-emerald-500/20 text-emerald-300 px-2 py-0.5 rounded">Hydrogen ＋ 3.8 Flash</span>
         </div>
         <ul class="text-xs text-slate-300 space-y-1.5 leading-relaxed list-disc pl-4">
           <li><b>2-Stage Benter融合</b>：オッズ完全遮断の基礎勝率 <code>fFund</code> とFLB市場確率 <code>q</code> を適応重み <code>wR</code> で融合（危険人気馬・ダート内枠等は <code>w≤0.10-0.15</code> クランプ）。</li>
-          <li><b>当日バイアス3R一致ガード</b>：同一会場3R以上の確認結果がある場合のみ本適用（3R未満は±5%上限）。</li>
+          <li><b>実ワイドオッズ＆直前馬体重再推論</b>：発走約60分前に公式馬体重と実ワイドオッズを自動検知して再更新。</li>
           <li><b>Core Shieldダッチング</b>：◎×上位2〜4頭強制結線＋◯-▲防衛（Core 75%、単発11,800円目標で-15%下落耐性、単一穴馬30%上限）。</li>
-          <li><b>モデル分散</b>：WIN5・重賞・S・メイン11R＝<code>gemini-4-hydrogen (HIGH)</code>、新馬＝<code>Hydrogen (MEDIUM)</code>、その他＝<code>gemini-3.8-flash (MEDIUM)</code>。</li>
+          <li><b>WIN5 Plan C 直交3枚編成</b>：T1 Core 45%上限＋T2/T3 直交波乱翼で重複ゼロの的中率最大化。</li>
         </ul>
+      </div>
+
+      <!-- Gemini事後検証＆スキル改善プロンプト出力カード -->
+      <div class="bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-500/30 rounded-xl p-3.5 space-y-2.5">
+        <div>
+          <h3 class="text-xs font-bold text-emerald-300">🔁 Geminiチャット連携：事後検証プロンプト生成</h3>
+          <p class="text-[11px] text-slate-400 mt-0.5">選択中の開催日の確定結果（的中・不的中・WIN5）を自動要約してコピー。そのままGeminiに貼ってスキル改善パッチを作成できます。</p>
+        </div>
+        <button onclick="copyPostRaceAuditPrompt()" class="w-full bg-emerald-500 hover:bg-emerald-400 active:scale-[0.99] text-slate-950 font-extrabold text-xs py-2.5 rounded-xl transition">
+          📋 選択日の事後検証プロンプトをコピー
+        </button>
+      </div>
+
+      <!-- アプリ保存データ管理 -->
+      <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2">
+        <div class="flex items-center justify-between">
+          <h3 class="text-xs font-bold text-slate-200">⚙️ 端末内設定・直前補正キャッシュ</h3>
+          <button onclick="clearLocalAppCache()" class="text-[11px] bg-slate-800 hover:bg-rose-900/60 border border-slate-700 text-rose-300 px-2.5 py-1 rounded-lg font-bold">
+            保存状態をリセット
+          </button>
+        </div>
+        <p class="text-[11px] text-slate-400">予算スライダー・購入済みチェック・直前手動補正はiPhone内に自動保存されます。</p>
       </div>
     </section>
   </main>
 
   <!-- 個別レースAI予想モーダル -->
-  <div id="raceModal" class="safe-modal-frame fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm px-2 flex flex-col justify-center items-center">
+  <div id="raceModal" class="safe-modal-frame fixed inset-0 z-50 hidden bg-black/85 backdrop-blur-sm px-2 flex flex-col justify-center items-center" onclick="if(event.target===this) closeRaceModal()">
     <div class="bg-slate-900 border border-slate-700 rounded-2xl w-full max-w-xl max-h-full flex flex-col overflow-hidden shadow-2xl">
       <div class="shrink-0 flex items-start justify-between border-b border-slate-800 p-3 gap-2 bg-slate-900">
         <div class="min-w-0">
@@ -190,10 +238,8 @@
             <span class="text-emerald-400 font-bold">🧠 Neon 2-Stage融合＆3シナリオ推論（F/E/H）</span>
             <span id="modalPivotInfo" class="text-slate-400 font-mono shrink-0"></span>
           </div>
-          <!-- Neonメタバッジ行（M3 / wR / 元返し率 / バイアス一致R） -->
           <div id="modalNeonMetaRow" class="flex flex-wrap gap-1 text-[10px]"></div>
           <p id="modalScenario" class="text-xs text-slate-200 leading-relaxed break-words"></p>
-          <!-- 反実仮想セルフ監査＆◎強制結線Core -->
           <div id="modalNeonAuditBox" class="hidden bg-slate-900/80 border border-slate-800 rounded-lg p-2 space-y-1 text-[11px]"></div>
           <div class="pt-1 border-t border-slate-800/80 grid grid-cols-3 gap-1.5">
             <button type="button" id="scenBtnMix" onclick="setScenarioMode('mix')" class="text-[11px] font-extrabold py-1 px-1.5 rounded-lg bg-emerald-500 text-slate-950">標準3展開混合</button>
@@ -206,17 +252,22 @@
           <div class="flex items-center justify-between gap-2">
             <div class="min-w-0">
               <div id="modalTicketHeaderTitle" class="text-xs text-emerald-300 font-bold">💰 Neon Core Shield配分（基準1万円・-15%下落耐性）</div>
-              <div class="text-[11px] text-slate-400">Core 75%ダッチング＋Alpha 25% ／ 確定後は公式払戻金で自動照合</div>
+              <div id="modalOddsSourceLabel" class="text-[11px] text-slate-400">Core 75%ダッチング＋Alpha 25% ／ 確定後は公式払戻金で自動照合</div>
             </div>
             <span id="modalBudgetValue" class="shrink-0 text-lg font-extrabold text-amber-400 whitespace-nowrap">10,000円</span>
           </div>
           <input id="modalBudgetSlider" type="range" min="3000" max="30000" step="500" value="10000" oninput="onModalBudgetChange(this.value)" class="w-full" />
-          <div class="flex gap-1.5 flex-wrap">
-            <button onclick="onModalBudgetChange(5000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">5,000円</button>
-            <button onclick="onModalBudgetChange(10000)" class="text-[11px] bg-emerald-900/60 text-emerald-200 px-2.5 py-1 rounded border border-emerald-600/50">10,000円(基準)</button>
-            <button onclick="onModalBudgetChange(15000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">15,000円</button>
-            <button onclick="onModalBudgetChange(20000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">20,000円</button>
-            <button onclick="onModalBudgetChange(30000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2.5 py-1 rounded border border-slate-700">30,000円</button>
+          <div class="flex items-center justify-between gap-1.5 flex-wrap">
+            <div class="flex gap-1 flex-wrap">
+              <button onclick="onModalBudgetChange(5000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700">5,000</button>
+              <button onclick="onModalBudgetChange(10000)" class="text-[11px] bg-emerald-900/60 text-emerald-200 px-2 py-1 rounded border border-emerald-600/50">10,000</button>
+              <button onclick="onModalBudgetChange(15000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700">15,000</button>
+              <button onclick="onModalBudgetChange(20000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700">20,000</button>
+              <button onclick="onModalBudgetChange(30000)" class="text-[11px] bg-slate-800 hover:bg-slate-700 px-2 py-1 rounded border border-slate-700">30,000</button>
+            </div>
+            <button id="btnCopyRaceTickets" onclick="copyActiveRaceTickets()" class="shrink-0 text-[11px] bg-indigo-500/20 hover:bg-indigo-500/30 border border-indigo-400/50 text-indigo-200 font-bold px-2.5 py-1 rounded-lg active:scale-95 transition">
+              📋 買い目コピー
+            </button>
           </div>
           <div id="modalTicketsList" class="space-y-2 pt-1"></div>
           <div id="modalPortfolioMetrics" class="bg-slate-950/90 border border-slate-800 rounded-lg p-2.5 text-[11px] text-slate-300 space-y-1"></div>
@@ -228,9 +279,12 @@
               <span id="modalRunnerCountLabel" class="text-xs font-bold text-white">🏇 出走全頭 確率＆直前補正</span>
               <div id="modalProbSumLabel" class="text-[10px] text-emerald-400 font-mono"></div>
             </div>
-            <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-0.5">
-              <button type="button" id="sortBtnProb" onclick="setHorseSort('prob')" class="text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950">融合勝率順</button>
-              <button type="button" id="sortBtnNum" onclick="setHorseSort('num')" class="text-xs font-bold px-2.5 py-1 rounded text-slate-400">馬番順</button>
+            <div class="flex items-center gap-1.5">
+              <button id="btnResetOverrides" onclick="resetActiveRaceOverrides()" class="hidden text-[10px] bg-rose-500/20 border border-rose-400/40 text-rose-200 px-2 py-1 rounded-lg font-bold">補正リセット</button>
+              <div class="flex items-center bg-slate-950 border border-slate-800 rounded-lg p-0.5">
+                <button type="button" id="sortBtnProb" onclick="setHorseSort('prob')" class="text-xs font-extrabold px-2.5 py-1 rounded bg-emerald-500 text-slate-950">融合勝率順</button>
+                <button type="button" id="sortBtnNum" onclick="setHorseSort('num')" class="text-xs font-bold px-2.5 py-1 rounded text-slate-400">馬番順</button>
+              </div>
             </div>
           </div>
           <div id="modalHorsesList" class="space-y-1.5"></div>
@@ -251,9 +305,12 @@
   </nav>
 
   <script>
+    const STORAGE_KEY = "bayesian_keiba_v11_state";
     const DB_JRA = {};
     const DB_NAR = {};
     let STATS_DATA = null;
+    let LAST_MODAL_TICKETS = [];
+    let LAST_WIN5_COPY_TEXT = "";
 
     const state = {
       circuitMode: "jra",
@@ -261,6 +318,7 @@
       selectedVenue: "ALL",
       selectedRank: "ALL",
       showAllRaces: true,
+      upcomingOnly: false,
       activeRace: null,
       horseSort: "prob",
       scenarioMode: "mix",
@@ -272,7 +330,83 @@
       statsRankFilter: "ALL"
     };
 
+    function loadPersistedState() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY);
+        if (!raw) return;
+        const saved = JSON.parse(raw);
+        if (saved.modalBudget) state.modalBudget = Number(saved.modalBudget);
+        if (saved.win5Budget) state.win5Budget = Number(saved.win5Budget);
+        if (saved.liveOverrides && typeof saved.liveOverrides === "object") state.liveOverrides = saved.liveOverrides;
+        if (saved.checkedTickets && typeof saved.checkedTickets === "object") state.checkedTickets = saved.checkedTickets;
+      } catch (e) {}
+    }
+
+    function savePersistedState() {
+      try {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify({
+          modalBudget: state.modalBudget,
+          win5Budget: state.win5Budget,
+          liveOverrides: state.liveOverrides,
+          checkedTickets: state.checkedTickets
+        }));
+      } catch (e) {}
+    }
+
+    function clearLocalAppCache() {
+      state.liveOverrides = {};
+      state.checkedTickets = {};
+      state.modalBudget = 10000;
+      state.win5Budget = 10000;
+      try { localStorage.removeItem(STORAGE_KEY); } catch (e) {}
+      showToast("端末内の保存状態をリセットしました");
+      if (state.activeRace) { renderModalHorses(state.activeRace); onModalBudgetChange(10000); }
+      updateWin5Budget(10000);
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const el = document.getElementById("toastBanner");
+      if (!el) return;
+      el.textContent = msg;
+      el.classList.remove("opacity-0", "-translate-y-2");
+      el.classList.add("opacity-100", "translate-y-0");
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        el.classList.add("opacity-0", "-translate-y-2");
+        el.classList.remove("opacity-100", "translate-y-0");
+      }, 2100);
+    }
+
+    async function copyToClipboard(text, successMsg) {
+      try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          await navigator.clipboard.writeText(text);
+        } else {
+          const ta = document.createElement("textarea");
+          ta.value = text;
+          ta.style.position = "fixed";
+          ta.style.opacity = "0";
+          document.body.appendChild(ta);
+          ta.select();
+          document.execCommand("copy");
+          document.body.removeChild(ta);
+        }
+        showToast(successMsg || "✅ コピーしました");
+      } catch (e) {
+        showToast("⚠️ コピーに失敗しました");
+      }
+    }
+
     function getActiveDB() { return state.circuitMode === "nar" ? DB_NAR : DB_JRA; }
+
+    function getMinutesUntilPost(cleanDate, postTime) {
+      if (!cleanDate || !postTime || !/^\d{1,2}:\d{2}$/.test(postTime)) return null;
+      const padded = postTime.length === 4 ? `0${postTime}` : postTime;
+      const postTs = new Date(`${cleanDate}T${padded}:00+09:00`).getTime();
+      if (isNaN(postTs)) return null;
+      return Math.round((postTs - Date.now()) / 60000);
+    }
 
     function getEffectiveHorses(race) {
       const raw = (race.horses || []).map(h => ({ ...h }));
@@ -334,8 +468,20 @@
       if (!state.activeRace) return;
       const key = `${state.activeRace.id}-${horseNum}`;
       state.liveOverrides[key] = (state.liveOverrides[key] === mode) ? "" : mode;
+      if (!state.liveOverrides[key]) delete state.liveOverrides[key];
+      savePersistedState();
       renderModalHorses(state.activeRace);
       onModalBudgetChange(state.modalBudget);
+    }
+
+    function resetActiveRaceOverrides() {
+      if (!state.activeRace) return;
+      const prefix = `${state.activeRace.id}-`;
+      Object.keys(state.liveOverrides).forEach(k => { if (k.startsWith(prefix)) delete state.liveOverrides[k]; });
+      savePersistedState();
+      renderModalHorses(state.activeRace);
+      onModalBudgetChange(state.modalBudget);
+      showToast("このレースの直前補正をリセットしました");
     }
 
     function switchCircuitMode(mode) {
@@ -345,7 +491,7 @@
       document.getElementById("modeBtnNar").className = isNar ? "text-xs font-extrabold px-2.5 py-1 rounded-md bg-amber-400 text-slate-950 transition" : "text-xs font-bold px-2.5 py-1 rounded-md text-slate-400 transition";
       document.getElementById("navMultiLegLabel").textContent = isNar ? "トリプル馬単" : "WIN5予想";
       document.getElementById("multiLegSkillBadge").textContent = isNar ? "app-bayesian-nar (v7.0 Neon)" : "app-bayesian-win5 (v11.1 Neon)";
-      document.getElementById("multiLegTitle").innerHTML = isNar ? "南関 トリプル馬単（10R・11R・12R）最適化" : "JRA WIN5 2-Stage融合＆Plan C最適化";
+      document.getElementById("multiLegTitle").innerHTML = isNar ? "南関 トリプル馬単（10R・11R・12R）最適化" : "JRA WIN5 2-Stage融合＆Plan C直交最適化";
 
       const keys = Object.keys(getActiveDB()).sort();
       state.selectedDate = keys[keys.length - 1] || "";
@@ -431,7 +577,16 @@
 
     function toggleShowAllRaces() {
       state.showAllRaces = !state.showAllRaces;
-      document.getElementById("toggleAllRacesBtn").textContent = `全レース表示: ${state.showAllRaces ? "ON" : "OFF"}`;
+      document.getElementById("toggleAllRacesBtn").textContent = `全R: ${state.showAllRaces ? "ON" : "OFF"}`;
+      renderRaceList();
+    }
+
+    function toggleUpcomingOnly() {
+      state.upcomingOnly = !state.upcomingOnly;
+      const btn = document.getElementById("toggleUpcomingBtn");
+      btn.className = state.upcomingOnly
+        ? "text-[11px] bg-emerald-500 text-slate-950 border border-emerald-400 px-2 py-1 rounded-lg font-extrabold whitespace-nowrap"
+        : "text-[11px] bg-slate-900 hover:bg-slate-800 border border-slate-700 text-slate-300 px-2 py-1 rounded-lg font-bold whitespace-nowrap";
       renderRaceList();
     }
 
@@ -476,7 +631,11 @@
         return;
       }
 
+      const cleanDate = state.selectedDate.replace("_nar", "");
       let list = day.races.filter(r => state.selectedVenue === "ALL" || r.venue === state.selectedVenue);
+      if (state.upcomingOnly) {
+        list = list.filter(r => !(r.actualTop3 && r.actualTop3.length > 0));
+      }
       if (state.selectedRank !== "ALL") {
         list = list.filter(r => (r.rank || "B") === state.selectedRank);
       } else if (!state.showAllRaces && list.length > 6) {
@@ -494,7 +653,7 @@
         const hCount = sortedH.length;
         const topHorse = sortedH[0] ? `${sortedH[0].mark} ${sortedH[0].num}番 ${sortedH[0].name} (f=${sortedH[0].f}%)` : "出馬表発表待機";
         const aiTag = r.aiPredicted
-          ? `<span class="text-[10px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-1.5 py-0.5 rounded font-bold">🧠 AI本推論</span>`
+          ? `<span class="text-[10px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-1.5 py-0.5 rounded font-bold">${r.aiPredictedWithWeights ? "🧠 AI本推論(体重済)" : "🧠 AI本推論"}</span>`
           : `<span class="text-[10px] bg-slate-800 border border-slate-700 text-slate-400 px-1.5 py-0.5 rounded">📊 事前算出</span>`;
         const neonTag = r.m3 != null
           ? `<span class="text-[10px] bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 px-1.5 py-0.5 rounded font-mono">M3:${Number(r.m3).toFixed(0)}%</span>`
@@ -502,7 +661,18 @@
         const hasResult = r.actualTop3 && r.actualTop3.length > 0;
         const evalResult = r.evalDone ? { isHit: r.isHit, ret: r.returnYen || 0, roi: r.actualRoi || 0, hits: r.hitTickets || [] } : null;
 
-        let bottomHtml = `<span class="text-slate-400 shrink-0 ml-auto">発走 <b class="text-slate-200">${r.time || "未定"}</b></span>`;
+        let countdownBadge = "";
+        if (!hasResult) {
+          const mins = getMinutesUntilPost(cleanDate, r.time);
+          if (mins !== null && mins > 0 && mins <= 180) {
+            const cCls = mins <= 15
+              ? "bg-rose-500/25 border-rose-400/60 text-rose-200 animate-pulse"
+              : (mins <= 60 ? "bg-amber-500/20 border-amber-400/50 text-amber-200" : "bg-slate-800 border-slate-700 text-slate-300");
+            countdownBadge = `<span class="text-[10px] border px-1.5 py-0.5 rounded font-bold ${cCls}">⏱ あと${mins}分</span>`;
+          }
+        }
+
+        let bottomHtml = `<span class="text-slate-400 shrink-0 ml-auto flex items-center gap-1.5">${countdownBadge}<span>発走 <b class="text-slate-200">${r.time || "未定"}</b></span></span>`;
         let resultBlock = "";
         if (hasResult) {
           const top3Str = r.actualTop3.map(a => `${a.rank}着:${a.num}番${a.name}`).join(" / ");
@@ -565,7 +735,7 @@
       document.getElementById("modalRankBadge").outerHTML = getRankBadgeHtml(race.rank).replace("<span", '<span id="modalRankBadge"');
       document.getElementById("modalSkillBadge").textContent = race.aiPredicted ? `🧠 ${race.skill} (${race.usedModel || "AI"})` : `📊 ${race.skill} (Neon事前)`;
       document.getElementById("modalRaceTitle").textContent = `${race.venue}${race.r}R ${race.name}`;
-      document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time || "未定"}`;
+      document.getElementById("modalRaceMeta").textContent = `${race.cond} ｜ 発走 ${race.time || "未定"}${race.weightsAnnounced ? " ｜ 公式馬体重反映済" : ""}`;
 
       const eff = getEffectiveHorses(race);
       const sorted = [...eff].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
@@ -573,7 +743,6 @@
       document.getElementById("modalPivotInfo").textContent = `${autoPivot} / N_lead=${race.nLead || 3}`;
       document.getElementById("modalScenario").textContent = race.scenario;
 
-      // Neonメタバッジ（過去JSONでも欠損せず安全に表示）
       const mRow = document.getElementById("modalNeonMetaRow");
       const metaBadges = [];
       if (race.strategyProfile === "hit_rate_max") metaBadges.push(`<span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded font-bold">🎯 的中率最大化</span>`);
@@ -586,7 +755,6 @@
       }
       mRow.innerHTML = metaBadges.join("");
 
-      // 反実仮想セルフ監査＆◎強制結線ボックス
       const auditBox = document.getElementById("modalNeonAuditBox");
       const auditParts = [];
       if (Array.isArray(race.coreConnections) && race.coreConnections.length > 0) {
@@ -612,6 +780,9 @@
 
     function renderModalHorses(race) {
       const rawList = getEffectiveHorses(race);
+      const hasOv = Object.keys(state.liveOverrides).some(k => k.startsWith(`${race.id}-`));
+      document.getElementById("btnResetOverrides").classList.toggle("hidden", !hasOv);
+
       if (rawList.length === 0) {
         document.getElementById("modalRunnerCountLabel").textContent = "🏇 出走馬発表待機";
         document.getElementById("modalProbSumLabel").textContent = "";
@@ -639,6 +810,7 @@
         const ov = state.liveOverrides[`${race.id}-${h.num}`] || "";
         const finBadge = actualMap[h.num] ? `<span class="text-[10px] bg-amber-400 text-slate-950 font-extrabold px-1.5 py-0.5 rounded">🏁 ${actualMap[h.num]}</span>` : "";
         const fundSpan = h.fFund != null ? `<span class="text-slate-400 text-[10px]">[基礎${h.fFund}%]</span>` : "";
+        const wtSpan = h.weight ? `<span class="text-[10px] text-slate-400 font-mono">${h.weight}</span>` : "";
         const clampBadge = (h.wUsed != null && Number(h.wUsed) <= 0.15)
           ? `<span class="text-[9px] bg-rose-500/20 border border-rose-400/40 text-rose-300 px-1 py-0.5 rounded font-mono">w=${Number(h.wUsed).toFixed(2)}</span>`
           : "";
@@ -650,6 +822,7 @@
                 <span class="shrink-0 text-xs font-extrabold px-1.5 py-0.5 rounded border ${badgeStyle}">${mk}</span>
                 <span class="text-xs font-bold text-white break-words">${h.num}番 ${h.name}</span>
                 <span class="text-[11px] text-slate-400 whitespace-nowrap">(${h.style || "先"}・${h.role || "評価"})</span>
+                ${wtSpan}
                 ${clampBadge}
                 ${finBadge}
               </div>
@@ -700,10 +873,30 @@
         }
         return { points: Math.max(1, seen.size), hitProb: Math.min(48.0, Math.max(10.0, ps)) };
       };
-      return { probExacta, probQuinella, probWide, evalTrio };
+      const calcCoreAnyHit = (corePairs) => {
+        let hitSum = 0;
+        for (let i = 0; i < list.length; i++) {
+          for (let j = i + 1; j < list.length; j++) {
+            for (let k = j + 1; k < list.length; k++) {
+              const a = list[i].num, b = list[j].num, c = list[k].num;
+              const matched = corePairs.some(([p, q]) => (p === a || p === b || p === c) && (q === a || q === b || q === c));
+              if (matched) hitSum += probTrioSingle(a, b, c);
+            }
+          }
+        }
+        return Math.min(92.0, hitSum);
+      };
+      return { probExacta, probQuinella, probWide, evalTrio, calcCoreAnyHit };
     }
 
-    // Neon v7.0: auto_predict.py の Core Shield (75% Drop-Buffered 11,800円ダッチング + ◎強制結線 + 穴30%上限) と完全同期
+    function lookupWideOddsClient(wideMap, a, b, fallback) {
+      if (wideMap && typeof wideMap === "object") {
+        const key = `${Math.min(a, b)}-${Math.max(a, b)}`;
+        if (wideMap[key] && Number(wideMap[key]) >= 1.1) return { val: Number(wideMap[key]), isLive: true };
+      }
+      return { val: fallback, isLive: false };
+    }
+
     function buildFullSkillTickets(race, B = 10000) {
       const sorted = [...getEffectiveHorses(race)].sort((a, b) => ((Number(b.f) || 0) * 0.55 + (Number(b.top3) || 0) * 0.45) - ((Number(a.f) || 0) * 0.55 + (Number(a.top3) || 0) * 0.45));
       const valid = sorted.filter(h => !["消", "危", "無"].includes(h.mark));
@@ -713,7 +906,17 @@
       const pl = buildPlackettLuceEngine(sorted);
       const o1 = Math.max(1.5, Number(h1.odds) || 4.5), o2 = Math.max(1.8, Number(h2.odds) || 6.0), o3 = Math.max(1.8, Number(h3.odds) || 7.5), o4 = Math.max(2.2, Number(h4.odds) || 10.0);
 
+      const wm = race.wideOddsMap || null;
+      const w12 = lookupWideOddsClient(wm, h1.num, h2.num, Math.max(1.8, Number((Math.sqrt(o1*o2)*0.62).toFixed(1))));
+      const w13 = lookupWideOddsClient(wm, h1.num, h3.num, Math.max(2.1, Number((Math.sqrt(o1*o3)*0.68).toFixed(1))));
+      const w23 = lookupWideOddsClient(wm, h2.num, h3.num, Math.max(2.4, Number((Math.sqrt(o2*o3)*0.72).toFixed(1))));
+      const w14 = lookupWideOddsClient(wm, h1.num, h4.num, Math.max(2.6, Number((Math.sqrt(o1*o4)*0.75).toFixed(1))));
+      const liveWideUsed = w12.isLive || w13.isLive;
+
       document.getElementById("modalTicketHeaderTitle").textContent = "💰 Neon Core Shield配分（Core75%ダッチング＋Alpha25%）";
+      document.getElementById("modalOddsSourceLabel").textContent = liveWideUsed
+        ? "✅ 実ワイドオッズ連動ダッチング（-15%下落耐性検証済）"
+        : "Core 75%ダッチング＋Alpha 25% ／ 確定後は公式払戻金で自動照合";
 
       const coreBudget = Math.round((B * 0.75) / 100) * 100;
       const alphaBudget = Math.max(500, B - coreBudget);
@@ -721,12 +924,12 @@
       const maxLongshot = Math.floor(B * 0.30);
 
       const coreDefs = [
-        { poolKey: "wide", nums: [h1.num, h2.num], comb: `${h1.num} － ${h2.num} (◎－◯ Core)`, hitProb: Math.max(18, pl.probWide(h1.num, h2.num)), baseOdds: Math.max(1.8, Number((Math.sqrt(o1*o2)*0.62).toFixed(1))), isLs: (o1 >= 10 || o2 >= 10) },
-        { poolKey: "wide", nums: [h1.num, h3.num], comb: `${h1.num} － ${h3.num} (◎－▲ Core)`, hitProb: Math.max(15, pl.probWide(h1.num, h3.num)), baseOdds: Math.max(2.1, Number((Math.sqrt(o1*o3)*0.68).toFixed(1))), isLs: (o1 >= 10 || o3 >= 10) },
-        { poolKey: "wide", nums: [h2.num, h3.num], comb: `${h2.num} － ${h3.num} (◯－▲ タテ目防衛)`, hitProb: Math.max(13, pl.probWide(h2.num, h3.num)), baseOdds: Math.max(2.4, Number((Math.sqrt(o2*o3)*0.72).toFixed(1))), isLs: (o2 >= 10 || o3 >= 10) }
+        { poolKey: "wide", nums: [h1.num, h2.num], comb: `${h1.num} － ${h2.num} (◎－◯ Core)`, hitProb: Math.max(18, pl.probWide(h1.num, h2.num)), baseOdds: w12.val, isLiveOdds: w12.isLive, isLs: (o1 >= 10 || o2 >= 10) },
+        { poolKey: "wide", nums: [h1.num, h3.num], comb: `${h1.num} － ${h3.num} (◎－▲ Core)`, hitProb: Math.max(15, pl.probWide(h1.num, h3.num)), baseOdds: w13.val, isLiveOdds: w13.isLive, isLs: (o1 >= 10 || o3 >= 10) },
+        { poolKey: "wide", nums: [h2.num, h3.num], comb: `${h2.num} － ${h3.num} (◯－▲ タテ目防衛)`, hitProb: Math.max(13, pl.probWide(h2.num, h3.num)), baseOdds: w23.val, isLiveOdds: w23.isLive, isLs: (o2 >= 10 || o3 >= 10) }
       ];
       if (h4.num !== h3.num) {
-        coreDefs.push({ poolKey: "wide", nums: [h1.num, h4.num], comb: `${h1.num} － ${h4.num} (◎－☆ 強制結線)`, hitProb: Math.max(11, pl.probWide(h1.num, h4.num)), baseOdds: Math.max(2.6, Number((Math.sqrt(o1*o4)*0.75).toFixed(1))), isLs: (o1 >= 10 || o4 >= 10) });
+        coreDefs.push({ poolKey: "wide", nums: [h1.num, h4.num], comb: `${h1.num} － ${h4.num} (◎－☆ 強制結線)`, hitProb: Math.max(11, pl.probWide(h1.num, h4.num)), baseOdds: w14.val, isLiveOdds: w14.isLive, isLs: (o1 >= 10 || o4 >= 10) });
       }
 
       const rawW = coreDefs.map(d => targetRet / d.baseOdds);
@@ -751,17 +954,34 @@
       const u12 = Math.max(100, Math.round((remAlpha * 0.58) / 100) * 100);
       const u13 = Math.max(100, remAlpha - u12);
 
-      return [
+      const coreAnyHit = pl.calcCoreAnyHit(coreRows.map(c => c.nums));
+      const allRows = [
         ...coreRows,
-        { poolKey: "umaren", nums: [h1.num, h2.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h2.num} (◎－◯)`, points: 1, amt: u12, hitProb: Math.max(7, pl.probQuinella(h1.num, h2.num)), baseOdds: Number((coreDefs[0].baseOdds * 2.4).toFixed(1)), isSynthetic: false },
-        { poolKey: "umaren", nums: [h1.num, h3.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h3.num} (◎－▲)`, points: 1, amt: u13, hitProb: Math.max(5.5, pl.probQuinella(h1.num, h3.num)), baseOdds: Number((coreDefs[1].baseOdds * 2.5).toFixed(1)), isSynthetic: false },
+        { poolKey: "umaren", nums: [h1.num, h2.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h2.num} (◎－◯)`, points: 1, amt: u12, hitProb: Math.max(7, pl.probQuinella(h1.num, h2.num)), baseOdds: Number((w12.val * 2.4).toFixed(1)), isSynthetic: false },
+        { poolKey: "umaren", nums: [h1.num, h3.num], zone: "Alpha (超過収益)", type: "馬連", comb: `${h1.num} － ${h3.num} (◎－▲)`, points: 1, amt: u13, hitProb: Math.max(5.5, pl.probQuinella(h1.num, h3.num)), baseOdds: Number((w13.val * 2.5).toFixed(1)), isSynthetic: false },
         { poolKey: "sanrenpuku", row1, row2, row3, zone: "Alpha (超過収益)", type: "3連複F", comb: `(${row1.join(",")}) － (${row2.join(",")}) － (${row3.join(",")})`, points: trio.points, amt: trioAmt, hitProb: trio.hitProb, baseOdds: Number((240.0 / trio.hitProb).toFixed(1)), isSynthetic: true }
       ];
+      return { rows: allRows, coreRows, coreAnyHit };
+    }
+
+    function copyActiveRaceTickets() {
+      const race = state.activeRace;
+      if (!race || !LAST_MODAL_TICKETS.length) return;
+      const lines = [
+        `【${race.venue}${race.r}R ${race.name}】予算 ${state.modalBudget.toLocaleString()}円 (Neon Core Shield)`,
+        ...LAST_MODAL_TICKETS.map(t => {
+          const perPt = Math.max(100, Math.round((t.amt / t.points) / 100) * 100);
+          const ptStr = t.points > 1 ? ` (${t.points}点×${perPt}円=計${t.amt.toLocaleString()}円)` : ` ${t.amt.toLocaleString()}円`;
+          return `・${t.type} ${t.comb}${ptStr}`;
+        })
+      ];
+      copyToClipboard(lines.join("\n"), "📋 買い目をコピーしました");
     }
 
     function onModalBudgetChange(val) {
       const B = Number(val);
       state.modalBudget = B;
+      savePersistedState();
       document.getElementById("modalBudgetSlider").value = B;
       document.getElementById("modalBudgetValue").textContent = `${B.toLocaleString()}円`;
 
@@ -770,18 +990,28 @@
       bannerEl.classList.add("hidden");
 
       if (!race || !race.horses || race.horses.length < 3) {
+        LAST_MODAL_TICKETS = [];
         document.getElementById("modalTicketsList").innerHTML = `<div class="text-xs text-slate-400 p-2">出馬表確定後に買い目が自動算出されます。</div>`;
         return;
       }
       if (race.rank === "Pass") {
+        LAST_MODAL_TICKETS = [];
         document.getElementById("modalTicketsList").innerHTML = `<div class="bg-slate-950 border border-slate-800 rounded-xl p-3 text-xs text-slate-300">💤 見送り（Pass / 推奨購入額 0円）</div>`;
         return;
       }
 
-      const allScaled = buildFullSkillTickets(race, B);
+      const built = buildFullSkillTickets(race, B);
+      const allScaled = built.rows;
+      LAST_MODAL_TICKETS = allScaled;
+
       const totalInvest = allScaled.reduce((s, t) => s + t.amt, 0);
       let totalExpectedReturn = 0, totalActualReturn = 0, hitCount = 0;
       const hasResult = race.actualTop3 && race.actualTop3.length > 0 && race.payouts;
+
+      const minCoreDropReturn = built.coreRows.length > 0
+        ? Math.min(...built.coreRows.map(c => Math.round(c.amt * c.baseOdds * 0.85)))
+        : 0;
+      const dropSafePct = Math.round((minCoreDropReturn / Math.max(1, totalInvest)) * 100);
 
       document.getElementById("modalTicketsList").innerHTML = allScaled.map((t, idx) => {
         const key = `${race.id}-row-${idx}`;
@@ -814,6 +1044,7 @@
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="text-xs">${res.checked ? (res.hit ? "🎯" : "❌") : (checked ? "✅" : "⬜")}</span>
                 <span class="text-[10px] font-bold px-1.5 py-0.5 rounded ${isCore ? "bg-emerald-500/20 text-emerald-300 border border-emerald-500/40" : "bg-amber-500/20 text-amber-300 border border-amber-500/40"}">${t.zone}</span>
+                ${t.isLiveOdds ? `<span class="text-[9px] bg-sky-500/20 text-sky-300 px-1 py-0.5 rounded font-bold">実オッズ</span>` : ""}
               </div>
               <div class="text-right shrink-0 whitespace-nowrap">
                 <span class="text-xs text-slate-400">購入額</span>
@@ -854,16 +1085,30 @@
       }
 
       const overallRoi = ((totalExpectedReturn / Math.max(1, totalInvest)) * 100).toFixed(1);
+      const dropWarn = dropSafePct < 90
+        ? `<span class="text-rose-300 font-bold">⚠️ -15%下落時 最悪${minCoreDropReturn.toLocaleString()}円 (${dropSafePct}%) ※トリガミ注意</span>`
+        : `<span class="text-sky-300">🛡️ -15%下落耐性: 最悪単発 ${minCoreDropReturn.toLocaleString()}円 (${dropSafePct}%)</span>`;
+
       document.getElementById("modalPortfolioMetrics").innerHTML = `
         <div class="flex items-center justify-between flex-wrap gap-1">
-          <span>合計購入額: <b class="text-white">${totalInvest.toLocaleString()}円 (全${allScaled.length}行・単一穴30%上限)</b></span>
+          <span>合計購入額: <b class="text-white">${totalInvest.toLocaleString()}円 (全${allScaled.length}行・Core的中率 ${built.coreAnyHit.toFixed(1)}%)</b></span>
           <span>${hasResult ? `確定払戻合計: <b class="text-amber-300">${totalActualReturn.toLocaleString()}円 (実ROI ${((totalActualReturn/Math.max(1,totalInvest))*100).toFixed(1)}%)</b>` : `期待払戻総額: <b class="text-emerald-400">${totalExpectedReturn.toLocaleString()}円 (期待ROI ${overallRoi}%)</b>`}</span>
+        </div>
+        <div class="pt-1 border-t border-slate-800/80 flex items-center justify-between flex-wrap gap-1 text-[10px]">
+          ${dropWarn}
+          <span class="text-slate-400">単一穴馬30%上限適用済</span>
         </div>
       `;
     }
 
-    function toggleTicketCheck(key) { state.checkedTickets[key] = !state.checkedTickets[key]; onModalBudgetChange(state.modalBudget); }
+    function toggleTicketCheck(key) {
+      state.checkedTickets[key] = !state.checkedTickets[key];
+      if (!state.checkedTickets[key]) delete state.checkedTickets[key];
+      savePersistedState();
+      onModalBudgetChange(state.modalBudget);
+    }
 
+    // ===== WIN5 / トリプル馬単（v11.1 完全直交3枚Plan C + Plan A） =====
     function computeOptimalCounts(legs, maxPoints, weightFn, initCounts) {
       const nLegs = legs.length, counts = initCounts.slice(0, nLegs);
       while (true) {
@@ -883,18 +1128,91 @@
       return counts;
     }
 
-    function calcJointCapture(legs, counts) {
-      let p = 1.0;
-      for (let r = 0; r < legs.length; r++) {
-        p *= Math.min(0.99, (legs[r].horses || []).slice(0, counts[r]).reduce((s, h) => s + (Number(h.f) || 10), 0) / 100);
+    function buildOrthogonalPlanC(legs, totalMaxPts) {
+      const nLegs = legs.length;
+      const initArr = new Array(nLegs).fill(1);
+      const t1Cap = Math.max(4, Math.floor(totalMaxPts * 0.45));
+      const c1 = computeOptimalCounts(legs, t1Cap, (l, r, i, f) => f, initArr);
+      const t1Slices = legs.map((lg, r) => (lg.horses || []).slice(0, c1[r]));
+      const pts1 = t1Slices.reduce((a, s) => a * Math.max(1, s.length), 1);
+
+      const remAfterT1 = Math.max(0, totalMaxPts - pts1);
+      const rankedWingLegs = legs
+        .map((lg, r) => ({
+          r,
+          avail: Math.max(0, (lg.horses || []).length - c1[r]),
+          score: (lg.typeBPlus ? 30 : 0) + (100 - (Number(lg.horses?.[0]?.f) || 20))
+        }))
+        .filter(x => x.avail >= 1)
+        .sort((a, b) => b.score - a.score);
+
+      const tickets = [{
+        id: "T1", role: "最密核Core (45%上限)", slices: t1Slices, points: pts1
+      }];
+
+      if (rankedWingLegs.length >= 1 && remAfterT1 >= 2) {
+        const w1Leg = rankedWingLegs[0].r;
+        const hasW2 = rankedWingLegs.length >= 2 && remAfterT1 >= 6;
+        const t2Budget = hasW2 ? Math.max(2, Math.floor(remAfterT1 * 0.55)) : remAfterT1;
+
+        const w1Count = Math.min(rankedWingLegs[0].avail, Math.max(1, Math.min(3, Math.floor(t2Budget / 2) || 1)));
+        const t2Counts = c1.map((c, r) => r === w1Leg ? w1Count : 1);
+        const t2Expanded = computeOptimalCounts(
+          legs.map((lg, r) => ({ ...lg, horses: r === w1Leg ? lg.horses.slice(c1[r], c1[r] + w1Count) : lg.horses.slice(0, c1[r]) })),
+          t2Budget,
+          (l, r, i, f) => (r === w1Leg ? -1 : f),
+          t2Counts
+        );
+        const t2Slices = legs.map((lg, r) => r === w1Leg ? lg.horses.slice(c1[r], c1[r] + w1Count) : lg.horses.slice(0, t2Expanded[r]));
+        const pts2 = t2Slices.reduce((a, s) => a * Math.max(1, s.length), 1);
+        tickets.push({
+          id: "T2", role: `第1直交翼 (Leg${w1Leg + 1}波乱拡張)`, slices: t2Slices, points: pts2, wingLeg: w1Leg
+        });
+
+        const remAfterT2 = Math.max(0, totalMaxPts - pts1 - pts2);
+        if (hasW2 && remAfterT2 >= 2) {
+          const w2Leg = rankedWingLegs[1].r;
+          const w2Count = Math.min(rankedWingLegs[1].avail, Math.max(1, Math.min(3, Math.floor(remAfterT2 / 2) || 1)));
+          const t3Counts = c1.map((c, r) => r === w2Leg ? w2Count : 1);
+          const t3Expanded = computeOptimalCounts(
+            legs.map((lg, r) => ({ ...lg, horses: r === w2Leg ? lg.horses.slice(c1[r], c1[r] + w2Count) : lg.horses.slice(0, c1[r]) })),
+            remAfterT2,
+            (l, r, i, f) => (r === w2Leg ? -1 : f),
+            t3Counts
+          );
+          const t3Slices = legs.map((lg, r) => r === w2Leg ? lg.horses.slice(c1[r], c1[r] + w2Count) : lg.horses.slice(0, t3Expanded[r]));
+          const pts3 = t3Slices.reduce((a, s) => a * Math.max(1, s.length), 1);
+          tickets.push({
+            id: "T3", role: `第2直交翼 (Leg${w2Leg + 1}波乱拡張)`, slices: t3Slices, points: pts3, wingLeg: w2Leg
+          });
+        }
       }
-      return (p * 100).toFixed(1);
+      return tickets;
     }
 
-    function formatLegNums(leg, k, isTriple) {
-      const hs = (leg.horses || []).slice(0, k);
+    function calcTicketHitProb(slices) {
+      let p = 1.0;
+      for (const hs of slices) {
+        p *= Math.min(0.99, hs.reduce((s, h) => s + (Number(h.f) || 8), 0) / 100);
+      }
+      return p * 100;
+    }
+
+    function formatSliceNums(hs, isTriple) {
       if (!isTriple) return hs.map(h => `${h.num}番`).join(", ");
-      return `1着(${hs.slice(0, Math.max(1, Math.ceil(k/2))).map(h=>h.num).join(",")}) → 2着(${hs.map(h=>h.num).join(",")})`;
+      const k = hs.length;
+      return `1着(${hs.slice(0, Math.max(1, Math.ceil(k/2))).map(h=>h.num).join(",")})→2着(${hs.map(h=>h.num).join(",")})`;
+    }
+
+    function isSlicePickedHit(hs, actualTop3, isTriple) {
+      if (!actualTop3 || actualTop3.length === 0) return null;
+      const w1 = Number(actualTop3[0].num);
+      if (!isTriple) return hs.some(h => Number(h.num) === w1);
+      if (actualTop3.length < 2) return null;
+      const w2 = Number(actualTop3[1].num);
+      const firsts = hs.slice(0, Math.max(1, Math.ceil(hs.length / 2))).map(h => Number(h.num));
+      const seconds = hs.map(h => Number(h.num));
+      return firsts.includes(w1) && seconds.includes(w2);
     }
 
     function findActiveMultiLegWithDay() {
@@ -919,21 +1237,15 @@
       return (r && Array.isArray(r.actualTop3) && r.actualTop3.length > 0) ? r.actualTop3 : [];
     }
 
-    function isLegPickedHit(leg, k, actualTop3, isTriple) {
-      if (!actualTop3 || actualTop3.length === 0) return null;
-      const hs = (leg.horses || []).slice(0, k);
-      const w1 = Number(actualTop3[0].num);
-      if (!isTriple) return hs.some(h => Number(h.num) === w1);
-      if (actualTop3.length < 2) return null;
-      const w2 = Number(actualTop3[1].num);
-      const firsts = hs.slice(0, Math.max(1, Math.ceil(k / 2))).map(h => Number(h.num));
-      const seconds = hs.map(h => Number(h.num));
-      return firsts.includes(w1) && seconds.includes(w2);
+    function copyWin5Tickets() {
+      if (!LAST_WIN5_COPY_TEXT) return;
+      copyToClipboard(LAST_WIN5_COPY_TEXT, "📋 フォーメーションをコピーしました");
     }
 
     function updateWin5Budget(val) {
       const budget = Math.max(5000, Math.min(50000, Number(val)));
       state.win5Budget = budget;
+      savePersistedState();
       document.getElementById("win5BudgetSlider").value = budget;
       document.getElementById("win5BudgetHeader").textContent = `${budget.toLocaleString()}円`;
 
@@ -944,6 +1256,7 @@
       resBanner.classList.add("hidden");
 
       if (!found) {
+        LAST_WIN5_COPY_TEXT = "";
         aiBadge.textContent = "待機中";
         document.getElementById("win5SummaryText").textContent = isNar
           ? "地方開催の最終10R〜12R出馬表を取得するとトリプル馬単が自動編成されます。"
@@ -967,34 +1280,39 @@
       const totalMaxPts = Math.floor(budget / unitYen), initArr = new Array(nLegs).fill(1);
 
       const countsA = computeOptimalCounts(legs, totalMaxPts, (l, r, i, f) => f, initArr);
-      const ptsA = countsA.reduce((a, b) => a * b, 1);
+      const slicesA = legs.map((lg, r) => (lg.horses || []).slice(0, countsA[r]));
+      const ptsA = slicesA.reduce((a, s) => a * Math.max(1, s.length), 1);
+      const probA = calcTicketHitProb(slicesA);
 
-      // Plan C (v11.1 直交シェル: T1 Core 45%上限 + T2/T3 Wing)
-      const countsC1 = computeOptimalCounts(legs, Math.max(4, Math.floor(totalMaxPts * 0.45)), (l, r, i, f) => f, initArr);
-      const ptsC1 = countsC1.reduce((a, b) => a * b, 1);
-      let anchorLeg = nLegs - 1, maxTopF = -1;
-      legs.forEach((lg, idx) => { const tf = Number(lg.horses?.[0]?.f) || 0; if (!lg.typeBPlus && tf > maxTopF) { maxTopF = tf; anchorLeg = idx; } });
-      const countsC2 = computeOptimalCounts(legs, Math.max(4, totalMaxPts - ptsC1), (lg, r, i, f) => (r === anchorLeg ? -1 : (lg.typeBPlus ? f * 1.75 : f * 0.9)), initArr);
-      const ptsC2 = countsC2.reduce((a, b) => a * b, 1);
+      const planCTickets = buildOrthogonalPlanC(legs, totalMaxPts);
+      const ptsC = planCTickets.reduce((s, t) => s + t.points, 0);
+      const probC = planCTickets.reduce((s, t) => s + calcTicketHitProb(t.slices), 0);
 
-      const legResults = legs.map((lg, r) => {
-        const top3 = resolveLegActualTop3(lg, dayRef);
-        const hA = isLegPickedHit(lg, countsA[r], top3, isNar);
-        const hC1 = isLegPickedHit(lg, countsC1[r], top3, isNar);
-        const hC2 = isLegPickedHit(lg, countsC2[r], top3, isNar);
-        return { top3, done: top3.length > 0, hA, hC1, hC2 };
-      });
-      const doneCnt = legResults.filter(x => x.done).length;
-      const hitCntA = legResults.filter(x => x.hA === true).length;
-      const hitCntC1 = legResults.filter(x => x.hC1 === true).length;
-      const hitCntC2 = legResults.filter(x => x.hC2 === true).length;
+      const actualPerLeg = legs.map(lg => resolveLegActualTop3(lg, dayRef));
+      const doneCnt = actualPerLeg.filter(x => x.length > 0).length;
+      const hitsA = legs.map((_, r) => isSlicePickedHit(slicesA[r], actualPerLeg[r], isNar));
+      const hitCntA = hitsA.filter(x => x === true).length;
       const winA = (doneCnt === nLegs && hitCntA === nLegs);
-      const winC = (doneCnt === nLegs && (hitCntC1 === nLegs || hitCntC2 === nLegs));
+
+      const ticketResultsC = planCTickets.map(t => {
+        const legHits = t.slices.map((sl, r) => isSlicePickedHit(sl, actualPerLeg[r], isNar));
+        const cnt = legHits.filter(x => x === true).length;
+        return { ...t, legHits, hitCnt: cnt, won: (doneCnt === nLegs && cnt === nLegs) };
+      });
+      const winC = ticketResultsC.some(t => t.won);
+
+      const labelName = isNar ? "トリプル馬単" : "WIN5";
+      LAST_WIN5_COPY_TEXT = [
+        `【${dataObj.date || ""} ${labelName} Plan C（合計 ${(ptsC*unitYen).toLocaleString()}円 / ${ptsC}組）】`,
+        ...planCTickets.map(t =>
+          `${t.id} ${t.role} (${(t.points*unitYen).toLocaleString()}円/${t.points}組)\n` +
+          t.slices.map((sl, r) => `  Leg${r+1}(${legs[r].venue}): [${formatSliceNums(sl, isNar)}]`).join("\n")
+        )
+      ].join("\n\n");
 
       if (doneCnt > 0) {
         const anyJackpot = winA || winC;
         const payNum = Number(dataObj.officialPayout) || 0;
-        const labelName = isNar ? "トリプル馬単" : "WIN5";
         resBanner.className = `rounded-xl p-3 space-y-2 border ${anyJackpot ? "bg-emerald-950/70 border-emerald-400" : "bg-slate-950/90 border-slate-700"}`;
         resBanner.innerHTML = `
           <div class="flex items-center justify-between flex-wrap gap-1">
@@ -1004,13 +1322,13 @@
               : `<span class="text-xs text-amber-300 font-bold">${doneCnt === nLegs ? "全レース確定" : "進行中"}</span>`}
           </div>
           <div class="grid grid-cols-2 gap-2 text-xs">
+            <div class="bg-slate-900 border ${winC ? "border-emerald-400" : "border-slate-800"} rounded-lg p-2">
+              <div class="text-[10px] text-slate-400">Plan C (${(ptsC*unitYen).toLocaleString()}円)</div>
+              <div class="font-extrabold ${winC ? "text-emerald-300" : "text-white"} mt-0.5">${winC ? "🏆 全勝的中！" : ticketResultsC.map(t=>`${t.id}:${t.hitCnt}/${doneCnt}`).join("・")}</div>
+            </div>
             <div class="bg-slate-900 border ${winA ? "border-emerald-400" : "border-slate-800"} rounded-lg p-2">
               <div class="text-[10px] text-slate-400">Plan A (${(ptsA*unitYen).toLocaleString()}円)</div>
               <div class="font-extrabold ${winA ? "text-emerald-300" : "text-white"} mt-0.5">${winA ? "🏆 全勝的中！" : `${hitCntA} / ${doneCnt} 確定R的中`}</div>
-            </div>
-            <div class="bg-slate-900 border ${winC ? "border-emerald-400" : "border-slate-800"} rounded-lg p-2">
-              <div class="text-[10px] text-slate-400">Plan C (${((ptsC1+ptsC2)*unitYen).toLocaleString()}円)</div>
-              <div class="font-extrabold ${winC ? "text-emerald-300" : "text-white"} mt-0.5">${winC ? "🏆 全勝的中！" : `T1:${hitCntC1}/${doneCnt} ・ T2:${hitCntC2}/${doneCnt}`}</div>
             </div>
           </div>
           ${payNum > 0 ? `<div class="text-xs bg-amber-500/15 border border-amber-400/40 text-amber-200 rounded-lg px-2.5 py-1.5 font-bold flex items-center justify-between"><span>💰 公式${labelName}払戻金</span><span>${payNum.toLocaleString()}円</span></div>` : ""}
@@ -1018,56 +1336,71 @@
       }
 
       const markIcon = (val) => val === true ? " 🎯" : (val === false ? " ❌" : "");
+      const tColors = ["text-sky-300", "text-rose-300", "text-amber-300"];
 
       document.getElementById("win5PlansAllocationBox").innerHTML = `
         <div class="bg-slate-900 border ${winC ? "border-emerald-400" : "border-amber-500/40"} rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2 flex-wrap">
-            <div><span class="bg-amber-500/20 text-amber-300 text-[11px] font-extrabold px-2 py-0.5 rounded">Plan C（Neon確率シェル・T1 45%上限）</span> <span class="text-xs text-slate-300 font-bold ml-1">最大指標 ${calcJointCapture(legs, countsC1.map((c,r)=>Math.max(c,countsC2[r])))}%</span></div>
-            <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">合計 ${((ptsC1+ptsC2)*unitYen).toLocaleString()}円 (計${ptsC1+ptsC2}組)</span>
+            <div>
+              <span class="bg-amber-500/20 text-amber-300 text-[11px] font-extrabold px-2 py-0.5 rounded">Plan C（完全直交${ticketResultsC.length}枚・T1≤45%）</span>
+              <span class="text-xs text-emerald-300 font-bold ml-1">合算突破 ${probC.toFixed(2)}%</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">${(ptsC*unitYen).toLocaleString()}円 (${ptsC}組)</span>
+              <button onclick="copyWin5Tickets()" class="text-[10px] bg-indigo-500/25 border border-indigo-400/50 text-indigo-200 font-bold px-2 py-0.5 rounded">📋 コピー</button>
+            </div>
           </div>
-          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
-            <div class="flex items-center justify-between text-xs font-bold"><span class="text-sky-300">🎫 T1 Coreシェル（45%上限：${countsC1.join("×")}）</span><span class="text-amber-300">${(ptsC1*unitYen).toLocaleString()}円 (${ptsC1}組)</span></div>
-            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="text-sky-300">[${formatLegNums(lg, countsC1[r], isNar)}]</b>${markIcon(legResults[r].hC1)}</div>`).join("")}</div>
-          </div>
-          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
-            <div class="flex items-center justify-between text-xs font-bold"><span class="text-rose-300">🎯 T2 Wingシェル（Leg${anchorLeg+1}軸×波乱拡張：${countsC2.join("×")}）</span><span class="text-amber-300">${(ptsC2*unitYen).toLocaleString()}円 (${ptsC2}組)</span></div>
-            <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="${lg.typeBPlus ? "text-rose-300" : "text-slate-200"}">[${formatLegNums(lg, countsC2[r], isNar)}]</b>${markIcon(legResults[r].hC2)}</div>`).join("")}</div>
-          </div>
+          ${ticketResultsC.map((t, ti) => `
+            <div class="bg-slate-950 border ${t.won ? "border-emerald-400" : "border-slate-800"} rounded-lg p-2.5 space-y-1">
+              <div class="flex items-center justify-between text-xs font-bold gap-2">
+                <span class="${tColors[ti % 3]}">🎫 ${t.id} ${t.role} (${t.slices.map(s=>s.length).join("×")})</span>
+                <span class="text-amber-300 whitespace-nowrap">${(t.points*unitYen).toLocaleString()}円 (${t.points}組)</span>
+              </div>
+              <div class="text-xs font-mono text-slate-200 space-y-0.5 break-words">
+                ${t.slices.map((sl, r) => `<div><span class="text-slate-400">Leg${r+1}:</span> <b class="${t.wingLeg === r ? "text-rose-300" : tColors[ti % 3]}">[${formatSliceNums(sl, isNar)}]</b>${markIcon(t.legHits[r])}</div>`).join("")}
+              </div>
+            </div>
+          `).join("")}
         </div>
         <div class="bg-slate-900 border ${winA ? "border-emerald-400" : "border-emerald-500/40"} rounded-xl p-3 space-y-2">
           <div class="flex items-center justify-between gap-2 flex-wrap">
-            <div><span class="bg-emerald-500/20 text-emerald-300 text-[11px] font-extrabold px-2 py-0.5 rounded">Plan A（標準・1枚構成）</span> <span class="text-xs text-slate-300 font-bold ml-1">突破指標 ${calcJointCapture(legs, countsA)}%</span></div>
+            <div><span class="bg-emerald-500/20 text-emerald-300 text-[11px] font-extrabold px-2 py-0.5 rounded">Plan A（標準・1枚構成）</span> <span class="text-xs text-slate-300 font-bold ml-1">突破指標 ${probA.toFixed(2)}%</span></div>
             <span class="text-sm font-extrabold text-amber-300 whitespace-nowrap">${(ptsA*unitYen).toLocaleString()}円 (${ptsA}組×${unitYen}円)</span>
           </div>
           <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 text-xs space-y-1 font-mono leading-relaxed break-words">
-            ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}(${lg.venue} ${lg.postTime||""}):</span> <b class="text-emerald-300">[${formatLegNums(lg, countsA[r], isNar)}]</b>${markIcon(legResults[r].hA)}</div>`).join("")}
+            ${legs.map((lg, r) => `<div><span class="text-slate-400">Leg${r+1}(${lg.venue} ${lg.postTime||""}):</span> <b class="text-emerald-300">[${formatSliceNums(slicesA[r], isNar)}]</b>${markIcon(hitsA[r])}</div>`).join("")}
           </div>
         </div>
       `;
 
       document.getElementById("win5LegsContainer").innerHTML = legs.map((leg, idx) => {
-        const kA = countsA[idx], kC = Math.max(countsC1[idx], countsC2[idx]);
-        const lr = legResults[idx];
-        const winNum = lr.done ? Number(lr.top3[0].num) : -1;
-        const secNum = (lr.done && lr.top3.length > 1) ? Number(lr.top3[1].num) : -1;
+        const pickedSetC = new Set();
+        planCTickets.forEach(t => t.slices[idx].forEach(h => pickedSetC.add(Number(h.num))));
+        const pickedSetA = new Set(slicesA[idx].map(h => Number(h.num)));
+        const top3 = actualPerLeg[idx];
+        const done = top3.length > 0;
+        const winNum = done ? Number(top3[0].num) : -1;
+        const secNum = (done && top3.length > 1) ? Number(top3[1].num) : -1;
+        const hitLegC = ticketResultsC.some(t => t.legHits[idx] === true);
+        const hitLegA = hitsA[idx] === true;
+
         let legResultHtml = "";
-        if (lr.done) {
-          const wInfo = isNar && lr.top3.length > 1
-            ? `1着:${lr.top3[0].num}番${lr.top3[0].name} → 2着:${lr.top3[1].num}番${lr.top3[1].name}`
-            : `1着:${lr.top3[0].num}番 ${lr.top3[0].name} (単勝${lr.top3[0].odds}倍)`;
-          const hitC = lr.hC1 || lr.hC2;
+        if (done) {
+          const wInfo = isNar && top3.length > 1
+            ? `1着:${top3[0].num}番${top3[0].name} → 2着:${top3[1].num}番${top3[1].name}`
+            : `1着:${top3[0].num}番 ${top3[0].name} (単勝${top3[0].odds}倍)`;
           legResultHtml = `
-            <div class="bg-slate-950 border ${lr.hA || hitC ? "border-emerald-500/60" : "border-rose-500/40"} rounded-lg p-2 text-xs space-y-1">
+            <div class="bg-slate-950 border ${hitLegA || hitLegC ? "border-emerald-500/60" : "border-rose-500/40"} rounded-lg p-2 text-xs space-y-1">
               <div class="font-bold text-amber-300">🏁 確定: ${wInfo}</div>
               <div class="flex items-center gap-2 text-[11px] flex-wrap">
-                <span class="${hitC ? "text-emerald-300 font-bold" : "text-slate-400"}">Plan C: ${hitC ? "🎯的中" : "❌不的中"}</span>
-                <span class="${lr.hA ? "text-emerald-300 font-bold" : "text-slate-400"}">Plan A: ${lr.hA ? "🎯的中" : "❌不的中"}</span>
+                <span class="${hitLegC ? "text-emerald-300 font-bold" : "text-slate-400"}">Plan C: ${hitLegC ? "🎯的中" : "❌不的中"}</span>
+                <span class="${hitLegA ? "text-emerald-300 font-bold" : "text-slate-400"}">Plan A: ${hitLegA ? "🎯的中" : "❌不的中"}</span>
               </div>
             </div>
           `;
         }
         return `
-          <div class="bg-slate-900 border ${lr.done && (lr.hA || lr.hC1 || lr.hC2) ? "border-emerald-500/50" : "border-slate-800"} rounded-xl p-3 space-y-2">
+          <div class="bg-slate-900 border ${done && (hitLegA || hitLegC) ? "border-emerald-500/50" : "border-slate-800"} rounded-xl p-3 space-y-2">
             <div class="flex items-center justify-between gap-2 flex-wrap">
               <div class="flex items-center gap-1.5 flex-wrap">
                 <span class="bg-indigo-500/20 text-indigo-300 text-xs font-extrabold px-2 py-0.5 rounded">Leg ${leg.leg || (idx+1)}</span>
@@ -1075,7 +1408,7 @@
                 <span class="text-xs text-slate-400">${leg.postTime || ""}</span>
                 ${leg.wR != null ? `<span class="text-[10px] bg-slate-800 text-slate-300 px-1.5 py-0.5 rounded font-mono">wR=${Number(leg.wR).toFixed(2)}</span>` : ""}
               </div>
-              <span class="text-xs font-bold text-emerald-400 whitespace-nowrap">C:最大${kC}頭 / A:${kA}頭</span>
+              <span class="text-xs font-bold text-emerald-400 whitespace-nowrap">C:${pickedSetC.size}頭 / A:${pickedSetA.size}頭</span>
             </div>
             ${legResultHtml}
             <p class="text-[11px] text-slate-400 break-words">${leg.note || ""}</p>
@@ -1083,7 +1416,7 @@
               ${(leg.horses || []).map((h, hIdx) => {
                 const isWin = Number(h.num) === winNum;
                 const isSec = isNar && Number(h.num) === secNum;
-                const picked = (hIdx < kA || hIdx < kC);
+                const picked = pickedSetC.has(Number(h.num)) || pickedSetA.has(Number(h.num));
                 const fundTxt = h.fFund != null ? ` [基礎${h.fFund}%]` : "";
                 return `
                   <div class="text-xs p-2 rounded-lg border ${isWin ? "bg-amber-500/20 border-amber-400 text-white" : (picked ? "bg-emerald-950/30 border-emerald-500/40 text-white" : "bg-slate-950 border-slate-800 text-slate-500")} space-y-1">
@@ -1112,24 +1445,36 @@
       `).join("");
     }
 
+    // ===== 成績・回収率（AI比較・日別グラフ付き） =====
     function buildClientStatsFallback() {
-      const mk = () => ({ races: 0, hits: 0, invest: 0, ret: 0, passCount: 0, passSaved: 0, byRank: { S: {races:0,hits:0,invest:0,ret:0}, A: {races:0,hits:0,invest:0,ret:0}, New: {races:0,hits:0,invest:0,ret:0}, B: {races:0,hits:0,invest:0,ret:0} } });
-      const res = { updatedAt: "アプリ内集計", all: mk(), jra: mk(), nar: mk(), recentResults: [] };
+      const mk = () => ({
+        races: 0, hits: 0, invest: 0, ret: 0, passCount: 0, passSaved: 0,
+        byRank: { S: {races:0,hits:0,invest:0,ret:0}, A: {races:0,hits:0,invest:0,ret:0}, New: {races:0,hits:0,invest:0,ret:0}, B: {races:0,hits:0,invest:0,ret:0} },
+        bySource: { ai: {races:0,hits:0,invest:0,ret:0}, baseline: {races:0,hits:0,invest:0,ret:0} }
+      });
+      const res = { updatedAt: "アプリ内集計", all: mk(), jra: mk(), nar: mk(), dailyTrend: [], recentResults: [] };
       const feed = (db, modeKey) => {
         Object.keys(db).sort().reverse().forEach(dk => {
+          let dr = 0, dh = 0, di = 0, dret = 0;
           (db[dk].races || []).forEach(r => {
             if (r.rank === "Pass") {
               ["all", modeKey].forEach(sk => { res[sk].passCount++; res[sk].passSaved += 10000; });
             } else if (r.evalDone) {
               const rk = ["S","A","New","B"].includes(r.rank) ? r.rank : "B";
+              const srcK = r.aiPredicted ? "ai" : "baseline";
               const inv = Number(r.investedYen) || 10000, ret = Number(r.returnYen) || 0, hit = ret > 0;
+              dr++; di += inv; dret += ret; if (hit) dh++;
               ["all", modeKey].forEach(sk => {
                 const b = res[sk]; b.races++; b.invest += inv; b.ret += ret; if (hit) b.hits++;
                 const rb = b.byRank[rk]; rb.races++; rb.invest += inv; rb.ret += ret; if (hit) rb.hits++;
+                const sb = b.bySource[srcK]; sb.races++; sb.invest += inv; sb.ret += ret; if (hit) sb.hits++;
               });
-              res.recentResults.push({ date: dk.replace("_nar",""), mode: modeKey, rank: rk, race: `${r.venue}${r.r}R ${r.name}`, status: r.status, roi: Number(r.actualRoi)||0, returnYen: ret, investedYen: inv, isHit: hit, hits: r.hitTickets || [] });
+              res.recentResults.push({ date: dk.replace("_nar",""), mode: modeKey, rank: rk, ai: !!r.aiPredicted, race: `${r.venue}${r.r}R ${r.name}`, status: r.status, roi: Number(r.actualRoi)||0, returnYen: ret, investedYen: inv, isHit: hit, hits: r.hitTickets || [] });
             }
           });
+          if (dr > 0) {
+            res.dailyTrend.push({ date: dk.replace("_nar",""), mode: modeKey, races: dr, hits: dh, invest: di, ret: dret, roi: Number((dret * 100 / Math.max(1, di)).toFixed(1)) });
+          }
         });
       };
       feed(DB_JRA, "jra"); feed(DB_NAR, "nar");
@@ -1150,8 +1495,10 @@
     function setStatsRankFilter(rk) { state.statsRankFilter = rk; renderStats(); }
 
     function renderStats() {
-      const src = (STATS_DATA && STATS_DATA.all && STATS_DATA.all.byRank) ? STATS_DATA : buildClientStatsFallback();
+      const fallback = buildClientStatsFallback();
+      const src = (STATS_DATA && STATS_DATA.all && STATS_DATA.all.byRank) ? STATS_DATA : fallback;
       const sc = src[state.statsCircuit] || src.all;
+      const scFallback = fallback[state.statsCircuit] || fallback.all;
       const roi = sc.invest > 0 ? ((sc.ret / sc.invest) * 100).toFixed(1) : "--";
       const hitRate = sc.races > 0 ? ((sc.hits / sc.races) * 100).toFixed(1) : "--";
       const prof = (sc.ret || 0) - (sc.invest || 0);
@@ -1162,6 +1509,49 @@
       document.getElementById("statTotalHit").textContent = `${hitRate}%`;
       document.getElementById("statPassSaved").innerHTML = `${sc.hits||0}/${sc.races||0}R的中 ｜ Pass防衛 <b class="text-sky-300">${(sc.passSaved||0).toLocaleString()}円</b>`;
       document.getElementById("statUpdatedAt").textContent = `更新: ${src.updatedAt || "最新"}`;
+
+      const bs = sc.bySource || scFallback.bySource;
+      document.getElementById("statSourceCompare").innerHTML = [
+        { k: "ai", title: "🧠 AI本推論", cls: "text-emerald-300" },
+        { k: "baseline", title: "📊 事前算出", cls: "text-slate-300" }
+      ].map(item => {
+        const d = (bs && bs[item.k]) || { races: 0, hits: 0, invest: 0, ret: 0 };
+        const rRoi = d.invest > 0 ? ((d.ret / d.invest) * 100).toFixed(1) : "--";
+        const rHit = d.races > 0 ? ((d.hits / d.races) * 100).toFixed(1) : "--";
+        return `
+          <div class="bg-slate-950 border border-slate-800 rounded-lg p-2.5 space-y-1">
+            <div class="font-bold ${item.cls}">${item.title}</div>
+            <div class="text-base font-extrabold ${Number(rRoi) >= 100 ? "text-emerald-400" : (d.races > 0 ? "text-amber-300" : "text-slate-500")}">ROI ${rRoi}%</div>
+            <div class="text-[10px] text-slate-400">的中 ${rHit}% (${d.hits}/${d.races}R)</div>
+          </div>
+        `;
+      }).join("");
+
+      const trendList = (Array.isArray(src.dailyTrend) && src.dailyTrend.length > 0 ? src.dailyTrend : fallback.dailyTrend)
+        .filter(t => state.statsCircuit === "all" || t.mode === state.statsCircuit)
+        .slice(0, 8);
+      const trendBox = document.getElementById("statDailyTrendBox");
+      if (trendList.length > 0) {
+        trendBox.classList.remove("hidden");
+        document.getElementById("statDailyTrend").innerHTML = trendList.map(t => {
+          const wPct = Math.min(100, Math.max(4, Math.round((t.roi / 200) * 100)));
+          const barCls = t.roi >= 100 ? "bg-emerald-500" : (t.roi >= 70 ? "bg-amber-400" : "bg-rose-500");
+          const mTag = t.mode === "nar" ? "地方" : "JRA";
+          return `
+            <div class="space-y-0.5">
+              <div class="flex items-center justify-between text-[10px]">
+                <span class="text-slate-300 font-mono">${t.date.slice(5)} (${mTag}) ・ ${t.hits}/${t.races}R的中</span>
+                <span class="font-bold ${t.roi >= 100 ? "text-emerald-300" : "text-amber-300"}">${t.roi}%</span>
+              </div>
+              <div class="w-full h-2 bg-slate-950 border border-slate-800 rounded-full overflow-hidden">
+                <div class="h-full ${barCls} rounded-full" style="width:${wPct}%"></div>
+              </div>
+            </div>
+          `;
+        }).join("");
+      } else {
+        trendBox.classList.add("hidden");
+      }
 
       const br = sc.byRank || {};
       const rankDefs = [
@@ -1221,26 +1611,52 @@
       }).join("") : `<div class="text-slate-400 p-2">該当する確定レースログはまだありません。</div>`;
     }
 
-    async function syncGitHubLiveData() {
+    function copyPostRaceAuditPrompt() {
+      const day = getActiveDB()[state.selectedDate];
+      if (!day || !day.races) {
+        showToast("対象日のデータがありません");
+        return;
+      }
+      const settled = day.races.filter(r => r.evalDone && r.rank !== "Pass");
+      if (settled.length === 0) {
+        showToast("選択日に確定済みレースがありません");
+        return;
+      }
+      const lines = [
+        `以下の ${state.selectedDate} (${state.circuitMode.toUpperCase()}) 確定結果を事後検証（シナリオ・レーティング/融合・ポートフォリオの3要因分解）し、スキル改善パッチを提案してください。`,
+        ""
+      ];
+      settled.forEach(r => {
+        const top3 = (r.actualTop3 || []).map(a => `${a.rank}着:${a.num}${a.name}`).join("/");
+        const picks = (r.horses || []).slice(0, 4).map(h => `${h.mark}${h.num}${h.name}(f=${h.f}%)`).join(", ");
+        lines.push(`■ ${r.venue}${r.r}R ${r.name} [Rank:${r.rank} / ${r.aiPredicted ? "AI" : "事前"}]`);
+        lines.push(`  予想上位: ${picks}`);
+        lines.push(`  確定結果: ${top3} ｜ 回収率 ${r.actualRoi}% (${(r.returnYen||0).toLocaleString()}円)`);
+      });
+      copyToClipboard(lines.join("\n"), "📋 事後検証プロンプトをコピーしました");
+    }
+
+    async function syncGitHubLiveData(manual = false) {
       const syncBadge = document.getElementById("syncStatusBadge");
+      if (manual) syncBadge.textContent = "🔄 再取得中...";
       try {
-        const sRes = await fetch(`./data/stats.json?t=${Date.now()}`);
+        const sRes = await fetch(`./data/stats.json?t=${Date.now()}`, { cache: "no-store" });
         if (sRes.ok) { STATS_DATA = await sRes.json(); }
       } catch (e) {}
 
       try {
-        const res = await fetch(`./data/index.json?t=${Date.now()}`);
+        const res = await fetch(`./data/index.json?t=${Date.now()}`, { cache: "no-store" });
         if (!res.ok) { syncBadge.textContent = "🔄 データ待機中"; return; }
         const idx = await res.json();
         const shortSync = (idx.lastSync || "最新").replace(/^20\d\d-/, "").replace(" JST", "");
         syncBadge.textContent = `🔄 自動取得: ${shortSync}`;
-        syncBadge.className = "inline-block text-[11px] bg-emerald-950 border border-emerald-500/50 text-emerald-300 px-2.5 py-0.5 rounded-full cursor-pointer whitespace-nowrap";
+        syncBadge.className = "inline-block text-[11px] bg-emerald-950 border border-emerald-500/50 text-emerald-300 px-2.5 py-0.5 rounded-full cursor-pointer whitespace-nowrap active:scale-95 transition";
 
         const allKeys = [...(idx.availableDates || []), ...(idx.narDates || [])];
         const wdays = ["日", "月", "火", "水", "木", "金", "土"];
 
         for (const dateKey of allKeys) {
-          const dayRes = await fetch(`./data/${dateKey}.json?t=${Date.now()}`);
+          const dayRes = await fetch(`./data/${dateKey}.json?t=${Date.now()}`, { cache: "no-store" });
           if (!dayRes.ok) continue;
           const liveDay = await dayRes.json();
           if (!liveDay.races || liveDay.races.length === 0) continue;
@@ -1260,7 +1676,7 @@
             status: "live",
             biases: Array.isArray(liveDay.trackBiases) && liveDay.trackBiases.length > 0
               ? liveDay.trackBiases
-              : venues.map(v => ({ venue: v, surf: "Neon v7.0・実配当照合済", trend: "3シナリオ混合推論" })),
+              : venues.map(v => ({ venue: v, surf: "Neon v11.2・実配当照合済", trend: "3シナリオ混合推論" })),
             multiLeg: isWin5Day || isNar ? (liveDay.multiLeg || null) : null,
             races: liveDay.races.map((r, i) => ({
               id: r.raceId || `${dateKey}-${i}`,
@@ -1268,6 +1684,9 @@
               time: r.postTime || "", rank: r.rank || "B",
               skill: r.skill || (isNar ? "app-bayesian-nar" : "app-bayesian-horse-racing-text"),
               usedModel: r.usedModel || "", aiPredicted: !!r.aiPredicted,
+              weightsAnnounced: !!r.weightsAnnounced,
+              aiPredictedWithWeights: !!r.aiPredictedWithWeights,
+              wideOddsMap: r.wideOddsMap || null,
               roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "115%",
               hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "60%",
               pivot: r.pivotType || "Dual-Pivot", nLead: r.nLead || 3,
@@ -1290,12 +1709,22 @@
         }
 
         const keys = Object.keys(getActiveDB()).sort();
-        if (keys.length > 0) state.selectedDate = keys[keys.length - 1];
+        if (!state.selectedDate || !getActiveDB()[state.selectedDate]) {
+          if (keys.length > 0) state.selectedDate = keys[keys.length - 1];
+        }
         renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList(); updateWin5Budget(state.win5Budget); renderStats();
-      } catch (e) { console.warn("Sync skipped:", e); }
+        if (manual) showToast("✅ 最新データへ同期しました");
+      } catch (e) {
+        console.warn("Sync skipped:", e);
+        if (manual) showToast("⚠️ 同期に失敗しました");
+      }
     }
 
-    window.addEventListener("DOMContentLoaded", () => { syncGitHubLiveData(); });
+    document.addEventListener("keydown", e => { if (e.key === "Escape") closeRaceModal(); });
+    window.addEventListener("DOMContentLoaded", () => {
+      loadPersistedState();
+      syncGitHubLiveData(false);
+    });
   </script>
 </body>
 </html>
