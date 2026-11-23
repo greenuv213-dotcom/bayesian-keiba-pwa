@@ -21,7 +21,7 @@ except Exception:
 
 os.makedirs("data", exist_ok=True)
 
-ENGINE_VER = "v11.0-neon"
+ENGINE_VER = "v11.2-neon"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
@@ -112,22 +112,38 @@ def parse_payout_table(rsoup: BeautifulSoup) -> dict:
                 payouts[key].append({"nums": num_groups[idx], "pay": pay})
     return payouts
 
-def fetch_full_shutuba(rid: str, mode: str = "jra", need_shutuba: bool = True, need_result: bool = True) -> tuple[str, list, list, str, str, dict]:
+def fetch_full_shutuba(rid: str, mode: str = "jra", need_shutuba: bool = True, need_result: bool = True) -> tuple[str, list, list, str, str, dict, dict, bool]:
     base = "https://race.netkeiba.com" if mode == "jra" else "https://nar.netkeiba.com"
-    lines, top3_actual, raw_runners, odds_map = [], [], [], {}
+    lines, top3_actual, raw_runners, odds_map, wide_map = [], [], [], {}, {}
     track_cond, post_time, payouts = "良", "", {}
 
     if need_shutuba:
         api_path = "api_get_jra_odds.html" if mode == "jra" else "api_get_nar_odds.html"
+        # 1. 単勝実オッズ取得
         try:
             o_json = SESSION.get(f"{base}/api/{api_path}?race_id={rid}&type=1&action=init", timeout=5).json()
             o_dict = (o_json.get("data") or {}).get("odds", {}).get("1", {})
             if isinstance(o_dict, dict):
                 for k, val in o_dict.items():
-                    if isinstance(val, list) and val and str(val[0]).replace(".", "").isdigit():
+                    if isinstance(val, list) and val and re.match(r"^\d+(\.\d+)?$", str(val[0])):
                         odds_map[int(k)] = float(val[0])
         except Exception: pass
 
+        # 2. ワイド実オッズ取得（下限オッズを安全側ダッチングに使用）
+        try:
+            w_json = SESSION.get(f"{base}/api/{api_path}?race_id={rid}&type=5&action=init", timeout=5).json()
+            w_dict = (w_json.get("data") or {}).get("odds", {}).get("5", {})
+            if isinstance(w_dict, dict):
+                for k, val in w_dict.items():
+                    if len(str(k)) == 4 and str(k).isdigit() and isinstance(val, list) and val:
+                        low_s = str(val[0]).replace(",", "")
+                        if re.match(r"^\d+(\.\d+)?$", low_s):
+                            a, b = int(str(k)[:2]), int(str(k)[2:4])
+                            if a != b and float(low_s) >= 1.1:
+                                wide_map[f"{min(a,b)}-{max(a,b)}"] = round(float(low_s), 1)
+        except Exception: pass
+
+        # 3. 出馬表（馬体重・斤量・騎手・馬場状態）
         try:
             soup = get_soup(f"{base}/race/shutuba.html?race_id={rid}")
             r1, r2 = soup.select_one(".RaceData01"), soup.select_one(".RaceData02")
@@ -167,6 +183,7 @@ def fetch_full_shutuba(rid: str, mode: str = "jra", need_shutuba: bool = True, n
                 })
         except Exception: pass
 
+        # 4. 馬柱（血統・近4走）
         try:
             psoup = get_soup(f"{base}/race/shutuba_past.html?race_id={rid}")
             if not post_time:
@@ -228,9 +245,11 @@ def fetch_full_shutuba(rid: str, mode: str = "jra", need_shutuba: bool = True, n
         except Exception: pass
 
     raw_runners.sort(key=lambda x: x["num"])
+    wt_cnt = sum(1 for r in raw_runners if re.search(r"\d{3}\([+-]?\d+\)", str(r.get("weight", ""))))
+    weights_ready = bool(raw_runners) and (wt_cnt >= max(3, len(raw_runners) // 2))
     for r in raw_runners:
-        lines.append(f"{r['waku']}枠 {r['num']}番 {r['name']} (性齢:{r.get('sexAge','')} 斤量:{r.get('futan','')} {r.get('pedigree','')} 騎手:{r['jockey']} 馬体:{r['weight']} 単勝:{r['odds'] if r['odds']>1 else '未発売'}倍) | 近4走:{r['past']}")
-    return "\n".join(lines[:22]), top3_actual, raw_runners, track_cond, post_time, payouts
+        lines.append(f"{r['waku']}枠 {r['num']}番 {r['name']} (性齢:{r.get('sexAge','')} 斤量:{r.get('futan','')} {r.get('pedigree','')} 騎手:{r['jockey']} 馬体:{r['weight'] or '未発表'} 単勝:{r['odds'] if r['odds']>1 else '未発売'}倍) | 近4走:{r['past']}")
+    return "\n".join(lines[:22]), top3_actual, raw_runners, track_cond, post_time, payouts, wide_map, weights_ready
 
 def summarize_intraday_track_bias(races: list, venue: str) -> tuple[str, int]:
     """Neon v7.0: 3レース一致ガード付きの当日バイアス集計"""
@@ -288,9 +307,7 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
     for idx, r in enumerate(raw_runners):
         waku, jockey, wt, sex_age, futan, ped = r.get("waku", 4), r.get("jockey", ""), r.get("weight", ""), r.get("sexAge", ""), r.get("futan", ""), r.get("pedigree", "")
         pm, style = parsed[idx], parsed[idx]["style"]
-        odd = float(r.get("odds", 0))
 
-        # Stage 1: オッズ非依存基礎モデル（未出走新馬で成績皆無時のみ枠・騎手・血統ベース）
         if is_new:
             base_theta = 0.0
         else:
@@ -303,7 +320,6 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
         if "3" in sex_age and ft_val <= 55.0: delta_th += 0.14; delta_pl += 0.10; reasons.append(f"F:3歳{ft_val}kg(H:軽量)")
         elif ft_val >= 58.0: delta_th -= 0.12; delta_pl -= 0.08; reasons.append(f"F:斤量{ft_val}kg(H:酷量)")
 
-        # ダート新馬1-2枠未経験砂被りハザード / 芝発進ダート物理
         if is_new and is_dirt and waku <= 2:
             delta_th -= 0.28; delta_pl -= 0.14; is_hazard = True; reasons.append(f"F:ダ新馬{waku}枠(H:砂被り危)")
         elif is_turf_start:
@@ -319,7 +335,6 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
         elif -8 <= diff_w <= -2:
             delta_th += 0.08; reasons.append(f"F:馬体{diff_w}kg絞り(H:好仕上)")
 
-        # 3〜4歳ダート連勝中昇級馬ルール
         if is_dirt and pm["isStreakRiser"] and ("3" in sex_age or "4" in sex_age):
             delta_th += 0.14; delta_pl += 0.10; reasons.append("F:ダ連勝昇級(H:Riser加点)")
         if pm["isSilver"]:
@@ -332,7 +347,6 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
             delta_th += 0.10; reasons.append(f"F:{ped[:10]}(H:血統適性)")
 
         scen_shift = (0.12 * pi_s1 - 0.08 * pi_s3) if style in ("逃", "先") else (-0.08 * pi_s1 + 0.14 * pi_s3)
-        # Neon v7.0: 総シフト幅ソフトクランプ |ΣΔθ| <= 0.45, δ_place ∈ [-0.30, +0.25]
         clamped_th = max(-0.45, min(0.45, delta_th + scen_shift))
         clamped_pl = max(-0.30, min(0.25, delta_pl))
 
@@ -343,12 +357,10 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
         styles.append(style)
         clamp_flags.append(is_hazard)
 
-    # Stage 1 基礎勝率 fFund
     max_fl = max(fund_logits)
     w_fund = [math.exp((x - max_fl) * 1.05) for x in fund_logits]
     f_fund_probs = [x / sum(w_fund) * 100.0 for x in w_fund]
 
-    # FLB Power De-vigged 市場確率 q
     final_odds = [
         round(float(r["odds"]), 1) if (has_live_odds and r.get("odds", 0) > 1.0)
         else round(max(1.5, min(99.9, 80.0 / max(0.8, f_fund_probs[i]))), 1)
@@ -357,7 +369,6 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
     inv_power = [math.pow(max(1.1, o), -1.10) for o in final_odds]
     q_probs = [x / sum(inv_power) * 100.0 for x in inv_power]
 
-    # Stage 2: 2-Stage Benter ベイジアン融合 (θ_post = (1-w)*θ_fund + w*ln(q))
     post_logits, w_used_list = [], []
     for i in range(n):
         w_i = (0.10 if is_new else 0.15) if clamp_flags[i] else (base_wr if has_live_odds else 0.0)
@@ -370,13 +381,11 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
     w_post = [math.exp(x - max_pl) for x in post_logits]
     f_probs = [x / sum(w_post) * 100.0 for x in w_post]
 
-    # Stage-Adjusted Top2 / Top3（保存則 200% / 300%）
     w2 = [math.exp((post_logits[i] + place_deltas[i]) - max_pl) for i in range(n)]
     p2_raw = [0.46 * f_probs[i] + 0.54 * (w2[i] / sum(w2) * 100.0) for i in range(n)]
     top2_probs = [min(92.0, x * (200.0 / max(1.0, sum(p2_raw)))) for x in p2_raw]
     top3_probs = [min(96.0, x * (300.0 / max(1.0, sum(top2_probs)))) for x in top2_probs]
 
-    # 融合後3着内率＆突破力の総合順で印選定（◎は安全軸）
     order = sorted(range(n), key=lambda i: (f_probs[i] * 0.55 + top3_probs[i] * 0.45), reverse=True)
     if len(order) >= 2 and (parsed[order[0]]["isSilver"] or clamp_flags[order[0]]):
         order[0], order[1] = order[1], order[0]
@@ -398,14 +407,13 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
 
     horses_out = [{
         "mark": marks_map[i], "role": roles_map[i], "num": raw_runners[i]["num"], "name": raw_runners[i]["name"],
-        "style": styles[i],
+        "style": styles[i], "weight": raw_runners[i].get("weight", ""),
         "f": round(f_probs[i], 1), "fFund": round(f_fund_probs[i], 1),
         "q": round(q_probs[i], 1), "wUsed": w_used_list[i],
         "top2": round(top2_probs[i], 1), "top3": round(top3_probs[i], 1),
         "odds": final_odds[i], "comment": notes[i]
     } for i in order]
 
-    # Neonメタ指標: M3集中度・◎強制結線・反実仮想セルフ監査
     top3_sorted_f = sorted([h["f"] for h in horses_out], reverse=True)
     m3_val = round(sum(top3_sorted_f[:3]), 1)
     safe_nodes = [h for h in horses_out if h["mark"] not in ("危", "消", "無")]
@@ -431,8 +439,15 @@ def compute_bayesian_full_field(raw_runners: list, race_meta: dict, track_cond: 
     }
     return horses_out, n_lead, scen_w, neon_meta
 
+def lookup_wide_odds(wide_map: dict, a: int, b: int, fallback: float) -> float:
+    if isinstance(wide_map, dict):
+        val = wide_map.get(f"{min(a,b)}-{max(a,b)}")
+        if val and float(val) >= 1.1:
+            return float(val)
+    return fallback
+
 def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict]:
-    """Neon v7.0 的中率最大化 Core Shield (75% Drop-Buffered 11,800円ダッチング + ◎強制結線 + 穴30%上限) + Alpha (25%)"""
+    """Neon v7.0 的中率最大化 Core Shield（実ワイドオッズ優先・75%ダッチング＋Alpha 25%）"""
     horses = race.get("horses") or []
     sorted_h = sorted(horses, key=lambda x: (float(x.get("f", 0)) * 0.55 + float(x.get("top3", 0)) * 0.45), reverse=True)
     valid = [h for h in sorted_h if h.get("mark") not in ("消", "危", "無")]
@@ -446,20 +461,25 @@ def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict
     o2 = max(1.8, float(h2.get("odds", 6.0)))
     o3 = max(1.8, float(h3.get("odds", 7.5)))
     o4 = max(2.2, float(h4.get("odds", 10.0)))
+    wm = race.get("wideOddsMap") or {}
 
-    # Core Shield 75%: ◎×{○,▲,△1}強制結線 + ○-▲タテ目防衛 を11,800円目標でダッチング
     core_budget = int(round((B * 0.75) / 100) * 100)
     alpha_budget = max(500, B - core_budget)
     target_ret = 1.18 * B
     max_longshot = int(B * 0.30)
 
+    w12 = lookup_wide_odds(wm, h1["num"], h2["num"], max(1.8, round(math.sqrt(o1 * o2) * 0.62, 1)))
+    w13 = lookup_wide_odds(wm, h1["num"], h3["num"], max(2.1, round(math.sqrt(o1 * o3) * 0.68, 1)))
+    w23 = lookup_wide_odds(wm, h2["num"], h3["num"], max(2.4, round(math.sqrt(o2 * o3) * 0.72, 1)))
+    w14 = lookup_wide_odds(wm, h1["num"], h4["num"], max(2.6, round(math.sqrt(o1 * o4) * 0.75, 1)))
+
     core_pairs = [
-        ("wide", [h1["num"], h2["num"]], max(1.8, round(math.sqrt(o1 * o2) * 0.62, 1)), f"ワイド {h1['num']}-{h2['num']} (◎-◯ Core)", o1 >= 10 or o2 >= 10),
-        ("wide", [h1["num"], h3["num"]], max(2.1, round(math.sqrt(o1 * o3) * 0.68, 1)), f"ワイド {h1['num']}-{h3['num']} (◎-▲ Core)", o1 >= 10 or o3 >= 10),
-        ("wide", [h2["num"], h3["num"]], max(2.4, round(math.sqrt(o2 * o3) * 0.72, 1)), f"ワイド {h2['num']}-{h3['num']} (◯-▲ 防衛)", o2 >= 10 or o3 >= 10),
+        ("wide", [h1["num"], h2["num"]], w12, f"ワイド {h1['num']}-{h2['num']} (◎-◯ Core)", o1 >= 10 or o2 >= 10),
+        ("wide", [h1["num"], h3["num"]], w13, f"ワイド {h1['num']}-{h3['num']} (◎-▲ Core)", o1 >= 10 or o3 >= 10),
+        ("wide", [h2["num"], h3["num"]], w23, f"ワイド {h2['num']}-{h3['num']} (◯-▲ 防衛)", o2 >= 10 or o3 >= 10),
     ]
     if h4["num"] != h3["num"]:
-        core_pairs.append(("wide", [h1["num"], h4["num"]], max(2.6, round(math.sqrt(o1 * o4) * 0.75, 1)), f"ワイド {h1['num']}-{h4['num']} (◎-☆ 強制結線)", o1 >= 10 or o4 >= 10))
+        core_pairs.append(("wide", [h1["num"], h4["num"]], w14, f"ワイド {h1['num']}-{h4['num']} (◎-☆ 強制結線)", o1 >= 10 or o4 >= 10))
 
     raw_w = [target_ret / p[2] for p in core_pairs]
     sum_rw = max(1.0, sum(raw_w))
@@ -475,7 +495,6 @@ def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict
         if specs[0]["amt"] + diff >= 100:
             specs[0]["amt"] += diff
 
-    # Alpha 25%: 馬連◎-◯, 馬連◎-▲, コンパクト3連複F
     row1 = [h1["num"], h2["num"]]
     row2 = sorted({h2["num"], h3["num"]})
     row3 = sorted({h3["num"], h4["num"]} | {x["num"] for x in himos})
@@ -527,7 +546,6 @@ def call_gemini(skill: str, prompt: str, tier: str = "flash") -> dict:
     p = f"skills/{skill}/SKILL.md"
     sys_inst = open(p, "r", encoding="utf-8").read() if os.path.exists(p) else "Output valid JSON only."
 
-    # 廃止された gemini-2.5-flash は削除し、Hydrogen + 3.8-Flash の2モデル無料枠ハイブリッドへ統一
     if tier == "high_h":
         candidates = [(HIGH_TIER_MODEL, "HIGH"), (FAST_MODEL, "MEDIUM")]
     elif tier == "med_h":
@@ -684,7 +702,7 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
         })
     last_hs = legs[-1]["horses"][2:4]
     hedges = [{"num": h["num"], "name": f"{legs[-1]['venue']} {h['name']}", "odds": h["odds"], "hedge50k": int((50000 / max(1.5, h["odds"]) + 99) // 100 * 100), "hedge100k": int((100000 / max(1.5, h["odds"]) + 99) // 100 * 100)} for h in last_hs]
-    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} Neon v11.0 2-Stage融合編成（{'トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 Plan A/B/C対応'}）】", "legs": legs, "hedges": hedges}
+    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} Neon v11.2 2-Stage融合編成（{'トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 Plan A/C直交3枚対応'}）】", "legs": legs, "hedges": hedges}
 
 def should_check_result(date_str: str, post_time: str, now: datetime) -> bool:
     today_str = now.strftime("%Y-%m-%d")
@@ -694,6 +712,13 @@ def should_check_result(date_str: str, post_time: str, now: datetime) -> bool:
         pdt = datetime.strptime(f"{date_str} {post_time}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
         return now >= (pdt + timedelta(minutes=5))
     return now.hour >= 10
+
+def is_pre_post_window(date_str: str, post_time: str, now: datetime, low_m: int = 10, high_m: int = 90) -> bool:
+    if date_str != now.strftime("%Y-%m-%d"): return False
+    if not re.match(r"^\d{2}:\d{2}$", post_time or ""): return False
+    pdt = datetime.strptime(f"{date_str} {post_time}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
+    mins = (pdt - now).total_seconds() / 60.0
+    return low_m <= mins <= high_m
 
 def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool, mode: str = "jra"):
     log(f"Processing {date_str} ({mode}, {len(races)} races)")
@@ -716,32 +741,51 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         bad_time = (not r.get("postTime")) or (r.get("postTime") == "15:00" and r.get("raceNumber", 11) < 10)
         can_have_result = should_check_result(date_str, r.get("postTime", ""), now)
         need_res = can_have_result and ((not r.get("evalDone")) or (not r.get("actualTop3")))
-        need_sh = (not has_real) or bad_time or (not has_neon and not r.get("actualTop3"))
+        in_live_win = is_today and is_pre_post_window(date_str, r.get("postTime", ""), now, 10, 95)
+        need_live_refresh = in_live_win and (not r.get("weightsAnnounced") or not r.get("wideOddsMap"))
+        need_sh = (not has_real) or bad_time or (not has_neon and not r.get("actualTop3")) or need_live_refresh
 
         if not need_sh and not need_res:
             continue
 
-        detail, actual, raw_runners, track_cond, ptime, payouts = fetch_full_shutuba(r["raceId"], mode=mode, need_shutuba=need_sh, need_result=need_res)
+        detail, actual, raw_runners, track_cond, ptime, payouts, wide_map, weights_ready = fetch_full_shutuba(
+            r["raceId"], mode=mode, need_shutuba=need_sh, need_result=need_res
+        )
         if ptime: r["postTime"] = ptime
         if raw_runners and need_sh:
             base_horses, n_lead, scen_w, neon_meta = compute_bayesian_full_field(raw_runners, r, track_cond=track_cond)
             r["nLead"], r["trackCond"], r["scenarioWeights"] = n_lead, track_cond, scen_w
+            if wide_map:
+                top_nums = {h["num"] for h in base_horses[:10]}
+                r["wideOddsMap"] = {
+                    k: v for k, v in wide_map.items()
+                    if all(int(x) in top_nums for x in k.split("-"))
+                }
+            if weights_ready:
+                r["weightsAnnounced"] = True
             if not has_real or not r.get("aiPredicted"):
                 r["horses"] = base_horses
                 r["predicted"] = True
                 r.update(neon_meta)
                 r["scenario"] = f"{r['venueLabel']}({r['surfaceDist']}・{track_cond}) 実測N_lead={n_lead}頭 / 2-Stage融合(wR={neon_meta['wR']}, M3={neon_meta['m3']}%)。3シナリオ混合(S1:{scen_w['s1']}% / S2:{scen_w['s2']}% / S3:{scen_w['s3']}%)で全{len(base_horses)}頭を厳密演算。"
+            else:
+                by_num_raw = {x["num"]: x for x in raw_runners}
+                for h in r["horses"]:
+                    rw = by_num_raw.get(h["num"])
+                    if rw:
+                        if rw.get("odds", 0) > 1.0: h["odds"] = round(float(rw["odds"]), 1)
+                        if rw.get("weight"): h["weight"] = rw["weight"]
             r["detailText"] = detail
         if actual: r["actualTop3"] = actual
         if payouts and any(payouts.values()):
             r["payouts"] = payouts
-            ev = evaluate_10k_payout(r)
-            if ev:
-                r.update(ev); r["evalDone"] = True
-                prof = ev["returnYen"] - ev["investedYen"]
-                r["resultStatus"] = f"🎯 的中 払戻{ev['returnYen']:,}円 (回収率{ev['actualRoi']}% / {prof:+,}円)" if ev["isHit"] else f"❌ 不的中 回収率0.0%"
+            if not r.get("evalDone"):
+                ev = evaluate_10k_payout(r)
+                if ev:
+                    r.update(ev); r["evalDone"] = True
+                    prof = ev["returnYen"] - ev["investedYen"]
+                    r["resultStatus"] = f"🎯 的中 払戻{ev['returnYen']:,}円 (回収率{ev['actualRoi']}% / {prof:+,}円)" if ev["isHit"] else f"❌ 不的中 回収率0.0%"
 
-    # 1. 日曜WIN5（Hydrogen HIGH 一括）または地方トリプル馬単
     if ((mode == "jra" and dt.weekday() == 6) or mode == "nar") and not time_exceeded():
         cur_ml = day_db.get("multiLeg") or {}
         need_ml_ai = (not cur_ml.get("aiPredicted")) or (cur_ml.get("engineVer") != ENGINE_VER and "hydrogen" not in str(cur_ml.get("usedModel", "")))
@@ -749,7 +793,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             mleg = build_multileg_with_ai(day_db.get("races", []), mode, date_str)
             if mleg: day_db["multiLeg"] = mleg
 
-    # 2. 未発走の勝負レースへ Neon v7.0 ハイブリッドAI本推論を適用
     ai_candidates = []
     for r in day_db.get("races", []):
         if not r.get("horses") or r.get("actualTop3") or r.get("rank") == "Pass":
@@ -758,24 +801,26 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             continue
         tier = classify_race_tier(r)
         used = str(r.get("usedModel", ""))
-        needs_ai = (not r.get("aiPredicted")) or (tier in ("high_h", "med_h") and "hydrogen" not in used)
+        need_weight_repredict = bool(r.get("weightsAnnounced")) and not bool(r.get("aiPredictedWithWeights"))
+        needs_ai = (not r.get("aiPredicted")) or (tier in ("high_h", "med_h") and "hydrogen" not in used) or need_weight_repredict
         if not needs_ai:
             continue
         prio = 0 if tier == "high_h" else (1 if tier == "med_h" else 2)
-        if is_today and re.match(r"^\d{2}:\d{2}$", r.get("postTime", "")):
-            pdt = datetime.strptime(f"{date_str} {r['postTime']}", "%Y-%m-%d %H:%M").replace(tzinfo=JST)
-            mins = (pdt - now).total_seconds() / 60.0
-            if 15 <= mins <= 95: prio -= 10
+        if is_today and is_pre_post_window(date_str, r.get("postTime", ""), now, 12, 95):
+            prio -= 10
+            if need_weight_repredict:
+                prio -= 3
         ai_candidates.append((prio, tier, r))
 
     ai_candidates.sort(key=lambda x: x[0])
     for _, tier, r in ai_candidates[:2]:
         if AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN or time_exceeded(): break
         bias_info, bias_cnt = summarize_intraday_track_bias(day_db.get("races", []), r["venue"])
-        detail = r.pop("detailText", "") or "\n".join([f"{h['num']}番{h['name']}(脚質:{h['style']} 単勝:{h['odds']}倍 {h['comment']})" for h in r["horses"]])
+        detail = r.pop("detailText", "") or "\n".join([f"{h['num']}番{h['name']}(脚質:{h['style']} 単勝:{h['odds']}倍 馬体:{h.get('weight','未発表')} {h['comment']})" for h in r["horses"]])
+        wt_note = "公式馬体重発表済（Type I〜III補正必須）" if r.get("weightsAnnounced") else "馬体重未発表"
         pred = call_gemini(
             r["skill"],
-            f"【モード: 標準（Neon v7.0 的中率最大化・全頭評価）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')})\n"
+            f"【モード: 標準（Neon v7.0 的中率最大化・全頭評価 / {wt_note}）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')})\n"
             f"【当日バイアス(3R一致ガード)】{bias_info}\n"
             f"全頭について mark, role, style, f(2-Stage融合後勝率), fFund(オッズ遮断基礎勝率), wUsed(個別融合重み), top2, top3, comment(35字以内) と、"
             f"scenario, pivotType, rank, wR, m3, hitRate, breakEvenRate, expectedRoi, coreConnections([[◎番,◯番],...]), counterfactualAudit(60字以内) をJSON出力せよ:\n{detail}",
@@ -808,6 +853,8 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             if "m3" not in r:
                 r["m3"] = round(sum(float(x["f"]) for x in r["horses"][:3]), 1)
             r["aiPredicted"] = True
+            if r.get("weightsAnnounced"):
+                r["aiPredictedWithWeights"] = True
 
     sync_multileg_results(day_db, mode)
 
@@ -816,7 +863,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
     day_db["trackBiases"] = []
     for v in venues:
         b_txt, b_cnt = summarize_intraday_track_bias(day_db.get("races", []), v)
-        day_db["trackBiases"].append({"venue": v, "surf": f"Neon v7.0・実配当照合済", "trend": b_txt, "consistentR": b_cnt})
+        day_db["trackBiases"].append({"venue": v, "surf": "Neon v11.2・実配当照合済", "trend": b_txt, "consistentR": b_cnt})
     day_db["engineVer"] = ENGINE_VER
     day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
     json.dump(day_db, open(db_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
@@ -825,17 +872,22 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
 def empty_scope_stats() -> dict:
     return {
         "races": 0, "hits": 0, "invest": 0, "ret": 0, "passCount": 0, "passSaved": 0,
-        "byRank": {rk: {"races": 0, "hits": 0, "invest": 0, "ret": 0} for rk in ("S", "A", "New", "B")}
+        "byRank": {rk: {"races": 0, "hits": 0, "invest": 0, "ret": 0} for rk in ("S", "A", "New", "B")},
+        "bySource": {
+            "ai": {"races": 0, "hits": 0, "invest": 0, "ret": 0},
+            "baseline": {"races": 0, "hits": 0, "invest": 0, "ret": 0}
+        }
     }
 
 def update_global_stats(now: datetime):
     scopes = {"all": empty_scope_stats(), "jra": empty_scope_stats(), "nar": empty_scope_stats()}
-    recent = []
+    recent, daily_trend = [], []
     for fp in sorted(glob.glob("data/20*.json"), reverse=True):
         try:
             d = json.load(open(fp, "r", encoding="utf-8"))
             is_nar = d.get("mode") == "nar" or fp.endswith("_nar.json")
             mode_key = "nar" if is_nar else "jra"
+            day_races, day_hits, day_inv, day_ret = 0, 0, 0, 0
             for r in d.get("races", []):
                 rk_raw = r.get("rank", "B")
                 if rk_raw == "Pass":
@@ -844,8 +896,11 @@ def update_global_stats(now: datetime):
                         scopes[sk]["passSaved"] += 10000
                 elif r.get("evalDone") and r.get("investedYen"):
                     rk = rk_raw if rk_raw in ("S", "A", "New", "B") else "B"
+                    src_k = "ai" if r.get("aiPredicted") else "baseline"
                     inv, ret = int(r["investedYen"]), int(r.get("returnYen", 0))
                     is_hit = ret > 0
+                    day_races += 1; day_inv += inv; day_ret += ret
+                    if is_hit: day_hits += 1
                     for sk in ("all", mode_key):
                         b = scopes[sk]
                         b["races"] += 1; b["invest"] += inv; b["ret"] += ret
@@ -853,17 +908,32 @@ def update_global_stats(now: datetime):
                         rb = b["byRank"][rk]
                         rb["races"] += 1; rb["invest"] += inv; rb["ret"] += ret
                         if is_hit: rb["hits"] += 1
-                    if len(recent) < 40:
+                        sb = b["bySource"][src_k]
+                        sb["races"] += 1; sb["invest"] += inv; sb["ret"] += ret
+                        if is_hit: sb["hits"] += 1
+                    if len(recent) < 50:
                         recent.append({
                             "date": d.get("date", ""), "mode": mode_key, "rank": rk,
+                            "ai": bool(r.get("aiPredicted")),
                             "race": f"{r['venueLabel']} {r['name']}",
                             "status": r.get("resultStatus", ""),
                             "roi": float(r.get("actualRoi", 0)),
                             "returnYen": ret, "investedYen": inv, "isHit": is_hit,
                             "hits": r.get("hitTickets", [])
                         })
+            if day_races > 0:
+                daily_trend.append({
+                    "date": d.get("date", ""), "mode": mode_key,
+                    "races": day_races, "hits": day_hits, "invest": day_inv, "ret": day_ret,
+                    "roi": round(day_ret * 100.0 / max(1, day_inv), 1)
+                })
         except Exception: pass
-    payload = {"updatedAt": now.strftime("%Y-%m-%d %H:%M JST"), **scopes, "recentResults": recent}
+    payload = {
+        "updatedAt": now.strftime("%Y-%m-%d %H:%M JST"),
+        **scopes,
+        "dailyTrend": daily_trend[:12],
+        "recentResults": recent
+    }
     json.dump(payload, open("data/stats.json", "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     log("Updated data/stats.json")
 
