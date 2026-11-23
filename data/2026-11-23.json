@@ -2050,7 +2050,102 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯8-▲12のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 12,
+          "name": "ウィンザーグレース",
+          "odds": "3.9"
+        },
+        {
+          "rank": "2",
+          "waku": 3,
+          "num": 4,
+          "name": "ファジュルナ",
+          "odds": "3.8"
+        },
+        {
+          "rank": "3",
+          "waku": 4,
+          "num": 6,
+          "name": "ピュールオンド",
+          "odds": "8.4"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              12
+            ],
+            "pay": 390
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              4,
+              12
+            ],
+            "pay": 980
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              4,
+              12
+            ],
+            "pay": 450
+          },
+          {
+            "nums": [
+              6,
+              12
+            ],
+            "pay": 520
+          },
+          {
+            "nums": [
+              4,
+              6
+            ],
+            "pay": 570
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              12,
+              4
+            ],
+            "pay": 2130
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              4,
+              6,
+              12
+            ],
+            "pay": 2030
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 16830,
+      "actualRoi": 168.3,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 4-12 (◎-▲ Core) (9,900円)",
+        "馬連 4-12 (◎-▲ Alpha) (4,900円)",
+        "3連複F (2,030円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻16,830円 (回収率168.3% / +6,830円)"
     },
     {
       "raceId": "202605050606",
@@ -2363,7 +2458,104 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎3番破綻時は◯5-▲12のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 4,
+          "num": 5,
+          "name": "ヴォラーレジャン",
+          "odds": "6.0"
+        },
+        {
+          "rank": "2",
+          "waku": 3,
+          "num": 3,
+          "name": "ランブルトーン",
+          "odds": "1.8"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 12,
+          "name": "ジャスパーレビン",
+          "odds": "7.4"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              5
+            ],
+            "pay": 600
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              3,
+              5
+            ],
+            "pay": 480
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              3,
+              5
+            ],
+            "pay": 230
+          },
+          {
+            "nums": [
+              5,
+              12
+            ],
+            "pay": 450
+          },
+          {
+            "nums": [
+              3,
+              12
+            ],
+            "pay": 240
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              5,
+              3
+            ],
+            "pay": 1350
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              3,
+              5,
+              12
+            ],
+            "pay": 890
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 21340,
+      "actualRoi": 213.4,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 3-5 (◎-◯ Core) (5,750円)",
+        "ワイド 3-12 (◎-▲ Core) (5,040円)",
+        "ワイド 5-12 (◯-▲ 防衛) (6,300円)",
+        "馬連 3-5 (◎-◯ Alpha) (3,360円)",
+        "3連複F (890円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻21,340円 (回収率213.4% / +11,340円)"
     },
     {
       "raceId": "202605050607",
@@ -2748,7 +2940,101 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎14番破綻時は◯15-▲12のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 1,
+          "num": 2,
+          "name": "ゴールドブレイズ",
+          "odds": "7.5"
+        },
+        {
+          "rank": "2",
+          "waku": 7,
+          "num": 14,
+          "name": "クアロアランチ",
+          "odds": "2.5"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 15,
+          "name": "デスサイズ",
+          "odds": "6.4"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              2
+            ],
+            "pay": 750
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              14
+            ],
+            "pay": 1130
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              14
+            ],
+            "pay": 520
+          },
+          {
+            "nums": [
+              2,
+              15
+            ],
+            "pay": 1050
+          },
+          {
+            "nums": [
+              14,
+              15
+            ],
+            "pay": 360
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              2,
+              14
+            ],
+            "pay": 2190
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              14,
+              15
+            ],
+            "pay": 2620
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 12700,
+      "actualRoi": 127.0,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 14-15 (◎-◯ Core) (10,080円)",
+        "3連複F (2,620円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻12,700円 (回収率127.0% / +2,700円)"
     },
     {
       "raceId": "202605050608",
@@ -3117,7 +3403,98 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎15番破綻時は◯3-▲11のCore結線で元返し防衛。 危険視1番は単騎楽逃げ時のみ復活。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 5,
+          "num": 10,
+          "name": "メルシージュテーム",
+          "odds": "31.3"
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 1,
+          "name": "マーゴットサンズ",
+          "odds": "3.0"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 15,
+          "name": "エリカマユーリ",
+          "odds": "2.6"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              10
+            ],
+            "pay": 3130
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              1,
+              10
+            ],
+            "pay": 3410
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              1,
+              10
+            ],
+            "pay": 1210
+          },
+          {
+            "nums": [
+              10,
+              15
+            ],
+            "pay": 1990
+          },
+          {
+            "nums": [
+              1,
+              15
+            ],
+            "pay": 310
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              10,
+              1
+            ],
+            "pay": 12380
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              1,
+              10,
+              15
+            ],
+            "pay": 7290
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202605050609",
@@ -3430,7 +3807,98 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎5番破綻時は◯6-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 4,
+          "num": 4,
+          "name": "スカイスプレンダー",
+          "odds": "8.5"
+        },
+        {
+          "rank": "2",
+          "waku": 2,
+          "num": 2,
+          "name": "アロンズロッド",
+          "odds": "4.2"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 7,
+          "name": "ニュークレド",
+          "odds": "10.3"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              4
+            ],
+            "pay": 850
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              4
+            ],
+            "pay": 1600
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              4
+            ],
+            "pay": 530
+          },
+          {
+            "nums": [
+              4,
+              7
+            ],
+            "pay": 1290
+          },
+          {
+            "nums": [
+              2,
+              7
+            ],
+            "pay": 680
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              4,
+              2
+            ],
+            "pay": 3700
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              4,
+              7
+            ],
+            "pay": 6100
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202605050610",
@@ -3904,7 +4372,98 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎14番破綻時は◯6-▲6のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 11,
+          "name": "シャルクハフト",
+          "odds": "35.7"
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 1,
+          "name": "ペンナヴェローチェ",
+          "odds": "8.9"
+        },
+        {
+          "rank": "3",
+          "waku": 4,
+          "num": 7,
+          "name": "ビービーアジャイル",
+          "odds": "11.1"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              11
+            ],
+            "pay": 3570
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              1,
+              11
+            ],
+            "pay": 13330
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              1,
+              11
+            ],
+            "pay": 3450
+          },
+          {
+            "nums": [
+              7,
+              11
+            ],
+            "pay": 5710
+          },
+          {
+            "nums": [
+              1,
+              7
+            ],
+            "pay": 1300
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              11,
+              1
+            ],
+            "pay": 27860
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              1,
+              7,
+              11
+            ],
+            "pay": 51950
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202605050611",
@@ -4201,7 +4760,98 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎1番破綻時は◯10-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 12,
+          "name": "オンユアマークス",
+          "odds": "17.4"
+        },
+        {
+          "rank": "2",
+          "waku": 7,
+          "num": 10,
+          "name": "ショウナンガレオン",
+          "odds": "2.2"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 8,
+          "name": "コラリオン",
+          "odds": "7.3"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              12
+            ],
+            "pay": 1740
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              10,
+              12
+            ],
+            "pay": 2590
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              10,
+              12
+            ],
+            "pay": 990
+          },
+          {
+            "nums": [
+              8,
+              12
+            ],
+            "pay": 1640
+          },
+          {
+            "nums": [
+              8,
+              10
+            ],
+            "pay": 410
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              12,
+              10
+            ],
+            "pay": 7130
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              8,
+              10,
+              12
+            ],
+            "pay": 4470
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202605050612",
@@ -4594,7 +5244,98 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯1-▲6のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 3,
+          "num": 6,
+          "name": "ミスターライト",
+          "odds": "2.6"
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 18,
+          "name": "マツリダイコ",
+          "odds": "5.8"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 17,
+          "name": "モントゥリエ",
+          "odds": "20.4"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              6
+            ],
+            "pay": 260
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              6,
+              18
+            ],
+            "pay": 610
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              6,
+              18
+            ],
+            "pay": 310
+          },
+          {
+            "nums": [
+              6,
+              17
+            ],
+            "pay": 730
+          },
+          {
+            "nums": [
+              17,
+              18
+            ],
+            "pay": 1160
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              6,
+              18
+            ],
+            "pay": 880
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              6,
+              17,
+              18
+            ],
+            "pay": 2610
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202603030601",
@@ -6809,7 +7550,102 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎10番破綻時は◯8-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 16,
+          "name": "マージナルゲイン",
+          "odds": "12.3"
+        },
+        {
+          "rank": "2",
+          "waku": 5,
+          "num": 10,
+          "name": "ミッキーラビット",
+          "odds": "3.2"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 4,
+          "name": "エンポリアム",
+          "odds": "7.0"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              16
+            ],
+            "pay": 1230
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              10,
+              16
+            ],
+            "pay": 1790
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              10,
+              16
+            ],
+            "pay": 700
+          },
+          {
+            "nums": [
+              4,
+              16
+            ],
+            "pay": 1510
+          },
+          {
+            "nums": [
+              4,
+              10
+            ],
+            "pay": 550
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              16,
+              10
+            ],
+            "pay": 4750
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              4,
+              10,
+              16
+            ],
+            "pay": 4520
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 21420,
+      "actualRoi": 214.2,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 10-4 (◎-▲ Core) (9,900円)",
+        "ワイド 10-16 (◎-☆ 強制結線) (7,000円)",
+        "3連複F (4,520円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻21,420円 (回収率214.2% / +11,420円)"
     },
     {
       "raceId": "202603030606",
@@ -7171,7 +8007,98 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎3番破綻時は◯11-▲14のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 14,
+          "name": "ロジパンドラ",
+          "odds": "16.5"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 12,
+          "name": "トーセンルルド",
+          "odds": "13.7"
+        },
+        {
+          "rank": "3",
+          "waku": 3,
+          "num": 6,
+          "name": "ドリームユー",
+          "odds": "60.1"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              14
+            ],
+            "pay": 1650
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              12,
+              14
+            ],
+            "pay": 11970
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              12,
+              14
+            ],
+            "pay": 2830
+          },
+          {
+            "nums": [
+              6,
+              14
+            ],
+            "pay": 9300
+          },
+          {
+            "nums": [
+              6,
+              12
+            ],
+            "pay": 6100
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              14,
+              12
+            ],
+            "pay": 25570
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              6,
+              12,
+              14
+            ],
+            "pay": 147050
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202603030607",
@@ -7565,7 +8492,100 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎8番破綻時は◯8-▲10のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 12,
+          "name": "ベラジオリン",
+          "odds": "3.4"
+        },
+        {
+          "rank": "2",
+          "waku": 4,
+          "num": 8,
+          "name": "ララバッカナール",
+          "odds": "5.3"
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 14,
+          "name": "アツキヤマト",
+          "odds": "30.9"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              12
+            ],
+            "pay": 340
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              8,
+              12
+            ],
+            "pay": 740
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              8,
+              12
+            ],
+            "pay": 420
+          },
+          {
+            "nums": [
+              12,
+              14
+            ],
+            "pay": 1640
+          },
+          {
+            "nums": [
+              8,
+              14
+            ],
+            "pay": 1740
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              12,
+              8
+            ],
+            "pay": 1460
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              8,
+              12,
+              14
+            ],
+            "pay": 6020
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 6300,
+      "actualRoi": 63.0,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 8-12 (◎-☆ 強制結線) (6,300円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻6,300円 (回収率63.0% / -3,700円)"
     },
     {
       "raceId": "202603030608",
@@ -8006,7 +9026,102 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎14番破綻時は◯14-▲11のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 11,
+          "name": "スウィッチインラヴ",
+          "odds": "6.7"
+        },
+        {
+          "rank": "2",
+          "waku": 7,
+          "num": 14,
+          "name": "シヴィータス",
+          "odds": "3.5"
+        },
+        {
+          "rank": "3",
+          "waku": 3,
+          "num": 5,
+          "name": "スプリングデイ",
+          "odds": "31.1"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              11
+            ],
+            "pay": 670
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              11,
+              14
+            ],
+            "pay": 1340
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              11,
+              14
+            ],
+            "pay": 620
+          },
+          {
+            "nums": [
+              5,
+              11
+            ],
+            "pay": 2970
+          },
+          {
+            "nums": [
+              5,
+              14
+            ],
+            "pay": 1730
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              11,
+              14
+            ],
+            "pay": 3340
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              5,
+              11,
+              14
+            ],
+            "pay": 12860
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 24460,
+      "actualRoi": 244.6,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 14-11 (◎-▲ Core) (6,200円)",
+        "ワイド 14-11 (◯-▲ 防衛) (6,200円)",
+        "馬連 14-11 (◎-▲ Alpha) (12,060円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻24,460円 (回収率244.6% / +14,460円)"
     },
     {
       "raceId": "202603030609",
@@ -8431,7 +9546,101 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎13番破綻時は◯13-▲15のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 12,
+          "name": "トラストボス",
+          "odds": "50.3"
+        },
+        {
+          "rank": "2",
+          "waku": 7,
+          "num": 13,
+          "name": "ボンボンベイビー",
+          "odds": "5.4"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 15,
+          "name": "ダノンミッドナイト",
+          "odds": "4.4"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              12
+            ],
+            "pay": 5030
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              12,
+              13
+            ],
+            "pay": 15610
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              12,
+              13
+            ],
+            "pay": 3990
+          },
+          {
+            "nums": [
+              12,
+              15
+            ],
+            "pay": 3140
+          },
+          {
+            "nums": [
+              13,
+              15
+            ],
+            "pay": 450
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              12,
+              13
+            ],
+            "pay": 41810
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              12,
+              13,
+              15
+            ],
+            "pay": 17500
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 18000,
+      "actualRoi": 180.0,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 13-15 (◎-▲ Core) (9,000円)",
+        "ワイド 13-15 (◯-▲ 防衛) (9,000円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻18,000円 (回収率180.0% / +8,000円)"
     },
     {
       "raceId": "202603030610",
@@ -8824,7 +10033,98 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎3番破綻時は◯8-▲15のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 2,
+          "num": 4,
+          "name": "アイドクレース",
+          "odds": "36.6"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 11,
+          "name": "ロートホルン",
+          "odds": "26.1"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 3,
+          "name": "アストリル",
+          "odds": "2.6"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              4
+            ],
+            "pay": 3660
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              4,
+              11
+            ],
+            "pay": 33000
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              4,
+              11
+            ],
+            "pay": 8390
+          },
+          {
+            "nums": [
+              3,
+              4
+            ],
+            "pay": 1250
+          },
+          {
+            "nums": [
+              3,
+              11
+            ],
+            "pay": 1310
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              4,
+              11
+            ],
+            "pay": 72320
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              3,
+              4,
+              11
+            ],
+            "pay": 17920
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202603030611",
@@ -9257,7 +10557,101 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎3番破綻時は◯8-▲11のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 2,
+          "num": 3,
+          "name": "ジェイエルモーダル",
+          "odds": "3.3"
+        },
+        {
+          "rank": "2",
+          "waku": 5,
+          "num": 8,
+          "name": "ディーズゴールド",
+          "odds": "3.7"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 10,
+          "name": "プロミシングスター",
+          "odds": "20.0"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              3
+            ],
+            "pay": 330
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              3,
+              8
+            ],
+            "pay": 640
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              3,
+              8
+            ],
+            "pay": 280
+          },
+          {
+            "nums": [
+              3,
+              10
+            ],
+            "pay": 820
+          },
+          {
+            "nums": [
+              8,
+              10
+            ],
+            "pay": 1630
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              3,
+              8
+            ],
+            "pay": 1280
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              3,
+              8,
+              10
+            ],
+            "pay": 4620
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 13880,
+      "actualRoi": 138.8,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 3-8 (◎-◯ Core) (8,120円)",
+        "馬連 3-8 (◎-◯ Alpha) (5,760円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻13,880円 (回収率138.8% / +3,880円)"
     },
     {
       "raceId": "202603030612",
@@ -9667,23 +11061,114 @@
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯13-▲14のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max"
+      "strategyProfile": "hit_rate_max",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 3,
+          "num": 6,
+          "name": "カテドラルクォーツ",
+          "odds": "4.2"
+        },
+        {
+          "rank": "2",
+          "waku": 5,
+          "num": 10,
+          "name": "レッドレグルス",
+          "odds": "15.0"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 4,
+          "name": "ポッドクロス",
+          "odds": "4.9"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              6
+            ],
+            "pay": 420
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              6,
+              10
+            ],
+            "pay": 4160
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              6,
+              10
+            ],
+            "pay": 1480
+          },
+          {
+            "nums": [
+              4,
+              6
+            ],
+            "pay": 580
+          },
+          {
+            "nums": [
+              4,
+              10
+            ],
+            "pay": 1170
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              6,
+              10
+            ],
+            "pay": 6200
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              4,
+              6,
+              10
+            ],
+            "pay": 6670
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     }
   ],
   "trackBiases": [
     {
       "venue": "東京",
       "surf": "Neon v11.2・実配当照合済",
-      "trend": "東京当日実測(4R一致検証済): 1着内枠0回/外枠2回 → 【外枠(6〜8枠)優勢】",
-      "consistentR": 4
+      "trend": "東京当日実測(12R一致検証済): 1着内枠2回/外枠5回 → 【外枠(6〜8枠)優勢】",
+      "consistentR": 12
     },
     {
       "venue": "福島",
       "surf": "Neon v11.2・実配当照合済",
-      "trend": "福島当日実測(4R一致検証済): 1着内枠3回/外枠1回 → 【内枠(1〜3枠)優勢】",
-      "consistentR": 4
+      "trend": "福島当日実測(12R一致検証済): 1着内枠6回/外枠6回 → 【内外フラット】",
+      "consistentR": 12
     }
   ],
   "engineVer": "v11.2-neon",
-  "updatedAt": "2026-11-23 11:42 JST"
+  "updatedAt": "2026-11-23 22:26 JST"
 }
