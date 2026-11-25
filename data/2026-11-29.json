@@ -27,21 +27,69 @@
           "mark": "危",
           "role": "過剰人気ハザード",
           "num": 1,
+          "name": "エフカイビーチ",
+          "style": "差",
+          "weight": "",
+          "f": 25.3,
+          "fFund": 25.9,
+          "q": 17.6,
+          "wUsed": 0.1,
+          "top2": 49.5,
+          "top3": 74.3,
+          "odds": 7.6,
+          "comment": "F:ダ新馬1枠(H:砂被り危) / F:父:ロードカナロア/(H:血統適性)"
+        },
+        {
+          "mark": "危",
+          "role": "過剰人気ハザード",
+          "num": 2,
+          "name": "オプレンシア",
+          "style": "差",
+          "weight": "",
+          "f": 28.5,
+          "fFund": 27.6,
+          "q": 33.0,
+          "wUsed": 0.1,
+          "top2": 60.3,
+          "top3": 90.4,
+          "odds": 4.3,
+          "comment": "F:ダ新馬1枠(H:砂被り危) / F:マーカン騎手(H:Top騎手)"
+        },
+        {
+          "mark": "危",
+          "role": "過剰人気ハザード",
+          "num": 4,
           "name": "[馬記号]馬名[ブリンカー]",
           "style": "差",
           "weight": "",
-          "f": 100.0,
-          "fFund": 100.0,
-          "q": 100.0,
+          "f": 25.2,
+          "fFund": 23.3,
+          "q": 42.7,
           "wUsed": 0.1,
-          "top2": 92.0,
-          "top3": 96.0,
-          "odds": 1.5,
-          "comment": "F:ダ新馬1枠(H:砂被り危)"
+          "top2": 49.2,
+          "top3": 73.9,
+          "odds": 3.4,
+          "comment": "F:ダ新馬2枠(H:砂被り危)"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 3,
+          "name": "キタノヴォイス",
+          "style": "差",
+          "weight": "",
+          "f": 20.9,
+          "fFund": 23.3,
+          "q": 6.7,
+          "wUsed": 0.1,
+          "top2": 40.9,
+          "top3": 61.4,
+          "odds": 18.2,
+          "comment": "F:ダ新馬2枠(H:砂被り危)"
         }
       ],
       "wR": 0.42,
-      "m3": 100.0,
+      "m3": 79.0,
       "coreConnections": [],
       "portfolioRules": {
         "coreRatio": 0.75,
@@ -50,7 +98,7 @@
       },
       "counterfactualAudit": "上位3頭のCore結線で防衛。 危険視1番は単騎楽逃げ時のみ復活。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "東京5R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.42, M3=100.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全1頭を厳密演算。"
+      "scenario": "東京5R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.42, M3=79.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全4頭を厳密演算。"
     },
     {
       "raceId": "202605050806",
@@ -76,31 +124,96 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
-          "num": 1,
+          "num": 2,
+          "name": "ガガインフェルノ",
+          "style": "差",
+          "weight": "",
+          "f": 30.2,
+          "fFund": 28.3,
+          "q": 32.2,
+          "wUsed": 0.42,
+          "top2": 63.7,
+          "top3": 95.5,
+          "odds": 7.8,
+          "comment": "F:武豊騎手(H:Top騎手)"
+        },
+        {
+          "mark": "◯",
+          "role": "融合上位強制結線",
+          "num": 4,
           "name": "[馬記号]馬名[ブリンカー]",
           "style": "差",
           "weight": "",
-          "f": 100.0,
-          "fFund": 100.0,
-          "q": 100.0,
-          "wUsed": 0.0,
-          "top2": 92.0,
-          "top3": 96.0,
-          "odds": 1.5,
+          "f": 27.6,
+          "fFund": 23.9,
+          "q": 32.6,
+          "wUsed": 0.42,
+          "top2": 53.8,
+          "top3": 80.7,
+          "odds": 7.7,
+          "comment": "F:2枠・近走平均7.5着"
+        },
+        {
+          "mark": "▲",
+          "role": "安定Connector",
+          "num": 1,
+          "name": "ヴェントディーオ",
+          "style": "差",
+          "weight": "",
+          "f": 23.1,
+          "fFund": 23.9,
+          "q": 21.4,
+          "wUsed": 0.42,
+          "top2": 45.1,
+          "top3": 67.6,
+          "odds": 11.3,
           "comment": "F:1枠・近走平均7.5着"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 3,
+          "name": "ノードラマラマ",
+          "style": "差",
+          "weight": "",
+          "f": 19.2,
+          "fFund": 23.9,
+          "q": 13.8,
+          "wUsed": 0.42,
+          "top2": 37.4,
+          "top3": 56.1,
+          "odds": 16.9,
+          "comment": "F:2枠・近走平均7.5着"
         }
       ],
       "wR": 0.42,
-      "m3": 100.0,
-      "coreConnections": [],
+      "m3": 80.9,
+      "coreConnections": [
+        [
+          2,
+          4
+        ],
+        [
+          2,
+          1
+        ],
+        [
+          4,
+          1
+        ],
+        [
+          2,
+          3
+        ]
+      ],
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
         "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "上位3頭のCore結線で防衛。",
+      "counterfactualAudit": "◎2番破綻時は◯4-▲1のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "東京6R(芝1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.42, M3=100.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全1頭を厳密演算。"
+      "scenario": "東京6R(芝1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.42, M3=80.9%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全4頭を厳密演算。"
     },
     {
       "raceId": "202605050808",
@@ -1741,31 +1854,96 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
+          "num": 3,
+          "name": "オタヴァ",
+          "style": "差",
+          "weight": "",
+          "f": 32.6,
+          "fFund": 25.0,
+          "q": 44.4,
+          "wUsed": 0.42,
+          "top2": 65.1,
+          "top3": 96.0,
+          "odds": 4.7,
+          "comment": "F:2枠・近走平均7.5着"
+        },
+        {
+          "mark": "◯",
+          "role": "融合上位強制結線",
           "num": 1,
+          "name": "イロアセヌ",
+          "style": "差",
+          "weight": "",
+          "f": 24.9,
+          "fFund": 25.0,
+          "q": 23.4,
+          "wUsed": 0.42,
+          "top2": 49.8,
+          "top3": 74.7,
+          "odds": 8.4,
+          "comment": "F:1枠・近走平均7.5着"
+        },
+        {
+          "mark": "▲",
+          "role": "安定Connector",
+          "num": 2,
+          "name": "ウインガウェイン",
+          "style": "差",
+          "weight": "",
+          "f": 21.7,
+          "fFund": 25.0,
+          "q": 16.9,
+          "wUsed": 0.42,
+          "top2": 43.4,
+          "top3": 65.2,
+          "odds": 11.3,
+          "comment": "F:1枠・近走平均7.5着"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 4,
           "name": "[馬記号]馬名[ブリンカー]",
           "style": "差",
           "weight": "",
-          "f": 100.0,
-          "fFund": 100.0,
-          "q": 100.0,
-          "wUsed": 0.0,
-          "top2": 92.0,
-          "top3": 96.0,
-          "odds": 1.5,
-          "comment": "F:1枠・近走平均7.5着"
+          "f": 20.8,
+          "fFund": 25.0,
+          "q": 15.3,
+          "wUsed": 0.42,
+          "top2": 41.6,
+          "top3": 62.4,
+          "odds": 12.4,
+          "comment": "F:2枠・近走平均7.5着"
         }
       ],
       "wR": 0.42,
-      "m3": 100.0,
-      "coreConnections": [],
+      "m3": 79.2,
+      "coreConnections": [
+        [
+          3,
+          1
+        ],
+        [
+          3,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          3,
+          4
+        ]
+      ],
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
         "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "上位3頭のCore結線で防衛。",
+      "counterfactualAudit": "◎3番破綻時は◯1-▲2のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "京都3R(芝1200m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.42, M3=100.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全1頭を厳密演算。"
+      "scenario": "京都3R(芝1200m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.42, M3=79.2%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全4頭を厳密演算。"
     },
     {
       "raceId": "202608050806",
@@ -1792,30 +1970,95 @@
           "mark": "◎",
           "role": "最安定Top-3軸",
           "num": 1,
+          "name": "アワードストーリー",
+          "style": "差",
+          "weight": "",
+          "f": 26.6,
+          "fFund": 27.0,
+          "q": 26.0,
+          "wUsed": 0.42,
+          "top2": 53.3,
+          "top3": 79.9,
+          "odds": 15.4,
+          "comment": "F:父:ドレフォン/母父(H:血統適性)"
+        },
+        {
+          "mark": "◯",
+          "role": "融合上位強制結線",
+          "num": 2,
+          "name": "ウィスパーノート",
+          "style": "差",
+          "weight": "",
+          "f": 26.2,
+          "fFund": 24.3,
+          "q": 28.9,
+          "wUsed": 0.42,
+          "top2": 52.4,
+          "top3": 78.5,
+          "odds": 14.0,
+          "comment": "F:1枠・近走平均7.5着"
+        },
+        {
+          "mark": "▲",
+          "role": "安定Connector",
+          "num": 4,
           "name": "[馬記号]馬名[ブリンカー]",
           "style": "差",
           "weight": "",
-          "f": 100.0,
-          "fFund": 100.0,
-          "q": 100.0,
-          "wUsed": 0.0,
-          "top2": 92.0,
-          "top3": 96.0,
-          "odds": 1.5,
-          "comment": "F:1枠・近走平均7.5着"
+          "f": 23.9,
+          "fFund": 24.3,
+          "q": 23.3,
+          "wUsed": 0.42,
+          "top2": 47.9,
+          "top3": 71.8,
+          "odds": 17.0,
+          "comment": "F:2枠・近走平均7.5着"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 3,
+          "name": "コパノプリンストン",
+          "style": "差",
+          "weight": "",
+          "f": 23.3,
+          "fFund": 24.3,
+          "q": 21.8,
+          "wUsed": 0.42,
+          "top2": 46.5,
+          "top3": 69.8,
+          "odds": 18.1,
+          "comment": "F:2枠・近走平均7.5着"
         }
       ],
       "wR": 0.42,
-      "m3": 100.0,
-      "coreConnections": [],
+      "m3": 76.7,
+      "coreConnections": [
+        [
+          1,
+          2
+        ],
+        [
+          1,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          1,
+          3
+        ]
+      ],
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
         "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "上位3頭のCore結線で防衛。",
+      "counterfactualAudit": "◎1番破綻時は◯2-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "京都6R(芝2000m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.42, M3=100.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全1頭を厳密演算。"
+      "scenario": "京都6R(芝2000m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.42, M3=76.7%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全4頭を厳密演算。"
     },
     {
       "raceId": "202608050809",
@@ -3419,5 +3662,5 @@
     }
   ],
   "engineVer": "v11.2-neon",
-  "updatedAt": "2026-11-25 04:30 JST"
+  "updatedAt": "2026-11-25 22:18 JST"
 }

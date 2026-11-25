@@ -243,7 +243,98 @@
       },
       "counterfactualAudit": "◎11番破綻時は◯1-▲5のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和1R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=56.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。"
+      "scenario": "浦和1R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=56.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 9,
+          "name": "ブルーハーツ",
+          "odds": "1.3"
+        },
+        {
+          "rank": "2",
+          "waku": 3,
+          "num": 3,
+          "name": "ネクストトゥーユー",
+          "odds": "33.6"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 11,
+          "name": "ユウユウチャパティ",
+          "odds": "215.9"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              9
+            ],
+            "pay": 130
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              3,
+              9
+            ],
+            "pay": 1310
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              3,
+              9
+            ],
+            "pay": 410
+          },
+          {
+            "nums": [
+              9,
+              11
+            ],
+            "pay": 3200
+          },
+          {
+            "nums": [
+              3,
+              11
+            ],
+            "pay": 10230
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              9,
+              3
+            ],
+            "pay": 1760
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              3,
+              9,
+              11
+            ],
+            "pay": 26600
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202642112502",
@@ -470,7 +561,98 @@
       },
       "counterfactualAudit": "◎6番破綻時は◯2-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和2R(ダ1600m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.38, M3=30.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全11頭を厳密演算。"
+      "scenario": "浦和2R(ダ1600m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.38, M3=30.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全11頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 2,
+          "num": 2,
+          "name": "シャコンヌ",
+          "odds": "4.6"
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 11,
+          "name": "タイシタモンダロ",
+          "odds": "2.5"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 7,
+          "name": "コロディア",
+          "odds": "2.1"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              2
+            ],
+            "pay": 460
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              11
+            ],
+            "pay": 790
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              11
+            ],
+            "pay": 190
+          },
+          {
+            "nums": [
+              2,
+              7
+            ],
+            "pay": 190
+          },
+          {
+            "nums": [
+              7,
+              11
+            ],
+            "pay": 140
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              2,
+              11
+            ],
+            "pay": 1480
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              7,
+              11
+            ],
+            "pay": 370
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202642112503",
@@ -713,7 +895,101 @@
       },
       "counterfactualAudit": "◎11番破綻時は◯9-▲8のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和3R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=27.4%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。"
+      "scenario": "浦和3R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=27.4%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 3,
+          "num": 3,
+          "name": "ウィズボンド",
+          "odds": "2.1"
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 11,
+          "name": "シナノダムール",
+          "odds": "10.6"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 8,
+          "name": "ノーブルフリージア",
+          "odds": "47.9"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              3
+            ],
+            "pay": 210
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              3,
+              11
+            ],
+            "pay": 1160
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              3,
+              11
+            ],
+            "pay": 360
+          },
+          {
+            "nums": [
+              3,
+              8
+            ],
+            "pay": 1360
+          },
+          {
+            "nums": [
+              8,
+              11
+            ],
+            "pay": 5630
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              3,
+              11
+            ],
+            "pay": 1860
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              3,
+              8,
+              11
+            ],
+            "pay": 11810
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 118780,
+      "actualRoi": 1187.8,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 11-8 (◎-▲ Core) (106,970円)",
+        "3連複F (11,810円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻118,780円 (回収率1187.8% / +108,780円)"
     },
     {
       "raceId": "202642112504",
@@ -956,7 +1232,98 @@
       },
       "counterfactualAudit": "◎10番破綻時は◯5-▲11のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和4R(ダ1600m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.38, M3=27.8%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。"
+      "scenario": "浦和4R(ダ1600m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.38, M3=27.8%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 5,
+          "num": 5,
+          "name": "ケンラパイド",
+          "odds": "2.0"
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 12,
+          "name": "クアダングル",
+          "odds": "3.2"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 8,
+          "name": "ウィルレーヴィア",
+          "odds": "5.0"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              5
+            ],
+            "pay": 200
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              5,
+              12
+            ],
+            "pay": 280
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              5,
+              12
+            ],
+            "pay": 180
+          },
+          {
+            "nums": [
+              5,
+              8
+            ],
+            "pay": 300
+          },
+          {
+            "nums": [
+              8,
+              12
+            ],
+            "pay": 230
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              5,
+              12
+            ],
+            "pay": 530
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              5,
+              8,
+              12
+            ],
+            "pay": 450
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202642112505",
@@ -1215,7 +1582,101 @@
       },
       "counterfactualAudit": "◎12番破綻時は◯2-▲10のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和5R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=27.6%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全13頭を厳密演算。"
+      "scenario": "浦和5R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=27.6%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全13頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 12,
+          "name": "ウインマデイラ",
+          "odds": "3.3"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 9,
+          "name": "ウィゾマニア",
+          "odds": "1.3"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 2,
+          "name": "モーイーワヒネ",
+          "odds": "69.8"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              12
+            ],
+            "pay": 330
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              9,
+              12
+            ],
+            "pay": 260
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              9,
+              12
+            ],
+            "pay": 160
+          },
+          {
+            "nums": [
+              2,
+              12
+            ],
+            "pay": 1750
+          },
+          {
+            "nums": [
+              2,
+              9
+            ],
+            "pay": 1550
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              12,
+              9
+            ],
+            "pay": 670
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              9,
+              12
+            ],
+            "pay": 3220
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 39970,
+      "actualRoi": 399.7,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 12-2 (◎-◯ Core) (36,750円)",
+        "3連複F (3,220円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻39,970円 (回収率399.7% / +29,970円)"
     },
     {
       "raceId": "202642112506",
@@ -1458,7 +1919,101 @@
       },
       "counterfactualAudit": "◎7番破綻時は◯2-▲1のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和6R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=30.0%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。"
+      "scenario": "浦和6R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=30.0%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 7,
+          "name": "キョウエイセレッソ",
+          "odds": "1.6"
+        },
+        {
+          "rank": "2",
+          "waku": 7,
+          "num": 10,
+          "name": "イエスユイキャン",
+          "odds": "3.0"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 2,
+          "name": "ラブミーヘンリー",
+          "odds": "67.3"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              7
+            ],
+            "pay": 160
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              7,
+              10
+            ],
+            "pay": 210
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              7,
+              10
+            ],
+            "pay": 150
+          },
+          {
+            "nums": [
+              2,
+              7
+            ],
+            "pay": 1090
+          },
+          {
+            "nums": [
+              2,
+              10
+            ],
+            "pay": 1930
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              7,
+              10
+            ],
+            "pay": 270
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              7,
+              10
+            ],
+            "pay": 3790
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 28860,
+      "actualRoi": 288.6,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 7-2 (◎-◯ Core) (25,070円)",
+        "3連複F (3,790円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻28,860円 (回収率288.6% / +18,860円)"
     },
     {
       "raceId": "202642112507",
@@ -1701,7 +2256,98 @@
       },
       "counterfactualAudit": "◎11番破綻時は◯10-▲1のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和7R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=26.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。"
+      "scenario": "浦和7R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=26.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 7,
+          "name": "ルラクソント",
+          "odds": "9.4"
+        },
+        {
+          "rank": "2",
+          "waku": 5,
+          "num": 5,
+          "name": "キャルドーン",
+          "odds": "2.6"
+        },
+        {
+          "rank": "3",
+          "waku": 4,
+          "num": 4,
+          "name": "エコロルキナ",
+          "odds": "17.3"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              7
+            ],
+            "pay": 940
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              5,
+              7
+            ],
+            "pay": 950
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              5,
+              7
+            ],
+            "pay": 430
+          },
+          {
+            "nums": [
+              4,
+              7
+            ],
+            "pay": 1580
+          },
+          {
+            "nums": [
+              4,
+              5
+            ],
+            "pay": 720
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              7,
+              5
+            ],
+            "pay": 2670
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              4,
+              5,
+              7
+            ],
+            "pay": 3280
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202642112508",
@@ -1976,7 +2622,100 @@
       },
       "counterfactualAudit": "◎8番破綻時は◯7-▲9のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和8R(ダ1600m・良) 実測N_lead=7頭 / 2-Stage融合(wR=0.38, M3=24.7%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全14頭を厳密演算。"
+      "scenario": "浦和8R(ダ1600m・良) 実測N_lead=7頭 / 2-Stage融合(wR=0.38, M3=24.7%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全14頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 5,
+          "num": 8,
+          "name": "ネイビーシンデレラ",
+          "odds": "27.0"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 10,
+          "name": "モンバイト",
+          "odds": "24.6"
+        },
+        {
+          "rank": "3",
+          "waku": 5,
+          "num": 7,
+          "name": "カラフルロケット",
+          "odds": "7.5"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              8
+            ],
+            "pay": 2700
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              8,
+              10
+            ],
+            "pay": 24590
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              8,
+              10
+            ],
+            "pay": 5150
+          },
+          {
+            "nums": [
+              7,
+              8
+            ],
+            "pay": 2130
+          },
+          {
+            "nums": [
+              7,
+              10
+            ],
+            "pay": 1930
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              8,
+              10
+            ],
+            "pay": 35930
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              7,
+              8,
+              10
+            ],
+            "pay": 27890
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 46860,
+      "actualRoi": 468.6,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 8-7 (◎-◯ Core) (46,860円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻46,860円 (回収率468.6% / +36,860円)"
     },
     {
       "raceId": "202642112509",
@@ -2219,7 +2958,98 @@
       },
       "counterfactualAudit": "◎2番破綻時は◯8-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和9R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=26.5%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。"
+      "scenario": "浦和9R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=26.5%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 10,
+          "name": "セイウンユズカ",
+          "odds": "8.5"
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 1,
+          "name": "マデイニスルー",
+          "odds": "124.2"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 2,
+          "name": "セクシーウィドー",
+          "odds": "74.9"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              10
+            ],
+            "pay": 850
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              1,
+              10
+            ],
+            "pay": 29000
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              1,
+              10
+            ],
+            "pay": 11130
+          },
+          {
+            "nums": [
+              2,
+              10
+            ],
+            "pay": 4690
+          },
+          {
+            "nums": [
+              1,
+              2
+            ],
+            "pay": 22700
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              10,
+              1
+            ],
+            "pay": 49320
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              1,
+              2,
+              10
+            ],
+            "pay": 288060
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202642112510",
@@ -2462,7 +3292,102 @@
       },
       "counterfactualAudit": "◎8番破綻時は◯1-▲10のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和10R(ダ1600m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.38, M3=30.3%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。"
+      "scenario": "浦和10R(ダ1600m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.38, M3=30.3%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 8,
+          "name": "ウェーブスリープス",
+          "odds": "1.6"
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 1,
+          "name": "エニーサンダー",
+          "odds": "11.7"
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 9,
+          "name": "プレストエンペラー",
+          "odds": "15.0"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              8
+            ],
+            "pay": 160
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              1,
+              8
+            ],
+            "pay": 940
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              1,
+              8
+            ],
+            "pay": 370
+          },
+          {
+            "nums": [
+              8,
+              9
+            ],
+            "pay": 660
+          },
+          {
+            "nums": [
+              1,
+              9
+            ],
+            "pay": 1470
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              8,
+              1
+            ],
+            "pay": 1070
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              1,
+              8,
+              9
+            ],
+            "pay": 3140
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 17860,
+      "actualRoi": 178.6,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 8-1 (◎-◯ Core) (8,140円)",
+        "馬連 8-1 (◎-◯ Alpha) (6,580円)",
+        "3連複F (3,140円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻17,860円 (回収率178.6% / +7,860円)"
     },
     {
       "raceId": "202642112511",
@@ -2657,7 +3582,101 @@
       },
       "counterfactualAudit": "◎1番破綻時は◯8-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和11R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=43.4%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全9頭を厳密演算。"
+      "scenario": "浦和11R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=43.4%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全9頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 9,
+          "name": "イッテラッシャイ",
+          "odds": "2.4"
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 1,
+          "name": "ナルカミ",
+          "odds": "3.5"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 8,
+          "name": "モックモック",
+          "odds": "5.7"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              9
+            ],
+            "pay": 240
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              1,
+              9
+            ],
+            "pay": 570
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              1,
+              9
+            ],
+            "pay": 290
+          },
+          {
+            "nums": [
+              8,
+              9
+            ],
+            "pay": 290
+          },
+          {
+            "nums": [
+              1,
+              8
+            ],
+            "pay": 340
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              9,
+              1
+            ],
+            "pay": 1030
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              1,
+              8,
+              9
+            ],
+            "pay": 930
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 8750,
+      "actualRoi": 87.5,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 1-8 (◎-◯ Core) (7,820円)",
+        "3連複F (930円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻8,750円 (回収率87.5% / -1,250円)"
     },
     {
       "raceId": "202642112512",
@@ -2932,7 +3951,98 @@
       },
       "counterfactualAudit": "◎4番破綻時は◯12-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "浦和12R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=24.3%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全14頭を厳密演算。"
+      "scenario": "浦和12R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=24.3%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全14頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 3,
+          "num": 3,
+          "name": "マシュー",
+          "odds": "4.6"
+        },
+        {
+          "rank": "2",
+          "waku": 4,
+          "num": 5,
+          "name": "ストゥディア",
+          "odds": "13.7"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 2,
+          "name": "ピーチピーチ",
+          "odds": "7.1"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              3
+            ],
+            "pay": 460
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              3,
+              5
+            ],
+            "pay": 3060
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              3,
+              5
+            ],
+            "pay": 1140
+          },
+          {
+            "nums": [
+              2,
+              3
+            ],
+            "pay": 520
+          },
+          {
+            "nums": [
+              2,
+              5
+            ],
+            "pay": 1140
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              3,
+              5
+            ],
+            "pay": 5090
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              3,
+              5
+            ],
+            "pay": 4250
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202648112509",
@@ -3175,7 +4285,98 @@
       },
       "counterfactualAudit": "◎7番破綻時は◯2-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "名古屋9R(ダ1600m・良) 実測N_lead=8頭 / 2-Stage融合(wR=0.38, M3=28.4%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全12頭を厳密演算。"
+      "scenario": "名古屋9R(ダ1600m・良) 実測N_lead=8頭 / 2-Stage融合(wR=0.38, M3=28.4%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 12,
+          "name": "モズシューター",
+          "odds": "3.5"
+        },
+        {
+          "rank": "2",
+          "waku": 4,
+          "num": 4,
+          "name": "アドゥールグロー",
+          "odds": "11.2"
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 9,
+          "name": "ミカノヴェニュス",
+          "odds": "1.4"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              12
+            ],
+            "pay": 350
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              4,
+              12
+            ],
+            "pay": 1230
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              4,
+              12
+            ],
+            "pay": 300
+          },
+          {
+            "nums": [
+              9,
+              12
+            ],
+            "pay": 150
+          },
+          {
+            "nums": [
+              4,
+              9
+            ],
+            "pay": 230
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              12,
+              4
+            ],
+            "pay": 2150
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              4,
+              9,
+              12
+            ],
+            "pay": 410
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202648112510",
@@ -3418,7 +4619,98 @@
       },
       "counterfactualAudit": "◎5番破綻時は◯3-▲11のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "名古屋10R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=28.2%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。"
+      "scenario": "名古屋10R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=28.2%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 10,
+          "name": "シュテフィ",
+          "odds": "9.6"
+        },
+        {
+          "rank": "2",
+          "waku": 2,
+          "num": 2,
+          "name": "ココデイック",
+          "odds": "1.8"
+        },
+        {
+          "rank": "3",
+          "waku": 4,
+          "num": 4,
+          "name": "ノーブルアクト",
+          "odds": "11.3"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              10
+            ],
+            "pay": 960
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              10
+            ],
+            "pay": 990
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              10
+            ],
+            "pay": 470
+          },
+          {
+            "nums": [
+              4,
+              10
+            ],
+            "pay": 1580
+          },
+          {
+            "nums": [
+              2,
+              4
+            ],
+            "pay": 390
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              10,
+              2
+            ],
+            "pay": 2590
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              4,
+              10
+            ],
+            "pay": 2640
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202648112511",
@@ -3661,7 +4953,98 @@
       },
       "counterfactualAudit": "◎11番破綻時は◯12-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "名古屋11R(ダ1600m・良) 実測N_lead=7頭 / 2-Stage融合(wR=0.38, M3=27.6%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全12頭を厳密演算。"
+      "scenario": "名古屋11R(ダ1600m・良) 実測N_lead=7頭 / 2-Stage融合(wR=0.38, M3=27.6%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 4,
+          "num": 4,
+          "name": "ウインライズ",
+          "odds": "2.1"
+        },
+        {
+          "rank": "2",
+          "waku": 5,
+          "num": 6,
+          "name": "コムーネ",
+          "odds": "73.1"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 8,
+          "name": "ワカギミ",
+          "odds": "66.3"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              4
+            ],
+            "pay": 210
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              4,
+              6
+            ],
+            "pay": 5960
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              4,
+              6
+            ],
+            "pay": 2520
+          },
+          {
+            "nums": [
+              4,
+              8
+            ],
+            "pay": 1380
+          },
+          {
+            "nums": [
+              6,
+              8
+            ],
+            "pay": 17940
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              4,
+              6
+            ],
+            "pay": 9080
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              4,
+              6,
+              8
+            ],
+            "pay": 31840
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202648112512",
@@ -3904,7 +5287,98 @@
       },
       "counterfactualAudit": "◎2番破綻時は◯5-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "名古屋12R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=26.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。"
+      "scenario": "名古屋12R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=26.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 8,
+          "name": "ハートニヒヲツケテ",
+          "odds": "7.5"
+        },
+        {
+          "rank": "2",
+          "waku": 7,
+          "num": 10,
+          "name": "ガビーズメロディ",
+          "odds": "2.6"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 12,
+          "name": "デスヨッテニ",
+          "odds": "4.7"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              8
+            ],
+            "pay": 750
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              8,
+              10
+            ],
+            "pay": 800
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              8,
+              10
+            ],
+            "pay": 350
+          },
+          {
+            "nums": [
+              8,
+              12
+            ],
+            "pay": 510
+          },
+          {
+            "nums": [
+              10,
+              12
+            ],
+            "pay": 280
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              8,
+              10
+            ],
+            "pay": 2430
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              8,
+              10,
+              12
+            ],
+            "pay": 980
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202650112509",
@@ -3920,7 +5394,7 @@
       "predicted": true,
       "aiPredicted": false,
       "nLead": 4,
-      "trackCond": "良",
+      "trackCond": "重",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
@@ -3930,130 +5404,130 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
-          "num": 2,
-          "name": "メイショウライズ",
-          "style": "先",
-          "weight": "9.14",
-          "f": 9.2,
-          "fFund": 9.2,
-          "q": 9.3,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.7,
+          "num": 12,
+          "name": "エバイダンス",
+          "style": "差",
+          "weight": "489(+27)3.32",
+          "f": 15.6,
+          "fFund": 8.7,
+          "q": 25.2,
+          "wUsed": 0.38,
+          "top2": 32.6,
+          "top3": 48.9,
+          "odds": 3.3,
           "comment": "F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 4,
-          "name": "エルグランゴラッソ",
-          "style": "先",
-          "weight": "12.76",
-          "f": 9.2,
-          "fFund": 9.2,
-          "q": 9.3,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.7,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "num": 3,
+          "name": "キャスケード",
+          "style": "逃",
+          "weight": "463(-6)3.21",
+          "f": 15.2,
+          "fFund": 8.1,
+          "q": 26.1,
+          "wUsed": 0.38,
+          "top2": 29.7,
+          "top3": 44.5,
+          "odds": 3.2,
+          "comment": "F:馬体-6kg絞り(H:好仕上)"
         },
         {
           "mark": "▲",
           "role": "安定Connector",
-          "num": 9,
-          "name": "サトノグラン",
-          "style": "差",
-          "weight": "76.011",
-          "f": 9.0,
-          "fFund": 9.0,
-          "q": 9.2,
-          "wUsed": 0.0,
-          "top2": 18.9,
-          "top3": 28.3,
-          "odds": 8.8,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "num": 7,
+          "name": "デイムサンライズ",
+          "style": "逃",
+          "weight": "441(+9)4.23",
+          "f": 13.7,
+          "fFund": 8.3,
+          "q": 19.3,
+          "wUsed": 0.38,
+          "top2": 26.8,
+          "top3": 40.2,
+          "odds": 4.2,
+          "comment": "F:父:シニスターミニス(H:血統適性)"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 12,
-          "name": "エバイダンス",
-          "style": "差",
-          "weight": "4.32",
-          "f": 9.0,
-          "fFund": 9.0,
-          "q": 9.2,
-          "wUsed": 0.0,
-          "top2": 18.9,
-          "top3": 28.3,
-          "odds": 8.8,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "num": 2,
+          "name": "メイショウライズ",
+          "style": "先",
+          "weight": "496(-4)9.04",
+          "f": 10.9,
+          "fFund": 9.6,
+          "q": 8.4,
+          "wUsed": 0.38,
+          "top2": 22.8,
+          "top3": 34.2,
+          "odds": 9.0,
+          "comment": "F:馬体-4kg絞り(H:好仕上) / F:0.2s差実績(H:巻き返し)"
         },
         {
-          "mark": "△",
-          "role": "3列目連下",
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
           "num": 1,
           "name": "クロワール",
           "style": "先",
-          "weight": "22.68",
-          "f": 8.6,
-          "fFund": 8.6,
-          "q": 8.6,
-          "wUsed": 0.0,
-          "top2": 16.8,
-          "top3": 25.3,
-          "odds": 9.3,
-          "comment": "F:父:ロードカナロア/(H:血統適性)"
+          "weight": "479(-6)10.05",
+          "f": 10.1,
+          "fFund": 9.1,
+          "q": 7.4,
+          "wUsed": 0.38,
+          "top2": 19.7,
+          "top3": 29.5,
+          "odds": 10.0,
+          "comment": "F:馬体-6kg絞り(H:好仕上) / F:父:ロードカナロア/(H:血統適性)"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 11,
+          "name": "トモジャイブ",
+          "style": "差",
+          "weight": "499(+2)15.86",
+          "f": 7.3,
+          "fFund": 7.4,
+          "q": 4.5,
+          "wUsed": 0.38,
+          "top2": 14.3,
+          "top3": 21.5,
+          "odds": 15.8,
+          "comment": "F:8枠・近走平均7.5着"
         },
         {
           "mark": "△",
           "role": "3列目連下",
-          "num": 7,
-          "name": "デイムサンライズ",
-          "style": "逃",
-          "weight": "16.77",
-          "f": 8.6,
-          "fFund": 8.6,
-          "q": 8.6,
-          "wUsed": 0.0,
-          "top2": 16.8,
-          "top3": 25.3,
-          "odds": 9.3,
-          "comment": "F:父:シニスターミニス(H:血統適性)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 3,
-          "name": "キャスケード",
-          "style": "逃",
-          "weight": "2.41",
-          "f": 7.8,
-          "fFund": 7.8,
-          "q": 7.7,
-          "wUsed": 0.0,
-          "top2": 15.2,
-          "top3": 22.8,
-          "odds": 10.3,
-          "comment": "F:3枠・近走平均7.5着"
+          "num": 6,
+          "name": "ワンダーシャッフル",
+          "style": "差",
+          "weight": "476(+2)19.17",
+          "f": 6.8,
+          "fFund": 7.4,
+          "q": 3.7,
+          "wUsed": 0.38,
+          "top2": 13.2,
+          "top3": 19.8,
+          "odds": 19.1,
+          "comment": "F:5枠・近走平均7.5着"
         },
         {
           "mark": "無",
           "role": "強調材料乏しい",
-          "num": 5,
-          "name": "シュトローム",
+          "num": 4,
+          "name": "エルグランゴラッソ",
           "style": "先",
-          "weight": "44.510",
-          "f": 7.8,
-          "fFund": 7.8,
-          "q": 7.7,
-          "wUsed": 0.0,
-          "top2": 15.2,
-          "top3": 22.8,
-          "odds": 10.3,
-          "comment": "F:5枠・近走平均7.5着"
+          "weight": "505(+3)33.49",
+          "f": 6.0,
+          "fFund": 8.9,
+          "q": 2.0,
+          "wUsed": 0.38,
+          "top2": 12.5,
+          "top3": 18.8,
+          "odds": 33.4,
+          "comment": "F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "無",
@@ -4061,31 +5535,47 @@
           "num": 10,
           "name": "ブランチアウト",
           "style": "先",
-          "weight": "7.73",
-          "f": 7.8,
-          "fFund": 7.8,
-          "q": 7.7,
-          "wUsed": 0.0,
-          "top2": 15.2,
-          "top3": 22.8,
-          "odds": 10.3,
+          "weight": "459(+7)29.18",
+          "f": 5.7,
+          "fFund": 7.5,
+          "q": 2.3,
+          "wUsed": 0.38,
+          "top2": 11.2,
+          "top3": 16.8,
+          "odds": 29.1,
           "comment": "F:7枠・近走平均7.5着"
         },
         {
           "mark": "無",
           "role": "強調材料乏しい",
-          "num": 6,
-          "name": "ワンダーシャッフル",
+          "num": 5,
+          "name": "シュトローム",
+          "style": "先",
+          "weight": "458(-7)74.710",
+          "f": 4.1,
+          "fFund": 8.1,
+          "q": 0.8,
+          "wUsed": 0.38,
+          "top2": 7.9,
+          "top3": 11.9,
+          "odds": 74.7,
+          "comment": "F:馬体-7kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "消",
+          "role": "時計・展開劣勢",
+          "num": 9,
+          "name": "サトノグラン",
           "style": "差",
-          "weight": "9.65",
-          "f": 7.6,
-          "fFund": 7.6,
-          "q": 7.6,
-          "wUsed": 0.0,
-          "top2": 14.9,
-          "top3": 22.4,
-          "odds": 10.5,
-          "comment": "F:5枠・近走平均7.5着"
+          "weight": "481(-5)274.911",
+          "f": 2.6,
+          "fFund": 9.5,
+          "q": 0.2,
+          "wUsed": 0.38,
+          "top2": 5.4,
+          "top3": 8.1,
+          "odds": 274.9,
+          "comment": "F:馬体-5kg絞り(H:好仕上) / F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "消",
@@ -4093,51 +5583,35 @@
           "num": 8,
           "name": "アドーネ",
           "style": "差",
-          "weight": "490.312",
-          "f": 7.6,
-          "fFund": 7.6,
-          "q": 7.6,
-          "wUsed": 0.0,
-          "top2": 14.9,
-          "top3": 22.4,
-          "odds": 10.5,
+          "weight": "462(+1)367.012",
+          "f": 2.0,
+          "fFund": 7.4,
+          "q": 0.1,
+          "wUsed": 0.38,
+          "top2": 3.8,
+          "top3": 5.8,
+          "odds": 367.0,
           "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 11,
-          "name": "トモジャイブ",
-          "style": "差",
-          "weight": "24.69",
-          "f": 7.6,
-          "fFund": 7.6,
-          "q": 7.6,
-          "wUsed": 0.0,
-          "top2": 14.9,
-          "top3": 22.4,
-          "odds": 10.5,
-          "comment": "F:8枠・近走平均7.5着"
         }
       ],
       "wR": 0.38,
-      "m3": 27.4,
+      "m3": 44.5,
       "coreConnections": [
         [
-          2,
-          4
+          12,
+          3
         ],
         [
-          2,
-          9
+          12,
+          7
         ],
         [
-          4,
-          9
+          3,
+          7
         ],
         [
-          2,
-          12
+          12,
+          2
         ]
       ],
       "portfolioRules": {
@@ -4145,9 +5619,105 @@
         "dutchTargetReturn": 11800,
         "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎2番破綻時は◯4-▲9のCore結線で元返し防衛。",
+      "counterfactualAudit": "◎12番破綻時は◯3-▲7のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "園田9R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=27.4%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。"
+      "scenario": "園田9R(ダ1600m・重) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=44.5%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 12,
+          "name": "エバイダンス",
+          "odds": "3.3"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 7,
+          "name": "デイムサンライズ",
+          "odds": "4.2"
+        },
+        {
+          "rank": "3",
+          "waku": 1,
+          "num": 1,
+          "name": "クロワール",
+          "odds": "10.0"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              12
+            ],
+            "pay": 330
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              7,
+              12
+            ],
+            "pay": 1370
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              7,
+              12
+            ],
+            "pay": 520
+          },
+          {
+            "nums": [
+              1,
+              12
+            ],
+            "pay": 1160
+          },
+          {
+            "nums": [
+              1,
+              7
+            ],
+            "pay": 620
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              12,
+              7
+            ],
+            "pay": 2800
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              1,
+              7,
+              12
+            ],
+            "pay": 3790
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 21040,
+      "actualRoi": 210.4,
+      "isHit": true,
+      "hitTickets": [
+        "ワイド 12-7 (◎-▲ Core) (10,400円)",
+        "馬連 12-7 (◎-▲ Alpha) (6,850円)",
+        "3連複F (3,790円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻21,040円 (回収率210.4% / +11,040円)"
     },
     {
       "raceId": "202650112510",
@@ -4390,7 +5960,98 @@
       },
       "counterfactualAudit": "◎2番破綻時は◯8-▲11のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "園田10R(ダ1600m・良) 実測N_lead=7頭 / 2-Stage融合(wR=0.38, M3=28.7%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全12頭を厳密演算。"
+      "scenario": "園田10R(ダ1600m・良) 実測N_lead=7頭 / 2-Stage融合(wR=0.38, M3=28.7%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 3,
+          "num": 3,
+          "name": "ジェイエルバース",
+          "odds": "9.4"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 7,
+          "name": "ラブラブフォー",
+          "odds": "15.1"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 11,
+          "name": "ヴァンセゾニエ",
+          "odds": "11.4"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              3
+            ],
+            "pay": 940
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              3,
+              7
+            ],
+            "pay": 9200
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              3,
+              7
+            ],
+            "pay": 2690
+          },
+          {
+            "nums": [
+              3,
+              11
+            ],
+            "pay": 1580
+          },
+          {
+            "nums": [
+              7,
+              11
+            ],
+            "pay": 2270
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              3,
+              7
+            ],
+            "pay": 16310
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              3,
+              7,
+              11
+            ],
+            "pay": 45920
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202650112511",
@@ -4601,7 +6262,98 @@
       },
       "counterfactualAudit": "◎1番破綻時は◯4-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "園田11R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=31.9%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全10頭を厳密演算。"
+      "scenario": "園田11R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=31.9%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全10頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 9,
+          "name": "ヴィーリヤ",
+          "odds": "1.6"
+        },
+        {
+          "rank": "2",
+          "waku": 4,
+          "num": 4,
+          "name": "フェアリーブルー",
+          "odds": "45.7"
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 8,
+          "name": "アストラカ",
+          "odds": "3.6"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              9
+            ],
+            "pay": 160
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              4,
+              9
+            ],
+            "pay": 2160
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              4,
+              9
+            ],
+            "pay": 690
+          },
+          {
+            "nums": [
+              8,
+              9
+            ],
+            "pay": 160
+          },
+          {
+            "nums": [
+              4,
+              8
+            ],
+            "pay": 890
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              9,
+              4
+            ],
+            "pay": 2940
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              4,
+              8,
+              9
+            ],
+            "pay": 1550
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     },
     {
       "raceId": "202650112512",
@@ -4844,7 +6596,98 @@
       },
       "counterfactualAudit": "◎1番破綻時は◯6-▲9のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
-      "scenario": "園田12R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=27.0%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。"
+      "scenario": "園田12R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=27.0%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 5,
+          "num": 5,
+          "name": "ミスジェイド",
+          "odds": "2.4"
+        },
+        {
+          "rank": "2",
+          "waku": 2,
+          "num": 2,
+          "name": "アンデルマット",
+          "odds": "109.2"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 8,
+          "name": "ブラックジャック",
+          "odds": "3.0"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              5
+            ],
+            "pay": 240
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              5
+            ],
+            "pay": 12080
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              5
+            ],
+            "pay": 2420
+          },
+          {
+            "nums": [
+              5,
+              8
+            ],
+            "pay": 200
+          },
+          {
+            "nums": [
+              2,
+              8
+            ],
+            "pay": 2820
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              5,
+              2
+            ],
+            "pay": 10760
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              5,
+              8
+            ],
+            "pay": 6490
+          }
+        ]
+      },
+      "investedYen": 10000,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": true,
+      "resultStatus": "❌ 不的中 回収率0.0%"
     }
   ],
   "multiLeg": {
@@ -4928,7 +6771,37 @@
             "odds": 10.2,
             "note": "F:3枠・近走平均7.5着"
           }
-        ]
+        ],
+        "actualTop3": [
+          {
+            "rank": "1",
+            "waku": 3,
+            "num": 3,
+            "name": "ジェイエルバース",
+            "odds": "9.4"
+          },
+          {
+            "rank": "2",
+            "waku": 6,
+            "num": 7,
+            "name": "ラブラブフォー",
+            "odds": "15.1"
+          },
+          {
+            "rank": "3",
+            "waku": 8,
+            "num": 11,
+            "name": "ヴァンセゾニエ",
+            "odds": "11.4"
+          }
+        ],
+        "actualWinner": {
+          "rank": "1",
+          "waku": 3,
+          "num": 3,
+          "name": "ジェイエルバース",
+          "odds": "9.4"
+        }
       },
       {
         "leg": 2,
@@ -5004,7 +6877,37 @@
             "odds": 8.0,
             "note": "F:父:パイロ/母父:エ(H:血統適性)"
           }
-        ]
+        ],
+        "actualTop3": [
+          {
+            "rank": "1",
+            "waku": 8,
+            "num": 9,
+            "name": "ヴィーリヤ",
+            "odds": "1.6"
+          },
+          {
+            "rank": "2",
+            "waku": 4,
+            "num": 4,
+            "name": "フェアリーブルー",
+            "odds": "45.7"
+          },
+          {
+            "rank": "3",
+            "waku": 7,
+            "num": 8,
+            "name": "アストラカ",
+            "odds": "3.6"
+          }
+        ],
+        "actualWinner": {
+          "rank": "1",
+          "waku": 8,
+          "num": 9,
+          "name": "ヴィーリヤ",
+          "odds": "1.6"
+        }
       },
       {
         "leg": 3,
@@ -5080,7 +6983,37 @@
             "odds": 9.6,
             "note": "F:父:ルヴァンスレーヴ(H:血統適性)"
           }
-        ]
+        ],
+        "actualTop3": [
+          {
+            "rank": "1",
+            "waku": 5,
+            "num": 5,
+            "name": "ミスジェイド",
+            "odds": "2.4"
+          },
+          {
+            "rank": "2",
+            "waku": 2,
+            "num": 2,
+            "name": "アンデルマット",
+            "odds": "109.2"
+          },
+          {
+            "rank": "3",
+            "waku": 6,
+            "num": 8,
+            "name": "ブラックジャック",
+            "odds": "3.0"
+          }
+        ],
+        "actualWinner": {
+          "rank": "1",
+          "waku": 5,
+          "num": 5,
+          "name": "ミスジェイド",
+          "odds": "2.4"
+        }
       }
     ],
     "hedges": [
@@ -5099,28 +7032,28 @@
         "hedge100k": 11300
       }
     ],
-    "finishedLegs": 0
+    "finishedLegs": 3
   },
   "trackBiases": [
     {
       "venue": "名古屋",
       "surf": "Neon v11.2・実配当照合済",
-      "trend": "名古屋: 前半確定レースなし（標準バイアス・補正±5%上限）",
-      "consistentR": 0
+      "trend": "名古屋当日実測(4R一致検証済): 1着内枠0回/外枠3回 → 【外枠(6〜8枠)優勢】",
+      "consistentR": 4
     },
     {
       "venue": "園田",
       "surf": "Neon v11.2・実配当照合済",
-      "trend": "園田: 前半確定レースなし（標準バイアス・補正±5%上限）",
-      "consistentR": 0
+      "trend": "園田当日実測(4R一致検証済): 1着内枠1回/外枠2回 → 【内外フラット】",
+      "consistentR": 4
     },
     {
       "venue": "浦和",
       "surf": "Neon v11.2・実配当照合済",
-      "trend": "浦和: 前半確定レースなし（標準バイアス・補正±5%上限）",
-      "consistentR": 0
+      "trend": "浦和当日実測(12R一致検証済): 1着内枠3回/外枠7回 → 【外枠(6〜8枠)優勢】",
+      "consistentR": 12
     }
   ],
   "engineVer": "v11.2-neon",
-  "updatedAt": "2026-11-25 04:30 JST"
+  "updatedAt": "2026-11-25 22:18 JST"
 }
