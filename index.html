@@ -176,7 +176,7 @@
       </div>
     </section>
 
-    <!-- ④ スキル管理ビュー（＋事後検証プロンプト自動生成） -->
+    <!-- ④ スキル管理ビュー（＋JRA/NAR全期間 事後検証プロンプト自動生成） -->
     <section id="view-skills" class="hidden space-y-3">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between">
@@ -191,14 +191,28 @@
         </ul>
       </div>
 
-      <!-- Gemini事後検証＆スキル改善プロンプト出力カード -->
+      <!-- Gemini事後検証＆スキル改善プロンプト出力カード（JRA/NAR全期間一括対応） -->
       <div class="bg-gradient-to-br from-emerald-950/40 via-slate-900 to-slate-900 border border-emerald-500/30 rounded-xl p-3.5 space-y-2.5">
         <div>
           <h3 class="text-xs font-bold text-emerald-300">🔁 Geminiチャット連携：事後検証プロンプト生成</h3>
-          <p class="text-[11px] text-slate-400 mt-0.5">選択中の開催日の確定結果（的中・不的中・WIN5）を自動要約してコピー。そのままGeminiに貼ってスキル改善パッチを作成できます。</p>
+          <p class="text-[11px] text-slate-400 mt-0.5">アプリに記録された全開催日の確定結果（全レース＋WIN5/トリプル馬単＋ランク別・AI/事前集計）をJRA・NARごとに一括コピーできます。</p>
         </div>
-        <button onclick="copyPostRaceAuditPrompt()" class="w-full bg-emerald-500 hover:bg-emerald-400 active:scale-[0.99] text-slate-950 font-extrabold text-xs py-2.5 rounded-xl transition">
-          📋 選択日の事後検証プロンプトをコピー
+        <label class="flex items-center gap-2 bg-slate-950/70 border border-slate-800 rounded-lg px-2.5 py-2 text-[11px] text-slate-300 cursor-pointer">
+          <input id="auditAiOnlyCheck" type="checkbox" onchange="renderAuditCounts()" class="rounded accent-emerald-500 w-3.5 h-3.5" />
+          <span>🧠 <b>AI本推論のみ抽出</b>（OFF＝事前算出も含む全確定レース）</span>
+        </label>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2">
+          <button onclick="copyAllPostRaceAuditPrompt('jra')" class="w-full bg-emerald-500 hover:bg-emerald-400 active:scale-[0.99] text-slate-950 font-extrabold text-xs py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5">
+            <span>🏇 JRA全記録をコピー</span>
+            <span id="auditCountJra" class="text-[10px] bg-slate-950/20 px-1.5 py-0.5 rounded font-mono">0R</span>
+          </button>
+          <button onclick="copyAllPostRaceAuditPrompt('nar')" class="w-full bg-amber-400 hover:bg-amber-300 active:scale-[0.99] text-slate-950 font-extrabold text-xs py-2.5 px-3 rounded-xl transition flex items-center justify-center gap-1.5">
+            <span>🌃 NAR全記録をコピー</span>
+            <span id="auditCountNar" class="text-[10px] bg-slate-950/20 px-1.5 py-0.5 rounded font-mono">0R</span>
+          </button>
+        </div>
+        <button onclick="copyPostRaceAuditPrompt()" class="w-full bg-slate-800 hover:bg-slate-700 active:scale-[0.99] border border-slate-700 text-slate-200 font-bold text-[11px] py-2 rounded-xl transition">
+          📅 選択中の1日のみコピー (<span id="auditCountSelected">0R</span>)
         </button>
       </div>
 
@@ -497,7 +511,7 @@
       state.selectedDate = keys[keys.length - 1] || "";
       state.selectedVenue = "ALL";
       state.selectedRank = "ALL";
-      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList(); updateWin5Budget(state.win5Budget);
+      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList(); updateWin5Budget(state.win5Budget); renderAuditCounts();
     }
 
     function switchMainView(viewName) {
@@ -507,6 +521,7 @@
       });
       if (viewName === "win5") updateWin5Budget(state.win5Budget);
       if (viewName === "stats") renderStats();
+      if (viewName === "skills") renderAuditCounts();
     }
 
     function renderDateTabs() {
@@ -524,7 +539,7 @@
       state.selectedVenue = "ALL";
       state.selectedRank = "ALL";
       updateWin5Budget(state.win5Budget);
-      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList();
+      renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList(); renderAuditCounts();
     }
 
     function renderBiasBar() {
@@ -1611,29 +1626,162 @@
       }).join("") : `<div class="text-slate-400 p-2">該当する確定レースログはまだありません。</div>`;
     }
 
-    function copyPostRaceAuditPrompt() {
-      const day = getActiveDB()[state.selectedDate];
-      if (!day || !day.races) {
-        showToast("対象日のデータがありません");
+    // ===== 事後検証プロンプト生成（JRA/NAR全期間一括 ＋ 選択日） =====
+    function isAuditAiOnly() {
+      const cb = document.getElementById("auditAiOnlyCheck");
+      return !!(cb && cb.checked);
+    }
+
+    function collectSettledFromDB(db, aiOnly, singleDateKey = null) {
+      const keys = singleDateKey ? (db[singleDateKey] ? [singleDateKey] : []) : Object.keys(db).sort();
+      const entries = [];
+      let totalRaces = 0, passCount = 0;
+      keys.forEach(dk => {
+        const day = db[dk];
+        if (!day || !Array.isArray(day.races)) return;
+        const settled = day.races.filter(r => r.evalDone && r.rank !== "Pass" && (!aiOnly || r.aiPredicted));
+        const dayPass = day.races.filter(r => r.rank === "Pass").length;
+        passCount += dayPass;
+        const hasSettledMl = day.multiLeg && Array.isArray(day.multiLeg.legs) &&
+          day.multiLeg.legs.some(lg => resolveLegActualTop3(lg, day).length > 0);
+        if (settled.length > 0 || hasSettledMl) {
+          entries.push({ dateKey: dk, cleanDate: dk.replace("_nar", ""), day, settled, dayPass });
+          totalRaces += settled.length;
+        }
+      });
+      return { entries, totalRaces, passCount };
+    }
+
+    function renderAuditCounts() {
+      const aiOnly = isAuditAiOnly();
+      const jraC = collectSettledFromDB(DB_JRA, aiOnly);
+      const narC = collectSettledFromDB(DB_NAR, aiOnly);
+      const selC = collectSettledFromDB(getActiveDB(), aiOnly, state.selectedDate);
+      const elJ = document.getElementById("auditCountJra");
+      const elN = document.getElementById("auditCountNar");
+      const elS = document.getElementById("auditCountSelected");
+      if (elJ) elJ.textContent = `${jraC.totalRaces}R / ${jraC.entries.length}日`;
+      if (elN) elN.textContent = `${narC.totalRaces}R / ${narC.entries.length}日`;
+      if (elS) elS.textContent = `${state.selectedDate ? state.selectedDate.replace("_nar", "") : "-"}・${selC.totalRaces}R`;
+    }
+
+    function formatMultiLegAuditLines(ml, day, isNar) {
+      if (!ml || !Array.isArray(ml.legs) || ml.legs.length === 0) return [];
+      const legs = ml.legs;
+      const actualPerLeg = legs.map(lg => resolveLegActualTop3(lg, day));
+      const doneCnt = actualPerLeg.filter(x => x.length > 0).length;
+      if (doneCnt === 0) return [];
+
+      const unitYen = isNar ? 50 : 100;
+      const totalMaxPts = Math.floor(10000 / unitYen);
+      const initArr = new Array(legs.length).fill(1);
+      const countsA = computeOptimalCounts(legs, totalMaxPts, (l, r, i, f) => f, initArr);
+      const slicesA = legs.map((lg, r) => (lg.horses || []).slice(0, countsA[r]));
+      const hitsA = legs.map((_, r) => isSlicePickedHit(slicesA[r], actualPerLeg[r], isNar));
+      const hitCntA = hitsA.filter(x => x === true).length;
+
+      const planCTickets = buildOrthogonalPlanC(legs, totalMaxPts);
+      const resC = planCTickets.map(t => {
+        const lh = t.slices.map((sl, r) => isSlicePickedHit(sl, actualPerLeg[r], isNar));
+        return `${t.id}:${lh.filter(x => x === true).length}/${doneCnt}`;
+      }).join(", ");
+
+      const labelName = isNar ? "トリプル馬単" : "WIN5";
+      const payStr = Number(ml.officialPayout) > 0 ? ` ｜ 公式払戻:${Number(ml.officialPayout).toLocaleString()}円` : "";
+      const out = [
+        `★ ${labelName} [${ml.aiPredicted ? `AI:${ml.usedModel || "Hydrogen"}` : "事前"}] (${doneCnt}/${legs.length}R確定) PlanC(${resC}) / PlanA(${hitCntA}/${doneCnt})${payStr}`
+      ];
+      legs.forEach((lg, r) => {
+        const t3 = actualPerLeg[r];
+        const wStr = t3.length > 0
+          ? (isNar && t3.length > 1 ? `1着:${t3[0].num}${t3[0].name}→2着:${t3[1].num}${t3[1].name}` : `1着:${t3[0].num}${t3[0].name}(${t3[0].odds}倍)`)
+          : "未確定";
+        const top3Picks = (lg.horses || []).slice(0, 3).map(h => `${h.num}${h.name}(f=${h.f}%)`).join(",");
+        out.push(`  Leg${r+1} ${lg.venue} ${lg.name}: 上位[${top3Picks}] → ${wStr}`);
+      });
+      return out;
+    }
+
+    function buildAuditPromptText(scopeTitle, collected, isNar, aiOnly) {
+      const { entries, totalRaces, passCount } = collected;
+      let totalInv = 0, totalRet = 0, totalHits = 0;
+      const bySrc = { ai: { r: 0, h: 0, inv: 0, ret: 0 }, base: { r: 0, h: 0, inv: 0, ret: 0 } };
+      const byRank = { S: { r: 0, h: 0, inv: 0, ret: 0 }, A: { r: 0, h: 0, inv: 0, ret: 0 }, New: { r: 0, h: 0, inv: 0, ret: 0 }, B: { r: 0, h: 0, inv: 0, ret: 0 } };
+
+      entries.forEach(e => {
+        e.settled.forEach(r => {
+          const inv = Number(r.investedYen) || 10000;
+          const ret = Number(r.returnYen) || 0;
+          const hit = ret > 0 ? 1 : 0;
+          totalInv += inv; totalRet += ret; totalHits += hit;
+          const sk = r.aiPredicted ? "ai" : "base";
+          bySrc[sk].r++; bySrc[sk].h += hit; bySrc[sk].inv += inv; bySrc[sk].ret += ret;
+          const rk = byRank[r.rank] ? r.rank : "B";
+          byRank[rk].r++; byRank[rk].h += hit; byRank[rk].inv += inv; byRank[rk].ret += ret;
+        });
+      });
+
+      const pct = (num, den) => den > 0 ? `${(num * 100 / den).toFixed(1)}%` : "--%";
+      const dateRange = entries.length > 0 ? `${entries[0].cleanDate}〜${entries[entries.length - 1].cleanDate}` : "-";
+
+      const lines = [
+        `以下の ${scopeTitle} 確定結果（${dateRange} / 全${entries.length}日・${totalRaces}レース${aiOnly ? "・AI本推論のみ" : "・全件"}）を横断的に事後検証（シナリオ・レーティング/2-Stage融合・ポートフォリオの3要因分解）し、再現性のある構造課題と具体的なスキル改善パッチを提案してください。`,
+        "",
+        "【期間集計サマリー（1万円購入基準）】",
+        `・総合: ${totalHits}/${totalRaces}R的中 (的中率 ${pct(totalHits, totalRaces)}) ｜ 投資 ${totalInv.toLocaleString()}円 → 払戻 ${totalRet.toLocaleString()}円 (回収率 ${pct(totalRet, totalInv)} / 収支 ${(totalRet - totalInv >= 0 ? "+" : "")}${(totalRet - totalInv).toLocaleString()}円) ｜ Pass見送り ${passCount}R`,
+        `・推論元別: AI本推論 ${bySrc.ai.h}/${bySrc.ai.r}R (ROI ${pct(bySrc.ai.ret, bySrc.ai.inv)}) ／ 事前算出 ${bySrc.base.h}/${bySrc.base.r}R (ROI ${pct(bySrc.base.ret, bySrc.base.inv)})`,
+        `・ランク別: S:${byRank.S.h}/${byRank.S.r}R(${pct(byRank.S.ret, byRank.S.inv)}) / A:${byRank.A.h}/${byRank.A.r}R(${pct(byRank.A.ret, byRank.A.inv)}) / 新馬:${byRank.New.h}/${byRank.New.r}R(${pct(byRank.New.ret, byRank.New.inv)}) / B:${byRank.B.h}/${byRank.B.r}R(${pct(byRank.B.ret, byRank.B.inv)})`,
+        ""
+      ];
+
+      entries.forEach(e => {
+        let dInv = 0, dRet = 0, dHit = 0;
+        e.settled.forEach(r => { dInv += Number(r.investedYen) || 10000; dRet += Number(r.returnYen) || 0; if ((Number(r.returnYen) || 0) > 0) dHit++; });
+        lines.push(`=== ${e.cleanDate} (${isNar ? "NAR" : "JRA"} / ${dHit}/${e.settled.length}R的中 / ROI ${pct(dRet, dInv)}) ===`);
+        e.settled.forEach(r => {
+          const top3 = (r.actualTop3 || []).map(a => `${a.rank}着:${a.num}${a.name}(${a.odds || "?"}倍)`).join("/");
+          const picks = (r.horses || []).slice(0, 4).map(h => {
+            const ff = h.fFund != null ? `/基${h.fFund}%` : "";
+            return `${h.mark}${h.num}${h.name}(f=${h.f}%${ff},O=${h.odds || "?"})`;
+          }).join(", ");
+          const srcLabel = r.aiPredicted ? `AI:${r.usedModel || "済"}${r.aiPredictedWithWeights ? "+体重" : ""}` : "事前";
+          const hitsTxt = (r.hitTickets && r.hitTickets.length > 0) ? ` ｜ 的中:[${r.hitTickets.join(", ")}]` : "";
+          lines.push(`■ ${r.venue}${r.r}R ${r.name} (${r.cond}・${(r.horses || []).length}頭) [Rank:${r.rank} / ${srcLabel}]`);
+          lines.push(`  予想上位: ${picks}`);
+          lines.push(`  確定結果: ${top3} ｜ 回収率 ${r.actualRoi}% (${(r.returnYen || 0).toLocaleString()}円)${hitsTxt}`);
+        });
+        const mlLines = formatMultiLegAuditLines(e.day.multiLeg, e.day, isNar);
+        if (mlLines.length > 0) lines.push(...mlLines);
+        lines.push("");
+      });
+      return lines.join("\n").trim();
+    }
+
+    function copyAllPostRaceAuditPrompt(mode) {
+      const isNar = mode === "nar";
+      const db = isNar ? DB_NAR : DB_JRA;
+      const aiOnly = isAuditAiOnly();
+      const collected = collectSettledFromDB(db, aiOnly);
+      if (collected.entries.length === 0) {
+        showToast(`${isNar ? "NAR" : "JRA"}の確定済みデータがありません${aiOnly ? "（AIのみ条件）" : ""}`);
         return;
       }
-      const settled = day.races.filter(r => r.evalDone && r.rank !== "Pass");
-      if (settled.length === 0) {
+      const text = buildAuditPromptText(isNar ? "NAR地方 全記録" : "JRA中央 全記録", collected, isNar, aiOnly);
+      copyToClipboard(text, `📋 ${isNar ? "NAR" : "JRA"}全${collected.totalRaces}Rの事後検証プロンプトをコピーしました`);
+    }
+
+    function copyPostRaceAuditPrompt() {
+      const db = getActiveDB();
+      const aiOnly = isAuditAiOnly();
+      const isNar = state.circuitMode === "nar";
+      const collected = collectSettledFromDB(db, aiOnly, state.selectedDate);
+      if (collected.entries.length === 0) {
         showToast("選択日に確定済みレースがありません");
         return;
       }
-      const lines = [
-        `以下の ${state.selectedDate} (${state.circuitMode.toUpperCase()}) 確定結果を事後検証（シナリオ・レーティング/融合・ポートフォリオの3要因分解）し、スキル改善パッチを提案してください。`,
-        ""
-      ];
-      settled.forEach(r => {
-        const top3 = (r.actualTop3 || []).map(a => `${a.rank}着:${a.num}${a.name}`).join("/");
-        const picks = (r.horses || []).slice(0, 4).map(h => `${h.mark}${h.num}${h.name}(f=${h.f}%)`).join(", ");
-        lines.push(`■ ${r.venue}${r.r}R ${r.name} [Rank:${r.rank} / ${r.aiPredicted ? "AI" : "事前"}]`);
-        lines.push(`  予想上位: ${picks}`);
-        lines.push(`  確定結果: ${top3} ｜ 回収率 ${r.actualRoi}% (${(r.returnYen||0).toLocaleString()}円)`);
-      });
-      copyToClipboard(lines.join("\n"), "📋 事後検証プロンプトをコピーしました");
+      const cleanDate = state.selectedDate.replace("_nar", "");
+      const text = buildAuditPromptText(`${cleanDate} (${isNar ? "NAR" : "JRA"})`, collected, isNar, aiOnly);
+      copyToClipboard(text, `📋 ${cleanDate}の事後検証プロンプトをコピーしました`);
     }
 
     async function syncGitHubLiveData(manual = false) {
@@ -1712,7 +1860,7 @@
         if (!state.selectedDate || !getActiveDB()[state.selectedDate]) {
           if (keys.length > 0) state.selectedDate = keys[keys.length - 1];
         }
-        renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList(); updateWin5Budget(state.win5Budget); renderStats();
+        renderDateTabs(); renderBiasBar(); renderVenueFilter(); renderRankFilter(); renderRaceList(); updateWin5Budget(state.win5Budget); renderStats(); renderAuditCounts();
         if (manual) showToast("✅ 最新データへ同期しました");
       } catch (e) {
         console.warn("Sync skipped:", e);
