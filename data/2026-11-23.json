@@ -10338,17 +10338,17 @@
   "trackBiases": [
     {
       "venue": "東京",
-      "surf": "Neon v11.3・実配当照合済",
+      "surf": "Neon v11.4・実配当照合済",
       "trend": "東京当日実測(12R一致検証済): 1着内枠2回/外枠5回 → 【外枠(6〜8枠)優勢】",
       "consistentR": 12
     },
     {
       "venue": "福島",
-      "surf": "Neon v11.3・実配当照合済",
+      "surf": "Neon v11.4・実配当照合済",
       "trend": "福島当日実測(12R一致検証済): 1着内枠6回/外枠6回 → 【内外フラット】",
       "consistentR": 12
     }
   ],
-  "engineVer": "v11.3-neon",
-  "updatedAt": "2026-11-26 20:21 JST"
+  "engineVer": "v11.4-neon",
+  "updatedAt": "2026-11-26 21:12 JST"
 }

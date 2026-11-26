@@ -2234,17 +2234,17 @@
   "trackBiases": [
     {
       "venue": "京都",
-      "surf": "Neon v11.3・実配当照合済",
+      "surf": "Neon v11.4・実配当照合済",
       "trend": "京都: 前半確定レースなし（標準バイアス・補正±5%上限）",
       "consistentR": 0
     },
     {
       "venue": "東京",
-      "surf": "Neon v11.3・実配当照合済",
+      "surf": "Neon v11.4・実配当照合済",
       "trend": "東京: 前半確定レースなし（標準バイアス・補正±5%上限）",
       "consistentR": 0
     }
   ],
-  "engineVer": "v11.3-neon",
-  "updatedAt": "2026-11-26 20:21 JST"
+  "engineVer": "v11.4-neon",
+  "updatedAt": "2026-11-26 21:12 JST"
 }

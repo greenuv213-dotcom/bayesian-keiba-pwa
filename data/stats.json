@@ -1,24 +1,24 @@
 {
-  "updatedAt": "2026-11-26 20:21 JST",
+  "updatedAt": "2026-11-26 21:12 JST",
   "all": {
-    "races": 118,
-    "hits": 51,
-    "invest": 1180000,
-    "ret": 1186720,
-    "passCount": 28,
-    "passSaved": 280000,
+    "races": 105,
+    "hits": 49,
+    "invest": 1050000,
+    "ret": 746400,
+    "passCount": 35,
+    "passSaved": 350000,
     "byRank": {
       "S": {
-        "races": 11,
-        "hits": 5,
-        "invest": 110000,
-        "ret": 74650
+        "races": 8,
+        "hits": 4,
+        "invest": 80000,
+        "ret": 70940
       },
       "A": {
-        "races": 53,
-        "hits": 21,
-        "invest": 530000,
-        "ret": 544360
+        "races": 45,
+        "hits": 18,
+        "invest": 450000,
+        "ret": 188910
       },
       "New": {
         "races": 7,
@@ -27,10 +27,10 @@
         "ret": 43420
       },
       "B": {
-        "races": 47,
-        "hits": 21,
-        "invest": 470000,
-        "ret": 524290
+        "races": 45,
+        "hits": 23,
+        "invest": 450000,
+        "ret": 443130
       }
     },
     "bySource": {
@@ -41,10 +41,10 @@
         "ret": 55220
       },
       "baseline": {
-        "races": 111,
-        "hits": 47,
-        "invest": 1110000,
-        "ret": 1131500
+        "races": 98,
+        "hits": 45,
+        "invest": 980000,
+        "ret": 691180
       }
     }
   },
@@ -97,24 +97,24 @@
     }
   },
   "nar": {
-    "races": 79,
-    "hits": 26,
-    "invest": 790000,
-    "ret": 880090,
-    "passCount": 7,
-    "passSaved": 70000,
+    "races": 66,
+    "hits": 24,
+    "invest": 660000,
+    "ret": 439770,
+    "passCount": 14,
+    "passSaved": 140000,
     "byRank": {
       "S": {
-        "races": 11,
-        "hits": 5,
-        "invest": 110000,
-        "ret": 74650
+        "races": 8,
+        "hits": 4,
+        "invest": 80000,
+        "ret": 70940
       },
       "A": {
-        "races": 40,
-        "hits": 13,
-        "invest": 400000,
-        "ret": 447880
+        "races": 32,
+        "hits": 10,
+        "invest": 320000,
+        "ret": 92430
       },
       "New": {
         "races": 0,
@@ -123,10 +123,10 @@
         "ret": 0
       },
       "B": {
-        "races": 28,
-        "hits": 8,
-        "invest": 280000,
-        "ret": 357560
+        "races": 26,
+        "hits": 10,
+        "invest": 260000,
+        "ret": 276400
       }
     },
     "bySource": {
@@ -137,10 +137,10 @@
         "ret": 0
       },
       "baseline": {
-        "races": 79,
-        "hits": 26,
-        "invest": 790000,
-        "ret": 880090
+        "races": 66,
+        "hits": 24,
+        "invest": 660000,
+        "ret": 439770
       }
     }
   },
@@ -148,11 +148,11 @@
     {
       "date": "2026-11-26",
       "mode": "nar",
-      "races": 15,
+      "races": 10,
       "hits": 4,
-      "invest": 150000,
-      "ret": 365890,
-      "roi": 243.9
+      "invest": 100000,
+      "ret": 19200,
+      "roi": 19.2
     },
     {
       "date": "2026-11-25",
@@ -175,11 +175,11 @@
     {
       "date": "2026-11-23",
       "mode": "nar",
-      "races": 13,
+      "races": 9,
       "hits": 4,
-      "invest": 130000,
+      "invest": 90000,
       "ret": 31490,
-      "roi": 24.2
+      "roi": 35.0
     },
     {
       "date": "2026-11-23",
@@ -202,11 +202,11 @@
     {
       "date": "2026-11-21",
       "mode": "nar",
-      "races": 11,
-      "hits": 4,
-      "invest": 110000,
-      "ret": 105720,
-      "roi": 96.1
+      "races": 7,
+      "hits": 2,
+      "invest": 70000,
+      "ret": 12090,
+      "roi": 17.3
     },
     {
       "date": "2026-11-21",
@@ -250,45 +250,16 @@
       "mode": "nar",
       "rank": "B",
       "ai": false,
-      "race": "浦和4R C2エC3選抜馬(C2C3)",
-      "status": "🎯 的中 払戻89,530円 (回収率895.3% / +79,530円)",
-      "roi": 895.3,
-      "returnYen": 89530,
+      "race": "浦和6R 新風特別(2歳)",
+      "status": "🎯 的中 払戻9,550円 (回収率95.5% / -450円)",
+      "roi": 95.5,
+      "returnYen": 9550,
       "investedYen": 10000,
       "isHit": true,
       "hits": [
-        "ワイド 9-12 (◎-◯ Core) (4,840円)",
-        "ワイド 9-5 (◎-▲ Core) (28,500円)",
-        "ワイド 12-5 (◯-▲ 防衛) (49,320円)",
-        "馬連 9-12 (◎-◯ Alpha) (3,080円)",
-        "3連複F (3,790円)"
+        "ワイド 1-5 (◎-▲ 2点圧縮Core) (7,200円)",
+        "馬連 1-5 (◎-▲ Alpha) (2,350円)"
       ]
-    },
-    {
-      "date": "2026-11-26",
-      "mode": "nar",
-      "rank": "B",
-      "ai": false,
-      "race": "浦和5R C1三四",
-      "status": "❌ 不的中 回収率0.0%",
-      "roi": 0.0,
-      "returnYen": 0,
-      "investedYen": 10000,
-      "isHit": false,
-      "hits": []
-    },
-    {
-      "date": "2026-11-26",
-      "mode": "nar",
-      "rank": "B",
-      "ai": false,
-      "race": "浦和7R C1三四",
-      "status": "❌ 不的中 回収率0.0%",
-      "roi": 0.0,
-      "returnYen": 0,
-      "investedYen": 10000,
-      "isHit": false,
-      "hits": []
     },
     {
       "date": "2026-11-26",
@@ -306,7 +277,7 @@
     {
       "date": "2026-11-26",
       "mode": "nar",
-      "rank": "S",
+      "rank": "B",
       "ai": false,
       "race": "浦和9R 東毛酪農63℃賞特...(C2)",
       "status": "🎯 的中 払戻3,710円 (回収率37.1% / -6,290円)",
@@ -324,29 +295,14 @@
       "mode": "nar",
       "rank": "B",
       "ai": false,
-      "race": "浦和10R 高崎ハム賞特別(C1C2)",
-      "status": "🎯 的中 払戻10,830円 (回収率108.3% / +830円)",
-      "roi": 108.3,
-      "returnYen": 10830,
+      "race": "金沢10R 金沢競馬は楽天競馬...(A2)",
+      "status": "🎯 的中 払戻1,180円 (回収率11.8% / -8,820円)",
+      "roi": 11.8,
+      "returnYen": 1180,
       "investedYen": 10000,
       "isHit": true,
       "hits": [
-        "ワイド 12-10 (◎-▲ Core) (10,830円)"
-      ]
-    },
-    {
-      "date": "2026-11-26",
-      "mode": "nar",
-      "rank": "A",
-      "ai": false,
-      "race": "浦和11R サザンスタースプリ...(3歳)",
-      "status": "🎯 的中 払戻261,820円 (回収率2618.2% / +251,820円)",
-      "roi": 2618.2,
-      "returnYen": 261820,
-      "investedYen": 10000,
-      "isHit": true,
-      "hits": [
-        "ワイド 2-5 (◎-▲ Core) (261,820円)"
+        "3連複F (1,180円)"
       ]
     },
     {
@@ -354,7 +310,7 @@
       "mode": "nar",
       "rank": "B",
       "ai": false,
-      "race": "浦和12R 群馬県畜産協会長賞...(B2B3)",
+      "race": "金沢12R かおるくん1歳のお...(B1特別)",
       "status": "❌ 不的中 回収率0.0%",
       "roi": 0.0,
       "returnYen": 0,
@@ -366,19 +322,6 @@
       "date": "2026-11-26",
       "mode": "nar",
       "rank": "B",
-      "ai": false,
-      "race": "名古屋9R ライトフェザーフュ...(2歳)",
-      "status": "❌ 不的中 回収率0.0%",
-      "roi": 0.0,
-      "returnYen": 0,
-      "investedYen": 10000,
-      "isHit": false,
-      "hits": []
-    },
-    {
-      "date": "2026-11-26",
-      "mode": "nar",
-      "rank": "A",
       "ai": false,
       "race": "名古屋10R 朔葉疾風特別(A)",
       "status": "❌ 不的中 回収率0.0%",
@@ -393,33 +336,22 @@
       "mode": "nar",
       "rank": "B",
       "ai": false,
+      "race": "名古屋11R ゴールドウィング賞(2歳)",
+      "status": "🎯 的中 払戻4,760円 (回収率47.6% / -5,240円)",
+      "roi": 47.6,
+      "returnYen": 4760,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "3連複F (4,760円)"
+      ]
+    },
+    {
+      "date": "2026-11-26",
+      "mode": "nar",
+      "rank": "B",
+      "ai": false,
       "race": "園田9R C1一",
-      "status": "❌ 不的中 回収率0.0%",
-      "roi": 0.0,
-      "returnYen": 0,
-      "investedYen": 10000,
-      "isHit": false,
-      "hits": []
-    },
-    {
-      "date": "2026-11-26",
-      "mode": "nar",
-      "rank": "B",
-      "ai": false,
-      "race": "園田11R 兵庫ジュニア(重賞)",
-      "status": "❌ 不的中 回収率0.0%",
-      "roi": 0.0,
-      "returnYen": 0,
-      "investedYen": 10000,
-      "isHit": false,
-      "hits": []
-    },
-    {
-      "date": "2026-11-26",
-      "mode": "nar",
-      "rank": "B",
-      "ai": false,
-      "race": "園田12R サフラン賞B2",
       "status": "❌ 不的中 回収率0.0%",
       "roi": 0.0,
       "returnYen": 0,
@@ -917,6 +849,75 @@
       "investedYen": 10000,
       "isHit": false,
       "hits": []
+    },
+    {
+      "date": "2026-11-24",
+      "mode": "nar",
+      "rank": "A",
+      "ai": false,
+      "race": "浦和12R 小春空特別(C1C2)",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-24",
+      "mode": "nar",
+      "rank": "A",
+      "ai": false,
+      "race": "名古屋9R ベテルギウス特別(B)",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-24",
+      "mode": "nar",
+      "rank": "A",
+      "ai": false,
+      "race": "名古屋10R 小雪大空特別(A)",
+      "status": "🎯 的中 払戻14,220円 (回収率142.2% / +4,220円)",
+      "roi": 142.2,
+      "returnYen": 14220,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 8-12 (◎-☆ 強制結線) (14,220円)"
+      ]
+    },
+    {
+      "date": "2026-11-24",
+      "mode": "nar",
+      "rank": "A",
+      "ai": false,
+      "race": "名古屋11R オリオン座特別(B)",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-24",
+      "mode": "nar",
+      "rank": "A",
+      "ai": false,
+      "race": "名古屋12R 金シャチ最終戦(C)",
+      "status": "🎯 的中 払戻4,420円 (回収率44.2% / -5,580円)",
+      "roi": 44.2,
+      "returnYen": 4420,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 1-4 (◎-☆ 強制結線) (4,420円)"
+      ]
     }
   ]
 }
