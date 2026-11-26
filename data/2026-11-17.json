@@ -5,5 +5,6 @@
   "audited": false,
   "races": [],
   "win5": {},
-  "skillPatches": []
+  "skillPatches": [],
+  "engineVer": "v11.5-neon"
 }

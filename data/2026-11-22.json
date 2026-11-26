@@ -327,7 +327,20 @@
         "3連複F (1,800円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻6,120円 (回収率61.2% / -3,880円)"
+      "resultStatus": "🎯 的中 払戻6,120円 (回収率61.2% / -3,880円)",
+      "isGraded": false,
+      "m3": 64.1,
+      "coreSyntheticOdds": 1.41,
+      "coreConnections": [
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          4
+        ]
+      ]
     },
     {
       "raceId": "202605050502",
@@ -338,7 +351,7 @@
       "name": "2歳未勝利",
       "surfaceDist": "芝1800m",
       "postTime": "10:20",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -605,17 +618,28 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 9460,
-      "actualRoi": 94.6,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 12-13 (4,320円)",
-        "馬連 12-13 (2,300円)",
-        "3連複F (2,840円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.33倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 66.7,
+      "coreSyntheticOdds": 1.33,
+      "coreConnections": [
+        [
+          12,
+          6
+        ],
+        [
+          12,
+          13
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻9,460円 (回収率94.6% / -540円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.33倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050503",
@@ -626,7 +650,7 @@
       "name": "2歳未勝利",
       "surfaceDist": "芝1400m",
       "postTime": "10:50",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -958,17 +982,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 43100,
-      "actualRoi": 431.0,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 10-18 (19,240円)",
-        "単勝 10 (4,160円)",
-        "馬連 10-18 (19,700円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.9倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 47.9,
+      "coreSyntheticOdds": 0.9,
+      "coreConnections": [
+        [
+          4,
+          10
+        ],
+        [
+          4,
+          18
+        ],
+        [
+          10,
+          18
+        ],
+        [
+          4,
+          8
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻43,100円 (回収率431.0% / +33,100円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.9倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050504",
@@ -979,7 +1022,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1600m",
       "postTime": "11:20",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "aiPredicted": false,
@@ -1233,13 +1276,36 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.83倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 46.7,
+      "coreSyntheticOdds": 0.83,
+      "coreConnections": [
+        [
+          6,
+          8
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          8,
+          12
+        ],
+        [
+          6,
+          4
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.83倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050505",
@@ -1250,7 +1316,7 @@
       "name": "2歳新馬",
       "surfaceDist": "芝2000m",
       "postTime": "12:10",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "aiPredicted": false,
@@ -1443,13 +1509,36 @@
         "umatan": [],
         "sanrenpuku": []
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.67倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 60.9,
+      "coreSyntheticOdds": 0.67,
+      "coreConnections": [
+        [
+          7,
+          8
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          6
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.67倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050506",
@@ -1460,7 +1549,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1400m",
       "postTime": "12:40",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "aiPredicted": true,
@@ -1682,7 +1771,7 @@
         }
       ],
       "scenario": "外枠優勢バイアス×芝発進ダ1400m。M1外枠先行加点＆内枠差し砂被り減点、M3先行激化差し編入発動。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "usedModel": "gemini-4-hydrogen(MEDIUM)",
       "actualTop3": [
         {
@@ -1768,13 +1857,35 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.23倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 50.5,
+      "coreSyntheticOdds": 1.23,
+      "coreConnections": [
+        [
+          12,
+          14
+        ],
+        [
+          12,
+          13
+        ],
+        [
+          14,
+          13
+        ],
+        [
+          12,
+          7
+        ]
+      ],
+      "passReason": "Core合成オッズ1.23倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050507",
@@ -1785,7 +1896,7 @@
       "name": "3歳以上1勝クラス",
       "surfaceDist": "ダ2100m",
       "postTime": "13:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -2091,15 +2202,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 1470,
-      "actualRoi": 14.7,
-      "isHit": true,
-      "hitTickets": [
-        "単勝 9 (1,470円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.94倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 45.1,
+      "coreSyntheticOdds": 0.94,
+      "coreConnections": [
+        [
+          9,
+          8
+        ],
+        [
+          9,
+          14
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          9,
+          1
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻1,470円 (回収率14.7% / -8,530円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.94倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050508",
@@ -2110,7 +2242,7 @@
       "name": "3歳以上2勝クラス",
       "surfaceDist": "ダ1600m",
       "postTime": "13:40",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -2416,16 +2548,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 19150,
-      "actualRoi": 191.5,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 4-12 (6,890円)",
-        "3連複F (12,260円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.91倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 46.1,
+      "coreSyntheticOdds": 0.91,
+      "coreConnections": [
+        [
+          4,
+          12
+        ],
+        [
+          4,
+          3
+        ],
+        [
+          12,
+          3
+        ],
+        [
+          4,
+          16
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻19,150円 (回収率191.5% / +9,150円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.91倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050509",
@@ -2436,7 +2588,7 @@
       "name": "赤松賞",
       "surfaceDist": "芝1600m",
       "postTime": "14:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": true,
@@ -2567,7 +2719,7 @@
         }
       ],
       "scenario": "逃げ3頭で流れ外枠優勢バイアス濃厚。8枠好位の8番軸、現級実績馬と外差し勢へ。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "usedModel": "gemini-4-hydrogen(HIGH)",
       "actualTop3": [
         {
@@ -2653,17 +2805,35 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 16240,
-      "actualRoi": 162.4,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 8-2 (8,840円)",
-        "単勝 2 (2,960円)",
-        "3連複F (4,440円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.74倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 62.0,
+      "coreSyntheticOdds": 0.74,
+      "coreConnections": [
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          8,
+          5
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻16,240円 (回収率162.4% / +6,240円)"
+      "passReason": "Core合成オッズ0.74倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050510",
@@ -2674,7 +2844,7 @@
       "name": "秋色S",
       "surfaceDist": "芝1600m",
       "postTime": "14:45",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": true,
@@ -3020,13 +3190,36 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.03倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 50.4,
+      "coreSyntheticOdds": 1.03,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          15
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          5,
+          8
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.03倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202605050511",
@@ -3405,7 +3598,28 @@
         "ワイド 6-5 (◎-◯ Core) (15,540円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻15,540円 (回収率155.4% / +5,540円)"
+      "resultStatus": "🎯 的中 払戻15,540円 (回収率155.4% / +5,540円)",
+      "isGraded": false,
+      "m3": 43.9,
+      "coreSyntheticOdds": 1.85,
+      "coreConnections": [
+        [
+          6,
+          5
+        ],
+        [
+          6,
+          15
+        ],
+        [
+          5,
+          15
+        ],
+        [
+          6,
+          8
+        ]
+      ]
     },
     {
       "raceId": "202605050512",
@@ -3416,7 +3630,7 @@
       "name": "3歳以上2勝クラス",
       "surfaceDist": "芝1400m",
       "postTime": "16:05",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -3758,7 +3972,7 @@
       },
       "weightsAnnounced": true,
       "wR": 0.35,
-      "m3": 32.1,
+      "m3": 44.6,
       "coreConnections": [
         [
           7,
@@ -3780,7 +3994,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎7番破綻時は◯12-▲13のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -3882,16 +4097,17 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 13430,
-      "actualRoi": 134.3,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 12-13 (◯-▲ 防衛) (8,280円)",
-        "3連複F (5,150円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻13,430円 (回収率134.3% / +3,430円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.03倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.03,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.03倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202608050601",
@@ -3902,7 +4118,7 @@
       "name": "2歳未勝利",
       "surfaceDist": "ダ1800m",
       "postTime": "10:05",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -4156,16 +4372,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 7480,
-      "actualRoi": 74.8,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 8-2 (5,200円)",
-        "3連複F (2,280円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.61倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 64.6,
+      "coreSyntheticOdds": 0.61,
+      "coreConnections": [
+        [
+          8,
+          1
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          8,
+          6
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻7,480円 (回収率74.8% / -2,520円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.61倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202608050602",
@@ -4451,7 +4687,20 @@
         "3連複F (2,630円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻2,630円 (回収率26.3% / -7,370円)"
+      "resultStatus": "🎯 的中 払戻2,630円 (回収率26.3% / -7,370円)",
+      "isGraded": false,
+      "m3": 58.2,
+      "coreSyntheticOdds": 1.42,
+      "coreConnections": [
+        [
+          10,
+          9
+        ],
+        [
+          10,
+          3
+        ]
+      ]
     },
     {
       "raceId": "202608050603",
@@ -4690,7 +4939,20 @@
         "3連複F (380円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻14,450円 (回収率144.5% / +4,450円)"
+      "resultStatus": "🎯 的中 払戻14,450円 (回収率144.5% / +4,450円)",
+      "isGraded": false,
+      "m3": 70.1,
+      "coreSyntheticOdds": 1.41,
+      "coreConnections": [
+        [
+          5,
+          3
+        ],
+        [
+          5,
+          4
+        ]
+      ]
     },
     {
       "raceId": "202608050604",
@@ -4701,7 +4963,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1800m",
       "postTime": "11:35",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "aiPredicted": false,
@@ -4929,16 +5191,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 5570,
-      "actualRoi": 55.7,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 6-1 (4,680円)",
-        "3連複F (890円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.8倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 49.1,
+      "coreSyntheticOdds": 0.8,
+      "coreConnections": [
+        [
+          9,
+          6
+        ],
+        [
+          9,
+          1
+        ],
+        [
+          6,
+          1
+        ],
+        [
+          9,
+          5
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻5,570円 (回収率55.7% / -4,430円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.8倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202608050605",
@@ -5214,7 +5496,20 @@
         "3連複F (990円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻20,450円 (回収率204.5% / +10,450円)"
+      "resultStatus": "🎯 的中 払戻20,450円 (回収率204.5% / +10,450円)",
+      "isGraded": false,
+      "m3": 65.5,
+      "coreSyntheticOdds": 1.75,
+      "coreConnections": [
+        [
+          9,
+          1
+        ],
+        [
+          9,
+          11
+        ]
+      ]
     },
     {
       "raceId": "202608050606",
@@ -5225,7 +5520,7 @@
       "name": "3歳以上1勝クラス",
       "surfaceDist": "ダ1200m",
       "postTime": "12:55",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -5531,17 +5826,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 11890,
-      "actualRoi": 118.9,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 4-16 (5,400円)",
-        "馬連 4-16 (4,720円)",
-        "3連複F (1,770円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.87倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 42.7,
+      "coreSyntheticOdds": 0.87,
+      "coreConnections": [
+        [
+          4,
+          16
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          16,
+          5
+        ],
+        [
+          4,
+          13
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻11,890円 (回収率118.9% / +1,890円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.87倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202608050607",
@@ -5552,7 +5866,7 @@
       "name": "3歳以上1勝クラス",
       "surfaceDist": "芝2400m",
       "postTime": "13:25",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -5884,18 +6198,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 20780,
-      "actualRoi": 207.8,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 5-9 (6,630円)",
-        "単勝 5 (2,870円)",
-        "馬連 5-9 (7,200円)",
-        "3連複F (4,080円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.31倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 31.2,
+      "coreSyntheticOdds": 1.31,
+      "coreConnections": [
+        [
+          9,
+          1
+        ],
+        [
+          9,
+          5
+        ],
+        [
+          1,
+          5
+        ],
+        [
+          9,
+          10
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻20,780円 (回収率207.8% / +10,780円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.31倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202608050608",
@@ -6144,7 +6476,20 @@
         "3連複F (1,190円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻12,210円 (回収率122.1% / +2,210円)"
+      "resultStatus": "🎯 的中 払戻12,210円 (回収率122.1% / +2,210円)",
+      "isGraded": false,
+      "m3": 59.6,
+      "coreSyntheticOdds": 1.37,
+      "coreConnections": [
+        [
+          2,
+          7
+        ],
+        [
+          2,
+          10
+        ]
+      ]
     },
     {
       "raceId": "202608050609",
@@ -6155,7 +6500,7 @@
       "name": "花見小路特別",
       "surfaceDist": "芝1600m",
       "postTime": "14:25",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": true,
@@ -6436,16 +6781,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 5910,
-      "actualRoi": 59.1,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 12-11 (4,550円)",
-        "3連複F (1,360円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.88倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 48.6,
+      "coreSyntheticOdds": 0.88,
+      "coreConnections": [
+        [
+          12,
+          11
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          11,
+          2
+        ],
+        [
+          12,
+          14
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻5,910円 (回収率59.1% / -4,090円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.88倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202608050610",
@@ -6774,7 +7139,28 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "m3": 45.6,
+      "coreSyntheticOdds": 2.42,
+      "coreConnections": [
+        [
+          4,
+          13
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          13,
+          8
+        ],
+        [
+          4,
+          1
+        ]
+      ]
     },
     {
       "raceId": "202608050611",
@@ -6785,7 +7171,7 @@
       "name": "マイルCS",
       "surfaceDist": "芝1600m",
       "postTime": "15:40",
-      "rank": "A",
+      "rank": "S",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": true,
@@ -7192,7 +7578,28 @@
         "3連複F (4,730円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻17,530円 (回収率175.3% / +7,530円)"
+      "resultStatus": "🎯 的中 払戻17,530円 (回収率175.3% / +7,530円)",
+      "isGraded": true,
+      "m3": 45.8,
+      "coreSyntheticOdds": 1.6,
+      "coreConnections": [
+        [
+          2,
+          8
+        ],
+        [
+          2,
+          14
+        ],
+        [
+          8,
+          14
+        ],
+        [
+          2,
+          11
+        ]
+      ]
     },
     {
       "raceId": "202608050612",
@@ -7203,7 +7610,7 @@
       "name": "醍醐S",
       "surfaceDist": "芝1200m",
       "postTime": "16:20",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -7521,18 +7928,10 @@
       },
       "weightsAnnounced": true,
       "wR": 0.35,
-      "m3": 36.6,
+      "m3": 58.4,
       "coreConnections": [
         [
           11,
-          13
-        ],
-        [
-          11,
-          12
-        ],
-        [
-          13,
           12
         ],
         [
@@ -7543,7 +7942,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 2
       },
       "counterfactualAudit": "◎11番破綻時は◯13-▲12のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -7639,7 +8039,9 @@
         "ワイド 11-12 (◎-▲ Core) (6,720円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻6,720円 (回収率67.2% / -3,280円)"
+      "resultStatus": "🎯 的中 払戻6,720円 (回収率67.2% / -3,280円)",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.77
     }
   ],
   "trackBiases": [
@@ -8141,5 +8543,5 @@
     "finishedLegs": 5
   },
   "updatedAt": "2026-11-23 22:26 JST",
-  "engineVer": "v11.2-neon"
+  "engineVer": "v11.5-neon"
 }

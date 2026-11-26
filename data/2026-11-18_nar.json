@@ -12,7 +12,7 @@
       "name": "2歳選抜牝馬",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -200,17 +200,35 @@
           "passing": "大井 月岡健二"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 29250,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:12番 シンティラガール / 回収29,250円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.32倍<1.35(トリガミ回避))",
       "nLead": 1,
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
         "s3": 15
-      }
+      },
+      "isGraded": false,
+      "m3": 67.3,
+      "coreSyntheticOdds": 1.32,
+      "coreConnections": [
+        [
+          8,
+          2
+        ],
+        [
+          8,
+          12
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.32倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111802",
@@ -221,7 +239,7 @@
       "name": "3歳一二",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -343,7 +361,7 @@
         }
       ],
       "scenario": "不良馬場の大井内回り1600m。2・3枠の先行2頭が前走好時計で優勢、叩き2走目の外枠大型先行馬が相手候補。",
-      "pivotType": "Single-Pivot",
+      "pivotType": "Pass",
       "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -372,16 +390,41 @@
           "passing": "大井 朝倉実"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 13000,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:2番 マイネルシュラハト / 回収13,000円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (少頭数(6頭)・低配当圧縮(平均W 2.75倍))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "isGraded": false,
+      "m3": 74.0,
+      "coreSyntheticOdds": 0.65,
+      "coreConnections": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          3,
+          8
+        ],
+        [
+          2,
+          10
+        ]
+      ],
+      "passReason": "少頭数(6頭)・低配当圧縮(平均W 2.75倍)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111803",
@@ -392,7 +435,7 @@
       "name": "3歳一二",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -562,7 +605,7 @@
         }
       ],
       "scenario": "不良の大井外1200m。叩き2走目の8枠逃げ12と好位5の先行有利決着に、時計上位1・4の差しが絡む展開。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "nLead": 5,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -591,16 +634,41 @@
           "passing": "大井 坂井英光"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 11500,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:12番 オンマイビート / 回収11,500円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.79倍<1.35(トリガミ回避))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
         "s3": 40
-      }
+      },
+      "isGraded": false,
+      "m3": 62.0,
+      "coreSyntheticOdds": 0.79,
+      "coreConnections": [
+        [
+          12,
+          5
+        ],
+        [
+          12,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          12,
+          4
+        ]
+      ],
+      "passReason": "Core合成オッズ0.79倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111804",
@@ -611,7 +679,7 @@
       "name": "C2七八九(C2八)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -833,7 +901,7 @@
         }
       ],
       "scenario": "不良の大井内回り1600m。1〜4枠の先行勢が極めて有利。矢野騎乗の休み明け実績馬と好枠反転の3歳馬の2軸で勝負。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -862,16 +930,41 @@
           "passing": "大井 田中正人"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 11500,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:2番 テンシノトリブン / 回収11,500円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.76倍<1.35(トリガミ回避))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "isGraded": false,
+      "m3": 58.5,
+      "coreSyntheticOdds": 0.76,
+      "coreConnections": [
+        [
+          2,
+          3
+        ],
+        [
+          2,
+          5
+        ],
+        [
+          3,
+          5
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "passReason": "Core合成オッズ0.76倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111805",
@@ -882,7 +975,7 @@
       "name": "C2七八九(C2八)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -1026,7 +1119,7 @@
         }
       ],
       "scenario": "大井1400外回り不良馬場。内枠砂被りを避け外目好位から運べる7枠8番と充実の5番の双頭軸。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "nLead": 2,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -1055,16 +1148,41 @@
           "passing": "大井 朝倉実"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 33750,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:7番 ジーティーウララ / 回収33,750円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.69倍<1.35(トリガミ回避))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
         "s3": 15
-      }
+      },
+      "isGraded": false,
+      "m3": 67.5,
+      "coreSyntheticOdds": 0.69,
+      "coreConnections": [
+        [
+          8,
+          5
+        ],
+        [
+          8,
+          7
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "passReason": "Core合成オッズ0.69倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111806",
@@ -1075,7 +1193,7 @@
       "name": "C2七八九(C2八)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -1301,7 +1419,7 @@
         }
       ],
       "scenario": "不良馬場の大井外回り1200m。前走1:14.0のキタノプレミアムが軸。大外大型先行カシマショウリュウと外差し勢が絡む展開。",
-      "pivotType": "Single-Pivot",
+      "pivotType": "Pass",
       "nLead": 6,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -1330,16 +1448,41 @@
           "passing": "大井 蛯名雄太"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 11500,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:6番 キタノプレミアム / 回収11,500円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.74倍<1.35(トリガミ回避))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
         "s3": 40
-      }
+      },
+      "isGraded": false,
+      "m3": 74.5,
+      "coreSyntheticOdds": 0.74,
+      "coreConnections": [
+        [
+          6,
+          14
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          14,
+          11
+        ],
+        [
+          6,
+          2
+        ]
+      ],
+      "passReason": "Core合成オッズ0.74倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111807",
@@ -1350,7 +1493,7 @@
       "name": "つわぶき特別(C2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -1494,7 +1637,7 @@
         }
       ],
       "scenario": "不良馬場の外回り1200m。同型多数で前速く、外目から砂被りを避けられる大型先行と門別転入の好位差しが優位。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "nLead": 10,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -1523,16 +1666,41 @@
           "passing": "大井 中道啓二"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 14400,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:12番 スターオブムーラン / 回収14,400円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (少頭数(7頭)・低配当圧縮(平均W 2.88倍))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
         "s3": 40
-      }
+      },
+      "isGraded": false,
+      "m3": 67.0,
+      "coreSyntheticOdds": 0.7,
+      "coreConnections": [
+        [
+          9,
+          12
+        ],
+        [
+          9,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          9,
+          7
+        ]
+      ],
+      "passReason": "少頭数(7頭)・低配当圧縮(平均W 2.88倍)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111808",
@@ -1543,7 +1711,7 @@
       "name": "プレリュード・フィ...(B2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "A",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -1728,7 +1896,20 @@
         "s1": 25,
         "s2": 35,
         "s3": 40
-      }
+      },
+      "isGraded": false,
+      "m3": 67.9,
+      "coreSyntheticOdds": 1.64,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          9
+        ]
+      ]
     },
     {
       "raceId": "202644111809",
@@ -1739,7 +1920,7 @@
       "name": "ほうおう座特別(C1)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -1948,7 +2129,7 @@
         }
       ],
       "scenario": "不良の大井2000mは外枠好位が砂被り回避で有利。7枠ツートンショコラと6枠大型馬ナインフォルドが好位で主導権を握る。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -1977,16 +2158,41 @@
           "passing": "大井 橋本和馬"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:10番 グランマローネ)",
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.72倍<1.35(トリガミ回避))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "isGraded": false,
+      "m3": 68.0,
+      "coreSyntheticOdds": 0.72,
+      "coreConnections": [
+        [
+          9,
+          7
+        ],
+        [
+          9,
+          12
+        ],
+        [
+          7,
+          12
+        ],
+        [
+          9,
+          8
+        ]
+      ],
+      "passReason": "Core合成オッズ0.72倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111810",
@@ -1997,7 +2203,7 @@
       "name": "ノベンバー賞(A2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -2150,7 +2356,7 @@
         }
       ],
       "scenario": "不良の大井外回り1200m。1枠マスターは砂被り懸念。8枠537kgハチメンと5枠カガヤキの外目先行勢が物理有利。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -2179,16 +2385,41 @@
           "passing": "大井 上杉昌宏"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 13000,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:1番 マスターオブライフ / 回収13,000円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (少頭数(7頭)・低配当圧縮(平均W 2.88倍))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "isGraded": false,
+      "m3": 76.0,
+      "coreSyntheticOdds": 0.64,
+      "coreConnections": [
+        [
+          1,
+          12
+        ],
+        [
+          1,
+          6
+        ],
+        [
+          12,
+          6
+        ],
+        [
+          1,
+          10
+        ]
+      ],
+      "passReason": "少頭数(7頭)・低配当圧縮(平均W 2.88倍)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111811",
@@ -2199,7 +2430,7 @@
       "name": "ハイセイコー記念(2歳)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -2387,17 +2618,43 @@
           "passing": "浦和 繁田健一"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 13000,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:1番 ケテンパッション / 回収13,000円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.64倍<1.35(トリガミ回避))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
         "s3": 40
-      }
+      },
+      "isGraded": true,
+      "m3": 60.8,
+      "coreSyntheticOdds": 0.64,
+      "coreConnections": [
+        [
+          1,
+          6
+        ],
+        [
+          1,
+          11
+        ],
+        [
+          6,
+          11
+        ],
+        [
+          1,
+          9
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.64倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644111812",
@@ -2408,7 +2665,7 @@
       "name": "猫又坂賞(B3)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -2619,7 +2876,20 @@
         "s1": 25,
         "s2": 35,
         "s3": 40
-      }
+      },
+      "isGraded": false,
+      "m3": 65.5,
+      "coreSyntheticOdds": 1.54,
+      "coreConnections": [
+        [
+          3,
+          13
+        ],
+        [
+          3,
+          9
+        ]
+      ]
     },
     {
       "raceId": "202647111810",
@@ -2630,7 +2900,7 @@
       "name": "雪待月特別(B)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -2802,7 +3072,20 @@
         "s1": 50,
         "s2": 35,
         "s3": 15
-      }
+      },
+      "isGraded": false,
+      "m3": 70.0,
+      "coreSyntheticOdds": 1.43,
+      "coreConnections": [
+        [
+          4,
+          3
+        ],
+        [
+          4,
+          9
+        ]
+      ]
     },
     {
       "raceId": "202647111811",
@@ -2813,7 +3096,7 @@
       "name": "神楽月特別(B)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -2985,7 +3268,20 @@
         "s1": 50,
         "s2": 35,
         "s3": 15
-      }
+      },
+      "isGraded": false,
+      "m3": 74.0,
+      "coreSyntheticOdds": 1.66,
+      "coreConnections": [
+        [
+          8,
+          10
+        ],
+        [
+          8,
+          6
+        ]
+      ]
     },
     {
       "raceId": "202647111812",
@@ -2996,7 +3292,7 @@
       "name": "仲冬特別(A)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -3184,17 +3480,43 @@
           "passing": "笠松 笹野博司"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:9番 グランゲレーロ)",
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.75倍<1.35(トリガミ回避))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 25,
         "s2": 35,
         "s3": 40
-      }
+      },
+      "isGraded": false,
+      "m3": 50.3,
+      "coreSyntheticOdds": 0.75,
+      "coreConnections": [
+        [
+          12,
+          1
+        ],
+        [
+          12,
+          2
+        ],
+        [
+          1,
+          2
+        ],
+        [
+          12,
+          9
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.75倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202650111810",
@@ -3205,7 +3527,7 @@
       "name": "JRA交流 水晶山...",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -3375,7 +3697,7 @@
         }
       ],
       "scenario": "重馬場の園田1400m。JRAダート実績上位の1が下原騎手で好位抜け出し。外枠先行勢と初ダートの大型馬5が相手本線。",
-      "pivotType": "Single-Pivot",
+      "pivotType": "Pass",
       "nLead": 3,
       "usedModel": "gemini-4-hydrogen",
       "actualTop3": [
@@ -3404,16 +3726,41 @@
           "passing": "栗東 中竹和也"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 11500,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:5番 ジゼルアリーナ / 回収11,500円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.77倍<1.35(トリガミ回避))",
       "trackCond": "重",
       "scenarioWeights": {
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "isGraded": false,
+      "m3": 69.0,
+      "coreSyntheticOdds": 0.77,
+      "coreConnections": [
+        [
+          1,
+          5
+        ],
+        [
+          1,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          1,
+          7
+        ]
+      ],
+      "passReason": "Core合成オッズ0.77倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202650111811",
@@ -3424,7 +3771,7 @@
       "name": "more!淡路市 ...(B2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -3622,7 +3969,20 @@
         "s1": 35,
         "s2": 40,
         "s3": 25
-      }
+      },
+      "isGraded": false,
+      "m3": 79.1,
+      "coreSyntheticOdds": 1.44,
+      "coreConnections": [
+        [
+          8,
+          4
+        ],
+        [
+          8,
+          12
+        ]
+      ]
     },
     {
       "raceId": "202650111812",
@@ -3633,7 +3993,7 @@
       "name": "カリン賞B2二",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "horses": [
@@ -3821,219 +4181,38 @@
           "passing": "兵庫 柏原誠路"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 11500,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:8番 ラガークイン / 回収11,500円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.32倍<1.35(トリガミ回避))",
       "nLead": 1,
       "trackCond": "重",
       "scenarioWeights": {
         "s1": 50,
         "s2": 35,
         "s3": 15
-      }
+      },
+      "isGraded": false,
+      "m3": 71.8,
+      "coreSyntheticOdds": 1.32,
+      "coreConnections": [
+        [
+          8,
+          12
+        ],
+        [
+          8,
+          7
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.32倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     }
   ],
   "updatedAt": "2026-11-18 22:31 JST",
-  "multiLeg": {
-    "predicted": true,
-    "summary": "当日実馬名編成（トリプル馬単50円単位）：全頭3シナリオ混合推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。",
-    "legs": [
-      {
-        "leg": 1,
-        "venue": "園田10R",
-        "name": "JRA交流 水晶山...",
-        "cond": "ダ1600m",
-        "typeBPlus": false,
-        "note": "重馬場の園田1400m。JRAダート実績上位の1が下原騎手で好位抜け出し。外枠先行勢と初ダートの大型馬5が相手",
-        "horses": [
-          {
-            "num": 1,
-            "name": "マイフレダ",
-            "f": 31.0,
-            "odds": 3.1,
-            "note": "阪神ダ1400m1:28.6は一枚上。園田リーディング下原配し前付け"
-          },
-          {
-            "num": 5,
-            "name": "ジゼルアリーナ",
-            "f": 22.0,
-            "odds": 4.5,
-            "note": "482kgの好馬体でダート替わり歓迎。新馬戦3番手の先行力で重馬場も"
-          },
-          {
-            "num": 8,
-            "name": "フランヴィア",
-            "f": 16.0,
-            "odds": 6.2,
-            "note": "重馬場で砂被り回避の8枠プラス。吉村智洋騎乗で先行押し切り警戒"
-          },
-          {
-            "num": 7,
-            "name": "カクシンゴールド",
-            "f": 11.5,
-            "odds": 8.5,
-            "note": "JRAダート4戦の経験値と54kgの斤量利。外枠からスムーズに捲れれ"
-          },
-          {
-            "num": 4,
-            "name": "オーシンヒマワリ",
-            "f": 9.0,
-            "odds": 10.5,
-            "note": "札幌芝1500mで2番手追走のスピード有。田口騎手で初ダート一変に注"
-          },
-          {
-            "num": 6,
-            "name": "ベラジオパルーザ",
-            "f": 5.5,
-            "odds": 18.0,
-            "note": "491kgの大型で叩き2戦目。地元勢最上位の地力ありJRA勢崩れで3"
-          },
-          {
-            "num": 9,
-            "name": "チョトツモウシン",
-            "f": 3.0,
-            "odds": 28.0,
-            "note": "中山重ダ1800m経験も終い甘く、1400mの追走ペースに戸惑う懸念"
-          }
-        ]
-      },
-      {
-        "leg": 2,
-        "venue": "園田11R",
-        "name": "more!淡路市 ...(B2)",
-        "cond": "ダ1600m",
-        "typeBPlus": false,
-        "note": "園田11R(ダ1600m) 全12頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
-        "horses": [
-          {
-            "num": 8,
-            "name": "ゴーゴーツヨシ",
-            "f": 41.1,
-            "odds": 1.6,
-            "note": "F:牝3鹿騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 7,
-            "name": "ゼンダンノハゲミ",
-            "f": 27.7,
-            "odds": 2.7,
-            "note": "F:牡5栗騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 12,
-            "name": "アストラッド",
-            "f": 10.3,
-            "odds": 10.1,
-            "note": "F:牝5黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 4,
-            "name": "エイシンケプラー",
-            "f": 8.8,
-            "odds": 10.9,
-            "note": "F:牡6青騎手"
-          },
-          {
-            "num": 10,
-            "name": "キングヴァージル",
-            "f": 5.3,
-            "odds": 24.6,
-            "note": "F:セ5芦騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 1,
-            "name": "グリーンシアター",
-            "f": 2.4,
-            "odds": 63.4,
-            "note": "F:牝7栗騎手 / F:最内1枠(H:包まれ・砂被り注意)"
-          },
-          {
-            "num": 5,
-            "name": "トンボ",
-            "f": 1.3,
-            "odds": 135.5,
-            "note": "F:牡5青騎手"
-          }
-        ]
-      },
-      {
-        "leg": 3,
-        "venue": "園田12R",
-        "name": "カリン賞B2二",
-        "cond": "ダ1600m",
-        "typeBPlus": false,
-        "note": "園田12R(ダ1600m) 全12頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
-        "horses": [
-          {
-            "num": 8,
-            "name": "ラガークイン",
-            "f": 49.9,
-            "odds": 1.2,
-            "note": "F:牝5青騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 3,
-            "name": "リリーオブザハート",
-            "f": 11.5,
-            "odds": 7.4,
-            "note": "F:牝4鹿騎手"
-          },
-          {
-            "num": 7,
-            "name": "ギユウ",
-            "f": 10.4,
-            "odds": 9.7,
-            "note": "F:牡7青騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 12,
-            "name": "グロリアスアポイ",
-            "f": 7.7,
-            "odds": 14.5,
-            "note": "F:牝7鹿騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 11,
-            "name": "エイシンビルボード",
-            "f": 5.5,
-            "odds": 22.8,
-            "note": "F:牡3黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 10,
-            "name": "タオロマイ",
-            "f": 5.2,
-            "odds": 24.8,
-            "note": "F:牡6黒騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
-          },
-          {
-            "num": 2,
-            "name": "ピンクマルガリータ",
-            "f": 3.3,
-            "odds": 39.4,
-            "note": "F:牝7鹿騎手"
-          }
-        ]
-      }
-    ],
-    "hedges": [
-      {
-        "num": 7,
-        "name": "園田12R ギユウ",
-        "odds": 9.7,
-        "hedge50k": 5200,
-        "hedge100k": 10400
-      },
-      {
-        "num": 12,
-        "name": "園田12R グロリアスアポイ",
-        "odds": 14.5,
-        "hedge50k": 3500,
-        "hedge100k": 6900
-      }
-    ]
-  },
   "trackBiases": [
     {
       "venue": "園田",
@@ -4050,5 +4229,6 @@
       "surf": "実測N_lead・3シナリオ混合",
       "trend": "笠松当日実測(3R集計): 1着内枠0回/外枠2回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
     }
-  ]
+  ],
+  "engineVer": "v11.5-neon"
 }

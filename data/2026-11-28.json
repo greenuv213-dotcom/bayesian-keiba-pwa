@@ -181,7 +181,7 @@
       "name": "シャングリラ",
       "surfaceDist": "ダ1400m",
       "postTime": "14:50",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": true,
@@ -517,7 +517,8 @@
       "hitRate": 56.5,
       "breakEvenRate": 46.5,
       "expectedRoi": 106.8,
-      "intradayBiasConsistentR": 0
+      "intradayBiasConsistentR": 0,
+      "isGraded": false
     },
     {
       "raceId": "202605050711",
@@ -866,7 +867,8 @@
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "isGraded": false
     },
     {
       "raceId": "202608050705",
@@ -1300,7 +1302,8 @@
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "isGraded": false
     },
     {
       "raceId": "202608050710",
@@ -1408,17 +1411,17 @@
   "trackBiases": [
     {
       "venue": "京都",
-      "surf": "Neon v11.4・実配当照合済",
+      "surf": "Neon v11.5・収益ゾーン基準",
       "trend": "京都: 前半確定レースなし（標準バイアス・補正±5%上限）",
       "consistentR": 0
     },
     {
       "venue": "東京",
-      "surf": "Neon v11.4・実配当照合済",
+      "surf": "Neon v11.5・収益ゾーン基準",
       "trend": "東京: 前半確定レースなし（標準バイアス・補正±5%上限）",
       "consistentR": 0
     }
   ],
-  "engineVer": "v11.4-neon",
-  "updatedAt": "2026-11-26 22:10 JST"
+  "engineVer": "v11.5-neon",
+  "updatedAt": "2026-11-26 23:38 JST"
 }

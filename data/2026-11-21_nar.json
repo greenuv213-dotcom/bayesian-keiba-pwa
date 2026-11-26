@@ -12,7 +12,7 @@
       "name": "Bー4",
       "surfaceDist": "ダ1600m",
       "postTime": "19:20",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -259,7 +259,28 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0% (1着:10番 メイショウカズサ)"
+      "resultStatus": "❌ 不的中 回収率0.0% (1着:10番 メイショウカズサ)",
+      "isGraded": false,
+      "m3": 47.7,
+      "coreSyntheticOdds": 5.79,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          10
+        ]
+      ]
     },
     {
       "raceId": "202654112110",
@@ -270,7 +291,7 @@
       "name": "Bー3",
       "surfaceDist": "ダ1600m",
       "postTime": "19:50",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -498,13 +519,36 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0% (1着:1番 トサノシュジンコウ)"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.07倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 48.4,
+      "coreSyntheticOdds": 1.07,
+      "coreConnections": [
+        [
+          3,
+          8
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          3,
+          10
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.07倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202654112111",
@@ -515,7 +559,7 @@
       "name": "Bー2",
       "surfaceDist": "ダ1600m",
       "postTime": "20:20",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -762,7 +806,20 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0% (1着:8番 ストーミーデイ)"
+      "resultStatus": "❌ 不的中 回収率0.0% (1着:8番 ストーミーデイ)",
+      "isGraded": false,
+      "m3": 47.5,
+      "coreSyntheticOdds": 2.95,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ]
+      ]
     },
     {
       "raceId": "202654112112",
@@ -773,7 +830,7 @@
       "name": "ファイナルレース(C3)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:50",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1027,13 +1084,36 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0% (1着:11番 ジョウショーブリエ)"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.2倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 42.0,
+      "coreSyntheticOdds": 1.2,
+      "coreConnections": [
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          12
+        ],
+        [
+          6,
+          12
+        ],
+        [
+          4,
+          1
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.2倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202655112109",
@@ -1044,7 +1124,7 @@
       "name": "世界ハロー・デー賞",
       "surfaceDist": "ダ1600m",
       "postTime": "19:40",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1272,15 +1352,28 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 910,
-      "actualRoi": 9.1,
-      "isHit": true,
-      "hitTickets": [
-        "単勝 3 (910円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.34倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 46.3,
+      "coreSyntheticOdds": 1.34,
+      "coreConnections": [
+        [
+          3,
+          8
+        ],
+        [
+          3,
+          10
+        ]
       ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻910円 (回収率9.1% / -9,090円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.34倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202655112110",
@@ -1525,7 +1618,28 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0% (1着:10番 ウインポラリス)"
+      "resultStatus": "❌ 不的中 回収率0.0% (1着:10番 ウインポラリス)",
+      "isGraded": false,
+      "m3": 46.8,
+      "coreSyntheticOdds": 4.87,
+      "coreConnections": [
+        [
+          3,
+          8
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          3,
+          4
+        ]
+      ]
     },
     {
       "raceId": "202655112111",
@@ -1536,7 +1650,7 @@
       "name": "SAGAリベFEV...(C2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:40",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1816,992 +1930,36 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 11180,
-      "actualRoi": 111.8,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 11-4 (4,680円)",
-        "単勝 11 (1,820円)",
-        "馬連 11-4 (4,680円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻11,180円 (回収率111.8% / +1,180円)"
-    },
-    {
-      "raceId": "202665112109",
-      "mode": "nar",
-      "venue": "地方",
-      "raceNumber": 9,
-      "venueLabel": "地方9R",
-      "name": "浅草マリモ 今日も...",
-      "surfaceDist": "ダ1600m",
-      "postTime": "18:30",
-      "rank": "A",
-      "skill": "app-bayesian-nar",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 2,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "1着妙味主軸",
-          "num": 8,
-          "name": "サトノプリンス",
-          "style": "先",
-          "f": 18.0,
-          "q": 21.1,
-          "top2": 36.0,
-          "top3": 54.0,
-          "odds": 11.4,
-          "comment": "F:7枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "◯",
-          "role": "双頭対抗軸",
-          "num": 3,
-          "name": "ライズビクトリー",
-          "style": "差",
-          "f": 16.7,
-          "q": 21.1,
-          "top2": 33.4,
-          "top3": 50.2,
-          "odds": 15.4,
-          "comment": "F:3枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 9,
-          "name": "ベルンシュタイン",
-          "style": "先",
-          "f": 11.6,
-          "q": 11.2,
-          "top2": 23.1,
-          "top3": 34.7,
-          "odds": 9.3,
-          "comment": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開特注穴",
-          "num": 4,
-          "name": "エレジー",
-          "style": "差",
-          "f": 10.7,
-          "q": 11.2,
-          "top2": 21.5,
-          "top3": 32.2,
-          "odds": 3.0,
-          "comment": "F:4枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 5,
-          "name": "ジェイノコマ",
-          "style": "先",
-          "f": 8.7,
-          "q": 7.6,
-          "top2": 17.5,
-          "top3": 26.2,
-          "odds": 13.5,
-          "comment": "F:5枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 10,
-          "name": "ホクセイカツサクラ",
-          "style": "先",
-          "f": 8.7,
-          "q": 7.6,
-          "top2": 17.5,
-          "top3": 26.2,
-          "odds": 15.2,
-          "comment": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 6,
-          "name": "スターフェニックス",
-          "style": "先",
-          "f": 7.1,
-          "q": 5.7,
-          "top2": 14.3,
-          "top3": 21.4,
-          "odds": 10.2,
-          "comment": "F:6枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 1,
-          "name": "サカノトウカイ",
-          "style": "差",
-          "f": 6.6,
-          "q": 5.7,
-          "top2": 13.3,
-          "top3": 19.9,
-          "odds": 136.6,
-          "comment": "F:1枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 7,
-          "name": "タカシマフクマツ",
-          "style": "先",
-          "f": 6.1,
-          "q": 4.5,
-          "top2": 12.2,
-          "top3": 18.2,
-          "odds": 4.6,
-          "comment": "F:7枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 2,
-          "name": "ツガルノセンショウ",
-          "style": "差",
-          "f": 5.6,
-          "q": 4.5,
-          "top2": 11.3,
-          "top3": 16.9,
-          "odds": 4.8,
-          "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
-        }
-      ],
-      "scenario": "地方9R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全10頭を推論。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 7,
-          "num": 8,
-          "name": "サトノプリンス",
-          "odds": "11.4"
-        },
-        {
-          "rank": "2",
-          "waku": 8,
-          "num": 9,
-          "name": "ベルンシュタイン",
-          "odds": "9.3"
-        },
-        {
-          "rank": "3",
-          "waku": 4,
-          "num": 4,
-          "name": "エレジー",
-          "odds": "3.0"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              8
-            ],
-            "pay": 1140
-          }
-        ],
-        "umaren": [
-          {
-            "nums": [
-              8,
-              9
-            ],
-            "pay": 6010
-          }
-        ],
-        "wide": [
-          {
-            "nums": [
-              8,
-              9
-            ],
-            "pay": 1220
-          },
-          {
-            "nums": [
-              4,
-              8
-            ],
-            "pay": 690
-          },
-          {
-            "nums": [
-              4,
-              9
-            ],
-            "pay": 430
-          }
-        ],
-        "umatan": [
-          {
-            "nums": [
-              8,
-              9
-            ],
-            "pay": 10540
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              4,
-              8,
-              9
-            ],
-            "pay": 3830
-          }
-        ]
-      },
-      "investedYen": 10000,
-      "returnYen": 84290,
-      "actualRoi": 842.9,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 8-9 (24,400円)",
-        "単勝 8 (7,980円)",
-        "馬連 8-9 (48,080円)",
-        "3連複F (3,830円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻84,290円 (回収率842.9% / +74,290円)"
-    },
-    {
-      "raceId": "202665112110",
-      "mode": "nar",
-      "venue": "地方",
-      "raceNumber": 10,
-      "venueLabel": "地方10R",
-      "name": "遅ればせながらマリ...",
-      "surfaceDist": "ダ1600m",
-      "postTime": "19:00",
-      "rank": "A",
-      "skill": "app-bayesian-nar",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 1,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "1着妙味主軸",
-          "num": 5,
-          "name": "マオノダイマオー",
-          "style": "先",
-          "f": 17.6,
-          "q": 19.6,
-          "top2": 35.2,
-          "top3": 52.9,
-          "odds": 30.5,
-          "comment": "F:5枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "◯",
-          "role": "双頭対抗軸",
-          "num": 8,
-          "name": "ジェイスカイ",
-          "style": "先",
-          "f": 17.6,
-          "q": 19.6,
-          "top2": 35.2,
-          "top3": 52.9,
-          "odds": 4.0,
-          "comment": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 2,
-          "name": "ジェイヒッター",
-          "style": "差",
-          "f": 16.4,
-          "q": 19.6,
-          "top2": 32.7,
-          "top3": 49.1,
-          "odds": 9.4,
-          "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開特注穴",
-          "num": 6,
-          "name": "イナノホマレ",
-          "style": "先",
-          "f": 9.7,
-          "q": 8.4,
-          "top2": 19.4,
-          "top3": 29.1,
-          "odds": 42.2,
-          "comment": "F:6枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 9,
-          "name": "プラチナガール",
-          "style": "先",
-          "f": 9.7,
-          "q": 8.4,
-          "top2": 19.4,
-          "top3": 29.1,
-          "odds": 1.7,
-          "comment": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 3,
-          "name": "マルゼンイチバン",
-          "style": "差",
-          "f": 9.0,
-          "q": 8.4,
-          "top2": 18.0,
-          "top3": 27.1,
-          "odds": 22.8,
-          "comment": "F:3枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 7,
-          "name": "フクノエル",
-          "style": "先",
-          "f": 7.0,
-          "q": 5.3,
-          "top2": 14.0,
-          "top3": 21.0,
-          "odds": 6.6,
-          "comment": "F:7枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 1,
-          "name": "サカノハマナカ",
-          "style": "差",
-          "f": 6.5,
-          "q": 5.3,
-          "top2": 13.0,
-          "top3": 19.5,
-          "odds": 28.1,
-          "comment": "F:1枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 4,
-          "name": "シンエイハリアー",
-          "style": "差",
-          "f": 6.5,
-          "q": 5.3,
-          "top2": 13.0,
-          "top3": 19.5,
-          "odds": 18.4,
-          "comment": "F:4枠・脚質[差](H:3シナリオ混合推論)"
-        }
-      ],
-      "scenario": "地方10R(ダ1600m・良) 実測N_lead=1頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全9頭を推論。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 7,
-          "num": 7,
-          "name": "フクノエル",
-          "odds": "6.6"
-        },
-        {
-          "rank": "2",
-          "waku": 1,
-          "num": 1,
-          "name": "サカノハマナカ",
-          "odds": "28.1"
-        },
-        {
-          "rank": "3",
-          "waku": 8,
-          "num": 8,
-          "name": "ジェイスカイ",
-          "odds": "4.0"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              7
-            ],
-            "pay": 660
-          }
-        ],
-        "umaren": [
-          {
-            "nums": [
-              1,
-              7
-            ],
-            "pay": 8010
-          }
-        ],
-        "wide": [
-          {
-            "nums": [
-              1,
-              7
-            ],
-            "pay": 1640
-          },
-          {
-            "nums": [
-              7,
-              8
-            ],
-            "pay": 670
-          },
-          {
-            "nums": [
-              1,
-              8
-            ],
-            "pay": 1110
-          }
-        ],
-        "umatan": [
-          {
-            "nums": [
-              7,
-              1
-            ],
-            "pay": 12790
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              1,
-              7,
-              8
-            ],
-            "pay": 7440
-          }
-        ]
-      },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0% (1着:7番 フクノエル)"
-    },
-    {
-      "raceId": "202665112111",
-      "mode": "nar",
-      "venue": "地方",
-      "raceNumber": 11,
-      "venueLabel": "地方11R",
-      "name": "摩周湖特別",
-      "surfaceDist": "ダ1600m",
-      "postTime": "19:30",
-      "rank": "A",
-      "skill": "app-bayesian-nar",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 2,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "1着妙味主軸",
-          "num": 8,
-          "name": "カツテンリフジ",
-          "style": "先",
-          "f": 17.7,
-          "q": 21.1,
-          "top2": 35.2,
-          "top3": 52.8,
-          "odds": 25.2,
-          "comment": "F:7枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "◯",
-          "role": "双頭対抗軸",
-          "num": 3,
-          "name": "ホクセイレクサス",
-          "style": "差",
-          "f": 16.5,
-          "q": 21.1,
-          "top2": 32.7,
-          "top3": 49.1,
-          "odds": 4.3,
-          "comment": "F:3枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 9,
-          "name": "ホクショウサクラ",
-          "style": "先",
-          "f": 11.4,
-          "q": 11.2,
-          "top2": 22.6,
-          "top3": 33.9,
-          "odds": 11.5,
-          "comment": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開特注穴",
-          "num": 4,
-          "name": "オオネガイキンヒメ",
-          "style": "差",
-          "f": 10.6,
-          "q": 11.2,
-          "top2": 21.0,
-          "top3": 31.5,
-          "odds": 88.7,
-          "comment": "F:4枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "☆",
-          "role": "巻き返し特注穴",
-          "num": 10,
-          "name": "ジェイホースサン",
-          "style": "先",
-          "f": 10.1,
-          "q": 7.6,
-          "top2": 21.5,
-          "top3": 32.2,
-          "odds": 35.2,
-          "comment": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 5,
-          "name": "エクレール",
-          "style": "先",
-          "f": 8.6,
-          "q": 7.6,
-          "top2": 17.1,
-          "top3": 25.7,
-          "odds": 11.6,
-          "comment": "F:5枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 6,
-          "name": "アシュラダイマオー",
-          "style": "先",
-          "f": 7.0,
-          "q": 5.7,
-          "top2": 14.0,
-          "top3": 20.9,
-          "odds": 22.1,
-          "comment": "F:6枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 1,
-          "name": "ジェイエクスプレス",
-          "style": "差",
-          "f": 6.5,
-          "q": 5.7,
-          "top2": 13.0,
-          "top3": 19.5,
-          "odds": 2.0,
-          "comment": "F:1枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 7,
-          "name": "ジェイマキシマム",
-          "style": "先",
-          "f": 6.0,
-          "q": 4.5,
-          "top2": 11.9,
-          "top3": 17.8,
-          "odds": 6.8,
-          "comment": "F:7枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 2,
-          "name": "ミヤビハヤブサ",
-          "style": "差",
-          "f": 5.6,
-          "q": 4.5,
-          "top2": 11.0,
-          "top3": 16.6,
-          "odds": 11.5,
-          "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
-        }
-      ],
-      "scenario": "地方11R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全10頭を推論。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 5,
-          "num": 5,
-          "name": "エクレール",
-          "odds": "11.6"
-        },
-        {
-          "rank": "2",
-          "waku": 7,
-          "num": 7,
-          "name": "ジェイマキシマム",
-          "odds": "6.8"
-        },
-        {
-          "rank": "3",
-          "waku": 3,
-          "num": 3,
-          "name": "ホクセイレクサス",
-          "odds": "4.3"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              5
-            ],
-            "pay": 1160
-          }
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.83倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 71.6,
+      "coreSyntheticOdds": 0.83,
+      "coreConnections": [
+        [
+          11,
+          4
         ],
-        "umaren": [
-          {
-            "nums": [
-              5,
-              7
-            ],
-            "pay": 3480
-          }
+        [
+          11,
+          3
         ],
-        "wide": [
-          {
-            "nums": [
-              5,
-              7
-            ],
-            "pay": 1040
-          },
-          {
-            "nums": [
-              3,
-              5
-            ],
-            "pay": 690
-          },
-          {
-            "nums": [
-              3,
-              7
-            ],
-            "pay": 560
-          }
+        [
+          4,
+          3
         ],
-        "umatan": [
-          {
-            "nums": [
-              5,
-              7
-            ],
-            "pay": 7140
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              3,
-              5,
-              7
-            ],
-            "pay": 3610
-          }
+        [
+          11,
+          9
         ]
-      },
-      "investedYen": 10000,
-      "returnYen": 0,
-      "actualRoi": 0.0,
-      "isHit": false,
-      "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0% (1着:5番 エクレール)"
-    },
-    {
-      "raceId": "202665112112",
-      "mode": "nar",
-      "venue": "地方",
-      "raceNumber": 12,
-      "venueLabel": "地方12R",
-      "name": "C1ー3",
-      "surfaceDist": "ダ1600m",
-      "postTime": "20:00",
-      "rank": "A",
-      "skill": "app-bayesian-nar",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 2,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "1着妙味主軸",
-          "num": 8,
-          "name": "ホクセイシンノスケ",
-          "style": "先",
-          "f": 20.5,
-          "q": 21.1,
-          "top2": 43.2,
-          "top3": 64.8,
-          "odds": 8.9,
-          "comment": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-        },
-        {
-          "mark": "◯",
-          "role": "双頭対抗軸",
-          "num": 3,
-          "name": "ホンマル",
-          "style": "差",
-          "f": 16.2,
-          "q": 21.1,
-          "top2": 32.0,
-          "top3": 48.0,
-          "odds": 14.7,
-          "comment": "F:3枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 9,
-          "name": "ホクショウラナ",
-          "style": "先",
-          "f": 11.2,
-          "q": 11.2,
-          "top2": 22.1,
-          "top3": 33.1,
-          "odds": 2.8,
-          "comment": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開特注穴",
-          "num": 4,
-          "name": "リアスコトブキ",
-          "style": "差",
-          "f": 10.4,
-          "q": 11.2,
-          "top2": 20.5,
-          "top3": 30.8,
-          "odds": 6.6,
-          "comment": "F:4枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 5,
-          "name": "ハゴロモディアナ",
-          "style": "先",
-          "f": 8.5,
-          "q": 7.6,
-          "top2": 16.7,
-          "top3": 25.1,
-          "odds": 118.7,
-          "comment": "F:5枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 10,
-          "name": "サクラタユウ",
-          "style": "先",
-          "f": 8.5,
-          "q": 7.6,
-          "top2": 16.7,
-          "top3": 25.1,
-          "odds": 3.2,
-          "comment": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 6,
-          "name": "ミライニツヅケ",
-          "style": "先",
-          "f": 6.9,
-          "q": 5.7,
-          "top2": 13.7,
-          "top3": 20.5,
-          "odds": 7.1,
-          "comment": "F:6枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 1,
-          "name": "ミスランラン",
-          "style": "差",
-          "f": 6.4,
-          "q": 5.7,
-          "top2": 12.7,
-          "top3": 19.0,
-          "odds": 11.1,
-          "comment": "F:1枠・脚質[差](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 7,
-          "name": "ジェイワールド",
-          "style": "先",
-          "f": 5.9,
-          "q": 4.5,
-          "top2": 11.6,
-          "top3": 17.4,
-          "odds": 77.6,
-          "comment": "F:7枠・脚質[先](H:3シナリオ混合推論)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 2,
-          "name": "ラブファンタジー",
-          "style": "差",
-          "f": 5.5,
-          "q": 4.5,
-          "top2": 10.8,
-          "top3": 16.2,
-          "odds": 98.5,
-          "comment": "F:2枠・脚質[差](H:3シナリオ混合推論)"
-        }
       ],
-      "scenario": "地方12R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全10頭を推論。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 6,
-          "num": 6,
-          "name": "ミライニツヅケ",
-          "odds": "7.1"
-        },
-        {
-          "rank": "2",
-          "waku": 7,
-          "num": 8,
-          "name": "ホクセイシンノスケ",
-          "odds": "8.9"
-        },
-        {
-          "rank": "3",
-          "waku": 8,
-          "num": 9,
-          "name": "ホクショウラナ",
-          "odds": "2.8"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              6
-            ],
-            "pay": 710
-          }
-        ],
-        "umaren": [
-          {
-            "nums": [
-              6,
-              8
-            ],
-            "pay": 2940
-          }
-        ],
-        "wide": [
-          {
-            "nums": [
-              6,
-              8
-            ],
-            "pay": 760
-          },
-          {
-            "nums": [
-              6,
-              9
-            ],
-            "pay": 380
-          },
-          {
-            "nums": [
-              8,
-              9
-            ],
-            "pay": 360
-          }
-        ],
-        "umatan": [
-          {
-            "nums": [
-              6,
-              8
-            ],
-            "pay": 4380
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              6,
-              8,
-              9
-            ],
-            "pay": 2140
-          }
-        ]
-      },
-      "investedYen": 10000,
-      "returnYen": 9340,
-      "actualRoi": 93.4,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 8-9 (7,200円)",
-        "3連複F (2,140円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻9,340円 (回収率93.4% / -660円)"
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.83倍<1.35(トリガミ回避)"
     }
   ],
   "trackBiases": [
@@ -2821,208 +1979,6 @@
       "trend": "高知当日実測(4R集計): 1着内枠1回/外枠3回 → 【外枠(6〜8枠)優勢】"
     }
   ],
-  "multiLeg": {
-    "predicted": true,
-    "date": "2026-11-21",
-    "summary": "【2026-11-21 実馬名自動編成（トリプル馬単50円単位）】全頭3シナリオ混合推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。",
-    "legs": [
-      {
-        "leg": 1,
-        "venue": "地方10R",
-        "name": "遅ればせながらマリ...",
-        "cond": "ダ1600m",
-        "postTime": "19:00",
-        "typeBPlus": true,
-        "note": "地方10R(ダ1600m・良) 実測N_lead=1頭。3シナリオ混合(S1前残り50% / S2標準35% ",
-        "horses": [
-          {
-            "num": 5,
-            "name": "マオノダイマオー",
-            "f": 17.6,
-            "odds": 30.5,
-            "note": "F:5枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 8,
-            "name": "ジェイスカイ",
-            "f": 17.6,
-            "odds": 4.0,
-            "note": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 2,
-            "name": "ジェイヒッター",
-            "f": 16.4,
-            "odds": 9.4,
-            "note": "F:2枠・脚質[差](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 6,
-            "name": "イナノホマレ",
-            "f": 9.7,
-            "odds": 42.2,
-            "note": "F:6枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 9,
-            "name": "プラチナガール",
-            "f": 9.7,
-            "odds": 1.7,
-            "note": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 3,
-            "name": "マルゼンイチバン",
-            "f": 9.0,
-            "odds": 22.8,
-            "note": "F:3枠・脚質[差](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 7,
-            "name": "フクノエル",
-            "f": 7.0,
-            "odds": 6.6,
-            "note": "F:7枠・脚質[先](H:3シナリオ混合推論)"
-          }
-        ]
-      },
-      {
-        "leg": 2,
-        "venue": "地方11R",
-        "name": "摩周湖特別",
-        "cond": "ダ1600m",
-        "postTime": "19:30",
-        "typeBPlus": true,
-        "note": "地方11R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% ",
-        "horses": [
-          {
-            "num": 8,
-            "name": "カツテンリフジ",
-            "f": 17.7,
-            "odds": 25.2,
-            "note": "F:7枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 3,
-            "name": "ホクセイレクサス",
-            "f": 16.5,
-            "odds": 4.3,
-            "note": "F:3枠・脚質[差](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 9,
-            "name": "ホクショウサクラ",
-            "f": 11.4,
-            "odds": 11.5,
-            "note": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 4,
-            "name": "オオネガイキンヒメ",
-            "f": 10.6,
-            "odds": 88.7,
-            "note": "F:4枠・脚質[差](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 10,
-            "name": "ジェイホースサン",
-            "f": 10.1,
-            "odds": 35.2,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 5,
-            "name": "エクレール",
-            "f": 8.6,
-            "odds": 11.6,
-            "note": "F:5枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 6,
-            "name": "アシュラダイマオー",
-            "f": 7.0,
-            "odds": 22.1,
-            "note": "F:6枠・脚質[先](H:3シナリオ混合推論)"
-          }
-        ]
-      },
-      {
-        "leg": 3,
-        "venue": "地方12R",
-        "name": "C1ー3",
-        "cond": "ダ1600m",
-        "postTime": "20:00",
-        "typeBPlus": true,
-        "note": "地方12R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% ",
-        "horses": [
-          {
-            "num": 8,
-            "name": "ホクセイシンノスケ",
-            "f": 20.5,
-            "odds": 8.9,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 3,
-            "name": "ホンマル",
-            "f": 16.2,
-            "odds": 14.7,
-            "note": "F:3枠・脚質[差](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 9,
-            "name": "ホクショウラナ",
-            "f": 11.2,
-            "odds": 2.8,
-            "note": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 4,
-            "name": "リアスコトブキ",
-            "f": 10.4,
-            "odds": 6.6,
-            "note": "F:4枠・脚質[差](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 5,
-            "name": "ハゴロモディアナ",
-            "f": 8.5,
-            "odds": 118.7,
-            "note": "F:5枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 10,
-            "name": "サクラタユウ",
-            "f": 8.5,
-            "odds": 3.2,
-            "note": "F:8枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 6,
-            "name": "ミライニツヅケ",
-            "f": 6.9,
-            "odds": 7.1,
-            "note": "F:6枠・脚質[先](H:3シナリオ混合推論)"
-          }
-        ]
-      }
-    ],
-    "hedges": [
-      {
-        "num": 9,
-        "name": "地方12R ホクショウラナ",
-        "odds": 2.8,
-        "hedge50k": 17900,
-        "hedge100k": 35800
-      },
-      {
-        "num": 4,
-        "name": "地方12R リアスコトブキ",
-        "odds": 6.6,
-        "hedge50k": 7600,
-        "hedge100k": 15200
-      }
-    ]
-  },
-  "updatedAt": "2026-11-21 23:13 JST"
+  "updatedAt": "2026-11-21 23:13 JST",
+  "engineVer": "v11.5-neon"
 }

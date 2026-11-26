@@ -221,25 +221,18 @@
       "coreConnections": [
         [
           11,
-          1
-        ],
-        [
-          11,
-          5
-        ],
-        [
-          1,
-          5
-        ],
-        [
-          11,
           7
+        ],
+        [
+          11,
+          5
         ]
       ],
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 2
       },
       "counterfactualAudit": "◎11番破綻時は◯1-▲5のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -334,7 +327,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.89
     },
     {
       "raceId": "202642112502",
@@ -557,7 +552,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎6番破綻時は◯2-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -652,7 +648,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.37
     },
     {
       "raceId": "202642112503",
@@ -891,7 +889,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎11番破綻時は◯9-▲8のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -989,7 +988,9 @@
         "3連複F (11,810円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻118,780円 (回収率1187.8% / +108,780円)"
+      "resultStatus": "🎯 的中 払戻118,780円 (回収率1187.8% / +108,780円)",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.53
     },
     {
       "raceId": "202642112504",
@@ -1228,7 +1229,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎10番破綻時は◯5-▲11のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -1323,7 +1325,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.48
     },
     {
       "raceId": "202642112505",
@@ -1578,7 +1582,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎12番破綻時は◯2-▲10のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -1676,7 +1681,9 @@
         "3連複F (3,220円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻39,970円 (回収率399.7% / +29,970円)"
+      "resultStatus": "🎯 的中 払戻39,970円 (回収率399.7% / +29,970円)",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.52
     },
     {
       "raceId": "202642112506",
@@ -1915,7 +1922,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎7番破綻時は◯2-▲1のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -2013,7 +2021,9 @@
         "3連複F (3,790円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻28,860円 (回収率288.6% / +18,860円)"
+      "resultStatus": "🎯 的中 払戻28,860円 (回収率288.6% / +18,860円)",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.39
     },
     {
       "raceId": "202642112507",
@@ -2252,7 +2262,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎11番破綻時は◯10-▲1のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -2347,7 +2358,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.54
     },
     {
       "raceId": "202642112508",
@@ -2618,7 +2631,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎8番破綻時は◯7-▲9のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -2715,7 +2729,9 @@
         "ワイド 8-7 (◎-◯ Core) (46,860円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻46,860円 (回収率468.6% / +36,860円)"
+      "resultStatus": "🎯 的中 払戻46,860円 (回収率468.6% / +36,860円)",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.67
     },
     {
       "raceId": "202642112509",
@@ -2726,7 +2742,7 @@
       "name": "浦和ジョッキーズト...(C2)",
       "surfaceDist": "ダ1600m",
       "postTime": "16:35",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2954,7 +2970,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎2番破綻時は◯8-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -3049,7 +3066,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.58
     },
     {
       "raceId": "202642112510",
@@ -3060,7 +3079,7 @@
       "name": "近いがうまい 埼玉...(B3)",
       "surfaceDist": "ダ1600m",
       "postTime": "17:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3288,7 +3307,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎8番破綻時は◯1-▲10のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -3387,7 +3407,9 @@
         "3連複F (3,140円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻17,860円 (回収率178.6% / +7,860円)"
+      "resultStatus": "🎯 的中 払戻17,860円 (回収率178.6% / +7,860円)",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.38
     },
     {
       "raceId": "202642112511",
@@ -3398,7 +3420,7 @@
       "name": "浦和記念(3上)",
       "surfaceDist": "ダ1600m",
       "postTime": "17:45",
-      "rank": "S",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3578,7 +3600,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎1番破綻時は◯8-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -3667,16 +3690,17 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 8750,
-      "actualRoi": 87.5,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 1-8 (◎-◯ Core) (7,820円)",
-        "3連複F (930円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻8,750円 (回収率87.5% / -1,250円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.97倍<1.35(トリガミ回避))",
+      "isGraded": true,
+      "coreSyntheticOdds": 0.97,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.97倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202642112512",
@@ -3687,7 +3711,7 @@
       "name": "近いがうまい 埼玉...(B2B3)",
       "surfaceDist": "ダ1600m",
       "postTime": "18:20",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3947,7 +3971,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎4番破綻時は◯12-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -4042,7 +4067,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.7
     },
     {
       "raceId": "202648112509",
@@ -4053,7 +4080,7 @@
       "name": "三つ星疾風戦(B)",
       "surfaceDist": "ダ1600m",
       "postTime": "19:05",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -4281,7 +4308,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎7番破綻時は◯2-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -4376,7 +4404,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.45
     },
     {
       "raceId": "202648112510",
@@ -4387,7 +4417,7 @@
       "name": "名古屋チャレンジカ...(A)",
       "surfaceDist": "ダ1600m",
       "postTime": "19:40",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -4615,7 +4645,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎5番破綻時は◯3-▲11のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -4710,7 +4741,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.47
     },
     {
       "raceId": "202648112511",
@@ -4721,7 +4754,7 @@
       "name": "アポロ特別(A)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:15",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -4949,7 +4982,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎11番破綻時は◯12-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -5044,7 +5078,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.51
     },
     {
       "raceId": "202648112512",
@@ -5055,7 +5091,7 @@
       "name": "金シャチ最終戦(C)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:50",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -5283,7 +5319,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎2番破綻時は◯5-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -5378,7 +5415,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.54
     },
     {
       "raceId": "202650112509",
@@ -5389,7 +5428,7 @@
       "name": "C2一",
       "surfaceDist": "ダ1600m",
       "postTime": "15:00",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -5617,7 +5656,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎12番破綻時は◯3-▲7のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -5707,17 +5747,17 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 21040,
-      "actualRoi": 210.4,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 12-7 (◎-▲ Core) (10,400円)",
-        "馬連 12-7 (◎-▲ Alpha) (6,850円)",
-        "3連複F (3,790円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻21,040円 (回収率210.4% / +11,040円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.65倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 0.65,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.65倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202650112510",
@@ -5728,7 +5768,7 @@
       "name": "B1B2",
       "surfaceDist": "ダ1600m",
       "postTime": "15:35",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -5956,7 +5996,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎2番破綻時は◯8-▲11のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -6051,7 +6092,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.46
     },
     {
       "raceId": "202650112511",
@@ -6062,7 +6105,7 @@
       "name": "JAみのり播州百日...(A1A2)",
       "surfaceDist": "ダ1600m",
       "postTime": "16:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -6258,7 +6301,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎1番破綻時は◯4-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -6347,13 +6391,17 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.3倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.3,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.3倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202650112512",
@@ -6364,7 +6412,7 @@
       "name": "サザンカ賞C1",
       "surfaceDist": "ダ1600m",
       "postTime": "16:45",
-      "rank": "S",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -6592,7 +6640,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎1番破綻時は◯6-▲9のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -6687,353 +6736,11 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.54
     }
   ],
-  "multiLeg": {
-    "predicted": true,
-    "aiPredicted": false,
-    "date": "2026-11-25",
-    "engineVer": "v11.2-neon",
-    "summary": "【2026-11-25 Neon v11.2 2-Stage融合編成（トリプル馬単50円単位）】",
-    "legs": [
-      {
-        "leg": 1,
-        "raceId": "202650112510",
-        "venue": "園田10R",
-        "name": "B1B2",
-        "cond": "ダ1600m",
-        "postTime": "15:35",
-        "wR": 0.38,
-        "typeBPlus": true,
-        "note": "園田10R(ダ1600m・良) 実測N_lead=7頭 / 2-Stage融合(wR=0.38, M3=28.",
-        "horses": [
-          {
-            "num": 2,
-            "name": "フェアリータイザン",
-            "f": 10.3,
-            "fFund": 10.3,
-            "q": 10.4,
-            "odds": 7.8,
-            "note": "F:0.2s差実績(H:巻き返し) / F:父:シニスターミニス(H"
-          },
-          {
-            "num": 8,
-            "name": "スマートビビット",
-            "f": 9.2,
-            "fFund": 9.2,
-            "q": 9.3,
-            "odds": 8.7,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 11,
-            "name": "ヴァンセゾニエ",
-            "f": 9.2,
-            "fFund": 9.2,
-            "q": 9.3,
-            "odds": 8.7,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 1,
-            "name": "ビスケット",
-            "f": 8.1,
-            "fFund": 8.1,
-            "q": 8.1,
-            "odds": 9.8,
-            "note": "F:1枠・近走平均7.5着"
-          },
-          {
-            "num": 10,
-            "name": "エイシンビリオン",
-            "f": 8.1,
-            "fFund": 8.1,
-            "q": 8.1,
-            "odds": 9.8,
-            "note": "F:7枠・近走平均7.5着"
-          },
-          {
-            "num": 12,
-            "name": "ポアゾンポレスター",
-            "f": 8.1,
-            "fFund": 8.1,
-            "q": 8.1,
-            "odds": 9.8,
-            "note": "F:8枠・近走平均7.5着"
-          },
-          {
-            "num": 3,
-            "name": "ジェイエルバース",
-            "f": 7.8,
-            "fFund": 7.8,
-            "q": 7.8,
-            "odds": 10.2,
-            "note": "F:3枠・近走平均7.5着"
-          }
-        ],
-        "actualTop3": [
-          {
-            "rank": "1",
-            "waku": 3,
-            "num": 3,
-            "name": "ジェイエルバース",
-            "odds": "9.4"
-          },
-          {
-            "rank": "2",
-            "waku": 6,
-            "num": 7,
-            "name": "ラブラブフォー",
-            "odds": "15.1"
-          },
-          {
-            "rank": "3",
-            "waku": 8,
-            "num": 11,
-            "name": "ヴァンセゾニエ",
-            "odds": "11.4"
-          }
-        ],
-        "actualWinner": {
-          "rank": "1",
-          "waku": 3,
-          "num": 3,
-          "name": "ジェイエルバース",
-          "odds": "9.4"
-        }
-      },
-      {
-        "leg": 2,
-        "raceId": "202650112511",
-        "venue": "園田11R",
-        "name": "JAみのり播州百日...(A1A2)",
-        "cond": "ダ1600m",
-        "postTime": "16:10",
-        "wR": 0.38,
-        "typeBPlus": true,
-        "note": "園田11R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=31.",
-        "horses": [
-          {
-            "num": 1,
-            "name": "スマイルクラーク",
-            "f": 10.7,
-            "fFund": 10.7,
-            "q": 10.8,
-            "odds": 7.5,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 4,
-            "name": "フェアリーブルー",
-            "f": 10.7,
-            "fFund": 10.7,
-            "q": 10.8,
-            "odds": 7.5,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 3,
-            "name": "ゲンヨウサイ",
-            "f": 10.5,
-            "fFund": 10.5,
-            "q": 10.6,
-            "odds": 7.6,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 6,
-            "name": "エコロクラージュ",
-            "f": 10.5,
-            "fFund": 10.5,
-            "q": 10.6,
-            "odds": 7.6,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 10,
-            "name": "ジューンキートス",
-            "f": 10.5,
-            "fFund": 10.5,
-            "q": 10.6,
-            "odds": 7.6,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 8,
-            "name": "アストラカ",
-            "f": 10.1,
-            "fFund": 10.1,
-            "q": 10.0,
-            "odds": 8.0,
-            "note": "F:父:ドレフォン/母父(H:血統適性)"
-          },
-          {
-            "num": 9,
-            "name": "ヴィーリヤ",
-            "f": 10.1,
-            "fFund": 10.1,
-            "q": 10.0,
-            "odds": 8.0,
-            "note": "F:父:パイロ/母父:エ(H:血統適性)"
-          }
-        ],
-        "actualTop3": [
-          {
-            "rank": "1",
-            "waku": 8,
-            "num": 9,
-            "name": "ヴィーリヤ",
-            "odds": "1.6"
-          },
-          {
-            "rank": "2",
-            "waku": 4,
-            "num": 4,
-            "name": "フェアリーブルー",
-            "odds": "45.7"
-          },
-          {
-            "rank": "3",
-            "waku": 7,
-            "num": 8,
-            "name": "アストラカ",
-            "odds": "3.6"
-          }
-        ],
-        "actualWinner": {
-          "rank": "1",
-          "waku": 8,
-          "num": 9,
-          "name": "ヴィーリヤ",
-          "odds": "1.6"
-        }
-      },
-      {
-        "leg": 3,
-        "raceId": "202650112512",
-        "venue": "園田12R",
-        "name": "サザンカ賞C1",
-        "cond": "ダ1600m",
-        "postTime": "16:45",
-        "wR": 0.38,
-        "typeBPlus": true,
-        "note": "園田12R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=27.",
-        "horses": [
-          {
-            "num": 1,
-            "name": "アカオー",
-            "f": 9.0,
-            "fFund": 9.0,
-            "q": 9.1,
-            "odds": 8.9,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 6,
-            "name": "キンセンオー",
-            "f": 9.0,
-            "fFund": 9.0,
-            "q": 9.1,
-            "odds": 8.9,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 9,
-            "name": "ネバーセイグッバイ",
-            "f": 9.0,
-            "fFund": 9.0,
-            "q": 9.1,
-            "odds": 8.9,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 12,
-            "name": "マテンロウタイム",
-            "f": 9.0,
-            "fFund": 9.0,
-            "q": 9.1,
-            "odds": 8.9,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 5,
-            "name": "ミスジェイド",
-            "f": 8.9,
-            "fFund": 8.9,
-            "q": 9.0,
-            "odds": 9.0,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 8,
-            "name": "ブラックジャック",
-            "f": 8.9,
-            "fFund": 8.9,
-            "q": 9.0,
-            "odds": 9.0,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 2,
-            "name": "アンデルマット",
-            "f": 8.3,
-            "fFund": 8.3,
-            "q": 8.4,
-            "odds": 9.6,
-            "note": "F:父:ルヴァンスレーヴ(H:血統適性)"
-          }
-        ],
-        "actualTop3": [
-          {
-            "rank": "1",
-            "waku": 5,
-            "num": 5,
-            "name": "ミスジェイド",
-            "odds": "2.4"
-          },
-          {
-            "rank": "2",
-            "waku": 2,
-            "num": 2,
-            "name": "アンデルマット",
-            "odds": "109.2"
-          },
-          {
-            "rank": "3",
-            "waku": 6,
-            "num": 8,
-            "name": "ブラックジャック",
-            "odds": "3.0"
-          }
-        ],
-        "actualWinner": {
-          "rank": "1",
-          "waku": 5,
-          "num": 5,
-          "name": "ミスジェイド",
-          "odds": "2.4"
-        }
-      }
-    ],
-    "hedges": [
-      {
-        "num": 9,
-        "name": "園田12R ネバーセイグッバイ",
-        "odds": 8.9,
-        "hedge50k": 5700,
-        "hedge100k": 11300
-      },
-      {
-        "num": 12,
-        "name": "園田12R マテンロウタイム",
-        "odds": 8.9,
-        "hedge50k": 5700,
-        "hedge100k": 11300
-      }
-    ],
-    "finishedLegs": 3
-  },
   "trackBiases": [
     {
       "venue": "名古屋",
@@ -7054,6 +6761,6 @@
       "consistentR": 12
     }
   ],
-  "engineVer": "v11.2-neon",
+  "engineVer": "v11.5-neon",
   "updatedAt": "2026-11-25 22:18 JST"
 }

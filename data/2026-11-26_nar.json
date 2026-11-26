@@ -330,7 +330,8 @@
       "evalDone": true,
       "resultStatus": "❌ 不的中 回収率0.0%",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202642112602",
@@ -660,7 +661,8 @@
       "evalDone": true,
       "resultStatus": "❌ 不的中 回収率0.0%",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202642112603",
@@ -984,7 +986,8 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (Core合成オッズ0.6倍<1.35(トリガミ回避))",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202642112604",
@@ -1324,7 +1327,8 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.61倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ0.61倍<1.35(トリガミ回避)",
+      "isGraded": false
     },
     {
       "raceId": "202642112605",
@@ -1680,7 +1684,8 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.61倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ0.61倍<1.35(トリガミ回避)",
+      "isGraded": false
     },
     {
       "raceId": "202642112606",
@@ -1982,7 +1987,8 @@
       "evalDone": true,
       "resultStatus": "🎯 的中 払戻9,550円 (回収率95.5% / -450円)",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202642112607",
@@ -2322,7 +2328,8 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.62倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ0.62倍<1.35(トリガミ回避)",
+      "isGraded": false
     },
     {
       "raceId": "202642112608",
@@ -2636,7 +2643,8 @@
       "evalDone": true,
       "resultStatus": "❌ 不的中 回収率0.0%",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202642112609",
@@ -3001,7 +3009,8 @@
       "evalDone": true,
       "resultStatus": "🎯 的中 払戻3,710円 (回収率37.1% / -6,290円)",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202642112610",
@@ -3341,7 +3350,8 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.63倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ0.63倍<1.35(トリガミ回避)",
+      "isGraded": false
     },
     {
       "raceId": "202642112611",
@@ -3590,7 +3600,7 @@
         }
       ],
       "wR": 0.46,
-      "m3": 41.3,
+      "m3": 56.6,
       "coreConnections": [
         [
           4,
@@ -3713,7 +3723,8 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.75倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ0.75倍<1.35(トリガミ回避)",
+      "isGraded": false
     },
     {
       "raceId": "202642112612",
@@ -4053,7 +4064,8 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.73倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ0.73倍<1.35(トリガミ回避)",
+      "isGraded": false
     },
     {
       "raceId": "202646112609",
@@ -4337,7 +4349,8 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (Core合成オッズ1.16倍<1.35(トリガミ回避))",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202646112610",
@@ -4622,7 +4635,8 @@
       "evalDone": true,
       "resultStatus": "🎯 的中 払戻1,180円 (回収率11.8% / -8,820円)",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202646112611",
@@ -4906,7 +4920,8 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (Core合成オッズ1.34倍<1.35(トリガミ回避))",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202646112612",
@@ -5205,7 +5220,8 @@
           }
         ]
       },
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false
     },
     {
       "raceId": "202648112609",
@@ -5521,7 +5537,8 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ1.22倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ1.22倍<1.35(トリガミ回避)",
+      "isGraded": false
     },
     {
       "raceId": "202648112610",
@@ -5835,7 +5852,8 @@
       "evalDone": true,
       "resultStatus": "❌ 不的中 回収率0.0%",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202648112611",
@@ -6167,7 +6185,8 @@
         "3連複F (4,760円)"
       ],
       "evalDone": true,
-      "resultStatus": "🎯 的中 払戻4,760円 (回収率47.6% / -5,240円)"
+      "resultStatus": "🎯 的中 払戻4,760円 (回収率47.6% / -5,240円)",
+      "isGraded": false
     },
     {
       "raceId": "202648112612",
@@ -6507,7 +6526,8 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成オッズ0.66倍<1.35(トリガミ回避))"
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.66倍<1.35(トリガミ回避))",
+      "isGraded": false
     },
     {
       "raceId": "202650112609",
@@ -6821,7 +6841,8 @@
       "evalDone": true,
       "resultStatus": "❌ 不的中 回収率0.0%",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202650112610",
@@ -7105,7 +7126,8 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (Core合成オッズ1.24倍<1.35(トリガミ回避))",
       "weightsAnnounced": true,
-      "hasLiveOdds": true
+      "hasLiveOdds": true,
+      "isGraded": false
     },
     {
       "raceId": "202650112611",
@@ -7445,7 +7467,8 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.62倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ0.62倍<1.35(トリガミ回避)",
+      "isGraded": true
     },
     {
       "raceId": "202650112612",
@@ -7753,43 +7776,44 @@
       "weightsAnnounced": true,
       "hasLiveOdds": true,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.64倍<1.35(トリガミ回避)"
+      "passReason": "Core合成オッズ0.64倍<1.35(トリガミ回避)",
+      "isGraded": false
     }
   ],
   "trackBiases": [
     {
       "venue": "名古屋",
-      "surf": "Neon v11.4・実配当照合済",
+      "surf": "Neon v11.5・収益ゾーン基準",
       "trend": "名古屋当日実測(4R一致検証済): 1着内枠0回/外枠2回 → 【外枠(6〜8枠)優勢】",
       "consistentR": 4
     },
     {
       "venue": "園田",
-      "surf": "Neon v11.4・実配当照合済",
+      "surf": "Neon v11.5・収益ゾーン基準",
       "trend": "園田当日実測(4R一致検証済): 1着内枠1回/外枠3回 → 【外枠(6〜8枠)優勢】",
       "consistentR": 4
     },
     {
       "venue": "浦和",
-      "surf": "Neon v11.4・実配当照合済",
+      "surf": "Neon v11.5・収益ゾーン基準",
       "trend": "浦和当日実測(12R一致検証済): 1着内枠4回/外枠8回 → 【外枠(6〜8枠)優勢】",
       "consistentR": 12
     },
     {
       "venue": "金沢",
-      "surf": "Neon v11.4・実配当照合済",
+      "surf": "Neon v11.5・収益ゾーン基準",
       "trend": "金沢当日実測(4R一致検証済): 1着内枠1回/外枠2回 → 【内外フラット】",
       "consistentR": 4
     }
   ],
-  "engineVer": "v11.4-neon",
-  "updatedAt": "2026-11-26 22:10 JST",
+  "engineVer": "v11.5-neon",
+  "updatedAt": "2026-11-26 23:38 JST",
   "multiLeg": {
     "predicted": true,
     "aiPredicted": false,
     "date": "2026-11-26",
-    "engineVer": "v11.4-neon",
-    "summary": "【2026-11-26 Neon v11.4 2-Stage融合編成（南関トリプル馬単50円単位）】",
+    "engineVer": "v11.5-neon",
+    "summary": "【2026-11-26 Neon v11.5 2-Stage融合編成（南関トリプル馬単50円単位）】",
     "legs": [
       {
         "leg": 1,

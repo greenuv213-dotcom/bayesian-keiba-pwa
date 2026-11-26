@@ -327,7 +327,20 @@
         "単勝 10 (2,380円)",
         "3連複F (5,900円)"
       ],
-      "evalDone": true
+      "evalDone": true,
+      "isGraded": false,
+      "m3": 67.3,
+      "coreSyntheticOdds": 1.61,
+      "coreConnections": [
+        [
+          10,
+          16
+        ],
+        [
+          10,
+          6
+        ]
+      ]
     },
     {
       "raceId": "202608050506",
@@ -337,7 +350,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1200m",
       "postTime": "12:55",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "horses": [
@@ -464,10 +477,10 @@
           "odds": "4.6"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 9120,
-      "isHit": true,
-      "resultStatus": "🎯 的中 払戻9,120円 (回収率91.2% / -880円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (少頭数(7頭)・低配当圧縮(平均W 2.4倍))",
       "payouts": {
         "win": [
           {
@@ -529,14 +542,32 @@
           }
         ]
       },
-      "actualRoi": 91.2,
-      "hitTickets": [
-        "ワイド 5-1 (3,500円)",
-        "単勝 5 (1,550円)",
-        "馬連 5-1 (3,540円)",
-        "3連複F (530円)"
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false,
+      "isGraded": false,
+      "m3": 67.8,
+      "coreSyntheticOdds": 0.59,
+      "coreConnections": [
+        [
+          7,
+          5
+        ],
+        [
+          7,
+          1
+        ],
+        [
+          5,
+          1
+        ],
+        [
+          7,
+          6
+        ]
       ],
-      "evalDone": true
+      "pivotType": "Pass",
+      "passReason": "少頭数(7頭)・低配当圧縮(平均W 2.4倍)"
     },
     {
       "raceId": "202608050509",
@@ -546,7 +577,7 @@
       "name": "秋明菊賞",
       "surfaceDist": "芝1400m",
       "postTime": "14:25",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -725,10 +756,10 @@
           "odds": "21.5"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "❌ 不的中 回収率0.0% (1着:7番 カレンハウ)",
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.23倍<1.35(トリガミ回避))",
       "payouts": {
         "win": [
           {
@@ -792,7 +823,30 @@
       },
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": true
+      "evalDone": false,
+      "isGraded": false,
+      "m3": 69.1,
+      "coreSyntheticOdds": 1.23,
+      "coreConnections": [
+        [
+          4,
+          6
+        ],
+        [
+          4,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.23倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202608050510",
@@ -1173,7 +1227,28 @@
       "hitTickets": [
         "単勝 7 (1,680円)"
       ],
-      "evalDone": true
+      "evalDone": true,
+      "isGraded": false,
+      "m3": 47.9,
+      "coreSyntheticOdds": 1.58,
+      "coreConnections": [
+        [
+          7,
+          3
+        ],
+        [
+          7,
+          10
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          7,
+          5
+        ]
+      ]
     },
     {
       "raceId": "202608050511",
@@ -1183,7 +1258,7 @@
       "name": "シトリンS",
       "surfaceDist": "ダ1900m",
       "postTime": "15:40",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -1587,7 +1662,28 @@
       },
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": true
+      "evalDone": true,
+      "isGraded": false,
+      "m3": 54.9,
+      "coreSyntheticOdds": 1.64,
+      "coreConnections": [
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          10
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          3,
+          14
+        ]
+      ]
     },
     {
       "raceId": "202603030509",
@@ -1934,7 +2030,28 @@
       },
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": true
+      "evalDone": true,
+      "isGraded": false,
+      "m3": 47.9,
+      "coreSyntheticOdds": 4.64,
+      "coreConnections": [
+        [
+          17,
+          4
+        ],
+        [
+          17,
+          5
+        ],
+        [
+          4,
+          5
+        ],
+        [
+          17,
+          6
+        ]
+      ]
     },
     {
       "raceId": "202603030510",
@@ -1944,7 +2061,7 @@
       "name": "福島放送賞",
       "surfaceDist": "ダ1150m",
       "postTime": "14:45",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -2281,7 +2398,28 @@
       },
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": true
+      "evalDone": true,
+      "isGraded": false,
+      "m3": 42.1,
+      "coreSyntheticOdds": 2.18,
+      "coreConnections": [
+        [
+          12,
+          6
+        ],
+        [
+          12,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          12,
+          1
+        ]
+      ]
     },
     {
       "raceId": "202603030511",
@@ -2686,7 +2824,28 @@
       },
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": true
+      "evalDone": true,
+      "isGraded": true,
+      "m3": 44.7,
+      "coreSyntheticOdds": 2.8,
+      "coreConnections": [
+        [
+          11,
+          5
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          5,
+          9
+        ],
+        [
+          11,
+          6
+        ]
+      ]
     }
   ],
   "updatedAt": "2026-11-22 14:41 JST",
@@ -2703,5 +2862,5 @@
       "trend": "福島当日実測(3R集計): 1着内枠1回/外枠2回 → 【内外フラット】"
     }
   ],
-  "engineVer": "v10.4"
+  "engineVer": "v11.5-neon"
 }

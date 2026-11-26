@@ -12,7 +12,7 @@
       "name": "2歳一二",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -195,10 +195,36 @@
           "passing": "大井 渡部則夫"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:11番 ディオライズ)"
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.97倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 48.0,
+      "coreSyntheticOdds": 0.97,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          6,
+          8
+        ],
+        [
+          5,
+          7
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.97倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112002",
@@ -209,7 +235,7 @@
       "name": "スターレット賞(2歳)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -392,10 +418,36 @@
           "passing": "大井 大宮和也"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 11500,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:6番 カストール / 回収11,500円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.96倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 48.3,
+      "coreSyntheticOdds": 0.96,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          9
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.96倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112003",
@@ -553,7 +605,28 @@
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:2番 キングビー / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:2番 キングビー / 回収11,500円)",
+      "isGraded": false,
+      "m3": 47.6,
+      "coreSyntheticOdds": 1.79,
+      "coreConnections": [
+        [
+          4,
+          2
+        ],
+        [
+          4,
+          6
+        ],
+        [
+          2,
+          6
+        ],
+        [
+          4,
+          8
+        ]
+      ]
     },
     {
       "raceId": "202644112004",
@@ -564,7 +637,7 @@
       "name": "C2二三四(C2三)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -734,10 +807,36 @@
           "passing": "大井 月岡健二"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:9番 キングパッション)"
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.27倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 45.9,
+      "coreSyntheticOdds": 1.27,
+      "coreConnections": [
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          9
+        ],
+        [
+          3,
+          9
+        ],
+        [
+          8,
+          10
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.27倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112005",
@@ -748,7 +847,7 @@
       "name": "C2二三四(C2三)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -970,10 +1069,36 @@
           "passing": "大井 栗田裕光"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 11500,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:11番 ライジングステップ / 回収11,500円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.32倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 44.3,
+      "coreSyntheticOdds": 1.32,
+      "coreConnections": [
+        [
+          11,
+          4
+        ],
+        [
+          11,
+          9
+        ],
+        [
+          4,
+          9
+        ],
+        [
+          11,
+          3
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.32倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112006",
@@ -984,7 +1109,7 @@
       "name": "C2二三四(C2三)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1206,10 +1331,36 @@
           "passing": "大井 佐野謙二"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:9番 リコーヘンメリー)"
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.22倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 43.8,
+      "coreSyntheticOdds": 1.22,
+      "coreConnections": [
+        [
+          4,
+          11
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.22倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112007",
@@ -1220,7 +1371,7 @@
       "name": "C1三",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1377,10 +1528,36 @@
           "passing": "大井 鷹見浩"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:4番 ペイシャケリー)"
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.08倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 52.0,
+      "coreSyntheticOdds": 1.08,
+      "coreConnections": [
+        [
+          5,
+          8
+        ],
+        [
+          5,
+          2
+        ],
+        [
+          8,
+          2
+        ],
+        [
+          5,
+          3
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.08倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112008",
@@ -1391,7 +1568,7 @@
       "name": "バロン賞(C1五)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1573,7 +1750,36 @@
           "comment": "F:6枠・脚質[差](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "大井8R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全13頭を推論。"
+      "scenario": "大井8R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全13頭を推論。",
+      "isGraded": false,
+      "m3": 49.6,
+      "coreSyntheticOdds": 1.01,
+      "coreConnections": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          7,
+          4
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.01倍<1.35(トリガミ回避)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112009",
@@ -1584,7 +1790,7 @@
       "name": "C1四五六(C1五)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1740,7 +1946,36 @@
           "comment": "F:4枠・脚質[追](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "大井9R(ダ1600m・良) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全11頭を推論。"
+      "scenario": "大井9R(ダ1600m・良) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全11頭を推論。",
+      "isGraded": false,
+      "m3": 47.4,
+      "coreSyntheticOdds": 0.96,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          9
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.96倍<1.35(トリガミ回避)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112010",
@@ -1751,7 +1986,7 @@
       "name": "黄葉特別(C1五)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1933,7 +2168,36 @@
           "comment": "F:6枠・脚質[差](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "大井10R(ダ1600m・良) 実測N_lead=5頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)＋血統・斤量・善戦マン補正で全13頭を推論。"
+      "scenario": "大井10R(ダ1600m・良) 実測N_lead=5頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)＋血統・斤量・善戦マン補正で全13頭を推論。",
+      "isGraded": false,
+      "m3": 42.3,
+      "coreSyntheticOdds": 0.97,
+      "coreConnections": [
+        [
+          8,
+          7
+        ],
+        [
+          8,
+          5
+        ],
+        [
+          7,
+          5
+        ],
+        [
+          8,
+          6
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.97倍<1.35(トリガミ回避)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202644112011",
@@ -1944,7 +2208,7 @@
       "name": "スポーツニッポン賞(B1B2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2165,7 +2429,28 @@
           "comment": "F:4枠・脚質[先](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "大井11R(ダ1600m・良) 実測N_lead=5頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)＋血統・斤量・善戦マン補正で全16頭を推論。"
+      "scenario": "大井11R(ダ1600m・良) 実測N_lead=5頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)＋血統・斤量・善戦マン補正で全16頭を推論。",
+      "isGraded": false,
+      "m3": 31.3,
+      "coreSyntheticOdds": 1.79,
+      "coreConnections": [
+        [
+          2,
+          6
+        ],
+        [
+          2,
+          10
+        ],
+        [
+          6,
+          10
+        ],
+        [
+          2,
+          14
+        ]
+      ]
     },
     {
       "raceId": "202644112012",
@@ -2176,7 +2461,7 @@
       "name": "神楽月賞(B2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2371,7 +2656,36 @@
           "comment": "F:7枠・脚質[差](H:3シナリオ混合推論)"
         }
       ],
-      "scenario": "大井12R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全14頭を推論。"
+      "scenario": "大井12R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全14頭を推論。",
+      "isGraded": false,
+      "m3": 42.7,
+      "coreSyntheticOdds": 1.22,
+      "coreConnections": [
+        [
+          4,
+          11
+        ],
+        [
+          4,
+          10
+        ],
+        [
+          11,
+          10
+        ],
+        [
+          4,
+          3
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.22倍<1.35(トリガミ回避)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202647112009",
@@ -2382,7 +2696,7 @@
       "name": "野山の錦特別(2歳)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2529,7 +2843,28 @@
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:7番 オギフシノネガイ)"
+      "resultStatus": "結果確定 (1着:7番 オギフシノネガイ)",
+      "isGraded": false,
+      "m3": 48.8,
+      "coreSyntheticOdds": 1.79,
+      "coreConnections": [
+        [
+          6,
+          2
+        ],
+        [
+          6,
+          4
+        ],
+        [
+          2,
+          4
+        ],
+        [
+          6,
+          8
+        ]
+      ]
     },
     {
       "raceId": "202647112010",
@@ -2540,7 +2875,7 @@
       "name": "チャレンジ(OP)(2歳)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2710,10 +3045,36 @@
           "passing": "笠松 伊藤強一"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:7番 ヨザクラギンジ)"
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.22倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 46.7,
+      "coreSyntheticOdds": 1.22,
+      "coreConnections": [
+        [
+          8,
+          3
+        ],
+        [
+          8,
+          4
+        ],
+        [
+          3,
+          4
+        ],
+        [
+          8,
+          9
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.22倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202647112011",
@@ -2724,7 +3085,7 @@
       "name": "小町花特別(C)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2923,7 +3284,28 @@
       "investedYen": 10000,
       "returnYen": 11500,
       "isHit": true,
-      "resultStatus": "🎯 的中 (1着:4番 レイノルズナンバー / 回収11,500円)"
+      "resultStatus": "🎯 的中 (1着:4番 レイノルズナンバー / 回収11,500円)",
+      "isGraded": false,
+      "m3": 27.3,
+      "coreSyntheticOdds": 3.38,
+      "coreConnections": [
+        [
+          3,
+          4
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          4,
+          7
+        ],
+        [
+          3,
+          10
+        ]
+      ]
     },
     {
       "raceId": "202647112012",
@@ -2934,7 +3316,7 @@
       "name": "B級サバイバル",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3091,10 +3473,36 @@
           "passing": "笠松 森山英雄"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 13000,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:2番 カツノサンキュウ / 回収13,000円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.08倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 51.1,
+      "coreSyntheticOdds": 1.08,
+      "coreConnections": [
+        [
+          2,
+          5
+        ],
+        [
+          2,
+          8
+        ],
+        [
+          5,
+          8
+        ],
+        [
+          2,
+          6
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.08倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202650112009",
@@ -3105,7 +3513,7 @@
       "name": "C2二",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3288,10 +3696,36 @@
           "passing": "兵庫 長南和宏"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:11番 リゴートゥー)"
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.94倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 47.4,
+      "coreSyntheticOdds": 0.94,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          8
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.94倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202650112010",
@@ -3302,7 +3736,7 @@
       "name": "カエデ賞C1",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3501,7 +3935,28 @@
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:7番 ルクスドリーム)"
+      "resultStatus": "結果確定 (1着:7番 ルクスドリーム)",
+      "isGraded": false,
+      "m3": 27.5,
+      "coreSyntheticOdds": 3.38,
+      "coreConnections": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          7
+        ],
+        [
+          3,
+          7
+        ],
+        [
+          1,
+          8
+        ]
+      ]
     },
     {
       "raceId": "202650112011",
@@ -3512,7 +3967,7 @@
       "name": "宝塚セイバージャパ...(B1)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3695,10 +4150,36 @@
           "passing": "兵庫 長南和宏"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:8番 ロードエクレール)"
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.94倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "m3": 46.7,
+      "coreSyntheticOdds": 0.94,
+      "coreConnections": [
+        [
+          5,
+          6
+        ],
+        [
+          5,
+          7
+        ],
+        [
+          6,
+          7
+        ],
+        [
+          5,
+          8
+        ]
+      ],
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.94倍<1.35(トリガミ回避)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202650112012",
@@ -3709,7 +4190,7 @@
       "name": "NMB48 坂下真...(C2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3908,7 +4389,28 @@
       "investedYen": 10000,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "結果確定 (1着:6番 マルベック)"
+      "resultStatus": "結果確定 (1着:6番 マルベック)",
+      "isGraded": false,
+      "m3": 27.3,
+      "coreSyntheticOdds": 3.38,
+      "coreConnections": [
+        [
+          1,
+          3
+        ],
+        [
+          1,
+          12
+        ],
+        [
+          3,
+          12
+        ],
+        [
+          1,
+          4
+        ]
+      ]
     }
   ],
   "trackBiases": [
@@ -3928,204 +4430,6 @@
       "trend": "笠松当日実測(4R集計): 1着内枠1回/外枠2回 → 【内外フラット】"
     }
   ],
-  "multiLeg": {
-    "predicted": true,
-    "summary": "当日実馬名編成（トリプル馬単50円単位）：全頭3シナリオ混合推論の純粋勝率f順で5,000円〜50,000円のプランA・プランBを同時最適化。",
-    "legs": [
-      {
-        "leg": 1,
-        "venue": "園田10R",
-        "name": "カエデ賞C1",
-        "cond": "ダ1600m",
-        "typeBPlus": true,
-        "note": "園田10R(ダ1600m・良) 実測N_lead=8頭。3シナリオ混合(S1前残り25% / S2標準35% ",
-        "horses": [
-          {
-            "num": 1,
-            "name": "ベラジオラオウ",
-            "f": 9.5,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16) / "
-          },
-          {
-            "num": 3,
-            "name": "メイショウジンソウ",
-            "f": 9.2,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 7,
-            "name": "ルクスドリーム",
-            "f": 8.8,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 8,
-            "name": "アスコットダンス",
-            "f": 8.8,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 10,
-            "name": "エポカリーナ",
-            "f": 8.8,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 11,
-            "name": "クレイズシネマ",
-            "f": 8.8,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 4,
-            "name": "セッティングサン",
-            "f": 8.1,
-            "odds": 19.6,
-            "note": "F:父:ルヴァンスレーヴ/(H:血統適性+0.08)"
-          }
-        ]
-      },
-      {
-        "leg": 2,
-        "venue": "園田11R",
-        "name": "宝塚セイバージャパ...(B1)",
-        "cond": "ダ1600m",
-        "typeBPlus": true,
-        "note": "園田11R(ダ1600m・良) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% ",
-        "horses": [
-          {
-            "num": 5,
-            "name": "ノンスタンダルド",
-            "f": 22.0,
-            "odds": 3.5,
-            "note": "F:父:ナダル/母父:クレ(H:血統適性+0.08)"
-          },
-          {
-            "num": 6,
-            "name": "ブリスタイム",
-            "f": 13.8,
-            "odds": 5.8,
-            "note": "F:6枠・脚質[差](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 7,
-            "name": "トモジャシック",
-            "f": 10.9,
-            "odds": 8.1,
-            "note": "F:6枠・脚質[先](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 8,
-            "name": "ロードエクレール",
-            "f": 9.8,
-            "odds": 10.4,
-            "note": "F:父:ロードカナロア/母(H:血統適性+0.08)"
-          },
-          {
-            "num": 11,
-            "name": "ブーヤカ",
-            "f": 7.7,
-            "odds": 17.3,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16) / "
-          },
-          {
-            "num": 9,
-            "name": "コスモバラタ",
-            "f": 7.6,
-            "odds": 12.7,
-            "note": "F:7枠・脚質[追](H:3シナリオ混合推論)"
-          },
-          {
-            "num": 10,
-            "name": "ライトニングブルー",
-            "f": 6.8,
-            "odds": 15.0,
-            "note": "F:8枠・脚質[逃](H:3シナリオ混合推論)"
-          }
-        ]
-      },
-      {
-        "leg": 3,
-        "venue": "園田12R",
-        "name": "NMB48 坂下真...(C2)",
-        "cond": "ダ1600m",
-        "typeBPlus": true,
-        "note": "園田12R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% ",
-        "horses": [
-          {
-            "num": 1,
-            "name": "アウローラルミエル",
-            "f": 9.1,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 3,
-            "name": "ノルディア",
-            "f": 9.1,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 12,
-            "name": "ジュディーイメル",
-            "f": 9.1,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 4,
-            "name": "ファイナルコマンド",
-            "f": 8.9,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 8,
-            "name": "プリンセスダーコ",
-            "f": 8.9,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 11,
-            "name": "タンタンドル",
-            "f": 8.9,
-            "odds": 19.6,
-            "note": "F:現級0.2s差実績(H:前走異条件凡走リセット+0.16)"
-          },
-          {
-            "num": 2,
-            "name": "エコロセレナ",
-            "f": 7.8,
-            "odds": 19.6,
-            "note": "F:2枠・脚質[先](H:3シナリオ混合推論)"
-          }
-        ]
-      }
-    ],
-    "hedges": [
-      {
-        "num": 12,
-        "name": "園田12R ジュディーイメル",
-        "odds": 19.6,
-        "hedge50k": 2600,
-        "hedge100k": 5200
-      },
-      {
-        "num": 4,
-        "name": "園田12R ファイナルコマンド",
-        "odds": 19.6,
-        "hedge50k": 2600,
-        "hedge100k": 5200
-      }
-    ]
-  },
-  "updatedAt": "2026-11-20 18:15 JST"
+  "updatedAt": "2026-11-20 18:15 JST",
+  "engineVer": "v11.5-neon"
 }

@@ -11,7 +11,7 @@
       "name": "C1三組",
       "surfaceDist": "ダ1600m",
       "postTime": "16:20",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -207,7 +207,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎9番破綻時は◯4-▲1のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -296,15 +297,17 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 6840,
-      "actualRoi": 68.4,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 9-1 (◎-▲ Core) (6,840円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻6,840円 (回収率68.4% / -3,160円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.25倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.25,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.25倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202636112310",
@@ -315,7 +318,7 @@
       "name": "イーストスタッド特...(C1)",
       "surfaceDist": "ダ1600m",
       "postTime": "16:55",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -511,7 +514,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎1番破綻時は◯10-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -600,17 +604,17 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 9840,
-      "actualRoi": 98.4,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 1-10 (◎-◯ Core) (4,830円)",
-        "馬連 1-10 (◎-◯ Alpha) (3,500円)",
-        "3連複F (1,510円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻9,840円 (回収率98.4% / -160円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.22倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.22,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.22倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202636112311",
@@ -621,7 +625,7 @@
       "name": "ラナンキュラス賞(C1)",
       "surfaceDist": "ダ1600m",
       "postTime": "17:30",
-      "rank": "S",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -817,7 +821,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎5番破綻時は◯7-▲8のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -906,13 +911,17 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.28倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.28,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.28倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202636112312",
@@ -923,7 +932,7 @@
       "name": "トウケイニセイ記念",
       "surfaceDist": "ダ1600m",
       "postTime": "18:05",
-      "rank": "S",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1135,7 +1144,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎10番破綻時は◯8-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -1230,7 +1240,9 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": true,
+      "coreSyntheticOdds": 1.36
     },
     {
       "raceId": "202646112309",
@@ -1241,7 +1253,7 @@
       "name": "MRO金賞(3歳)",
       "surfaceDist": "ダ1600m",
       "postTime": "18:15",
-      "rank": "S",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1437,7 +1449,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎1番破綻時は◯2-▲3のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -1526,17 +1539,17 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 6220,
-      "actualRoi": 62.2,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 1-3 (◎-▲ Core) (3,300円)",
-        "馬連 1-3 (◎-▲ Alpha) (2,500円)",
-        "3連複F (420円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻6,220円 (回収率62.2% / -3,780円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ0.85倍<1.35(トリガミ回避))",
+      "isGraded": true,
+      "coreSyntheticOdds": 0.85,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ0.85倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202646112310",
@@ -1547,7 +1560,7 @@
       "name": "C216",
       "surfaceDist": "ダ1600m",
       "postTime": "18:55",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1775,7 +1788,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎8番破綻時は◯2-▲4のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -1864,13 +1878,17 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.22倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.22,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.22倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202655112309",
@@ -1881,7 +1899,7 @@
       "name": "長崎街道小田宿特選(C1)",
       "surfaceDist": "ダ1600m",
       "postTime": "19:45",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2077,7 +2095,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎2番破綻時は◯10-▲1のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -2166,13 +2185,17 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.29倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.29,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.29倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202655112310",
@@ -2183,7 +2206,7 @@
       "name": "勤労感謝の日賞(A2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:20",
-      "rank": "S",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2379,7 +2402,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎7番破綻時は◯1-▲2のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -2468,17 +2492,17 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 8590,
-      "actualRoi": 85.9,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 7-2 (◎-▲ Core) (3,990円)",
-        "ワイド 7-4 (◎-☆ 強制結線) (3,910円)",
-        "3連複F (690円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻8,590円 (回収率85.9% / -1,410円)"
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (Core合成オッズ1.33倍<1.35(トリガミ回避))",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.33,
+      "pivotType": "Pass",
+      "passReason": "Core合成オッズ1.33倍<1.35(トリガミ回避)"
     },
     {
       "raceId": "202655112311",
@@ -2489,7 +2513,7 @@
       "name": "SAGAリベFEV...(C2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:50",
-      "rank": "A",
+      "rank": "B",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2749,7 +2773,8 @@
       "portfolioRules": {
         "coreRatio": 0.75,
         "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
+        "singleLongshotCapPct": 0.3,
+        "coreLineCap": 4
       },
       "counterfactualAudit": "◎14番破綻時は◯2-▲9のCore結線で元返し防衛。",
       "strategyProfile": "hit_rate_max",
@@ -2844,1545 +2869,11 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
-    },
-    {
-      "raceId": "202665112309",
-      "mode": "nar",
-      "venue": "地方",
-      "raceNumber": 9,
-      "venueLabel": "地方9R",
-      "name": "財務委員会1年間あ...",
-      "surfaceDist": "ダ1600m",
-      "postTime": "18:30",
-      "rank": "A",
-      "skill": "app-bayesian-nar",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 1,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "最安定Top-3軸",
-          "num": 5,
-          "name": "リックンフィーバー",
-          "style": "先",
-          "weight": "0.05",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "◯",
-          "role": "融合上位強制結線",
-          "num": 6,
-          "name": "エーデルシュタイン",
-          "style": "先",
-          "weight": "0.06",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 7,
-          "name": "パワーハンター",
-          "style": "先",
-          "weight": "0.07",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 8,
-          "name": "キョウエイハンター",
-          "style": "先",
-          "weight": "0.08",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 9,
-          "name": "リアンドノール",
-          "style": "先",
-          "weight": "0.09",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 10,
-          "name": "ツルイテンカ",
-          "style": "先",
-          "weight": "0.010",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 1,
-          "name": "トマランサーヨウコ",
-          "style": "差",
-          "weight": "0.01",
-          "f": 9.6,
-          "fFund": 9.6,
-          "q": 9.6,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.3,
-          "comment": "F:1枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 2,
-          "name": "トマランサカミカゼ",
-          "style": "差",
-          "weight": "0.02",
-          "f": 9.6,
-          "fFund": 9.6,
-          "q": 9.6,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.3,
-          "comment": "F:2枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 3,
-          "name": "タアボモリウチ",
-          "style": "差",
-          "weight": "0.03",
-          "f": 9.6,
-          "fFund": 9.6,
-          "q": 9.6,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.3,
-          "comment": "F:3枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 4,
-          "name": "ハゴロモグルービー",
-          "style": "差",
-          "weight": "0.04",
-          "f": 9.6,
-          "fFund": 9.6,
-          "q": 9.6,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.3,
-          "comment": "F:4枠・近走平均7.5着"
-        }
-      ],
-      "wR": 0.38,
-      "m3": 30.9,
-      "coreConnections": [
-        [
-          5,
-          6
-        ],
-        [
-          5,
-          7
-        ],
-        [
-          6,
-          7
-        ],
-        [
-          5,
-          8
-        ]
-      ],
-      "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
-      },
-      "counterfactualAudit": "◎5番破綻時は◯6-▲7のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "地方9R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=30.9%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全10頭を厳密演算。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 8,
-          "num": 10,
-          "name": "ツルイテンカ",
-          "odds": "4.5"
-        },
-        {
-          "rank": "2",
-          "waku": 8,
-          "num": 9,
-          "name": "リアンドノール",
-          "odds": "6.8"
-        },
-        {
-          "rank": "3",
-          "waku": 1,
-          "num": 1,
-          "name": "トマランサーヨウコ",
-          "odds": "2.1"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              10
-            ],
-            "pay": 450
-          }
-        ],
-        "umaren": [
-          {
-            "nums": [
-              9,
-              10
-            ],
-            "pay": 1640
-          }
-        ],
-        "wide": [
-          {
-            "nums": [
-              9,
-              10
-            ],
-            "pay": 570
-          },
-          {
-            "nums": [
-              1,
-              10
-            ],
-            "pay": 290
-          },
-          {
-            "nums": [
-              1,
-              9
-            ],
-            "pay": 390
-          }
-        ],
-        "umatan": [
-          {
-            "nums": [
-              10,
-              9
-            ],
-            "pay": 2760
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              1,
-              9,
-              10
-            ],
-            "pay": 1340
-          }
-        ]
-      },
-      "investedYen": 10000,
-      "returnYen": 0,
-      "actualRoi": 0.0,
-      "isHit": false,
-      "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
-    },
-    {
-      "raceId": "202665112310",
-      "mode": "nar",
-      "venue": "地方",
-      "raceNumber": 10,
-      "venueLabel": "地方10R",
-      "name": "高田記念",
-      "surfaceDist": "ダ1600m",
-      "postTime": "19:05",
-      "rank": "S",
-      "skill": "app-bayesian-nar",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 1,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "最安定Top-3軸",
-          "num": 5,
-          "name": "ジェイマーシー",
-          "style": "先",
-          "weight": "0.05",
-          "f": 11.5,
-          "fFund": 11.5,
-          "q": 11.5,
-          "wUsed": 0.0,
-          "top2": 22.9,
-          "top3": 34.4,
-          "odds": 7.0,
-          "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "◯",
-          "role": "融合上位強制結線",
-          "num": 6,
-          "name": "ビックコンボ",
-          "style": "先",
-          "weight": "0.06",
-          "f": 11.5,
-          "fFund": 11.5,
-          "q": 11.5,
-          "wUsed": 0.0,
-          "top2": 22.9,
-          "top3": 34.4,
-          "odds": 7.0,
-          "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 7,
-          "name": "コウシュハキング",
-          "style": "先",
-          "weight": "0.07",
-          "f": 11.5,
-          "fFund": 11.5,
-          "q": 11.5,
-          "wUsed": 0.0,
-          "top2": 22.9,
-          "top3": 34.4,
-          "odds": 7.0,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 8,
-          "name": "ジェイライアン",
-          "style": "先",
-          "weight": "0.08",
-          "f": 11.5,
-          "fFund": 11.5,
-          "q": 11.5,
-          "wUsed": 0.0,
-          "top2": 22.9,
-          "top3": 34.4,
-          "odds": 7.0,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 9,
-          "name": "タカシオ",
-          "style": "先",
-          "weight": "0.09",
-          "f": 11.5,
-          "fFund": 11.5,
-          "q": 11.5,
-          "wUsed": 0.0,
-          "top2": 22.9,
-          "top3": 34.4,
-          "odds": 7.0,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 1,
-          "name": "サカノテッペン",
-          "style": "差",
-          "weight": "0.01",
-          "f": 10.7,
-          "fFund": 10.7,
-          "q": 10.6,
-          "wUsed": 0.0,
-          "top2": 21.4,
-          "top3": 32.0,
-          "odds": 7.5,
-          "comment": "F:1枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 2,
-          "name": "キタサカエカイザー",
-          "style": "差",
-          "weight": "0.02",
-          "f": 10.7,
-          "fFund": 10.7,
-          "q": 10.6,
-          "wUsed": 0.0,
-          "top2": 21.4,
-          "top3": 32.0,
-          "odds": 7.5,
-          "comment": "F:2枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 3,
-          "name": "ビッグシラヌイ",
-          "style": "差",
-          "weight": "0.03",
-          "f": 10.7,
-          "fFund": 10.7,
-          "q": 10.6,
-          "wUsed": 0.0,
-          "top2": 21.4,
-          "top3": 32.0,
-          "odds": 7.5,
-          "comment": "F:3枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 4,
-          "name": "アスノチカラ",
-          "style": "差",
-          "weight": "0.04",
-          "f": 10.7,
-          "fFund": 10.7,
-          "q": 10.6,
-          "wUsed": 0.0,
-          "top2": 21.4,
-          "top3": 32.0,
-          "odds": 7.5,
-          "comment": "F:4枠・近走平均7.5着"
-        }
-      ],
-      "wR": 0.38,
-      "m3": 34.5,
-      "coreConnections": [
-        [
-          5,
-          6
-        ],
-        [
-          5,
-          7
-        ],
-        [
-          6,
-          7
-        ],
-        [
-          5,
-          8
-        ]
-      ],
-      "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
-      },
-      "counterfactualAudit": "◎5番破綻時は◯6-▲7のCore結線で元返し防衛。 危険視3番は単騎楽逃げ時のみ復活。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "地方10R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=34.5%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全9頭を厳密演算。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 8,
-          "num": 9,
-          "name": "タカシオ",
-          "odds": "3.0"
-        },
-        {
-          "rank": "2",
-          "waku": 2,
-          "num": 2,
-          "name": "キタサカエカイザー",
-          "odds": "3.6"
-        },
-        {
-          "rank": "3",
-          "waku": 5,
-          "num": 5,
-          "name": "ジェイマーシー",
-          "odds": "9.0"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              9
-            ],
-            "pay": 300
-          }
-        ],
-        "umaren": [
-          {
-            "nums": [
-              2,
-              9
-            ],
-            "pay": 430
-          }
-        ],
-        "wide": [
-          {
-            "nums": [
-              2,
-              9
-            ],
-            "pay": 200
-          },
-          {
-            "nums": [
-              5,
-              9
-            ],
-            "pay": 580
-          },
-          {
-            "nums": [
-              2,
-              5
-            ],
-            "pay": 580
-          }
-        ],
-        "umatan": [
-          {
-            "nums": [
-              9,
-              2
-            ],
-            "pay": 870
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              2,
-              5,
-              9
-            ],
-            "pay": 1660
-          }
-        ]
-      },
-      "investedYen": 10000,
-      "returnYen": 0,
-      "actualRoi": 0.0,
-      "isHit": false,
-      "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
-    },
-    {
-      "raceId": "202665112311",
-      "mode": "nar",
-      "venue": "地方",
-      "raceNumber": 11,
-      "venueLabel": "地方11R",
-      "name": "知床賞(OP)",
-      "surfaceDist": "ダ1600m",
-      "postTime": "19:35",
-      "rank": "S",
-      "skill": "app-bayesian-nar",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 1,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "最安定Top-3軸",
-          "num": 5,
-          "name": "スーパーシン",
-          "style": "先",
-          "weight": "0.05",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "◯",
-          "role": "融合上位強制結線",
-          "num": 6,
-          "name": "ダイヤカツヒメ",
-          "style": "先",
-          "weight": "0.06",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 7,
-          "name": "コウシュハテンセイ",
-          "style": "先",
-          "weight": "0.07",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 8,
-          "name": "トワイチロ",
-          "style": "先",
-          "weight": "0.08",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 9,
-          "name": "トウケイレーヴ",
-          "style": "先",
-          "weight": "0.09",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 10,
-          "name": "ツガルノヒロイモノ",
-          "style": "先",
-          "weight": "0.010",
-          "f": 10.3,
-          "fFund": 10.3,
-          "q": 10.3,
-          "wUsed": 0.0,
-          "top2": 20.6,
-          "top3": 30.8,
-          "odds": 7.8,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 1,
-          "name": "シンエイアロイ",
-          "style": "差",
-          "weight": "0.01",
-          "f": 9.6,
-          "fFund": 9.6,
-          "q": 9.6,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.3,
-          "comment": "F:1枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 2,
-          "name": "ゼン",
-          "style": "差",
-          "weight": "0.02",
-          "f": 9.6,
-          "fFund": 9.6,
-          "q": 9.6,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.3,
-          "comment": "F:2枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 3,
-          "name": "ウンカイダイマオー",
-          "style": "差",
-          "weight": "0.03",
-          "f": 9.6,
-          "fFund": 9.6,
-          "q": 9.6,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.3,
-          "comment": "F:3枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 4,
-          "name": "ローランド",
-          "style": "差",
-          "weight": "0.04",
-          "f": 9.6,
-          "fFund": 9.6,
-          "q": 9.6,
-          "wUsed": 0.0,
-          "top2": 19.2,
-          "top3": 28.7,
-          "odds": 8.3,
-          "comment": "F:4枠・近走平均7.5着"
-        }
-      ],
-      "wR": 0.38,
-      "m3": 30.9,
-      "coreConnections": [
-        [
-          5,
-          6
-        ],
-        [
-          5,
-          7
-        ],
-        [
-          6,
-          7
-        ],
-        [
-          5,
-          8
-        ]
-      ],
-      "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
-      },
-      "counterfactualAudit": "◎5番破綻時は◯6-▲7のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "地方11R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=30.9%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全10頭を厳密演算。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 8,
-          "num": 10,
-          "name": "ツガルノヒロイモノ",
-          "odds": "1.3"
-        },
-        {
-          "rank": "2",
-          "waku": 7,
-          "num": 8,
-          "name": "トワイチロ",
-          "odds": "22.9"
-        },
-        {
-          "rank": "3",
-          "waku": 6,
-          "num": 6,
-          "name": "ダイヤカツヒメ",
-          "odds": "17.2"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              10
-            ],
-            "pay": 130
-          }
-        ],
-        "umaren": [
-          {
-            "nums": [
-              8,
-              10
-            ],
-            "pay": 1300
-          }
-        ],
-        "wide": [
-          {
-            "nums": [
-              8,
-              10
-            ],
-            "pay": 670
-          },
-          {
-            "nums": [
-              6,
-              10
-            ],
-            "pay": 210
-          },
-          {
-            "nums": [
-              6,
-              8
-            ],
-            "pay": 1770
-          }
-        ],
-        "umatan": [
-          {
-            "nums": [
-              10,
-              8
-            ],
-            "pay": 1510
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              6,
-              8,
-              10
-            ],
-            "pay": 2330
-          }
-        ]
-      },
-      "investedYen": 10000,
-      "returnYen": 0,
-      "actualRoi": 0.0,
-      "isHit": false,
-      "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
-    },
-    {
-      "raceId": "202665112312",
-      "mode": "nar",
-      "venue": "地方",
-      "raceNumber": 12,
-      "venueLabel": "地方12R",
-      "name": "B1ー4",
-      "surfaceDist": "ダ1600m",
-      "postTime": "20:05",
-      "rank": "A",
-      "skill": "app-bayesian-nar",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 1,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "最安定Top-3軸",
-          "num": 10,
-          "name": "ウチュウジン",
-          "style": "先",
-          "weight": "0.010",
-          "f": 11.9,
-          "fFund": 11.9,
-          "q": 12.1,
-          "wUsed": 0.0,
-          "top2": 25.3,
-          "top3": 37.9,
-          "odds": 6.7,
-          "comment": "F:0.2s差実績(H:巻き返し)"
-        },
-        {
-          "mark": "◯",
-          "role": "融合上位強制結線",
-          "num": 5,
-          "name": "レジェンドボス",
-          "style": "先",
-          "weight": "0.05",
-          "f": 10.1,
-          "fFund": 10.1,
-          "q": 10.1,
-          "wUsed": 0.0,
-          "top2": 20.0,
-          "top3": 30.0,
-          "odds": 7.9,
-          "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 6,
-          "name": "ホクショウムサシ",
-          "style": "先",
-          "weight": "0.06",
-          "f": 10.1,
-          "fFund": 10.1,
-          "q": 10.1,
-          "wUsed": 0.0,
-          "top2": 20.0,
-          "top3": 30.0,
-          "odds": 7.9,
-          "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 7,
-          "name": "ココロノニダイメ",
-          "style": "先",
-          "weight": "0.07",
-          "f": 10.1,
-          "fFund": 10.1,
-          "q": 10.1,
-          "wUsed": 0.0,
-          "top2": 20.0,
-          "top3": 30.0,
-          "odds": 7.9,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 8,
-          "name": "ツカサセンター",
-          "style": "先",
-          "weight": "0.08",
-          "f": 10.1,
-          "fFund": 10.1,
-          "q": 10.1,
-          "wUsed": 0.0,
-          "top2": 20.0,
-          "top3": 30.0,
-          "odds": 7.9,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 9,
-          "name": "グリフィス",
-          "style": "先",
-          "weight": "0.09",
-          "f": 10.1,
-          "fFund": 10.1,
-          "q": 10.1,
-          "wUsed": 0.0,
-          "top2": 20.0,
-          "top3": 30.0,
-          "odds": 7.9,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 1,
-          "name": "サカノテンリュウ",
-          "style": "差",
-          "weight": "0.01",
-          "f": 9.4,
-          "fFund": 9.4,
-          "q": 9.3,
-          "wUsed": 0.0,
-          "top2": 18.7,
-          "top3": 28.0,
-          "odds": 8.5,
-          "comment": "F:1枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 2,
-          "name": "クリスタルホーク",
-          "style": "差",
-          "weight": "0.02",
-          "f": 9.4,
-          "fFund": 9.4,
-          "q": 9.3,
-          "wUsed": 0.0,
-          "top2": 18.7,
-          "top3": 28.0,
-          "odds": 8.5,
-          "comment": "F:2枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 3,
-          "name": "ユウマダイマジン",
-          "style": "差",
-          "weight": "0.03",
-          "f": 9.4,
-          "fFund": 9.4,
-          "q": 9.3,
-          "wUsed": 0.0,
-          "top2": 18.7,
-          "top3": 28.0,
-          "odds": 8.5,
-          "comment": "F:3枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 4,
-          "name": "タンジロウ",
-          "style": "差",
-          "weight": "0.04",
-          "f": 9.4,
-          "fFund": 9.4,
-          "q": 9.3,
-          "wUsed": 0.0,
-          "top2": 18.7,
-          "top3": 28.0,
-          "odds": 8.5,
-          "comment": "F:4枠・近走平均7.5着"
-        }
-      ],
-      "wR": 0.38,
-      "m3": 32.1,
-      "coreConnections": [
-        [
-          10,
-          5
-        ],
-        [
-          10,
-          6
-        ],
-        [
-          5,
-          6
-        ],
-        [
-          10,
-          7
-        ]
-      ],
-      "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3
-      },
-      "counterfactualAudit": "◎10番破綻時は◯5-▲6のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "地方12R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=32.1%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全10頭を厳密演算。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 5,
-          "num": 5,
-          "name": "レジェンドボス",
-          "odds": "5.0"
-        },
-        {
-          "rank": "2",
-          "waku": 2,
-          "num": 2,
-          "name": "クリスタルホーク",
-          "odds": "20.5"
-        },
-        {
-          "rank": "3",
-          "waku": 4,
-          "num": 4,
-          "name": "タンジロウ",
-          "odds": "7.4"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              5
-            ],
-            "pay": 500
-          }
-        ],
-        "umaren": [
-          {
-            "nums": [
-              2,
-              5
-            ],
-            "pay": 4620
-          }
-        ],
-        "wide": [
-          {
-            "nums": [
-              2,
-              5
-            ],
-            "pay": 1330
-          },
-          {
-            "nums": [
-              4,
-              5
-            ],
-            "pay": 570
-          },
-          {
-            "nums": [
-              2,
-              4
-            ],
-            "pay": 1390
-          }
-        ],
-        "umatan": [
-          {
-            "nums": [
-              5,
-              2
-            ],
-            "pay": 6320
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              2,
-              4,
-              5
-            ],
-            "pay": 8140
-          }
-        ]
-      },
-      "investedYen": 10000,
-      "returnYen": 0,
-      "actualRoi": 0.0,
-      "isHit": false,
-      "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "❌ 不的中 回収率0.0%",
+      "isGraded": false,
+      "coreSyntheticOdds": 1.69
     }
   ],
-  "multiLeg": {
-    "predicted": true,
-    "aiPredicted": false,
-    "date": "2026-11-23",
-    "engineVer": "v11.2-neon",
-    "summary": "【2026-11-23 Neon v11.2 2-Stage融合編成（トリプル馬単50円単位）】",
-    "legs": [
-      {
-        "leg": 1,
-        "raceId": "202665112310",
-        "venue": "地方10R",
-        "name": "高田記念",
-        "cond": "ダ1600m",
-        "postTime": "19:05",
-        "wR": 0.38,
-        "typeBPlus": true,
-        "note": "地方10R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=34.",
-        "horses": [
-          {
-            "num": 5,
-            "name": "ジェイマーシー",
-            "f": 11.5,
-            "fFund": 11.5,
-            "q": 11.5,
-            "odds": 7.0,
-            "note": "F:5枠・近走平均7.5着"
-          },
-          {
-            "num": 6,
-            "name": "ビックコンボ",
-            "f": 11.5,
-            "fFund": 11.5,
-            "q": 11.5,
-            "odds": 7.0,
-            "note": "F:6枠・近走平均7.5着"
-          },
-          {
-            "num": 7,
-            "name": "コウシュハキング",
-            "f": 11.5,
-            "fFund": 11.5,
-            "q": 11.5,
-            "odds": 7.0,
-            "note": "F:7枠・近走平均7.5着"
-          },
-          {
-            "num": 8,
-            "name": "ジェイライアン",
-            "f": 11.5,
-            "fFund": 11.5,
-            "q": 11.5,
-            "odds": 7.0,
-            "note": "F:8枠・近走平均7.5着"
-          },
-          {
-            "num": 9,
-            "name": "タカシオ",
-            "f": 11.5,
-            "fFund": 11.5,
-            "q": 11.5,
-            "odds": 7.0,
-            "note": "F:8枠・近走平均7.5着"
-          },
-          {
-            "num": 1,
-            "name": "サカノテッペン",
-            "f": 10.7,
-            "fFund": 10.7,
-            "q": 10.6,
-            "odds": 7.5,
-            "note": "F:1枠・近走平均7.5着"
-          },
-          {
-            "num": 2,
-            "name": "キタサカエカイザー",
-            "f": 10.7,
-            "fFund": 10.7,
-            "q": 10.6,
-            "odds": 7.5,
-            "note": "F:2枠・近走平均7.5着"
-          }
-        ],
-        "actualTop3": [
-          {
-            "rank": "1",
-            "waku": 8,
-            "num": 9,
-            "name": "タカシオ",
-            "odds": "3.0"
-          },
-          {
-            "rank": "2",
-            "waku": 2,
-            "num": 2,
-            "name": "キタサカエカイザー",
-            "odds": "3.6"
-          },
-          {
-            "rank": "3",
-            "waku": 5,
-            "num": 5,
-            "name": "ジェイマーシー",
-            "odds": "9.0"
-          }
-        ],
-        "actualWinner": {
-          "rank": "1",
-          "waku": 8,
-          "num": 9,
-          "name": "タカシオ",
-          "odds": "3.0"
-        }
-      },
-      {
-        "leg": 2,
-        "raceId": "202665112311",
-        "venue": "地方11R",
-        "name": "知床賞(OP)",
-        "cond": "ダ1600m",
-        "postTime": "19:35",
-        "wR": 0.38,
-        "typeBPlus": true,
-        "note": "地方11R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=30.",
-        "horses": [
-          {
-            "num": 5,
-            "name": "スーパーシン",
-            "f": 10.3,
-            "fFund": 10.3,
-            "q": 10.3,
-            "odds": 7.8,
-            "note": "F:5枠・近走平均7.5着"
-          },
-          {
-            "num": 6,
-            "name": "ダイヤカツヒメ",
-            "f": 10.3,
-            "fFund": 10.3,
-            "q": 10.3,
-            "odds": 7.8,
-            "note": "F:6枠・近走平均7.5着"
-          },
-          {
-            "num": 7,
-            "name": "コウシュハテンセイ",
-            "f": 10.3,
-            "fFund": 10.3,
-            "q": 10.3,
-            "odds": 7.8,
-            "note": "F:7枠・近走平均7.5着"
-          },
-          {
-            "num": 8,
-            "name": "トワイチロ",
-            "f": 10.3,
-            "fFund": 10.3,
-            "q": 10.3,
-            "odds": 7.8,
-            "note": "F:7枠・近走平均7.5着"
-          },
-          {
-            "num": 9,
-            "name": "トウケイレーヴ",
-            "f": 10.3,
-            "fFund": 10.3,
-            "q": 10.3,
-            "odds": 7.8,
-            "note": "F:8枠・近走平均7.5着"
-          },
-          {
-            "num": 10,
-            "name": "ツガルノヒロイモノ",
-            "f": 10.3,
-            "fFund": 10.3,
-            "q": 10.3,
-            "odds": 7.8,
-            "note": "F:8枠・近走平均7.5着"
-          },
-          {
-            "num": 1,
-            "name": "シンエイアロイ",
-            "f": 9.6,
-            "fFund": 9.6,
-            "q": 9.6,
-            "odds": 8.3,
-            "note": "F:1枠・近走平均7.5着"
-          }
-        ],
-        "actualTop3": [
-          {
-            "rank": "1",
-            "waku": 8,
-            "num": 10,
-            "name": "ツガルノヒロイモノ",
-            "odds": "1.3"
-          },
-          {
-            "rank": "2",
-            "waku": 7,
-            "num": 8,
-            "name": "トワイチロ",
-            "odds": "22.9"
-          },
-          {
-            "rank": "3",
-            "waku": 6,
-            "num": 6,
-            "name": "ダイヤカツヒメ",
-            "odds": "17.2"
-          }
-        ],
-        "actualWinner": {
-          "rank": "1",
-          "waku": 8,
-          "num": 10,
-          "name": "ツガルノヒロイモノ",
-          "odds": "1.3"
-        }
-      },
-      {
-        "leg": 3,
-        "raceId": "202665112312",
-        "venue": "地方12R",
-        "name": "B1ー4",
-        "cond": "ダ1600m",
-        "postTime": "20:05",
-        "wR": 0.38,
-        "typeBPlus": true,
-        "note": "地方12R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=32.",
-        "horses": [
-          {
-            "num": 10,
-            "name": "ウチュウジン",
-            "f": 11.9,
-            "fFund": 11.9,
-            "q": 12.1,
-            "odds": 6.7,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 5,
-            "name": "レジェンドボス",
-            "f": 10.1,
-            "fFund": 10.1,
-            "q": 10.1,
-            "odds": 7.9,
-            "note": "F:5枠・近走平均7.5着"
-          },
-          {
-            "num": 6,
-            "name": "ホクショウムサシ",
-            "f": 10.1,
-            "fFund": 10.1,
-            "q": 10.1,
-            "odds": 7.9,
-            "note": "F:6枠・近走平均7.5着"
-          },
-          {
-            "num": 7,
-            "name": "ココロノニダイメ",
-            "f": 10.1,
-            "fFund": 10.1,
-            "q": 10.1,
-            "odds": 7.9,
-            "note": "F:7枠・近走平均7.5着"
-          },
-          {
-            "num": 8,
-            "name": "ツカサセンター",
-            "f": 10.1,
-            "fFund": 10.1,
-            "q": 10.1,
-            "odds": 7.9,
-            "note": "F:7枠・近走平均7.5着"
-          },
-          {
-            "num": 9,
-            "name": "グリフィス",
-            "f": 10.1,
-            "fFund": 10.1,
-            "q": 10.1,
-            "odds": 7.9,
-            "note": "F:8枠・近走平均7.5着"
-          },
-          {
-            "num": 1,
-            "name": "サカノテンリュウ",
-            "f": 9.4,
-            "fFund": 9.4,
-            "q": 9.3,
-            "odds": 8.5,
-            "note": "F:1枠・近走平均7.5着"
-          }
-        ],
-        "actualTop3": [
-          {
-            "rank": "1",
-            "waku": 5,
-            "num": 5,
-            "name": "レジェンドボス",
-            "odds": "5.0"
-          },
-          {
-            "rank": "2",
-            "waku": 2,
-            "num": 2,
-            "name": "クリスタルホーク",
-            "odds": "20.5"
-          },
-          {
-            "rank": "3",
-            "waku": 4,
-            "num": 4,
-            "name": "タンジロウ",
-            "odds": "7.4"
-          }
-        ],
-        "actualWinner": {
-          "rank": "1",
-          "waku": 5,
-          "num": 5,
-          "name": "レジェンドボス",
-          "odds": "5.0"
-        }
-      }
-    ],
-    "hedges": [
-      {
-        "num": 6,
-        "name": "地方12R ホクショウムサシ",
-        "odds": 7.9,
-        "hedge50k": 6400,
-        "hedge100k": 12700
-      },
-      {
-        "num": 7,
-        "name": "地方12R ココロノニダイメ",
-        "odds": 7.9,
-        "hedge50k": 6400,
-        "hedge100k": 12700
-      }
-    ],
-    "finishedLegs": 3
-  },
   "trackBiases": [
     {
       "venue": "佐賀",
@@ -4409,6 +2900,6 @@
       "consistentR": 2
     }
   ],
-  "engineVer": "v11.2-neon",
+  "engineVer": "v11.5-neon",
   "updatedAt": "2026-11-23 22:26 JST"
 }
