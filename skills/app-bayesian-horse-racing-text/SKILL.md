@@ -142,3 +142,76 @@ All existing keys are preserved verbatim for zero-breakage PWA compatibility; ne
     }
   ]
 }
+```
+
+#### Mode B: `標準` (1-Hour-Before Single-Race Prediction JSON)
+
+Evaluate **all $N$ active declared runners internally** (never skipping any horse; exclude scratches). Output all marked contenders (`◎◯▲△☆`) plus notable faded favorites (`消`, $O_i \le 6.0$)—or **all $N$ runners if the app prompt requests full-field rows**—with `tailSummary` ensuring $\sum f = 100.0\%$ and $\sum \text{top3} = 300.0\%$:
+
+```json
+{
+  "raceId": "20261122-tok-11",
+  "venue": "東京11R",
+  "name": "レース名",
+  "surfaceDist": "ダ1400m",
+  "postTime": "15:20",
+  "skill": "app-bayesian-horse-racing-text",
+  "strategyProfile": "hit_rate_max",
+  "rank": "S | A | B | Pass",
+  "pivotType": "Single-Pivot | Dual-Pivot | Pass",
+  "nLead": 4,
+  "rpci": 48.2,
+  "wR": 0.35,
+  "m3": 52.4,
+  "coreSyntheticOdds": 1.65,
+  "intradayBias3R": true,
+  "expectedRoi": 111.5,
+  "hitRate": 61.2,
+  "breakEvenRate": 58.4,
+  "scenario": "当日3R一致バイアス・展開・3〜4MECEシナリオ重み要約(80字以内)",
+  "horses": [
+    {
+      "mark": "◎ | ◯ | ▲ | △ | ☆ | 消",
+      "role": "最安定Top-3軸 | 双頭対抗軸 | 第3軸Connector | 連勝昇級穴 | 危険人気馬",
+      "num": 5,
+      "name": "馬名",
+      "style": "逃 | 先 | 差 | 追",
+      "f": 19.6,
+      "fFund": 21.5,
+      "q": 16.0,
+      "top2": 38.8,
+      "top3": 55.4,
+      "odds": 5.2,
+      "tags": ["F:東ダ1400[3-1-0-0]", "H:2段階融合軸+0.16"],
+      "comment": "45字以内のF/H核心根拠"
+    }
+  ],
+  "tailSummary": { "count": 8, "sumF": 10.3, "sumTop3": 29.6 },
+  "coreConnections": [[5, 6], [5, 1], [5, 14], [6, 14]],
+  "portfolioRules": {
+    "coreRatio": 0.76,
+    "coreLineCap": 4,
+    "dutchTargetReturn": 11800,
+    "singleLongshotCapPct": 0.30,
+    "maxLongshotAllocPct": 0.24
+  },
+  "alerts": ["馬体重Type II(+8kg超)自動減点・絞り込み未達警告、またはLevel B自動差替ルール(50字以内)"],
+  "counterfactualAudit": "◎破綻時の○-▲防衛状態と消し人気馬の復活条件(60字以内)",
+  "triggers": ["直前馬体重(Type I-III)・実オッズ確認トリガー(40字以内)"]
+}
+```
+
+#### Mode C: `事後検証` (Weekend Batch Post-Race Audit & Skill Patch JSON)
+
+Output a JSON object containing `auditSummary`, 3-factor decomposition (`scenarioError` including intraday-bias overreaction & wet-dirt short sprint check, `ratingError` including foreign G1 vs. returning Japanese split, dirt inner-gate soft cap, 50x+ longshot cap, 2yo extreme-lap, & handicap bounce-back checks, and `portfolioError` including `◎` connection leaks, Auto-Pass `<1.35x` / `<=8` runners audit, single-longshot $>30\%$ concentration, and late-drop Torigami audit), and `skillPatch` (`targetSkill`, `targetVersion`, `moduleName`, `patchRule`).
+
+## Gotchas
+
+  - Never confuse a past-race odds column with live market odds, never include scratched/withdrawn (`取消・除外`) runners, and never output a betting rank without inspecting all $N$ active runners.
+  - Never hard-fade (`消`) or omit from `◎` Core connections a Top-2 market favorite ($O_i \le 4.5$) drawn in Dirt Frames 1–2 on turf-start dirt or standard dirt (cap penalty at `-0.08 to -0.12`, keep $w_{r,i} \ge 0.25$), and waive the inside-kickback penalty on wet/sloppy short-distance dirt ($\le 1200\text{m}$).
+  - Never promote an extreme longshot ($O_i \ge 50.0\text{x}$) into `◎ / ◯ / ▲` or above `f = 6.0%` without indisputable `F`-level physical discontinuity.
+  - Always declare `rank: "Pass"` when Core Wide synthetic odds are `< 1.35x` or when active field size is `<= 8` with compressed odds (`Wide avg < 3.0x` or Top-2 favs `<= 2.5x` & Quinella `< 3.0x`); when $O_{\text{◎}} \le 2.0\text{x}$ is playable, compress Core to 2 lines instead of 4.
+  - Never apply the returning-Japanese-horse overseas fatigue cap to elite visiting foreign G1 contenders; evaluate them independently with $w_r \ge 0.40$.
+  - Never shift intraday scenario weights $\ge 10\%$ from fewer than 3 pace-consistent earlier races on the same surface (except the win-side `+8% to +12%` shift when $\ge 3$ consecutive same-surface winners come from the same outer/closer zone).
+  - Never omit direct `◎` Wide links to Top 2–4 Posterior contenders or Top-2 market favorites (`飛び石結線禁止`), never allocate $> 30\%$ of total budget to any single longshot (`☆`), and always size Core Dutching to `11,500–12,500 JPY` per `10,000 JPY` baseline to survive `-15%` late odds drops.
+  - Always output valid, parseable JSON without conversational filler when invoked in app pipeline mode.
