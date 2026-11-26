@@ -1,12 +1,12 @@
 {
-  "updatedAt": "2026-11-26 23:38 JST",
+  "updatedAt": "2026-11-27 03:26 JST",
   "all": {
     "races": 68,
     "hits": 27,
     "invest": 680000,
     "ret": 503310,
-    "passCount": 145,
-    "passSaved": 1450000,
+    "passCount": 153,
+    "passSaved": 1530000,
     "byRank": {
       "S": {
         "races": 2,
@@ -101,8 +101,8 @@
     "hits": 14,
     "invest": 460000,
     "ret": 360280,
-    "passCount": 78,
-    "passSaved": 780000,
+    "passCount": 86,
+    "passSaved": 860000,
     "byRank": {
       "S": {
         "races": 0,
