@@ -198,20 +198,16 @@
         [
           8,
           1
-        ],
-        [
-          6,
-          2
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎6番破綻時は◯8-▲1のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "水沢9R(ダ1600m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.38, M3=32.3%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全10頭を厳密演算。",
       "actualTop3": [
         {
@@ -303,11 +299,12 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成オッズ1.28倍<1.35(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.28,
+      "coreSyntheticOdds": 1.66,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ1.28倍<1.35(トリガミ回避)"
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "maxEv": 0.8
     },
     {
       "raceId": "202636112410",
@@ -505,20 +502,16 @@
         [
           6,
           2
-        ],
-        [
-          10,
-          9
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎10番破綻時は◯6-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "水沢10R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=34.4%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全10頭を厳密演算。",
       "actualTop3": [
         {
@@ -610,11 +603,12 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成オッズ1.2倍<1.35(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.2,
+      "coreSyntheticOdds": 1.56,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ1.2倍<1.35(トリガミ回避)"
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "maxEv": 0.8
     },
     {
       "raceId": "202636112411",
@@ -625,7 +619,7 @@
       "name": "山茶花特別(A)",
       "surfaceDist": "ダ1600m",
       "postTime": "17:30",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -828,20 +822,16 @@
         [
           9,
           4
-        ],
-        [
-          8,
-          10
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎8番破綻時は◯9-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "水沢11R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=30.5%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全11頭を厳密演算。",
       "actualTop3": [
         {
@@ -927,15 +917,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.36
+      "coreSyntheticOdds": 1.76,
+      "maxEv": 0.81,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202636112412",
@@ -946,7 +939,7 @@
       "name": "初冬特別(A)",
       "surfaceDist": "ダ1600m",
       "postTime": "18:05",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1165,20 +1158,16 @@
         [
           3,
           9
-        ],
-        [
-          2,
-          10
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎2番破綻時は◯3-▲9のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "水沢12R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=27.7%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -1264,15 +1253,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.48
+      "coreSyntheticOdds": 1.93,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202642112401",
@@ -1454,20 +1446,16 @@
         [
           7,
           1
-        ],
-        [
-          4,
-          2
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯7-▲1のCore結線で元返し防衛。 危険視8番は単騎楽逃げ時のみ復活。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和1R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=34.9%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全9頭を厳密演算。",
       "actualTop3": [
         {
@@ -1559,11 +1547,12 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成オッズ1.18倍<1.35(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.18,
+      "coreSyntheticOdds": 1.54,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ1.18倍<1.35(トリガミ回避)"
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "maxEv": 0.81
     },
     {
       "raceId": "202642112402",
@@ -1574,7 +1563,7 @@
       "name": "ランチタイム(3歳)",
       "surfaceDist": "ダ1600m",
       "postTime": "12:50",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1777,20 +1766,16 @@
         [
           2,
           5
-        ],
-        [
-          3,
-          4
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎3番破綻時は◯2-▲5のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和2R(ダ1600m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.38, M3=29.7%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全11頭を厳密演算。",
       "actualTop3": [
         {
@@ -1876,17 +1861,18 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 3600,
-      "actualRoi": 36.0,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 2-5 (◯-▲ 防衛) (3,600円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻3,600円 (回収率36.0% / -6,400円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.4
+      "coreSyntheticOdds": 1.8,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202642112403",
@@ -2052,20 +2038,16 @@
         [
           6,
           7
-        ],
-        [
-          5,
-          8
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎5番破綻時は◯6-▲7のCore結線で元返し防衛。 危険視4番は単騎楽逃げ時のみ復活。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和3R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=38.7%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全8頭を厳密演算。",
       "actualTop3": [
         {
@@ -2157,11 +2139,12 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成オッズ1.07倍<1.35(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.07,
+      "coreSyntheticOdds": 1.38,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ1.07倍<1.35(トリガミ回避)"
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "maxEv": 0.8
     },
     {
       "raceId": "202642112404",
@@ -2295,20 +2278,16 @@
         [
           6,
           5
-        ],
-        [
-          4,
-          1
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯6-▲5のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和4R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=53.4%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全6頭を厳密演算。",
       "actualTop3": [
         {
@@ -2400,11 +2379,12 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成オッズ0.79倍<1.35(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 0.79,
+      "coreSyntheticOdds": 1.0,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.79倍<1.35(トリガミ回避)"
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "maxEv": 0.81
     },
     {
       "raceId": "202642112405",
@@ -2415,7 +2395,7 @@
       "name": "3歳一",
       "surfaceDist": "ダ1600m",
       "postTime": "14:20",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2618,20 +2598,16 @@
         [
           7,
           2
-        ],
-        [
-          1,
-          4
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎1番破綻時は◯7-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和5R(ダ1600m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.38, M3=29.5%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全11頭を厳密演算。",
       "actualTop3": [
         {
@@ -2717,15 +2693,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.41
+      "coreSyntheticOdds": 1.82,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202642112406",
@@ -2736,7 +2715,7 @@
       "name": "C2三四",
       "surfaceDist": "ダ1600m",
       "postTime": "14:50",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2971,20 +2950,16 @@
         [
           8,
           2
-        ],
-        [
-          4,
-          3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯8-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和6R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=26.4%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全13頭を厳密演算。",
       "actualTop3": [
         {
@@ -3070,15 +3045,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.56
+      "coreSyntheticOdds": 2.02,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202642112407",
@@ -3089,7 +3067,7 @@
       "name": "C2三四",
       "surfaceDist": "ダ1600m",
       "postTime": "15:25",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3308,20 +3286,16 @@
         [
           9,
           5
-        ],
-        [
-          1,
-          2
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎1番破綻時は◯9-▲5のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和7R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=29.5%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -3407,18 +3381,18 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 19130,
-      "actualRoi": 191.3,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 1-9 (◎-◯ Core) (17,380円)",
-        "3連複F (1,750円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻19,130円 (回収率191.3% / +9,130円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.4
+      "coreSyntheticOdds": 1.82,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202642112408",
@@ -3648,20 +3622,16 @@
         [
           6,
           4
-        ],
-        [
-          7,
-          11
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎7番破綻時は◯6-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和8R(ダ1600m・良) 実測N_lead=7頭 / 2-Stage融合(wR=0.38, M3=31.5%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -3753,11 +3723,12 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成オッズ1.31倍<1.35(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.31,
+      "coreSyntheticOdds": 1.7,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ1.31倍<1.35(トリガミ回避)"
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "maxEv": 0.81
     },
     {
       "raceId": "202642112409",
@@ -3768,7 +3739,7 @@
       "name": "神楽月特別(C1)",
       "surfaceDist": "ダ1600m",
       "postTime": "16:35",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -3987,20 +3958,16 @@
         [
           2,
           7
-        ],
-        [
-          3,
-          9
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎3番破綻時は◯2-▲7のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和9R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=25.9%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -4086,15 +4053,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.58
+      "coreSyntheticOdds": 2.06,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202642112410",
@@ -4105,7 +4075,7 @@
       "name": "とちぎ和牛賞特別(B2B3)",
       "surfaceDist": "ダ1600m",
       "postTime": "17:10",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -4324,20 +4294,16 @@
         [
           2,
           3
-        ],
-        [
-          1,
-          6
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎1番破綻時は◯2-▲3のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和10R(ダ1600m・良) 実測N_lead=8頭 / 2-Stage融合(wR=0.38, M3=26.5%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -4423,20 +4389,18 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 47380,
-      "actualRoi": 473.8,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 1-2 (◎-◯ Core) (16,170円)",
-        "ワイド 1-3 (◎-▲ Core) (24,510円)",
-        "ワイド 2-3 (◯-▲ 防衛) (4,500円)",
-        "3連複F (2,200円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻47,380円 (回収率473.8% / +37,380円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (ライブオッズ未取得のため見送り)",
       "isGraded": false,
-      "coreSyntheticOdds": 1.57
+      "coreSyntheticOdds": 2.04,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "ライブオッズ未取得のため見送り"
     },
     {
       "raceId": "202642112411",
@@ -4447,7 +4411,7 @@
       "name": "栃木県畜産協会長賞...(B3)",
       "surfaceDist": "ダ1600m",
       "postTime": "17:45",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -4698,20 +4662,16 @@
         [
           2,
           9
-        ],
-        [
-          5,
-          13
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎5番破綻時は◯2-▲9のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和11R(ダ1600m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.38, M3=23.7%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全14頭を厳密演算。",
       "actualTop3": [
         {
@@ -4797,15 +4757,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (ライブオッズ未取得のため見送り)",
       "isGraded": false,
-      "coreSyntheticOdds": 1.75
+      "coreSyntheticOdds": 2.27,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "ライブオッズ未取得のため見送り"
     },
     {
       "raceId": "202642112412",
@@ -4816,7 +4779,7 @@
       "name": "小春空特別(C1C2)",
       "surfaceDist": "ダ1600m",
       "postTime": "18:20",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -5035,20 +4998,16 @@
         [
           9,
           7
-        ],
-        [
-          6,
-          10
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎6番破綻時は◯9-▲7のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "浦和12R(ダ1600m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.38, M3=28.4%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -5134,15 +5093,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (ライブオッズ未取得のため見送り)",
       "isGraded": false,
-      "coreSyntheticOdds": 1.45
+      "coreSyntheticOdds": 1.89,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "ライブオッズ未取得のため見送り"
     },
     {
       "raceId": "202648112409",
@@ -5153,7 +5115,7 @@
       "name": "ベテルギウス特別(B)",
       "surfaceDist": "ダ1600m",
       "postTime": "19:05",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -5372,20 +5334,16 @@
         [
           2,
           10
-        ],
-        [
-          4,
-          3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯2-▲10のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "名古屋9R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=28.3%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -5471,15 +5429,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.47
+      "coreSyntheticOdds": 1.88,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202648112410",
@@ -5490,7 +5451,7 @@
       "name": "小雪大空特別(A)",
       "surfaceDist": "ダ1600m",
       "postTime": "19:40",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -5709,20 +5670,16 @@
         [
           4,
           9
-        ],
-        [
-          8,
-          12
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎8番破綻時は◯4-▲9のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "名古屋10R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=28.4%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -5808,17 +5765,18 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 14220,
-      "actualRoi": 142.2,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 8-12 (◎-☆ 強制結線) (14,220円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻14,220円 (回収率142.2% / +4,220円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.45
+      "coreSyntheticOdds": 1.9,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202648112411",
@@ -5829,7 +5787,7 @@
       "name": "オリオン座特別(B)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:18",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -6048,20 +6006,16 @@
         [
           6,
           2
-        ],
-        [
-          4,
-          9
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯6-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "名古屋11R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=28.1%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -6147,15 +6101,18 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.48
+      "coreSyntheticOdds": 1.91,
+      "maxEv": 0.8,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     },
     {
       "raceId": "202648112412",
@@ -6166,7 +6123,7 @@
       "name": "金シャチ最終戦(C)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:53",
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -6385,20 +6342,16 @@
         [
           2,
           3
-        ],
-        [
-          1,
-          4
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎1番破綻時は◯2-▲3のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
+      "strategyProfile": "roi_100_plus",
       "scenario": "名古屋12R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=25.1%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -6484,17 +6437,18 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 4420,
-      "actualRoi": 44.2,
-      "isHit": true,
-      "hitTickets": [
-        "ワイド 1-4 (◎-☆ 強制結線) (4,420円)"
-      ],
-      "evalDone": true,
-      "resultStatus": "🎯 的中 払戻4,420円 (回収率44.2% / -5,580円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.65
+      "coreSyntheticOdds": 2.14,
+      "maxEv": 0.81,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     }
   ],
   "trackBiases": [
@@ -6517,6 +6471,6 @@
       "consistentR": 12
     }
   ],
-  "engineVer": "v11.5-neon",
+  "engineVer": "v11.6-neon",
   "updatedAt": "2026-11-24 23:04 JST"
 }

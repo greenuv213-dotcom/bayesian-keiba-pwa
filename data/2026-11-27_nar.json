@@ -28,34 +28,34 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
-          "num": 3,
-          "name": "カズトラ",
-          "style": "先",
-          "weight": "2.11",
-          "f": 30.2,
-          "fFund": 12.8,
-          "q": 39.1,
+          "num": 6,
+          "name": "オーシンワイルド",
+          "style": "逃",
+          "weight": "516(-1)1.61",
+          "f": 41.2,
+          "fFund": 14.8,
+          "q": 51.5,
           "wUsed": 0.66,
-          "top2": 60.1,
-          "top3": 90.2,
-          "odds": 2.1,
-          "comment": "F:3枠・近走平均7.5着"
+          "top2": 82.4,
+          "top3": 96.0,
+          "odds": 1.6,
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 6,
-          "name": "オーシンワイルド",
-          "style": "逃",
-          "weight": "2.12",
-          "f": 30.2,
-          "fFund": 12.8,
-          "q": 39.1,
+          "num": 3,
+          "name": "カズトラ",
+          "style": "先",
+          "weight": "527(+3)2.42",
+          "f": 30.8,
+          "fFund": 14.8,
+          "q": 33.2,
           "wUsed": 0.66,
-          "top2": 60.1,
-          "top3": 90.2,
-          "odds": 2.1,
-          "comment": "F:6枠・近走平均7.5着"
+          "top2": 61.8,
+          "top3": 92.6,
+          "odds": 2.4,
+          "comment": "F:3枠・近走平均7.5着"
         },
         {
           "mark": "▲",
@@ -63,14 +63,14 @@
           "num": 4,
           "name": "デューンディライト",
           "style": "差",
-          "weight": "10.43",
-          "f": 9.2,
-          "fFund": 11.8,
-          "q": 6.9,
+          "weight": "443(+7)7.53",
+          "f": 13.0,
+          "fFund": 13.6,
+          "q": 9.7,
           "wUsed": 0.66,
-          "top2": 18.2,
-          "top3": 27.4,
-          "odds": 10.4,
+          "top2": 26.0,
+          "top3": 39.0,
+          "odds": 7.5,
           "comment": "F:4枠・近走平均7.5着"
         },
         {
@@ -79,120 +79,183 @@
           "num": 8,
           "name": "オサケノオトモニ",
           "style": "差",
-          "weight": "14.44",
-          "f": 8.2,
-          "fFund": 14.4,
-          "q": 4.9,
+          "weight": "519(+13)18.14",
+          "f": 6.9,
+          "fFund": 13.6,
+          "q": 3.7,
           "wUsed": 0.66,
-          "top2": 17.5,
-          "top3": 26.3,
-          "odds": 14.4,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "top2": 13.9,
+          "top3": 20.8,
+          "odds": 18.1,
+          "comment": "F:馬体+13kg(H:TypeII大幅増) / F:0.2s差実績(H:巻き返し)"
         },
         {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 5,
-          "name": "ラグーンデザイアー",
-          "style": "差",
-          "weight": "21.35",
-          "f": 6.2,
-          "fFund": 14.4,
-          "q": 3.2,
-          "wUsed": 0.66,
-          "top2": 13.3,
-          "top3": 19.9,
-          "odds": 21.3,
-          "comment": "F:0.2s差実績(H:巻き返し)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
+          "mark": "△",
+          "role": "超穴抑え上限",
           "num": 1,
           "name": "シルフマスター",
           "style": "先",
-          "weight": "22.96",
-          "f": 6.3,
-          "fFund": 11.0,
-          "q": 3.0,
+          "weight": "447(+4)55.75",
+          "f": 4.8,
+          "fFund": 12.8,
+          "q": 1.1,
           "wUsed": 0.18,
-          "top2": 12.1,
-          "top3": 18.1,
-          "odds": 22.9,
+          "top2": 9.3,
+          "top3": 13.9,
+          "odds": 55.7,
           "comment": "F:ダ1枠(H:砂被り警戒)"
         },
         {
           "mark": "△",
-          "role": "3列目連下",
-          "num": 2,
-          "name": "カラフルハート",
-          "style": "先",
-          "weight": "31.87",
-          "f": 5.9,
-          "fFund": 11.0,
-          "q": 2.1,
-          "wUsed": 0.18,
-          "top2": 11.3,
-          "top3": 17.0,
-          "odds": 31.8,
-          "comment": "F:ダ2枠(H:砂被り警戒)"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
+          "role": "超穴抑え上限",
           "num": 7,
           "name": "エムワンチーコ",
           "style": "差",
-          "weight": "37.88",
-          "f": 3.7,
-          "fFund": 11.8,
-          "q": 1.7,
+          "weight": "382(-13)126.56",
+          "f": 1.7,
+          "fFund": 13.6,
+          "q": 0.5,
           "wUsed": 0.66,
-          "top2": 7.3,
-          "top3": 10.9,
-          "odds": 37.8,
+          "top2": 3.5,
+          "top3": 5.2,
+          "odds": 126.5,
           "comment": "F:7枠・近走平均7.5着"
+        },
+        {
+          "mark": "△",
+          "role": "超穴抑え上限",
+          "num": 5,
+          "name": "ラグーンデザイアー",
+          "style": "差",
+          "weight": "463(+4)186.77",
+          "f": 1.5,
+          "fFund": 16.7,
+          "q": 0.3,
+          "wUsed": 0.66,
+          "top2": 3.2,
+          "top3": 4.8,
+          "odds": 186.7,
+          "comment": "F:0.2s差実績(H:巻き返し)"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 69.6,
+      "m3": 85.0,
       "coreConnections": [
         [
-          3,
-          6
-        ],
-        [
-          3,
-          4
+          6,
+          8
         ],
         [
           6,
           4
-        ],
-        [
-          3,
-          8
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 2,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎3番破綻時は◯6-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和1R(ダ1300m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=69.6%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全8頭を厳密演算。",
-      "coreSyntheticOdds": 0.62,
+      "counterfactualAudit": "◎6番破綻時は◯3-▲4の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和1R(ダ1300m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=85.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全7頭を厳密演算。",
+      "coreSyntheticOdds": 1.5,
       "pivotType": "Pass",
-      "passReason": "少頭数(8頭)・低配当圧縮(平均W 3.0倍)",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 3,
+          "num": 3,
+          "name": "カズトラ",
+          "odds": "2.4"
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 1,
+          "name": "シルフマスター",
+          "odds": "55.7"
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 7,
+          "name": "エムワンチーコ",
+          "odds": "126.5"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              3
+            ],
+            "pay": 240
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              1,
+              3
+            ],
+            "pay": 3540
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              1,
+              3
+            ],
+            "pay": 620
+          },
+          {
+            "nums": [
+              3,
+              7
+            ],
+            "pay": 1170
+          },
+          {
+            "nums": [
+              1,
+              7
+            ],
+            "pay": 5380
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              3,
+              1
+            ],
+            "pay": 4360
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              1,
+              3,
+              7
+            ],
+            "pay": 20280
+          }
+        ]
+      },
+      "maxEv": 1.25,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112702",
@@ -205,7 +268,7 @@
       "postTime": "12:50",
       "isNew": false,
       "isGraded": false,
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -223,79 +286,79 @@
           "num": 9,
           "name": "トリエンナーレ",
           "style": "差",
-          "weight": "1.31",
-          "f": 51.9,
+          "weight": "426(-12)1.71",
+          "f": 42.1,
           "fFund": 10.7,
-          "q": 65.4,
+          "q": 49.1,
           "wUsed": 0.66,
-          "top2": 92.0,
+          "top2": 84.9,
           "top3": 96.0,
-          "odds": 1.3,
+          "odds": 1.7,
           "comment": "F:父:マインドユアビス(H:血統適性)"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 3,
-          "name": "ゴーレジェンド",
-          "style": "逃",
-          "weight": "6.92",
-          "f": 15.0,
-          "fFund": 9.9,
-          "q": 10.8,
-          "wUsed": 0.66,
-          "top2": 30.0,
-          "top3": 47.7,
-          "odds": 6.9,
-          "comment": "F:3枠・近走平均7.5着"
+          "num": 2,
+          "name": "マイネルラジェム",
+          "style": "差",
+          "weight": "486(-3)3.82",
+          "f": 16.8,
+          "fFund": 9.5,
+          "q": 20.6,
+          "wUsed": 0.54,
+          "top2": 32.9,
+          "top3": 49.4,
+          "odds": 3.8,
+          "comment": "F:ダ2枠上位/芝発(H:減点ソフト上限) / F:馬体-3kg絞り(H:好仕上)"
         },
         {
           "mark": "▲",
           "role": "安定Connector",
-          "num": 5,
-          "name": "ヨドノラヴ",
-          "style": "差",
-          "weight": "15.05",
-          "f": 9.7,
-          "fFund": 11.8,
-          "q": 4.7,
+          "num": 3,
+          "name": "ゴーレジェンド",
+          "style": "逃",
+          "weight": "499(+25)5.43",
+          "f": 15.5,
+          "fFund": 8.0,
+          "q": 14.1,
           "wUsed": 0.66,
-          "top2": 20.6,
-          "top3": 32.9,
-          "odds": 15.0,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "top2": 29.3,
+          "top3": 43.9,
+          "odds": 5.4,
+          "comment": "F:馬体+25kg(H:TypeII大幅増)"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 1,
-          "name": "マーズテソーロ",
+          "num": 5,
+          "name": "ヨドノラヴ",
           "style": "差",
-          "weight": "8.93",
-          "f": 5.7,
-          "fFund": 8.3,
-          "q": 8.2,
-          "wUsed": 0.18,
-          "top2": 10.8,
-          "top3": 17.2,
-          "odds": 8.9,
-          "comment": "F:ダ1枠(H:砂被り警戒)"
+          "weight": "447(-1)11.55",
+          "f": 11.5,
+          "fFund": 11.8,
+          "q": 6.2,
+          "wUsed": 0.66,
+          "top2": 24.7,
+          "top3": 37.1,
+          "odds": 11.5,
+          "comment": "F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "△",
           "role": "3列目連下",
-          "num": 2,
-          "name": "マイネルラジェム",
+          "num": 1,
+          "name": "マーズテソーロ",
           "style": "差",
-          "weight": "9.54",
-          "f": 5.6,
+          "weight": "480(0)9.54",
+          "f": 5.0,
           "fFund": 8.3,
-          "q": 7.6,
+          "q": 7.7,
           "wUsed": 0.18,
-          "top2": 10.7,
-          "top3": 17.0,
+          "top2": 9.6,
+          "top3": 14.4,
           "odds": 9.5,
-          "comment": "F:ダ2枠(H:砂被り警戒)"
+          "comment": "F:ダ1枠(H:砂被り警戒)"
         },
         {
           "mark": "△",
@@ -303,30 +366,46 @@
           "num": 7,
           "name": "シルキーグリーン",
           "style": "差",
-          "weight": "57.16",
+          "weight": "465(-3)59.96",
           "f": 3.5,
-          "fFund": 10.7,
-          "q": 1.1,
+          "fFund": 11.8,
+          "q": 1.0,
           "wUsed": 0.66,
-          "top2": 7.0,
-          "top3": 11.1,
-          "odds": 57.1,
-          "comment": "F:父:ルヴァンスレーヴ(H:血統適性)"
+          "top2": 7.1,
+          "top3": 10.7,
+          "odds": 59.9,
+          "comment": "F:馬体-3kg絞り(H:好仕上) / F:父:ルヴァンスレーヴ(H:血統適性)"
         },
         {
           "mark": "△",
           "role": "超穴抑え上限",
+          "num": 10,
+          "name": "グレイモカ",
+          "style": "差",
+          "weight": "445(+7)84.47",
+          "f": 2.4,
+          "fFund": 9.6,
+          "q": 0.7,
+          "wUsed": 0.66,
+          "top2": 4.9,
+          "top3": 7.4,
+          "odds": 84.4,
+          "comment": "F:8枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
           "num": 6,
           "name": "ヴェラージュコマチ",
           "style": "先",
-          "weight": "74.17",
-          "f": 2.8,
-          "fFund": 9.9,
-          "q": 0.8,
+          "weight": "407(+9)165.48",
+          "f": 1.5,
+          "fFund": 9.8,
+          "q": 0.3,
           "wUsed": 0.66,
-          "top2": 5.5,
-          "top3": 8.8,
-          "odds": 74.1,
+          "top2": 3.1,
+          "top3": 4.6,
+          "odds": 165.4,
           "comment": "F:6枠・近走平均7.5着"
         },
         {
@@ -335,14 +414,14 @@
           "num": 4,
           "name": "グロースフロイデ",
           "style": "逃",
-          "weight": "98.38",
-          "f": 2.4,
+          "weight": "421(+6)346.19",
+          "f": 1.0,
           "fFund": 10.9,
-          "q": 0.6,
+          "q": 0.2,
           "wUsed": 0.66,
-          "top2": 4.8,
-          "top3": 7.6,
-          "odds": 98.3,
+          "top2": 1.9,
+          "top3": 2.9,
+          "odds": 346.1,
           "comment": "F:父:クリソベリル/母(H:血統適性)"
         },
         {
@@ -351,36 +430,20 @@
           "num": 8,
           "name": "シェナノローマ",
           "style": "追",
-          "weight": "128.09",
-          "f": 1.8,
-          "fFund": 9.7,
-          "q": 0.5,
+          "weight": "522(+1)490.410",
+          "f": 0.7,
+          "fFund": 9.6,
+          "q": 0.1,
           "wUsed": 0.66,
-          "top2": 3.7,
-          "top3": 5.9,
-          "odds": 128.0,
+          "top2": 1.4,
+          "top3": 2.1,
+          "odds": 490.4,
           "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "超穴抑え上限",
-          "num": 10,
-          "name": "グレイモカ",
-          "style": "差",
-          "weight": "150.610",
-          "f": 1.6,
-          "fFund": 9.7,
-          "q": 0.4,
-          "wUsed": 0.66,
-          "top2": 3.3,
-          "top3": 5.2,
-          "odds": 150.6,
-          "comment": "F:8枠・近走平均7.5着"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 76.6,
+      "m3": 74.4,
       "coreConnections": [
         [
           9,
@@ -388,19 +451,114 @@
         ],
         [
           9,
-          1
+          3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 2
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 2,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎9番破綻時は◯3-▲5のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和2R(ダ1400m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.66, M3=76.6%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全10頭を厳密演算。",
-      "coreSyntheticOdds": 1.39
+      "counterfactualAudit": "◎9番破綻時は◯2-▲3の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和2R(ダ1400m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.66, M3=74.4%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全10頭を厳密演算。",
+      "coreSyntheticOdds": 1.28,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 8,
+          "num": 9,
+          "name": "トリエンナーレ",
+          "odds": "1.7"
+        },
+        {
+          "rank": "2",
+          "waku": 2,
+          "num": 2,
+          "name": "マイネルラジェム",
+          "odds": "3.8"
+        },
+        {
+          "rank": "3",
+          "waku": 3,
+          "num": 3,
+          "name": "ゴーレジェンド",
+          "odds": "5.4"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              9
+            ],
+            "pay": 170
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              9
+            ],
+            "pay": 310
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              9
+            ],
+            "pay": 160
+          },
+          {
+            "nums": [
+              3,
+              9
+            ],
+            "pay": 200
+          },
+          {
+            "nums": [
+              2,
+              3
+            ],
+            "pay": 260
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              9,
+              2
+            ],
+            "pay": 580
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              3,
+              9
+            ],
+            "pay": 380
+          }
+        ]
+      },
+      "maxEv": 1.32,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112703",
@@ -431,15 +589,15 @@
           "num": 7,
           "name": "ヒロシゲクリスタル",
           "style": "逃",
-          "weight": "2.41",
-          "f": 27.8,
-          "fFund": 9.8,
-          "q": 35.6,
+          "weight": "470(-4)1.71",
+          "f": 37.0,
+          "fFund": 10.5,
+          "q": 49.0,
           "wUsed": 0.66,
-          "top2": 57.7,
-          "top3": 86.5,
-          "odds": 2.4,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "top2": 76.3,
+          "top3": 96.0,
+          "odds": 1.7,
+          "comment": "F:馬体-4kg絞り(H:好仕上) / F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "◯",
@@ -447,63 +605,63 @@
           "num": 5,
           "name": "イチモクサン",
           "style": "差",
-          "weight": "4.42",
-          "f": 17.8,
-          "fFund": 9.6,
-          "q": 18.5,
+          "weight": "484(-1)4.32",
+          "f": 17.7,
+          "fFund": 9.3,
+          "q": 18.0,
           "wUsed": 0.66,
-          "top2": 37.0,
-          "top3": 55.5,
-          "odds": 4.4,
+          "top2": 36.6,
+          "top3": 54.9,
+          "odds": 4.3,
           "comment": "F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "▲",
           "role": "安定Connector",
-          "num": 4,
-          "name": "マルノアンナ",
-          "style": "逃",
-          "weight": "4.53",
-          "f": 15.7,
-          "fFund": 8.0,
-          "q": 18.1,
-          "wUsed": 0.66,
-          "top2": 30.4,
-          "top3": 45.7,
-          "odds": 4.5,
-          "comment": "F:4枠・近走平均7.5着"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
           "num": 3,
           "name": "ヤマトカチドキ",
           "style": "差",
-          "weight": "13.05",
-          "f": 7.3,
-          "fFund": 7.9,
-          "q": 5.7,
+          "weight": "511(+7)5.93",
+          "f": 12.5,
+          "fFund": 7.6,
+          "q": 12.8,
           "wUsed": 0.66,
-          "top2": 14.1,
-          "top3": 21.2,
-          "odds": 13.0,
+          "top2": 24.1,
+          "top3": 36.2,
+          "odds": 5.9,
           "comment": "F:3枠・近走平均7.5着"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 6,
-          "name": "ケイティーユイ",
-          "style": "先",
-          "weight": "23.67",
-          "f": 5.1,
-          "fFund": 8.9,
-          "q": 3.0,
+          "num": 10,
+          "name": "スターハッスル",
+          "style": "差",
+          "weight": "503(-3)11.24",
+          "f": 8.4,
+          "fFund": 8.4,
+          "q": 6.4,
           "wUsed": 0.66,
-          "top2": 9.9,
-          "top3": 14.9,
-          "odds": 23.6,
-          "comment": "F:父:パイロ/母父:コ(H:血統適性)"
+          "top2": 16.3,
+          "top3": 24.4,
+          "odds": 11.2,
+          "comment": "F:馬体-3kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "△",
+          "role": "3列目連下",
+          "num": 4,
+          "name": "マルノアンナ",
+          "style": "逃",
+          "weight": "459(-9)15.85",
+          "f": 6.3,
+          "fFund": 7.8,
+          "q": 4.4,
+          "wUsed": 0.66,
+          "top2": 12.1,
+          "top3": 18.1,
+          "odds": 15.8,
+          "comment": "F:4枠・近走平均7.5着"
         },
         {
           "mark": "△",
@@ -511,30 +669,46 @@
           "num": 9,
           "name": "フローラルロマンス",
           "style": "差",
-          "weight": "21.86",
-          "f": 5.0,
-          "fFund": 7.9,
-          "q": 3.3,
+          "weight": "453(+5)24.77",
+          "f": 4.5,
+          "fFund": 7.6,
+          "q": 2.7,
           "wUsed": 0.66,
-          "top2": 9.8,
-          "top3": 14.7,
-          "odds": 21.8,
+          "top2": 8.7,
+          "top3": 13.0,
+          "odds": 24.7,
           "comment": "F:7枠・近走平均7.5着"
         },
         {
           "mark": "△",
           "role": "3列目連下",
+          "num": 6,
+          "name": "ケイティーユイ",
+          "style": "先",
+          "weight": "461(+7)44.08",
+          "f": 3.2,
+          "fFund": 8.6,
+          "q": 1.5,
+          "wUsed": 0.66,
+          "top2": 6.2,
+          "top3": 9.3,
+          "odds": 44.0,
+          "comment": "F:父:パイロ/母父:コ(H:血統適性)"
+        },
+        {
+          "mark": "無",
+          "role": "強調材料乏しい",
           "num": 2,
           "name": "ワンダーフィール",
           "style": "差",
-          "weight": "9.74",
-          "f": 5.0,
-          "fFund": 6.8,
-          "q": 7.9,
+          "weight": "494(+7)22.36",
+          "f": 3.3,
+          "fFund": 6.6,
+          "q": 3.0,
           "wUsed": 0.18,
-          "top2": 9.4,
-          "top3": 14.1,
-          "odds": 9.7,
+          "top2": 6.1,
+          "top3": 9.2,
+          "odds": 22.3,
           "comment": "F:ダ2枠(H:砂被り警戒)"
         },
         {
@@ -543,63 +717,31 @@
           "num": 8,
           "name": "デルマプラクリティ",
           "style": "差",
-          "weight": "24.08",
-          "f": 4.7,
-          "fFund": 7.9,
-          "q": 3.0,
+          "weight": "473(-4)47.19",
+          "f": 3.0,
+          "fFund": 8.4,
+          "q": 1.4,
           "wUsed": 0.66,
-          "top2": 9.1,
-          "top3": 13.7,
-          "odds": 24.0,
-          "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 1,
-          "name": "セイウンコチョウ",
-          "style": "差",
-          "weight": "41.39",
-          "f": 3.8,
-          "fFund": 6.8,
-          "q": 1.6,
-          "wUsed": 0.18,
-          "top2": 7.1,
-          "top3": 10.6,
-          "odds": 41.3,
-          "comment": "F:ダ1枠(H:砂被り警戒)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 12,
-          "name": "スピークオブデビル",
-          "style": "差",
-          "weight": "44.110",
-          "f": 3.5,
-          "fFund": 9.6,
-          "q": 1.5,
-          "wUsed": 0.66,
-          "top2": 7.2,
-          "top3": 10.7,
-          "odds": 44.1,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "top2": 5.8,
+          "top3": 8.8,
+          "odds": 47.1,
+          "comment": "F:馬体-4kg絞り(H:好仕上)"
         },
         {
           "mark": "無",
           "role": "超穴抑え上限",
-          "num": 10,
-          "name": "スターハッスル",
+          "num": 1,
+          "name": "セイウンコチョウ",
           "style": "差",
-          "weight": "51.711",
-          "f": 2.7,
-          "fFund": 7.9,
-          "q": 1.3,
-          "wUsed": 0.66,
-          "top2": 5.3,
-          "top3": 7.9,
-          "odds": 51.7,
-          "comment": "F:7枠・近走平均7.5着"
+          "weight": "420(+1)164.610",
+          "f": 2.2,
+          "fFund": 6.6,
+          "q": 0.4,
+          "wUsed": 0.18,
+          "top2": 4.1,
+          "top3": 6.2,
+          "odds": 164.6,
+          "comment": "F:ダ1枠(H:砂被り警戒)"
         },
         {
           "mark": "無",
@@ -607,32 +749,40 @@
           "num": 11,
           "name": "ニシノミモザ",
           "style": "追",
-          "weight": "123.512",
-          "f": 1.6,
-          "fFund": 8.7,
-          "q": 0.5,
+          "weight": "444(0)225.411",
+          "f": 1.0,
+          "fFund": 8.4,
+          "q": 0.3,
           "wUsed": 0.66,
-          "top2": 3.0,
-          "top3": 4.5,
-          "odds": 123.5,
+          "top2": 1.9,
+          "top3": 2.9,
+          "odds": 225.4,
           "comment": "F:父:マインドユアビス(H:血統適性)"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 12,
+          "name": "スピークオブデビル",
+          "style": "差",
+          "weight": "489(-2)349.812",
+          "f": 0.8,
+          "fFund": 10.3,
+          "q": 0.2,
+          "wUsed": 0.66,
+          "top2": 1.7,
+          "top3": 2.5,
+          "odds": 349.8,
+          "comment": "F:馬体-2kg絞り(H:好仕上) / F:0.2s差実績(H:巻き返し)"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 61.3,
+      "m3": 67.2,
       "coreConnections": [
         [
           7,
-          5
-        ],
-        [
-          7,
-          4
-        ],
-        [
-          5,
-          4
+          10
         ],
         [
           7,
@@ -640,23 +790,110 @@
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 2,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎7番破綻時は◯5-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和3R(ダ1500m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.66, M3=61.3%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
-      "coreSyntheticOdds": 0.66,
+      "counterfactualAudit": "◎7番破綻時は◯5-▲3の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和3R(ダ1500m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.66, M3=67.2%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "coreSyntheticOdds": 1.32,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.66倍<1.35(トリガミ回避)",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 2,
+          "num": 2,
+          "name": "ワンダーフィール",
+          "odds": "22.3"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 7,
+          "name": "ヒロシゲクリスタル",
+          "odds": "1.7"
+        },
+        {
+          "rank": "3",
+          "waku": 3,
+          "num": 3,
+          "name": "ヤマトカチドキ",
+          "odds": "5.9"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              2
+            ],
+            "pay": 2230
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              7
+            ],
+            "pay": 1140
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              7
+            ],
+            "pay": 400
+          },
+          {
+            "nums": [
+              2,
+              3
+            ],
+            "pay": 970
+          },
+          {
+            "nums": [
+              3,
+              7
+            ],
+            "pay": 330
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              2,
+              7
+            ],
+            "pay": 4620
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              3,
+              7
+            ],
+            "pay": 2420
+          }
+        ]
+      },
+      "maxEv": 0.94,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112704",
@@ -687,14 +924,14 @@
           "num": 9,
           "name": "ジャズピアニスト",
           "style": "逃",
-          "weight": "2.11",
-          "f": 26.5,
-          "fFund": 7.8,
-          "q": 40.9,
+          "weight": "475(-20)1.51",
+          "f": 35.6,
+          "fFund": 7.7,
+          "q": 55.7,
           "wUsed": 0.66,
-          "top2": 53.1,
-          "top3": 79.7,
-          "odds": 2.1,
+          "top2": 71.6,
+          "top3": 96.0,
+          "odds": 1.5,
           "comment": "F:6枠・近走平均7.5着"
         },
         {
@@ -703,14 +940,14 @@
           "num": 13,
           "name": "ワールドバトル",
           "style": "先",
-          "weight": "4.82",
+          "weight": "478(-1)5.22",
           "f": 14.7,
-          "fFund": 7.8,
-          "q": 16.8,
+          "fFund": 7.7,
+          "q": 14.5,
           "wUsed": 0.66,
           "top2": 29.5,
-          "top3": 44.2,
-          "odds": 4.8,
+          "top3": 44.3,
+          "odds": 5.2,
           "comment": "F:8枠・近走平均7.5着"
         },
         {
@@ -719,95 +956,79 @@
           "num": 10,
           "name": "プライムクオリティ",
           "style": "先",
-          "weight": "5.63",
-          "f": 13.2,
-          "fFund": 7.8,
-          "q": 14.2,
+          "weight": "491(-2)7.83",
+          "f": 11.7,
+          "fFund": 8.5,
+          "q": 9.4,
           "wUsed": 0.66,
-          "top2": 26.4,
-          "top3": 39.6,
-          "odds": 5.6,
+          "top2": 23.5,
+          "top3": 35.3,
+          "odds": 7.8,
+          "comment": "F:馬体-2kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 11,
+          "name": "セイダンシング",
+          "style": "差",
+          "weight": "486(-1)8.84",
+          "f": 10.2,
+          "fFund": 7.9,
+          "q": 8.2,
+          "wUsed": 0.66,
+          "top2": 20.6,
+          "top3": 30.8,
+          "odds": 8.8,
           "comment": "F:7枠・近走平均7.5着"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 6,
-          "name": "モズマスターピース",
-          "style": "差",
-          "weight": "10.74",
-          "f": 8.4,
-          "fFund": 7.9,
-          "q": 7.1,
-          "wUsed": 0.66,
-          "top2": 16.9,
-          "top3": 25.3,
-          "odds": 10.7,
-          "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
           "num": 4,
           "name": "オンネア",
           "style": "逃",
-          "weight": "18.15",
-          "f": 5.7,
-          "fFund": 7.8,
-          "q": 4.0,
+          "weight": "469(+4)23.25",
+          "f": 5.1,
+          "fFund": 7.7,
+          "q": 2.9,
           "wUsed": 0.66,
-          "top2": 11.4,
-          "top3": 17.2,
-          "odds": 18.1,
+          "top2": 10.2,
+          "top3": 15.2,
+          "odds": 23.2,
           "comment": "F:4枠・近走平均7.5着"
         },
         {
-          "mark": "△",
-          "role": "3列目連下",
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
           "num": 3,
           "name": "ピノモラーン",
           "style": "差",
-          "weight": "20.16",
-          "f": 5.4,
-          "fFund": 7.9,
-          "q": 3.6,
+          "weight": "477(-4)31.66",
+          "f": 4.4,
+          "fFund": 8.7,
+          "q": 2.1,
           "wUsed": 0.66,
-          "top2": 10.8,
-          "top3": 16.1,
-          "odds": 20.1,
-          "comment": "F:3枠・近走平均7.5着"
+          "top2": 8.8,
+          "top3": 13.2,
+          "odds": 31.6,
+          "comment": "F:馬体-4kg絞り(H:好仕上)"
         },
         {
           "mark": "△",
           "role": "3列目連下",
-          "num": 7,
-          "name": "アイスフィールド",
-          "style": "差",
-          "weight": "24.57",
-          "f": 4.7,
-          "fFund": 7.9,
-          "q": 2.9,
+          "num": 8,
+          "name": "ダイユウルージュ",
+          "style": "先",
+          "weight": "420(0)32.77",
+          "f": 4.0,
+          "fFund": 7.7,
+          "q": 2.0,
           "wUsed": 0.66,
-          "top2": 9.3,
-          "top3": 14.0,
-          "odds": 24.5,
-          "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 11,
-          "name": "セイダンシング",
-          "style": "差",
-          "weight": "25.78",
-          "f": 4.5,
-          "fFund": 7.9,
-          "q": 2.7,
-          "wUsed": 0.66,
-          "top2": 9.0,
-          "top3": 13.5,
-          "odds": 25.7,
-          "comment": "F:7枠・近走平均7.5着"
+          "top2": 8.0,
+          "top3": 11.9,
+          "odds": 32.7,
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -815,63 +1036,15 @@
           "num": 1,
           "name": "ノワスティエ",
           "style": "先",
-          "weight": "29.99",
-          "f": 4.1,
-          "fFund": 6.7,
-          "q": 2.3,
-          "wUsed": 0.18,
-          "top2": 7.9,
-          "top3": 11.9,
-          "odds": 29.9,
-          "comment": "F:ダ1枠(H:砂被り警戒)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 8,
-          "name": "ダイユウルージュ",
-          "style": "先",
-          "weight": "34.910",
-          "f": 3.6,
-          "fFund": 7.8,
+          "weight": "443(-6)33.18",
+          "f": 4.0,
+          "fFund": 7.3,
           "q": 2.0,
-          "wUsed": 0.66,
-          "top2": 7.2,
-          "top3": 10.7,
-          "odds": 34.9,
-          "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 12,
-          "name": "サンドバンブー",
-          "style": "差",
-          "weight": "45.011",
-          "f": 3.0,
-          "fFund": 7.9,
-          "q": 1.5,
-          "wUsed": 0.66,
-          "top2": 6.1,
-          "top3": 9.1,
-          "odds": 45.0,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 5,
-          "name": "メラ",
-          "style": "差",
-          "weight": "48.212",
-          "f": 2.9,
-          "fFund": 7.9,
-          "q": 1.4,
-          "wUsed": 0.66,
-          "top2": 5.8,
-          "top3": 8.7,
-          "odds": 48.2,
-          "comment": "F:4枠・近走平均7.5着"
+          "wUsed": 0.18,
+          "top2": 7.8,
+          "top3": 11.6,
+          "odds": 33.1,
+          "comment": "F:ダ1枠(H:砂被り警戒) / F:馬体-6kg絞り(H:好仕上)"
         },
         {
           "mark": "無",
@@ -879,56 +1052,199 @@
           "num": 2,
           "name": "ハーシュミストレス",
           "style": "差",
-          "weight": "88.413",
-          "f": 3.5,
+          "weight": "467(+6)157.313",
+          "f": 2.6,
           "fFund": 6.8,
-          "q": 0.7,
+          "q": 0.4,
           "wUsed": 0.18,
-          "top2": 6.6,
-          "top3": 10.0,
-          "odds": 88.4,
+          "top2": 5.1,
+          "top3": 7.6,
+          "odds": 157.3,
           "comment": "F:ダ2枠(H:砂被り警戒)"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 12,
+          "name": "サンドバンブー",
+          "style": "差",
+          "weight": "537(+2)70.710",
+          "f": 2.3,
+          "fFund": 7.9,
+          "q": 0.9,
+          "wUsed": 0.66,
+          "top2": 4.7,
+          "top3": 7.0,
+          "odds": 70.7,
+          "comment": "F:8枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 6,
+          "name": "モズマスターピース",
+          "style": "差",
+          "weight": "524(+4)130.411",
+          "f": 1.5,
+          "fFund": 7.9,
+          "q": 0.4,
+          "wUsed": 0.66,
+          "top2": 3.0,
+          "top3": 4.5,
+          "odds": 130.4,
+          "comment": "F:5枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 7,
+          "name": "アイスフィールド",
+          "style": "差",
+          "weight": "460(+3)134.112",
+          "f": 1.5,
+          "fFund": 7.9,
+          "q": 0.4,
+          "wUsed": 0.66,
+          "top2": 2.9,
+          "top3": 4.4,
+          "odds": 134.1,
+          "comment": "F:5枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 5,
+          "name": "メラ",
+          "style": "差",
+          "weight": "554(+10)58.29",
+          "f": 2.3,
+          "fFund": 6.4,
+          "q": 1.1,
+          "wUsed": 0.66,
+          "top2": 4.4,
+          "top3": 6.6,
+          "odds": 58.2,
+          "comment": "F:馬体+10kg(H:TypeII大幅増)"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 54.4,
+      "m3": 62.0,
       "coreConnections": [
         [
           9,
-          13
+          11
         ],
         [
           9,
           10
-        ],
-        [
-          13,
-          10
-        ],
-        [
-          9,
-          6
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 2,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎9番破綻時は◯13-▲10のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和4R(ダ1400m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.66, M3=54.4%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全13頭を厳密演算。",
-      "coreSyntheticOdds": 0.67,
+      "counterfactualAudit": "◎9番破綻時は◯13-▲10の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和4R(ダ1400m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.66, M3=62.0%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全13頭を厳密演算。",
+      "coreSyntheticOdds": 1.24,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.67倍<1.35(トリガミ回避)",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 11,
+          "name": "セイダンシング",
+          "odds": "8.8"
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 13,
+          "name": "ワールドバトル",
+          "odds": "5.2"
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 10,
+          "name": "プライムクオリティ",
+          "odds": "7.8"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              11
+            ],
+            "pay": 880
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              11,
+              13
+            ],
+            "pay": 2360
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              11,
+              13
+            ],
+            "pay": 700
+          },
+          {
+            "nums": [
+              10,
+              11
+            ],
+            "pay": 660
+          },
+          {
+            "nums": [
+              10,
+              13
+            ],
+            "pay": 410
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              11,
+              13
+            ],
+            "pay": 4580
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              10,
+              11,
+              13
+            ],
+            "pay": 3650
+          }
+        ]
+      },
+      "maxEv": 0.91,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112705",
@@ -941,7 +1257,7 @@
       "postTime": "14:20",
       "isNew": false,
       "isGraded": false,
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -956,34 +1272,34 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
-          "num": 5,
-          "name": "ダイメイナガス",
-          "style": "逃",
-          "weight": "1.41",
-          "f": 45.8,
-          "fFund": 9.7,
-          "q": 62.5,
+          "num": 12,
+          "name": "カスタネアローズ",
+          "style": "先",
+          "weight": "459(-1)2.22",
+          "f": 33.4,
+          "fFund": 10.1,
+          "q": 37.1,
           "wUsed": 0.66,
-          "top2": 92.0,
+          "top2": 69.9,
           "top3": 96.0,
-          "odds": 1.4,
+          "odds": 2.2,
           "comment": "F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 12,
-          "name": "カスタネアローズ",
-          "style": "先",
-          "weight": "11.63",
-          "f": 10.1,
-          "fFund": 9.7,
-          "q": 6.4,
+          "num": 5,
+          "name": "ダイメイナガス",
+          "style": "逃",
+          "weight": "484(+10)2.11",
+          "f": 30.4,
+          "fFund": 8.3,
+          "q": 39.0,
           "wUsed": 0.66,
-          "top2": 20.8,
-          "top3": 31.6,
-          "odds": 11.6,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "top2": 59.7,
+          "top3": 89.5,
+          "odds": 2.1,
+          "comment": "F:馬体+10kg(H:TypeII大幅増) / F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "▲",
@@ -991,47 +1307,15 @@
           "num": 2,
           "name": "ミーコノデバンダ",
           "style": "先",
-          "weight": "5.82",
-          "f": 7.4,
-          "fFund": 8.4,
-          "q": 13.5,
+          "weight": "443(0)7.93",
+          "f": 6.4,
+          "fFund": 8.7,
+          "q": 9.3,
           "wUsed": 0.18,
-          "top2": 14.5,
-          "top3": 22.0,
-          "odds": 5.8,
+          "top2": 12.8,
+          "top3": 19.2,
+          "odds": 7.9,
           "comment": "F:ダ2枠(H:砂被り警戒) / F:0.2s差実績(H:巻き返し)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 8,
-          "name": "シェリー",
-          "style": "差",
-          "weight": "16.64",
-          "f": 6.8,
-          "fFund": 7.8,
-          "q": 4.3,
-          "wUsed": 0.66,
-          "top2": 13.2,
-          "top3": 20.0,
-          "odds": 16.6,
-          "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 11,
-          "name": "ギルランダ",
-          "style": "差",
-          "weight": "20.25",
-          "f": 6.0,
-          "fFund": 7.8,
-          "q": 3.5,
-          "wUsed": 0.66,
-          "top2": 11.5,
-          "top3": 17.4,
-          "odds": 20.2,
-          "comment": "F:8枠・近走平均7.5着"
         },
         {
           "mark": "☆",
@@ -1039,95 +1323,79 @@
           "num": 9,
           "name": "マカンコーサッポー",
           "style": "差",
-          "weight": "24.76",
-          "f": 5.2,
-          "fFund": 7.8,
-          "q": 2.8,
+          "weight": "479(+6)19.75",
+          "f": 6.1,
+          "fFund": 8.1,
+          "q": 3.5,
           "wUsed": 0.66,
-          "top2": 9.9,
-          "top3": 15.0,
-          "odds": 24.7,
+          "top2": 12.0,
+          "top3": 17.9,
+          "odds": 19.7,
           "comment": "F:7枠・近走平均7.5着"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 7,
+          "name": "スターハル",
+          "style": "差",
+          "weight": "407(+5)23.66",
+          "f": 5.4,
+          "fFund": 8.1,
+          "q": 2.9,
+          "wUsed": 0.66,
+          "top2": 10.5,
+          "top3": 15.8,
+          "odds": 23.6,
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "△",
           "role": "3列目連下",
-          "num": 3,
-          "name": "ムゾラシカ",
+          "num": 8,
+          "name": "シェリー",
           "style": "差",
-          "weight": "42.97",
-          "f": 3.5,
-          "fFund": 7.8,
-          "q": 1.6,
+          "weight": "489(+10)17.94",
+          "f": 5.8,
+          "fFund": 6.6,
+          "q": 3.9,
           "wUsed": 0.66,
-          "top2": 6.7,
-          "top3": 10.2,
-          "odds": 42.9,
-          "comment": "F:3枠・近走平均7.5着"
+          "top2": 10.6,
+          "top3": 15.9,
+          "odds": 17.9,
+          "comment": "F:馬体+10kg(H:TypeII大幅増)"
         },
         {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 10,
-          "name": "ニコニコニコル",
-          "style": "先",
-          "weight": "49.79",
-          "f": 3.2,
-          "fFund": 8.0,
-          "q": 1.3,
-          "wUsed": 0.66,
-          "top2": 6.1,
-          "top3": 9.2,
-          "odds": 49.7,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 4,
-          "name": "シンデレラリバティ",
-          "style": "差",
-          "weight": "48.98",
-          "f": 3.2,
-          "fFund": 7.8,
-          "q": 1.3,
-          "wUsed": 0.66,
-          "top2": 6.1,
-          "top3": 9.2,
-          "odds": 48.9,
-          "comment": "F:4枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "超穴抑え上限",
+          "mark": "△",
+          "role": "3列目連下",
           "num": 1,
           "name": "サノノラブミー",
           "style": "先",
-          "weight": "86.711",
-          "f": 3.2,
-          "fFund": 6.8,
-          "q": 0.7,
+          "weight": "463(+6)40.67",
+          "f": 3.4,
+          "fFund": 7.1,
+          "q": 1.6,
           "wUsed": 0.18,
-          "top2": 5.9,
-          "top3": 9.0,
-          "odds": 86.7,
+          "top2": 6.5,
+          "top3": 9.7,
+          "odds": 40.6,
           "comment": "F:ダ1枠(H:砂被り警戒)"
         },
         {
           "mark": "無",
           "role": "超穴抑え上限",
-          "num": 7,
-          "name": "スターハル",
+          "num": 4,
+          "name": "シンデレラリバティ",
           "style": "差",
-          "weight": "50.010",
+          "weight": "448(+3)50.88",
           "f": 3.1,
-          "fFund": 7.8,
-          "q": 1.3,
+          "fFund": 8.1,
+          "q": 1.2,
           "wUsed": 0.66,
-          "top2": 6.0,
+          "top2": 6.1,
           "top3": 9.1,
-          "odds": 50.0,
-          "comment": "F:6枠・近走平均7.5着"
+          "odds": 50.8,
+          "comment": "F:4枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -1135,40 +1403,183 @@
           "num": 6,
           "name": "ヒシルリアン",
           "style": "追",
-          "weight": "86.812",
-          "f": 2.5,
-          "fFund": 10.5,
+          "weight": "523(+9)98.910",
+          "f": 2.3,
+          "fFund": 11.0,
+          "q": 0.6,
+          "wUsed": 0.66,
+          "top2": 4.9,
+          "top3": 7.3,
+          "odds": 98.9,
+          "comment": "F:0.2s差実績(H:巻き返し) / F:父:キズナ/母父:ス(H:血統適性)"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 11,
+          "name": "ギルランダ",
+          "style": "差",
+          "weight": "435(-7)198.711",
+          "f": 1.3,
+          "fFund": 9.0,
+          "q": 0.3,
+          "wUsed": 0.66,
+          "top2": 2.5,
+          "top3": 3.7,
+          "odds": 198.7,
+          "comment": "F:馬体-7kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 3,
+          "name": "ムゾラシカ",
+          "style": "差",
+          "weight": "477(+1)472.412",
+          "f": 0.6,
+          "fFund": 8.1,
+          "q": 0.1,
+          "wUsed": 0.66,
+          "top2": 1.2,
+          "top3": 1.9,
+          "odds": 472.4,
+          "comment": "F:3枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 10,
+          "name": "ニコニコニコル",
+          "style": "先",
+          "weight": "400(+11)92.89",
+          "f": 1.8,
+          "fFund": 6.8,
           "q": 0.7,
           "wUsed": 0.66,
-          "top2": 5.2,
-          "top3": 7.9,
-          "odds": 86.8,
-          "comment": "F:0.2s差実績(H:巻き返し) / F:父:キズナ/母父:ス(H:血統適性)"
+          "top2": 3.3,
+          "top3": 5.0,
+          "odds": 92.8,
+          "comment": "F:馬体+11kg(H:TypeII大幅増)"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 63.3,
+      "m3": 70.2,
       "coreConnections": [
         [
-          5,
-          8
+          12,
+          9
         ],
         [
-          5,
-          12
+          12,
+          2
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 2
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 2,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎5番破綻時は◯12-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和5R(ダ800m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.66, M3=63.3%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
-      "coreSyntheticOdds": 1.48
+      "counterfactualAudit": "◎12番破綻時は◯5-▲2の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和5R(ダ800m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.66, M3=70.2%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "coreSyntheticOdds": 1.78,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 8,
+          "name": "シェリー",
+          "odds": "17.9"
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 12,
+          "name": "カスタネアローズ",
+          "odds": "2.2"
+        },
+        {
+          "rank": "3",
+          "waku": 6,
+          "num": 7,
+          "name": "スターハル",
+          "odds": "23.6"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              8
+            ],
+            "pay": 1790
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              8,
+              12
+            ],
+            "pay": 1260
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              8,
+              12
+            ],
+            "pay": 530
+          },
+          {
+            "nums": [
+              7,
+              8
+            ],
+            "pay": 2370
+          },
+          {
+            "nums": [
+              7,
+              12
+            ],
+            "pay": 700
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              8,
+              12
+            ],
+            "pay": 4700
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              7,
+              8,
+              12
+            ],
+            "pay": 5080
+          }
+        ]
+      },
+      "maxEv": 1.2,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112706",
@@ -1199,14 +1610,14 @@
           "num": 3,
           "name": "サフラナール",
           "style": "逃",
-          "weight": "5.24",
-          "f": 16.2,
+          "weight": "491(+6)2.51",
+          "f": 28.5,
           "fFund": 9.3,
-          "q": 15.7,
+          "q": 33.5,
           "wUsed": 0.66,
-          "top2": 34.5,
-          "top3": 51.7,
-          "odds": 5.2,
+          "top2": 60.5,
+          "top3": 90.8,
+          "odds": 2.5,
           "comment": "F:笹川翼騎手(H:Top騎手)"
         },
         {
@@ -1215,79 +1626,63 @@
           "num": 11,
           "name": "クラオウリュウ",
           "style": "先",
-          "weight": "4.32",
-          "f": 16.6,
+          "weight": "504(+6)2.92",
+          "f": 22.9,
           "fFund": 7.8,
-          "q": 19.2,
+          "q": 28.5,
           "wUsed": 0.66,
-          "top2": 32.4,
-          "top3": 48.6,
-          "odds": 4.3,
+          "top2": 44.7,
+          "top3": 67.0,
+          "odds": 2.9,
           "comment": "F:8枠・近走平均7.5着"
         },
         {
           "mark": "▲",
           "role": "安定Connector",
-          "num": 2,
-          "name": "ステラブローニュ",
-          "style": "先",
-          "weight": "3.81",
-          "f": 15.6,
-          "fFund": 8.5,
-          "q": 22.0,
-          "wUsed": 0.54,
-          "top2": 31.8,
-          "top3": 47.7,
-          "odds": 3.8,
-          "comment": "F:ダ2枠上位/芝発(H:減点ソフト上限) / F:0.2s差実績(H:巻き返し)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
           "num": 9,
           "name": "シェナノクインサー",
           "style": "先",
-          "weight": "4.53",
-          "f": 16.0,
-          "fFund": 7.8,
-          "q": 18.3,
+          "weight": "463(-7)5.73",
+          "f": 15.1,
+          "fFund": 8.6,
+          "q": 13.7,
           "wUsed": 0.66,
-          "top2": 31.4,
-          "top3": 47.0,
-          "odds": 4.5,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 5,
-          "name": "タツノドリーム",
-          "style": "差",
-          "weight": "8.05",
-          "f": 10.8,
-          "fFund": 8.0,
-          "q": 9.8,
-          "wUsed": 0.66,
-          "top2": 21.1,
-          "top3": 31.6,
-          "odds": 8.0,
-          "comment": "F:5枠・近走平均7.5着"
+          "top2": 29.4,
+          "top3": 44.1,
+          "odds": 5.7,
+          "comment": "F:馬体-7kg絞り(H:好仕上)"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 6,
-          "name": "ランウェイクイーン",
+          "num": 5,
+          "name": "タツノドリーム",
           "style": "差",
-          "weight": "21.77",
-          "f": 6.0,
-          "fFund": 9.8,
-          "q": 3.3,
+          "weight": "491(-2)11.05",
+          "f": 9.6,
+          "fFund": 8.8,
+          "q": 6.8,
           "wUsed": 0.66,
-          "top2": 12.5,
-          "top3": 18.8,
-          "odds": 21.7,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "top2": 18.6,
+          "top3": 28.0,
+          "odds": 11.0,
+          "comment": "F:馬体-2kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 2,
+          "name": "ステラブローニュ",
+          "style": "先",
+          "weight": "479(+2)10.24",
+          "f": 5.9,
+          "fFund": 8.2,
+          "q": 7.3,
+          "wUsed": 0.18,
+          "top2": 11.7,
+          "top3": 17.6,
+          "odds": 10.2,
+          "comment": "F:ダ2枠(H:砂被り警戒) / F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "△",
@@ -1295,63 +1690,63 @@
           "num": 1,
           "name": "レディーキューティ",
           "style": "先",
-          "weight": "14.46",
-          "f": 5.4,
-          "fFund": 7.4,
-          "q": 5.2,
+          "weight": "421(-4)12.96",
+          "f": 5.6,
+          "fFund": 8.2,
+          "q": 5.7,
           "wUsed": 0.18,
-          "top2": 10.1,
-          "top3": 15.1,
-          "odds": 14.4,
-          "comment": "F:ダ1枠(H:砂被り警戒) / F:父:シニスターミニス(H:血統適性)"
+          "top2": 10.5,
+          "top3": 15.8,
+          "odds": 12.9,
+          "comment": "F:ダ1枠(H:砂被り警戒) / F:馬体-4kg絞り(H:好仕上) / F:父:シニスター"
         },
         {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 12,
-          "name": "バルカロール",
-          "style": "逃",
-          "weight": "28.28",
-          "f": 4.6,
-          "fFund": 8.6,
-          "q": 2.5,
-          "wUsed": 0.66,
-          "top2": 9.0,
-          "top3": 13.5,
-          "odds": 28.2,
-          "comment": "F:父:クリソベリル/母(H:血統適性)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 7,
-          "name": "ラエティティア",
+          "mark": "△",
+          "role": "3列目連下",
+          "num": 6,
+          "name": "ランウェイクイーン",
           "style": "差",
-          "weight": "43.310",
-          "f": 3.2,
-          "fFund": 8.0,
-          "q": 1.6,
+          "weight": "479(+3)46.07",
+          "f": 3.7,
+          "fFund": 9.7,
+          "q": 1.4,
           "wUsed": 0.66,
-          "top2": 6.3,
-          "top3": 9.5,
-          "odds": 43.3,
-          "comment": "F:6枠・近走平均7.5着"
+          "top2": 7.6,
+          "top3": 11.5,
+          "odds": 46.0,
+          "comment": "F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "無",
-          "role": "強調材料乏しい",
+          "role": "超穴抑え上限",
           "num": 4,
           "name": "アルパインハット",
           "style": "先",
-          "weight": "42.79",
-          "f": 3.2,
+          "weight": "473(+5)57.08",
+          "f": 2.7,
           "fFund": 7.8,
-          "q": 1.6,
+          "q": 1.1,
           "wUsed": 0.66,
-          "top2": 6.3,
-          "top3": 9.5,
-          "odds": 42.7,
+          "top2": 5.3,
+          "top3": 8.0,
+          "odds": 57.0,
           "comment": "F:4枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 7,
+          "name": "ラエティティア",
+          "style": "差",
+          "weight": "489(+1)92.29",
+          "f": 2.0,
+          "fFund": 7.9,
+          "q": 0.7,
+          "wUsed": 0.66,
+          "top2": 3.8,
+          "top3": 5.8,
+          "odds": 92.2,
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -1359,14 +1754,14 @@
           "num": 8,
           "name": "ヴァシロペス",
           "style": "差",
-          "weight": "140.011",
-          "f": 1.4,
-          "fFund": 8.0,
-          "q": 0.4,
+          "weight": "493(+7)104.610",
+          "f": 1.8,
+          "fFund": 7.9,
+          "q": 0.6,
           "wUsed": 0.66,
-          "top2": 2.7,
-          "top3": 4.1,
-          "odds": 140.0,
+          "top2": 3.5,
+          "top3": 5.3,
+          "odds": 104.6,
           "comment": "F:6枠・近走平均7.5着"
         },
         {
@@ -1375,20 +1770,36 @@
           "num": 10,
           "name": "ニシノアクシス",
           "style": "追",
-          "weight": "262.812",
-          "f": 1.0,
+          "weight": "503(+7)688.112",
+          "f": 0.6,
           "fFund": 8.8,
-          "q": 0.2,
+          "q": 0.1,
           "wUsed": 0.66,
-          "top2": 1.9,
-          "top3": 2.8,
-          "odds": 262.8,
+          "top2": 1.2,
+          "top3": 1.7,
+          "odds": 688.1,
           "comment": "F:父:ロードカナロア/(H:血統適性)"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 12,
+          "name": "バルカロール",
+          "style": "逃",
+          "weight": "450(+12)106.511",
+          "f": 1.7,
+          "fFund": 7.0,
+          "q": 0.6,
+          "wUsed": 0.66,
+          "top2": 3.0,
+          "top3": 4.5,
+          "odds": 106.5,
+          "comment": "F:馬体+12kg(H:TypeII大幅増) / F:父:クリソベリル/母(H:血統適性)"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 48.8,
+      "m3": 66.5,
       "coreConnections": [
         [
           3,
@@ -1396,35 +1807,118 @@
         ],
         [
           3,
-          2
+          9
         ],
         [
           11,
-          2
-        ],
-        [
-          3,
           9
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎3番破綻時は◯11-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和6R(ダ800m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.66, M3=48.8%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
-      "coreSyntheticOdds": 0.77,
+      "counterfactualAudit": "◎3番破綻時は◯11-▲9の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和6R(ダ800m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.66, M3=66.5%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
+      "coreSyntheticOdds": 0.76,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.77倍<1.35(トリガミ回避)",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 5,
+          "num": 5,
+          "name": "タツノドリーム",
+          "odds": "11.0"
+        },
+        {
+          "rank": "2",
+          "waku": 2,
+          "num": 2,
+          "name": "ステラブローニュ",
+          "odds": "10.2"
+        },
+        {
+          "rank": "3",
+          "waku": 8,
+          "num": 11,
+          "name": "クラオウリュウ",
+          "odds": "2.9"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              5
+            ],
+            "pay": 1100
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              5
+            ],
+            "pay": 2520
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              5
+            ],
+            "pay": 660
+          },
+          {
+            "nums": [
+              5,
+              11
+            ],
+            "pay": 440
+          },
+          {
+            "nums": [
+              2,
+              11
+            ],
+            "pay": 390
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              5,
+              2
+            ],
+            "pay": 5830
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              5,
+              11
+            ],
+            "pay": 1930
+          }
+        ]
+      },
+      "maxEv": 1.06,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112707",
@@ -1437,7 +1931,7 @@
       "postTime": "15:25",
       "isNew": false,
       "isGraded": false,
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1455,15 +1949,15 @@
           "num": 9,
           "name": "アンジュディーヴァ",
           "style": "逃",
-          "weight": "1.71",
-          "f": 36.3,
-          "fFund": 9.2,
-          "q": 51.4,
+          "weight": "447(-3)1.81",
+          "f": 37.5,
+          "fFund": 9.7,
+          "q": 45.9,
           "wUsed": 0.66,
-          "top2": 71.9,
+          "top2": 74.9,
           "top3": 96.0,
-          "odds": 1.7,
-          "comment": "F:父:ヘニーヒューズ/(H:血統適性)"
+          "odds": 1.8,
+          "comment": "F:馬体-3kg絞り(H:好仕上) / F:父:ヘニーヒューズ/(H:血統適性)"
         },
         {
           "mark": "◯",
@@ -1471,15 +1965,15 @@
           "num": 10,
           "name": "アイノスカイライン",
           "style": "逃",
-          "weight": "5.92",
-          "f": 15.7,
-          "fFund": 9.9,
-          "q": 13.4,
+          "weight": "444(-7)7.33",
+          "f": 14.5,
+          "fFund": 10.5,
+          "q": 10.1,
           "wUsed": 0.66,
-          "top2": 33.9,
-          "top3": 50.9,
-          "odds": 5.9,
-          "comment": "F:笹川翼騎手(H:Top騎手)"
+          "top2": 31.6,
+          "top3": 47.5,
+          "odds": 7.3,
+          "comment": "F:馬体-7kg絞り(H:好仕上) / F:笹川翼騎手(H:Top騎手)"
         },
         {
           "mark": "▲",
@@ -1487,15 +1981,31 @@
           "num": 8,
           "name": "サマーエンド",
           "style": "先",
-          "weight": "7.23",
-          "f": 12.2,
-          "fFund": 8.3,
-          "q": 10.8,
+          "weight": "488(-2)8.34",
+          "f": 11.8,
+          "fFund": 8.8,
+          "q": 8.8,
           "wUsed": 0.66,
-          "top2": 24.1,
-          "top3": 36.2,
-          "odds": 7.2,
-          "comment": "F:6枠・近走平均7.5着"
+          "top2": 23.7,
+          "top3": 35.5,
+          "odds": 8.3,
+          "comment": "F:馬体-2kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 2,
+          "name": "チュラブロッサム",
+          "style": "先",
+          "weight": "444(+13)3.12",
+          "f": 12.7,
+          "fFund": 5.8,
+          "q": 25.5,
+          "wUsed": 0.54,
+          "top2": 23.2,
+          "top3": 34.8,
+          "odds": 3.1,
+          "comment": "F:ダ2枠上位/芝発(H:減点ソフト上限) / F:馬体+13kg(H:TypeII大幅増)"
         },
         {
           "mark": "☆",
@@ -1503,95 +2013,63 @@
           "num": 11,
           "name": "デンデンデングリ",
           "style": "先",
-          "weight": "21.85",
-          "f": 5.5,
-          "fFund": 8.3,
+          "weight": "475(+4)20.85",
+          "f": 5.8,
+          "fFund": 8.0,
           "q": 3.3,
           "wUsed": 0.66,
-          "top2": 11.0,
-          "top3": 16.4,
-          "odds": 21.8,
+          "top2": 11.5,
+          "top3": 17.3,
+          "odds": 20.8,
           "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 2,
-          "name": "チュラブロッサム",
-          "style": "先",
-          "weight": "8.24",
-          "f": 5.3,
-          "fFund": 7.1,
-          "q": 9.4,
-          "wUsed": 0.18,
-          "top2": 10.1,
-          "top3": 15.2,
-          "odds": 8.2,
-          "comment": "F:ダ2枠(H:砂被り警戒)"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 6,
-          "name": "サッシーユー",
-          "style": "逃",
-          "weight": "24.26",
-          "f": 5.1,
-          "fFund": 8.3,
-          "q": 2.9,
+          "num": 5,
+          "name": "ラッキードーター",
+          "style": "先",
+          "weight": "398(+8)26.96",
+          "f": 4.8,
+          "fFund": 8.0,
+          "q": 2.5,
           "wUsed": 0.66,
-          "top2": 10.2,
-          "top3": 15.2,
-          "odds": 24.2,
+          "top2": 9.6,
+          "top3": 14.4,
+          "odds": 26.9,
           "comment": "F:5枠・近走平均7.5着"
         },
         {
           "mark": "△",
           "role": "3列目連下",
-          "num": 5,
-          "name": "ラッキードーター",
-          "style": "先",
-          "weight": "24.97",
-          "f": 5.0,
-          "fFund": 8.3,
-          "q": 2.8,
-          "wUsed": 0.66,
-          "top2": 10.0,
-          "top3": 14.9,
-          "odds": 24.9,
-          "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
           "num": 4,
           "name": "インチャージ",
           "style": "差",
-          "weight": "35.88",
-          "f": 3.9,
-          "fFund": 8.5,
-          "q": 1.9,
+          "weight": "497(+6)46.67",
+          "f": 3.3,
+          "fFund": 8.1,
+          "q": 1.4,
           "wUsed": 0.66,
-          "top2": 7.8,
-          "top3": 11.7,
-          "odds": 35.8,
+          "top2": 6.6,
+          "top3": 9.9,
+          "odds": 46.6,
           "comment": "F:4枠・近走平均7.5着"
         },
         {
           "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 12,
-          "name": "ミーリイ",
-          "style": "先",
-          "weight": "36.09",
-          "f": 3.9,
-          "fFund": 8.3,
-          "q": 1.9,
+          "role": "超穴抑え上限",
+          "num": 6,
+          "name": "サッシーユー",
+          "style": "逃",
+          "weight": "431(-3)56.68",
+          "f": 3.0,
+          "fFund": 8.8,
+          "q": 1.1,
           "wUsed": 0.66,
-          "top2": 7.7,
-          "top3": 11.5,
-          "odds": 36.0,
-          "comment": "F:8枠・近走平均7.5着"
+          "top2": 6.0,
+          "top3": 9.0,
+          "odds": 56.6,
+          "comment": "F:馬体-3kg絞り(H:好仕上)"
         },
         {
           "mark": "無",
@@ -1599,31 +2077,31 @@
           "num": 1,
           "name": "ユウユウオチョコ",
           "style": "先",
-          "weight": "57.910",
-          "f": 3.7,
-          "fFund": 7.1,
-          "q": 1.1,
+          "weight": "455(-4)132.210",
+          "f": 3.0,
+          "fFund": 7.6,
+          "q": 0.4,
           "wUsed": 0.18,
-          "top2": 6.9,
-          "top3": 10.4,
-          "odds": 57.9,
-          "comment": "F:ダ1枠(H:砂被り警戒)"
+          "top2": 5.7,
+          "top3": 8.5,
+          "odds": 132.2,
+          "comment": "F:ダ1枠(H:砂被り警戒) / F:馬体-4kg絞り(H:好仕上)"
         },
         {
           "mark": "無",
           "role": "超穴抑え上限",
-          "num": 3,
-          "name": "ザラストチャダル",
+          "num": 12,
+          "name": "ミーリイ",
           "style": "先",
-          "weight": "73.411",
-          "f": 2.3,
-          "fFund": 8.3,
-          "q": 0.9,
+          "weight": "426(+4)108.59",
+          "f": 1.8,
+          "fFund": 8.0,
+          "q": 0.5,
           "wUsed": 0.66,
-          "top2": 4.6,
-          "top3": 6.9,
-          "odds": 73.4,
-          "comment": "F:3枠・近走平均7.5着"
+          "top2": 3.6,
+          "top3": 5.3,
+          "odds": 108.5,
+          "comment": "F:8枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -1631,40 +2109,151 @@
           "num": 7,
           "name": "コパノベリーズ",
           "style": "先",
-          "weight": "259.412",
+          "weight": "431(-1)268.211",
           "f": 0.9,
-          "fFund": 8.3,
+          "fFund": 8.0,
           "q": 0.2,
           "wUsed": 0.66,
           "top2": 1.9,
           "top3": 2.8,
-          "odds": 259.4,
+          "odds": 268.2,
           "comment": "F:6枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 3,
+          "name": "ザラストチャダル",
+          "style": "先",
+          "weight": "435(-3)324.612",
+          "f": 0.9,
+          "fFund": 8.8,
+          "q": 0.2,
+          "wUsed": 0.66,
+          "top2": 1.7,
+          "top3": 2.6,
+          "odds": 324.6,
+          "comment": "F:馬体-3kg絞り(H:好仕上)"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 64.2,
+      "m3": 64.7,
       "coreConnections": [
         [
           9,
-          11
+          8
         ],
         [
           9,
-          8
+          10
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 2
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 2,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎9番破綻時は◯10-▲8のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和7R(ダ1400m・良) 実測N_lead=8頭 / 2-Stage融合(wR=0.66, M3=64.2%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
-      "coreSyntheticOdds": 1.58
+      "counterfactualAudit": "◎9番破綻時は◯10-▲8の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和7R(ダ1400m・良) 実測N_lead=8頭 / 2-Stage融合(wR=0.66, M3=64.7%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
+      "coreSyntheticOdds": 1.25,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 9,
+          "name": "アンジュディーヴァ",
+          "odds": "1.8"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 8,
+          "name": "サマーエンド",
+          "odds": "8.3"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 2,
+          "name": "チュラブロッサム",
+          "odds": "3.1"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              9
+            ],
+            "pay": 180
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              8,
+              9
+            ],
+            "pay": 500
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              8,
+              9
+            ],
+            "pay": 230
+          },
+          {
+            "nums": [
+              2,
+              9
+            ],
+            "pay": 170
+          },
+          {
+            "nums": [
+              2,
+              8
+            ],
+            "pay": 320
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              9,
+              8
+            ],
+            "pay": 890
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              8,
+              9
+            ],
+            "pay": 580
+          }
+        ]
+      },
+      "maxEv": 1.06,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112708",
@@ -1692,66 +2281,98 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
-          "num": 3,
-          "name": "ユウユウプレゼンス",
-          "style": "先",
-          "weight": "3.11",
-          "f": 22.4,
-          "fFund": 9.0,
-          "q": 27.2,
+          "num": 11,
+          "name": "ペプチドシナノ",
+          "style": "差",
+          "weight": "497(+2)3.51",
+          "f": 20.2,
+          "fFund": 8.0,
+          "q": 23.5,
           "wUsed": 0.66,
-          "top2": 45.0,
-          "top3": 67.5,
-          "odds": 3.1,
-          "comment": "F:3枠・近走平均7.5着"
+          "top2": 40.7,
+          "top3": 61.1,
+          "odds": 3.5,
+          "comment": "F:8枠・近走平均7.5着"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 11,
-          "name": "ペプチドシナノ",
-          "style": "差",
-          "weight": "5.03",
-          "f": 15.1,
-          "fFund": 8.3,
-          "q": 16.2,
+          "num": 12,
+          "name": "エガル",
+          "style": "逃",
+          "weight": "464(-2)4.23",
+          "f": 20.0,
+          "fFund": 9.6,
+          "q": 19.3,
           "wUsed": 0.66,
-          "top2": 30.4,
-          "top3": 45.6,
-          "odds": 5.0,
-          "comment": "F:8枠・近走平均7.5着"
+          "top2": 40.1,
+          "top3": 60.2,
+          "odds": 4.2,
+          "comment": "F:馬体-2kg絞り(H:好仕上)"
         },
         {
           "mark": "▲",
           "role": "安定Connector",
+          "num": 3,
+          "name": "ユウユウプレゼンス",
+          "style": "先",
+          "weight": "438(-7)5.54",
+          "f": 16.5,
+          "fFund": 9.6,
+          "q": 14.4,
+          "wUsed": 0.66,
+          "top2": 33.1,
+          "top3": 49.7,
+          "odds": 5.5,
+          "comment": "F:馬体-7kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
           "num": 2,
           "name": "テーオーダムール",
           "style": "先",
-          "weight": "4.12",
-          "f": 14.1,
-          "fFund": 8.0,
-          "q": 20.1,
+          "weight": "528(+8)3.82",
+          "f": 14.6,
+          "fFund": 7.7,
+          "q": 21.5,
           "wUsed": 0.54,
-          "top2": 27.7,
-          "top3": 41.5,
-          "odds": 4.1,
+          "top2": 28.7,
+          "top3": 43.0,
+          "odds": 3.8,
           "comment": "F:ダ2枠上位/芝発(H:減点ソフト上限)"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 12,
-          "name": "エガル",
-          "style": "逃",
-          "weight": "9.24",
-          "f": 10.3,
-          "fFund": 9.0,
-          "q": 8.4,
+          "num": 10,
+          "name": "シヴァシン",
+          "style": "差",
+          "weight": "437(+5)17.66",
+          "f": 6.4,
+          "fFund": 8.0,
+          "q": 4.1,
           "wUsed": 0.66,
-          "top2": 20.7,
-          "top3": 31.1,
-          "odds": 9.2,
-          "comment": "F:8枠・近走平均7.5着"
+          "top2": 12.9,
+          "top3": 19.3,
+          "odds": 17.6,
+          "comment": "F:7枠・近走平均7.5着"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 5,
+          "name": "モナークスラッガー",
+          "style": "差",
+          "weight": "432(-8)20.97",
+          "f": 6.0,
+          "fFund": 8.8,
+          "q": 3.4,
+          "wUsed": 0.66,
+          "top2": 12.1,
+          "top3": 18.2,
+          "odds": 20.9,
+          "comment": "F:馬体-8kg絞り(H:好仕上)"
         },
         {
           "mark": "△",
@@ -1759,47 +2380,15 @@
           "num": 6,
           "name": "ミノリチャン",
           "style": "差",
-          "weight": "9.75",
-          "f": 9.4,
-          "fFund": 8.3,
-          "q": 7.9,
+          "weight": "440(-1)24.28",
+          "f": 5.1,
+          "fFund": 8.0,
+          "q": 2.9,
           "wUsed": 0.66,
-          "top2": 18.9,
-          "top3": 28.4,
-          "odds": 9.7,
+          "top2": 10.3,
+          "top3": 15.4,
+          "odds": 24.2,
           "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 10,
-          "name": "シヴァシン",
-          "style": "差",
-          "weight": "12.57",
-          "f": 7.9,
-          "fFund": 8.3,
-          "q": 6.0,
-          "wUsed": 0.66,
-          "top2": 15.8,
-          "top3": 23.7,
-          "odds": 12.5,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 7,
-          "name": "ルミナヴィクター",
-          "style": "差",
-          "weight": "18.98",
-          "f": 5.9,
-          "fFund": 8.3,
-          "q": 3.9,
-          "wUsed": 0.66,
-          "top2": 11.8,
-          "top3": 17.7,
-          "odds": 18.9,
-          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -1807,31 +2396,31 @@
           "num": 1,
           "name": "ビップルーク",
           "style": "追",
-          "weight": "12.56",
-          "f": 5.3,
-          "fFund": 7.1,
-          "q": 6.0,
+          "weight": "510(+9)8.95",
+          "f": 4.9,
+          "fFund": 6.9,
+          "q": 8.6,
           "wUsed": 0.18,
-          "top2": 10.3,
-          "top3": 15.5,
-          "odds": 12.5,
+          "top2": 9.4,
+          "top3": 14.2,
+          "odds": 8.9,
           "comment": "F:ダ1枠(H:砂被り警戒)"
         },
         {
           "mark": "無",
           "role": "強調材料乏しい",
-          "num": 5,
-          "name": "モナークスラッガー",
+          "num": 7,
+          "name": "ルミナヴィクター",
           "style": "差",
-          "weight": "37.69",
-          "f": 3.6,
-          "fFund": 8.3,
-          "q": 1.8,
+          "weight": "472(+5)47.49",
+          "f": 3.2,
+          "fFund": 8.0,
+          "q": 1.4,
           "wUsed": 0.66,
-          "top2": 7.2,
-          "top3": 10.8,
-          "odds": 37.6,
-          "comment": "F:5枠・近走平均7.5着"
+          "top2": 6.4,
+          "top3": 9.5,
+          "odds": 47.4,
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -1839,14 +2428,14 @@
           "num": 8,
           "name": "ジャガンナート",
           "style": "差",
-          "weight": "56.610",
-          "f": 2.9,
-          "fFund": 9.1,
-          "q": 1.2,
+          "weight": "528(+8)141.810",
+          "f": 1.5,
+          "fFund": 8.8,
+          "q": 0.4,
           "wUsed": 0.66,
-          "top2": 5.7,
-          "top3": 8.6,
-          "odds": 56.6,
+          "top2": 3.1,
+          "top3": 4.6,
+          "odds": 141.8,
           "comment": "F:父:キタサンブラック(H:血統適性)"
         },
         {
@@ -1855,14 +2444,14 @@
           "num": 4,
           "name": "スタークイック",
           "style": "差",
-          "weight": "113.311",
-          "f": 1.6,
-          "fFund": 8.3,
-          "q": 0.6,
+          "weight": "428(+4)280.811",
+          "f": 0.9,
+          "fFund": 8.0,
+          "q": 0.2,
           "wUsed": 0.66,
-          "top2": 3.3,
-          "top3": 4.9,
-          "odds": 113.3,
+          "top2": 1.8,
+          "top3": 2.7,
+          "odds": 280.8,
           "comment": "F:4枠・近走平均7.5着"
         },
         {
@@ -1871,56 +2460,139 @@
           "num": 9,
           "name": "シェナクラウン",
           "style": "差",
-          "weight": "120.812",
-          "f": 1.6,
-          "fFund": 8.3,
-          "q": 0.5,
+          "weight": "506(-2)447.512",
+          "f": 0.7,
+          "fFund": 8.8,
+          "q": 0.1,
           "wUsed": 0.66,
-          "top2": 3.1,
-          "top3": 4.7,
-          "odds": 120.8,
-          "comment": "F:7枠・近走平均7.5着"
+          "top2": 1.4,
+          "top3": 2.0,
+          "odds": 447.5,
+          "comment": "F:馬体-2kg絞り(H:好仕上)"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 51.6,
+      "m3": 56.7,
       "coreConnections": [
         [
-          3,
-          11
-        ],
-        [
-          3,
-          2
+          11,
+          12
         ],
         [
           11,
-          2
+          3
         ],
         [
-          3,
-          12
+          12,
+          3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎3番破綻時は◯11-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和8R(ダ2000m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=51.6%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
-      "coreSyntheticOdds": 0.72,
+      "counterfactualAudit": "◎11番破綻時は◯12-▲3の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和8R(ダ2000m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=56.7%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
+      "coreSyntheticOdds": 0.97,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.72倍<1.35(トリガミ回避)",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 2,
+          "num": 2,
+          "name": "テーオーダムール",
+          "odds": "3.8"
+        },
+        {
+          "rank": "2",
+          "waku": 8,
+          "num": 11,
+          "name": "ペプチドシナノ",
+          "odds": "3.5"
+        },
+        {
+          "rank": "3",
+          "waku": 3,
+          "num": 3,
+          "name": "ユウユウプレゼンス",
+          "odds": "5.5"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              2
+            ],
+            "pay": 380
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              11
+            ],
+            "pay": 760
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              11
+            ],
+            "pay": 320
+          },
+          {
+            "nums": [
+              2,
+              3
+            ],
+            "pay": 320
+          },
+          {
+            "nums": [
+              3,
+              11
+            ],
+            "pay": 370
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              2,
+              11
+            ],
+            "pay": 1750
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              3,
+              11
+            ],
+            "pay": 1200
+          }
+        ]
+      },
+      "maxEv": 0.91,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112709",
@@ -1933,7 +2605,7 @@
       "postTime": "16:35",
       "isNew": false,
       "isGraded": false,
-      "rank": "B",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -1948,34 +2620,34 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
-          "num": 5,
-          "name": "クウレイナニ",
-          "style": "差",
-          "weight": "1.91",
-          "f": 32.4,
-          "fFund": 8.1,
-          "q": 44.6,
+          "num": 4,
+          "name": "タカイチナダル",
+          "style": "先",
+          "weight": "487(-7)2.21",
+          "f": 31.1,
+          "fFund": 9.9,
+          "q": 37.2,
           "wUsed": 0.66,
-          "top2": 64.2,
-          "top3": 96.0,
-          "odds": 1.9,
-          "comment": "F:5枠・近走平均7.5着"
+          "top2": 61.4,
+          "top3": 92.2,
+          "odds": 2.2,
+          "comment": "F:馬体-7kg絞り(H:好仕上) / F:父:ナダル/母父:タ(H:血統適性)"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 4,
-          "name": "タカイチナダル",
-          "style": "先",
-          "weight": "2.62",
-          "f": 27.9,
-          "fFund": 9.1,
-          "q": 31.8,
+          "num": 5,
+          "name": "クウレイナニ",
+          "style": "差",
+          "weight": "483(-3)2.52",
+          "f": 26.3,
+          "fFund": 8.8,
+          "q": 32.4,
           "wUsed": 0.66,
-          "top2": 55.3,
-          "top3": 83.0,
-          "odds": 2.6,
-          "comment": "F:父:ナダル/母父:タ(H:血統適性)"
+          "top2": 52.1,
+          "top3": 78.1,
+          "odds": 2.5,
+          "comment": "F:馬体-3kg絞り(H:好仕上)"
         },
         {
           "mark": "▲",
@@ -1983,14 +2655,14 @@
           "num": 3,
           "name": "カズチャンペ",
           "style": "差",
-          "weight": "8.73",
-          "f": 12.4,
-          "fFund": 9.8,
-          "q": 8.6,
+          "weight": "488(-11)4.53",
+          "f": 18.4,
+          "fFund": 9.7,
+          "q": 17.2,
           "wUsed": 0.66,
-          "top2": 26.3,
-          "top3": 39.4,
-          "odds": 8.7,
+          "top2": 38.9,
+          "top3": 58.4,
+          "odds": 4.5,
           "comment": "F:0.2s差実績(H:巻き返し)"
         },
         {
@@ -1999,15 +2671,31 @@
           "num": 11,
           "name": "ウキヨノメシア",
           "style": "先",
-          "weight": "26.86",
-          "f": 5.6,
-          "fFund": 10.0,
-          "q": 2.6,
+          "weight": "450(-3)20.95",
+          "f": 6.6,
+          "fFund": 11.0,
+          "q": 3.3,
           "wUsed": 0.66,
-          "top2": 11.9,
-          "top3": 17.9,
-          "odds": 26.8,
-          "comment": "F:0.2s差実績(H:巻き返し)"
+          "top2": 14.0,
+          "top3": 21.1,
+          "odds": 20.9,
+          "comment": "F:馬体-3kg絞り(H:好仕上) / F:0.2s差実績(H:巻き返し)"
+        },
+        {
+          "mark": "△",
+          "role": "3列目連下",
+          "num": 12,
+          "name": "スナオナキモチ",
+          "style": "追",
+          "weight": "420(-1)32.17",
+          "f": 4.0,
+          "fFund": 8.0,
+          "q": 2.1,
+          "wUsed": 0.66,
+          "top2": 7.9,
+          "top3": 11.9,
+          "odds": 32.1,
+          "comment": "F:8枠・近走平均7.5着"
         },
         {
           "mark": "△",
@@ -2015,31 +2703,15 @@
           "num": 1,
           "name": "エドノジェット",
           "style": "差",
-          "weight": "25.55",
-          "f": 4.4,
-          "fFund": 7.7,
-          "q": 2.7,
+          "weight": "417(+1)20.04",
+          "f": 3.9,
+          "fFund": 7.6,
+          "q": 3.4,
           "wUsed": 0.18,
-          "top2": 8.3,
-          "top3": 12.4,
-          "odds": 25.5,
+          "top2": 7.4,
+          "top3": 11.1,
+          "odds": 20.0,
           "comment": "F:ダ1枠(H:砂被り警戒) / F:父:シニスターミニス(H:血統適性)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 2,
-          "name": "エクセルブラック",
-          "style": "先",
-          "weight": "14.44",
-          "f": 4.3,
-          "fFund": 7.1,
-          "q": 5.0,
-          "wUsed": 0.18,
-          "top2": 8.2,
-          "top3": 12.3,
-          "odds": 14.4,
-          "comment": "F:ダ2枠(H:砂被り警戒)"
         },
         {
           "mark": "△",
@@ -2047,15 +2719,31 @@
           "num": 9,
           "name": "ゴールドアムレット",
           "style": "差",
-          "weight": "37.57",
-          "f": 3.9,
-          "fFund": 8.1,
-          "q": 1.8,
+          "weight": "472(+16)31.76",
+          "f": 3.6,
+          "fFund": 6.5,
+          "q": 2.1,
           "wUsed": 0.66,
-          "top2": 7.7,
-          "top3": 11.5,
-          "odds": 37.5,
-          "comment": "F:7枠・近走平均7.5着"
+          "top2": 6.6,
+          "top3": 9.9,
+          "odds": 31.7,
+          "comment": "F:馬体+16kg(H:TypeII大幅増)"
+        },
+        {
+          "mark": "無",
+          "role": "強調材料乏しい",
+          "num": 2,
+          "name": "エクセルブラック",
+          "style": "先",
+          "weight": "464(+14)45.28",
+          "f": 2.2,
+          "fFund": 5.7,
+          "q": 1.4,
+          "wUsed": 0.18,
+          "top2": 3.9,
+          "top3": 5.8,
+          "odds": 45.2,
+          "comment": "F:ダ2枠(H:砂被り警戒) / F:馬体+14kg(H:TypeII大幅増)"
         },
         {
           "mark": "無",
@@ -2063,14 +2751,14 @@
           "num": 7,
           "name": "ラグーンプリンセス",
           "style": "追",
-          "weight": "81.98",
-          "f": 2.2,
-          "fFund": 8.1,
-          "q": 0.8,
+          "weight": "462(+5)194.89",
+          "f": 1.1,
+          "fFund": 8.0,
+          "q": 0.3,
           "wUsed": 0.66,
-          "top2": 4.4,
-          "top3": 6.6,
-          "odds": 81.9,
+          "top2": 2.2,
+          "top3": 3.3,
+          "odds": 194.8,
           "comment": "F:6枠・近走平均7.5着"
         },
         {
@@ -2079,47 +2767,15 @@
           "num": 6,
           "name": "ラブリーモンスター",
           "style": "差",
-          "weight": "90.99",
-          "f": 2.1,
-          "fFund": 8.1,
-          "q": 0.7,
+          "weight": "497(+1)203.410",
+          "f": 1.1,
+          "fFund": 8.0,
+          "q": 0.3,
           "wUsed": 0.66,
-          "top2": 4.1,
-          "top3": 6.1,
-          "odds": 90.9,
+          "top2": 2.1,
+          "top3": 3.2,
+          "odds": 203.4,
           "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "超穴抑え上限",
-          "num": 12,
-          "name": "スナオナキモチ",
-          "style": "追",
-          "weight": "94.910",
-          "f": 2.0,
-          "fFund": 8.1,
-          "q": 0.7,
-          "wUsed": 0.66,
-          "top2": 4.0,
-          "top3": 5.9,
-          "odds": 94.9,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "超穴抑え上限",
-          "num": 10,
-          "name": "シンキングレーヴ",
-          "style": "差",
-          "weight": "122.911",
-          "f": 1.7,
-          "fFund": 8.1,
-          "q": 0.5,
-          "wUsed": 0.66,
-          "top2": 3.3,
-          "top3": 4.9,
-          "odds": 122.9,
-          "comment": "F:7枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -2127,40 +2783,151 @@
           "num": 8,
           "name": "セイウンスイート",
           "style": "差",
-          "weight": "183.212",
-          "f": 1.2,
-          "fFund": 8.1,
-          "q": 0.3,
+          "weight": "455(-5)251.911",
+          "f": 1.0,
+          "fFund": 8.8,
+          "q": 0.2,
           "wUsed": 0.66,
-          "top2": 2.5,
-          "top3": 3.7,
-          "odds": 183.2,
-          "comment": "F:6枠・近走平均7.5着"
+          "top2": 1.9,
+          "top3": 2.9,
+          "odds": 251.9,
+          "comment": "F:馬体-5kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 10,
+          "name": "シンキングレーヴ",
+          "style": "差",
+          "weight": "514(+5)358.412",
+          "f": 0.7,
+          "fFund": 8.0,
+          "q": 0.2,
+          "wUsed": 0.66,
+          "top2": 1.4,
+          "top3": 2.1,
+          "odds": 358.4,
+          "comment": "F:7枠・近走平均7.5着"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 72.7,
+      "m3": 75.8,
       "coreConnections": [
         [
-          5,
+          4,
           11
         ],
         [
-          5,
+          4,
           3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 2
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 2,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎5番破綻時は◯4-▲3のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和9R(ダ1500m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.66, M3=72.7%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
-      "coreSyntheticOdds": 1.84
+      "counterfactualAudit": "◎4番破綻時は◯5-▲3の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和9R(ダ1500m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.66, M3=75.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
+      "coreSyntheticOdds": 1.49,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 5,
+          "num": 5,
+          "name": "クウレイナニ",
+          "odds": "2.5"
+        },
+        {
+          "rank": "2",
+          "waku": 3,
+          "num": 3,
+          "name": "カズチャンペ",
+          "odds": "4.5"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 2,
+          "name": "エクセルブラック",
+          "odds": "45.2"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              5
+            ],
+            "pay": 250
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              3,
+              5
+            ],
+            "pay": 700
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              3,
+              5
+            ],
+            "pay": 290
+          },
+          {
+            "nums": [
+              2,
+              5
+            ],
+            "pay": 840
+          },
+          {
+            "nums": [
+              2,
+              3
+            ],
+            "pay": 2110
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              5,
+              3
+            ],
+            "pay": 1290
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              3,
+              5
+            ],
+            "pay": 5080
+          }
+        ]
+      },
+      "maxEv": 1.38,
+      "pivotType": "Pass",
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "actualRoi": 0.0,
+      "isHit": false,
+      "hitTickets": [],
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))"
     },
     {
       "raceId": "202642112710",
@@ -2188,114 +2955,114 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
-          "num": 1,
-          "name": "アルヴァレス",
+          "num": 4,
+          "name": "シトラスフレイバー",
           "style": "先",
-          "weight": "2.61",
-          "f": 18.1,
-          "fFund": 7.6,
-          "q": 33.0,
-          "wUsed": 0.54,
-          "top2": 35.3,
-          "top3": 52.9,
-          "odds": 2.6,
-          "comment": "F:ダ1枠上位/芝発(H:減点ソフト上限)"
+          "weight": "456(-2)3.51",
+          "f": 20.9,
+          "fFund": 9.5,
+          "q": 23.7,
+          "wUsed": 0.66,
+          "top2": 42.2,
+          "top3": 63.2,
+          "odds": 3.5,
+          "comment": "F:馬体-2kg絞り(H:好仕上)"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 10,
-          "name": "ハナチルサト",
-          "style": "先",
-          "weight": "4.62",
-          "f": 16.9,
-          "fFund": 8.5,
-          "q": 17.8,
+          "num": 8,
+          "name": "ドリームファイター",
+          "style": "逃",
+          "weight": "503(+3)4.63",
+          "f": 16.2,
+          "fFund": 8.6,
+          "q": 17.6,
           "wUsed": 0.66,
-          "top2": 33.8,
-          "top3": 50.7,
+          "top2": 32.6,
+          "top3": 48.9,
           "odds": 4.6,
-          "comment": "F:7枠・近走平均7.5着"
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "▲",
           "role": "安定Connector",
+          "num": 1,
+          "name": "アルヴァレス",
+          "style": "先",
+          "weight": "469(+4)4.12",
+          "f": 13.3,
+          "fFund": 7.7,
+          "q": 20.0,
+          "wUsed": 0.54,
+          "top2": 26.2,
+          "top3": 39.3,
+          "odds": 4.1,
+          "comment": "F:ダ1枠上位/芝発(H:減点ソフト上限)"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
           "num": 11,
           "name": "フクチャンキング",
           "style": "差",
-          "weight": "6.43",
-          "f": 13.5,
-          "fFund": 8.7,
-          "q": 12.5,
+          "weight": "543(-7)6.94",
+          "f": 13.0,
+          "fFund": 9.7,
+          "q": 11.4,
           "wUsed": 0.66,
-          "top2": 27.0,
-          "top3": 40.5,
-          "odds": 6.4,
-          "comment": "F:父:マインドユアビス(H:血統適性)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 4,
-          "name": "シトラスフレイバー",
-          "style": "先",
-          "weight": "6.54",
-          "f": 13.2,
-          "fFund": 8.5,
-          "q": 12.3,
-          "wUsed": 0.66,
-          "top2": 26.4,
-          "top3": 39.6,
-          "odds": 6.5,
-          "comment": "F:4枠・近走平均7.5着"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 12,
-          "name": "ジュンゴールド",
-          "style": "追",
-          "weight": "14.16",
-          "f": 8.7,
-          "fFund": 10.6,
-          "q": 5.3,
-          "wUsed": 0.66,
-          "top2": 18.6,
-          "top3": 28.0,
-          "odds": 14.1,
-          "comment": "F:0.2s差実績(H:巻き返し) / F:父:エピファネイア/(H:血統適性)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 8,
-          "name": "ドリームファイター",
-          "style": "逃",
-          "weight": "11.45",
-          "f": 8.8,
-          "fFund": 8.5,
-          "q": 6.7,
-          "wUsed": 0.66,
-          "top2": 17.7,
-          "top3": 26.6,
-          "odds": 11.4,
-          "comment": "F:6枠・近走平均7.5着"
+          "top2": 26.3,
+          "top3": 39.4,
+          "odds": 6.9,
+          "comment": "F:馬体-7kg絞り(H:好仕上) / F:父:マインドユアビス(H:血統適性)"
         },
         {
           "mark": "△",
           "role": "3列目連下",
-          "num": 3,
-          "name": "ブレイジングヒート",
-          "style": "追",
-          "weight": "19.68",
-          "f": 6.1,
-          "fFund": 8.7,
-          "q": 3.7,
+          "num": 10,
+          "name": "ハナチルサト",
+          "style": "先",
+          "weight": "454(-1)7.15",
+          "f": 11.9,
+          "fFund": 8.6,
+          "q": 11.0,
           "wUsed": 0.66,
-          "top2": 12.2,
-          "top3": 18.2,
-          "odds": 19.6,
-          "comment": "F:父:シニスターミニス(H:血統適性)"
+          "top2": 23.9,
+          "top3": 35.9,
+          "odds": 7.1,
+          "comment": "F:7枠・近走平均7.5着"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 6,
+          "name": "サンリコリス",
+          "style": "追",
+          "weight": "466(-3)25.88",
+          "f": 4.8,
+          "fFund": 8.7,
+          "q": 2.7,
+          "wUsed": 0.66,
+          "top2": 9.6,
+          "top3": 14.4,
+          "odds": 25.8,
+          "comment": "F:馬体-3kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "△",
+          "role": "3列目連下",
+          "num": 7,
+          "name": "デアシュトゥルム",
+          "style": "逃",
+          "weight": "489(+4)25.89",
+          "f": 4.7,
+          "fFund": 8.6,
+          "q": 2.7,
+          "wUsed": 0.66,
+          "top2": 9.5,
+          "top3": 14.3,
+          "odds": 25.8,
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -2303,47 +3070,47 @@
           "num": 2,
           "name": "ネライウチ",
           "style": "差",
-          "weight": "18.07",
-          "f": 4.6,
+          "weight": "496(+4)14.26",
+          "f": 4.7,
           "fFund": 6.8,
-          "q": 4.1,
+          "q": 5.2,
           "wUsed": 0.18,
-          "top2": 8.9,
-          "top3": 13.4,
-          "odds": 18.0,
+          "top2": 9.1,
+          "top3": 13.7,
+          "odds": 14.2,
           "comment": "F:ダ2枠(H:砂被り警戒)"
         },
         {
           "mark": "無",
           "role": "強調材料乏しい",
-          "num": 6,
-          "name": "サンリコリス",
+          "num": 3,
+          "name": "ブレイジングヒート",
           "style": "追",
-          "weight": "35.49",
-          "f": 3.7,
-          "fFund": 7.8,
-          "q": 2.0,
+          "weight": "480(+10)22.07",
+          "f": 4.7,
+          "fFund": 7.2,
+          "q": 3.3,
           "wUsed": 0.66,
-          "top2": 7.5,
-          "top3": 11.2,
-          "odds": 35.4,
-          "comment": "F:5枠・近走平均7.5着"
+          "top2": 8.9,
+          "top3": 13.4,
+          "odds": 22.0,
+          "comment": "F:馬体+10kg(H:TypeII大幅増) / F:父:シニスターミニス(H:血統適性)"
         },
         {
           "mark": "無",
           "role": "強調材料乏しい",
-          "num": 7,
-          "name": "デアシュトゥルム",
-          "style": "逃",
-          "weight": "43.410",
+          "num": 12,
+          "name": "ジュンゴールド",
+          "style": "追",
+          "weight": "505(+28)41.910",
           "f": 3.4,
-          "fFund": 8.5,
+          "fFund": 8.7,
           "q": 1.6,
           "wUsed": 0.66,
           "top2": 6.8,
           "top3": 10.2,
-          "odds": 43.4,
-          "comment": "F:6枠・近走平均7.5着"
+          "odds": 41.9,
+          "comment": "F:馬体+28kg(H:TypeII大幅増) / F:0.2s差実績(H:巻き返し) / F"
         },
         {
           "mark": "無",
@@ -2351,14 +3118,14 @@
           "num": 9,
           "name": "アイグレース",
           "style": "差",
-          "weight": "97.011",
-          "f": 1.8,
-          "fFund": 7.8,
-          "q": 0.7,
+          "weight": "455(+7)160.211",
+          "f": 1.2,
+          "fFund": 7.9,
+          "q": 0.4,
           "wUsed": 0.66,
-          "top2": 3.7,
-          "top3": 5.5,
-          "odds": 97.0,
+          "top2": 2.5,
+          "top3": 3.7,
+          "odds": 160.2,
           "comment": "F:7枠・近走平均7.5着"
         },
         {
@@ -2367,56 +3134,139 @@
           "num": 5,
           "name": "メロスゴー",
           "style": "差",
-          "weight": "213.912",
-          "f": 1.0,
-          "fFund": 7.8,
-          "q": 0.3,
+          "weight": "487(+8)165.612",
+          "f": 1.2,
+          "fFund": 7.9,
+          "q": 0.4,
           "wUsed": 0.66,
-          "top2": 2.1,
-          "top3": 3.1,
-          "odds": 213.9,
+          "top2": 2.4,
+          "top3": 3.6,
+          "odds": 165.6,
           "comment": "F:5枠・近走平均7.5着"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 48.5,
+      "m3": 50.4,
       "coreConnections": [
         [
-          1,
-          10
+          4,
+          8
         ],
         [
-          1,
-          11
+          4,
+          1
         ],
         [
-          10,
-          11
-        ],
-        [
-          1,
-          4
+          8,
+          1
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎1番破綻時は◯10-▲11のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和10R(ダ1500m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=48.5%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
-      "coreSyntheticOdds": 0.71,
+      "counterfactualAudit": "◎4番破綻時は◯8-▲1の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和10R(ダ1500m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=50.4%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
+      "coreSyntheticOdds": 0.9,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.71倍<1.35(トリガミ回避)",
+      "passReason": "Core合成0.9倍<1.52(高期待値基準未達)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 1,
+          "num": 1,
+          "name": "アルヴァレス",
+          "odds": "4.1"
+        },
+        {
+          "rank": "2",
+          "waku": 6,
+          "num": 7,
+          "name": "デアシュトゥルム",
+          "odds": "25.8"
+        },
+        {
+          "rank": "3",
+          "waku": 4,
+          "num": 4,
+          "name": "シトラスフレイバー",
+          "odds": "3.5"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              1
+            ],
+            "pay": 410
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              1,
+              7
+            ],
+            "pay": 4450
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              1,
+              7
+            ],
+            "pay": 2110
+          },
+          {
+            "nums": [
+              1,
+              4
+            ],
+            "pay": 280
+          },
+          {
+            "nums": [
+              4,
+              7
+            ],
+            "pay": 1720
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              1,
+              7
+            ],
+            "pay": 10360
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              1,
+              4,
+              7
+            ],
+            "pay": 5260
+          }
+        ]
+      },
+      "maxEv": 0.9,
+      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.52(高期待値基準未達))"
     },
     {
       "raceId": "202642112711",
@@ -2447,63 +3297,47 @@
           "num": 11,
           "name": "エアポートライナー",
           "style": "逃",
-          "weight": "3.32",
-          "f": 25.2,
-          "fFund": 9.6,
-          "q": 25.1,
+          "weight": "598(+3)2.82",
+          "f": 28.4,
+          "fFund": 9.5,
+          "q": 29.0,
           "wUsed": 0.66,
-          "top2": 55.2,
-          "top3": 82.8,
-          "odds": 3.3,
+          "top2": 62.1,
+          "top3": 93.1,
+          "odds": 2.8,
           "comment": "F:0.2s差実績(H:巻き返し) / F:笹川翼騎手(H:Top騎手)"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 2,
-          "name": "サトノフェニックス",
-          "style": "差",
-          "weight": "2.51",
-          "f": 17.5,
-          "fFund": 6.6,
-          "q": 33.8,
-          "wUsed": 0.54,
-          "top2": 32.7,
-          "top3": 49.1,
-          "odds": 2.5,
-          "comment": "F:ダ2枠上位/芝発(H:減点ソフト上限) / F:父:ヘニーヒューズ/(H:血統適性)"
+          "num": 3,
+          "name": "ブラックエックス",
+          "style": "先",
+          "weight": "525(-3)4.43",
+          "f": 19.6,
+          "fFund": 8.8,
+          "q": 17.8,
+          "wUsed": 0.66,
+          "top2": 39.9,
+          "top3": 59.8,
+          "odds": 4.4,
+          "comment": "F:馬体-3kg絞り(H:好仕上) / F:0.2s差実績(H:巻き返し)"
         },
         {
           "mark": "▲",
           "role": "安定Connector",
-          "num": 3,
-          "name": "ブラックエックス",
-          "style": "先",
-          "weight": "5.73",
-          "f": 15.3,
-          "fFund": 8.0,
-          "q": 13.9,
-          "wUsed": 0.66,
-          "top2": 31.1,
-          "top3": 46.7,
-          "odds": 5.7,
-          "comment": "F:0.2s差実績(H:巻き返し)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 14,
-          "name": "トノパー",
-          "style": "先",
-          "weight": "9.84",
-          "f": 9.1,
+          "num": 2,
+          "name": "サトノフェニックス",
+          "style": "差",
+          "weight": "523(0)2.41",
+          "f": 17.5,
           "fFund": 6.6,
-          "q": 7.7,
-          "wUsed": 0.66,
-          "top2": 17.5,
-          "top3": 26.2,
-          "odds": 9.8,
-          "comment": "F:8枠・近走平均7.5着"
+          "q": 34.2,
+          "wUsed": 0.54,
+          "top2": 32.5,
+          "top3": 48.8,
+          "odds": 2.4,
+          "comment": "F:ダ2枠上位/芝発(H:減点ソフト上限) / F:父:ヘニーヒューズ/(H:血統適性)"
         },
         {
           "mark": "☆",
@@ -2511,95 +3345,79 @@
           "num": 4,
           "name": "ドレッド",
           "style": "差",
-          "weight": "18.56",
-          "f": 6.3,
+          "weight": "470(+1)9.64",
+          "f": 10.1,
           "fFund": 7.4,
-          "q": 3.9,
+          "q": 7.7,
           "wUsed": 0.66,
-          "top2": 12.0,
-          "top3": 18.0,
-          "odds": 18.5,
+          "top2": 19.2,
+          "top3": 28.8,
+          "odds": 9.6,
           "comment": "F:父:ドレフォン/母父(H:血統適性)"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 6,
-          "name": "オニアシ",
-          "style": "差",
-          "weight": "24.29",
-          "f": 5.4,
-          "fFund": 8.0,
-          "q": 2.9,
+          "num": 14,
+          "name": "トノパー",
+          "style": "先",
+          "weight": "519(-9)19.85",
+          "f": 5.6,
+          "fFund": 6.5,
+          "q": 3.5,
           "wUsed": 0.66,
-          "top2": 11.3,
-          "top3": 17.0,
-          "odds": 24.2,
-          "comment": "F:御神本訓騎手(H:Top騎手)"
+          "top2": 10.6,
+          "top3": 15.9,
+          "odds": 19.8,
+          "comment": "F:8枠・近走平均7.5着"
         },
         {
           "mark": "△",
           "role": "3列目連下",
-          "num": 12,
-          "name": "スペンサーバローズ",
-          "style": "差",
-          "weight": "21.57",
-          "f": 5.3,
-          "fFund": 6.7,
-          "q": 3.3,
-          "wUsed": 0.66,
-          "top2": 10.1,
-          "top3": 15.2,
-          "odds": 21.5,
-          "comment": "F:7枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 10,
-          "name": "ケンキートス",
-          "style": "先",
-          "weight": "22.58",
-          "f": 5.1,
-          "fFund": 6.6,
-          "q": 3.2,
-          "wUsed": 0.66,
-          "top2": 9.7,
-          "top3": 14.5,
-          "odds": 22.5,
-          "comment": "F:6枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
           "num": 1,
           "name": "リョウタスペシャル",
           "style": "先",
-          "weight": "17.75",
-          "f": 4.1,
-          "fFund": 6.3,
-          "q": 4.1,
+          "weight": "440(-1)35.96",
+          "f": 3.2,
+          "fFund": 6.2,
+          "q": 1.8,
           "wUsed": 0.18,
-          "top2": 7.5,
-          "top3": 11.3,
-          "odds": 17.7,
+          "top2": 5.8,
+          "top3": 8.7,
+          "odds": 35.9,
           "comment": "F:ダ1枠(H:砂被り警戒) / F:父:シニスターミニス(H:血統適性)"
+        },
+        {
+          "mark": "△",
+          "role": "3列目連下",
+          "num": 6,
+          "name": "オニアシ",
+          "style": "差",
+          "weight": "474(+18)38.87",
+          "f": 3.4,
+          "fFund": 6.5,
+          "q": 1.7,
+          "wUsed": 0.66,
+          "top2": 6.7,
+          "top3": 10.0,
+          "odds": 38.8,
+          "comment": "F:馬体+18kg(H:TypeII大幅増) / F:御神本訓騎手(H:Top騎手)"
         },
         {
           "mark": "無",
           "role": "超穴抑え上限",
-          "num": 13,
-          "name": "スタンリーテソーロ",
-          "style": "逃",
-          "weight": "87.610",
-          "f": 1.9,
-          "fFund": 6.6,
-          "q": 0.7,
+          "num": 10,
+          "name": "ケンキートス",
+          "style": "先",
+          "weight": "507(-17)53.28",
+          "f": 2.8,
+          "fFund": 6.5,
+          "q": 1.2,
           "wUsed": 0.66,
-          "top2": 3.7,
-          "top3": 5.5,
-          "odds": 87.6,
-          "comment": "F:8枠・近走平均7.5着"
+          "top2": 5.2,
+          "top3": 7.9,
+          "odds": 53.2,
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -2607,15 +3425,47 @@
           "num": 9,
           "name": "ラブリービュー",
           "style": "先",
-          "weight": "97.211",
+          "weight": "494(0)54.39",
+          "f": 2.7,
+          "fFund": 6.5,
+          "q": 1.2,
+          "wUsed": 0.66,
+          "top2": 5.2,
+          "top3": 7.7,
+          "odds": 54.3,
+          "comment": "F:6枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 13,
+          "name": "スタンリーテソーロ",
+          "style": "逃",
+          "weight": "436(-3)82.210",
+          "f": 2.1,
+          "fFund": 7.2,
+          "q": 0.8,
+          "wUsed": 0.66,
+          "top2": 4.1,
+          "top3": 6.1,
+          "odds": 82.2,
+          "comment": "F:馬体-3kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 12,
+          "name": "スペンサーバローズ",
+          "style": "差",
+          "weight": "483(-3)107.411",
           "f": 1.8,
-          "fFund": 6.6,
+          "fFund": 7.4,
           "q": 0.6,
           "wUsed": 0.66,
           "top2": 3.4,
           "top3": 5.1,
-          "odds": 97.2,
-          "comment": "F:6枠・近走平均7.5着"
+          "odds": 107.4,
+          "comment": "F:馬体-3kg絞り(H:好仕上)"
         },
         {
           "mark": "無",
@@ -2623,31 +3473,15 @@
           "num": 8,
           "name": "タイムモーメント",
           "style": "差",
-          "weight": "173.412",
+          "weight": "499(+6)172.712",
           "f": 1.2,
           "fFund": 6.7,
           "q": 0.3,
           "wUsed": 0.66,
           "top2": 2.3,
           "top3": 3.4,
-          "odds": 173.4,
+          "odds": 172.7,
           "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "超穴抑え上限",
-          "num": 7,
-          "name": "シュガーコルト",
-          "style": "差",
-          "weight": "250.613",
-          "f": 1.0,
-          "fFund": 7.4,
-          "q": 0.2,
-          "wUsed": 0.66,
-          "top2": 1.9,
-          "top3": 2.8,
-          "odds": 250.6,
-          "comment": "F:父:ヘニーヒューズ/(H:血統適性)"
         },
         {
           "mark": "無",
@@ -2655,56 +3489,155 @@
           "num": 5,
           "name": "エリンアキレウス",
           "style": "差",
-          "weight": "287.814",
-          "f": 0.8,
+          "weight": "557(+5)224.613",
+          "f": 1.0,
           "fFund": 6.7,
-          "q": 0.2,
+          "q": 0.3,
           "wUsed": 0.66,
-          "top2": 1.6,
-          "top3": 2.4,
-          "odds": 287.8,
+          "top2": 1.9,
+          "top3": 2.9,
+          "odds": 224.6,
           "comment": "F:4枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 7,
+          "name": "シュガーコルト",
+          "style": "差",
+          "weight": "526(+5)510.614",
+          "f": 0.6,
+          "fFund": 7.4,
+          "q": 0.1,
+          "wUsed": 0.66,
+          "top2": 1.1,
+          "top3": 1.7,
+          "odds": 510.6,
+          "comment": "F:父:ヘニーヒューズ/(H:血統適性)"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 58.0,
+      "m3": 65.5,
       "coreConnections": [
+        [
+          11,
+          3
+        ],
         [
           11,
           2
         ],
         [
-          11,
-          3
-        ],
-        [
-          2,
-          3
-        ],
-        [
-          11,
-          14
+          3,
+          2
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎11番破綻時は◯2-▲3のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和11R(ダ1400m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.66, M3=58.0%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全14頭を厳密演算。",
-      "coreSyntheticOdds": 0.67,
+      "counterfactualAudit": "◎11番破綻時は◯3-▲2の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和11R(ダ1400m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.66, M3=65.5%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全14頭を厳密演算。",
+      "coreSyntheticOdds": 0.69,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.67倍<1.35(トリガミ回避)",
+      "passReason": "Core合成0.69倍<1.52(高期待値基準未達)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 4,
+          "num": 6,
+          "name": "オニアシ",
+          "odds": "38.8"
+        },
+        {
+          "rank": "2",
+          "waku": 3,
+          "num": 4,
+          "name": "ドレッド",
+          "odds": "9.6"
+        },
+        {
+          "rank": "3",
+          "waku": 7,
+          "num": 11,
+          "name": "エアポートライナー",
+          "odds": "2.8"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              6
+            ],
+            "pay": 3880
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              4,
+              6
+            ],
+            "pay": 8400
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              4,
+              6
+            ],
+            "pay": 2300
+          },
+          {
+            "nums": [
+              6,
+              11
+            ],
+            "pay": 890
+          },
+          {
+            "nums": [
+              4,
+              11
+            ],
+            "pay": 460
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              6,
+              4
+            ],
+            "pay": 20670
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              4,
+              6,
+              11
+            ],
+            "pay": 6380
+          }
+        ]
+      },
+      "maxEv": 0.97,
+      "resultStatus": "💤 見送りPass (Core合成0.69倍<1.52(高期待値基準未達))"
     },
     {
       "raceId": "202642112712",
@@ -2732,98 +3665,98 @@
         {
           "mark": "◎",
           "role": "最安定Top-3軸",
-          "num": 8,
-          "name": "サヨノゴーステッド",
-          "style": "追",
-          "weight": "2.91",
-          "f": 20.8,
-          "fFund": 8.3,
-          "q": 29.5,
-          "wUsed": 0.66,
-          "top2": 41.4,
-          "top3": 62.0,
-          "odds": 2.9,
-          "comment": "F:6枠・近走平均7.5着"
+          "num": 2,
+          "name": "フリューゲルクー",
+          "style": "逃",
+          "weight": "438(-6)2.61",
+          "f": 23.0,
+          "fFund": 10.7,
+          "q": 32.5,
+          "wUsed": 0.54,
+          "top2": 47.9,
+          "top3": 71.9,
+          "odds": 2.6,
+          "comment": "F:ダ2枠上位/芝発(H:減点ソフト上限) / F:馬体-6kg絞り(H:好仕上) / F:"
         },
         {
           "mark": "◯",
           "role": "融合上位強制結線",
-          "num": 7,
-          "name": "ムルーデ",
-          "style": "逃",
-          "weight": "4.82",
-          "f": 14.4,
-          "fFund": 8.1,
-          "q": 17.1,
+          "num": 12,
+          "name": "メイショウフソウ",
+          "style": "先",
+          "weight": "506(+8)4.62",
+          "f": 15.6,
+          "fFund": 8.0,
+          "q": 17.5,
           "wUsed": 0.66,
-          "top2": 28.5,
-          "top3": 42.7,
-          "odds": 4.8,
-          "comment": "F:6枠・近走平均7.5着"
+          "top2": 31.2,
+          "top3": 46.8,
+          "odds": 4.6,
+          "comment": "F:8枠・近走平均7.5着"
         },
         {
           "mark": "▲",
           "role": "安定Connector",
-          "num": 2,
-          "name": "フリューゲルクー",
+          "num": 7,
+          "name": "ムルーデ",
           "style": "逃",
-          "weight": "6.84",
-          "f": 13.5,
-          "fFund": 10.9,
-          "q": 11.7,
+          "weight": "454(+3)6.04",
+          "f": 12.9,
+          "fFund": 8.0,
+          "q": 13.2,
           "wUsed": 0.66,
-          "top2": 28.7,
-          "top3": 43.0,
-          "odds": 6.8,
-          "comment": "F:0.2s差実績(H:巻き返し) / F:父:シニスターミニス(H:血統適性)"
+          "top2": 25.8,
+          "top3": 38.7,
+          "odds": 6.0,
+          "comment": "F:6枠・近走平均7.5着"
         },
         {
           "mark": "☆",
           "role": "展開・連勝特注穴",
-          "num": 12,
-          "name": "メイショウフソウ",
-          "style": "先",
-          "weight": "5.73",
-          "f": 12.7,
-          "fFund": 8.1,
-          "q": 14.2,
-          "wUsed": 0.66,
-          "top2": 25.2,
-          "top3": 37.8,
-          "odds": 5.7,
-          "comment": "F:8枠・近走平均7.5着"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
           "num": 5,
           "name": "ゴッドトレジャー",
           "style": "差",
-          "weight": "7.95",
-          "f": 10.2,
-          "fFund": 8.3,
-          "q": 10.0,
+          "weight": "531(+11)5.13",
+          "f": 13.0,
+          "fFund": 6.7,
+          "q": 15.7,
           "wUsed": 0.66,
-          "top2": 20.2,
-          "top3": 30.4,
-          "odds": 7.9,
-          "comment": "F:5枠・近走平均7.5着"
+          "top2": 24.3,
+          "top3": 36.5,
+          "odds": 5.1,
+          "comment": "F:馬体+11kg(H:TypeII大幅増)"
         },
         {
-          "mark": "△",
-          "role": "3列目連下",
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
+          "num": 8,
+          "name": "サヨノゴーステッド",
+          "style": "追",
+          "weight": "542(-2)9.95",
+          "f": 9.7,
+          "fFund": 9.1,
+          "q": 7.7,
+          "wUsed": 0.66,
+          "top2": 19.5,
+          "top3": 29.3,
+          "odds": 9.9,
+          "comment": "F:馬体-2kg絞り(H:好仕上)"
+        },
+        {
+          "mark": "☆",
+          "role": "展開・連勝特注穴",
           "num": 11,
           "name": "レッドゲート",
           "style": "差",
-          "weight": "12.66",
-          "f": 7.3,
-          "fFund": 8.3,
-          "q": 6.0,
+          "weight": "430(-3)12.96",
+          "f": 8.1,
+          "fFund": 9.1,
+          "q": 5.8,
           "wUsed": 0.66,
-          "top2": 14.5,
-          "top3": 21.8,
-          "odds": 12.6,
-          "comment": "F:8枠・近走平均7.5着"
+          "top2": 16.2,
+          "top3": 24.2,
+          "odds": 12.9,
+          "comment": "F:馬体-3kg絞り(H:好仕上)"
         },
         {
           "mark": "△",
@@ -2831,47 +3764,15 @@
           "num": 4,
           "name": "ビーチガール",
           "style": "追",
-          "weight": "24.27",
-          "f": 4.6,
-          "fFund": 8.3,
-          "q": 3.0,
+          "weight": "463(-1)34.37",
+          "f": 3.8,
+          "fFund": 8.2,
+          "q": 2.0,
           "wUsed": 0.66,
-          "top2": 9.1,
-          "top3": 13.7,
-          "odds": 24.2,
+          "top2": 7.6,
+          "top3": 11.3,
+          "odds": 34.3,
           "comment": "F:4枠・近走平均7.5着"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 1,
-          "name": "ユウオウマイシン",
-          "style": "先",
-          "weight": "41.510",
-          "f": 4.0,
-          "fFund": 7.0,
-          "q": 1.7,
-          "wUsed": 0.18,
-          "top2": 7.7,
-          "top3": 11.5,
-          "odds": 41.5,
-          "comment": "F:ダ1枠(H:砂被り警戒)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 6,
-          "name": "ビリーヴィン",
-          "style": "先",
-          "weight": "30.08",
-          "f": 3.9,
-          "fFund": 8.1,
-          "q": 2.4,
-          "wUsed": 0.66,
-          "top2": 7.7,
-          "top3": 11.6,
-          "odds": 30.0,
-          "comment": "F:5枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -2879,31 +3780,63 @@
           "num": 9,
           "name": "ジオヴィグラス",
           "style": "追",
-          "weight": "36.39",
+          "weight": "467(-5)43.48",
           "f": 3.4,
-          "fFund": 8.3,
-          "q": 1.9,
+          "fFund": 9.1,
+          "q": 1.6,
           "wUsed": 0.66,
           "top2": 6.8,
           "top3": 10.2,
-          "odds": 36.3,
-          "comment": "F:7枠・近走平均7.5着"
+          "odds": 43.4,
+          "comment": "F:馬体-5kg絞り(H:好仕上)"
         },
         {
-          "mark": "消",
-          "role": "時計・展開劣勢",
+          "mark": "無",
+          "role": "強調材料乏しい",
           "num": 3,
           "name": "テンダリー",
           "style": "先",
-          "weight": "48.111",
-          "f": 2.8,
-          "fFund": 8.1,
-          "q": 1.4,
+          "weight": "515(+2)49.59",
+          "f": 2.9,
+          "fFund": 8.0,
+          "q": 1.3,
           "wUsed": 0.66,
-          "top2": 5.5,
-          "top3": 8.3,
-          "odds": 48.1,
+          "top2": 5.7,
+          "top3": 8.6,
+          "odds": 49.5,
           "comment": "F:3枠・近走平均7.5着"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 1,
+          "name": "ユウオウマイシン",
+          "style": "先",
+          "weight": "467(0)59.511",
+          "f": 3.6,
+          "fFund": 6.9,
+          "q": 1.1,
+          "wUsed": 0.18,
+          "top2": 6.8,
+          "top3": 10.3,
+          "odds": 59.5,
+          "comment": "F:ダ1枠(H:砂被り警戒)"
+        },
+        {
+          "mark": "無",
+          "role": "超穴抑え上限",
+          "num": 6,
+          "name": "ビリーヴィン",
+          "style": "先",
+          "weight": "522(+7)51.410",
+          "f": 2.8,
+          "fFund": 8.0,
+          "q": 1.3,
+          "wUsed": 0.66,
+          "top2": 5.6,
+          "top3": 8.4,
+          "odds": 51.4,
+          "comment": "F:5枠・近走平均7.5着"
         },
         {
           "mark": "無",
@@ -2911,64 +3844,147 @@
           "num": 10,
           "name": "ニシノアヤカゼ",
           "style": "差",
-          "weight": "62.212",
-          "f": 2.3,
-          "fFund": 8.3,
-          "q": 1.1,
+          "weight": "493(-1)156.912",
+          "f": 1.3,
+          "fFund": 8.2,
+          "q": 0.4,
           "wUsed": 0.66,
-          "top2": 4.7,
-          "top3": 7.0,
-          "odds": 62.2,
+          "top2": 2.6,
+          "top3": 3.8,
+          "odds": 156.9,
           "comment": "F:7枠・近走平均7.5着"
         }
       ],
       "wR": 0.66,
       "hasLiveOdds": true,
-      "m3": 48.7,
+      "m3": 51.6,
       "coreConnections": [
         [
-          8,
+          2,
+          12
+        ],
+        [
+          2,
           7
         ],
         [
-          8,
-          2
-        ],
-        [
-          7,
-          2
-        ],
-        [
-          8,
-          12
+          12,
+          7
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.75,
-        "dutchTargetReturn": 11800,
-        "singleLongshotCapPct": 0.3,
-        "coreLineCap": 4
+        "coreRatio": 0.55,
+        "alphaRatio": 0.45,
+        "coreLineCap": 3,
+        "singleLongshotCapPct": 0.3
       },
-      "counterfactualAudit": "◎8番破綻時は◯7-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "hit_rate_max",
-      "scenario": "浦和12R(ダ2000m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.66, M3=48.7%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
-      "coreSyntheticOdds": 0.74,
+      "counterfactualAudit": "◎2番破綻時は◯12-▲7の防衛線カバー。",
+      "strategyProfile": "roi_100_plus",
+      "scenario": "浦和12R(ダ2000m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.66, M3=51.6%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
+      "coreSyntheticOdds": 0.9,
       "pivotType": "Pass",
-      "passReason": "Core合成オッズ0.74倍<1.35(トリガミ回避)",
+      "passReason": "Core合成0.9倍<1.52(高期待値基準未達)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "weightsAnnounced": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 6,
+          "num": 8,
+          "name": "サヨノゴーステッド",
+          "odds": "9.9"
+        },
+        {
+          "rank": "2",
+          "waku": 3,
+          "num": 3,
+          "name": "テンダリー",
+          "odds": "49.5"
+        },
+        {
+          "rank": "3",
+          "waku": 2,
+          "num": 2,
+          "name": "フリューゲルクー",
+          "odds": "2.6"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              8
+            ],
+            "pay": 990
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              3,
+              8
+            ],
+            "pay": 10360
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              3,
+              8
+            ],
+            "pay": 2630
+          },
+          {
+            "nums": [
+              2,
+              8
+            ],
+            "pay": 470
+          },
+          {
+            "nums": [
+              2,
+              3
+            ],
+            "pay": 1590
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              8,
+              3
+            ],
+            "pay": 15870
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              3,
+              8
+            ],
+            "pay": 6600
+          }
+        ]
+      },
+      "maxEv": 0.77,
+      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.52(高期待値基準未達))"
     }
   ],
   "multiLeg": {
     "predicted": true,
     "aiPredicted": false,
     "date": "2026-11-27",
-    "engineVer": "v11.5-neon",
-    "summary": "【2026-11-27 Neon v11.5 2-Stage融合編成（南関トリプル馬単50円単位）】",
+    "engineVer": "v11.6-neon",
+    "summary": "【2026-11-27 Neon v11.6 2-Stage融合編成（南関トリプル馬単50円単位）】",
     "legs": [
       {
         "leg": 1,
@@ -2979,72 +3995,102 @@
         "postTime": "17:10",
         "wR": 0.66,
         "typeBPlus": true,
-        "note": "浦和10R(ダ1500m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=48.",
+        "note": "浦和10R(ダ1500m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=50.",
         "horses": [
-          {
-            "num": 1,
-            "name": "アルヴァレス",
-            "f": 18.1,
-            "fFund": 7.6,
-            "q": 33.0,
-            "odds": 2.6,
-            "note": "F:ダ1枠上位/芝発(H:減点ソフト上限)"
-          },
-          {
-            "num": 10,
-            "name": "ハナチルサト",
-            "f": 16.9,
-            "fFund": 8.5,
-            "q": 17.8,
-            "odds": 4.6,
-            "note": "F:7枠・近走平均7.5着"
-          },
-          {
-            "num": 11,
-            "name": "フクチャンキング",
-            "f": 13.5,
-            "fFund": 8.7,
-            "q": 12.5,
-            "odds": 6.4,
-            "note": "F:父:マインドユアビス(H:血統適性)"
-          },
           {
             "num": 4,
             "name": "シトラスフレイバー",
-            "f": 13.2,
-            "fFund": 8.5,
-            "q": 12.3,
-            "odds": 6.5,
-            "note": "F:4枠・近走平均7.5着"
+            "f": 20.9,
+            "fFund": 9.5,
+            "q": 23.7,
+            "odds": 3.5,
+            "note": "F:馬体-2kg絞り(H:好仕上)"
           },
           {
             "num": 8,
             "name": "ドリームファイター",
-            "f": 8.8,
-            "fFund": 8.5,
-            "q": 6.7,
-            "odds": 11.4,
+            "f": 16.2,
+            "fFund": 8.6,
+            "q": 17.6,
+            "odds": 4.6,
             "note": "F:6枠・近走平均7.5着"
           },
           {
-            "num": 12,
-            "name": "ジュンゴールド",
-            "f": 8.7,
-            "fFund": 10.6,
-            "q": 5.3,
-            "odds": 14.1,
-            "note": "F:0.2s差実績(H:巻き返し) / F:父:エピファネイア/(H"
+            "num": 1,
+            "name": "アルヴァレス",
+            "f": 13.3,
+            "fFund": 7.7,
+            "q": 20.0,
+            "odds": 4.1,
+            "note": "F:ダ1枠上位/芝発(H:減点ソフト上限)"
           },
           {
-            "num": 3,
-            "name": "ブレイジングヒート",
-            "f": 6.1,
+            "num": 11,
+            "name": "フクチャンキング",
+            "f": 13.0,
+            "fFund": 9.7,
+            "q": 11.4,
+            "odds": 6.9,
+            "note": "F:馬体-7kg絞り(H:好仕上) / F:父:マインドユアビス(H"
+          },
+          {
+            "num": 10,
+            "name": "ハナチルサト",
+            "f": 11.9,
+            "fFund": 8.6,
+            "q": 11.0,
+            "odds": 7.1,
+            "note": "F:7枠・近走平均7.5着"
+          },
+          {
+            "num": 6,
+            "name": "サンリコリス",
+            "f": 4.8,
             "fFund": 8.7,
-            "q": 3.7,
-            "odds": 19.6,
-            "note": "F:父:シニスターミニス(H:血統適性)"
+            "q": 2.7,
+            "odds": 25.8,
+            "note": "F:馬体-3kg絞り(H:好仕上)"
+          },
+          {
+            "num": 7,
+            "name": "デアシュトゥルム",
+            "f": 4.7,
+            "fFund": 8.6,
+            "q": 2.7,
+            "odds": 25.8,
+            "note": "F:6枠・近走平均7.5着"
           }
-        ]
+        ],
+        "actualTop3": [
+          {
+            "rank": "1",
+            "waku": 1,
+            "num": 1,
+            "name": "アルヴァレス",
+            "odds": "4.1"
+          },
+          {
+            "rank": "2",
+            "waku": 6,
+            "num": 7,
+            "name": "デアシュトゥルム",
+            "odds": "25.8"
+          },
+          {
+            "rank": "3",
+            "waku": 4,
+            "num": 4,
+            "name": "シトラスフレイバー",
+            "odds": "3.5"
+          }
+        ],
+        "actualWinner": {
+          "rank": "1",
+          "waku": 1,
+          "num": 1,
+          "name": "アルヴァレス",
+          "odds": "4.1"
+        }
       },
       {
         "leg": 2,
@@ -3055,72 +4101,102 @@
         "postTime": "17:45",
         "wR": 0.66,
         "typeBPlus": true,
-        "note": "浦和11R(ダ1400m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.66, M3=58.",
+        "note": "浦和11R(ダ1400m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.66, M3=65.",
         "horses": [
           {
             "num": 11,
             "name": "エアポートライナー",
-            "f": 25.2,
-            "fFund": 9.6,
-            "q": 25.1,
-            "odds": 3.3,
+            "f": 28.4,
+            "fFund": 9.5,
+            "q": 29.0,
+            "odds": 2.8,
             "note": "F:0.2s差実績(H:巻き返し) / F:笹川翼騎手(H:Top騎"
+          },
+          {
+            "num": 3,
+            "name": "ブラックエックス",
+            "f": 19.6,
+            "fFund": 8.8,
+            "q": 17.8,
+            "odds": 4.4,
+            "note": "F:馬体-3kg絞り(H:好仕上) / F:0.2s差実績(H:巻き"
           },
           {
             "num": 2,
             "name": "サトノフェニックス",
             "f": 17.5,
             "fFund": 6.6,
-            "q": 33.8,
-            "odds": 2.5,
+            "q": 34.2,
+            "odds": 2.4,
             "note": "F:ダ2枠上位/芝発(H:減点ソフト上限) / F:父:ヘニーヒュー"
-          },
-          {
-            "num": 3,
-            "name": "ブラックエックス",
-            "f": 15.3,
-            "fFund": 8.0,
-            "q": 13.9,
-            "odds": 5.7,
-            "note": "F:0.2s差実績(H:巻き返し)"
-          },
-          {
-            "num": 14,
-            "name": "トノパー",
-            "f": 9.1,
-            "fFund": 6.6,
-            "q": 7.7,
-            "odds": 9.8,
-            "note": "F:8枠・近走平均7.5着"
           },
           {
             "num": 4,
             "name": "ドレッド",
-            "f": 6.3,
+            "f": 10.1,
             "fFund": 7.4,
-            "q": 3.9,
-            "odds": 18.5,
+            "q": 7.7,
+            "odds": 9.6,
             "note": "F:父:ドレフォン/母父(H:血統適性)"
+          },
+          {
+            "num": 14,
+            "name": "トノパー",
+            "f": 5.6,
+            "fFund": 6.5,
+            "q": 3.5,
+            "odds": 19.8,
+            "note": "F:8枠・近走平均7.5着"
           },
           {
             "num": 6,
             "name": "オニアシ",
-            "f": 5.4,
-            "fFund": 8.0,
-            "q": 2.9,
-            "odds": 24.2,
-            "note": "F:御神本訓騎手(H:Top騎手)"
+            "f": 3.4,
+            "fFund": 6.5,
+            "q": 1.7,
+            "odds": 38.8,
+            "note": "F:馬体+18kg(H:TypeII大幅増) / F:御神本訓騎手("
           },
           {
-            "num": 12,
-            "name": "スペンサーバローズ",
-            "f": 5.3,
-            "fFund": 6.7,
-            "q": 3.3,
-            "odds": 21.5,
-            "note": "F:7枠・近走平均7.5着"
+            "num": 1,
+            "name": "リョウタスペシャル",
+            "f": 3.2,
+            "fFund": 6.2,
+            "q": 1.8,
+            "odds": 35.9,
+            "note": "F:ダ1枠(H:砂被り警戒) / F:父:シニスターミニス(H:血統"
           }
-        ]
+        ],
+        "actualTop3": [
+          {
+            "rank": "1",
+            "waku": 4,
+            "num": 6,
+            "name": "オニアシ",
+            "odds": "38.8"
+          },
+          {
+            "rank": "2",
+            "waku": 3,
+            "num": 4,
+            "name": "ドレッド",
+            "odds": "9.6"
+          },
+          {
+            "rank": "3",
+            "waku": 7,
+            "num": 11,
+            "name": "エアポートライナー",
+            "odds": "2.8"
+          }
+        ],
+        "actualWinner": {
+          "rank": "1",
+          "waku": 4,
+          "num": 6,
+          "name": "オニアシ",
+          "odds": "38.8"
+        }
       },
       {
         "leg": 3,
@@ -3131,100 +4207,131 @@
         "postTime": "18:20",
         "wR": 0.66,
         "typeBPlus": true,
-        "note": "浦和12R(ダ2000m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.66, M3=48.",
+        "note": "浦和12R(ダ2000m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.66, M3=51.",
         "horses": [
-          {
-            "num": 8,
-            "name": "サヨノゴーステッド",
-            "f": 20.8,
-            "fFund": 8.3,
-            "q": 29.5,
-            "odds": 2.9,
-            "note": "F:6枠・近走平均7.5着"
-          },
-          {
-            "num": 7,
-            "name": "ムルーデ",
-            "f": 14.4,
-            "fFund": 8.1,
-            "q": 17.1,
-            "odds": 4.8,
-            "note": "F:6枠・近走平均7.5着"
-          },
           {
             "num": 2,
             "name": "フリューゲルクー",
-            "f": 13.5,
-            "fFund": 10.9,
-            "q": 11.7,
-            "odds": 6.8,
-            "note": "F:0.2s差実績(H:巻き返し) / F:父:シニスターミニス(H"
+            "f": 23.0,
+            "fFund": 10.7,
+            "q": 32.5,
+            "odds": 2.6,
+            "note": "F:ダ2枠上位/芝発(H:減点ソフト上限) / F:馬体-6kg絞り"
           },
           {
             "num": 12,
             "name": "メイショウフソウ",
-            "f": 12.7,
-            "fFund": 8.1,
-            "q": 14.2,
-            "odds": 5.7,
+            "f": 15.6,
+            "fFund": 8.0,
+            "q": 17.5,
+            "odds": 4.6,
             "note": "F:8枠・近走平均7.5着"
           },
           {
             "num": 5,
             "name": "ゴッドトレジャー",
-            "f": 10.2,
-            "fFund": 8.3,
-            "q": 10.0,
-            "odds": 7.9,
-            "note": "F:5枠・近走平均7.5着"
+            "f": 13.0,
+            "fFund": 6.7,
+            "q": 15.7,
+            "odds": 5.1,
+            "note": "F:馬体+11kg(H:TypeII大幅増)"
+          },
+          {
+            "num": 7,
+            "name": "ムルーデ",
+            "f": 12.9,
+            "fFund": 8.0,
+            "q": 13.2,
+            "odds": 6.0,
+            "note": "F:6枠・近走平均7.5着"
+          },
+          {
+            "num": 8,
+            "name": "サヨノゴーステッド",
+            "f": 9.7,
+            "fFund": 9.1,
+            "q": 7.7,
+            "odds": 9.9,
+            "note": "F:馬体-2kg絞り(H:好仕上)"
           },
           {
             "num": 11,
             "name": "レッドゲート",
-            "f": 7.3,
-            "fFund": 8.3,
-            "q": 6.0,
-            "odds": 12.6,
-            "note": "F:8枠・近走平均7.5着"
+            "f": 8.1,
+            "fFund": 9.1,
+            "q": 5.8,
+            "odds": 12.9,
+            "note": "F:馬体-3kg絞り(H:好仕上)"
           },
           {
             "num": 4,
             "name": "ビーチガール",
-            "f": 4.6,
-            "fFund": 8.3,
-            "q": 3.0,
-            "odds": 24.2,
+            "f": 3.8,
+            "fFund": 8.2,
+            "q": 2.0,
+            "odds": 34.3,
             "note": "F:4枠・近走平均7.5着"
           }
-        ]
+        ],
+        "actualTop3": [
+          {
+            "rank": "1",
+            "waku": 6,
+            "num": 8,
+            "name": "サヨノゴーステッド",
+            "odds": "9.9"
+          },
+          {
+            "rank": "2",
+            "waku": 3,
+            "num": 3,
+            "name": "テンダリー",
+            "odds": "49.5"
+          },
+          {
+            "rank": "3",
+            "waku": 2,
+            "num": 2,
+            "name": "フリューゲルクー",
+            "odds": "2.6"
+          }
+        ],
+        "actualWinner": {
+          "rank": "1",
+          "waku": 6,
+          "num": 8,
+          "name": "サヨノゴーステッド",
+          "odds": "9.9"
+        }
       }
     ],
     "hedges": [
       {
-        "num": 2,
-        "name": "浦和12R フリューゲルクー",
-        "odds": 6.8,
-        "hedge50k": 7400,
-        "hedge100k": 14800
+        "num": 5,
+        "name": "浦和12R ゴッドトレジャー",
+        "odds": 5.1,
+        "hedge50k": 9900,
+        "hedge100k": 19700
       },
       {
-        "num": 12,
-        "name": "浦和12R メイショウフソウ",
-        "odds": 5.7,
-        "hedge50k": 8800,
-        "hedge100k": 17600
+        "num": 7,
+        "name": "浦和12R ムルーデ",
+        "odds": 6.0,
+        "hedge50k": 8400,
+        "hedge100k": 16700
       }
     ],
-    "finishedLegs": 0
+    "finishedLegs": 3
   },
   "trackBiases": [
     {
       "venue": "浦和",
-      "surf": "Neon v11.5・収益ゾーン基準",
-      "trend": "浦和: 前半確定レースなし（標準バイアス・補正±5%上限）",
-      "consistentR": 0
+      "surf": "Neon v11.6 (free)",
+      "trend": "浦和当日実測(12R一致検証済): 1着内枠4回/外枠5回 → 【内外フラット】",
+      "consistentR": 12
     }
   ],
-  "engineVer": "v11.5-neon",
-  "updatedAt": "2026-11-27 03:26 JST"
+  "engineVer": "v11.6-neon",
+  "updatedAt": "2026-11-27 22:17 JST",
+  "aiPlan": "free"
 }
