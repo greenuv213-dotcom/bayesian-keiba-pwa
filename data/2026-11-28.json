@@ -3484,18 +3484,18 @@
   "trackBiases": [
     {
       "venue": "京都",
-      "surf": "Neon v11.6 (free)",
+      "surf": "Neon v11.7 (JRA:plan2_neon)",
       "trend": "京都: 前半確定レースなし（標準バイアス・補正±5%上限）",
       "consistentR": 0
     },
     {
       "venue": "東京",
-      "surf": "Neon v11.6 (free)",
+      "surf": "Neon v11.7 (JRA:plan2_neon)",
       "trend": "東京: 前半確定レースなし（標準バイアス・補正±5%上限）",
       "consistentR": 0
     }
   ],
   "engineVer": "v11.7-neon",
-  "updatedAt": "2026-11-27 22:17 JST",
-  "aiPlan": "free"
+  "updatedAt": "2026-11-27 23:32 JST",
+  "aiPlan": "JRA:plan2_neon(Neon統一) / NAR:無料枠"
 }
