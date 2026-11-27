@@ -3983,8 +3983,8 @@
     "predicted": true,
     "aiPredicted": false,
     "date": "2026-11-27",
-    "engineVer": "v11.6-neon",
-    "summary": "【2026-11-27 Neon v11.6 2-Stage融合編成（南関トリプル馬単50円単位）】",
+    "engineVer": "v11.7-neon",
+    "summary": "【2026-11-27 Neon v11.7 2-Stage融合編成（南関トリプル馬単50円単位）】",
     "legs": [
       {
         "leg": 1,
@@ -4326,12 +4326,12 @@
   "trackBiases": [
     {
       "venue": "浦和",
-      "surf": "Neon v11.6 (free)",
+      "surf": "Neon v11.7 (NAR:baseline-only)",
       "trend": "浦和当日実測(12R一致検証済): 1着内枠4回/外枠5回 → 【内外フラット】",
       "consistentR": 12
     }
   ],
-  "engineVer": "v11.6-neon",
-  "updatedAt": "2026-11-27 22:17 JST",
-  "aiPlan": "free"
+  "engineVer": "v11.7-neon",
+  "updatedAt": "2026-11-27 23:03 JST",
+  "aiPlan": "JRA:plan2_neon(Neon統一) / NAR:無料枠"
 }
