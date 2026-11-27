@@ -10,39 +10,55 @@ START_TS = time.time()
 MAX_RUNTIME_SEC = 330
 
 JST = timezone(timedelta(hours=9))
-API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 
-# AI_PLAN: "free" (無料枠) | "plan1_hydrogen" (月600-900円) | "plan2_neon" (月1,000-1,500円: Neon主力+WIN5/G1 Carbon)
-AI_PLAN = os.environ.get("AI_PLAN", "free").strip().lower()
+# === APIキー完全分離（JRA=有料Tier1 / NAR=無料枠専用・誤課金防止ガード付き） ===
+JRA_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
+NAR_FREE_API_KEY = os.environ.get("GEMINI_FREE_API_KEY", "").strip()
+
+# AI_PLAN: "plan2_neon" (JRAはWIN5/G1含め全面Neon・NARは無料枠固定) | "plan1_hydrogen" | "free"
+AI_PLAN = os.environ.get("AI_PLAN", "plan2_neon").strip().lower()
 CUSTOM_HIGH_MODEL = os.environ.get("GEMINI_HIGH_TIER_MODEL", "").strip()
 CUSTOM_FAST_MODEL = os.environ.get("GEMINI_FAST_MODEL", "").strip()
 
 if AI_PLAN == "plan2_neon":
-    WIN5_G1_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-carbon"
-    HIGH_TIER_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-neon"
-    FAST_MODEL = CUSTOM_FAST_MODEL or "gemini-4-neon"
-    DEFAULT_MAX_AI_CALLS = 10
+    JRA_WIN5_G1_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-neon"
+    JRA_HIGH_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-neon"
+    JRA_FAST_MODEL = CUSTOM_FAST_MODEL or "gemini-4-neon"
+    DEFAULT_MAX_JRA_CALLS = 10
 elif AI_PLAN == "plan1_hydrogen":
-    WIN5_G1_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-hydrogen"
-    HIGH_TIER_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-hydrogen"
-    FAST_MODEL = CUSTOM_FAST_MODEL or "gemini-4-hydrogen"
-    DEFAULT_MAX_AI_CALLS = 10
+    JRA_WIN5_G1_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-hydrogen"
+    JRA_HIGH_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-hydrogen"
+    JRA_FAST_MODEL = CUSTOM_FAST_MODEL or "gemini-4-hydrogen"
+    DEFAULT_MAX_JRA_CALLS = 10
 else:
-    WIN5_G1_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-hydrogen"
-    HIGH_TIER_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-hydrogen"
-    FAST_MODEL = CUSTOM_FAST_MODEL or "gemini-3.8-flash"
-    DEFAULT_MAX_AI_CALLS = 6
+    JRA_WIN5_G1_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-hydrogen"
+    JRA_HIGH_MODEL = CUSTOM_HIGH_MODEL or "gemini-4-hydrogen"
+    JRA_FAST_MODEL = CUSTOM_FAST_MODEL or "gemini-3.8-flash"
+    DEFAULT_MAX_JRA_CALLS = 6
 
-MAX_AI_CALLS_PER_RUN = int(os.environ.get("MAX_AI_CALLS_PER_RUN", str(DEFAULT_MAX_AI_CALLS)))
+# NARは常に無料枠モデル（Hydrogen / 3.8 Flash）を使用
+NAR_FREE_HIGH_MODEL = "gemini-4-hydrogen"
+NAR_FREE_FAST_MODEL = "gemini-3.8-flash"
 
-try:
-    client = genai.Client(api_key=API_KEY, http_options=types.HttpOptions(timeout=55000)) if API_KEY else None
-except Exception:
-    client = genai.Client(api_key=API_KEY) if API_KEY else None
+MAX_AI_CALLS_JRA = int(os.environ.get("MAX_AI_CALLS_PER_RUN", str(DEFAULT_MAX_JRA_CALLS)))
+MAX_AI_CALLS_NAR = int(os.environ.get("MAX_NAR_FREE_CALLS_PER_RUN", "3"))
+
+def make_client(api_key: str, timeout_ms: int):
+    if not api_key:
+        return None
+    try:
+        return genai.Client(api_key=api_key, http_options=types.HttpOptions(timeout=timeout_ms))
+    except Exception:
+        return genai.Client(api_key=api_key)
+
+# JRA有料クライアントはNeon(XHIGH/HIGH)の深い思考に対応するため90秒タイムアウトを確保
+jra_client = make_client(JRA_API_KEY, 90000)
+# NAR無料クライアントはGEMINI_FREE_API_KEY専用（未設定時はNoneで有料キーへの誤課金を完全遮断）
+nar_free_client = make_client(NAR_FREE_API_KEY, 55000)
 
 os.makedirs("data", exist_ok=True)
 
-ENGINE_VER = "v11.6-neon"
+ENGINE_VER = "v11.7-neon"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
@@ -69,7 +85,8 @@ TRUE_GRADED_KEYWORDS = (
 )
 NAR_DG_KEYWORDS = ("Jpn", "重賞", "ダートグレード", "兵庫ジュニア", "浦和記念", "名古屋グランプリ", "佐賀記念", "マーキュリー", "クラスター", "マイルCS南部", "JBC", "東京大賞典", "帝王賞", "かしわ記念", "川崎記念")
 
-AI_CALL_COUNT = 0
+AI_CALL_COUNT_JRA = 0
+AI_CALL_COUNT_NAR = 0
 
 def log(msg: str):
     print(f"[{int(time.time() - START_TS):03d}s] {msg}", flush=True)
@@ -152,7 +169,6 @@ def is_nankan_race(r: dict) -> bool:
     return (len(rid) >= 6 and rid[4:6] in NANKAN_CODES) or (r.get("venue") in NANKAN_NAMES)
 
 def is_nar_bettable_race(r: dict) -> bool:
-    """v11.6: NARは控除率25%の壁を超えるため南関10-12R(トリプル馬単圏)または交流重賞/主要重賞に限定"""
     if r.get("mode") != "nar":
         return True
     if r.get("isGraded") or any(k in str(r.get("name", "")) for k in NAR_DG_KEYWORDS):
@@ -181,7 +197,6 @@ def fetch_race_list(ymd: str, mode: str = "jra") -> list:
                 if "ばんえい" in name:
                     continue
                 is_dg = any(k in name for k in NAR_DG_KEYWORDS)
-                # v11.6: NARは南関4場の10-12R（トリプル馬単・メイン）と全国交流重賞のみに絞りAI到達率を100%化
                 if (vcode in NANKAN_CODES and rnum < 9 and not is_dg):
                     continue
                 if (vcode not in NANKAN_CODES) and not (is_dg and rnum >= 9):
@@ -738,7 +753,6 @@ def lookup_wide_odds(wide_map: dict, a: int, b: int, fallback: float) -> float:
     return fallback
 
 def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict, dict]:
-    """v11.6: 回収率100%超向け Core 55%(ワイド2-3点絞り) + Alpha 45%(単勝・馬連2点・少点数3連複)"""
     horses = race.get("horses") or []
     sorted_h = sorted(horses, key=lambda x: (float(x.get("f", 0)) * 0.55 + float(x.get("top3", 0)) * 0.45), reverse=True)
     valid = [h for h in sorted_h if h.get("mark") not in ("消", "危", "無")]
@@ -747,7 +761,6 @@ def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict
     h1, h2, h3 = pool[0], pool[1], pool[2]
     h4 = pool[3] if len(pool) > 3 else h3
 
-    # 市場1〜2番人気(O<=5.0・欠格なし)が漏れていればh4へ強制結線編入
     by_odds = sorted([h for h in horses if float(h.get("odds", 99)) > 1.0], key=lambda x: float(x.get("odds", 99)))
     core_nums = {h1["num"], h2["num"], h3["num"], h4["num"]}
     forced_fav = False
@@ -774,7 +787,6 @@ def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict
     w23 = lookup_wide_odds(wm, h2["num"], h3["num"], max(1.8, round(math.sqrt(o2 * o3) * 0.72, 1)))
     w14 = lookup_wide_odds(wm, h1["num"], h4["num"], max(1.9, round(math.sqrt(o1 * o4) * 0.75, 1)))
 
-    # Core 55%: 4点分散を廃止し、2〜3点へ厳選集中（的中時の単発回収力と合成オッズを底上げ）
     if o1 <= 2.2:
         cand_partners = [
             (h2, w12, o2, f"ワイド {h1['num']}-{h2['num']} (◎-◯ 2点Core)"),
@@ -813,7 +825,6 @@ def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict
         if specs[0]["amt"] + diff >= 100:
             specs[0]["amt"] += diff
 
-    # Alpha 45% (4,500円): 控除率20%の単勝 + 馬連2点 + 少点数3連複(上限1,000円)で一撃2万〜4万円を狙う
     row1 = [h1["num"], h2["num"]]
     row2 = sorted({h2["num"], h3["num"]})
     row3 = sorted({h3["num"], h4["num"]} | {x["num"] for x in himos})
@@ -822,7 +833,6 @@ def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict
     trio_cap = int(round((alpha_budget * 0.24) / 100) * 100)
     trio_amt = min(max(400, trio_cap), trio_pts * 100)
 
-    # 単勝: ◎(O>=2.4)と◯(O>=3.0)のうち期待値(f*O)が高い方へ配分
     ev1 = (float(h1.get("f", 0)) / 100.0) * o1
     ev2 = (float(h2.get("f", 0)) / 100.0) * o2
     win_target = h1 if (o1 >= 2.4 and (ev1 >= ev2 or o2 < 2.8)) else (h2 if o2 >= 2.8 else h1)
@@ -842,7 +852,6 @@ def build_neon_core_shield_specs(race: dict, B: int = 10000) -> tuple[list, dict
 
     trio_meta = {"trioSet": trio_set, "trioPts": trio_pts, "trioAmt": trio_amt}
 
-    # 期待値エッジ maxEv（上位4頭のうち消/危と50倍超を除いた最大 f/100 * O）
     top_ev_vals = []
     for h in sorted_h[:4]:
         od = float(h.get("odds", 0))
@@ -872,7 +881,6 @@ def compute_market_m3(horses: list) -> tuple[float, bool]:
     return round(sum(q_sorted[:3]), 1), has_spread
 
 def apply_auto_pass_and_rank(r: dict, is_historical: bool = False):
-    """v11.6-neon: 厳選購入ゲート（Bランク＆オッズ未取得＆NAR下級平場を完全Pass化 ＋ 期待値エッジ＆Core合成1.52倍+必須）"""
     horses = r.get("horses") or []
     if len(horses) < 3:
         return
@@ -906,7 +914,6 @@ def apply_auto_pass_and_rank(r: dict, is_historical: bool = False):
     r["portfolioRules"] = {"coreRatio": 0.55, "alphaRatio": 0.45, "coreLineCap": metrics["coreLines"], "singleLongshotCapPct": 0.30}
     r["strategyProfile"] = "roi_100_plus"
 
-    # === 厳選Passゲート（控除率負けゾーンを徹底遮断） ===
     pass_reason = ""
     if is_nar and not is_nar_bettable_race(r):
         pass_reason = "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
@@ -991,24 +998,46 @@ def classify_race_tier(r: dict) -> str:
         return "high_h"
     return "flash"
 
-def call_gemini(skill: str, prompt: str, tier: str = "flash") -> dict:
-    global AI_CALL_COUNT
-    if not client or AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN or time_exceeded():
+def call_gemini(skill: str, prompt: str, tier: str = "flash", mode: str = "jra") -> dict:
+    """v11.7: JRAは有料Neon専用クライアント、NARは無料枠専用クライアントへ完全分離（誤課金防止）"""
+    global AI_CALL_COUNT_JRA, AI_CALL_COUNT_NAR
+    if time_exceeded():
         return {}
-    AI_CALL_COUNT += 1
+
+    if mode == "nar":
+        if not nar_free_client:
+            log("[NAR Free Guard] GEMINI_FREE_API_KEY未設定のためNARのAI呼出をスキップ（有料キー誤課金防止）")
+            return {}
+        if AI_CALL_COUNT_NAR >= MAX_AI_CALLS_NAR:
+            return {}
+        AI_CALL_COUNT_NAR += 1
+        active_client = nar_free_client
+        route_tag = "NAR-FREE"
+        if tier in ("g1_win5", "high_h"):
+            candidates = [(NAR_FREE_HIGH_MODEL, "HIGH"), (NAR_FREE_FAST_MODEL, "MEDIUM")]
+        elif tier == "med_h":
+            candidates = [(NAR_FREE_HIGH_MODEL, "MEDIUM"), (NAR_FREE_FAST_MODEL, "MEDIUM")]
+        else:
+            candidates = [(NAR_FREE_FAST_MODEL, "MEDIUM"), (NAR_FREE_HIGH_MODEL, "MEDIUM")]
+    else:
+        if not jra_client or AI_CALL_COUNT_JRA >= MAX_AI_CALLS_JRA:
+            return {}
+        AI_CALL_COUNT_JRA += 1
+        active_client = jra_client
+        route_tag = f"JRA-{AI_PLAN}"
+        if tier == "g1_win5":
+            # WIN5・G1はNeon(XHIGH)最優先 -> タイムアウト/非対応時はNeon(HIGH)へ自動フォールバック
+            candidates = [(JRA_WIN5_G1_MODEL, "XHIGH"), (JRA_WIN5_G1_MODEL, "HIGH"), (JRA_FAST_MODEL, "MEDIUM")]
+        elif tier == "high_h":
+            candidates = [(JRA_HIGH_MODEL, "HIGH"), (JRA_FAST_MODEL, "MEDIUM")]
+        elif tier == "med_h":
+            candidates = [(JRA_HIGH_MODEL, "MEDIUM"), (JRA_HIGH_MODEL, "HIGH")]
+        else:
+            candidates = [(JRA_FAST_MODEL, "MEDIUM"), (JRA_HIGH_MODEL, "MEDIUM")]
+
     p = f"skills/{skill}/SKILL.md"
     sys_inst = open(p, "r", encoding="utf-8").read() if os.path.exists(p) else "Output valid JSON only."
 
-    if tier == "g1_win5":
-        candidates = [(WIN5_G1_MODEL, "HIGH"), (HIGH_TIER_MODEL, "HIGH"), (FAST_MODEL, "MEDIUM")]
-    elif tier == "high_h":
-        candidates = [(HIGH_TIER_MODEL, "HIGH"), (FAST_MODEL, "MEDIUM")]
-    elif tier == "med_h":
-        candidates = [(HIGH_TIER_MODEL, "MEDIUM"), (FAST_MODEL, "MEDIUM")]
-    else:
-        candidates = [(FAST_MODEL, "MEDIUM"), (HIGH_TIER_MODEL, "MEDIUM")]
-
-    # 重複候補を排除
     dedup = []
     for c in candidates:
         if c not in dedup: dedup.append(c)
@@ -1018,7 +1047,7 @@ def call_gemini(skill: str, prompt: str, tier: str = "flash") -> dict:
             log("Time cap reached during AI fallback; stopping cleanly.")
             return {}
         try:
-            log(f"Calling AI [{AI_PLAN}]: {skill} -> {m}({think_lvl})")
+            log(f"Calling AI [{route_tag}]: {skill} -> {m}({think_lvl})")
             time.sleep(1.5)
             try:
                 cfg = types.GenerateContentConfig(
@@ -1027,16 +1056,20 @@ def call_gemini(skill: str, prompt: str, tier: str = "flash") -> dict:
                     thinking_config=types.ThinkingConfig(thinking_level=think_lvl),
                 )
             except Exception:
+                # XHIGH等がSDKのEnum未対応だった場合は次の候補(HIGH等)へ安全フォールバック
+                if think_lvl == "XHIGH":
+                    log(f"[Fallback] {m}(XHIGH) unsupported by SDK enum -> trying next level")
+                    continue
                 cfg = types.GenerateContentConfig(system_instruction=sys_inst, response_mime_type="application/json")
 
-            res = client.models.generate_content(model=m, contents=prompt, config=cfg)
+            res = active_client.models.generate_content(model=m, contents=prompt, config=cfg)
             fence_pat = r"^\x60{3}(?:json)?\s*|\s*\x60{3}$"
             data = json.loads(re.sub(fence_pat, "", (res.text or "").strip(), flags=re.DOTALL))
             data["usedModel"] = f"{m}({think_lvl})"
-            log(f"[AI Success] {skill} -> {data['usedModel']}")
+            log(f"[AI Success {route_tag}] {skill} -> {data['usedModel']}")
             return data
         except Exception as e:
-            log(f"[Fallback] {m}: {str(e)[:120]}")
+            log(f"[Fallback {route_tag}] {m}({think_lvl}): {str(e)[:120]}")
     return {}
 
 def fetch_official_win5_ids() -> list:
@@ -1129,7 +1162,7 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
             "{\"summary\":\"5レース全体の攻略総括(100字以内)\",\"legs\":[{\"leg\":1,\"venue\":\"会場R\",\"name\":\"レース名\",\"postTime\":\"HH:MM\",\"wR\":0.40,\"typeBPlus\":true/false,\"note\":\"展開・バイアス見解(45字以内)\",\"horses\":[{\"num\":馬番,\"name\":\"馬名\",\"f\":融合勝率,\"fFund\":基礎勝率,\"q\":市場確率,\"odds\":オッズ,\"shell\":\"Core|Wing\",\"note\":\"F/H根拠(30字以内)\"}]}],\"hedges\":[{\"num\":馬番,\"name\":\"Leg5伏兵名\",\"odds\":オッズ,\"hedge50k\":円,\"hedge100k\":円}]}\n\n"
             + "\n".join(blocks)
         )
-        ai_w = call_gemini("app-bayesian-win5", w_prompt, tier="g1_win5")
+        ai_w = call_gemini("app-bayesian-win5", w_prompt, tier="g1_win5", mode="jra")
         if isinstance(ai_w, dict) and isinstance(ai_w.get("legs"), list) and len(ai_w["legs"]) == 5:
             ai_w["predicted"] = True; ai_w["aiPredicted"] = True; ai_w["date"] = date_str; ai_w["engineVer"] = ENGINE_VER
             for idx, r in enumerate(selected):
@@ -1156,7 +1189,7 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
                     for rk, x in enumerate(r["horses"]):
                         x["mark"] = ["◎","◯","▲","☆","△","△","△"][rk] if rk < 7 else "無"
                     r["aiPredicted"] = True
-                    r["usedModel"] = ai_w.get("usedModel", f"{WIN5_G1_MODEL}(HIGH)")
+                    r["usedModel"] = ai_w.get("usedModel", f"{JRA_WIN5_G1_MODEL}(HIGH)")
                     if leg_obj.get("note"): r["scenario"] = leg_obj["note"]
                     if leg_obj.get("wR"): r["wR"] = leg_obj["wR"]
                     apply_auto_pass_and_rank(r)
@@ -1179,7 +1212,7 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
         })
     last_hs = legs[-1]["horses"][2:4]
     hedges = [{"num": h["num"], "name": f"{legs[-1]['venue']} {h['name']}", "odds": h["odds"], "hedge50k": int((50000 / max(1.5, h["odds"]) + 99) // 100 * 100), "hedge100k": int((100000 / max(1.5, h["odds"]) + 99) // 100 * 100)} for h in last_hs]
-    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} Neon v11.6 2-Stage融合編成（{'南関トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 Plan A/C直交3枚対応'}）】", "legs": legs, "hedges": hedges}
+    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} Neon v11.7 2-Stage融合編成（{'南関トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 Plan A/C直交3枚対応'}）】", "legs": legs, "hedges": hedges}
 
 def should_check_result(date_str: str, post_time: str, now: datetime) -> bool:
     today_str = now.strftime("%Y-%m-%d")
@@ -1198,7 +1231,8 @@ def is_pre_post_window(date_str: str, post_time: str, now: datetime, low_m: int 
     return low_m <= mins <= high_m
 
 def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool, mode: str = "jra"):
-    log(f"Processing {date_str} ({mode}, {len(races)} races, plan={AI_PLAN})")
+    route_desc = f"JRA:{AI_PLAN}" if mode == "jra" else ("NAR:free" if nar_free_client else "NAR:baseline-only")
+    log(f"Processing {date_str} ({mode}, {len(races)} races, route={route_desc})")
     suffix = "_nar" if mode == "nar" else ""
     db_path = f"data/{date_str}{suffix}.json"
     day_db = json.load(open(db_path, "r", encoding="utf-8")) if os.path.exists(db_path) else {"date": date_str, "mode": mode, "races": races}
@@ -1232,7 +1266,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         has_real = isinstance(r.get("horses"), list) and len(r["horses"]) >= 5
         has_neon = has_real and ("fFund" in r["horses"][0])
         is_unsettled = not bool(r.get("actualTop3"))
-        need_v116_refusion = is_unsettled and (not r.get("aiPredicted")) and (day_db.get("engineVer") != ENGINE_VER)
+        need_v117_refusion = is_unsettled and (not r.get("aiPredicted")) and (day_db.get("engineVer") != ENGINE_VER)
         missing_nar_odds = (mode == "nar") and has_neon and (float(r.get("wR", 0)) == 0.0) and is_unsettled
         missing_dist = (not r.get("surfaceDist")) or (mode == "nar" and r.get("surfaceDist") == "ダ1600m" and day_db.get("engineVer") != ENGINE_VER)
         bad_time = (not r.get("postTime")) or (r.get("postTime") == "15:00" and r.get("raceNumber", 11) < 10)
@@ -1240,7 +1274,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         need_res = can_have_result and ((not r.get("evalDone") and r.get("rank") != "Pass") or is_unsettled or contaminated)
         in_live_win = is_today and is_pre_post_window(date_str, r.get("postTime", ""), now, 10, 95)
         need_live_refresh = in_live_win and (not r.get("weightsAnnounced") or not r.get("wideOddsMap") or missing_nar_odds)
-        need_sh = contaminated or (not has_real) or bad_time or missing_dist or missing_nar_odds or need_v116_refusion or (not has_neon and is_unsettled) or need_live_refresh
+        need_sh = contaminated or (not has_real) or bad_time or missing_dist or missing_nar_odds or need_v117_refusion or (not has_neon and is_unsettled) or need_live_refresh
 
         if need_sh or need_res:
             detail, actual, raw_runners, track_cond, ptime, payouts, wide_map, weights_ready, fetched_sd = fetch_full_shutuba(
@@ -1292,53 +1326,60 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
 
     if ((mode == "jra" and dt.weekday() == 6) or mode == "nar") and not time_exceeded():
         cur_ml = day_db.get("multiLeg") or {}
-        need_ml_ai = (not cur_ml.get("aiPredicted")) or (cur_ml.get("engineVer") != ENGINE_VER and WIN5_G1_MODEL not in str(cur_ml.get("usedModel", "")))
+        need_ml_ai = (not cur_ml.get("aiPredicted")) or (cur_ml.get("engineVer") != ENGINE_VER and JRA_WIN5_G1_MODEL not in str(cur_ml.get("usedModel", "")))
         if need_ml_ai:
             mleg = build_multileg_with_ai(day_db.get("races", []), mode, date_str)
             if mleg: day_db["multiLeg"] = mleg
 
-    # v11.6: 厳選通過した S / New / A（および重賞・南関メイン）へAI枠を100%集中
+    # AI本推論ルーティング（NARはGEMINI_FREE_API_KEY設定時のみ無料枠で実行）
+    can_call_ai = (jra_client is not None) if mode == "jra" else (nar_free_client is not None)
     ai_candidates = []
-    for r in day_db.get("races", []):
-        if not r.get("horses") or r.get("actualTop3"):
-            continue
-        is_target_nankan_ml = (mode == "nar") and is_nankan_race(r) and r.get("raceNumber") in (10, 11, 12)
-        # 厳選通過(S/A/New)に加え、発走前の重賞・新馬(9頭以上)・南関10-12RはAIで真の期待値エッジを再検証
-        is_promising_pre = (r.get("rank") in ("S", "A", "New")) or r.get("isGraded") or is_target_nankan_ml
-        if not is_promising_pre:
-            continue
-        if r.get("rank") == "Pass" and not (r.get("isGraded") or is_target_nankan_ml):
-            continue
-        tier = classify_race_tier(r)
-        used = str(r.get("usedModel", ""))
-        target_model = WIN5_G1_MODEL if tier == "g1_win5" else (HIGH_TIER_MODEL if tier in ("high_h", "med_h") else FAST_MODEL)
-        need_weight_repredict = bool(r.get("weightsAnnounced")) and not bool(r.get("aiPredictedWithWeights"))
-        needs_ai = (not r.get("aiPredicted")) or (target_model not in used) or need_weight_repredict
-        if not needs_ai:
-            continue
-        prio = -8 if r.get("rank") == "S" else (-5 if r.get("rank") == "New" else (-3 if r.get("rank") == "A" else 0))
-        if r.get("isGraded"): prio -= 2
-        if is_target_nankan_ml: prio -= 1
-        if is_today and is_pre_post_window(date_str, r.get("postTime", ""), now, 12, 95):
-            prio -= 12
-            if need_weight_repredict:
-                prio -= 4
-        ai_candidates.append((prio, tier, r))
+    if can_call_ai:
+        for r in day_db.get("races", []):
+            if not r.get("horses") or r.get("actualTop3"):
+                continue
+            is_target_nankan_ml = (mode == "nar") and is_nankan_race(r) and r.get("raceNumber") in (10, 11, 12)
+            is_promising_pre = (r.get("rank") in ("S", "A", "New")) or r.get("isGraded") or is_target_nankan_ml
+            if not is_promising_pre:
+                continue
+            if r.get("rank") == "Pass" and not (r.get("isGraded") or is_target_nankan_ml):
+                continue
+            tier = classify_race_tier(r)
+            used = str(r.get("usedModel", ""))
+            if mode == "nar":
+                target_model = NAR_FREE_HIGH_MODEL if tier in ("g1_win5", "high_h", "med_h") else NAR_FREE_FAST_MODEL
+            else:
+                target_model = JRA_WIN5_G1_MODEL if tier == "g1_win5" else (JRA_HIGH_MODEL if tier in ("high_h", "med_h") else JRA_FAST_MODEL)
+            need_weight_repredict = bool(r.get("weightsAnnounced")) and not bool(r.get("aiPredictedWithWeights"))
+            needs_ai = (not r.get("aiPredicted")) or (target_model not in used) or need_weight_repredict
+            if not needs_ai:
+                continue
+            prio = -8 if r.get("rank") == "S" else (-5 if r.get("rank") == "New" else (-3 if r.get("rank") == "A" else 0))
+            if r.get("isGraded"): prio -= 2
+            if is_target_nankan_ml: prio -= 1
+            if is_today and is_pre_post_window(date_str, r.get("postTime", ""), now, 12, 95):
+                prio -= 12
+                if need_weight_repredict:
+                    prio -= 4
+            ai_candidates.append((prio, tier, r))
 
     ai_candidates.sort(key=lambda x: x[0])
-    per_day_limit = 6 if AI_PLAN != "free" else 4
+    per_day_limit = 3 if mode == "nar" else (6 if AI_PLAN != "free" else 4)
     for _, tier, r in ai_candidates[:per_day_limit]:
-        if AI_CALL_COUNT >= MAX_AI_CALLS_PER_RUN or time_exceeded(): break
+        cur_cnt = AI_CALL_COUNT_NAR if mode == "nar" else AI_CALL_COUNT_JRA
+        cur_max = MAX_AI_CALLS_NAR if mode == "nar" else MAX_AI_CALLS_JRA
+        if cur_cnt >= cur_max or time_exceeded(): break
         bias_info, bias_cnt = summarize_intraday_track_bias(day_db.get("races", []), r["venue"])
         detail = r.pop("detailText", "") or "\n".join([f"{h['num']}番{h['name']}(脚質:{h['style']} 単勝:{h['odds']}倍 馬体:{h.get('weight','未発表')} {h['comment']})" for h in r["horses"]])
         wt_note = "公式馬体重発表済（Type I〜III・1800m+の+12kg+・ダート新馬<420kg補正必須）" if r.get("weightsAnnounced") else "馬体重未発表"
         pred = call_gemini(
             r["skill"],
-            f"【モード: 標準（Neon v11.6 回収率100%超厳選・Core55%/Alpha45%・期待値エッジ重視 / {wt_note}）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')}・{len(r['horses'])}頭)\n"
+            f"【モード: 標準（Neon v11.7 回収率100%超厳選・Core55%/Alpha45%・期待値エッジ重視 / {wt_note}）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')}・{len(r['horses'])}頭)\n"
             f"【当日バイアス(3R一致ガード)】{bias_info}\n"
             f"全頭について mark, role, style, f(2-Stage融合後勝率・50倍超は6%上限), fFund(オッズ遮断基礎勝率), wUsed(個別融合重み), top2, top3, comment(35字以内) と、"
             f"scenario, pivotType, rank(合成オッズ<1.52や期待値エッジ不足はPass), wR, m3, coreSyntheticOdds, hitRate, breakEvenRate, expectedRoi, coreConnections([[◎番,◯番],...]), counterfactualAudit(60字以内) をJSON出力せよ:\n{detail}",
             tier=tier,
+            mode=mode,
         )
         if isinstance(pred, dict) and "horses" in pred:
             by_num_cur = {int(h["num"]): h for h in r["horses"] if str(h.get("num", "")).isdigit()}
@@ -1391,15 +1432,14 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
     day_db["trackBiases"] = []
     for v in venues:
         b_txt, b_cnt = summarize_intraday_track_bias(day_db.get("races", []), v)
-        day_db["trackBiases"].append({"venue": v, "surf": f"Neon v11.6 ({AI_PLAN})", "trend": b_txt, "consistentR": b_cnt})
+        day_db["trackBiases"].append({"venue": v, "surf": f"Neon v11.7 ({route_desc})", "trend": b_txt, "consistentR": b_cnt})
     day_db["engineVer"] = ENGINE_VER
-    day_db["aiPlan"] = AI_PLAN
+    day_db["aiPlan"] = f"JRA:{AI_PLAN}(Neon統一) / NAR:無料枠"
     day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
     json.dump(day_db, open(db_path, "w", encoding="utf-8"), ensure_ascii=False, indent=2)
     log(f"Saved {db_path}")
 
 def recalibrate_historical_data(now: datetime):
-    """v11.6-neon: 通信ゼロで既存の全過去JSONへ厳選購入ゲート＋Core55%/Alpha45%再評価を一括適用（過去予想印は維持）"""
     updated_cnt = 0
     for fp in sorted(glob.glob("data/20*.json")):
         try:
@@ -1433,7 +1473,7 @@ def recalibrate_historical_data(now: datetime):
         except Exception as e:
             log(f"[Warn] recalibrate {fp}: {e}")
     if updated_cnt > 0:
-        log(f"Recalibrated {updated_cnt} historical files to {ENGINE_VER} (Core55/Alpha45 + EV gate).")
+        log(f"Recalibrated {updated_cnt} historical files to {ENGINE_VER}.")
 
 def empty_scope_stats() -> dict:
     return {
@@ -1499,7 +1539,7 @@ def update_global_stats(now: datetime):
         except Exception: pass
     payload = {
         "updatedAt": now.strftime("%Y-%m-%d %H:%M JST"),
-        "aiPlan": AI_PLAN,
+        "aiPlan": f"JRA:Neon統一 / NAR:{'無料枠' if nar_free_client else '無料キー待機'}",
         **scopes,
         "dailyTrend": daily_trend[:12],
         "recentResults": recent
@@ -1509,7 +1549,7 @@ def update_global_stats(now: datetime):
 
 def run_pipeline():
     now = datetime.now(JST)
-    log(f"Pipeline start ({ENGINE_VER}, plan={AI_PLAN}, max_ai={MAX_AI_CALLS_PER_RUN}) at {now.strftime('%Y-%m-%d %H:%M JST')}")
+    log(f"Pipeline start ({ENGINE_VER}, JRA={AI_PLAN}/Neon max={MAX_AI_CALLS_JRA}, NAR={'FREE' if nar_free_client else 'NO-FREE-KEY'} max={MAX_AI_CALLS_NAR}) at {now.strftime('%Y-%m-%d %H:%M JST')}")
     is_weekend = now.weekday() in (5, 6)
     is_weekend_jra_hours = is_weekend and (8 <= now.hour < 17)
 
