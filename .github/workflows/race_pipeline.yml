@@ -34,11 +34,13 @@ jobs:
       - name: Run JRA & NAR Prediction Pipeline
         env:
           GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_FREE_API_KEY: ${{ secrets.GEMINI_FREE_API_KEY }}
+          AI_PLAN: plan2_neon
         run: python scripts/auto_predict.py
       - name: Commit & Push Updated JSON to PWA
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
           git add data/*.json
-          git diff --staged --quiet || git commit -m "Auto-update JRA/NAR predictions"
+          git diff --staged --quiet || git commit -m "Auto-update JRA/NAR predictions (v11.7 JRA-Neon / NAR-Free)"
           git push
