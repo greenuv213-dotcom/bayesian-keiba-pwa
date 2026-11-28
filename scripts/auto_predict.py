@@ -54,7 +54,7 @@ nar_free_client = make_client(NAR_FREE_API_KEY, 55000)
 
 os.makedirs("data", exist_ok=True)
 
-ENGINE_VER = "v11.8-neon"
+ENGINE_VER = "v11.9-neon"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
@@ -69,10 +69,10 @@ TOP_RIDERS = ("矢野", "御神本", "笹川", "吉原", "森泰斗", "ルメー
 POWER_SIRES = ("ナダル", "クリソベリル", "ゴールドアリュール", "ルヴァンスレーヴ", "シニスターミニスター", "ヘニーヒューズ", "ドレフォン", "パイロ", "マインドユアビスケッツ", "キズナ", "キタサンブラック", "エピファネイア", "ロードカナロア", "コントレイル", "モーリス")
 TURF_START_DIRT = {("東京",1300),("東京",1400),("東京",1600),("中山",1200),("京都",1400),("阪神",1400),("中京",1400),("福島",1150),("新潟",1200)}
 
-G1_KEYWORDS = ("G1", "GⅠ", "Jpn1", "JpnⅠ", "マイルCS", "ジャパンC", "有馬", "天皇賞", "ダービー", "オークス", "皐月賞", "桜花賞", "菊花賞", "秋華賞", "エリザベス", "チャンピオンズ", "阪神JF", "朝日杯", "ホープフル", "東京大賞典", "帝王賞", "JBC", "川崎記念", "かしわ記念")
+G1_KEYWORDS = ("G1", "GⅠ", "Jpn1", "JpnⅠ", "マイルCS", "ジャパンC", "ジャパンＣ", "有馬", "天皇賞", "ダービー", "オークス", "皐月賞", "桜花賞", "菊花賞", "秋華賞", "エリザベス", "チャンピオンズ", "阪神JF", "朝日杯", "ホープフル", "東京大賞典", "帝王賞", "JBC", "川崎記念", "かしわ記念")
 TRUE_GRADED_KEYWORDS = (
     "Jpn", "G1", "G2", "G3", "GⅠ", "GⅡ", "GⅢ", "S1", "S2", "S3", "重賞",
-    "記念", "マイルCS", "ジャパンC", "有馬", "天皇賞", "ダービー", "オークス",
+    "記念", "マイルCS", "ジャパンC", "ジャパンＣ", "有馬", "天皇賞", "ダービー", "オークス",
     "皐月賞", "桜花賞", "菊花賞", "秋華賞", "エリザベス", "2歳S", "2歳Ｓ",
     "グランプリ", "兵庫ジュニア", "金賞", "大賞典", "帝王賞", "JBC",
     "かしわ", "マーキュリー", "クラスター", "南部杯", "スパーキング", "テレ玉杯",
@@ -877,7 +877,6 @@ def compute_market_m3(horses: list) -> tuple[float, bool]:
     return round(sum(q_sorted[:3]), 1), has_spread
 
 def apply_auto_pass_and_rank(r: dict, is_historical: bool = False):
-    """v11.8-neon: ワイド3点の実測合成オッズ(1.12+)と事前/AI別EVゲートへ適正化（1日5-8R厳選・AIデッドロック解消）"""
     horses = r.get("horses") or []
     if len(horses) < 3:
         return
@@ -912,7 +911,6 @@ def apply_auto_pass_and_rank(r: dict, is_historical: bool = False):
     r["portfolioRules"] = {"coreRatio": 0.55, "alphaRatio": 0.45, "coreLineCap": metrics["coreLines"], "singleLongshotCapPct": 0.30}
     r["strategyProfile"] = "roi_100_plus"
 
-    # === 適正化Passゲート（ワイド3点の数学的レンジに校正・事前段階はAI検証へ通過させる） ===
     ev_floor_new = 0.86 if is_ai else 0.80
     ev_floor_std = 0.94 if is_ai else 0.88
 
@@ -1070,29 +1068,55 @@ def call_gemini(skill: str, prompt: str, tier: str = "flash", mode: str = "jra")
             log(f"[Fallback {route_tag}] {m}({think_lvl}): {str(e)[:120]}")
     return {}
 
-def fetch_official_win5_ids() -> list:
-    try:
-        soup = get_soup("https://race.netkeiba.com/top/win5.html")
-        ids = []
-        for a in soup.select("a[href*='race_id=']"):
-            m = re.search(r"race_id=(\d{12})", a.get("href", ""))
-            if m and m.group(1) not in ids: ids.append(m.group(1))
-        if len(ids) >= 5: return ids[:5]
-    except Exception: pass
+def fetch_official_win5_ids(ymd: str = "", valid_ids: set | None = None) -> list:
+    """v11.9: 土曜・日曜・月曜(3日連続開催)すべてに対応し、対象日の実在race_idと厳密照合してWIN5 5鞍を取得"""
+    urls = []
+    if ymd:
+        urls.append(f"https://race.netkeiba.com/top/win5.html?kaisai_date={ymd}")
+    urls.append("https://race.netkeiba.com/top/win5.html")
+
+    for url in urls:
+        try:
+            soup = get_soup(url)
+            for selector in (
+                ".Win5_TargetRace a[href*='race_id='], .Win5RaceList a[href*='race_id='], .Win5_Table a[href*='race_id='], table a[href*='race_id=']",
+                "a[href*='race_id=']",
+            ):
+                ids = []
+                for a in soup.select(selector):
+                    m = re.search(r"race_id=(\d{12})", a.get("href", ""))
+                    if not m:
+                        continue
+                    rid = m.group(1)
+                    if valid_ids is not None and rid not in valid_ids:
+                        continue
+                    if rid not in ids:
+                        ids.append(rid)
+                if len(ids) >= 5:
+                    return ids[:5]
+        except Exception:
+            pass
     return []
 
-def fetch_official_win5_payout(target_race_ids: list) -> int:
-    try:
-        soup = get_soup("https://race.netkeiba.com/top/win5.html")
-        page_ids = re.findall(r"race_id=(\d{12})", str(soup))
-        if target_race_ids and not any(rid in page_ids for rid in target_race_ids):
-            return 0
-        txt = soup.get_text(" ", strip=True)
-        m = re.search(r"(?:払戻金|配当)[^\d]{0,15}([\d,]{3,12})\s*円", txt)
-        if m:
-            val = int(m.group(1).replace(",", ""))
-            if val >= 100: return val
-    except Exception: pass
+def fetch_official_win5_payout(target_race_ids: list, ymd: str = "") -> int:
+    urls = []
+    if ymd:
+        urls.append(f"https://race.netkeiba.com/top/win5.html?kaisai_date={ymd}")
+    urls.append("https://race.netkeiba.com/top/win5.html")
+    for url in urls:
+        try:
+            soup = get_soup(url)
+            page_ids = set(re.findall(r"race_id=(\d{12})", str(soup)))
+            if target_race_ids and sum(1 for rid in target_race_ids if rid in page_ids) < 3:
+                continue
+            txt = soup.get_text(" ", strip=True)
+            m = re.search(r"(?:払戻金|配当)[^\d]{0,15}([\d,]{3,12})\s*円", txt)
+            if m:
+                val = int(m.group(1).replace(",", ""))
+                if val >= 100:
+                    return val
+        except Exception:
+            pass
     return 0
 
 def sync_multileg_results(day_db: dict, mode: str):
@@ -1116,10 +1140,12 @@ def sync_multileg_results(day_db: dict, mode: str):
             finished += 1
     ml["finishedLegs"] = finished
     if mode == "jra" and finished == len(ml["legs"]) and finished == 5 and not ml.get("officialPayout"):
-        pay = fetch_official_win5_payout(leg_rids)
+        ymd = str(day_db.get("date", "")).replace("-", "")
+        pay = fetch_official_win5_payout(leg_rids, ymd=ymd)
         if pay > 0: ml["officialPayout"] = pay
 
 def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
+    """v11.9: 日曜固定ロックを撤廃し、土曜・日曜・月曜すべての公式WIN5対象日を自動検出・編成"""
     dt = datetime.strptime(date_str, "%Y-%m-%d")
     if mode == "nar":
         nankan_cand = [
@@ -1138,16 +1164,25 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
         if len(selected) < 3:
             return {}
     else:
-        if dt.weekday() != 6: return {}
-        off_ids = fetch_official_win5_ids()
+        ymd = date_str.replace("-", "")
+        valid_ids = {r["raceId"] for r in races if r.get("raceId")}
+        off_ids = fetch_official_win5_ids(ymd=ymd, valid_ids=valid_ids)
         matched = [r for r in races if r["raceId"] in off_ids and isinstance(r.get("horses"), list) and len(r["horses"]) >= 2]
         if len(matched) == 5:
-            selected = sorted(matched, key=lambda x: x.get("postTime") or "15:00")
-        else:
-            pool = [r for r in races if r.get("raceNumber") in (9, 10, 11) and isinstance(r.get("horses"), list) and len(r["horses"]) >= 2]
-            pool.sort(key=lambda x: (x["raceNumber"], x.get("postTime") or "14:30"), reverse=True)
+            selected = sorted(matched, key=lambda x: (x.get("postTime") or "15:00", x.get("raceNumber", 10)))
+            log(f"[WIN5] Official 5 legs matched for {date_str}: {[x['venueLabel'] for x in selected]}")
+        elif dt.weekday() == 6:
+            # 日曜のみ公式ID未掲載時のフォールバック（ジャパンC等のG1・12Rも対象に含める）
+            pool = [
+                r for r in races
+                if (r.get("raceNumber") in (9, 10, 11) or detect_is_g1(r.get("name", "")))
+                and isinstance(r.get("horses"), list) and len(r["horses"]) >= 2
+            ]
+            pool.sort(key=lambda x: (1 if detect_is_g1(x.get("name", "")) else 0, 1 if x["raceNumber"] >= 10 else 0, x["raceNumber"], x.get("postTime") or "14:30"), reverse=True)
             if len(pool) < 5: return {}
-            selected = sorted(pool[:5], key=lambda x: x.get("postTime") or "15:00")
+            selected = sorted(pool[:5], key=lambda x: (x.get("postTime") or "15:00", x["raceNumber"]))
+        else:
+            return {}
 
     all_finished = all(bool(r.get("actualTop3")) for r in selected)
     if mode == "jra" and len(selected) == 5 and not all_finished and not time_exceeded():
@@ -1210,7 +1245,7 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
         })
     last_hs = legs[-1]["horses"][2:4]
     hedges = [{"num": h["num"], "name": f"{legs[-1]['venue']} {h['name']}", "odds": h["odds"], "hedge50k": int((50000 / max(1.5, h["odds"]) + 99) // 100 * 100), "hedge100k": int((100000 / max(1.5, h["odds"]) + 99) // 100 * 100)} for h in last_hs]
-    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} Neon v11.8 2-Stage融合編成（{'南関トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 Plan A/C直交3枚対応'}）】", "legs": legs, "hedges": hedges}
+    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} Neon v11.9 2-Stage融合編成（{'南関トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 Plan A/C直交3枚対応'}）】", "legs": legs, "hedges": hedges}
 
 def should_check_result(date_str: str, post_time: str, now: datetime) -> bool:
     today_str = now.strftime("%Y-%m-%d")
@@ -1235,7 +1270,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
     db_path = f"data/{date_str}{suffix}.json"
     day_db = json.load(open(db_path, "r", encoding="utf-8")) if os.path.exists(db_path) else {"date": date_str, "mode": mode, "races": races}
 
-    # v11.8 Fix①: 木曜特別登録時点(11R等)で作成されたJSONに、金曜確定の全レース(1R〜8R・新馬戦等)を自動マージ
     if not day_db.get("races") and races:
         day_db["races"] = races
     elif races:
@@ -1257,10 +1291,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             if any(not any(nv in str(lg.get("venue", "")) for nv in NANKAN_NAMES) for lg in cur_ml["legs"]):
                 day_db.pop("multiLeg", None)
 
-    dt = datetime.strptime(date_str, "%Y-%m-%d")
-    if mode == "jra" and dt.weekday() != 6:
-        day_db.pop("multiLeg", None)
-
     for r in day_db.get("races", []):
         if time_exceeded():
             log("Time cap reached in scraping loop; saving progress.")
@@ -1275,7 +1305,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         has_neon = has_real and ("fFund" in r["horses"][0])
         is_unsettled = not bool(r.get("actualTop3"))
         need_ver_refresh = is_unsettled and (not r.get("aiPredicted")) and (day_db.get("engineVer") != ENGINE_VER)
-        # v11.8 Fix②: JRA/NAR問わず、朝7時前などライブオッズ未取得だったレースを必ず再取得する
         missing_live_odds = is_unsettled and (
             (has_neon and float(r.get("wR", 0)) == 0.0)
             or (r.get("hasLiveOdds") is False)
@@ -1338,9 +1367,16 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
                     prof = ev["returnYen"] - ev["investedYen"]
                     r["resultStatus"] = f"🎯 的中 払戻{ev['returnYen']:,}円 (回収率{ev['actualRoi']}% / {prof:+,}円)" if ev["isHit"] else f"❌ 不的中 回収率0.0%"
 
-    if ((mode == "jra" and dt.weekday() == 6) or mode == "nar") and not time_exceeded():
+    # v11.9: 曜日に関係なく当日・今後のJRA WIN5対象日（土・日・月）とNARトリプル馬単を自動編成
+    is_past_day = date_str < now.strftime("%Y-%m-%d")
+    if not time_exceeded():
         cur_ml = day_db.get("multiLeg") or {}
-        need_ml_ai = (not cur_ml.get("aiPredicted")) or (cur_ml.get("engineVer") != ENGINE_VER and JRA_WIN5_G1_MODEL not in str(cur_ml.get("usedModel", "")))
+        has_ml = isinstance(cur_ml.get("legs"), list) and len(cur_ml["legs"]) >= 3
+        need_ml_ai = (
+            (not has_ml and not is_past_day)
+            or (has_ml and not cur_ml.get("aiPredicted") and not is_past_day)
+            or (has_ml and not is_past_day and cur_ml.get("engineVer") != ENGINE_VER and JRA_WIN5_G1_MODEL not in str(cur_ml.get("usedModel", "")))
+        )
         if need_ml_ai:
             mleg = build_multileg_with_ai(day_db.get("races", []), mode, date_str)
             if mleg: day_db["multiLeg"] = mleg
@@ -1352,7 +1388,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             if not r.get("horses") or r.get("actualTop3"):
                 continue
             is_target_nankan_ml = (mode == "nar") and is_nankan_race(r) and r.get("raceNumber") in (10, 11, 12)
-            # ライブオッズ未取得の段階では無駄なAI呼出を避ける（重賞と新馬のみ先行許可）
             if r.get("hasLiveOdds") is False and not (r.get("isGraded") or r.get("isNew")):
                 continue
             is_promising_pre = (r.get("rank") in ("S", "A", "New")) or r.get("isGraded") or is_target_nankan_ml
@@ -1390,7 +1425,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         wt_note = "公式馬体重発表済（Type I〜III・1800m+の+12kg+・ダート新馬<420kg補正必須）" if r.get("weightsAnnounced") else "馬体重未発表"
         pred = call_gemini(
             r["skill"],
-            f"【モード: 標準（Neon v11.8 回収率100%超厳選・Core55%/Alpha45%・期待値エッジ重視 / {wt_note}）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')}・{len(r['horses'])}頭)\n"
+            f"【モード: 標準（Neon v11.9 回収率100%超厳選・Core55%/Alpha45%・期待値エッジ重視 / {wt_note}）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')}・{len(r['horses'])}頭)\n"
             f"【当日バイアス(3R一致ガード)】{bias_info}\n"
             f"全頭について mark, role, style, f(2-Stage融合後勝率・50倍超は6%上限), fFund(オッズ遮断基礎勝率), wUsed(個別融合重み), top2, top3, comment(35字以内) と、"
             f"scenario, pivotType, rank(低配当トリガミ圧縮や期待値不足はPass), wR, m3, coreSyntheticOdds, hitRate, breakEvenRate, expectedRoi, coreConnections([[◎番,◯番],...]), counterfactualAudit(60字以内) をJSON出力せよ:\n{detail}",
@@ -1448,7 +1483,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
     day_db["trackBiases"] = []
     for v in venues:
         b_txt, b_cnt = summarize_intraday_track_bias(day_db.get("races", []), v)
-        day_db["trackBiases"].append({"venue": v, "surf": f"Neon v11.8 ({route_desc})", "trend": b_txt, "consistentR": b_cnt})
+        day_db["trackBiases"].append({"venue": v, "surf": f"Neon v11.9 ({route_desc})", "trend": b_txt, "consistentR": b_cnt})
     day_db["engineVer"] = ENGINE_VER
     day_db["aiPlan"] = f"JRA:{AI_PLAN}(Neon統一) / NAR:無料枠"
     day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
@@ -1587,7 +1622,6 @@ def run_pipeline():
             upcoming_days.append((dt, rs, off == 0))
             if len(upcoming_days) >= 2: break
 
-    # v11.8 Fix④: 開催当日は常に「今日(is_td=True)」を最優先処理する（今日でない場合のみ日曜優先）
     upcoming_days.sort(key=lambda x: (0 if x[2] else 1, 0 if x[0].weekday() == 6 else 1))
     for dt, rs, is_td in upcoming_days:
         if time_exceeded(): break
