@@ -15,7 +15,6 @@ JST = timezone(timedelta(hours=9))
 JRA_API_KEY = os.environ.get("GEMINI_API_KEY", "").strip()
 NAR_FREE_API_KEY = os.environ.get("GEMINI_FREE_API_KEY", "").strip()
 
-# AI_PLAN: "plan2_neon" (JRAはWIN5/G1含め全面Neon・NARは無料枠固定) | "plan1_hydrogen" | "free"
 AI_PLAN = os.environ.get("AI_PLAN", "plan2_neon").strip().lower()
 CUSTOM_HIGH_MODEL = os.environ.get("GEMINI_HIGH_TIER_MODEL", "").strip()
 CUSTOM_FAST_MODEL = os.environ.get("GEMINI_FAST_MODEL", "").strip()
@@ -36,7 +35,6 @@ else:
     JRA_FAST_MODEL = CUSTOM_FAST_MODEL or "gemini-3.8-flash"
     DEFAULT_MAX_JRA_CALLS = 6
 
-# NARは常に無料枠モデル（Hydrogen / 3.8 Flash）を使用
 NAR_FREE_HIGH_MODEL = "gemini-4-hydrogen"
 NAR_FREE_FAST_MODEL = "gemini-3.8-flash"
 
@@ -51,14 +49,12 @@ def make_client(api_key: str, timeout_ms: int):
     except Exception:
         return genai.Client(api_key=api_key)
 
-# JRA有料クライアントはNeon(XHIGH/HIGH)の深い思考に対応するため90秒タイムアウトを確保
 jra_client = make_client(JRA_API_KEY, 90000)
-# NAR無料クライアントはGEMINI_FREE_API_KEY専用（未設定時はNoneで有料キーへの誤課金を完全遮断）
 nar_free_client = make_client(NAR_FREE_API_KEY, 55000)
 
 os.makedirs("data", exist_ok=True)
 
-ENGINE_VER = "v11.7-neon"
+ENGINE_VER = "v11.8-neon"
 HEADERS = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) Chrome/124.0.0.0"}
 SESSION = requests.Session()
 SESSION.headers.update(HEADERS)
@@ -881,6 +877,7 @@ def compute_market_m3(horses: list) -> tuple[float, bool]:
     return round(sum(q_sorted[:3]), 1), has_spread
 
 def apply_auto_pass_and_rank(r: dict, is_historical: bool = False):
+    """v11.8-neon: ワイド3点の実測合成オッズ(1.12+)と事前/AI別EVゲートへ適正化（1日5-8R厳選・AIデッドロック解消）"""
     horses = r.get("horses") or []
     if len(horses) < 3:
         return
@@ -894,12 +891,13 @@ def apply_auto_pass_and_rank(r: dict, is_historical: bool = False):
     n_active = len(horses)
     is_nar = r.get("mode") == "nar"
     is_new = bool(r.get("isNew")) or r.get("skill") == "app-bayesian-make-debut" or "新馬" in str(r.get("name", ""))
+    is_ai = bool(r.get("aiPredicted"))
     o1 = metrics["top1Odds"]
 
     m3_f = round(sum(sorted([float(h.get("f", 0)) for h in horses], reverse=True)[:3]), 1)
     m3_q, has_real_odds_spread = compute_market_m3(horses)
     is_pseudo_odds = (r.get("hasLiveOdds") is False) or (
-        not r.get("aiPredicted") and all(abs(float(h.get("f", 0)) - float(h.get("fFund", -1))) < 0.05 for h in horses[:4]) and not has_real_odds_spread
+        not is_ai and all(abs(float(h.get("f", 0)) - float(h.get("fFund", -1))) < 0.05 for h in horses[:4]) and not has_real_odds_spread
     )
 
     if is_historical and not is_pseudo_odds and m3_f < 42.0 and m3_q >= 46.0:
@@ -914,29 +912,33 @@ def apply_auto_pass_and_rank(r: dict, is_historical: bool = False):
     r["portfolioRules"] = {"coreRatio": 0.55, "alphaRatio": 0.45, "coreLineCap": metrics["coreLines"], "singleLongshotCapPct": 0.30}
     r["strategyProfile"] = "roi_100_plus"
 
+    # === 適正化Passゲート（ワイド3点の数学的レンジに校正・事前段階はAI検証へ通過させる） ===
+    ev_floor_new = 0.86 if is_ai else 0.80
+    ev_floor_std = 0.94 if is_ai else 0.88
+
     pass_reason = ""
     if is_nar and not is_nar_bettable_race(r):
         pass_reason = "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
     elif is_pseudo_odds:
         pass_reason = "ライブオッズ未取得のため見送り"
-    elif n_active <= 8 and (avg_w < 3.2 or (len(top2_o) >= 2 and top2_o[0] <= 2.5 and top2_o[1] <= 2.5)):
+    elif n_active <= 8 and (avg_w < 3.0 or (len(top2_o) >= 2 and top2_o[0] <= 2.5 and top2_o[1] <= 2.5)):
         pass_reason = f"少頭数({n_active}頭)・低配当圧縮(平均W {avg_w}倍)"
-    elif is_nar and len(top2_o) >= 1 and top2_o[0] <= 1.6 and avg_w < 3.0:
+    elif is_nar and len(top2_o) >= 1 and top2_o[0] <= 1.6 and avg_w < 2.8:
         pass_reason = f"NAR一強圧縮(1人気{top2_o[0]}倍・平均W {avg_w}倍)"
     elif is_new:
-        if synth < 1.48:
-            pass_reason = f"新馬Core合成{synth}倍<1.48(トリガミ回避)"
-        elif max_ev < 0.96 and not r.get("aiPredicted"):
-            pass_reason = f"新馬期待値エッジ不足(EV {max_ev}<0.96)"
+        if synth < 1.08:
+            pass_reason = f"新馬Core合成{synth}倍<1.08(トリガミ回避)"
+        elif max_ev < ev_floor_new:
+            pass_reason = f"新馬期待値不足(EV {max_ev}<{ev_floor_new})"
     else:
-        if synth < 1.52:
-            pass_reason = f"Core合成{synth}倍<1.52(高期待値基準未達)"
-        elif max_ev < 1.02:
-            pass_reason = f"期待値エッジ不足(最大EV {max_ev}<1.02)"
-        elif not (1.9 <= o1 <= 11.0):
-            pass_reason = f"◎オッズ{o1}倍が適正収益帯(1.9-11.0)外"
-        elif m3_eval < 38.0:
-            pass_reason = f"混戦カオス(M3 {m3_eval}%<38%)"
+        if synth < 1.12:
+            pass_reason = f"Core合成{synth}倍<1.12(低配当圧縮回避)"
+        elif max_ev < ev_floor_std:
+            pass_reason = f"期待値エッジ不足(最大EV {max_ev}<{ev_floor_std})"
+        elif not (1.9 <= o1 <= 11.5):
+            pass_reason = f"◎オッズ{o1}倍が適正収益帯(1.9-11.5)外"
+        elif m3_eval < 34.0:
+            pass_reason = f"混戦カオス(M3 {m3_eval}%<34%)"
 
     if pass_reason:
         r["rank"] = "Pass"
@@ -953,13 +955,12 @@ def apply_auto_pass_and_rank(r: dict, is_historical: bool = False):
         return
 
     r.pop("passReason", None)
-    is_ai = bool(r.get("aiPredicted"))
 
     if is_new:
         r["rank"] = "New"
     elif (
-        (2.2 <= o1 <= 8.5 and synth >= 1.70 and m3_eval >= 46.0 and max_ev >= 1.10)
-        or (is_ai and 2.1 <= o1 <= 9.0 and synth >= 1.60 and m3_eval >= 42.0 and max_ev >= 1.06)
+        (2.2 <= o1 <= 9.0 and synth >= 1.32 and m3_eval >= 44.0 and max_ev >= 1.04)
+        or (is_ai and 2.1 <= o1 <= 9.5 and synth >= 1.25 and m3_eval >= 40.0 and max_ev >= 1.00)
     ):
         r["rank"] = "S"
     else:
@@ -999,7 +1000,6 @@ def classify_race_tier(r: dict) -> str:
     return "flash"
 
 def call_gemini(skill: str, prompt: str, tier: str = "flash", mode: str = "jra") -> dict:
-    """v11.7: JRAは有料Neon専用クライアント、NARは無料枠専用クライアントへ完全分離（誤課金防止）"""
     global AI_CALL_COUNT_JRA, AI_CALL_COUNT_NAR
     if time_exceeded():
         return {}
@@ -1026,7 +1026,6 @@ def call_gemini(skill: str, prompt: str, tier: str = "flash", mode: str = "jra")
         active_client = jra_client
         route_tag = f"JRA-{AI_PLAN}"
         if tier == "g1_win5":
-            # WIN5・G1はNeon(XHIGH)最優先 -> タイムアウト/非対応時はNeon(HIGH)へ自動フォールバック
             candidates = [(JRA_WIN5_G1_MODEL, "XHIGH"), (JRA_WIN5_G1_MODEL, "HIGH"), (JRA_FAST_MODEL, "MEDIUM")]
         elif tier == "high_h":
             candidates = [(JRA_HIGH_MODEL, "HIGH"), (JRA_FAST_MODEL, "MEDIUM")]
@@ -1056,7 +1055,6 @@ def call_gemini(skill: str, prompt: str, tier: str = "flash", mode: str = "jra")
                     thinking_config=types.ThinkingConfig(thinking_level=think_lvl),
                 )
             except Exception:
-                # XHIGH等がSDKのEnum未対応だった場合は次の候補(HIGH等)へ安全フォールバック
                 if think_lvl == "XHIGH":
                     log(f"[Fallback] {m}(XHIGH) unsupported by SDK enum -> trying next level")
                     continue
@@ -1212,7 +1210,7 @@ def build_multileg_with_ai(races: list, mode: str, date_str: str) -> dict:
         })
     last_hs = legs[-1]["horses"][2:4]
     hedges = [{"num": h["num"], "name": f"{legs[-1]['venue']} {h['name']}", "odds": h["odds"], "hedge50k": int((50000 / max(1.5, h["odds"]) + 99) // 100 * 100), "hedge100k": int((100000 / max(1.5, h["odds"]) + 99) // 100 * 100)} for h in last_hs]
-    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} Neon v11.7 2-Stage融合編成（{'南関トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 Plan A/C直交3枚対応'}）】", "legs": legs, "hedges": hedges}
+    return {"predicted": True, "aiPredicted": False, "date": date_str, "engineVer": ENGINE_VER, "summary": f"【{date_str} Neon v11.8 2-Stage融合編成（{'南関トリプル馬単50円単位' if mode=='nar' else 'JRA WIN5 Plan A/C直交3枚対応'}）】", "legs": legs, "hedges": hedges}
 
 def should_check_result(date_str: str, post_time: str, now: datetime) -> bool:
     today_str = now.strftime("%Y-%m-%d")
@@ -1232,11 +1230,21 @@ def is_pre_post_window(date_str: str, post_time: str, now: datetime, low_m: int 
 
 def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool, mode: str = "jra"):
     route_desc = f"JRA:{AI_PLAN}" if mode == "jra" else ("NAR:free" if nar_free_client else "NAR:baseline-only")
-    log(f"Processing {date_str} ({mode}, {len(races)} races, route={route_desc})")
+    log(f"Processing {date_str} ({mode}, fetched={len(races)} races, route={route_desc})")
     suffix = "_nar" if mode == "nar" else ""
     db_path = f"data/{date_str}{suffix}.json"
     day_db = json.load(open(db_path, "r", encoding="utf-8")) if os.path.exists(db_path) else {"date": date_str, "mode": mode, "races": races}
-    if not day_db.get("races") and races: day_db["races"] = races
+
+    # v11.8 Fix①: 木曜特別登録時点(11R等)で作成されたJSONに、金曜確定の全レース(1R〜8R・新馬戦等)を自動マージ
+    if not day_db.get("races") and races:
+        day_db["races"] = races
+    elif races:
+        existing_ids = {r.get("raceId") for r in day_db.get("races", [])}
+        added = [r for r in races if r.get("raceId") not in existing_ids]
+        if added:
+            log(f"[Merge] Added {len(added)} newly published races to {date_str}")
+            day_db["races"].extend(added)
+            day_db["races"].sort(key=lambda x: (x.get("venue", ""), int(x.get("raceNumber", 0))))
     day_db["mode"] = mode
 
     if mode == "nar":
@@ -1266,15 +1274,20 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         has_real = isinstance(r.get("horses"), list) and len(r["horses"]) >= 5
         has_neon = has_real and ("fFund" in r["horses"][0])
         is_unsettled = not bool(r.get("actualTop3"))
-        need_v117_refusion = is_unsettled and (not r.get("aiPredicted")) and (day_db.get("engineVer") != ENGINE_VER)
-        missing_nar_odds = (mode == "nar") and has_neon and (float(r.get("wR", 0)) == 0.0) and is_unsettled
+        need_ver_refresh = is_unsettled and (not r.get("aiPredicted")) and (day_db.get("engineVer") != ENGINE_VER)
+        # v11.8 Fix②: JRA/NAR問わず、朝7時前などライブオッズ未取得だったレースを必ず再取得する
+        missing_live_odds = is_unsettled and (
+            (has_neon and float(r.get("wR", 0)) == 0.0)
+            or (r.get("hasLiveOdds") is False)
+            or ("ライブオッズ未取得" in str(r.get("passReason", "")))
+        )
         missing_dist = (not r.get("surfaceDist")) or (mode == "nar" and r.get("surfaceDist") == "ダ1600m" and day_db.get("engineVer") != ENGINE_VER)
         bad_time = (not r.get("postTime")) or (r.get("postTime") == "15:00" and r.get("raceNumber", 11) < 10)
         can_have_result = should_check_result(date_str, r.get("postTime", ""), now)
         need_res = can_have_result and ((not r.get("evalDone") and r.get("rank") != "Pass") or is_unsettled or contaminated)
         in_live_win = is_today and is_pre_post_window(date_str, r.get("postTime", ""), now, 10, 95)
-        need_live_refresh = in_live_win and (not r.get("weightsAnnounced") or not r.get("wideOddsMap") or missing_nar_odds)
-        need_sh = contaminated or (not has_real) or bad_time or missing_dist or missing_nar_odds or need_v117_refusion or (not has_neon and is_unsettled) or need_live_refresh
+        need_live_refresh = in_live_win and (not r.get("weightsAnnounced") or not r.get("wideOddsMap") or missing_live_odds)
+        need_sh = contaminated or (not has_real) or bad_time or missing_dist or missing_live_odds or need_ver_refresh or (not has_neon and is_unsettled) or need_live_refresh
 
         if need_sh or need_res:
             detail, actual, raw_runners, track_cond, ptime, payouts, wide_map, weights_ready, fetched_sd = fetch_full_shutuba(
@@ -1308,12 +1321,13 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
                         h["name"] = rw["name"]
                         if rw.get("odds", 0) > 1.0: h["odds"] = round(float(rw["odds"]), 1)
                         if rw.get("weight"): h["weight"] = rw["weight"]
+                    r["hasLiveOdds"] = neon_meta.get("hasLiveOdds", True)
                 r["detailText"] = detail
             if actual: r["actualTop3"] = actual
             if payouts and any(payouts.values()):
                 r["payouts"] = payouts
 
-        if r.get("horses") and (not r.get("evalDone") or contaminated or day_db.get("engineVer") != ENGINE_VER):
+        if r.get("horses") and (not r.get("evalDone") or contaminated or day_db.get("engineVer") != ENGINE_VER or missing_live_odds):
             apply_auto_pass_and_rank(r, is_historical=bool(r.get("actualTop3")))
 
         if r.get("payouts") and any(r["payouts"].values()) and r.get("rank") not in ("Pass", "B"):
@@ -1331,7 +1345,6 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             mleg = build_multileg_with_ai(day_db.get("races", []), mode, date_str)
             if mleg: day_db["multiLeg"] = mleg
 
-    # AI本推論ルーティング（NARはGEMINI_FREE_API_KEY設定時のみ無料枠で実行）
     can_call_ai = (jra_client is not None) if mode == "jra" else (nar_free_client is not None)
     ai_candidates = []
     if can_call_ai:
@@ -1339,6 +1352,9 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             if not r.get("horses") or r.get("actualTop3"):
                 continue
             is_target_nankan_ml = (mode == "nar") and is_nankan_race(r) and r.get("raceNumber") in (10, 11, 12)
+            # ライブオッズ未取得の段階では無駄なAI呼出を避ける（重賞と新馬のみ先行許可）
+            if r.get("hasLiveOdds") is False and not (r.get("isGraded") or r.get("isNew")):
+                continue
             is_promising_pre = (r.get("rank") in ("S", "A", "New")) or r.get("isGraded") or is_target_nankan_ml
             if not is_promising_pre:
                 continue
@@ -1364,7 +1380,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
             ai_candidates.append((prio, tier, r))
 
     ai_candidates.sort(key=lambda x: x[0])
-    per_day_limit = 3 if mode == "nar" else (6 if AI_PLAN != "free" else 4)
+    per_day_limit = 3 if mode == "nar" else (8 if (is_today and AI_PLAN != "free") else (5 if AI_PLAN != "free" else 4))
     for _, tier, r in ai_candidates[:per_day_limit]:
         cur_cnt = AI_CALL_COUNT_NAR if mode == "nar" else AI_CALL_COUNT_JRA
         cur_max = MAX_AI_CALLS_NAR if mode == "nar" else MAX_AI_CALLS_JRA
@@ -1374,10 +1390,10 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
         wt_note = "公式馬体重発表済（Type I〜III・1800m+の+12kg+・ダート新馬<420kg補正必須）" if r.get("weightsAnnounced") else "馬体重未発表"
         pred = call_gemini(
             r["skill"],
-            f"【モード: 標準（Neon v11.7 回収率100%超厳選・Core55%/Alpha45%・期待値エッジ重視 / {wt_note}）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')}・{len(r['horses'])}頭)\n"
+            f"【モード: 標準（Neon v11.8 回収率100%超厳選・Core55%/Alpha45%・期待値エッジ重視 / {wt_note}）】日付:{date_str} {r['venueLabel']} {r['name']} ({r['surfaceDist']}・{r.get('trackCond','良')}・{len(r['horses'])}頭)\n"
             f"【当日バイアス(3R一致ガード)】{bias_info}\n"
             f"全頭について mark, role, style, f(2-Stage融合後勝率・50倍超は6%上限), fFund(オッズ遮断基礎勝率), wUsed(個別融合重み), top2, top3, comment(35字以内) と、"
-            f"scenario, pivotType, rank(合成オッズ<1.52や期待値エッジ不足はPass), wR, m3, coreSyntheticOdds, hitRate, breakEvenRate, expectedRoi, coreConnections([[◎番,◯番],...]), counterfactualAudit(60字以内) をJSON出力せよ:\n{detail}",
+            f"scenario, pivotType, rank(低配当トリガミ圧縮や期待値不足はPass), wR, m3, coreSyntheticOdds, hitRate, breakEvenRate, expectedRoi, coreConnections([[◎番,◯番],...]), counterfactualAudit(60字以内) をJSON出力せよ:\n{detail}",
             tier=tier,
             mode=mode,
         )
@@ -1432,7 +1448,7 @@ def process_kaisai_day(date_str: str, races: list, now: datetime, is_today: bool
     day_db["trackBiases"] = []
     for v in venues:
         b_txt, b_cnt = summarize_intraday_track_bias(day_db.get("races", []), v)
-        day_db["trackBiases"].append({"venue": v, "surf": f"Neon v11.7 ({route_desc})", "trend": b_txt, "consistentR": b_cnt})
+        day_db["trackBiases"].append({"venue": v, "surf": f"Neon v11.8 ({route_desc})", "trend": b_txt, "consistentR": b_cnt})
     day_db["engineVer"] = ENGINE_VER
     day_db["aiPlan"] = f"JRA:{AI_PLAN}(Neon統一) / NAR:無料枠"
     day_db["updatedAt"] = now.strftime("%Y-%m-%d %H:%M JST")
@@ -1571,7 +1587,8 @@ def run_pipeline():
             upcoming_days.append((dt, rs, off == 0))
             if len(upcoming_days) >= 2: break
 
-    upcoming_days.sort(key=lambda x: 0 if x[0].weekday() == 6 else 1)
+    # v11.8 Fix④: 開催当日は常に「今日(is_td=True)」を最優先処理する（今日でない場合のみ日曜優先）
+    upcoming_days.sort(key=lambda x: (0 if x[2] else 1, 0 if x[0].weekday() == 6 else 1))
     for dt, rs, is_td in upcoming_days:
         if time_exceeded(): break
         process_kaisai_day(dt.strftime("%Y-%m-%d"), rs, now, is_td, "jra")
