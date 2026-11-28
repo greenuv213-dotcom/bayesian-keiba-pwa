@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-28 15:38 JST",
+  "updatedAt": "2026-11-28 16:07 JST",
   "aiPlan": "JRA:Neon統一 / NAR:無料キー待機",
   "all": {
-    "races": 28,
+    "races": 29,
     "hits": 12,
-    "invest": 280000,
+    "invest": 290000,
     "ret": 193580,
-    "passCount": 234,
-    "passSaved": 2340000,
+    "passCount": 248,
+    "passSaved": 2480000,
     "byRank": {
       "S": {
         "races": 9,
@@ -16,9 +16,9 @@
         "ret": 49960
       },
       "A": {
-        "races": 10,
+        "races": 11,
         "hits": 4,
-        "invest": 100000,
+        "invest": 110000,
         "ret": 68180
       },
       "New": {
@@ -36,9 +36,9 @@
     },
     "bySource": {
       "ai": {
-        "races": 8,
+        "races": 9,
         "hits": 4,
-        "invest": 80000,
+        "invest": 90000,
         "ret": 57730
       },
       "baseline": {
@@ -50,12 +50,12 @@
     }
   },
   "jra": {
-    "races": 28,
+    "races": 29,
     "hits": 12,
-    "invest": 280000,
+    "invest": 290000,
     "ret": 193580,
-    "passCount": 78,
-    "passSaved": 780000,
+    "passCount": 92,
+    "passSaved": 920000,
     "byRank": {
       "S": {
         "races": 9,
@@ -64,9 +64,9 @@
         "ret": 49960
       },
       "A": {
-        "races": 10,
+        "races": 11,
         "hits": 4,
-        "invest": 100000,
+        "invest": 110000,
         "ret": 68180
       },
       "New": {
@@ -84,9 +84,9 @@
     },
     "bySource": {
       "ai": {
-        "races": 8,
+        "races": 9,
         "hits": 4,
-        "invest": 80000,
+        "invest": 90000,
         "ret": 57730
       },
       "baseline": {
@@ -149,11 +149,11 @@
     {
       "date": "2026-11-28",
       "mode": "jra",
-      "races": 7,
+      "races": 8,
       "hits": 3,
-      "invest": 70000,
+      "invest": 80000,
       "ret": 39960,
-      "roi": 57.1
+      "roi": 50.0
     },
     {
       "date": "2026-11-23",
@@ -235,6 +235,20 @@
       "isGraded": false,
       "ai": true,
       "race": "京都9R 栂尾特別",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-28",
+      "mode": "jra",
+      "rank": "A",
+      "isGraded": false,
+      "ai": true,
+      "race": "京都10R 東山S",
       "status": "❌ 不的中 回収率0.0%",
       "roi": 0.0,
       "returnYen": 0,
