@@ -1,19 +1,19 @@
 {
-  "updatedAt": "2026-11-28 13:49 JST",
+  "updatedAt": "2026-11-28 15:38 JST",
   "aiPlan": "JRA:Neon統一 / NAR:無料キー待機",
   "all": {
-    "races": 25,
-    "hits": 11,
-    "invest": 250000,
-    "ret": 168930,
-    "passCount": 235,
-    "passSaved": 2350000,
+    "races": 28,
+    "hits": 12,
+    "invest": 280000,
+    "ret": 193580,
+    "passCount": 234,
+    "passSaved": 2340000,
     "byRank": {
       "S": {
-        "races": 6,
-        "hits": 2,
-        "invest": 60000,
-        "ret": 25310
+        "races": 9,
+        "hits": 3,
+        "invest": 90000,
+        "ret": 49960
       },
       "A": {
         "races": 10,
@@ -36,32 +36,32 @@
     },
     "bySource": {
       "ai": {
-        "races": 6,
-        "hits": 3,
-        "invest": 60000,
-        "ret": 33080
+        "races": 8,
+        "hits": 4,
+        "invest": 80000,
+        "ret": 57730
       },
       "baseline": {
-        "races": 19,
+        "races": 20,
         "hits": 8,
-        "invest": 190000,
+        "invest": 200000,
         "ret": 135850
       }
     }
   },
   "jra": {
-    "races": 25,
-    "hits": 11,
-    "invest": 250000,
-    "ret": 168930,
-    "passCount": 79,
-    "passSaved": 790000,
+    "races": 28,
+    "hits": 12,
+    "invest": 280000,
+    "ret": 193580,
+    "passCount": 78,
+    "passSaved": 780000,
     "byRank": {
       "S": {
-        "races": 6,
-        "hits": 2,
-        "invest": 60000,
-        "ret": 25310
+        "races": 9,
+        "hits": 3,
+        "invest": 90000,
+        "ret": 49960
       },
       "A": {
         "races": 10,
@@ -84,15 +84,15 @@
     },
     "bySource": {
       "ai": {
-        "races": 6,
-        "hits": 3,
-        "invest": 60000,
-        "ret": 33080
+        "races": 8,
+        "hits": 4,
+        "invest": 80000,
+        "ret": 57730
       },
       "baseline": {
-        "races": 19,
+        "races": 20,
         "hits": 8,
-        "invest": 190000,
+        "invest": 200000,
         "ret": 135850
       }
     }
@@ -149,11 +149,11 @@
     {
       "date": "2026-11-28",
       "mode": "jra",
-      "races": 4,
-      "hits": 2,
-      "invest": 40000,
-      "ret": 15310,
-      "roi": 38.3
+      "races": 7,
+      "hits": 3,
+      "invest": 70000,
+      "ret": 39960,
+      "roi": 57.1
     },
     {
       "date": "2026-11-23",
@@ -217,6 +217,34 @@
     {
       "date": "2026-11-28",
       "mode": "jra",
+      "rank": "S",
+      "isGraded": false,
+      "ai": false,
+      "race": "京都8R 3歳以上2勝クラス",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-28",
+      "mode": "jra",
+      "rank": "S",
+      "isGraded": false,
+      "ai": true,
+      "race": "京都9R 栂尾特別",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-28",
+      "mode": "jra",
       "rank": "New",
       "isGraded": false,
       "ai": false,
@@ -242,6 +270,26 @@
       "isHit": true,
       "hits": [
         "ワイド 3-8 (◎-▲ Core) (7,770円)"
+      ]
+    },
+    {
+      "date": "2026-11-28",
+      "mode": "jra",
+      "rank": "S",
+      "isGraded": false,
+      "ai": true,
+      "race": "東京9R セレブレイシ",
+      "status": "🎯 的中 払戻24,650円 (回収率246.5% / +14,650円)",
+      "roi": 246.5,
+      "returnYen": 24650,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 14-11 (◎-◯ Core) (7,260円)",
+        "ワイド 14-10 (◎-▲ Core) (5,130円)",
+        "ワイド 11-10 (◯-▲ タテ目防衛) (7,000円)",
+        "単勝 11 (◯ ウィロークリーク Alpha) (4,080円)",
+        "3連複F (1,180円)"
       ]
     },
     {
