@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Bayesian競馬AI" />
-  <title>Bayesian Keiba AI — JRA/NAR 階層ベイズ予想PWA (Neon v11.6)</title>
+  <title>Bayesian Keiba AI — JRA/NAR 階層ベイズ予想PWA (Neon v11.9)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -90,7 +90,7 @@
 
         <div id="win5ResultSummary" class="hidden rounded-xl p-3 space-y-2 border"></div>
 
-        <p id="win5SummaryText" class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-lg p-2.5"></p>
+        <p id="win5SummaryText" class="text-xs text-slate-300 leading-relaxed bg-slate-950/60 border border-slate-800 rounded-lg p-2.5 whitespace-pre-line"></p>
         <div class="bg-slate-950/80 border border-slate-800 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
             <span class="text-xs text-slate-300 font-bold">💰 総予算変更（5,000円〜50,000円）</span>
@@ -178,14 +178,14 @@
     <section id="view-skills" class="hidden space-y-3">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <h2 class="text-sm font-bold text-white">🧬 Neon v11.6 回収率100%超エンジン</h2>
-          <span id="skillAiPlanBadge" class="text-[11px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded font-bold">plan2_neon (Neon + Carbon)</span>
+          <h2 class="text-sm font-bold text-white">🧬 Neon v11.9 回収率100%超エンジン</h2>
+          <span id="skillAiPlanBadge" class="text-[11px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded font-bold">JRA:Neon統一 / NAR:無料枠</span>
         </div>
         <ul class="text-xs text-slate-300 space-y-1.5 leading-relaxed list-disc pl-4">
-          <li><b>厳選購入＆期待値エッジゲート</b>：Bランク・オッズ未取得・NAR下級平場を完全 <code>Pass</code> 化。<code>Core合成 ≥ 1.52倍</code> × <code>最大EV ≥ 1.02</code>（Sは合成<code>1.70+</code>・EV<code>1.10+</code>）を通過した <b>S・A・新馬</b> のみへ投資を集中。</li>
+          <li><b>厳選購入＆適正化EVゲート</b>：Bランク・オッズ未取得・NAR下級平場を完全 <code>Pass</code> 化。<code>Core合成 ≥ 1.12倍</code> × <code>EV ≥ 0.88(AI後0.94)</code>（Sは合成<code>1.25+</code>・EV<code>1.00+</code>）を通過した <b>S・A・新馬</b> へ投資を集中。</li>
           <li><b>Core 55% / Alpha 45% の高回収バランス</b>：ワイド2〜3点（<code>O◎ ≤ 2.2</code> は2点圧縮・市場1〜2人気強制結線）で元返し防衛しつつ、控除率20%の<b>単勝＋馬連2点＋少点数3連複</b>へ45%配分し、的中時平均1.8〜2.2倍を狙う。</li>
-          <li><b>有料モデル最適ルーティング（plan2_neon）</b>：WIN5・G1は <code>gemini-4-carbon (HIGH)</code>、S・A・新馬・南関メインは <code>gemini-4-neon</code> で100% AI本推論＋直前馬体重再推論。</li>
-          <li><b>WIN5 / トリプル馬単 Plan C 直交編成</b>：T1 Core 45%上限＋T2/T3 直交波乱翼（中穴5〜15倍優先・NARは南関4場限定）。</li>
+          <li><b>JRA有料Neon統一 ＆ NAR完全無料枠分離</b>：JRAはWIN5・G1（<code>XHIGH/HIGH</code>）からS・A・新馬まで全面 <code>gemini-4-neon</code>、NARは専用無料キーで <code>Hydrogen / 3.8 Flash</code> を稼働（誤課金防止ガード付）。</li>
+          <li><b>土・日・月全日程WIN5 ＆ トリプル馬単 Plan C 直交編成</b>：公式対象5レースIDを曜日問わず自動検知し、T1 Core 45%上限＋T2/T3 直交波乱翼（中穴5〜15倍優先・NARは南関4場限定）を編成。</li>
         </ul>
       </div>
 
@@ -264,7 +264,7 @@
         <div class="bg-gradient-to-br from-emerald-950/50 via-slate-900 to-slate-950 border border-emerald-500/40 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
             <div class="min-w-0">
-              <div id="modalTicketHeaderTitle" class="text-xs text-emerald-300 font-bold">💰 Neon v11.6配分（Core55%・Alpha45%）</div>
+              <div id="modalTicketHeaderTitle" class="text-xs text-emerald-300 font-bold">💰 Neon v11.9配分（Core55%・Alpha45%）</div>
               <div id="modalOddsSourceLabel" class="text-[11px] text-slate-400">ワイド2-3点防衛＋単勝・馬連2点・少点数3連複でROI100%超狙い</div>
             </div>
             <span id="modalBudgetValue" class="shrink-0 text-lg font-extrabold text-amber-400 whitespace-nowrap">10,000円</span>
@@ -526,9 +526,9 @@
     function renderAiPlanBadge() {
       const el = document.getElementById("skillAiPlanBadge");
       if (!el) return;
-      const plan = (STATS_DATA && STATS_DATA.aiPlan) || "plan2_neon";
+      const plan = (STATS_DATA && STATS_DATA.aiPlan) || "JRA:Neon統一 / NAR:無料枠";
       const labels = {
-        plan2_neon: "plan2_neon (Neon主力 + Carbon)",
+        plan2_neon: "JRA:Neon統一 / NAR:無料枠",
         plan1_hydrogen: "plan1_hydrogen (Hydrogen上限解除)",
         free: "free (Hydrogen + 3.8 Flash)"
       };
@@ -686,10 +686,10 @@
           ? `<span class="text-[10px] bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 px-1.5 py-0.5 rounded font-mono">M3:${Number(r.m3).toFixed(0)}%</span>`
           : "";
         const synthTag = r.coreSyntheticOdds != null
-          ? `<span class="text-[10px] ${Number(r.coreSyntheticOdds) < 1.52 ? "bg-rose-500/15 border-rose-400/30 text-rose-300" : "bg-sky-500/15 border-sky-400/30 text-sky-300"} border px-1.5 py-0.5 rounded font-mono">合${Number(r.coreSyntheticOdds).toFixed(2)}</span>`
+          ? `<span class="text-[10px] ${Number(r.coreSyntheticOdds) < 1.12 ? "bg-rose-500/15 border-rose-400/30 text-rose-300" : "bg-sky-500/15 border-sky-400/30 text-sky-300"} border px-1.5 py-0.5 rounded font-mono">合${Number(r.coreSyntheticOdds).toFixed(2)}</span>`
           : "";
         const evTag = r.maxEv != null && Number(r.maxEv) > 0
-          ? `<span class="text-[10px] ${Number(r.maxEv) >= 1.10 ? "bg-emerald-500/20 border-emerald-400/40 text-emerald-300" : (Number(r.maxEv) >= 1.02 ? "bg-amber-500/15 border-amber-400/30 text-amber-200" : "bg-slate-800 border-slate-700 text-slate-400")} border px-1.5 py-0.5 rounded font-mono">EV${Number(r.maxEv).toFixed(2)}</span>`
+          ? `<span class="text-[10px] ${Number(r.maxEv) >= 1.04 ? "bg-emerald-500/20 border-emerald-400/40 text-emerald-300" : (Number(r.maxEv) >= 0.94 ? "bg-amber-500/15 border-amber-400/30 text-amber-200" : "bg-slate-800 border-slate-700 text-slate-400")} border px-1.5 py-0.5 rounded font-mono">EV${Number(r.maxEv).toFixed(2)}</span>`
           : "";
         const hasResult = r.actualTop3 && r.actualTop3.length > 0;
         const evalResult = r.evalDone ? { isHit: r.isHit, ret: r.returnYen || 0, roi: r.actualRoi || 0, hits: r.hitTickets || [] } : null;
@@ -787,11 +787,11 @@
       metaBadges.push(`<span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded font-bold">💎 Core55/Alpha45</span>`);
       if (race.m3 != null) metaBadges.push(`<span class="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 px-1.5 py-0.5 rounded font-mono">M3 ${Number(race.m3).toFixed(1)}%</span>`);
       if (race.coreSyntheticOdds != null) {
-        const scCls = Number(race.coreSyntheticOdds) < 1.52 ? "bg-rose-500/20 text-rose-300 border-rose-400/40" : "bg-sky-500/20 text-sky-300 border-sky-400/30";
+        const scCls = Number(race.coreSyntheticOdds) < 1.12 ? "bg-rose-500/20 text-rose-300 border-rose-400/40" : "bg-sky-500/20 text-sky-300 border-sky-400/30";
         metaBadges.push(`<span class="${scCls} border px-1.5 py-0.5 rounded font-mono">Core合成 ${Number(race.coreSyntheticOdds).toFixed(2)}倍</span>`);
       }
       if (race.maxEv != null && Number(race.maxEv) > 0) {
-        const evCls = Number(race.maxEv) >= 1.10 ? "bg-emerald-500/25 text-emerald-200 border-emerald-400/50" : (Number(race.maxEv) >= 1.02 ? "bg-amber-500/20 text-amber-200 border-amber-400/40" : "bg-rose-500/20 text-rose-300 border-rose-400/40");
+        const evCls = Number(race.maxEv) >= 1.04 ? "bg-emerald-500/25 text-emerald-200 border-emerald-400/50" : (Number(race.maxEv) >= 0.94 ? "bg-amber-500/20 text-amber-200 border-amber-400/40" : "bg-rose-500/20 text-rose-300 border-rose-400/40");
         metaBadges.push(`<span class="${evCls} border px-1.5 py-0.5 rounded font-mono font-bold">最大EV ${Number(race.maxEv).toFixed(2)}</span>`);
       }
       if (race.wR != null) metaBadges.push(`<span class="bg-slate-800 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded font-mono">融合wR ${Number(race.wR).toFixed(2)}</span>`);
@@ -859,7 +859,7 @@
         const wtSpan = h.weight ? `<span class="text-[10px] text-slate-400 font-mono">${h.weight}</span>` : "";
         const evVal = ((Number(h.f) || 0) / 100.0) * (Number(h.odds) || 0);
         const evSpan = (Number(h.odds) > 1.0 && Number(h.odds) < 50.0)
-          ? `<span class="text-[10px] font-mono ${evVal >= 1.10 ? "text-emerald-300 font-bold" : (evVal >= 1.0 ? "text-amber-300" : "text-slate-500")}">EV:${evVal.toFixed(2)}</span>`
+          ? `<span class="text-[10px] font-mono ${evVal >= 1.04 ? "text-emerald-300 font-bold" : (evVal >= 0.94 ? "text-amber-300" : "text-slate-500")}">EV:${evVal.toFixed(2)}</span>`
           : "";
         const clampBadge = (h.wUsed != null && Number(h.wUsed) <= 0.18)
           ? `<span class="text-[9px] bg-rose-500/20 border border-rose-400/40 text-rose-300 px-1 py-0.5 rounded font-mono">w=${Number(h.wUsed).toFixed(2)}</span>`
@@ -950,7 +950,7 @@
       return { val: fallback, isLive: false };
     }
 
-    // auto_predict.py (v11.6-neon) と100%同期: Core 55% (ワイド2-3点絞り) + Alpha 45% (単勝 + 馬連2点 + 少点数3連複)
+    // auto_predict.py (v11.9-neon) と100%同期: Core 55% (ワイド2-3点絞り) + Alpha 45% (単勝 + 馬連2点 + 少点数3連複)
     function buildFullSkillTickets(race, B = 10000) {
       const effHorses = getEffectiveHorses(race);
       const sorted = [...effHorses].sort((a, b) => ((Number(b.f) || 0) * 0.55 + (Number(b.top3) || 0) * 0.45) - ((Number(a.f) || 0) * 0.55 + (Number(a.top3) || 0) * 0.45));
@@ -1018,8 +1018,8 @@
       const coreSynthOdds = Number((1.0 / Math.max(0.05, invSum)).toFixed(2));
 
       document.getElementById("modalTicketHeaderTitle").textContent = isCompressed2
-        ? "💰 Neon v11.6配分（O◎≤2.2 2点Core 55% ＋ Alpha 45%）"
-        : "💰 Neon v11.6配分（厳選3点Core 55% ＋ 高回収Alpha 45%）";
+        ? "💰 Neon v11.9配分（O◎≤2.2 2点Core 55% ＋ Alpha 45%）"
+        : "💰 Neon v11.9配分（厳選3点Core 55% ＋ 高回収Alpha 45%）";
       document.getElementById("modalOddsSourceLabel").textContent = liveWideUsed
         ? `✅ 実ワイドオッズ連動（Core合成 ${coreSynthOdds}倍）＋単勝/馬連/3連複で一撃2万〜4万円狙い`
         : `Core 55%（合成 ${coreSynthOdds}倍）＋ Alpha 45%（単勝・馬連2点・少点数3連複）`;
@@ -1073,7 +1073,7 @@
       const race = state.activeRace;
       if (!race || !LAST_MODAL_TICKETS.length) return;
       const lines = [
-        `【${race.venue}${race.r}R ${race.name}】予算 ${state.modalBudget.toLocaleString()}円 (Neon v11.6 Core55/Alpha45)`,
+        `【${race.venue}${race.r}R ${race.name}】予算 ${state.modalBudget.toLocaleString()}円 (Neon v11.9 Core55/Alpha45)`,
         ...LAST_MODAL_TICKETS.map(t => {
           const perPt = Math.max(100, Math.round((t.amt / t.points) / 100) * 100);
           const ptStr = t.points > 1 ? ` (${t.points}点×${perPt}円=計${t.amt.toLocaleString()}円)` : ` ${t.amt.toLocaleString()}円`;
@@ -1102,7 +1102,7 @@
       if (race.rank === "Pass" || race.rank === "B") {
         LAST_MODAL_TICKETS = [];
         const reasonTxt = race.passReason ? `<div class="text-[11px] text-amber-300 mt-1">見送り理由: ${race.passReason}</div>` : "";
-        document.getElementById("modalTicketsList").innerHTML = `<div class="bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-slate-300"><b>💤 自動見送り（Pass / 推奨購入額 0円）</b>${reasonTxt}<div class="text-[10px] text-slate-400 mt-1">回収率100%超を守るため、Core合成オッズ1.52倍未満・期待値エッジ不足・NAR下級平場は購入を見送ります。</div></div>`;
+        document.getElementById("modalTicketsList").innerHTML = `<div class="bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-slate-300"><b>💤 自動見送り（Pass / 推奨購入額 0円）</b>${reasonTxt}<div class="text-[10px] text-slate-400 mt-1">回収率100%超を守るため、Core合成オッズ1.12倍未満・期待値エッジ不足・NAR下級平場は購入を見送ります。</div></div>`;
         document.getElementById("modalPortfolioMetrics").innerHTML = `<div class="text-[11px] text-sky-300 font-bold">🛡️ Pass見送りによる防衛額: +10,000円</div>`;
         return;
       }
@@ -1192,8 +1192,8 @@
       }
 
       const overallRoi = ((totalExpectedReturn / Math.max(1, totalInvest)) * 100).toFixed(1);
-      const synthWarn = built.coreSynthOdds < 1.52
-        ? `<span class="text-rose-300 font-bold">⚠️ Core合成${built.coreSynthOdds}倍(&lt;1.52) 見送り推奨</span>`
+      const synthWarn = built.coreSynthOdds < 1.12
+        ? `<span class="text-rose-300 font-bold">⚠️ Core合成${built.coreSynthOdds}倍(&lt;1.12) 見送り推奨</span>`
         : `<span class="text-sky-300">🛡️ Core合成${built.coreSynthOdds}倍 / ワイド単発目安 ${minCoreReturn.toLocaleString()}円 (${minCorePct}%)</span>`;
 
       document.getElementById("modalPortfolioMetrics").innerHTML = `
@@ -1215,7 +1215,7 @@
       onModalBudgetChange(state.modalBudget);
     }
 
-    // ===== WIN5 / トリプル馬単（v11.2 完全直交3枚Plan C + Plan A） =====
+    // ===== WIN5 / トリプル馬単（v11.9 土・日・月全日程対応 ＋ 完全直交3枚Plan C + Plan A） =====
     function computeOptimalCounts(legs, maxPoints, weightFn, initCounts) {
       const nLegs = legs.length, counts = initCounts.slice(0, nLegs);
       while (true) {
@@ -1325,12 +1325,13 @@
     function findActiveMultiLegWithDay() {
       const db = getActiveDB();
       const curDay = db[state.selectedDate];
-      if (curDay && curDay.isWin5Day && curDay.multiLeg && curDay.multiLeg.legs) return { ml: curDay.multiLeg, day: curDay };
-      if (state.circuitMode === "nar" && curDay && curDay.multiLeg && curDay.multiLeg.legs) return { ml: curDay.multiLeg, day: curDay };
+      if (curDay && (curDay.isWin5Day || state.circuitMode === "nar") && curDay.multiLeg && curDay.multiLeg.legs) {
+        return { ml: curDay.multiLeg, day: curDay, isFallback: false };
+      }
       const keys = Object.keys(db).sort().reverse();
       for (const k of keys) {
         if ((state.circuitMode === "nar" || db[k].isWin5Day) && db[k].multiLeg && db[k].multiLeg.legs) {
-          return { ml: db[k].multiLeg, day: db[k] };
+          return { ml: db[k].multiLeg, day: db[k], isFallback: true };
         }
       }
       return null;
@@ -1365,9 +1366,12 @@
       if (!found) {
         LAST_WIN5_COPY_TEXT = "";
         aiBadge.textContent = "待機中";
+        document.getElementById("multiLegTitle").innerHTML = isNar
+          ? "南関 トリプル馬単（10R・11R・12R）最適化"
+          : "JRA WIN5 2-Stage融合＆Plan C直交最適化";
         document.getElementById("win5SummaryText").textContent = isNar
           ? "南関4場開催日の最終10R〜12R出馬表を取得するとトリプル馬単が自動編成されます。"
-          : "日曜WIN5対象5レースの出馬表を取得すると自動編成されます。";
+          : "WIN5対象5レースの出馬表を取得すると自動編成されます。";
         document.getElementById("win5PlansAllocationBox").innerHTML = "";
         document.getElementById("win5LegsContainer").innerHTML = "";
         document.getElementById("win5HedgeTable").innerHTML = "";
@@ -1379,10 +1383,18 @@
       aiBadge.className = dataObj.aiPredicted
         ? "text-[10px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded font-bold"
         : "text-[10px] bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded font-bold";
-      aiBadge.textContent = dataObj.aiPredicted ? `🧠 AI本推論済 (${dataObj.usedModel || "Carbon"})` : "📊 Neon 2-Stage融合算出";
+      aiBadge.textContent = dataObj.aiPredicted ? `🧠 AI本推論済 (${dataObj.usedModel || "Neon"})` : "📊 Neon 2-Stage融合算出";
 
       const unitYen = isNar ? 50 : 100;
-      document.getElementById("win5SummaryText").textContent = dataObj.summary || "";
+      const dateLbl = dayRef.label || dataObj.date || "";
+      document.getElementById("multiLegTitle").innerHTML = isNar
+        ? `${dateLbl} 南関 トリプル馬単（10R・11R・12R）`
+        : `${dateLbl} JRA WIN5 2-Stage融合＆Plan C直交最適化`;
+      const fbNote = found.isFallback
+        ? `※ 選択中の ${state.selectedDate.replace("_nar", "")} にはWIN5データがないため、${dateLbl} を表示中です。\n`
+        : "";
+      document.getElementById("win5SummaryText").textContent = fbNote + (dataObj.summary || "");
+
       const legs = dataObj.legs || [], nLegs = legs.length;
       const totalMaxPts = Math.floor(budget / unitYen), initArr = new Array(nLegs).fill(1);
 
@@ -1662,9 +1674,9 @@
 
       const br = sc.byRank || {};
       const rankDefs = [
-        { k: "S", label: "🔥 S：最優先勝負（合1.70+ / EV1.10+ / M3 46%+）", cls: "text-rose-300" },
-        { k: "A", label: "✨ A：厳選好機（合1.52+ / EV1.02+ / M3 38%+）", cls: "text-amber-300" },
-        { k: "New", label: "🔰 新馬戦（Make Debut・合1.48+）", cls: "text-sky-300" }
+        { k: "S", label: "🔥 S：最優先勝負（合1.25+ / EV1.00+ / M3 40%+）", cls: "text-rose-300" },
+        { k: "A", label: "✨ A：厳選好機（合1.12+ / EV0.88+ / M3 34%+）", cls: "text-amber-300" },
+        { k: "New", label: "🔰 新馬戦（Make Debut・合1.08+）", cls: "text-sky-300" }
       ];
       document.getElementById("statRankBreakdown").innerHTML = rankDefs.map(rd => {
         const d = br[rd.k] || { races: 0, hits: 0, invest: 0, ret: 0 };
@@ -1782,7 +1794,7 @@
       const labelName = isNar ? "トリプル馬単" : "WIN5";
       const payStr = Number(ml.officialPayout) > 0 ? ` ｜ 公式払戻:${Number(ml.officialPayout).toLocaleString()}円` : "";
       const out = [
-        `★ ${labelName} [${ml.aiPredicted ? `AI:${ml.usedModel || "Carbon"}` : "事前"}] (${doneCnt}/${legs.length}R確定) PlanC(${resC}) / PlanA(${hitCntA}/${doneCnt})${payStr}`
+        `★ ${labelName} [${ml.aiPredicted ? `AI:${ml.usedModel || "Neon"}` : "事前"}] (${doneCnt}/${legs.length}R確定) PlanC(${resC}) / PlanA(${hitCntA}/${doneCnt})${payStr}`
       ];
       legs.forEach((lg, r) => {
         const t3 = actualPerLeg[r];
@@ -1908,8 +1920,7 @@
           const cleanDate = dateKey.replace("_nar", "");
           const dObj = new Date(`${cleanDate}T12:00:00+09:00`);
           const wday = isNaN(dObj.getTime()) ? "" : `(${wdays[dObj.getDay()]})`;
-          const isSunday = !isNaN(dObj.getTime()) && dObj.getDay() === 0;
-          const isWin5Day = !isNar && isSunday && liveDay.multiLeg && Array.isArray(liveDay.multiLeg.legs) && liveDay.multiLeg.legs.length === 5;
+          const isWin5Day = !isNar && !!(liveDay.multiLeg && Array.isArray(liveDay.multiLeg.legs) && liveDay.multiLeg.legs.length === 5);
           const venues = [...new Set(liveDay.races.map(r => r.venue))];
 
           targetStore[dateKey] = {
@@ -1918,7 +1929,7 @@
             status: "live",
             biases: Array.isArray(liveDay.trackBiases) && liveDay.trackBiases.length > 0
               ? liveDay.trackBiases
-              : venues.map(v => ({ venue: v, surf: "Neon v11.6・ROI100%超基準", trend: "3シナリオ混合推論" })),
+              : venues.map(v => ({ venue: v, surf: "Neon v11.9・ROI100%超基準", trend: "3シナリオ混合推論" })),
             multiLeg: isWin5Day || isNar ? (liveDay.multiLeg || null) : null,
             races: liveDay.races.map((r, i) => ({
               id: r.raceId || `${dateKey}-${i}`,
