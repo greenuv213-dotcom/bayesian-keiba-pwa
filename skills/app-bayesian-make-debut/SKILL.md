@@ -1,276 +1,202 @@
 ---
-name: bayesian-make-debut
-description: Execute hierarchical Bayesian prediction and portfolio optimization for JRA Make Debut (2yo/3yo newcomer races, n_i = 0) optimized for Gemini 4 Neon Maximum Hit-Rate Engine v7.1 with mandatory full-field autonomous web gathering (excluding scratches), 2-Stage Benter Bayesian Fusion (odds-blind f_fund pooled with FLB de-vigged q via adaptive w_{r,i}, clamped <=0.10 on hazards/overrides and >=0.25 on Dirt Frame 1-2 Top-2 favs/turf-start), 3-race-consistent intraday 1R-4R venue bias guard, full-field exact Plackett-Luce, workout confrontation graph, gate-to-4C positional micro-simulation, rule-stacking soft clamp, counterfactual self-audit, 10-Module True-Winner Identification (including Dirt ultra-lightweight <420kg penalty / <=400kg ◎ ban & Dirt inner-gate Top-2 fav / turf-start / wet <=1200m soft cap), Overbet 6-Trigger Filter, Mid-Longshot Override, mandatory ◎-top-contender & Top-2 market-fav Core connection, single-longshot <=30% cap, synthetic-odds <1.35x & <=8-runner auto-Pass / heavy-fav 2-line Core compression, Drop-Buffered Anti-Torigami Dutching Core Shield (70-80%, 11,500-12,500 JPY target), optional Plan B 2-Zone Sniper, Win-Reach Hedge, and Entropy/M3 Screening.
+name: app-bayesian-make-debut
+description: App-dedicated copy of bayesian-make-debut (v7.2 Neon Balanced ROI Edition) for the JRA Racing AI PWA and 1-hour-before pipeline. Executes mandatory full-field evaluation, strict 0.0-100.0 percentage output (no decimals), 2-Stage Benter Bayesian Fusion (odds-blind fFund pooled with FLB de-vigged q via adaptive wR, protecting O<=4.5 Top-2 favs at wR>=0.42 unless Dirt <=400kg / severe Type II / verified Overbet 危, capping O>=8x at min(18%, q+10pt) and O>=50x at <=5.5%), 3-race-consistent morning 1R-4R venue bias guard, full-field exact Plackett-Luce, workout confrontation graph, gate-to-4C positional micro-simulation, rule-stacking soft clamp, counterfactual self-audit, 10-Module Make Debut physics (including Dirt <420kg penalty / <=400kg ◎ ban & Dirt inner-gate Top-2 fav / turf-start / wet <=1200m soft cap), Overbet 6-Trigger Filter, Mid-Longshot Override, ◎ 1.2-4.5x anchor band & ◎-☆/Top2-Fav mandatory Core connection, single-longshot <=30% cap, Core 62% (2-4 Wide lines) / Alpha 38% (◎ Win protection + 2 Quinellas + compact Trio), synthetic-odds <1.08x / avgWide <2.8x / <=8-runner auto-Pass, and Win-Reach Hedge, outputting backward-compatible compact JSON.
 ---
 
-# Bayesian Make Debut (v7.1 — Gemini 4 Neon Maximum Hit-Rate & Deep-Reasoning Master Edition)
+# App Bayesian Make Debut (v7.2 — Neon v12.0 Balanced ROI JSON Edition)
 
-Autonomous text-based hierarchical Bayesian analysis and portfolio optimization system tailored for **JRA Make Debut (新馬戦 / メイクデビュー, all runners $n_i = 0$)**, engineered to maximize **Gemini 4 Neon's multi-step quantitative reasoning**, **autonomous full-field web data acquisition**, and **composite hit rate + break-even recovery rate (`的中率 × 元返し率最大化`)**. Cross-integrates the **2-Stage Benter Bayesian Fusion**, **3-Race-Consistent Intraday Bias Assimilation**, **Full-Field Exact Plackett-Luce**, **Workout Confrontation Graph**, **Gate-to-4C Positional Micro-Simulation**, **Rule-Stacking Soft Clamp**, **Counterfactual Self-Audit**, **Drop-Buffered Anti-Torigami Dutching Core Shield (with Synthetic-Odds `<1.35x` & `<=8`-Runner Auto-Pass / Heavy-Favorite 2-Line Core Compression)**, and the **10-Module Newcomer True-Winner Identification Architecture** (Winning 4C $\le 0.6\text{s}$ Gate vs. $N_{\text{lead}} \ge 4$ Closer, Dirt Untested Kickback Inner Hazard + Top-2 Fav/Turf-Start/Wet-Sprint Soft Cap + Ultra-Lightweight `<420kg`/`<=400kg` Physique Penalty & Outer/Large-Frame Bonus, Older-Class & Final-2F Sustained Breaker, Two-Step Workout Trouble & High-Pace Load Survivor Audit, Gate-Pass Pipe-Opener Ignore & V-Bounce vs. 1-Week-Out Peak-Out Reaction, Debut Silver-Collector & Educational-Riding Fade vs. Lone-Speed Steal, High-CV Sprint Persistence, Niigata 1000m & Sibling Course-Specialist/Mismatch Reset, Fillies Pocket Bonus, Tight-Oval Apprentice & Uphill Stature Physics, Stayer Slope-Only & 3yo Late-Debut Caps, Overbet 6-Trigger Filter, and Mid-Longshot Early-Maturity Override). Strictly separates **"Highest-Reliability Top-3 Anchor (`◎` 融合後3着内率＆突破力上位)"**, **"High-Floor Place Connector (`◯/▲` 安定アンカー・教育騎乗/同入常習人気馬)"**, **"Asymmetric Value Booster (`☆_override / ☆_pace / ☆_closer / △_course_ped`)"**, and **"Overbet Nominal Favorite Hazard (`危`)"**, treating **"Pass / No Bet (見送り / 0円)"** as a first-class decision.
+Autonomous hierarchical Bayesian analysis system tailored for **JRA Make Debut (新馬戦 / メイクデビュー, all runners $n_i = 0$)** dedicated to the **Racing AI App (PWA) and automated 1-hour-before GitHub Actions pipeline**. Synchronized with `auto_predict.py` (**v12.0-neon**), combining mandatory full-field evaluation, **strict `0.0–100.0` percentage output (Patch S7)**, **2-Stage Benter Bayesian Fusion with Top-2 market favorite protection (`O <= 4.5` $w_{r,i} \ge 0.42$ unless Dirt $\le 400\text{kg}$, severe Type II `+14kg+`, or verified `F`-level Overbet `危` — Patch S5)**, **mid/extreme-longshot caps (`O >= 8.0x`: `min(18.0%, q + 10.0%)`; `O >= 50.0x`: `<= 5.5%` — Patch S6)**, 3-race-consistent morning 1R–4R venue bias guard, full-field exact Plackett-Luce, workout confrontation graph, gate-to-4C positional micro-simulation, rule-stacking soft clamp, 10-Module Make Debut physics, **`◎` 1.2–4.5x anchor band**, mandatory `◎-☆` & Top-2 market-favorite Core connection, single-longshot $\le 30\%$ cap, **Core 62% / Alpha 38% (`◎` Win priority protection + 2 Quinellas + compact Trio)**, auto-Pass gating (`coreSyntheticOdds < 1.08x`, `avgCoreWide < 2.8x`, `◎` outside `1.2–4.5x`, or `<= 8` runners compressed odds), Quantitative Win-Reach Hedge, and Counterfactual Self-Audit—while outputting **backward-compatible compact JSON**.
 
-> **High-Density Output Policy (`予測精度100%維持・省文字数出力規約`)**:
-> 
->   - **Internal Modeling (Zero Shortcuts)**: Execute Phase 0 full-field web gathering (excluding scratches), all 7 Phases, all 10 True-Winner Modules, Gate-to-4C positional micro-simulation, full-field exact Plackett-Luce normalization ($\sum_{i=1}^N P(\text{Win}_i)=100.0\%, \sum P(\text{Top 2}_i)=200.0\%, \sum P(\text{Top 3}_i)=300.0\%$), Inclusion-Exclusion disjoint-state audit, and Counterfactual Self-Audit across all $N$ active runners without omission.
->   - **Output Compression**: In `標準` mode, output ONLY essential conclusions, core probability tables, active-only module audits, counterfactual checks, and actionable betting allocations in a telegraphic format (`体言止め・短文化・記号化`, target `1,200〜2,000文字`). Omit inapplicable modules, repetitive prose explanations, and individual lines for non-competitive tail runners.
+## When to Use
 
-## Phase 0: Mandatory Full-Field Autonomous Web Data Acquisition Protocol (全頭データ自動調査・必須ゲート)
+  - **Morning Batch Screening (`朝一括スクリーニング`)**: Filtering all Make Debut races using **Top-3 Posterior Mass ($M_3$)**, Chaos Type (`Type S/A/B/B+`), `◎` odds (`1.2–4.5x`), Core synthetic odds, average Core Wide odds, and Expected ROI into `New` (`subRank`: `A` 勝負新馬 / `Pass` 見送り).
+  - **1-Hour-Before Automated Prediction (`発走1時間前本予想`)**: Generating full-field odds-blind `fFund` and 2-Stage Benter Fused Plackett-Luce probabilities (`f`, `fFund`, `q`, `top2`, `top3`, `wUsed`, `mark`, `role`, `tags`), `coreConnections`, Core 62% / Alpha 38% `portfolioRules`, `winReachHedge`, and `counterfactualAudit` in compact JSON.
+  - **Weekend Post-Race Audit & Skill Patch Generation (`事後検証・スキル改訂パッチ生成`)**: Decomposing Make Debut results across 3 factors and outputting an actionable skill patch.
 
-When the user requests a Make Debut prediction, multi-race screening, pre-race update, or post-race audit without pasting full race data (e.g., providing only a venue/race number, horse name, or date), **automatically gather all required `F` (Verifiable Fact) data via parallel web searches** before running Phases 1–7—do NOT ask the user to manually paste entry lists, workouts, or odds.
+## Steps
 
-1.  **Full-Field Mandatory Gate (`全頭取得必須ゲート` — No Partial-Field Betting)**:
-      - Before outputting any single-race betting portfolio (`標準` / `詳細`), you **MUST fetch and inspect the complete active declared field (all $N$ active runners: gate, horse number, name, sex/age, carried weight & apprentice claim `▲☆◇★`, jockey, trainer, Sire × BMS, breeder/gaikyu, and latest live odds)**—completely excluding scratched/withdrawn (`取消・除外`) runners before normalization. NEVER leave uninspected horses in a `"残余X頭未取得"` placeholder bucket, which risks missing fast-clocked mid-longshot overrides (`☆_override`) or live 3rd–5th favorites.
-      - If the current time is within 50–60 minutes of post time (when official JRA weights are published), also fetch **official horse weights (`公式馬体重`)**, compare against **mid-week training center weights (`週中調教時馬体重`)** for first-time transport-loss detection and dirt ultra-lightweight (`< 420kg` / `<= 400kg`) checks, and fetch live Wide/Quinella/Trio pool odds before finalizing stakes.
-2.  **Zero-Paste Make Debut Auto-Fetch Checklist (Parallel Web Search Batches)**:
-      - **Racecard & Live Market**: Declared full field (`全N頭の枠番・馬番・馬名・性齢・斤量・減量・騎手・調教師・生産者/外厩・取消/除外`), latest official Win/Place/Quinella/Wide/Trio odds (`最新オッズ・取得時刻JST`), large-bet/smart-money signals (`大口投票`), and mid-week vs. official race-day horse weights.
-      - **Track Physics & Morning 1R–4R Telemetry ($s_{\text{venue}}$)**: JRA official `クッション値`, goal-front & 4-corner `含水率 %`, temporary rail (`A/B/C/Dコース`), official going (`良〜不良`), racecourse weather/rain timing & wind speed/direction (`風速 m/s・風向`), and **same-day earlier 1R–4R results on the same surface & rail (`枠順・4角位置取り・1000m通過/RPCI・上がり3F・走破時計`)** for 3-race-consistent bias validation.
-      - **Workouts, Gate Tests, Sparring Partners & Camp Intent**: Chronological workout history (`坂路/CW/美W/函館W 本数・中抜け・ゲート直後1本目 vs. 1週前・最終の全体/4F/3F/2F/1Fラップ・馬場状態・時間帯・騎乗者`), **sparring partner's name, actual JRA class & margin/lateral position (`併せ馬の相手馬名・クラス・内/中/外・先着/同入/遅れ`)**, gate test time & re-test history (`ゲート試験時計・再審査歴`), stable entry/re-entry history (`入厩日・一旦放牧歴`), camp/jockey comments (`勝負気配 vs. 教育騎乗・脚測り`), declared gear (`ブリンカー/チーク/クロス鼻革/舌縛り`), and veterinary notes (`ソエ/DDSP/スクミ`).
-      - **Pedigree, Biological & Sibling Heritage**: Sire × BMS, foaling month (`生月`), dam age at foaling & foal parity (`何番仔・初仔`), and full/half-sibling $n=0$ debut & exact-course records (`兄姉・母の同コース実績`).
-      - **Post-Race Audit (`事後検証`)**: Official finish order, margins, race lap splits (`1000m通過・RPCI・上がり3F`), corner passing orders, and official payouts (`払戻金`).
-3.  **Hybrid Merge with User-Provided Data (`TARGET / JRA-VAN` 併用則)**:
-      - When the user supplies TARGET frontier JV / JRA-VAN CSV exports or pasted tables, treat user-provided facts as primary ground truth and automatically search **only for missing or live-updating items** (e.g., today's cushion value, moisture, wind, morning 1R–4R bias, latest live odds, sparring partner class, final workouts, official weights, scratches).
-4.  **Screening 2-Stage Search Efficiency (`スクリーニング` 2段階探索)**:
-      - For multi-race Make Debut screening, first fetch the day's Make Debut race list, track conditions, morning results, and full-field odds/top contenders in parallel; then run targeted deep searches (workouts, sparring partners, gate tests, pedigrees) on A/B-candidate races.
-5.  **Source Integrity & Unreleased-Data Guard**:
-      - Prioritize authoritative sources (JRA公式, netkeiba, keibalab/日刊/スポニチ/サンスポ/東スポ調教・厩舎コメント, weather telemetry) and record `{Value, Unit, Timestamp(JST), Source}` for key `F` facts.
-      - **Never fabricate missing clocks, gate times, or horse weights**: If an item is not published, explicitly mark it as `未発表（直前更新で確認）` and set Execution Level accurately (`Level B` with verified pre-market odds; `Level C` only if market odds are unavailable, labeling estimates as `推定想定オッズ`).
+### Step 0: Mandatory Full-Field Data Gate (`全頭取得必須ゲート`)
 
-## Neon Maximum Hit-Rate & Deep-Reasoning Protocol (的中率最大化・内部厳密演算ルール)
+  - **No Partial-Field Prediction**: Inspect **all $N$ active declared runners** (gate, horse number, name, sex/age, carried weight & apprentice claim `▲☆◇★`, jockey, trainer, Sire × BMS, breeder/gaikyu, latest live odds, and official race-day horse weights vs. mid-week training center weights once announced ~50–60 min pre-post). Exclude scratched/withdrawn (`取消・除外`) runners completely before normalization.
+  - **Hybrid Auto-Fetch**: When invoked with search enabled and partial/missing inputs, automatically gather missing full-field entries, chronological workouts, sparring partner classes, gate test times, mid-week/official horse weights, cushion value/moisture/wind, and same-day morning 1R–4R results. Never fabricate unpublished data; mark missing items as `未発表` in `triggers`.
 
-Execute all 7 phases of hierarchical Bayesian inference and quantitative verification internally at 100% mathematical fidelity while keeping external output concise:
+### Step 1: Selective Resource Loading, Evidence Taxonomy (F / E / H), Confrontation Graph & Regularization Clamp
 
-1.  **2-Stage Benter Bayesian Fusion for $n_i = 0$ (`オッズ完全遮断基礎モデル × 市場情報の適応融合` — Hit-Rate Core #1)**:
-      - **Stage 1 (Odds-Blind Fundamental Model)**: Compute every runner's fundamental log-ability $\tilde{\theta}^{\text{fund}}_{i,s}$ and pure win probability $f^{\text{fund}}_i$ purely from Phases 1–5 (10-Module physics, workouts, pedigree, gate, position) **completely blind to public odds** to eliminate anchoring bias, tracking `純粋勝率 f_fund 順` and cumulative capture $F_k$.
-      - **Stage 2 (Adaptive Market Fusion with Hazard/Override Guard)**: Strip takeout and Favorite-Longshot Bias via the Power method ($q_i = (1/O_i)^{\gamma} / \sum_k (1/O_k)^{\gamma}, \gamma \in [1.05, 1.15]$), then fuse into the **Log-Loss-Optimal Posterior** using an adaptive reliability weight $w_{r,i}$: $$\theta^{\text{post}}_{i,s} = (1 - w_{r,i})\tilde{\theta}^{\text{fund}}_{i,s} + w_{r,i} \ln q_i, \qquad \theta^{\text{post},(2,3)}_{i,s} = \theta^{\text{post}}_{i,s} + \delta^{\text{place}}_i$$
-          - **Default $n_i = 0$ Baseline ($w_r \in [0.40, 0.50]$)**: Because newcomers lack race history, live market odds aggregate high-value private signals (unclocked gaikyu fitness, paddock sharpness, genuine camp intent).
-          - **Clear Physical-Mispricing / Low-Opacity Adjustment ($w_r \in [0.25, 0.35]$)**: Lower baseline $w_r$ when full workout + gate + sparring data is complete and clear `F`-level physical mispricings exist (e.g., Niigata 1000m inner favorites, 3+ race verified rail-bias inversion).
-          - **Asymmetric Hazard / Override Clamp ($w_{r,i} \le 0.10$) & Soft-Cap Exception ($w_{r,i} \ge 0.25$)**: Strictly cap market weight at **$w_{r,i} \le 0.10$** for **`【危】` Overbet Nominal Favorites** (6-Trigger Filter), **`☆_override`** (Mid-Longshot Early-Maturity Override), **Older-Class Final-2F Breakers**, **High-Pace Load Survivors**, **Dirt $\le 400\text{kg}$ ultra-lightweights**, and **non-mitigated Dirt Frame 1–2 untested favorites** so public brand-bias noise NEVER washes out verified `F`-level edges. **Exception (`Patch S1`)**: Maintain **$w_{r,i} \ge 0.25$** for Dirt Frame 1–2 Top-2 market favorites ($O_i \le 4.5$) or turf-start dirt runners that have NO `危` workout/gate failure.
-          - Use the **Fused Posterior $p_i$** for all exact Plackett-Luce joint arrival probabilities $P(y_1=i, y_2=j, y_3=m)$, Top-2/Top-3 rankings, and hit-rate optimization (while surfacing `p_i (基礎 f_fund)` side-by-side).
-2.  **3-Race-Consistent & Pace-Matched Morning Venue Bias Guard (`午前1R〜4Rバイアス3レース一致＋ラップ整合制限` — Hit-Rate Core #2)**:
-      - Update prior scenario weights $\pi_s^{\text{prior}}$ from same-day morning 1R–4R results on the exact same surface & rail ($s_{\text{venue}}$) via $\pi_s^{\text{post}} \propto \pi_s^{\text{prior}} \cdot L(\text{Intraday}_{1\text{R}\sim(R-1)} \mid s)$:
-          - **$\ge 3$ consistent same-surface races with compatible pace (`S/M/H`)**: Full shift ($\pm 10\%\text{–}20\%$ on $\pi_s$, $\pm 0.06\text{–}0.12$ on matching positional logits).
-          - **2 consistent same-surface races with compatible pace** (common before 4R–5R Make Debuts): Moderate shift capped at **$\pm 6\%\text{–}10\%$** on $\pi_s$ ($\pm 0.04\text{–}0.08$ on logits).
-          - **Single-Race Overreaction Ban (`$< 2$` races or pace/lap mismatch)**: Strictly cap intraday shift to **$\le \pm 5\%$**—NEVER extrapolate a single extreme-pace morning Maiden onto a different pace regime.
-3.  **Full-Field Exact Plackett-Luce, Workout Confrontation Graph & Gate-to-4C Micro-Simulation (`全頭厳密演算・併せ馬対戦グラフ・ゲート〜4角マイクロシミュレーション`)**:
-      - Internally assign explicit numerical $\theta^{\text{post}}_{i,s}, \delta^{\text{place}}_i, \sigma_i^2$ to **every active declared runner ($i = 1 \dots N$) across 3 to 4 MECE scenarios** (including a **Tail-Risk / External-Shock branch $\pi_{\text{shock}} \in [10\%, 25\%]$** for gate-break chaos, first-time kickback panic, or surprise lone-speed steal), normalize $\exp(\theta^{\text{post}}_{i,s})$ directly, and compute exact 2nd/3rd-stage Plackett-Luce joint probabilities.
-      - Internally build a **Workout Confrontation Graph (`併せ馬対戦グラフ`)** calibrating sparring partners' actual JRA class (Open/3-Win/2-Win/1-Win/Maiden Top-2 vs. Maiden tail-ender) and cross-center clock standards, and run a **Gate-to-4C Positional Micro-Simulation (`発馬→芝/ダ境目→1角→4角0.6秒射程圏→直線進路`)** scoring boxed-in risk $P(\text{box}_i \mid s)$ and untested dirt kickback exposure $P(\text{kickback}_i \mid s)$.
-4.  **Mechanism Deduplication & Global Soft-Clamp Regularization (`重複ルール統合＆総シフト幅クランプ`)**:
-      - Keep camp/pedigree cap ($\Delta \theta_{\text{camp}} \le +0.20$) and positional synergy cap ($\le +0.20$), AND enforce a **global soft regularization clamp ($|\sum \Delta \theta_i| \le 0.45$, $\delta^{\text{place}}_i \in [-0.30, +0.25]$)** across Phases 1–4 unless overridden by indisputable `F`-level physical discontinuity (e.g., non-mitigated Dirt Frame 1–2 untested kickback + gate re-test, or Dirt $\le 400\text{kg}$ ultra-light physique wall).
-5.  **Mandatory `◎`-Top-Contender & Market Top-2 Fav Connection, Auto-Pass / 2-Line Core Compression, Single-Longshot 30% Cap & Drop-Buffered Dutching (`◎強制結線・自動Pass・断然人気2点圧縮・穴馬30%上限・11,500円ダッチング` — Hit-Rate Core #3)**:
-      - Select **`◎`** as the highest Posterior $P(\text{Top 3}_i)$ & breakthrough anchor passing all `Single-Pivot` / `危` / Dirt $>400\text{kg}$ safety checks.
-      - **Mandatory `◎` × Top 2–4 Contender & Market Top-2 Favorite Connection (`飛び石結線禁止＆市場1〜2人気強制Core結線則`)**: In Core Shield, ALWAYS connect **`◎` directly to the Top 2–4 highest Posterior $P(\text{Top 3}_i)$ contenders** AND **never exclude a Top-2 market favorite ($O_i \le 5.0$) with NO `危` trigger from `◎`'s direct Core connections even if ranked 4th (`☆`)**. NEVER skip `◎ − △1` while betting `○ − △1`.
-      - **Auto-Pass Torigami Compression Gate & Heavy-Favorite 2-Line Core Compression (`自動Passゲート＆断然人気2点圧縮則`)**:
-          - Declare **`見送り (Pass / 0円)`** immediately when **(a) Core Wide Synthetic Odds $< 1.35\text{x}$** (even after 2-line compression), OR **(b) active field size $\le 8$ runners AND (Core Wide average odds $< 3.0\text{x}$ OR both Top-2 favorites $\le 2.5\text{x}$ with Quinella $< 3.0\text{x}$)**.
-          - When `◎` trades at **$O_{\text{◎}} \le 2.0\text{x}$** and valid mid-longshot partners ($O_j \ge 6.0\text{x}$) keep Core synthetic odds $\ge 1.35\text{x}$, **prohibit spreading Core across 4 Wide tickets**—compress Core strictly to **2 lines (or 2 Quinellas + 1 Wide)** to maintain single-hit return $\ge 11,500\text{円}$.
-      - **Single-Longshot Stake Cap ($\le 30\%$)**: Cap the combined outlay across ALL pools (Wide + Quinella + Trio + Win-Reach Hedge) involving any single longshot (`☆`, $O_i \ge 10.0$) at **$\le 30\%$ of total budget (`3,000円` max)**.
-      - **Drop-Buffered Anti-Torigami Dutching**: Size Core Shield Wide/Quinella stakes to target **`11,500円〜12,500円` payout on a single Core hit** at reference odds so that even after a **`-15%` late odds drop**, a single Core hit still returns **`9,800円〜10,600円` (practical break-even)**.
-6.  **Counterfactual Self-Audit & Exact Disjoint-State Verification (`反実仮想チェック＆包除原理厳密検算`)**:
-      - Internally verify before output: (a) `#1` physically plausible failure mode of `◎` (gate miss, kickback panic, 4C traffic, lightweight dirt physique) and whether Core covers `○−▲`; (b) exact comeback path of any faded Top-3 market favorite (`危` or unbacked); (c) $\sum P(\text{Win}) = 100.0\%$, $\sum P(\text{Top 2}) = 200.0\%$, $\sum P(\text{Top 3}) = 300.0\%$; (d) Core synthetic odds $\ge 1.35\text{x}$ and Dirt $>400\text{kg}$ `◎` check; (e) exact Trio formation counts ($3M+1$ / $5M+4$); (f) total stakes = `10,000円` and single-longshot total $\le 3,000\text{円}$; (g) exact **Inclusion-Exclusion / disjoint elementary state union** for $P(\text{Any Hit})$, $P(\text{元返し以上})$, $P(\text{トリガミ赤字})$, and $P(\text{不的中})$.
+  - Load `references/make_debut_priors.md` via `skills:get_skill_resources` when running full `標準` predictions if not already in context.
+  - Classify every input strictly into **`F` (Verifiable Fact)**, **`E` (Validated Effect)**, or **`H` (Heuristic / Candidate Prior)** on a dimensionless Plackett-Luce logit scale ($\theta_i \in \mathbb{R}$, baseline $0.00$), separating 1st-place shift ($\Delta \theta^{(1)}_i$), 2nd/3rd retention ($\delta^{\text{place}}_i$), and uncertainty ($\sigma_i^2$).
+  - **Workout Confrontation Graph**: Calibrate sparring results against the sparring partner's actual JRA class and cross-center clock standards.
+  - **Collinearity Guard & Global Soft-Clamp Regularization**: Bound combined camp/pedigree shifts at $\Delta \theta_{\text{camp}} \le +0.20$, overlapping positional synergy at $\le +0.20$, and enforce the **global soft regularization clamp ($|\sum \Delta \theta_i| \le 0.45$, $\delta^{\text{place}}_i \in [-0.30, +0.25]$)** unless overridden by indisputable `F`-level discontinuity (e.g., Dirt $\le 400\text{kg}$ physique wall or gate re-test).
 
-## 1. Selective Resource Loading & Evidence Classification (F / E / H)
+### Step 2: Ten-Module Make Debut Physics (100% Synced with v7.2)
 
-  - **Selective Resource Loading Rule (Token Optimization)**:
-      - **Standard (`標準`) / Detailed (`詳細`) Modes**: Load `references/make_debut_priors.md` via `skills:get_skill_resources` to reference workout benchmark clocks (Ritto, Miho, Sapporo, Hakodate), Final-2F Breakers, Two-Step Workout Trouble & High-Pace Load Survivor rules, Gate-Pass Pipe-Opener Bounce-Back, Workout Confrontation Graph & `RPCI/W-PCI` rules, Subarctic/moisture adjustments, 10-Module physics, 3yo late-debut & stayer variance caps, foaling-month/dam-parity/sibling-reset priors, unattenuated Sire × BMS debut priors, gaikyu/stable debut pattern tables, and veterinary/equipment/transport priors.
-      - **Screening (`スクリーニング`) / Pre-Race Update (`直前更新`) / Post-Race Audit (`事後検証`)**: Skip loading `references/make_debut_priors.md` if already loaded in conversation context or when rapidly scanning multiple races.
-  - **Strict F / E / H Evidence Classification**:
-    1.  **`F` (Verifiable Fact)**: Course geometry, temporary rail (`A/B/C/Dコース`), start surface (turf-start vs. dirt-start), straight length & uphill gradient, field size ($N$), turf cushion value (`クッション値`), goal-front/4C turf & dirt moisture (`含水率 %`), dirt sand depth (`砂厚`), weather/wind speed & direction, **same-day morning 1R–4R results/pass-ranks/rail-bias/RPCI ($s_{\text{venue}}$)**, carried weight & apprentice claims (`▲3kg / ☆2kg / ◇1kg / ★4kg`), foaling date/month (`生月`), dam age & foal parity (`何番仔`), full/half-sibling debut & course-specific records, mid-week training center weight vs. official race-day weight, scratches (`取消・除外`), workout course/condition/timing/rider/volume/chronological sequence, overall time & 4F/3F/2F/1F splits (`W-PCI`), sparring partner's actual class & lateral margin (`併せ馬の内・中・外`), gate test clock & re-test history, stable entry/re-entry date, camp/jockey comments, declared equipment, veterinary notes, and observable paddock/canter cues. Always record `{Value, Unit, Location, Timestamp(JST), Source}`.
-    2.  **`E` (Validated Effect)**: Statistical effects backed by verified sample size, period, baseline, and out-of-sample validation on a dimensionless logit scale.
-    3.  **`H` (Heuristic / Candidate Prior)**: Candidate priors in `references/make_debut_priors.md`. Never apply `H` as fixed mechanical constants. Operate strictly on a **dimensionless Plackett-Luce log-ability (logit) scale ($\theta_i \in \mathbb{R}$, field baseline $0.00$)**, separating **expected ability shift ($\Delta \theta_i$)** from **uncertainty ($\sigma_i^2$ / $\sigma_i$)**.
+Evaluate all $N$ active runners ($n_i = 0$) internally across all 10 modules before generating JSON:
 
-## 2. Execution Modes, Strategy Profiles & Defaults
+1.  **Module 1 — Dirt Untested Kickback Hazard, Inner-Gate Soft Cap, Ultra-Lightweight Penalty & Outer/Large-Frame Bonus (`Patch S1`)**:
+      - **Standard Inner-Frame Kickback Hazard (Frames 1–2 on Good/Dry Dirt)**: Apply $\Delta \theta^{(1)}_i \in [-0.22, -0.35], \delta^{\text{place}}_i \in [-0.10, -0.18], \sigma_i^2 \uparrow$, bar from `Single-Pivot`, unless lone-lead gate ($\le 11.8\text{s}$), $\ge 500\text{kg}$ with 3-horse kickback training, or mitigated by the Soft Cap below.
+      - **Top-2 Market Favorite, Turf-Start & Wet-Sprint Inner-Gate Soft Cap**: On **重・不良 $\le 1200\text{m}$**, waive the inner penalty ($0.00\text{ to }+0.08$). On **turf-start dirt** OR for a **Top-2 market favorite ($O_i \le 4.5$)** lacking verified `危` workout/gate/$\le 400\text{kg}$ flaws, **cap the inner kickback penalty to $\Delta \theta^{(1)}_i \in [-0.08, -0.12], \delta^{\text{place}}_i \in [-0.05, -0.08]$, maintain $w_{r,i} \ge 0.42$, and strictly prohibit `消` or disconnecting it from `◎` Core connections**.
+      - **Dirt Make Debut Ultra-Lightweight Physique Penalty**: On `良・稍重` dirt Make Debuts, penalize body weight **$< 420\text{kg}$** by $[-0.14, -0.22], \delta^{\text{place}}_i \in [-0.10, -0.16]$. If **$\le 400\text{kg}$**, strictly prohibit `◎` & `Single-Pivot` and boost competing $\ge 470\text{kg}$ runners ($+0.08\text{ to }+0.12$).
+      - **Outer-Frame & Large-Frame Bonus (Frames 6–8)**: Forward/stalkers with Colts/Geldings $\ge 480\text{kg}$ (Fillies $\ge 460\text{kg}$) gain $[+0.15, +0.25], \delta^{\text{place}}_i \in [+0.06, +0.12]$.
+2.  **Module 2 — Turf 3-Regime Cushion Value (`CV`), Opening-Week Rail & High-CV Sprint Persistence**:
+      - High-Rebound Opening-Week (`CV >= 9.8–10.0`): Boost Frames 1–3 with gate 1F $\le 12.0\text{s}$ ($+0.08\text{ to }+0.15$); penalize wide closers ($-0.08\text{ to }-0.14$).
+      - Low-Rebound Tough Turf ($\text{CV} < 8.8$ or Moisture $\ge 15\%$) & Subarctic Turf (`札幌・函館`): Attenuate fast-track 1F bonuses by 50% ($\le +0.05$) and upgrade sustained woodchip/slope loads + European/Roberto pedigrees.
+      - High-CV ($\ge 9.6$) Turf Sprint (1200m–1400m): Boost Frames 6–8 with fast gate/Slope dash ($+0.10\text{ to }+0.18$).
+3.  **Module 3 — Winning 4th-Corner Feasibility Gate ($\le 0.6\text{s}$) vs. $N_{\text{lead}} \ge 4$ Pace-Collapse Closer**:
+      - $N_{\text{lead}} \le 2\text{–}3$ ($\text{RPCI} \ge 58.5$): Boost runners projected within $\le 0.6\text{s}$ at 4C with 1F $\le 11.3\text{s}$ ($+0.12\text{ to }+0.18$); attenuate deep closers' 1st-place ($-0.10\text{ to }-0.18$) while preserving $\delta^{\text{place}}_i \in [+0.10, +0.18]$ as `Connector`.
+      - $N_{\text{lead}} \ge 4$ ($\text{RPCI} \le 48.5$): Trigger $\pi_{\text{collapse}} \ge 35\%\text{–}45\%$ and elevate `#1` pack-tolerant closer (`☆_closer`).
+4.  **Module 4 — Educational / Classic-Target Debut Favorite Fade vs. Lone-Speed Steal**:
+      - Attenuate 1st-place ($-0.10\text{ to }-0.18$, bar `Single-Pivot`) for educational-riding favorites while boosting $\delta^{\text{place}}_i \in [+0.10, +0.18]$ as `High-Floor Connector (◯/▲)` and elevating `#1` lone speed (`☆_pace`).
+5.  **Modules 5 & 6 — Fillies-Only Pocket Bonus, Tight-Oval Apprentice Speed & Steep-Uphill Stature Physics**:
+      - Fillies-only turf (1400m–1800m): Boost Frames 1–4 with 1F $\le 11.3\text{s}$ ($+0.10\text{ to }+0.16$); penalize Frames 7–8 wide closers.
+      - Tight-oval apprentice claims ($50\text{–}52\text{kg}$) with fast gate gain $+0.12\text{ to }+0.18$; steep uphill `< 440kg` full-weight favorites lose $-0.08\text{ to }-0.14$.
+6.  **Module 7 — Special-Course Geometry (`新潟芝直1000m`), Sibling Heritage (`△_course_ped`), Mismatch Reset & 3yo Late-Debut Cap**:
+      - Niigata 1000m Straight boosts Frames 7–8 ($+0.18\text{ to }+0.28$), penalizes Frames 1–2 ($-0.15\text{ to }-0.25$). Sibling exact-course Top-3 grants $+0.06\text{ to }+0.12$. 3yo setback favorites capped at `fFund <= 30%`.
+7.  **Module 8 — Workout 8-Axis Audit, Gate Cap, Pre-Race Transport Loss & Stayer Slope-Only Cap**:
+      - Older-Class & Final-2F Sustained Breakers (`+0.16 to +0.24`), High-Class Sparring calibration (`+0.16 to +0.25`), Debut Silver-Collector (`-0.10 to -0.18` 1st, `+0.12 to +0.20` place), Trouble/High-Pace Load Survivor & Pipe-Opener V-Bounce (`+0.08 to +0.18`), Gate/Transport-Loss `-8kg to -12kg` guards, and Stayer Slope-Only Cap (`2000m+` turf / `1800m` dry dirt).
+8.  **Modules 9 & 10 — Overbet 6-Trigger Filter (`危`) & Mid-Longshot Override (`☆_override`)**:
+      - Only flag a $O_i \le 2.5$ favorite as **`危`** when supported by verifiable `F`-level flaws (light 1-week load, `< 5` breezes, Dirt $\le 400\text{kg}$, severe Type II `+14kg+`, gate re-test, Slope-only 2000m+/D1800m wall, or peak-out reaction). Promote modest-pedigree runners ($O_i \in [8.0, 25.0]$) with $\ge 6\text{–}8$ works + sparring proof via `☆_override` (subject to Patch S6 cap `f <= min(18.0%, q + 10.0%)`).
 
-Switch modes based on user intent (default to `標準` for a single race, `スクリーニング` for multiple races):
+### Step 3: Gate-to-4C Positional Micro-Simulation, 3-Race Morning Bias Guard, 2-Stage Benter Fusion (`Patch S5/S6/S7`) & Exact Plackett-Luce
 
-  - **Strategy Profile Toggle (Default: `的中率最大化モード`)**:
-      - **`的中率最大化モード` (Default — Max Hit-Rate & Break-Even Shield)**:
-          - Allocation: **Core Shield `70%–80%` (`7,000円〜8,000円`) / Alpha & Win-Reach Sniper `20%–30%` (`2,000円〜3,000円`)**, with Core synthetic odds $\ge 1.35\text{x}$ (`O◎<=2.0`時は2点圧縮), mandatory `◎` × Top 2–4 & Top-2 fav connection, single-longshot total $\le 30\%$ (`3,000円`), and Core single-hit Dutching target `11,500円〜12,500円`.
-          - Targets: Exact $P(\text{Any Hit}) \ge \mathbf{55\%}$ ($\ge \mathbf{50\%}$ in 15–18 runner full-gate Make Debuts), $P(\text{元返し以上}) \ge \mathbf{42\%}$, Expected ROI $\ge \mathbf{102\%}$ (pre-market $\ge \mathbf{105\%}$), surviving `-15%` late odds drop (stress ROI $\ge 90\%$ with positive edge intact).
-      - **`高回収・Plan Bスナイパーモード` (Optional — when user explicitly requests ROI/high-payout or Plan B focus)**:
-          - Allocation: **Non-Cartesian 2-Zone Plan B Sniper** — **Zone 1 Core & Connector `55%–65%` (`5,500円〜6,500円`) / Zone 2 Deep Sniper (`#5–#7` + Win-Reach Hedge) `35%–45%` (`3,500円〜4,500円`)**.
-          - Targets: Exact $P(\text{Any Hit}) \ge 40\%$ ($\ge 36\%$ full-gate) and Expected ROI $\ge 105\%$ (pre-market $\ge 108\%$), surviving `-15%` late odds drop.
-  - **Execution Modes**:
-      - **`スクリーニング` (Entropy & $M_3$ Multi-Race Screening Mode)**: Auto-fetch card/track/morning-bias/odds across all target Make Debut races and rank by **Top-3 Posterior Mass ($M_3 = p_{(1)} + p_{(2)} + p_{(3)}$)**, Chaos Type (`Type S/A/B/B+`), Core synthetic odds, exact composite hit rate, break-even probability, and Expected ROI.
-      - **`標準` (Standard Concise Mode)**: Phase 0 mandatory full-field fetch + full 7-phase 2-Stage Bayesian inference (10-Module verification + Counterfactual Self-Audit), rendered in the **Compact 4-Block High-Density Format** (Target: `1,200〜2,000文字`; Top 7–8 + marked/faded horses in table with 1-line tail-runner conservation summary, active-only module bullets, counterfactual check, `10,000円` + `1/4 Kelly` allocation, and 1-line Win-Reach Hedge).
-      - **`詳細` (Detailed Mode)**: Expands `標準` only when explicitly requested (`"詳細モード"`, `"全頭個別解説"`), adding full all-runner individual rows, Workout Confrontation Graph details, Gate-to-4C positional simulation map, scenario logit tables, and full 3-tier Win-Reach Hedge tables.
-      - **`直前更新` (Pre-Race Diff Update)**: Auto-fetch morning 1R–4R results ($s_{\text{venue}}$), official race-day weights vs. mid-week weights (Type I/II/III transport loss $\ge -8\text{kg}\text{ to }-12\text{kg}$ + dirt `<420kg` / `<=400kg` ◎ ban + dirt `480kg/500kg` & steep-uphill `440kg` cutoffs), paddock/canter (`返し馬`) observations, intraday rain/wind telemetry, and late smart-money odds movements for a fast diff-only Bayesian update (10–15 lines max).
-      - **`事後検証` (Post-Race Audit)**: Auto-fetch official results, race laps (`RPCI`), corner passing orders, and payouts for a concise hindsight-free 3-factor decomposition into (1) Scenario, `RPCI`, $s_{\text{venue}}$ & pace/kickback weight error $\pi_s$, (2) Fusion weight $w_{r,i}$ & conditional readiness/pack-tolerance/physique/final-2F/4C-gate rating error $\theta^{\text{post}}_{i,s}, \delta^{\text{place}}_i$, and (3) Overbet Filter (`危`), `◎` Connection / Auto-Pass / Dutching / Win-Reach Hedge coverage audit.
+1.  **Gate-to-4C Positional Micro-Simulation & Strict 3-Race Morning Venue Bias Guard**:
+      - Simulate `発馬 → 芝/ダ境目 → 1角 → 4角0.6秒射程圏 → 直線進路` across **3 to 4 MECE scenarios** ($\sum_s \pi_s^{\text{post}} = 1.00$), including Tail-Risk/Shock ($\pi_{\text{shock}} \in [10\%, 25\%]$).
+      - Cap morning 1R–4R venue bias shifts strictly: $\ge 3$ consistent pace-matched races ($\pm 10\%\text{–}20\%$), 2 consistent races ($\pm 6\%\text{–}10\%$), $< 2$ races or pace mismatch ($\le \pm 5\%$).
+2.  **2-Stage Benter Bayesian Fusion & Calibration Guardrails (`Patch S5 / S6 / S7`)**:
+      - **Stage 1 (Odds-Blind Fundamental `fFund`)**: Compute clean odds-blind win probability `fFund` on a **strict `0.0–100.0` percentage scale** ($\sum f^{\text{fund}} = 100.0\%$).
+      - **Stage 2 (Adaptive Market Fusion)**: Compute FLB Power de-vigged $q_i$ ($\gamma \approx 1.08$) and pool via baseline $w_r \in [0.48, 0.55]$: $$\theta^{\text{post}}_{i,s} = (1 - w_{r,i})\tilde{\theta}^{\text{fund}}_{i,s} + w_{r,i} \ln q_i, \qquad \theta^{\text{post},(2,3)}_{i,s} = \theta^{\text{post}}_{i,s} + \delta^{\text{place}}_i$$
+      - **Top-2 Market Favorite Protection (`Patch S5`)**: Keep **$w_{r,i} \ge 0.42$** and strictly prohibit `消/危` for any runner with **$O_i \le 4.5\text{x}$** unless backed by Dirt $\le 400\text{kg}$, severe Type II (`+12kg+` in $\ge 1800\text{m}$ / `+14kg+`), or verified `F`-level `危` workout/gate failure.
+      - **Calibration Caps (`Patch S6`)**: Cap **`O_i >= 8.0x`** at **`f <= min(18.0%, q_i + 10.0%)`** and **`O_i >= 50.0x`** at **`f <= 5.5%`** (barred from `◎ / ◯ / ▲`).
+      - **Strict Percentage Format (`Patch S7`)**: Output ALL probabilities (`f`, `fFund`, `q`, `top2`, `top3`, `m3`, `hitRate`, `breakEvenRate`) strictly in **`0.0–100.0` percentage units** (NEVER `0.0–1.0` decimals). Verify $\sum f = 100.0\%, \sum \text{top2} = 200.0\%, \sum \text{top3} = 300.0\%$.
 
-**Budget & Bankroll Defaults**:
+### Step 4: v12.0 Balanced ROI Portfolio Rules (`Core 62% / Alpha 38%`), `◎` Anchor Discipline & Auto-Pass Gate
 
-  - **Per-Race Budget**: `10,000円` (`100円` units; respect explicit user caps).
-  - **Assumed Bankroll ($B$)**: `100,000円（試算用の仮設定）`. Keep Fixed Budget (`10,000円`), Kelly Cap ($L$), and Bankroll ($B$) strictly distinct.
-  - **Interactive HTML Output**: Omit by default; output `<GenerateWidget>` or standalone HTML **ONLY** when the user explicitly requests `"スライダー表あり"` or `"HTML出力"`.
+  - **Anchor Discipline (`◎ 1.2–4.5x` Band)**: Select **`◎`** from verified high-reliability contenders; if `◎` falls outside **`1.2x–4.5x`**, declare **`subRank: "Pass"` / `rank: "Pass"`**.
+  - **Core 62% / Alpha 38% Structure (Synced 100% with `auto_predict.py` v12.0)**:
+      - **Core Shield (`62%` = `6,200 JPY`)**: Wide Dutching with mandatory `◎-☆` & Top-2 market-favorite (`O <= 5.0`) connection:
+          - $O_{\text{◎}} \le 1.8\text{x}$: **2 Wide lines** (`◎` × top 2 value partners).
+          - $1.8\text{x} < O_{\text{◎}} \le 2.2\text{x}$: **3 Wide lines** (`◎-◯`, `◎-▲`, `◎-☆/人気`).
+          - $O_{\text{◎}} > 2.2\text{x}$: **4 Wide lines** (`◎-◯`, `◎-▲`, `◯-▲`, `◎-☆/人気`).
+      - **Alpha Booster (`38%` = `3,800 JPY`)**:
+          - **`◎` Win Priority Protection (`約1,400 JPY`)**: Protect `◎` to win (`単勝 ◎`) when $O_{\text{◎}} \ge 2.0\text{x}$; split across `◎` + `◯` when $O_{\text{◎}} < 2.0\text{x}$ and $O_{\text{◯}} \ge 2.8\text{x}$.
+          - **Quinella 2 lines (`約1,600 JPY`)** + **Compact Trio (`約800 JPY`)** + optional **Win-Reach Hedge** (`B_hedge = ⌈G_min / O_j⌉`).
+      - **Single-Longshot Cap**: $\le 30\%$ (`3,000 JPY`).
+  - **Auto-Pass Gate**: Declare **`Pass`** whenever: (1) live odds missing, (2) `◎` outside `1.2x–4.5x`, (3) `coreSyntheticOdds < 1.08x` OR `avgCoreWide < 2.8x`, OR (4) `<= 8` active runners with compressed odds (`avgCoreWide < 3.0x` or Top-2 favs `<= 2.5x`).
+  - **Counterfactual Self-Audit**: Internally verify `◎` failure mode, `◯-▲` coverage, Dirt `> 400kg` check, percentage scaling (`0.0–100.0`), and `O>=8x`/`O>=50x` caps before emitting JSON.
 
-## 3. Multi-Race Screening Mode (`スクリーニング` — Entropy & $M_3$ Hit-Rate First)
+### Step 5: App-Optimized Backward-Compatible JSON Schemas
 
-Evaluate all target Make Debut races internally using Phase 0–6 (full active field scan so Top-3/4 favorites and `☆_override` are never missed), computing **Top-3 Posterior Mass ($M_3 = p_{(1)} + p_{(2)} + p_{(3)}$)**, **Core Synthetic Odds**, and Chaos Type, then output in a **two-tier compact format**:
+All existing keys are preserved verbatim for zero-breakage PWA compatibility. Output **ONLY a single valid JSON object** when invoked by the automated pipeline.
 
-1.  **【A判定（高的中率×プラス期待値：的中率55%超[フルゲート50%超]・元返し率42%超・Core合成オッズ1.35倍以上・前売りROI105%超）】＆【B判定（直前条件次第）】レース（各レース3〜4行ブロック）**:
-      - **1行目（予測難度・馬場・午前バイアス・展開）**: 上位3頭集中度 $M_3$・Core合成オッズ・波乱度(`Type S/A/B/B+`)・馬場/午前バイアス($s_{\text{venue}}$・一致R数)・想定`RPCI`/$N_{\text{lead}}$・推奨軸型(`Single-Anchor` / `3-Node Triangle` / `2点圧縮` / `Plan B 2-Zone`)。
-      - **2行目（人気馬検算＆融合上位3頭）**: `危` / `Connector` / `真の強軸` 判定 + `#1〜#3 馬番 馬名(p_i[基礎f] | 3着内率 | O_i)`。
-      - **3行目（妙味馬・判定・直前条件）**: `☆/△候補` + `【A or B】` + 推定合成的中率/元返し率/期待ROI・直前確認トリガー（1行）。
-2.  **【C判定（見送り：Core合成オッズ `< 1.35倍`／8頭以下低配当圧縮／高エントロピー混戦 $M_3 < 36\%$）】レース（1行リスト圧縮）**:
-      - `レース名 | 判定[C:見送り] | M_3 | 見送り理由（30字以内：7頭低配当圧縮／Core合成1.25倍トリガミ／混戦カオス 等）`
-3.  **優先勝負レース順位**: 的中率×期待値の総合スコア上位1〜3位を最後に1行で提示。
+#### Mode A: `スクリーニング` (Morning Make Debut Batch Screening JSON)
 
-## 4. Core 7-Phase Modeling Architecture (Integrating the 10 True-Winner Modules)
+```json
+{
+  "date": "YYYY-MM-DD",
+  "venue": "東京",
+  "strategyProfile": "v12_balanced_roi",
+  "trackBias": {
+    "turfCv": 9.8,
+    "turfMoisture": "11.0%",
+    "dirtMoisture": "3.2%",
+    "intradayBiasConsistentR": 2,
+    "summary": "Aコース開幕週・芝高速良・ダ乾砂"
+  },
+  "races": [
+    {
+      "raceNumber": 5,
+      "name": "2歳新馬",
+      "surfaceDist": "芝1800m",
+      "postTime": "12:15",
+      "rank": "New",
+      "subRank": "A | Pass",
+      "chaosType": "Type S | Type A | Type B | Type B+",
+      "skill": "app-bayesian-make-debut",
+      "pivotType": "Single-Pivot | Dual-Pivot | Pass",
+      "nLead": 2,
+      "rpci": 59.5,
+      "m3": 56.2,
+      "coreSyntheticOdds": 1.38,
+      "avgCoreWide": 4.4,
+      "expectedRoi": 114.2,
+      "hitRate": 59.8,
+      "breakEvenRate": 49.5,
+      "summary": "35字以内の◎オッズ・平均W・M3判定根拠"
+    }
+  ]
+}
+```
 
-### Phase 1: Course Physics, 3-Regime Cushion/Rail Telemetry, Winning 4th-Corner Gate ($\le 0.6\text{s}$), Shared Venue Bias ($s_{\text{venue}}$), Dirt Kickback & Physique/Pace/Sex/Apprentice Priors (`F` vs. `H`)
+#### Mode B: `標準` (1-Hour-Before Single-Race Prediction JSON)
 
-1.  **Module ①: Dirt Make Debut — Untested Kickback Hazard, Top-2 Fav / Turf-Start / Wet-Sprint Soft Cap, Ultra-Lightweight `<420kg`/`<=400kg` Penalty & Outer/Large-Frame Bonus (`ダート新馬・砂被りソフトキャップ＆極小馬体自動減点＆外枠大型馬ボーナス`)**:
-      - **Standard Inner-Frame Kickback Hazard (Frames 1–2 / Horses 1–4 on Good/Dry Dirt)**: Because **100% of Make Debut runners ($n_i = 0$) are untested against real-race multi-horse sand spray**, inside draws face severe panic/stalling risk. For non-mitigated runners in **Frames 1–2 (Horses 1–4)**, apply **$\Delta \theta^{(1)}_i \in [-0.22, -0.35]$**, widen $\sigma_i^2$, set $\delta^{\text{place}}_i \in [-0.10, -0.18]$, clamp $w_{r,i} \le 0.10$, and **strictly bar from `Single-Pivot` & `Type S`**, unless gate 1F $\le 11.8\text{s}$ (lone-lead projection) OR horse weight $\ge 500\text{kg}$ with verified 3-horse inside/middle kickback training, OR mitigated by the Soft Cap below.
-      - **Top-2 Market Favorite, Turf-Start & Wet-Sprint Inner-Gate Soft Cap (`ダート新馬1〜2枠「1〜2人気・芝スタート・重不良1200m以下」減点ソフトキャップ＆完全消し禁止則`)**:
-          - On **重・不良 short-distance dirt ($\le 1200\text{m}$)**, waive the inner kickback penalty ($0.00\text{ to }+0.08$) for fast-gate / Top-3 market runners.
-          - On **turf-start dirt (`東京1300/1400/1600m・京都/阪神/中京1400m・福島1150m・新潟/中山1200m`)** OR when a Frame 1–2 runner is a **Top-2 market favorite ($O_i \le 4.5$)** lacking `危` workout/gate flaws, **cap the inner kickback penalty to $\Delta \theta^{(1)}_i \in [-0.08, -0.12]$ and $\delta^{\text{place}}_i \in [-0.05, -0.08]$, maintain $w_{r,i} \ge 0.25$, and strictly prohibit hard-fading (`消`) or disconnecting it from `◎` Core connections** (still bar `Single-Pivot` unless kickback proof exists).
-      - **Dirt Make Debut Ultra-Lightweight Physique Penalty (`ダート新馬「極小馬体<420kg自動減点＆<=400kg◎禁止」則`)**: On Good/Slightly-Wet (`良・稍重`) dirt Make Debuts, apply mandatory physique penalty **$\Delta \theta^{(1)}_i \in [-0.14, -0.22], \delta^{\text{place}}_i \in [-0.10, -0.16]$** to any runner with official/mid-week body weight **$< 420\text{kg}$**. If body weight is **$\le 400\text{kg}$**, **strictly prohibit `◎` and `Single-Pivot`** (clamp $w_{r,i} \le 0.10$) and award a relative power bonus ($+0.08\text{ to }+0.12$) to competing large-framed runners ($\ge 470\text{kg}$).
-      - **Outer-Frame Acceleration & Large-Frame Bonus (Frames 6–8)**: For **Frames 6–8 (`6〜8枠`)** with forward/stalking tactical speed and body weight **Colts/Geldings $\ge 480\text{kg}$ (Fillies $\ge 460\text{kg}$)**, award **$\Delta \theta^{(1)}_i \in [+0.15, +0.25]$** and $\delta^{\text{place}}_i \in [+0.06, +0.12]$.
-      - **Dirt Moisture ($m_{\text{dirt}}$) & Sand Depth**: On dry power dirt ($m_{\text{dirt}} < 3.0\%$), reinforce large-framed ($\ge 490\text{kg}$) outer power stalkers; on wet/fast dirt ($m_{\text{dirt}} \ge 6.0\%$), boost high-gate-speed front/rail persistence while retaining a collapse branch when $N_{\text{lead}} \ge 4$.
-2.  **Modules ②–④: Turf Make Debut — 3-Regime Cushion Value (`CV`) × Opening-Week `A/B` Rail Physics, Winning 4th-Corner Feasibility Gate ($\le 0.6\text{s}$), High-CV Sprint Persistence & Educational-Riding Fade**:
-      - **3-Regime Turf Cushion Value (`CV`) & Opening-Week `A/B` Rail Inside-Saver**:
-          - **High-Rebound / Fast Turf ($\text{CV} \ge 9.8\text{–}10.0$ / low moisture $< 12\%$) on Opening-Week `A/B` Rails (`開幕週〜前半A/B`・fresh `C/D` Day 1–2)**: Grant **$\Delta \theta^{(1)}_i \in [+0.08, +0.15], \delta^{\text{place}}_i \in [+0.06, +0.12]$** to **Frames 1–3** with gate 1F $\le 12.0\text{s}$; penalize wide deep closers and heavy-action grinders ($-0.08 \sim -0.14$).
-          - **Standard Turf ($8.8 \le \text{CV} < 9.8$)**: Balanced; governed by $N_{\text{lead}}$, Expected `RPCI`, rail wear, and post position.
-          - **Low-Rebound Tough Turf ($\text{CV} < 8.8$ or Moisture $\ge 15\%$) & Subarctic Turf (`洋芝：札幌・函館`)**: **Attenuate fast-track CW/W/turf/poly final-1F ($\le 11.3\text{s}$) speed bonuses by 50% ($\Delta \theta_i \le +0.05$)**; upgrade deep woodchip/slope sustained power loads (`函館W 5F <= 67.5s` or heavy-track accelerating splits), outer clean-turf paths, and European/Roberto bloodlines ($+0.08 \sim +0.14, \delta^{\text{place}}_i +0.10 \sim +0.16$) as mandatory Core anchors.
-      - **High-CV ($\ge 9.6$) Turf Sprint ($1200\text{m}\text{–}1400\text{m}$) Speed Persistence & Dual Outer-Speed Survival**:
-          - Do NOT over-weight pace collapse unless $N_{\text{lead}} \ge 4$ extreme speed horses collide. Sprinters with top-tier gate/early workout dash (`ゲート1F <= 11.8s` or Slope `4F <= 52.8s / 2F <= 24.8s`) in **Frames 6–8** receive $\Delta \theta^{(1)}_i \in [+0.10, +0.18]$ under $\pi_{\text{speed\_persist}} \ge 35\%$. When $\text{CV} \ge 9.8$, evaluate a **dual outer-speed finish (`☆_pace1 − ☆_pace2` 行った行った決着)**.
-      - **Winning 4th-Corner Feasibility Gate ($\le 0.6\text{s}$) & Expected `RPCI` ($\ge 58.5$ vs. $\le 48.5$) Matching**:
-          - When $N \le 13$ or $N_{\text{lead}} \le 2\text{–}3$ (Expected $\text{RPCI} \ge 58.5$), estimate each runner's **Projected 4C Position & Gap** via the Gate-to-4C micro-simulation:
-              - **Inside 4C Gate ($\le 0.6\text{s}$, positions 1–5)** + CW/W final 1F $\le 11.3\text{s}$: **$\Delta \theta^{(1)}_i \in [+0.12, +0.18], \delta^{\text{place}}_i \in [+0.08, +0.14]$**.
-              - **Outside 4C Gate ($> 1.0\text{s}$ back)** in High-RPCI slow debuts: attenuate 1st-place **$\Delta \theta^{(1)}_i \in [-0.10, -0.18]$** and **bar from `Single-Pivot`**, while maintaining 2nd/3rd closing retention ($\delta^{\text{place}}_i \in [+0.10, +0.18]$) as **`High-Floor Connector (◯/▲)`**. Discount one-paced Slope even-split grinders lacking a sub-$11.4\text{s}$ gear ($-0.08 \sim -0.14$).
-      - **Educational / Classic-Target Debut Favorite 1st-Place Fade vs. Lone-Speed Steal**:
-          - In turf $1600\text{m}\text{–}2000\text{m}$ debuts, when a blue-blood 1st/2nd favorite ($O_i \le 3.5$) has explicit camp/jockey intent for **"educational settling / measuring response (`折り合い専念・教育騎乗・脚測り・余裕残し`)"**, attenuate 1st-place hazard ($\Delta \theta^{(1)}_i \in [-0.10, -0.18]$, **bar from `Single-Pivot`**) while boosting 2nd/3rd retention ($\delta^{\text{place}}_i \in [+0.10, +0.18]$) as a **`High-Floor Connector (◯/▲)`**—prime Wide/Place Core Shield partner! Simultaneously elevate the `#1` unbothered front-runner / aggressive early-position rider (`☆_pace`) by $+0.10 \sim +0.16$.
-3.  **Modules ⑤–⑧: Special-Course Geometry (`新潟芝直1000m等`), Fillies-Only Pocket Bonus, Tight-Oval Apprentice Speed, Uphill Stature Physics & 3-Race-Consistent Morning Bias ($s_{\text{venue}}$)**:
-      - **Niigata 1000m Straight Outer-Rail Dominance**: **Frames 7–8 (and 6)** with fast gate/Slope dash (`ゲート1F <= 11.8s` / Slope `2F <= 24.6s`) + apprentice claim get **$\Delta \theta^{(1)}_i \in [+0.18, +0.28]$**; **Frames 1–2** get **$-0.15 \sim -0.25$** (`Single-Pivot` ban) unless backed by proven Niigata 1000m sibling/dam heritage (`△_course_ped`) + elite gate speed.
-      - **Fillies-Only Make Debut Inside-Pocket Bonus vs. Wide-Sweep Penalty**: In fillies-only turf debuts ($1400\text{m}\text{–}1800\text{m}$), grant **$\Delta \theta^{(1)}_i \in [+0.10, +0.16], \delta^{\text{place}}_i \in [+0.08, +0.14]$** to **Frames 1–4** with inside-sparring pack tolerance + CW/W final 1F $\le 11.3\text{s}$ (elevate `#1` pocket filly into top 3–4 of $f^{\text{fund}}_i$). Penalize popular fillies in **Frames 7–8** on 4-corner/inner tracks forced 3–4 wide ($-0.08 \sim -0.14$).
-      - **Tight-Oval Apprentice Claim (`50〜52kg`) & Steep-Uphill Stature Physics**: In tight-oval/short-stretch ($\le 310\text{m}$) debuts, an apprentice claim (`▲3kg / ☆2kg / ★4kg`) with fast gate + top-3 early speed + clean draw gets **$\Delta \theta^{(1)}_i \in [+0.12, +0.18]$** (`☆_pace`). On steep uphill finishes (`中山・阪神・中京・東京`) or deep dirt, penalize small-framed favorites ($< 440\text{kg}$) at full weight ($55\text{–}56\text{kg}$) by $-0.08 \sim -0.14$.
-      - **3-Race-Consistent Morning Venue Bias ($s_{\text{venue}}$) & Intraday Rain/Wind/Worn-Rail Shift**: Apply the strict `3R一致(±10〜20%) / 2R一致(±6〜10%) / 1R・ラップ不一致(±5%上限)` gate from the Neon Protocol. When afternoon rain starts or homestretch headwind $\ge 5\text{m/s}$, penalize exposed lone leaders ($-0.10 \sim -0.15$) and boost slipstream stalkers; on worn inner turf ($\text{CV} \le 8.9$ or chewed C/D rail), penalize Frames 1–2 ($-0.08 \sim -0.14$) and boost outer clean-strip stalkers ($+0.08 \sim +0.14$).
-      - **Field Size ($N$) & Scratches**: Small field ($N \le 10$) shrinks $\sigma_i$ for tractable stalkers (while $N \le 8$ triggers the compressed-odds Auto-Pass check); Full Gate ($N \ge 15$) amplifies inside traffic/kickback ($\delta^{\text{place}}_i \in [-0.08, -0.16]$) for slow breakers. Keep all active declared runners in the Plackett-Luce denominator (assigning $\theta_i \le -2.5$ to non-competitive tails); remove scratches (`取消・除外`) and renormalize.
+Evaluate **all $N$ active declared runners internally** (excluding scratches). Sort `horses` by **Fused Posterior Win Probability `f` descending**, strictly using **`0.0–100.0` percentage values** so $\sum f = 100.0\%$ and $\sum \text{top3} = 300.0\%$:
 
-### Phase 2: Qualitative 8-Axis Workout Decomposition, Confrontation Graph, Two-Step Trouble/Load Rescue, Pipe-Opener Bounce-Back & Debut Silver-Collector Separation
+```json
+{
+  "raceId": "20261129-tok-05",
+  "venue": "東京5R",
+  "name": "2歳新馬",
+  "surfaceDist": "芝1800m",
+  "postTime": "12:15",
+  "skill": "app-bayesian-make-debut",
+  "strategyProfile": "v12_balanced_roi",
+  "rank": "New",
+  "subRank": "A | Pass",
+  "chaosType": "Type S | Type A | Type B | Type B+",
+  "pivotType": "Single-Pivot | Dual-Pivot | Pass",
+  "nLead": 2,
+  "rpci": 59.5,
+  "wR": 0.52,
+  "m3": 56.2,
+  "coreSyntheticOdds": 1.38,
+  "avgCoreWide": 4.4,
+  "intradayBiasConsistentR": 2,
+  "expectedRoi": 114.2,
+  "hitRate": 59.8,
+  "breakEvenRate": 49.5,
+  "scenario": "午前バイアス(s_venue一致R数)・想定RPCI・3〜4MECEシナリオ要約(80字以内)",
+  "activeModules": ["M2:高CV開幕イン先行", "M3:4角0.6s射程圏ゲート", "M8:古馬基準×後半2F突破"],
+  "horses": [
+    {
+      "mark": "◎ | ◯ | ▲ | ☆ | △ | 危",
+      "role": "最安定Top-3＆突破軸 | 安定Connector | 中穴Override | 過剰人気危",
+      "num": 6,
+      "name": "馬名",
+      "style": "逃 | 先 | 差 | 追",
+      "f": 28.4,
+      "fFund": 26.5,
+      "q": 30.2,
+      "wUsed": 0.52,
+      "top2": 48.2,
+      "top3": 63.0,
+      "odds": 2.6,
+      "tags": ["F:CW 6F 80.9-22.4s", "H:古馬基準突破+0.22"],
+      "comment": "45字以内のF/H核心根拠"
+    }
+  ],
+  "tailSummary": { "count": 8, "sumF": 11.2, "sumTop3": 36.5 },
+  "coreConnections": [[6, 3], [6, 11], [3, 11], [6, 2]],
+  "portfolioRules": {
+    "coreRatio": 0.62,
+    "alphaRatio": 0.38,
+    "coreLineCap": 4,
+    "singleLongshotCapPct": 0.30
+  },
+  "winReachHedge": [
+    { "num": 11, "name": "馬名", "odds": 12.5, "hedge10k": 800, "hedge20k": 1600 }
+  ],
+  "counterfactualAudit": "◎出遅れ/進路詰まり時の◯-▲防衛状態と上位人気馬保護状態(60字以内)",
+  "triggers": ["直前馬体重(週中比-8kg超Type III・ダート420kg未満警戒)・午前バイアス確認トリガー(45字以内)"]
+}
+```
 
-Consult `references/make_debut_priors.md` and evaluate workouts across 8 axes, separating **1st-Place Breakthrough Power (`後半2F持続加速・格上突き放し・前負荷サバイバー`)** from **2nd/3rd Place-Anchor Stability (`同入止まり・ソラ・ワンペース`)**:
+#### Mode C: `事後検証` (Weekend Batch Post-Race Audit & Skill Patch JSON)
 
-1.  **Volume, Load Consistency & Gate-Pass Pipe-Opener Bounce-Back**:
-      - Flag gaps (`中抜け`) or thin breeze counts ($< 4$ clocked works) signaling shin/muscle setbacks (`ソエ・スクミ`).
-      - **Gate-Pass Pipe-Opener Ignore & 2nd/3rd-Work V-Bounce**: When a newcomer posted a slow initial clock right after passing the gate test (`CW 6F >= 86.0s` / `Slope 4F >= 56.0s`, causing $O_i \ge 10.0$) and then slices $\ge 1.5\text{s}\text{–}2.5\text{s}$ off its total clock while sharpening final 1F by $\ge 0.5\text{s}$ across its final 1–2 works, **completely disregard the initial pipe-opener** and award **$\Delta \theta^{(1)}_i \in [+0.10, +0.18]$** (shrink $\sigma_i$).
-2.  **Older-Class & Final-2F Sustained Lap Breaker Promotion vs. 1F-Only Flash**:
-      - Clearing **BOTH** older-class total clock (**Ritto CW `6F <= 81.5s`**, **Miho W `5F <= 65.8s`**, **Ritto/Miho Slope `4F <= 52.2s–52.5s`**) **AND** **Final-2F Sustained Lap (CW/W `2F <= 22.8s` or Slope `2F <= 24.4s–24.6s` non-decelerating)**: award **$\Delta \theta^{(1)}_i \in [+0.16, +0.24]$**, shrink $\sigma_i$, clamp $w_{r,i} \le 0.10$ if underbet, and **promote into rank `#1–#2` of $f^{\text{fund}}_i$** ahead of 1F-only flash favorites (`6F >= 85.0s + 終い1Fのみ<=11.3s`, which face $-0.10 \sim -0.18$ in sustained/low-RPCI paces). Apply the **Subarctic / Low-CV 50% Attenuation Rule** when $\text{CV} < 8.8\text{–}9.0$ or on Hokkaido turf.
-3.  **Workout Confrontation Graph & Sparring-Partner Class Calibration (`併せ馬対戦グラフ＆相手クラス校正`)**:
-      - **High-Class Partner Proof (`格上・古馬突き放し`)**: Inside of a pair or middle of a 3-horse set decisively pulling away in the final 1F against an **Open / 3-Win / 2-Win / 1-Win horse or validated Maiden Top-2**: **$\Delta \theta^{(1)}_i \in [+0.16, +0.25]$, shrink $\sigma_i$, $\delta^{\text{place}}_i \in [+0.06, +0.12]$**.
-      - **Low-Class Sparring Partner Trap (`未勝利大敗馬・遅い新馬相手の見かけ倒し先着`)**: Discount nominal sparring-win bonus by 50–70% ($\Delta \theta^{(1)}_i \le +0.04$).
-4.  **Debut Silver-Collector Ceiling (`新馬版シルバーコレクター：同入常習・ソラ・ワンペース`)**:
-      - Repeatedly finishing even without pulling away (`同入常習・抜かせないが突き放せない`), hanging in front (`ソラ`), or one-paced grinding: penalize 1st-place **$\Delta \theta^{(1)}_i \in [-0.10, -0.18]$ and bar from Win-only `Single-Pivot`**, while boosting 2nd/3rd retention **$\delta^{\text{place}}_i \in [+0.12, +0.20]$**—making them **prime Wide/Place Core Shield `Connector (◯/▲)`** anchors in Maximum Hit-Rate Mode!
-5.  **Two-Step Workout Trouble Rescue, High-Pace Load Survivor vs. 1-Week-Out Peak-Out Reaction**:
-      - **Step 5A — Hidden-Clock Trouble Rescue**: Ordinary raw clock caused by late cut-up session (`開門後半荒れ馬場`), lanes 8–9 on CW, or boxed behind traffic with reserve (`前壁待機・馬なり余力`): restore **$\Delta \theta_i \in [+0.08, +0.15]$** (qualifies for `☆_override`).
-      - **Step 5B — High-Pace Load Survivor**: Slowing to `12.3s–12.5s` final 1F ONLY after pressing a brutal opening split (`CW前半3F <= 36.2s` or `坂路前半2F <= 24.4s`, `W-PCI <= 47.5`) alongside a fast older sprinter while holding overall clock (`4F <= 52.8s` / `6F <= 82.2s`): NO deceleration penalty; award **$\Delta \theta^{(1)}_i \in [+0.10, +0.18], \delta^{\text{place}}_i \in [+0.06, +0.12]$** (clamp $w_{r,i} \le 0.10$ if underbet). Reserve deceleration penalty ($-0.10 \sim -0.20$) strictly for **unpressured slow-opening deceleration**.
-      - **Step 5C — 1-Week-Out Peak-Out Reaction (`1週前猛時計の反動・お釣りなし`)**: All-out (`一杯`) flashy clock 1 week out followed by sluggish final-week response or unpressured final-1F deceleration ($\ge +0.4\text{s}$): apply **$\Delta \theta_i \in [-0.10, -0.18]$, widen $\sigma_i^2$**, and trigger **`危`** if $O_i \le 2.5$. Reward final-week V-shaped acceleration after heavy 1-week-out pipe-opener ($+0.08 \sim +0.14$).
-6.  **Stayer Make Debut ($\ge 2000\text{m}$ Turf / $1800\text{m}$ Dry Dirt) "Slope-Only Stamina Wall Cap"**:
-      - Heavy favorite ($O_i \le 3.0$) prepared **exclusively on 4F Slope (`CW/W 6F長め負荷なし`)** or keen (`折り合い難`): expand $\sigma_{\text{dist}}^2 \ge 0.25$, apply $\Delta \theta^{(1)}_{i,\text{attrition}} \in [-0.15, -0.28]$, **cap $f^{\text{fund}}_i \le 32\%$**, and **bar from `Single-Pivot`**.
-7.  **Week-Over-Week Progression & Stable Debut Pattern**:
-      - Evaluate 1-week-out load (`一杯/強め`) to final-week sharpness (`馬なり`), rider weight diff (heavy assistant $\sim 58\text{–}62\text{kg}$ vs. light jockey $\sim 52\text{–}55\text{kg}$), and downward deviations from the stable's winning debut template ($-0.08 \sim -0.16$).
+Output a JSON object containing `auditSummary`, 3-factor decomposition (`scenarioError`, `ratingError`, `portfolioError`), and `skillPatch`.
 
-### Phase 3: Unattenuated Pedigree (Sire × BMS), Course-Specialist Heritage, Sibling Mismatch Reset, 3yo Late-Debut Regime, Regularization Clamp & Mid-Longshot Override
+## Gotchas
 
-1.  **Unattenuated Pedigree Priors ($n_i = 0$, weight $1.0$) & BMS Interaction**: Evaluate Sire × BMS precocity, surface/distance fit, Expected `RPCI` fit, and cushion/moisture/Subarctic preference via `references/make_debut_priors.md`.
-2.  **Module ⑦: Sibling Debut Separation, Course-Specialist Heritage (`△_course_ped`), Off-Condition Reset & 3yo Late-Debut Regime**:
-      - **Sibling / Dam Exact-Course Specialist Heritage (`△_course_ped`)**: Validated Top-3 over today's exact specialized course (`新潟芝直1000m・東京ダ1400/1600m・中山ダ1200m・京都外回り・洋芝等`) grants **$\Delta \theta_i \in [+0.06, +0.12], \delta^{\text{place}}_i \in [+0.08, +0.15]$** (keep as a mandatory `△_course_ped` candidate even at $O_i \ge 15.0$).
-      - **Sibling Surface/Sire-Mismatch Reset**: If public odds ($O_i \ge 15.0$) discard a runner because half-siblings failed at $n=0$ under mismatched conditions/slow sire while today's Sire × condition aligns, **reset negative sibling penalty to $0.00$ and award $+0.06 \sim +0.12$**.
-      - **Foaling Month & 3yo Winter/Spring Late Make Debut Regime**: In 2yo races (June–Dec), reward Jan–Feb early foals ($+0.04 \sim +0.08$) and discount May–June late foals ($-0.04 \sim -0.10$). In **3yo Make Debuts (Jan–April)**, **reset late-foal penalty to $0.00$**; for popular 3yo debutants ($O_i \le 3.5$) delayed by physical setbacks (`骨折・ソエ・体質弱`), expand $\sigma_i^2 \ge 0.28$, **cap $f^{\text{fund}}_i \le 30\%$, and bar from `Single-Pivot`**, while upgrading planned late-maturing large-framed ($\ge 490\text{kg}$) 3yos with $\ge 6$ uninterrupted works ($+0.06 \sim +0.12$).
-3.  **Debut Selection Hazard, Collinearity Guard & Global Soft Clamp (`重複加点防止＆総シフト幅クランプ`)**:
-      - Penalize salvage dirt switches (`ソエ・脚元不安によるダート妥協` on $<450\text{kg}$ turf-pedigree horses: $-0.12 \sim -0.22$).
-      - Bound camp/pedigree shift at **$\Delta \theta_{\text{camp}} \le +0.20$**, overlapping positional advantages at **$\le +0.20$**, and apply the **Global Soft Regularization Clamp ($|\sum \Delta \theta_i| \le 0.45$, $\delta^{\text{place}}_i \in [-0.30, +0.25]$)** across Phases 1–4 unless overridden by indisputable `F`-level discontinuity.
-4.  **Module ⑩: Mid-Longshot Early-Maturity Override (`☆_override`)**:
-      - Modest pedigree/farm prior ($\Delta \theta_{\text{camp}} \le 0.00$, $O_i \in [8.0, 25.0]$) with **(1) $\ge 6\text{–}8$ uninterrupted breezes**, **(2) sparring win/tie vs. older/upper-class horse (or trouble/high-pace load rescue / 2nd-3rd work V-bounce)**, and **(3) favorable draw**: nullify negative brand priors to $0.00$, apply **$\Delta \theta_{\text{override}} \in [+0.18, +0.28]$** (shrink $\sigma_i$), and **clamp $w_{r,i} \le 0.10$** to promote into `◎/◯/☆_override`.
-
-### Phase 4: Gate/Early-Speed Index Cap, Jockey Tactical Match, Equipment & Stage-Adjusted Logit ($\delta^{\text{place}}_i$)
-
-1.  **Gate & Early-Speed Index & Mandatory `Single-Pivot` Cap**:
-      - Upgrade fast gate tests ($\le 11.8\text{s}$ 1F / $\le 24.2\text{s}$ 2F on Ritto E; $\le 12.0\text{s}$ on Miho E), projecting inside the **Winning 4C Gate ($\le 0.6\text{s}$)**.
-      - **Mandatory Single-Pivot Cap**: Mediocre gate clock ($\ge 12.3\text{s}$ 1F / $\ge 25.0\text{s}$ 2F), gate re-test (`再審査`), OR temperament/standing warnings (`駐立不安・出遅れ・幼さ・引っ掛かり`): **strictly prohibit `Single-Pivot`**, apply $\Delta \theta^{(1)}_i \in [-0.10, -0.18]$, widen $\sigma_i^2$, $\delta^{\text{place}}_i \in [-0.08, -0.16]$.
-2.  **Jockey Synchronicity, Debut Equipment & Veterinary Priors**:
-      - Evaluate rider × style × course synchronicity (`+0.05 ~ +0.10` vs. educational/passive mismatch).
-      - **Blinkers (`B`) / Cheekpieces (`CP`) at $n=0$**: Widen $\sigma_i^2$, bar from `Single-Pivot`, $\delta^{\text{place}}_i \in [-0.08, -0.15]$ unless post-blinker breeze improved final 1F by $\ge 0.8\text{s}$.
-      - **Cross Noseband / Tongue Tie / Veterinary Notes (`ソエ・DDSP`)**: In $\ge 1600\text{m}$ slow-pace debuts, apply $-0.06 \sim -0.14$ and widen $\sigma_i^2$.
-3.  **Stage-Adjusted Logit Separation ($\theta^{\text{post},(2,3)}_{i,s} = \theta^{\text{post}}_{i,s} + \delta^{\text{place}}_i$)**:
-      - **Boom-or-Bust / Hazard (`危` / non-mitigated Dirt Frame 1–2 / Dirt $\le 400\text{kg}$ / Gate-Risk / Slope-Only Stayer / 3yo Setback / Peak-Out)**: $\delta^{\text{place}}_i \in [-0.10, -0.22]$ (never use as a Wide/Trio Core anchor).
-      - **High-Floor Place Anchor (`Connector ◯/▲` / Debut Silver-Collector / Educational-Riding / `△_course_ped`)**: $\delta^{\text{place}}_i \in [+0.08, +0.20]$. When Posterior $P(\text{Top 3}_i) \ge 48\%$ and $\delta^{\text{place}}_i \ge +0.08$ with no `危` triggers, route as a **prime `High-Floor Connector`** for Core Shield Wide/Quinella pairs.
-
-### Phase 5: Gate-to-4C Positional Micro-Simulation, 2-Stage Benter Fusion, Exact Plackett-Luce & Chaos Grading
-
-1.  **Execution Level & Overbet 6-Trigger Audit (`危`)**:
-      - Declare **`Level A`**, **`Level B`**, or **`Level C`**.
-      - **Module ⑨ (Overbet 6-Trigger Filter `危`)**: For any runner with **$O_i \le 2.5$** backed on nominal brand signals, audit 6 triggers: (1) light 1-week-out load, (2) $< 5$ breezes or setback gap, (3) slack/heavy body (`Type II`) OR Dirt ultra-lightweight $\le 400\text{kg}$, (4) non-mitigated Dirt Frame 1–2 or Gate hazard, (5) Slope-only 2000m+ / D1800m stamina wall, (6) 1-week-out all-out peak-out reaction (`最終追切減速・お釣りなし`) or low-class sparring illusion. If $\ge 1$ trigger applies, flag **`【危】`**, **prohibit `◎` & `Single-Pivot`**, apply $\Delta \theta_i \in [-0.12, -0.22], \delta^{\text{place}}_i \in [-0.08, -0.16]$, and **clamp $w_{r,i} \le 0.10$**.
-2.  **Gate-to-4C Positional Micro-Simulation & 3–4 MECE Scenarios**:
-      - Simulate `発馬 → 芝/ダ境目 → 1角 → 4角0.6秒射程圏 → 直線進路` across **3 to 4 MECE scenarios** ($\sum_s \pi_s^{\text{post}} = 1.00$), applying the strict 3-race-consistent morning bias assimilation gate ($s_{\text{venue}}$):
-          - **Standard / Slow Pace ($N_{\text{lead}} \le 2\text{–}3, \text{RPCI} \ge 58.5$), Opening-Week `A/B` Rail, High-CV ($\ge 9.6$) Turf Sprints, or Educational-Favorite Debuts**: Enforce $\pi_{\text{speed\_persist}} \ge 40\% \sim 55\%$ and boost runners inside the **Winning 4C Gate ($\le 0.6\text{s}$)**, opening-week inside savers, outer high-CV sprinters, Niigata 1000m outer-rail speed, or apprentice `☆_pace`.
-          - **Contested / High-Pace Cluster ($N_{\text{lead}} \ge 4, \text{RPCI} \le 48.5$)**: Trigger $\pi_{\text{collapse}} \ge 35\% \sim 45\%$; **always elevate the `#1` mid-pack/outer closer with inside-sparring pack tolerance and CW/W final 2F $\le 22.8\text{s}$ / 1F $\le 11.4\text{s}$ (`☆_closer`) into the top 3–4 of $f^{\text{fund}}_i$**.
-          - **Tail-Risk / External-Shock Branch (Scenario 3 or 4)**: Allocate $\pi_{\text{shock}} \in [10\%, 25\%]$ to gate-break chaos, first-time kickback panic, rain/wind shift, or lone-speed surprise steal.
-3.  **2-Stage Benter Bayesian Fusion & Exact Stage-Adjusted Plackett-Luce Equations**:
-      - **Stage 1 (Odds-Blind Fundamental)**: Apply Jensen's Inequality variance attenuation $\tilde{\theta}^{\text{fund}}_{i,s} = \theta^{\text{fund}}_{i,s} / \sqrt{1 + 0.304 \cdot \sigma_i^2}$ to compute pure win probability $f^{\text{fund}}_i$ (tracking `f_fund 順` and cumulative capture $F_k$).
-      - **Stage 2 (Adaptive Market Fusion)**: Compute FLB Power de-vigged $q_i = (1/O_i)^\gamma / \sum_k (1/O_k)^\gamma$ ($\gamma \in [1.05, 1.15]$) and pool via $w_{r,i}$ ($0.40\text{–}0.50$ default; $0.25\text{–}0.35$ on clear physical mispricings; $\ge 0.25$ on Dirt Frame 1–2 Top-2 favorites/turf-start lacking `危` flaws; $\le 0.10$ on `危` / `☆_override` / Final-2F Breakers / High-Pace Survivors / Dirt $\le 400\text{kg}$ / non-mitigated Dirt Frame 1–2): $$\theta^{\text{post}}_{i,s} = (1 - w_{r,i})\tilde{\theta}^{\text{fund}}_{i,s} + w_{r,i} \ln q_i, \qquad \theta^{\text{post},(2,3)}_{i,s} = \theta^{\text{post}}_{i,s} + \delta^{\text{place}}_i$$
-      - Compute exact conditional probabilities per scenario $s$ across ALL $N$ active declared runners: $$P_s(y_1 = i) = \frac{\exp(\theta^{\text{post}}_{i,s})}{\sum_{k} \exp(\theta^{\text{post}}_{k,s})}, \quad P_s(y_2 = j \mid y_1 = i) = \frac{\exp(\theta^{\text{post},(2,3)}_{j,s})}{\sum_{k \neq i} \exp(\theta^{\text{post},(2,3)}_{k,s})}, \quad P_s(y_3 = m \mid y_1 = i, y_2 = j) = \frac{\exp(\theta^{\text{post},(2,3)}_{m,s})}{\sum_{k \notin \{i,j\}} \exp(\theta^{\text{post},(2,3)}_{k,s})}$$
-      - Mix across posterior scenario weights ($P(E) = \sum_s \pi_s^{\text{post}} P_s(E)$) and verify strict conservation across all $N$ active runners ($\sum_i P(\text{Win}_i) = 100.0\%$, $\sum_i P(\text{Top 2}_i) = 200.0\%$, $\sum_i P(\text{Top 3}_i) = 300.0\%$).
-      - **Chaos & Concentration Grading**: Compute **Top-3 Posterior Mass ($M_3 = p_{(1)} + p_{(2)} + p_{(3)}$)** and classify: `Type S` ($p_1 \ge 36\%$ with NO `Single-Pivot` / `危` / Dirt $\le 400\text{kg}$ caps), `Type A` ($p_1 + p_2 \ge 48\%$), `Type B` (standard), or `Type B+` (15+ runner Full-Gate Dirt, Intraday Rain / $\text{CV} \le 8.9$ / $m_{\text{dirt}} \ge 9.0\%$ / Worn Rail, OR $p_1 < 26.0\%$ with flat mid-tier / `危` on top favorites).
-
-### Phase 6: Maximum Hit-Rate Portfolio Optimization, Mandatory `◎` Connection, Auto-Pass / 2-Line Core Compression, Longshot 30% Cap, Drop-Buffered Dutching & Win-Reach Hedge
-
-1.  **Hit-Rate-First Pool Selection & Mandatory `◎`-Top-Contender / Market Top-2 Fav Connection (`◎×融合上位2〜4頭＆市場1〜2人気強制Core結線則`)**:
-      - Prioritize **`ワイド` > `馬連` / `複勝` > コンパクト`3連複` > `単勝`** when pairing value pivots with `High-Floor Connectors (◯/▲)`.
-      - **Mandatory `◎` Connection Rule (`飛び石結線禁止＆市場1〜2人気強制Core結線`)**: In Core Shield, ALWAYS include direct Wide/Quinella links from **`◎` to the Top 2–4 highest Posterior $P(\text{Top 3}_i)$ contenders** AND **never exclude a Top-2 market favorite ($O_i \le 5.0$) with NO `危` trigger from `◎`'s direct Core connections even if ranked 4th (`☆`)**. NEVER skip `◎ − △1` while funding `○ − △1`.
-2.  **Dynamic Pivot Selection (`Single-Anchor` vs. `3-Node Triangle Core` vs. `2-Line Heavy-Fav Compression` vs. `Plan B 2-Zone`)**:
-      - **`Hit-Rate Single-Anchor Core (絶対安定軸型)`**: ONLY when $P(\text{Top 3}_{\text{◎}}) \ge 60\%$ (`高回収モード`: $\ge 52\%$ & $p_{\text{◎}} - p_{\text{◯}} \ge 4.0\%$) AND `◎` has NO `Single-Pivot` ban.
-      - **`3-Node Triangle Core (3頭トライアングル防衛型 — Default in Competitive/Full-Gate Make Debuts)`**: Anchor Core on `◎` connected to top contenders (`◎−○`, `◎−▲`, `◎−△1`) plus the `○−▲` fallback link so **ANY 2 of the Top-3 nodes finishing Top 3** triggers a Core Shield hit.
-      - **`Heavy-Favorite 2-Line Core Compression (断然人気O◎≤2.0倍・2点圧縮型)`**: Whenever `◎` trades at **$O_{\text{◎}} \le 2.0\text{x}$** and valid mid-longshot partners ($O_j \ge 6.0\text{x}$) keep Core synthetic odds $\ge 1.35\text{x}$, **prohibit spreading Core across 4 Wide tickets**—compress Core strictly to **2 lines (or 2 Quinellas + 1 Wide)** to preserve $\ge 11,500\text{円}$ single-hit return.
-      - **`Plan B 2-Zone Sniper`** *(Optional — when user requests `高回収・Plan Bスナイパーモード`)*: Zone 1 Core `55%–65%` (`5,500円〜6,500円`) on top 3–4 horses + Zone 2 Deep Sniper `35%–45%` (`3,500円〜4,500円`) pinning `◎` (or `◎−◯`) down to `#5–#7` (outer dirt stalkers, load survivors, apprentice `☆_pace`, `△_course_ped`, High-CV dual outer-speed `☆_pace1 − ☆_pace2`).
-3.  **Exact Trio Formation Combinatorial Count Guard (`3連複フォーメーション点数厳密検算`)**:
-      - Standard 3-pair format **`(◎, ◯) − (◯, ▲) − (▲, △, ☆...)`** ($|C| = M + 1$, disjoint from `◎, ◯`): **$\mathbf{3M + 1\text{ 点}}$**.
-      - Extended 2nd-row format **`(◎, ◯) − (◯, ▲, △1) − C`** ($|C| = M + 2$): **$\mathbf{5M + 4\text{ 点}}$**. Verify `点数 × 100円 = 購入額` and total outlay = **`10,000円`**.
-4.  **Drop-Buffered Anti-Torigami Dutching, Auto-Pass Gate, Single-Longshot 30% Cap & Quantitative Win-Reach Hedge**:
-      - **Exact Inclusion-Exclusion Audit**: Compute $P(\text{Any Hit})$, $P(\text{元返し以上}: \text{Payout} \ge 10,000\text{円})$, $P(\text{トリガミ赤字}: 0 < \text{Payout} < 10,000\text{円})$, and $P(\text{不的中})$ strictly over mutually exclusive Top-3 arrival states $e = (y_1, y_2, y_3)$.
-      - **Single-Longshot Stake Cap ($\le 30\%$ / `3,000円` max)**: Across ALL pools (Wide + Quinella + Trio + Win-Reach Hedge), total stakes on tickets containing any single longshot (`☆`, $O_i \ge 10.0$) MUST NOT exceed **`3,000円`**.
-      - **Default `的中率最大化モード` Allocation (`10,000円` Fixed)**:
-          - **Core Shield Tranche (`基礎的中・元返し防衛枠`: `70%–80%` = `7,000円〜8,000円`)**: Size 2–6 Core Wide/Quinella(/Place) tickets covering `◎ × {○, ▲, △1}` and `○ − ▲` (or compressed 2 lines when $O_{\text{◎}} \le 2.0\text{x}$) via **Drop-Buffered Anti-Torigami Dutching** ($x_k \approx \lceil \text{TargetReturn} / O_k \rceil_{100}$, **`TargetReturn = 11,500円〜12,500円`**) so a **`-15%` late odds drop** still returns `9,800円〜10,600円`.
-          - **Alpha & Win-Reach Tranche (`上振れ・アタマ保証枠`: `20%–30%` = `2,000円〜3,000円`)**: Allocate to positive-edge (`p > q`) tickets (`馬連 ◎−○/▲`, compact `3連複 3〜7点`, `ワイド ◎−☆`, or **Quantitative Win-Reach Hedge** $B_{\text{hedge},j} = \lceil G_{\text{min}} / O_j \rceil_{100\text{円単位}}$ with $G_{\text{min}} = 10,000\text{円} / 20,000\text{円}$ on high-upside `☆_override / ☆_pace / ☆_closer / △_course_ped` ranked `#2–#5` with $p_j \ge 8.0\%, O_j \ge 8.0$, respecting the $\le 3,000\text{円}$ cap).
-      - **Mandatory Structural Auto-Pass & Threshold Gate (`見送り基準`)**:
-          - Immediately declare **`見送り (Pass / 0円)`** if **(1) Core Synthetic Odds $< 1.35\text{x}$** (even after 2-line compression), OR **(2) Active Field $\le 8$ runners AND (Core Wide avg $< 3.0\text{x}$ OR both Top-2 favorites $\le 2.5\text{x}$ with Quinella $< 3.0\text{x}$)**.
-          - Otherwise require exact $P(\text{Any Hit}) \ge \mathbf{55\%}$ ($\ge \mathbf{50\%}$ full-gate), $P(\text{元返し以上}) \ge \mathbf{42\%}$, Expected ROI $\ge \mathbf{102\%}$ (pre-market $\ge \mathbf{105\%}$), and `-15%` stress ROI $\ge 90\%$; if unmet, declare **`見送り (Pass / 0円)`**. Provide both `10,000円固定` and `1/4 Kelly` ($B = 100,000\text{円}$, cap $L = 10,000\text{円}$).
-
-### Phase 7: Pre-Race Diff Update (`直前更新`), Morning Venue Bias ($s_{\text{venue}}$), Transport Weight-Loss Audit, Smart-Money Surge & Post-Race Audit (`事後検証`)
-
-  - **Anti-Hallucination Guard**: Never fabricate unverified race results, workout clocks, or payouts; clearly distinguish Empirical Backtests from Parametric Monte Carlo Simulations.
-  - **Pre-Race Weight & Paddock 3-Classification (`直前更新`)**:
-      - **Type I (`① 好仕上がり・週中比±4kg以内`)**: $\Delta \theta_i \in [+0.03, +0.08]$, shrink $\sigma_i^2$.
-      - **Type II (`② 太め残り・重苦しい`)**: $\Delta \theta_i \in [-0.10, -0.20]$; triggers **`危`** if $O_i \le 2.5$ (and demotes from Core anchors).
-      - **Type III (`③ 初輸送減り[週中比-8kg〜-12kg以上]・細身[<430kg / ダート<420kg・<=400kg◎禁止]・発汗・イレ込み・制御難`)**: $\Delta \theta_i \in [-0.10, -0.22]$, widen $\sigma_i^2$, $\delta^{\text{place}}_i -0.10$, enforce `Single-Pivot` Ban (and `◎` Ban on Dirt $\le 400\text{kg}$).
-  - **Canter (`返し馬`), 3-Race Morning Bias ($s_{\text{venue}}$), Weather & Smart-Money Surge**:
-      - Re-run the strict 3-race-consistent morning bias update (`3R一致/2R一致/1R制限`), penalize exposed lone leaders under afternoon rain or headwind $\ge 5\text{m/s}$ ($-0.10 \sim -0.15$). Because Stage 2 fuses live $q_i$ via $w_{r,i}$, a $\ge 30\%$ late odds drop / large-bet surge automatically lifts posterior $p_i$; additionally boost `☆_override / △_course_ped` contenders surging late by $+0.08 \sim +0.14$ if ROI $\ge 102\%$.
-
-## 5. Concise High-Density Output Structure (`標準` Mode — Target 1,200–2,000 Characters)
-
-Keep `標準` mode strictly within the following **4 compact blocks** using telegraphic phrasing (`体言止め・短文化`). Do NOT output long prose paragraphs or inapplicable module descriptions.
-
-### 1. 結論・前提・展開シナリオ (4–5 Lines Max)
-
-  - **判定・モード・構造**: `【購入 / 条件付き購入 / 見送り】` ｜ `的中率最大化モード（or 高回収Plan B）` ｜ 波乱度: `Type S/A/B/B+` ($M_3$: `XX.X%` / Core合成 `X.XX倍`) ｜ 推奨軸型: `Single-Anchor / 3-Node Triangle / 断然人気2点圧縮 / Plan B 2-Zone` ｜ 水準: `Level A/B/C` ｜ 予算 `10,000円`（仮資金 `100,000円`）｜ 全頭確認済・取得時刻(JST・出典)
-  - **馬場・午前バイアス・融合重み・シナリオ**: コース/CV/含水率/風向 ｜ 午前バイアス($s_{\text{venue}}$・一致R数判定) ｜ 想定`RPCI`・$N_{\text{lead}}$ ｜ 融合重み $w_r$ ｜ MECEシナリオ $\pi_s^{\text{post}}$（1行凝縮）
-  - **印と役割分担**:
-      - `◎ 馬番 馬名` (最安定Top-3＆突破軸 / 4角0.6s圏・後半2F突破等)
-      - `◯▲ 馬番 馬名` (融合上位強制結線軸 / 高安定Connector `[教育騎乗・同入常習等]`)
-      - `☆△ 馬番 馬名` (妙味抜擢: `☆_override / ☆_pace / ☆_closer / △_course_ped` ※単一穴馬30%上限)
-      - `危 馬番 馬名` (過剰人気ハザード: 該当トリガー名＆$w_{r,i} \le 0.10$ ※該当なしなら省略)
-
-### 2. 融合勝率($p_i$順)コア評価表 (Top 7–8 + Marked/Faded Horses & 1-Line Tail Summary)
-
-Internally compute ALL $N$ active declared runners via 2-Stage Fusion + exact Plackett-Luce ($\sum \text{Win}=100.0\%, \sum \text{Top 2}=200.0\%, \sum \text{Top 3}=300.0\%$), and output a compact 9-column markdown table sorted by **Fused Posterior Win Probability $p_i$ descending**: `順位 | 印 | 馬番 馬名 | 型・想定4角 | 融合p_i(基礎f・累積F) | 市場q_i | 3着内率 | 単勝O_i(期待ROI) | 核心根拠・検算タグ(F/H 28字以内)`
-
-  - **Row Compression Rule (`下位馬1行集約規約`)**: Show individual rows **ONLY for the Top 7–8 horses plus any marked/Overbet (`危`) horses**. Aggregate all remaining tail runners into **1 bottom summary row** (`8〜N位計(X頭) | — | 馬番リスト | 追切不足等 | 計X.X% (100%) | 計X.X% | 計XX.X% (300%) | — | 追切時計/本数不足・砂被り懸念等(F/H)`). *(Expand all rows only in `詳細` mode).*
-
-### 3. 発動モジュール検算・主要馬F→H短評・反実仮想チェック (Bullet Points Only)
-
-  - **発動モジュール検算 (`Active Modules Only`)**: Internally verify all 10 Modules, but write out **ONLY the 2–4 actively triggered modules** in 1 line each (omit inapplicable modules).
-  - **主要馬短評 (Max 4–5 Horses, 1 Line Each)**: `馬番 馬名 (印・型)`: `[F: 追切時計/併せ馬クラス/ゲート/枠/体重]` → `[H: Δθ・δ・w補正根拠]` (1行60〜75字以内)
-  - **反実仮想チェック (`Counterfactual Audit` — 1 Line)**: `◎`最大破綻経路（出遅れ/砂被り/4角詰まり/ダート極小馬体等）時の `○−▲` 防衛可否 ＆ 消し/`危`人気馬の唯一の復活条件。
-
-### 4. 1万円最適配分・アタマ保証ヘッジ・直前トリガー
-
-  - **購入配分表 (7 Columns)**: `枠(Core/Alpha) | 券種・組番 | 推定的中率 | 基準O(元返しライン) | 期待ROI | 購入額 | 採用理由(短記)`
-  - **厳密ポートフォリオ指標 (1–2 Lines, Exact Disjoint-State Inclusion-Exclusion Basis)**: `合計: 10,000円 (Core合成: X.XX倍 | 1/4 Kelly参考: X,XXX円 | 単一穴馬最大: X,XXX円<=3,000円) | 厳密合成的中率: XX.X% | 元返し以上確率: XX.X% (-15%下落時: XX.X%) | トリガミ赤字/不的中: X.X%/XX.X% | 期待払戻: XX,XXX円 (期待ROI: XXX.X% / -15%時: XXX.X%)`
-  - **単勝/馬単アタマ突き抜け保証ヘッジ (1 Line, Applicable Value Horses Only)**: `単勝ヘッジ目安 B_hedge = ⌈G_min/O_j⌉: 馬番 馬名(O_j倍) → 1万円保証 X00円 / 2万円保証 X00円` *(該当なし・Alpha組込済なら1行で記載)*
-  - **直前更新トリガー＆出典 (2 Lines Max)**: 午前バイアス($s_{\text{venue}}$ 3R一致判定)・雨風変化、当日馬体重(週中比-8kg超Type III初輸送減り、ダート420kg未満減点/400kg以下◎禁止・ダ外枠480kg/内枠500kg・急坂440kg基準)・パドック/返し馬、直前オッズ下限ライン、および主要出典(JRA/タイムスタンプ)。
+  - **NEVER output probabilities as `0.0–1.0` decimals** (e.g., `0.265`); ALWAYS output **`0.0–100.0` percentages** (e.g., `26.5`) so $\sum f = 100.0$.
+  - **NEVER hard-fade (`消/危`) or omit from `◎` Core connections a Top-2 market favorite ($O_i \le 4.5$)** lacking Dirt $\le 400\text{kg}$, severe Type II (`+14kg+`), or verified `F`-level `危` workout/gate flaws; maintain $w_{r,i} \ge 0.42$.
+  - **NEVER let a mid-longshot ($O_i \ge 8.0\text{x}$) exceed `f = min(18.0%, q + 10.0%)`**, and **NEVER promote an extreme longshot ($O_i \ge 50.0\text{x}$) above `f = 5.5%` or into `◎ / ◯ / ▲`**.
+  - Never assign `◎` or `Single-Pivot` to a Dirt newcomer weighing $\le 400\text{kg}$ (penalize `< 420kg` by `-0.14 to -0.22`).
+  - Always declare `Pass` when `◎` is outside `1.2x–4.5x`, `coreSyntheticOdds < 1.08x`, `avgCoreWide < 2.8x`, or active field `<= 8` with compressed odds.
+  - Always sort `horses` by Fused Posterior Win Probability `f` descending and output valid, parseable JSON without conversational filler in app pipeline mode.
