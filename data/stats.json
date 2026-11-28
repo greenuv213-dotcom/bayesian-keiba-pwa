@@ -1,11 +1,11 @@
 {
-  "updatedAt": "2026-11-28 10:48 JST",
+  "updatedAt": "2026-11-28 13:49 JST",
   "aiPlan": "JRA:Neon統一 / NAR:無料キー待機",
   "all": {
-    "races": 21,
-    "hits": 9,
-    "invest": 210000,
-    "ret": 153620,
+    "races": 25,
+    "hits": 11,
+    "invest": 250000,
+    "ret": 168930,
     "passCount": 235,
     "passSaved": 2350000,
     "byRank": {
@@ -16,16 +16,16 @@
         "ret": 25310
       },
       "A": {
-        "races": 9,
+        "races": 10,
         "hits": 4,
-        "invest": 90000,
+        "invest": 100000,
         "ret": 68180
       },
       "New": {
-        "races": 6,
-        "hits": 3,
-        "invest": 60000,
-        "ret": 60130
+        "races": 9,
+        "hits": 5,
+        "invest": 90000,
+        "ret": 75440
       },
       "B": {
         "races": 0,
@@ -36,24 +36,24 @@
     },
     "bySource": {
       "ai": {
-        "races": 5,
-        "hits": 2,
-        "invest": 50000,
-        "ret": 25310
+        "races": 6,
+        "hits": 3,
+        "invest": 60000,
+        "ret": 33080
       },
       "baseline": {
-        "races": 16,
-        "hits": 7,
-        "invest": 160000,
-        "ret": 128310
+        "races": 19,
+        "hits": 8,
+        "invest": 190000,
+        "ret": 135850
       }
     }
   },
   "jra": {
-    "races": 21,
-    "hits": 9,
-    "invest": 210000,
-    "ret": 153620,
+    "races": 25,
+    "hits": 11,
+    "invest": 250000,
+    "ret": 168930,
     "passCount": 79,
     "passSaved": 790000,
     "byRank": {
@@ -64,16 +64,16 @@
         "ret": 25310
       },
       "A": {
-        "races": 9,
+        "races": 10,
         "hits": 4,
-        "invest": 90000,
+        "invest": 100000,
         "ret": 68180
       },
       "New": {
-        "races": 6,
-        "hits": 3,
-        "invest": 60000,
-        "ret": 60130
+        "races": 9,
+        "hits": 5,
+        "invest": 90000,
+        "ret": 75440
       },
       "B": {
         "races": 0,
@@ -84,16 +84,16 @@
     },
     "bySource": {
       "ai": {
-        "races": 5,
-        "hits": 2,
-        "invest": 50000,
-        "ret": 25310
+        "races": 6,
+        "hits": 3,
+        "invest": 60000,
+        "ret": 33080
       },
       "baseline": {
-        "races": 16,
-        "hits": 7,
-        "invest": 160000,
-        "ret": 128310
+        "races": 19,
+        "hits": 8,
+        "invest": 190000,
+        "ret": 135850
       }
     }
   },
@@ -147,6 +147,15 @@
   },
   "dailyTrend": [
     {
+      "date": "2026-11-28",
+      "mode": "jra",
+      "races": 4,
+      "hits": 2,
+      "invest": 40000,
+      "ret": 15310,
+      "roi": 38.3
+    },
+    {
       "date": "2026-11-23",
       "mode": "jra",
       "races": 7,
@@ -175,6 +184,66 @@
     }
   ],
   "recentResults": [
+    {
+      "date": "2026-11-28",
+      "mode": "jra",
+      "rank": "A",
+      "isGraded": false,
+      "ai": false,
+      "race": "京都3R 2歳未勝利",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-28",
+      "mode": "jra",
+      "rank": "New",
+      "isGraded": false,
+      "ai": false,
+      "race": "京都6R 2歳新馬",
+      "status": "🎯 的中 払戻7,540円 (回収率75.4% / -2,460円)",
+      "roi": 75.4,
+      "returnYen": 7540,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 12-6 (◎-▲ Core) (7,540円)"
+      ]
+    },
+    {
+      "date": "2026-11-28",
+      "mode": "jra",
+      "rank": "New",
+      "isGraded": false,
+      "ai": false,
+      "race": "東京4R 2歳新馬",
+      "status": "❌ 不的中 回収率0.0%",
+      "roi": 0.0,
+      "returnYen": 0,
+      "investedYen": 10000,
+      "isHit": false,
+      "hits": []
+    },
+    {
+      "date": "2026-11-28",
+      "mode": "jra",
+      "rank": "New",
+      "isGraded": false,
+      "ai": true,
+      "race": "東京5R 2歳新馬",
+      "status": "🎯 的中 払戻7,770円 (回収率77.7% / -2,230円)",
+      "roi": 77.7,
+      "returnYen": 7770,
+      "investedYen": 10000,
+      "isHit": true,
+      "hits": [
+        "ワイド 3-8 (◎-▲ Core) (7,770円)"
+      ]
+    },
     {
       "date": "2026-11-23",
       "mode": "jra",
