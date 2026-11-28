@@ -1,13 +1,13 @@
 {
-  "updatedAt": "2026-11-28 20:12 JST",
+  "updatedAt": "2026-11-29 01:16 JST",
   "aiPlan": "JRA:Neon統一 / NAR:無料キー待機",
   "all": {
     "races": 21,
     "hits": 15,
     "invest": 210000,
     "ret": 183030,
-    "passCount": 266,
-    "passSaved": 2660000,
+    "passCount": 263,
+    "passSaved": 2630000,
     "byRank": {
       "S": {
         "races": 13,
@@ -54,8 +54,8 @@
     "hits": 15,
     "invest": 210000,
     "ret": 183030,
-    "passCount": 107,
-    "passSaved": 1070000,
+    "passCount": 104,
+    "passSaved": 1040000,
     "byRank": {
       "S": {
         "races": 13,
