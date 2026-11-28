@@ -6,7 +6,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="Bayesian競馬AI" />
-  <title>Bayesian Keiba AI — JRA/NAR 階層ベイズ予想PWA (Neon v11.9)</title>
+  <title>Bayesian Keiba AI — JRA/NAR 階層ベイズ予想PWA (Neon v12.0)</title>
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
     body {
@@ -77,7 +77,7 @@
         <div class="flex items-center justify-between gap-2">
           <div>
             <div class="flex items-center gap-1.5 flex-wrap">
-              <span id="multiLegSkillBadge" class="text-[11px] bg-indigo-500/20 border border-indigo-400/40 text-indigo-300 px-2 py-0.5 rounded font-semibold">app-bayesian-win5 (v11.2 Neon)</span>
+              <span id="multiLegSkillBadge" class="text-[11px] bg-indigo-500/20 border border-indigo-400/40 text-indigo-300 px-2 py-0.5 rounded font-semibold">app-bayesian-win5 (v11.3 Neon)</span>
               <span id="multiLegAiBadge" class="text-[10px] bg-slate-800 text-slate-300 px-2 py-0.5 rounded font-bold">読込中</span>
             </div>
             <h2 id="multiLegTitle" class="text-base font-bold text-white mt-1">JRA WIN5 2-Stage融合＆Plan C直交最適化</h2>
@@ -178,14 +178,14 @@
     <section id="view-skills" class="hidden space-y-3">
       <div class="bg-slate-900 border border-slate-800 rounded-xl p-3.5 space-y-2.5">
         <div class="flex items-center justify-between gap-2 flex-wrap">
-          <h2 class="text-sm font-bold text-white">🧬 Neon v11.9 回収率100%超エンジン</h2>
+          <h2 class="text-sm font-bold text-white">🧬 Neon v12.0 厳密Benter融合エンジン</h2>
           <span id="skillAiPlanBadge" class="text-[11px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded font-bold">JRA:Neon統一 / NAR:無料枠</span>
         </div>
         <ul class="text-xs text-slate-300 space-y-1.5 leading-relaxed list-disc pl-4">
-          <li><b>厳選購入＆適正化EVゲート</b>：Bランク・オッズ未取得・NAR下級平場を完全 <code>Pass</code> 化。<code>Core合成 ≥ 1.12倍</code> × <code>EV ≥ 0.88(AI後0.94)</code>（Sは合成<code>1.25+</code>・EV<code>1.00+</code>）を通過した <b>S・A・新馬</b> へ投資を集中。</li>
-          <li><b>Core 55% / Alpha 45% の高回収バランス</b>：ワイド2〜3点（<code>O◎ ≤ 2.2</code> は2点圧縮・市場1〜2人気強制結線）で元返し防衛しつつ、控除率20%の<b>単勝＋馬連2点＋少点数3連複</b>へ45%配分し、的中時平均1.8〜2.2倍を狙う。</li>
-          <li><b>JRA有料Neon統一 ＆ NAR完全無料枠分離</b>：JRAはWIN5・G1（<code>XHIGH/HIGH</code>）からS・A・新馬まで全面 <code>gemini-4-neon</code>、NARは専用無料キーで <code>Hydrogen / 3.8 Flash</code> を稼働（誤課金防止ガード付）。</li>
-          <li><b>土・日・月全日程WIN5 ＆ トリプル馬単 Plan C 直交編成</b>：公式対象5レースIDを曜日問わず自動検知し、T1 Core 45%上限＋T2/T3 直交波乱翼（中穴5〜15倍優先・NARは南関4場限定）を編成。</li>
+          <li><b>Python側でのStage 2 Benter融合強制実行</b>：AIの基礎評価 <code>fFund</code> と実オッズ <code>q</code> を数式で厳密融合。単勝4.5倍以下の1〜2人気全消しを禁止し、8倍以上の過大評価（18%上限）と50倍超の暴走（5.5%上限）を根絶。</li>
+          <li><b>逆選択バグ根絶（◎1.4〜4.0倍軸限定＆障害戦除外）</b>：赤字の7割を生んでいた◎4.1倍超の中穴軸・障害レースを完全 <code>Pass</code> 化し、<b>上位人気軸 × 相手妙味（平均W 3.0+ / 合成1.10+）× 集中度M3</b> で S / A を厳選。</li>
+          <li><b>Core 62% / Alpha 38% ＋ ◎単勝優先保護</b>：<code>◎-☆</code> 結線を復活させつつワイド2〜4点で62%防衛し、Alphaでは<b>◎単勝を必ず保護</b>（<code>O◎ &lt; 2.0</code> 時のみ◎◯2段単勝）＋馬連2点＋少点数3連複を配分。</li>
+          <li><b>JRA有料Neon統一 ＆ WIN5小数スケール自動補正</b>：WIN5・G1は安定した <code>gemini-4-neon (HIGH)</code> で統一し、小数出力バグ（<code>0.232</code> 等）を自動パーセント補正。NARは専用無料キーで完全分離。</li>
         </ul>
       </div>
 
@@ -248,7 +248,7 @@
 
         <div class="bg-slate-950 border border-slate-800 rounded-xl p-2.5 space-y-2">
           <div class="flex items-center justify-between text-[11px] gap-2">
-            <span class="text-emerald-400 font-bold">🧠 Neon 2-Stage融合＆3シナリオ推論（F/E/H）</span>
+            <span class="text-emerald-400 font-bold">🧠 Neon v12.0 厳密2-Stage融合＆3シナリオ推論</span>
             <span id="modalPivotInfo" class="text-slate-400 font-mono shrink-0"></span>
           </div>
           <div id="modalNeonMetaRow" class="flex flex-wrap gap-1 text-[10px]"></div>
@@ -264,8 +264,8 @@
         <div class="bg-gradient-to-br from-emerald-950/50 via-slate-900 to-slate-950 border border-emerald-500/40 rounded-xl p-3 space-y-2.5">
           <div class="flex items-center justify-between gap-2">
             <div class="min-w-0">
-              <div id="modalTicketHeaderTitle" class="text-xs text-emerald-300 font-bold">💰 Neon v11.9配分（Core55%・Alpha45%）</div>
-              <div id="modalOddsSourceLabel" class="text-[11px] text-slate-400">ワイド2-3点防衛＋単勝・馬連2点・少点数3連複でROI100%超狙い</div>
+              <div id="modalTicketHeaderTitle" class="text-xs text-emerald-300 font-bold">💰 Neon v12.0配分（Core62%・Alpha38%）</div>
+              <div id="modalOddsSourceLabel" class="text-[11px] text-slate-400">ワイド2-4点防衛（◎-☆復活）＋◎単勝優先保護・馬連2点・少点数3連複</div>
             </div>
             <span id="modalBudgetValue" class="shrink-0 text-lg font-extrabold text-amber-400 whitespace-nowrap">10,000円</span>
           </div>
@@ -342,6 +342,23 @@
       statsCircuit: "all",
       statsRankFilter: "ALL"
     };
+
+    // Code Patch P12 クライアント側防御: 小数(0.232)データが残っていたら自動×100補正
+    function normalizeProbScaleClient(horses) {
+      if (!Array.isArray(horses) || horses.length === 0) return;
+      const fVals = horses.map(h => Number(h.f) || 0);
+      const sumF = fVals.reduce((s, x) => s + x, 0);
+      const maxF = Math.max(...fVals);
+      if (sumF > 0 && sumF <= 1.8 && maxF <= 1.0) {
+        horses.forEach(h => {
+          ["f", "fFund", "q", "top2", "top3"].forEach(k => {
+            if (h[k] != null && Number(h[k]) <= 3.1) {
+              h[k] = Number((Number(h[k]) * 100.0).toFixed(1));
+            }
+          });
+        });
+      }
+    }
 
     function loadPersistedState() {
       try {
@@ -424,6 +441,7 @@
     function getEffectiveHorses(race) {
       const raw = (race.horses || []).map(h => ({ ...h }));
       if (raw.length === 0) return [];
+      normalizeProbScaleClient(raw);
       let changed = state.scenarioMode !== "mix";
       raw.forEach(h => {
         const ov = state.liveOverrides[`${race.id}-${h.num}`];
@@ -503,7 +521,7 @@
       document.getElementById("modeBtnJra").className = !isNar ? "text-xs font-extrabold px-2.5 py-1 rounded-md bg-emerald-500 text-slate-950 transition" : "text-xs font-bold px-2.5 py-1 rounded-md text-slate-400 transition";
       document.getElementById("modeBtnNar").className = isNar ? "text-xs font-extrabold px-2.5 py-1 rounded-md bg-amber-400 text-slate-950 transition" : "text-xs font-bold px-2.5 py-1 rounded-md text-slate-400 transition";
       document.getElementById("navMultiLegLabel").textContent = isNar ? "トリプル馬単" : "WIN5予想";
-      document.getElementById("multiLegSkillBadge").textContent = isNar ? "app-bayesian-nar (v7.1 Neon)" : "app-bayesian-win5 (v11.2 Neon)";
+      document.getElementById("multiLegSkillBadge").textContent = isNar ? "app-bayesian-nar (v7.2 Neon)" : "app-bayesian-win5 (v11.3 Neon)";
       document.getElementById("multiLegTitle").innerHTML = isNar ? "南関 トリプル馬単（10R・11R・12R）最適化" : "JRA WIN5 2-Stage融合＆Plan C直交最適化";
 
       const keys = Object.keys(getActiveDB()).sort();
@@ -675,7 +693,7 @@
       container.innerHTML = list.map(r => {
         const sortedH = [...(r.horses || [])].sort((a, b) => (Number(b.f) || 0) - (Number(a.f) || 0));
         const hCount = sortedH.length;
-        const topHorse = sortedH[0] ? `${sortedH[0].mark} ${sortedH[0].num}番 ${sortedH[0].name} (f=${sortedH[0].f}%)` : "出馬表発表待機";
+        const topHorse = sortedH[0] ? `${sortedH[0].mark} ${sortedH[0].num}番 ${sortedH[0].name} (f=${sortedH[0].f}%, ${sortedH[0].odds}倍)` : "出馬表発表待機";
         const gradedTag = r.isGraded
           ? `<span class="text-[10px] bg-amber-500/20 border border-amber-400/50 text-amber-200 px-1.5 py-0.5 rounded font-extrabold whitespace-nowrap">🏆重賞</span>`
           : "";
@@ -686,10 +704,10 @@
           ? `<span class="text-[10px] bg-indigo-500/15 border border-indigo-400/30 text-indigo-300 px-1.5 py-0.5 rounded font-mono">M3:${Number(r.m3).toFixed(0)}%</span>`
           : "";
         const synthTag = r.coreSyntheticOdds != null
-          ? `<span class="text-[10px] ${Number(r.coreSyntheticOdds) < 1.12 ? "bg-rose-500/15 border-rose-400/30 text-rose-300" : "bg-sky-500/15 border-sky-400/30 text-sky-300"} border px-1.5 py-0.5 rounded font-mono">合${Number(r.coreSyntheticOdds).toFixed(2)}</span>`
+          ? `<span class="text-[10px] ${Number(r.coreSyntheticOdds) < 1.10 ? "bg-rose-500/15 border-rose-400/30 text-rose-300" : "bg-sky-500/15 border-sky-400/30 text-sky-300"} border px-1.5 py-0.5 rounded font-mono">合${Number(r.coreSyntheticOdds).toFixed(2)}</span>`
           : "";
-        const evTag = r.maxEv != null && Number(r.maxEv) > 0
-          ? `<span class="text-[10px] ${Number(r.maxEv) >= 1.04 ? "bg-emerald-500/20 border-emerald-400/40 text-emerald-300" : (Number(r.maxEv) >= 0.94 ? "bg-amber-500/15 border-amber-400/30 text-amber-200" : "bg-slate-800 border-slate-700 text-slate-400")} border px-1.5 py-0.5 rounded font-mono">EV${Number(r.maxEv).toFixed(2)}</span>`
+        const avgWTag = r.avgCoreWide != null
+          ? `<span class="text-[10px] ${Number(r.avgCoreWide) >= 3.8 ? "bg-emerald-500/20 border-emerald-400/40 text-emerald-300" : "bg-slate-800 border-slate-700 text-slate-300"} border px-1.5 py-0.5 rounded font-mono">W平均${Number(r.avgCoreWide).toFixed(1)}</span>`
           : "";
         const hasResult = r.actualTop3 && r.actualTop3.length > 0;
         const evalResult = r.evalDone ? { isHit: r.isHit, ret: r.returnYen || 0, roi: r.actualRoi || 0, hits: r.hitTickets || [] } : null;
@@ -741,7 +759,7 @@
                 ${aiTag}
                 ${neonTag}
                 ${synthTag}
-                ${evTag}
+                ${avgWTag}
               </div>
               <div class="shrink-0">${getRankBadgeHtml(r.rank)}</div>
             </div>
@@ -784,15 +802,15 @@
 
       const mRow = document.getElementById("modalNeonMetaRow");
       const metaBadges = [];
-      metaBadges.push(`<span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded font-bold">💎 Core55/Alpha45</span>`);
+      metaBadges.push(`<span class="bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 px-1.5 py-0.5 rounded font-bold">💎 Core62/Alpha38</span>`);
       if (race.m3 != null) metaBadges.push(`<span class="bg-indigo-500/20 text-indigo-300 border border-indigo-400/30 px-1.5 py-0.5 rounded font-mono">M3 ${Number(race.m3).toFixed(1)}%</span>`);
       if (race.coreSyntheticOdds != null) {
-        const scCls = Number(race.coreSyntheticOdds) < 1.12 ? "bg-rose-500/20 text-rose-300 border-rose-400/40" : "bg-sky-500/20 text-sky-300 border-sky-400/30";
+        const scCls = Number(race.coreSyntheticOdds) < 1.10 ? "bg-rose-500/20 text-rose-300 border-rose-400/40" : "bg-sky-500/20 text-sky-300 border-sky-400/30";
         metaBadges.push(`<span class="${scCls} border px-1.5 py-0.5 rounded font-mono">Core合成 ${Number(race.coreSyntheticOdds).toFixed(2)}倍</span>`);
       }
-      if (race.maxEv != null && Number(race.maxEv) > 0) {
-        const evCls = Number(race.maxEv) >= 1.04 ? "bg-emerald-500/25 text-emerald-200 border-emerald-400/50" : (Number(race.maxEv) >= 0.94 ? "bg-amber-500/20 text-amber-200 border-amber-400/40" : "bg-rose-500/20 text-rose-300 border-rose-400/40");
-        metaBadges.push(`<span class="${evCls} border px-1.5 py-0.5 rounded font-mono font-bold">最大EV ${Number(race.maxEv).toFixed(2)}</span>`);
+      if (race.avgCoreWide != null) {
+        const awCls = Number(race.avgCoreWide) >= 3.8 ? "bg-emerald-500/25 text-emerald-200 border-emerald-400/50" : (Number(race.avgCoreWide) >= 3.0 ? "bg-amber-500/20 text-amber-200 border-amber-400/40" : "bg-rose-500/20 text-rose-300 border-rose-400/40");
+        metaBadges.push(`<span class="${awCls} border px-1.5 py-0.5 rounded font-mono font-bold">平均W ${Number(race.avgCoreWide).toFixed(1)}倍</span>`);
       }
       if (race.wR != null) metaBadges.push(`<span class="bg-slate-800 text-slate-300 border border-slate-700 px-1.5 py-0.5 rounded font-mono">融合wR ${Number(race.wR).toFixed(2)}</span>`);
       if (race.intradayBiasConsistentR != null) {
@@ -859,9 +877,9 @@
         const wtSpan = h.weight ? `<span class="text-[10px] text-slate-400 font-mono">${h.weight}</span>` : "";
         const evVal = ((Number(h.f) || 0) / 100.0) * (Number(h.odds) || 0);
         const evSpan = (Number(h.odds) > 1.0 && Number(h.odds) < 50.0)
-          ? `<span class="text-[10px] font-mono ${evVal >= 1.04 ? "text-emerald-300 font-bold" : (evVal >= 0.94 ? "text-amber-300" : "text-slate-500")}">EV:${evVal.toFixed(2)}</span>`
+          ? `<span class="text-[10px] font-mono ${evVal >= 1.00 ? "text-emerald-300 font-bold" : (evVal >= 0.88 ? "text-amber-300" : "text-slate-500")}">EV:${evVal.toFixed(2)}</span>`
           : "";
-        const clampBadge = (h.wUsed != null && Number(h.wUsed) <= 0.18)
+        const clampBadge = (h.wUsed != null && Number(h.wUsed) <= 0.20)
           ? `<span class="text-[9px] bg-rose-500/20 border border-rose-400/40 text-rose-300 px-1 py-0.5 rounded font-mono">w=${Number(h.wUsed).toFixed(2)}</span>`
           : "";
 
@@ -950,7 +968,7 @@
       return { val: fallback, isLive: false };
     }
 
-    // auto_predict.py (v11.9-neon) と100%同期: Core 55% (ワイド2-3点絞り) + Alpha 45% (単勝 + 馬連2点 + 少点数3連複)
+    // auto_predict.py (v12.0-neon) と100%同期: Core 62% (◎-☆結線復活・2〜4点) + Alpha 38% (◎単勝優先保護・馬連2点・少点数3連複)
     function buildFullSkillTickets(race, B = 10000) {
       const effHorses = getEffectiveHorses(race);
       const sorted = [...effHorses].sort((a, b) => ((Number(b.f) || 0) * 0.55 + (Number(b.top3) || 0) * 0.45) - ((Number(a.f) || 0) * 0.55 + (Number(a.top3) || 0) * 0.45));
@@ -972,7 +990,7 @@
 
       const himos = sorted.filter(h => ![h1.num, h2.num, h3.num, h4.num].includes(h.num) && h.mark !== "消").slice(0, 2);
       const pl = buildPlackettLuceEngine(sorted);
-      const o1 = Math.max(1.1, Number(h1.odds) || 4.5), o2 = Math.max(1.2, Number(h2.odds) || 6.0), o3 = Math.max(1.2, Number(h3.odds) || 7.5), o4 = Math.max(1.5, Number(h4.odds) || 10.0);
+      const o1 = Math.max(1.1, Number(h1.odds) || 3.5), o2 = Math.max(1.2, Number(h2.odds) || 5.5), o3 = Math.max(1.2, Number(h3.odds) || 7.5), o4 = Math.max(1.5, Number(h4.odds) || 10.0);
 
       const wm = race.wideOddsMap || null;
       const w12 = lookupWideOddsClient(wm, h1.num, h2.num, Math.max(1.3, Number((Math.sqrt(o1*o2)*0.62).toFixed(1))));
@@ -981,48 +999,56 @@
       const w14 = lookupWideOddsClient(wm, h1.num, h4.num, Math.max(1.9, Number((Math.sqrt(o1*o4)*0.75).toFixed(1))));
       const liveWideUsed = w12.isLive || w13.isLive;
 
-      const coreBudget = Math.round((B * 0.55) / 100) * 100;
+      const coreBudget = Math.round((B * 0.62) / 100) * 100;
       const alphaBudget = Math.max(500, B - coreBudget);
       const maxLongshot = Math.floor(B * 0.30);
 
       let coreDefs = [];
-      let isCompressed2 = false;
-      if (o1 <= 2.2) {
-        isCompressed2 = true;
+      let coreModeLabel = "4点Core(◎-☆復活)";
+      if (o1 <= 1.8) {
+        coreModeLabel = "O◎≤1.8 2点圧縮Core";
         const candPartners = [
           { h: h2, w: w12, o: o2, comb: `${h1.num} － ${h2.num} (◎－◯ 2点Core)` },
           { h: h3, w: w13, o: o3, comb: `${h1.num} － ${h3.num} (◎－▲ 2点Core)` }
         ];
-        if (h4.num !== h3.num && (forcedFav || (o4 >= 6.0 && w14.val > w12.val))) {
+        if (h4.num !== h3.num) {
           candPartners.push({ h: h4, w: w14, o: o4, comb: `${h1.num} － ${h4.num} (◎－${forcedFav ? "人気" : "☆"} 2点Core)` });
         }
-        candPartners.sort((a, b) => ((b.w.val >= 2.8 ? 1 : 0) - (a.w.val >= 2.8 ? 1 : 0)) || (b.w.val - a.w.val));
+        candPartners.sort((a, b) => ((b.w.val >= 2.6 ? 1 : 0) - (a.w.val >= 2.6 ? 1 : 0)) || (b.w.val - a.w.val));
         coreDefs = candPartners.slice(0, 2).map(p => ({
           poolKey: "wide", nums: [h1.num, p.h.num], comb: p.comb,
           hitProb: Math.max(15, pl.probWide(h1.num, p.h.num)),
           baseOdds: p.w.val, isLiveOdds: p.w.isLive, isLs: (o1 >= 10 || p.o >= 10)
         }));
+      } else if (o1 <= 2.2) {
+        coreModeLabel = "O◎≤2.2 3点軸Core";
+        coreDefs = [
+          { poolKey: "wide", nums: [h1.num, h2.num], comb: `${h1.num} － ${h2.num} (◎－◯ 3点Core)`, hitProb: Math.max(18, pl.probWide(h1.num, h2.num)), baseOdds: w12.val, isLiveOdds: w12.isLive, isLs: (o1 >= 10 || o2 >= 10) },
+          { poolKey: "wide", nums: [h1.num, h3.num], comb: `${h1.num} － ${h3.num} (◎－▲ 3点Core)`, hitProb: Math.max(15, pl.probWide(h1.num, h3.num)), baseOdds: w13.val, isLiveOdds: w13.isLive, isLs: (o1 >= 10 || o3 >= 10) }
+        ];
+        if (h4.num !== h3.num) {
+          coreDefs.push({ poolKey: "wide", nums: [h1.num, h4.num], comb: `${h1.num} － ${h4.num} (◎－${forcedFav ? "人気馬" : "☆"} 3点Core)`, hitProb: Math.max(12, pl.probWide(h1.num, h4.num)), baseOdds: w14.val, isLiveOdds: w14.isLive, isLs: (o1 >= 10 || o4 >= 10) });
+        }
       } else {
         coreDefs = [
           { poolKey: "wide", nums: [h1.num, h2.num], comb: `${h1.num} － ${h2.num} (◎－◯ Core)`, hitProb: Math.max(18, pl.probWide(h1.num, h2.num)), baseOdds: w12.val, isLiveOdds: w12.isLive, isLs: (o1 >= 10 || o2 >= 10) },
-          { poolKey: "wide", nums: [h1.num, h3.num], comb: `${h1.num} － ${h3.num} (◎－▲ Core)`, hitProb: Math.max(15, pl.probWide(h1.num, h3.num)), baseOdds: w13.val, isLiveOdds: w13.isLive, isLs: (o1 >= 10 || o3 >= 10) }
+          { poolKey: "wide", nums: [h1.num, h3.num], comb: `${h1.num} － ${h3.num} (◎－▲ Core)`, hitProb: Math.max(15, pl.probWide(h1.num, h3.num)), baseOdds: w13.val, isLiveOdds: w13.isLive, isLs: (o1 >= 10 || o3 >= 10) },
+          { poolKey: "wide", nums: [h2.num, h3.num], comb: `${h2.num} － ${h3.num} (◯－▲ タテ目防衛)`, hitProb: Math.max(13, pl.probWide(h2.num, h3.num)), baseOdds: w23.val, isLiveOdds: w23.isLive, isLs: (o2 >= 10 || o3 >= 10) }
         ];
-        if (forcedFav && ![h1.num, h2.num, h3.num].includes(h4.num)) {
-          coreDefs.push({ poolKey: "wide", nums: [h1.num, h4.num], comb: `${h1.num} － ${h4.num} (◎－人気馬 強制Core)`, hitProb: Math.max(12, pl.probWide(h1.num, h4.num)), baseOdds: w14.val, isLiveOdds: w14.isLive, isLs: (o1 >= 10 || o4 >= 10) });
-        } else {
-          coreDefs.push({ poolKey: "wide", nums: [h2.num, h3.num], comb: `${h2.num} － ${h3.num} (◯－▲ タテ目防衛)`, hitProb: Math.max(13, pl.probWide(h2.num, h3.num)), baseOdds: w23.val, isLiveOdds: w23.isLive, isLs: (o2 >= 10 || o3 >= 10) });
+        if (h4.num !== h3.num) {
+          const tag4 = forcedFav ? "◎－人気馬 強制Core" : "◎－☆ 強制Core";
+          coreDefs.push({ poolKey: "wide", nums: [h1.num, h4.num], comb: `${h1.num} － ${h4.num} (${tag4})`, hitProb: Math.max(12, pl.probWide(h1.num, h4.num)), baseOdds: w14.val, isLiveOdds: w14.isLive, isLs: (o1 >= 10 || o4 >= 10) });
         }
       }
 
       const invSum = coreDefs.reduce((s, d) => s + (1.0 / Math.max(1.1, d.baseOdds)), 0);
       const coreSynthOdds = Number((1.0 / Math.max(0.05, invSum)).toFixed(2));
+      const avgCoreWide = Number((coreDefs.reduce((s, d) => s + d.baseOdds, 0) / Math.max(1, coreDefs.length)).toFixed(1));
 
-      document.getElementById("modalTicketHeaderTitle").textContent = isCompressed2
-        ? "💰 Neon v11.9配分（O◎≤2.2 2点Core 55% ＋ Alpha 45%）"
-        : "💰 Neon v11.9配分（厳選3点Core 55% ＋ 高回収Alpha 45%）";
+      document.getElementById("modalTicketHeaderTitle").textContent = `💰 Neon v12.0配分（${coreModeLabel} 62% ＋ Alpha 38%）`;
       document.getElementById("modalOddsSourceLabel").textContent = liveWideUsed
-        ? `✅ 実ワイドオッズ連動（Core合成 ${coreSynthOdds}倍）＋単勝/馬連/3連複で一撃2万〜4万円狙い`
-        : `Core 55%（合成 ${coreSynthOdds}倍）＋ Alpha 45%（単勝・馬連2点・少点数3連複）`;
+        ? `✅ 実ワイドオッズ連動（合成 ${coreSynthOdds}倍 / 平均W ${avgCoreWide}倍）＋◎単勝優先保護`
+        : `Core 62%（合成 ${coreSynthOdds}倍 / 平均W ${avgCoreWide}倍）＋ Alpha 38%（◎単勝保護・馬連2点・3連複）`;
 
       const rawW = coreDefs.map(d => 1.0 / Math.max(1.1, d.baseOdds));
       const sumRw = Math.max(1e-6, rawW.reduce((s, x) => s + x, 0));
@@ -1031,27 +1057,32 @@
         let amt = Math.max(100, Math.round((rawW[i] / sumRw * coreBudget) / 100) * 100);
         if (d.isLs) amt = Math.min(amt, maxLongshot);
         usedCore += amt;
-        return { ...d, zone: "Core (基礎防衛 55%)", type: "ワイド", points: 1, amt, isSynthetic: false };
+        return { ...d, zone: "Core (基礎防衛 62%)", type: "ワイド", points: 1, amt, isSynthetic: false };
       });
       if (usedCore !== coreBudget && coreRows.length > 0 && coreRows[0].amt + (coreBudget - usedCore) >= 100) {
         coreRows[0].amt += (coreBudget - usedCore);
       }
 
+      // Alpha 38%: ◎単勝優先保護 + 馬連2点 + 少点数3連複
       const row1 = [h1.num, h2.num];
       const row2 = [...new Set([h2.num, h3.num])].sort((a,b)=>a-b);
       const row3 = [...new Set([h3.num, h4.num, ...himos.map(x => x.num)])].sort((a,b)=>a-b);
       const trio = pl.evalTrio(row1, row2, row3);
-      const trioCap = Math.round((alphaBudget * 0.24) / 100) * 100;
+      const trioCap = Math.round((alphaBudget * 0.22) / 100) * 100;
       const trioAmt = Math.min(Math.max(400, trioCap), trio.points * 100);
 
-      const ev1 = ((Number(h1.f) || 0) / 100.0) * o1;
-      const ev2 = ((Number(h2.f) || 0) / 100.0) * o2;
-      const winTarget = (o1 >= 2.4 && (ev1 >= ev2 || o2 < 2.8)) ? h1 : (o2 >= 2.8 ? h2 : h1);
-      const winOdds = Math.max(1.2, Number(winTarget.odds) || o1);
-      let winAmt = Math.max(300, Math.round((alphaBudget * 0.27) / 100) * 100);
-      if (winOdds >= 10.0) winAmt = Math.min(winAmt, Math.max(300, Math.floor(maxLongshot / 2)));
+      const winBudget = Math.max(400, Math.round((alphaBudget * 0.37) / 100) * 100);
+      const winRows = [];
+      if (o1 >= 2.0 || o2 < 2.8) {
+        winRows.push({ poolKey: "win", nums: [h1.num], zone: "Alpha (◎単勝保護)", type: "単勝", comb: `${h1.num} (◎ ${h1.name})`, points: 1, amt: winBudget, hitProb: Math.max(4, Number(h1.f) || 20), baseOdds: o1, isSynthetic: false });
+      } else {
+        const w1Amt = Math.max(300, Math.round((winBudget * (o1 >= 1.5 ? 0.58 : 0.45)) / 100) * 100);
+        const w2Amt = Math.max(100, winBudget - w1Amt);
+        winRows.push({ poolKey: "win", nums: [h1.num], zone: "Alpha (◎単勝保護)", type: "単勝", comb: `${h1.num} (◎ ${h1.name})`, points: 1, amt: w1Amt, hitProb: Math.max(4, Number(h1.f) || 25), baseOdds: o1, isSynthetic: false });
+        winRows.push({ poolKey: "win", nums: [h2.num], zone: "Alpha (◯逆転単勝)", type: "単勝", comb: `${h2.num} (◯ ${h2.name})`, points: 1, amt: w2Amt, hitProb: Math.max(4, Number(h2.f) || 14), baseOdds: o2, isSynthetic: false });
+      }
 
-      const remUmaren = Math.max(200, alphaBudget - trioAmt - winAmt);
+      const remUmaren = Math.max(200, alphaBudget - trioAmt - winBudget);
       const u2Partner = (forcedFav && h4.num !== h2.num) ? h4 : h3;
       const u2Tag = (forcedFav && h4.num !== h2.num) ? "人気馬" : "▲";
       const u2Wide = (forcedFav && h4.num !== h2.num) ? w14.val : w13.val;
@@ -1061,19 +1092,19 @@
       const coreAnyHit = pl.calcCoreAnyHit(coreRows.map(c => c.nums));
       const allRows = [
         ...coreRows,
-        { poolKey: "win", nums: [winTarget.num], zone: "Alpha (単勝・控除20%)", type: "単勝", comb: `${winTarget.num} (${winTarget.mark || "◎"} ${winTarget.name})`, points: 1, amt: winAmt, hitProb: Math.max(4, Number(winTarget.f) || 12), baseOdds: winOdds, isSynthetic: false },
-        { poolKey: "umaren", nums: [h1.num, h2.num], zone: "Alpha (高回収 45%)", type: "馬連", comb: `${h1.num} － ${h2.num} (◎－◯)`, points: 1, amt: u12, hitProb: Math.max(7, pl.probQuinella(h1.num, h2.num)), baseOdds: Number((w12.val * 2.4).toFixed(1)), isSynthetic: false },
-        { poolKey: "umaren", nums: [h1.num, u2Partner.num], zone: "Alpha (高回収 45%)", type: "馬連", comb: `${h1.num} － ${u2Partner.num} (◎－${u2Tag})`, points: 1, amt: u13, hitProb: Math.max(5.5, pl.probQuinella(h1.num, u2Partner.num)), baseOdds: Number((u2Wide * 2.5).toFixed(1)), isSynthetic: false },
-        { poolKey: "sanrenpuku", row1, row2, row3, zone: "Alpha (高回収 45%)", type: "3連複F", comb: `(${row1.join(",")}) － (${row2.join(",")}) － (${row3.join(",")})`, points: trio.points, amt: trioAmt, hitProb: trio.hitProb, baseOdds: Number((240.0 / trio.hitProb).toFixed(1)), isSynthetic: true }
+        ...winRows,
+        { poolKey: "umaren", nums: [h1.num, h2.num], zone: "Alpha (高回収 38%)", type: "馬連", comb: `${h1.num} － ${h2.num} (◎－◯)`, points: 1, amt: u12, hitProb: Math.max(7, pl.probQuinella(h1.num, h2.num)), baseOdds: Number((w12.val * 2.4).toFixed(1)), isSynthetic: false },
+        { poolKey: "umaren", nums: [h1.num, u2Partner.num], zone: "Alpha (高回収 38%)", type: "馬連", comb: `${h1.num} － ${u2Partner.num} (◎－${u2Tag})`, points: 1, amt: u13, hitProb: Math.max(5.5, pl.probQuinella(h1.num, u2Partner.num)), baseOdds: Number((u2Wide * 2.5).toFixed(1)), isSynthetic: false },
+        { poolKey: "sanrenpuku", row1, row2, row3, zone: "Alpha (高回収 38%)", type: "3連複F", comb: `(${row1.join(",")}) － (${row2.join(",")}) － (${row3.join(",")})`, points: trio.points, amt: trioAmt, hitProb: trio.hitProb, baseOdds: Number((240.0 / trio.hitProb).toFixed(1)), isSynthetic: true }
       ];
-      return { rows: allRows, coreRows, coreAnyHit, coreSynthOdds, isCompressed2 };
+      return { rows: allRows, coreRows, coreAnyHit, coreSynthOdds, avgCoreWide };
     }
 
     function copyActiveRaceTickets() {
       const race = state.activeRace;
       if (!race || !LAST_MODAL_TICKETS.length) return;
       const lines = [
-        `【${race.venue}${race.r}R ${race.name}】予算 ${state.modalBudget.toLocaleString()}円 (Neon v11.9 Core55/Alpha45)`,
+        `【${race.venue}${race.r}R ${race.name}】予算 ${state.modalBudget.toLocaleString()}円 (Neon v12.0 Core62/Alpha38)`,
         ...LAST_MODAL_TICKETS.map(t => {
           const perPt = Math.max(100, Math.round((t.amt / t.points) / 100) * 100);
           const ptStr = t.points > 1 ? ` (${t.points}点×${perPt}円=計${t.amt.toLocaleString()}円)` : ` ${t.amt.toLocaleString()}円`;
@@ -1102,7 +1133,7 @@
       if (race.rank === "Pass" || race.rank === "B") {
         LAST_MODAL_TICKETS = [];
         const reasonTxt = race.passReason ? `<div class="text-[11px] text-amber-300 mt-1">見送り理由: ${race.passReason}</div>` : "";
-        document.getElementById("modalTicketsList").innerHTML = `<div class="bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-slate-300"><b>💤 自動見送り（Pass / 推奨購入額 0円）</b>${reasonTxt}<div class="text-[10px] text-slate-400 mt-1">回収率100%超を守るため、Core合成オッズ1.12倍未満・期待値エッジ不足・NAR下級平場は購入を見送ります。</div></div>`;
+        document.getElementById("modalTicketsList").innerHTML = `<div class="bg-slate-950 border border-slate-700 rounded-xl p-3 text-xs text-slate-300"><b>💤 自動見送り（Pass / 推奨購入額 0円）</b>${reasonTxt}<div class="text-[10px] text-slate-400 mt-1">回収率100%超を守るため、◎4.1倍超の中穴混戦・低配当圧縮・障害戦・NAR下級平場は購入を見送ります。</div></div>`;
         document.getElementById("modalPortfolioMetrics").innerHTML = `<div class="text-[11px] text-sky-300 font-bold">🛡️ Pass見送りによる防衛額: +10,000円</div>`;
         return;
       }
@@ -1192,8 +1223,8 @@
       }
 
       const overallRoi = ((totalExpectedReturn / Math.max(1, totalInvest)) * 100).toFixed(1);
-      const synthWarn = built.coreSynthOdds < 1.12
-        ? `<span class="text-rose-300 font-bold">⚠️ Core合成${built.coreSynthOdds}倍(&lt;1.12) 見送り推奨</span>`
+      const synthWarn = built.coreSynthOdds < 1.10
+        ? `<span class="text-rose-300 font-bold">⚠️ Core合成${built.coreSynthOdds}倍(&lt;1.10) 見送り推奨</span>`
         : `<span class="text-sky-300">🛡️ Core合成${built.coreSynthOdds}倍 / ワイド単発目安 ${minCoreReturn.toLocaleString()}円 (${minCorePct}%)</span>`;
 
       document.getElementById("modalPortfolioMetrics").innerHTML = `
@@ -1203,7 +1234,7 @@
         </div>
         <div class="pt-1 border-t border-slate-800/80 flex items-center justify-between flex-wrap gap-1 text-[10px]">
           ${synthWarn}
-          <span class="text-slate-400">Alpha45%で上振れ強化</span>
+          <span class="text-slate-400">◎単勝優先保護・◎-☆結線済</span>
         </div>
       `;
     }
@@ -1215,7 +1246,7 @@
       onModalBudgetChange(state.modalBudget);
     }
 
-    // ===== WIN5 / トリプル馬単（v11.9 土・日・月全日程対応 ＋ 完全直交3枚Plan C + Plan A） =====
+    // ===== WIN5 / トリプル馬単（v12.0 土・日・月全日程対応 ＋ 小数スケール自動補正 ＋ 完全直交3枚Plan C） =====
     function computeOptimalCounts(legs, maxPoints, weightFn, initCounts) {
       const nLegs = legs.length, counts = initCounts.slice(0, nLegs);
       while (true) {
@@ -1380,6 +1411,9 @@
 
       const dataObj = found.ml;
       const dayRef = found.day;
+      const legs = dataObj.legs || [], nLegs = legs.length;
+      legs.forEach(lg => normalizeProbScaleClient(lg.horses));
+
       aiBadge.className = dataObj.aiPredicted
         ? "text-[10px] bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 px-2 py-0.5 rounded font-bold"
         : "text-[10px] bg-slate-800 border border-slate-700 text-slate-300 px-2 py-0.5 rounded font-bold";
@@ -1395,7 +1429,6 @@
         : "";
       document.getElementById("win5SummaryText").textContent = fbNote + (dataObj.summary || "");
 
-      const legs = dataObj.legs || [], nLegs = legs.length;
       const totalMaxPts = Math.floor(budget / unitYen), initArr = new Array(nLegs).fill(1);
 
       const countsA = computeOptimalCounts(legs, totalMaxPts, (l, r, i, f) => f, initArr);
@@ -1674,9 +1707,9 @@
 
       const br = sc.byRank || {};
       const rankDefs = [
-        { k: "S", label: "🔥 S：最優先勝負（合1.25+ / EV1.00+ / M3 40%+）", cls: "text-rose-300" },
-        { k: "A", label: "✨ A：厳選好機（合1.12+ / EV0.88+ / M3 34%+）", cls: "text-amber-300" },
-        { k: "New", label: "🔰 新馬戦（Make Debut・合1.08+）", cls: "text-sky-300" }
+        { k: "S", label: "🔥 S：最優先勝負（◎1.5-4.0 / 平均W 3.8+ / M3 44%+）", cls: "text-rose-300" },
+        { k: "A", label: "✨ A：厳選好機（◎1.4-4.0 / 合1.10+ / 平均W 3.0+）", cls: "text-amber-300" },
+        { k: "New", label: "🔰 新馬戦（Make Debut・◎1.2-4.5 / 合1.08+）", cls: "text-sky-300" }
       ];
       document.getElementById("statRankBreakdown").innerHTML = rankDefs.map(rd => {
         const d = br[rd.k] || { races: 0, hits: 0, invest: 0, ret: 0 };
@@ -1773,6 +1806,7 @@
     function formatMultiLegAuditLines(ml, day, isNar) {
       if (!ml || !Array.isArray(ml.legs) || ml.legs.length === 0) return [];
       const legs = ml.legs;
+      legs.forEach(lg => normalizeProbScaleClient(lg.horses));
       const actualPerLeg = legs.map(lg => resolveLegActualTop3(lg, day));
       const doneCnt = actualPerLeg.filter(x => x.length > 0).length;
       if (doneCnt === 0) return [];
@@ -1832,7 +1866,7 @@
       const lines = [
         `以下の ${scopeTitle} 確定結果（${dateRange} / 全${entries.length}日・${totalRaces}レース${aiOnly ? "・AI本推論のみ" : "・厳選全件"}）を横断的に事後検証（シナリオ・レーティング/2-Stage融合・ポートフォリオの3要因分解）し、再現性のある構造課題と具体的なスキル改善パッチを提案してください。`,
         "",
-        "【期間集計サマリー（1万円購入基準・Core55%/Alpha45%）】",
+        "【期間集計サマリー（1万円購入基準・Core62%/Alpha38%）】",
         `・総合: ${totalHits}/${totalRaces}R的中 (的中率 ${pct(totalHits, totalRaces)}) ｜ 投資 ${totalInv.toLocaleString()}円 → 払戻 ${totalRet.toLocaleString()}円 (回収率 ${pct(totalRet, totalInv)} / 収支 ${(totalRet - totalInv >= 0 ? "+" : "")}${(totalRet - totalInv).toLocaleString()}円) ｜ Pass見送り ${passCount}R`,
         `・推論元別: AI本推論 ${bySrc.ai.h}/${bySrc.ai.r}R (ROI ${pct(bySrc.ai.ret, bySrc.ai.inv)}) ／ 事前算出 ${bySrc.base.h}/${bySrc.base.r}R (ROI ${pct(bySrc.base.ret, bySrc.base.inv)})`,
         `・ランク別: S:${byRank.S.h}/${byRank.S.r}R(${pct(byRank.S.ret, byRank.S.inv)}) / A:${byRank.A.h}/${byRank.A.r}R(${pct(byRank.A.ret, byRank.A.inv)}) / 新馬:${byRank.New.h}/${byRank.New.r}R(${pct(byRank.New.ret, byRank.New.inv)})`,
@@ -1923,45 +1957,54 @@
           const isWin5Day = !isNar && !!(liveDay.multiLeg && Array.isArray(liveDay.multiLeg.legs) && liveDay.multiLeg.legs.length === 5);
           const venues = [...new Set(liveDay.races.map(r => r.venue))];
 
+          if (liveDay.multiLeg && Array.isArray(liveDay.multiLeg.legs)) {
+            liveDay.multiLeg.legs.forEach(lg => normalizeProbScaleClient(lg.horses));
+          }
+
           targetStore[dateKey] = {
             label: `${cleanDate.slice(5).replace("-", "/")}${wday}${isNar ? " 地方" : ""}`,
             isWin5Day,
             status: "live",
             biases: Array.isArray(liveDay.trackBiases) && liveDay.trackBiases.length > 0
               ? liveDay.trackBiases
-              : venues.map(v => ({ venue: v, surf: "Neon v11.9・ROI100%超基準", trend: "3シナリオ混合推論" })),
+              : venues.map(v => ({ venue: v, surf: "Neon v12.0・厳密Benter融合", trend: "3シナリオ混合推論" })),
             multiLeg: isWin5Day || isNar ? (liveDay.multiLeg || null) : null,
-            races: liveDay.races.map((r, i) => ({
-              id: r.raceId || `${dateKey}-${i}`,
-              venue: r.venue, r: r.raceNumber, name: r.name, cond: r.surfaceDist || "ダ1600m",
-              time: r.postTime || "", rank: r.rank || "Pass",
-              isGraded: !!r.isGraded,
-              passReason: r.passReason || "",
-              coreSyntheticOdds: r.coreSyntheticOdds ?? null,
-              maxEv: r.maxEv ?? null,
-              skill: r.skill || (isNar ? "app-bayesian-nar" : "app-bayesian-horse-racing-text"),
-              usedModel: r.usedModel || "", aiPredicted: !!r.aiPredicted,
-              weightsAnnounced: !!r.weightsAnnounced,
-              aiPredictedWithWeights: !!r.aiPredictedWithWeights,
-              wideOddsMap: r.wideOddsMap || null,
-              roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "115%",
-              hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "58%",
-              pivot: r.pivotType || "Dual-Pivot", nLead: r.nLead || 3,
-              wR: r.wR ?? null, m3: r.m3 ?? null,
-              breakEvenRate: r.breakEvenRate ?? null,
-              intradayBiasConsistentR: r.intradayBiasConsistentR ?? null,
-              coreConnections: r.coreConnections || [],
-              counterfactualAudit: r.counterfactualAudit || "",
-              strategyProfile: r.strategyProfile || "roi_100_plus",
-              predicted: Array.isArray(r.horses) && r.horses.length > 0,
-              actualTop3: r.actualTop3 || [], payouts: r.payouts || null,
-              evalDone: !!r.evalDone, isHit: !!r.isHit,
-              investedYen: r.investedYen || 10000, returnYen: r.returnYen || 0,
-              actualRoi: r.actualRoi || 0, hitTickets: r.hitTickets || [],
-              status: r.resultStatus || "",
-              scenario: r.scenario || r.summary || "2-Stage融合＆3シナリオ混合Plackett-Luceモデルから全頭確率とCore55/Alpha45配分を算出。",
-              horses: Array.isArray(r.horses) ? r.horses : []
-            }))
+            races: liveDay.races.map((r, i) => {
+              const hs = Array.isArray(r.horses) ? r.horses : [];
+              normalizeProbScaleClient(hs);
+              return {
+                id: r.raceId || `${dateKey}-${i}`,
+                venue: r.venue, r: r.raceNumber, name: r.name, cond: r.surfaceDist || "ダ1600m",
+                time: r.postTime || "", rank: r.rank || "Pass",
+                isGraded: !!r.isGraded,
+                passReason: r.passReason || "",
+                coreSyntheticOdds: r.coreSyntheticOdds ?? null,
+                avgCoreWide: r.avgCoreWide ?? null,
+                maxEv: r.maxEv ?? null,
+                skill: r.skill || (isNar ? "app-bayesian-nar" : "app-bayesian-horse-racing-text"),
+                usedModel: r.usedModel || "", aiPredicted: !!r.aiPredicted,
+                weightsAnnounced: !!r.weightsAnnounced,
+                aiPredictedWithWeights: !!r.aiPredictedWithWeights,
+                wideOddsMap: r.wideOddsMap || null,
+                roi: r.expectedRoi ? `${Math.round(r.expectedRoi)}%` : "115%",
+                hitRate: r.hitRate ? `${Math.round(r.hitRate)}%` : "58%",
+                pivot: r.pivotType || "Dual-Pivot", nLead: r.nLead || 3,
+                wR: r.wR ?? null, m3: r.m3 ?? null,
+                breakEvenRate: r.breakEvenRate ?? null,
+                intradayBiasConsistentR: r.intradayBiasConsistentR ?? null,
+                coreConnections: r.coreConnections || [],
+                counterfactualAudit: r.counterfactualAudit || "",
+                strategyProfile: r.strategyProfile || "v12_balanced_roi",
+                predicted: hs.length > 0,
+                actualTop3: r.actualTop3 || [], payouts: r.payouts || null,
+                evalDone: !!r.evalDone, isHit: !!r.isHit,
+                investedYen: r.investedYen || 10000, returnYen: r.returnYen || 0,
+                actualRoi: r.actualRoi || 0, hitTickets: r.hitTickets || [],
+                status: r.resultStatus || "",
+                scenario: r.scenario || r.summary || "厳密2-Stage融合＆3シナリオ混合Plackett-Luceモデルから全頭確率とCore62/Alpha38配分を算出。",
+                horses: hs
+              };
+            })
           };
         }
 
