@@ -573,7 +573,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.76倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.76倍<1.12(低配当圧縮回避))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -599,7 +599,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.76倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.76倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -876,7 +876,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.94倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.94倍<1.12(低配当圧縮回避))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -902,7 +902,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.94倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.94倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -923,7 +923,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1600m",
       "postTime": "11:15",
-      "rank": "Pass",
+      "rank": "New",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "horses": [
@@ -1157,7 +1157,6 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "新馬Core合成1.4倍<1.48(トリガミ回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -1170,7 +1169,7 @@
       "name": "2歳新馬",
       "surfaceDist": "芝1600m",
       "postTime": "12:05",
-      "rank": "Pass",
+      "rank": "New",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "horses": [
@@ -1355,7 +1354,6 @@
           5
         ]
       ],
-      "passReason": "新馬Core合成1.15倍<1.48(トリガミ回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -1632,7 +1630,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.32倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (◎オッズ1.8倍が適正収益帯(1.9-11.5)外)",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
@@ -1654,7 +1652,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.32倍<1.52(高期待値基準未達)",
+      "passReason": "◎オッズ1.8倍が適正収益帯(1.9-11.5)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -1905,7 +1903,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.89倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.89倍<1.12(低配当圧縮回避))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -1931,7 +1929,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.89倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.89倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -2156,7 +2154,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.16倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (◎オッズ1.7倍が適正収益帯(1.9-11.5)外)",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -2178,7 +2176,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.16倍<1.52(高期待値基準未達)",
+      "passReason": "◎オッズ1.7倍が適正収益帯(1.9-11.5)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -2199,7 +2197,7 @@
       "name": "銀嶺S",
       "surfaceDist": "ダ1400m",
       "postTime": "14:10",
-      "rank": "Pass",
+      "rank": "A",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -2485,7 +2483,6 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.99<1.02)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -3042,7 +3039,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.09倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成1.09倍<1.12(低配当圧縮回避))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -3068,7 +3065,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.09倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成1.09倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -3311,7 +3308,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.07倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成1.07倍<1.12(低配当圧縮回避))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 35,
@@ -3335,7 +3332,7 @@
           1
         ]
       ],
-      "passReason": "Core合成1.07倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成1.07倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -3521,7 +3518,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.2倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.87<0.88))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -3543,7 +3540,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.2倍<1.52(高期待値基準未達)",
+      "passReason": "期待値エッジ不足(最大EV 0.87<0.88)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -3768,7 +3765,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.82倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.82倍<1.12(低配当圧縮回避))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -3794,7 +3791,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.82倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.82倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -3993,7 +3990,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.23倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (◎オッズ1.8倍が適正収益帯(1.9-11.5)外)",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -4015,7 +4012,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.23倍<1.52(高期待値基準未達)",
+      "passReason": "◎オッズ1.8倍が適正収益帯(1.9-11.5)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -4036,7 +4033,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1400m",
       "postTime": "11:25",
-      "rank": "Pass",
+      "rank": "New",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "horses": [
@@ -4322,7 +4319,6 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "新馬Core合成1.44倍<1.48(トリガミ回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -4604,7 +4600,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (新馬Core合成0.88倍<1.48(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (新馬Core合成0.88倍<1.08(トリガミ回避))",
       "nLead": 3,
       "trackCond": "重",
       "scenarioWeights": {
@@ -4630,7 +4626,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "新馬Core合成0.88倍<1.48(トリガミ回避)",
+      "passReason": "新馬Core合成0.88倍<1.08(トリガミ回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -4907,7 +4903,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.89倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.89倍<1.12(低配当圧縮回避))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -4933,7 +4929,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.89倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.89倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -5223,7 +5219,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.97倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.97倍<1.12(低配当圧縮回避))",
       "nLead": 6,
       "trackCond": "重",
       "scenarioWeights": {
@@ -5249,7 +5245,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.97倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.97倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -5270,7 +5266,7 @@
       "name": "3歳以上2勝クラス",
       "surfaceDist": "ダ1200m",
       "postTime": "13:50",
-      "rank": "Pass",
+      "rank": "A",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -5465,7 +5461,6 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 1.0<1.02)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -5643,7 +5638,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.94倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.94倍<1.12(低配当圧縮回避))",
       "nLead": 5,
       "trackCond": "重",
       "scenarioWeights": {
@@ -5669,7 +5664,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.94倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.94倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -5868,7 +5863,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.31倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (◎オッズ1.7倍が適正収益帯(1.9-11.5)外)",
       "nLead": 1,
       "trackCond": "良",
       "scenarioWeights": {
@@ -5890,7 +5885,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.31倍<1.52(高期待値基準未達)",
+      "passReason": "◎オッズ1.7倍が適正収益帯(1.9-11.5)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -5911,7 +5906,7 @@
       "name": "エリザベス杯",
       "surfaceDist": "芝2200m",
       "postTime": "15:40",
-      "rank": "Pass",
+      "rank": "A",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -6206,7 +6201,6 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.44倍<1.52(高期待値基準未達)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -6483,7 +6477,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.38倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.83<0.88))",
       "nLead": 3,
       "trackCond": "重",
       "scenarioWeights": {
@@ -6509,7 +6503,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.38倍<1.52(高期待値基準未達)",
+      "passReason": "期待値エッジ不足(最大EV 0.83<0.88)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -6786,7 +6780,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.82倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.82倍<1.12(低配当圧縮回避))",
       "nLead": 6,
       "trackCond": "良",
       "scenarioWeights": {
@@ -6812,7 +6806,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.82倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.82倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -6833,7 +6827,7 @@
       "name": "2歳未勝利",
       "surfaceDist": "芝1800m",
       "postTime": "10:05",
-      "rank": "Pass",
+      "rank": "A",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -7115,7 +7109,6 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.14倍<1.52(高期待値基準未達)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -7379,7 +7372,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.06倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成1.06倍<1.12(低配当圧縮回避))",
       "nLead": 7,
       "trackCond": "良",
       "scenarioWeights": {
@@ -7405,7 +7398,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.06倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成1.06倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -7630,7 +7623,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.97倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.97倍<1.12(低配当圧縮回避))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
@@ -7656,7 +7649,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.97倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.97倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -7842,7 +7835,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 1.01<1.02))",
+      "resultStatus": "💤 見送りPass (◎オッズ1.5倍が適正収益帯(1.9-11.5)外)",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -7872,7 +7865,7 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 1.01<1.02)",
+      "passReason": "◎オッズ1.5倍が適正収益帯(1.9-11.5)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -7885,7 +7878,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1700m",
       "postTime": "12:30",
-      "rank": "Pass",
+      "rank": "New",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "horses": [
@@ -8093,7 +8086,6 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "新馬Core合成1.39倍<1.48(トリガミ回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -8362,7 +8354,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.99倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.99倍<1.12(低配当圧縮回避))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
@@ -8388,7 +8380,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.99倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.99倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -8652,7 +8644,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.88倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.88倍<1.12(低配当圧縮回避))",
       "nLead": 8,
       "trackCond": "良",
       "scenarioWeights": {
@@ -8678,7 +8670,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.88倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.88倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -8903,7 +8895,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.12(低配当圧縮回避))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
@@ -8929,7 +8921,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.9倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.9倍<1.12(低配当圧縮回避)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -8950,7 +8942,7 @@
       "name": "三陸特別",
       "surfaceDist": "芝2600m",
       "postTime": "14:35",
-      "rank": "Pass",
+      "rank": "A",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -9232,7 +9224,6 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.2倍<1.52(高期待値基準未達)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -9496,7 +9487,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.25倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.84<0.88))",
       "nLead": 7,
       "trackCond": "良",
       "scenarioWeights": {
@@ -9522,7 +9513,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.25倍<1.52(高期待値基準未達)",
+      "passReason": "期待値エッジ不足(最大EV 0.84<0.88)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -9799,7 +9790,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.13倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.74<0.88))",
       "nLead": 2,
       "trackCond": "重",
       "scenarioWeights": {
@@ -9825,7 +9816,7 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.13倍<1.52(高期待値基準未達)",
+      "passReason": "期待値エッジ不足(最大EV 0.74<0.88)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -10176,5 +10167,5 @@
       "trend": "福島当日実測(12R集計): 1着内枠3回/外枠5回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
     }
   ],
-  "engineVer": "v11.7-neon"
+  "engineVer": "v11.8-neon"
 }

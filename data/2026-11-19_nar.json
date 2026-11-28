@@ -2462,7 +2462,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ19.6倍が適正収益帯(1.9-11.0)外)",
+      "resultStatus": "💤 見送りPass (◎オッズ19.6倍が適正収益帯(1.9-11.5)外)",
       "isGraded": false,
       "m3": 28.4,
       "coreSyntheticOdds": 4.38,
@@ -2489,7 +2489,7 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "◎オッズ19.6倍が適正収益帯(1.9-11.0)外",
+      "passReason": "◎オッズ19.6倍が適正収益帯(1.9-11.5)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -2503,7 +2503,7 @@
       "name": "’26ローズベール...(OP)(4",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "Pass",
+      "rank": "A",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2682,7 +2682,6 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.29倍<1.52(高期待値基準未達)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
@@ -2903,7 +2902,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ19.6倍が適正収益帯(1.9-11.0)外)",
+      "resultStatus": "💤 見送りPass (◎オッズ19.6倍が適正収益帯(1.9-11.5)外)",
       "isGraded": false,
       "m3": 27.0,
       "coreSyntheticOdds": 4.38,
@@ -2930,7 +2929,7 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "◎オッズ19.6倍が適正収益帯(1.9-11.0)外",
+      "passReason": "◎オッズ19.6倍が適正収益帯(1.9-11.5)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -3558,7 +3557,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ19.6倍が適正収益帯(1.9-11.0)外)",
+      "resultStatus": "💤 見送りPass (◎オッズ19.6倍が適正収益帯(1.9-11.5)外)",
       "isGraded": true,
       "m3": 27.5,
       "coreSyntheticOdds": 4.38,
@@ -3585,7 +3584,7 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "◎オッズ19.6倍が適正収益帯(1.9-11.0)外",
+      "passReason": "◎オッズ19.6倍が適正収益帯(1.9-11.5)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false
@@ -4705,5 +4704,5 @@
     }
   ],
   "updatedAt": "2026-11-19 21:28 JST",
-  "engineVer": "v11.7-neon"
+  "engineVer": "v11.8-neon"
 }

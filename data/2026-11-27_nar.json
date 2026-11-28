@@ -3173,7 +3173,7 @@
       "scenario": "浦和10R(ダ1500m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.66, M3=50.4%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
       "coreSyntheticOdds": 0.9,
       "pivotType": "Pass",
-      "passReason": "Core合成0.9倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.9倍<1.12(低配当圧縮回避)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -3266,7 +3266,7 @@
         ]
       },
       "maxEv": 0.9,
-      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.52(高期待値基準未達))"
+      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.12(低配当圧縮回避))"
     },
     {
       "raceId": "202642112711",
@@ -3544,7 +3544,7 @@
       "scenario": "浦和11R(ダ1400m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.66, M3=65.5%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全14頭を厳密演算。",
       "coreSyntheticOdds": 0.69,
       "pivotType": "Pass",
-      "passReason": "Core合成0.69倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.69倍<1.12(低配当圧縮回避)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -3637,7 +3637,7 @@
         ]
       },
       "maxEv": 0.97,
-      "resultStatus": "💤 見送りPass (Core合成0.69倍<1.52(高期待値基準未達))"
+      "resultStatus": "💤 見送りPass (Core合成0.69倍<1.12(低配当圧縮回避))"
     },
     {
       "raceId": "202642112712",
@@ -3883,7 +3883,7 @@
       "scenario": "浦和12R(ダ2000m・良) 実測N_lead=6頭 / 2-Stage融合(wR=0.66, M3=51.6%)。3シナリオ混合(S1:30% / S2:35% / S3:35%)で全12頭を厳密演算。",
       "coreSyntheticOdds": 0.9,
       "pivotType": "Pass",
-      "passReason": "Core合成0.9倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成0.9倍<1.12(低配当圧縮回避)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -3976,7 +3976,7 @@
         ]
       },
       "maxEv": 0.77,
-      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.52(高期待値基準未達))"
+      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.12(低配当圧縮回避))"
     }
   ],
   "multiLeg": {
@@ -4331,7 +4331,7 @@
       "consistentR": 12
     }
   ],
-  "engineVer": "v11.7-neon",
+  "engineVer": "v11.8-neon",
   "updatedAt": "2026-11-27 23:32 JST",
   "aiPlan": "JRA:plan2_neon(Neon統一) / NAR:無料枠"
 }

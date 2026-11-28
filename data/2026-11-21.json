@@ -1175,7 +1175,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.41<1.02))",
+      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.41<0.88))",
       "payouts": {
         "win": [
           {
@@ -1265,7 +1265,7 @@
         "singleLongshotCapPct": 0.3
       },
       "strategyProfile": "roi_100_plus",
-      "passReason": "期待値エッジ不足(最大EV 0.41<1.02)"
+      "passReason": "期待値エッジ不足(最大EV 0.41<0.88)"
     },
     {
       "raceId": "202608050511",
@@ -1615,7 +1615,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ13.3倍が適正収益帯(1.9-11.0)外)",
+      "resultStatus": "💤 見送りPass (◎オッズ13.3倍が適正収益帯(1.9-11.5)外)",
       "payouts": {
         "win": [
           {
@@ -1705,7 +1705,7 @@
         "singleLongshotCapPct": 0.3
       },
       "strategyProfile": "roi_100_plus",
-      "passReason": "◎オッズ13.3倍が適正収益帯(1.9-11.0)外"
+      "passReason": "◎オッズ13.3倍が適正収益帯(1.9-11.5)外"
     },
     {
       "raceId": "202603030509",
@@ -1988,7 +1988,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ14.4倍が適正収益帯(1.9-11.0)外)",
+      "resultStatus": "💤 見送りPass (◎オッズ14.4倍が適正収益帯(1.9-11.5)外)",
       "payouts": {
         "win": [
           {
@@ -2079,7 +2079,7 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "◎オッズ14.4倍が適正収益帯(1.9-11.0)外"
+      "passReason": "◎オッズ14.4倍が適正収益帯(1.9-11.5)外"
     },
     {
       "raceId": "202603030510",
@@ -2362,7 +2362,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.91<1.02))",
+      "resultStatus": "💤 見送りPass (◎オッズ121.5倍が適正収益帯(1.9-11.5)外)",
       "payouts": {
         "win": [
           {
@@ -2453,7 +2453,7 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.91<1.02)"
+      "passReason": "◎オッズ121.5倍が適正収益帯(1.9-11.5)外"
     },
     {
       "raceId": "202603030511",
@@ -2463,7 +2463,7 @@
       "name": "福島記念",
       "surfaceDist": "芝2000m",
       "postTime": "15:20",
-      "rank": "A",
+      "rank": "S",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -2900,5 +2900,5 @@
       "trend": "福島当日実測(3R集計): 1着内枠1回/外枠2回 → 【内外フラット】"
     }
   ],
-  "engineVer": "v11.7-neon"
+  "engineVer": "v11.8-neon"
 }

@@ -1531,11 +1531,11 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成1.04倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core合成1.04倍<1.12(低配当圧縮回避))",
       "isGraded": true,
       "coreSyntheticOdds": 1.04,
       "pivotType": "Pass",
-      "passReason": "Core合成1.04倍<1.52(高期待値基準未達)",
+      "passReason": "Core合成1.04倍<1.12(低配当圧縮回避)",
       "maxEv": 0.81
     },
     {
@@ -2877,6 +2877,6 @@
       "consistentR": 2
     }
   ],
-  "engineVer": "v11.7-neon",
+  "engineVer": "v11.8-neon",
   "updatedAt": "2026-11-23 22:26 JST"
 }

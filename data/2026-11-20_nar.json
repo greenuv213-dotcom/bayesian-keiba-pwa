@@ -2027,7 +2027,7 @@
       "name": "黄葉特別(C1五)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "Pass",
+      "rank": "A",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2228,7 +2228,6 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.28倍<1.52(高期待値基準未達)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -2501,7 +2500,7 @@
       },
       "strategyProfile": "roi_100_plus",
       "pivotType": "Pass",
-      "passReason": "混戦カオス(M3 31.3%<38%)",
+      "passReason": "混戦カオス(M3 31.3%<34%)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -4543,5 +4542,5 @@
     }
   ],
   "updatedAt": "2026-11-20 18:15 JST",
-  "engineVer": "v11.7-neon"
+  "engineVer": "v11.8-neon"
 }
