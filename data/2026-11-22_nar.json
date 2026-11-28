@@ -183,7 +183,7 @@
       "scenario": "水沢9R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)で全12頭を推論。",
       "isGraded": false,
       "m3": 29.7,
-      "coreSyntheticOdds": 1.81,
+      "coreSyntheticOdds": 1.4,
       "coreConnections": [
         [
           5,
@@ -196,16 +196,20 @@
         [
           4,
           12
+        ],
+        [
+          5,
+          8
         ]
       ],
       "maxEv": 0.81,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
@@ -213,7 +217,8 @@
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 5.65
     },
     {
       "raceId": "202636112210",
@@ -396,7 +401,7 @@
       "scenario": "水沢10R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)で全12頭を推論。",
       "isGraded": false,
       "m3": 29.9,
-      "coreSyntheticOdds": 1.8,
+      "coreSyntheticOdds": 1.37,
       "coreConnections": [
         [
           11,
@@ -409,16 +414,20 @@
         [
           2,
           4
+        ],
+        [
+          11,
+          6
         ]
       ],
       "maxEv": 0.8,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
@@ -426,7 +435,8 @@
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 5.55
     },
     {
       "raceId": "202636112211",
@@ -583,7 +593,7 @@
       "scenario": "水沢11R(ダ1600m・良) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)で全10頭を推論。",
       "isGraded": false,
       "m3": 33.0,
-      "coreSyntheticOdds": 1.64,
+      "coreSyntheticOdds": 1.26,
       "coreConnections": [
         [
           1,
@@ -596,6 +606,10 @@
         [
           7,
           8
+        ],
+        [
+          1,
+          9
         ]
       ],
       "pivotType": "Pass",
@@ -608,12 +622,13 @@
       "evalDone": false,
       "maxEv": 0.81,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 5.08
     },
     {
       "raceId": "202636112212",
@@ -796,7 +811,7 @@
       "scenario": "水沢12R(ダ1600m・良) 実測N_lead=5頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)で全12頭を推論。",
       "isGraded": false,
       "m3": 29.7,
-      "coreSyntheticOdds": 1.79,
+      "coreSyntheticOdds": 1.4,
       "coreConnections": [
         [
           7,
@@ -809,16 +824,20 @@
         [
           2,
           10
+        ],
+        [
+          7,
+          5
         ]
       ],
       "maxEv": 0.81,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
@@ -826,7 +845,8 @@
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 5.65
     },
     {
       "raceId": "202654112209",
@@ -957,7 +977,7 @@
       "scenario": "高知9R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)で全8頭を推論。",
       "isGraded": false,
       "m3": 42.5,
-      "coreSyntheticOdds": 1.27,
+      "coreSyntheticOdds": 0.99,
       "coreConnections": [
         [
           5,
@@ -970,6 +990,10 @@
         [
           8,
           6
+        ],
+        [
+          5,
+          3
         ]
       ],
       "pivotType": "Pass",
@@ -982,12 +1006,13 @@
       "evalDone": false,
       "maxEv": 0.81,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.03
     },
     {
       "raceId": "202654112210",
@@ -1105,7 +1130,7 @@
       "scenario": "高知10R(ダ1600m・良) 実測N_lead=6頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)で全7頭を推論。",
       "isGraded": false,
       "m3": 48.3,
-      "coreSyntheticOdds": 1.12,
+      "coreSyntheticOdds": 0.88,
       "coreConnections": [
         [
           1,
@@ -1118,6 +1143,10 @@
         [
           2,
           7
+        ],
+        [
+          1,
+          5
         ]
       ],
       "pivotType": "Pass",
@@ -1130,12 +1159,13 @@
       "evalDone": false,
       "maxEv": 0.81,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.55
     },
     {
       "raceId": "202654112211",
@@ -1318,7 +1348,7 @@
       "scenario": "高知11R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)で全12頭を推論。",
       "isGraded": false,
       "m3": 27.4,
-      "coreSyntheticOdds": 1.95,
+      "coreSyntheticOdds": 1.5,
       "coreConnections": [
         [
           3,
@@ -1331,16 +1361,20 @@
         [
           4,
           9
+        ],
+        [
+          3,
+          10
         ]
       ],
       "maxEv": 0.8,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
@@ -1348,7 +1382,8 @@
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 6.03
     },
     {
       "raceId": "202655112209",
@@ -1531,7 +1566,7 @@
       "scenario": "佐賀9R(ダ1600m・良) 実測N_lead=1頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)で全12頭を推論。",
       "isGraded": false,
       "m3": 30.9,
-      "coreSyntheticOdds": 1.74,
+      "coreSyntheticOdds": 1.37,
       "coreConnections": [
         [
           1,
@@ -1544,16 +1579,20 @@
         [
           3,
           6
+        ],
+        [
+          1,
+          2
         ]
       ],
       "maxEv": 0.8,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
@@ -1561,7 +1600,8 @@
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 5.53
     },
     {
       "raceId": "202655112210",
@@ -1718,7 +1758,7 @@
       "scenario": "佐賀10R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)で全10頭を推論。",
       "isGraded": false,
       "m3": 35.4,
-      "coreSyntheticOdds": 1.52,
+      "coreSyntheticOdds": 1.2,
       "coreConnections": [
         [
           3,
@@ -1731,6 +1771,10 @@
         [
           4,
           7
+        ],
+        [
+          3,
+          1
         ]
       ],
       "pivotType": "Pass",
@@ -1743,12 +1787,13 @@
       "evalDone": false,
       "maxEv": 0.81,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.85
     },
     {
       "raceId": "202655112211",
@@ -1957,7 +2002,7 @@
       "scenario": "佐賀11R(ダ1600m・良) 実測N_lead=5頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)で全14頭を推論。",
       "isGraded": false,
       "m3": 24.4,
-      "coreSyntheticOdds": 2.21,
+      "coreSyntheticOdds": 1.68,
       "coreConnections": [
         [
           9,
@@ -1970,16 +2015,20 @@
         [
           1,
           3
+        ],
+        [
+          9,
+          4
         ]
       ],
       "maxEv": 0.8,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "investedYen": 0,
@@ -1987,7 +2036,8 @@
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 6.82
     }
   ],
   "trackBiases": [
@@ -2012,6 +2062,6 @@
       "trend": "高知: 前半確定レースなし（標準バイアス想定）"
     }
   ],
-  "engineVer": "v11.9-neon",
+  "engineVer": "v12.0-neon",
   "updatedAt": "2026-11-22 01:09 JST"
 }

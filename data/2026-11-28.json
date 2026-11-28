@@ -345,16 +345,20 @@
         [
           15,
           12
+        ],
+        [
+          10,
+          5
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎10番破綻時は◯15-▲12の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "京都1R(ダ1400m・良) 実測N_lead=8頭 / 2-Stage融合(wR=0.65, M3=69.8%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全16頭を厳密演算。",
       "actualTop3": [
         {
@@ -441,16 +445,17 @@
         ]
       },
       "maxEv": 0.9,
-      "coreSyntheticOdds": 0.66,
+      "coreSyntheticOdds": 0.6,
       "pivotType": "Pass",
-      "passReason": "Core合成0.66倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.6倍/平均W 3.12倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成0.66倍<1.12(低配当圧縮回避))"
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.6倍/平均W 3.12倍))",
+      "avgCoreWide": 3.12
     },
     {
       "raceId": "202608050702",
@@ -463,7 +468,7 @@
       "postTime": "10:35",
       "isNew": false,
       "isGraded": false,
-      "rank": "Pass",
+      "rank": "S",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -730,13 +735,13 @@
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎5番破綻時は◯7-▲8の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "京都2R(ダ1800m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.65, M3=71.9%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -825,14 +830,16 @@
       "maxEv": 1.2,
       "coreSyntheticOdds": 1.54,
       "pivotType": "Pass",
-      "passReason": "◎オッズ1.5倍が適正収益帯(1.9-11.5)外",
-      "investedYen": 0,
-      "returnYen": 0,
-      "actualRoi": 0.0,
-      "isHit": false,
-      "hitTickets": [],
-      "evalDone": false,
-      "resultStatus": "💤 見送りPass (◎オッズ1.5倍が適正収益帯(1.9-11.5)外)"
+      "investedYen": 10000,
+      "returnYen": 10850,
+      "actualRoi": 108.5,
+      "isHit": true,
+      "hitTickets": [
+        "3連複F (10,850円)"
+      ],
+      "evalDone": true,
+      "resultStatus": "🎯 的中 払戻10,850円 (回収率108.5% / +850円)",
+      "avgCoreWide": 3.35
     },
     {
       "raceId": "202608050703",
@@ -845,7 +852,7 @@
       "postTime": "11:05",
       "isNew": false,
       "isGraded": false,
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -1177,19 +1184,23 @@
         [
           7,
           1
+        ],
+        [
+          15,
+          2
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎15番破綻時は◯7-▲1の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "京都3R(芝1600m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.65, M3=48.6%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全16頭を厳密演算。",
       "maxEv": 0.88,
-      "coreSyntheticOdds": 1.3,
+      "coreSyntheticOdds": 1.07,
       "actualTop3": [
         {
           "rank": "1",
@@ -1274,291 +1285,16 @@
           }
         ]
       },
-      "investedYen": 10000,
-      "returnYen": 0,
-      "actualRoi": 0.0,
-      "isHit": false,
-      "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
-    },
-    {
-      "raceId": "202608050704",
-      "mode": "jra",
-      "venue": "京都",
-      "raceNumber": 4,
-      "venueLabel": "京都4R",
-      "name": "3歳以上障害未勝利",
-      "surfaceDist": "障2910m",
-      "postTime": "11:35",
-      "isNew": false,
-      "isGraded": false,
-      "rank": "Pass",
-      "skill": "app-bayesian-horse-racing-text",
-      "predicted": true,
-      "aiPredicted": false,
-      "nLead": 1,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 50,
-        "s2": 35,
-        "s3": 15
-      },
-      "wideOddsMap": {
-        "1-2": 3.6,
-        "1-3": 2.3,
-        "1-4": 3.1,
-        "1-5": 1.8,
-        "1-6": 2.6,
-        "1-7": 6.5,
-        "2-3": 9.4,
-        "2-4": 8.5,
-        "2-5": 7.1,
-        "2-6": 8.7,
-        "2-7": 12.8,
-        "3-4": 8.2,
-        "3-5": 4.0,
-        "3-6": 5.0,
-        "3-7": 13.9,
-        "4-5": 4.9,
-        "4-6": 7.9,
-        "4-7": 17.8,
-        "5-6": 3.6,
-        "5-7": 10.9,
-        "6-7": 13.6
-      },
-      "weightsAnnounced": true,
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "最安定Top-3軸",
-          "num": 1,
-          "name": "ラトラース",
-          "style": "差",
-          "weight": "496(+8)",
-          "f": 42.9,
-          "fFund": 15.7,
-          "q": 59.7,
-          "wUsed": 0.65,
-          "top2": 86.7,
-          "top3": 96.0,
-          "odds": 1.4,
-          "comment": "F:父:キズナ/母父:ロ(H:血統適性)"
-        },
-        {
-          "mark": "◯",
-          "role": "融合上位強制結線",
-          "num": 5,
-          "name": "リードアクトレス",
-          "style": "差",
-          "weight": "500(0)",
-          "f": 13.8,
-          "fFund": 14.2,
-          "q": 11.6,
-          "wUsed": 0.65,
-          "top2": 28.0,
-          "top3": 42.0,
-          "odds": 6.4,
-          "comment": "F:5枠・近走平均7.5着"
-        },
-        {
-          "mark": "▲",
-          "role": "安定Connector",
-          "num": 3,
-          "name": "ローズピリオド",
-          "style": "先",
-          "weight": "498(+4)",
-          "f": 10.5,
-          "fFund": 15.5,
-          "q": 7.0,
-          "wUsed": 0.65,
-          "top2": 21.3,
-          "top3": 31.9,
-          "odds": 10.2,
-          "comment": "F:3枠・近走平均7.5着"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 2,
-          "name": "ニヴルヘイム",
-          "style": "追",
-          "weight": "450(0)",
-          "f": 8.9,
-          "fFund": 15.7,
-          "q": 5.3,
-          "wUsed": 0.65,
-          "top2": 18.0,
-          "top3": 26.9,
-          "odds": 13.2,
-          "comment": "F:父:エピファネイア/(H:血統適性)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開・連勝特注穴",
-          "num": 6,
-          "name": "クリアクォーツ",
-          "style": "差",
-          "weight": "478(-2)",
-          "f": 8.8,
-          "fFund": 15.7,
-          "q": 5.2,
-          "wUsed": 0.65,
-          "top2": 17.8,
-          "top3": 26.6,
-          "odds": 13.4,
-          "comment": "F:馬体-2kg絞り(H:好仕上)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 4,
-          "name": "アニージョ",
-          "style": "差",
-          "weight": "522(+24)",
-          "f": 7.8,
-          "fFund": 11.1,
-          "q": 8.3,
-          "wUsed": 0.18,
-          "top2": 14.6,
-          "top3": 21.9,
-          "odds": 8.7,
-          "comment": "F:1800m+馬体+24kg(H:TypeII減点)"
-        },
-        {
-          "mark": "△",
-          "role": "3列目連下",
-          "num": 7,
-          "name": "ウルトラハート",
-          "style": "先",
-          "weight": "500(+16)",
-          "f": 7.3,
-          "fFund": 12.0,
-          "q": 3.0,
-          "wUsed": 0.18,
-          "top2": 13.7,
-          "top3": 20.6,
-          "odds": 22.6,
-          "comment": "F:1800m+馬体+16kg(H:TypeII減点)"
-        }
-      ],
-      "wR": 0.65,
-      "hasLiveOdds": true,
-      "m3": 67.2,
-      "coreConnections": [
-        [
-          1,
-          2
-        ],
-        [
-          1,
-          3
-        ]
-      ],
-      "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 2,
-        "singleLongshotCapPct": 0.3
-      },
-      "counterfactualAudit": "◎1番破綻時は◯5-▲3の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
-      "scenario": "京都4R(障2910m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.65, M3=67.2%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全7頭を厳密演算。",
-      "maxEv": 1.17,
-      "coreSyntheticOdds": 1.4,
-      "pivotType": "Pass",
-      "passReason": "少頭数(7頭)・低配当圧縮(平均W 2.95倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 3,
-          "num": 3,
-          "name": "ローズピリオド",
-          "odds": "8.2"
-        },
-        {
-          "rank": "2",
-          "waku": 1,
-          "num": 1,
-          "name": "ラトラース",
-          "odds": "1.5"
-        },
-        {
-          "rank": "3",
-          "waku": 4,
-          "num": 4,
-          "name": "アニージョ",
-          "odds": "14.7"
-        }
-      ],
-      "payouts": {
-        "win": [
-          {
-            "nums": [
-              3
-            ],
-            "pay": 820
-          }
-        ],
-        "umaren": [
-          {
-            "nums": [
-              1,
-              3
-            ],
-            "pay": 440
-          }
-        ],
-        "wide": [
-          {
-            "nums": [
-              1,
-              3
-            ],
-            "pay": 230
-          },
-          {
-            "nums": [
-              3,
-              4
-            ],
-            "pay": 920
-          },
-          {
-            "nums": [
-              1,
-              4
-            ],
-            "pay": 330
-          }
-        ],
-        "umatan": [
-          {
-            "nums": [
-              3,
-              1
-            ],
-            "pay": 1760
-          }
-        ],
-        "sanrenpuku": [
-          {
-            "nums": [
-              1,
-              3,
-              4
-            ],
-            "pay": 1270
-          }
-        ]
-      },
-      "resultStatus": "💤 見送りPass (少頭数(7頭)・低配当圧縮(平均W 2.95倍))"
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成1.07倍/平均W 4.7倍))",
+      "avgCoreWide": 4.7,
+      "pivotType": "Pass",
+      "passReason": "Core低配当圧縮(合成1.07倍/平均W 4.7倍)"
     },
     {
       "raceId": "202608050705",
@@ -1804,16 +1540,20 @@
         [
           11,
           3
+        ],
+        [
+          9,
+          8
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎9番破綻時は◯11-▲3の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "京都5R(芝1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.72, M3=53.1%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全13頭を厳密演算。",
       "evalDone": false,
       "wideOddsMap": {
@@ -1866,9 +1606,9 @@
       "hasLiveOdds": true,
       "isGraded": false,
       "maxEv": 0.76,
-      "coreSyntheticOdds": 1.18,
+      "coreSyntheticOdds": 1.01,
       "pivotType": "Pass",
-      "passReason": "新馬期待値不足(EV 0.76<0.8)",
+      "passReason": "新馬低配当圧縮(合成1.01倍/平均W 4.55倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -1958,7 +1698,8 @@
           }
         ]
       },
-      "resultStatus": "💤 見送りPass (新馬期待値不足(EV 0.76<0.8))"
+      "resultStatus": "💤 見送りPass (新馬低配当圧縮(合成1.01倍/平均W 4.55倍))",
+      "avgCoreWide": 4.55
     },
     {
       "raceId": "202608050706",
@@ -2252,16 +1993,20 @@
         [
           14,
           6
+        ],
+        [
+          12,
+          13
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎12番破綻時は◯14-▲6の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "京都6R(ダ1400m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.72, M3=44.2%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全16頭を厳密演算。",
       "evalDone": true,
       "wideOddsMap": {
@@ -2314,14 +2059,15 @@
       "hasLiveOdds": true,
       "isGraded": false,
       "maxEv": 0.86,
-      "coreSyntheticOdds": 1.77,
+      "coreSyntheticOdds": 1.33,
       "pivotType": "Pass",
       "investedYen": 10000,
-      "returnYen": 7540,
-      "actualRoi": 75.4,
+      "returnYen": 10020,
+      "actualRoi": 100.2,
       "isHit": true,
       "hitTickets": [
-        "ワイド 12-6 (◎-▲ Core) (7,540円)"
+        "ワイド 12-6 (◎-▲ Core) (6,380円)",
+        "単勝 12 (◎ ヒエラルキー 本線保護) (3,640円)"
       ],
       "actualTop3": [
         {
@@ -2407,7 +2153,8 @@
           }
         ]
       },
-      "resultStatus": "🎯 的中 払戻7,540円 (回収率75.4% / -2,460円)"
+      "resultStatus": "🎯 的中 払戻10,020円 (回収率100.2% / +20円)",
+      "avgCoreWide": 5.6
     },
     {
       "raceId": "202608050707",
@@ -2783,21 +2530,25 @@
         [
           14,
           9
+        ],
+        [
+          4,
+          5
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯14-▲9の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "京都7R(芝1800m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.65, M3=36.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全18頭を厳密演算。",
       "maxEv": 0.73,
-      "coreSyntheticOdds": 2.07,
+      "coreSyntheticOdds": 1.56,
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.73<0.88)",
+      "passReason": "混戦カオス(M3 36.8%<38%)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -2888,7 +2639,8 @@
           }
         ]
       },
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.73<0.88))"
+      "resultStatus": "💤 見送りPass (混戦カオス(M3 36.8%<38%))",
+      "avgCoreWide": 6.5
     },
     {
       "raceId": "202608050708",
@@ -2901,7 +2653,7 @@
       "postTime": "13:55",
       "isNew": false,
       "isGraded": false,
-      "rank": "S",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": false,
@@ -3216,19 +2968,23 @@
         [
           2,
           13
+        ],
+        [
+          9,
+          11
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎9番破綻時は◯2-▲13の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "京都8R(ダ1200m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.65, M3=40.9%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全15頭を厳密演算。",
       "maxEv": 1.07,
-      "coreSyntheticOdds": 2.09,
+      "coreSyntheticOdds": 1.62,
       "weightsAnnounced": true,
       "actualTop3": [
         {
@@ -3314,13 +3070,16 @@
           }
         ]
       },
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "evalDone": false,
+      "resultStatus": "💤 見送りPass (◎オッズ4.2倍が上位軸適正帯(1.4-4.0)外)",
+      "avgCoreWide": 7.02,
+      "pivotType": "Pass",
+      "passReason": "◎オッズ4.2倍が上位軸適正帯(1.4-4.0)外"
     },
     {
       "raceId": "202608050709",
@@ -3331,7 +3090,7 @@
       "name": "栂尾特別",
       "surfaceDist": "ダ1800m",
       "postTime": "14:31",
-      "rank": "S",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": true,
@@ -3564,27 +3323,31 @@
           4
         ],
         [
+          12,
+          4
+        ],
+        [
           6,
           1
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎11番が久々取消明けで反応鈍く4着以下の場合、外枠▲13番と地力◯1番の1-13ラインおよび6番絡みで防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "先行5頭でHペース想定。1枠ソフト上限の1番と外枠好仕上げ11番を核、差し中穴を翼へ。",
-      "coreSyntheticOdds": 3.35,
-      "pivotType": "3-Node Triangle",
-      "investedYen": 10000,
+      "coreSyntheticOdds": 3.05,
+      "pivotType": "Pass",
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": true,
+      "evalDone": false,
       "isGraded": false,
       "wideOddsMap": {
         "1-2": 10.6,
@@ -3726,7 +3489,9 @@
           }
         ]
       },
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "💤 見送りPass (◎オッズ9.3倍が上位軸適正帯(1.4-4.0)外)",
+      "avgCoreWide": 20.68,
+      "passReason": "◎オッズ9.3倍が上位軸適正帯(1.4-4.0)外"
     },
     {
       "raceId": "202608050710",
@@ -3737,7 +3502,7 @@
       "name": "東山S",
       "surfaceDist": "芝1400m",
       "postTime": "15:05",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": true,
@@ -4002,20 +3767,24 @@
           10
         ],
         [
+          4,
+          10
+        ],
+        [
           7,
           3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎15が外差し不発で4着以下なら◯3−▲13軸の3連複・馬連で防衛。1人気3の内枠詰まりが最大波乱要因。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "逃げ2頭の標準ペース。内枠好位差しの3番と実力15番を核、5-15倍帯の0.2s差組を翼。",
-      "evalDone": true,
+      "evalDone": false,
       "wideOddsMap": {
         "1-3": 10.6,
         "1-4": 64.1,
@@ -4066,9 +3835,9 @@
       "hasLiveOdds": true,
       "isGraded": false,
       "maxEv": 2.54,
-      "coreSyntheticOdds": 7.06,
+      "coreSyntheticOdds": 6.66,
       "pivotType": "Pass",
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
@@ -4162,7 +3931,9 @@
           }
         ]
       },
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "💤 見送りPass (◎オッズ10.0倍が上位軸適正帯(1.4-4.0)外)",
+      "avgCoreWide": 62.88,
+      "passReason": "◎オッズ10.0倍が上位軸適正帯(1.4-4.0)外"
     },
     {
       "raceId": "202608050711",
@@ -4358,18 +4129,22 @@
           7
         ],
         [
+          4,
+          7
+        ],
+        [
           1,
           8
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎10番破綻時は◯8-▲6の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "2歳重賞でwR=0.60・上限30%適用。10・8番を核とし5-15倍帯の実績馬へ広く展開。",
       "evalDone": false,
       "wideOddsMap": {
@@ -4422,7 +4197,7 @@
       "hasLiveOdds": true,
       "isGraded": true,
       "maxEv": 8.85,
-      "coreSyntheticOdds": 8.04,
+      "coreSyntheticOdds": 7.25,
       "pivotType": "Pass",
       "investedYen": 0,
       "returnYen": 0,
@@ -4430,7 +4205,7 @@
       "isHit": false,
       "hitTickets": [],
       "weightsAnnounced": true,
-      "passReason": "◎オッズ26.0倍が適正収益帯(1.9-11.5)外",
+      "passReason": "◎オッズ26.0倍が上位軸適正帯(1.4-4.0)外",
       "usedModel": "gemini-4-neon(MEDIUM)",
       "actualTop3": [
         {
@@ -4516,7 +4291,8 @@
           }
         ]
       },
-      "resultStatus": "💤 見送りPass (◎オッズ26.0倍が適正収益帯(1.9-11.5)外)"
+      "resultStatus": "💤 見送りPass (◎オッズ26.0倍が上位軸適正帯(1.4-4.0)外)",
+      "avgCoreWide": 44.1
     },
     {
       "raceId": "202608050712",
@@ -4529,7 +4305,7 @@
       "postTime": "16:15",
       "isNew": false,
       "isGraded": false,
-      "rank": "S",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "aiPredicted": true,
@@ -4892,20 +4668,24 @@
         [
           2,
           18
+        ],
+        [
+          13,
+          14
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎13が前崩れで4着以下でも◯2-▲18で防衛。内枠2番の大外一気は馬連で網羅し、+12kgの10番復調時のみリスク。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "外枠優勢高速S-M(55%) / 外差し決着(30%) / 内枠残存・前残り波乱(15%)",
       "maxEv": 1.62,
-      "coreSyntheticOdds": 1.67,
-      "pivotType": "3-Node Triangle Core",
+      "coreSyntheticOdds": 1.5,
+      "pivotType": "Pass",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -4918,7 +4698,94 @@
       "breakEvenRate": 44.2,
       "expectedRoi": 119.5,
       "intradayBiasConsistentR": 11,
-      "aiPredictedWithWeights": true
+      "aiPredictedWithWeights": true,
+      "actualTop3": [
+        {
+          "rank": "1",
+          "waku": 7,
+          "num": 13,
+          "name": "フロムレイブン",
+          "odds": "3.2"
+        },
+        {
+          "rank": "2",
+          "waku": 1,
+          "num": 2,
+          "name": "マウンテンバローズ",
+          "odds": "2.1"
+        },
+        {
+          "rank": "3",
+          "waku": 3,
+          "num": 5,
+          "name": "クイーンズデイ",
+          "odds": "21.8"
+        }
+      ],
+      "payouts": {
+        "win": [
+          {
+            "nums": [
+              13
+            ],
+            "pay": 320
+          }
+        ],
+        "umaren": [
+          {
+            "nums": [
+              2,
+              13
+            ],
+            "pay": 280
+          }
+        ],
+        "wide": [
+          {
+            "nums": [
+              2,
+              13
+            ],
+            "pay": 180
+          },
+          {
+            "nums": [
+              5,
+              13
+            ],
+            "pay": 1020
+          },
+          {
+            "nums": [
+              2,
+              5
+            ],
+            "pay": 660
+          }
+        ],
+        "umatan": [
+          {
+            "nums": [
+              13,
+              2
+            ],
+            "pay": 600
+          }
+        ],
+        "sanrenpuku": [
+          {
+            "nums": [
+              2,
+              5,
+              13
+            ],
+            "pay": 2340
+          }
+        ]
+      },
+      "avgCoreWide": 11.18,
+      "passReason": "◎オッズ5.2倍が上位軸適正帯(1.4-4.0)外",
+      "resultStatus": "💤 見送りPass (◎オッズ5.2倍が上位軸適正帯(1.4-4.0)外)"
     },
     {
       "raceId": "202605050701",
@@ -5199,16 +5066,20 @@
         [
           10,
           6
+        ],
+        [
+          12,
+          3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎12番破綻時は◯10-▲6の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京1R(ダ1600m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.65, M3=71.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -5295,16 +5166,17 @@
         ]
       },
       "maxEv": 0.91,
-      "coreSyntheticOdds": 0.7,
+      "coreSyntheticOdds": 0.54,
       "pivotType": "Pass",
-      "passReason": "Core合成0.7倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.54倍/平均W 2.22倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成0.7倍<1.12(低配当圧縮回避))"
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.54倍/平均W 2.22倍))",
+      "avgCoreWide": 2.22
     },
     {
       "raceId": "202605050702",
@@ -5632,13 +5504,13 @@
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎13番破綻時は◯12-▲2の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京2R(ダ1400m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.65, M3=72.1%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全15頭を厳密演算。",
       "actualTop3": [
         {
@@ -5727,14 +5599,15 @@
       "maxEv": 0.87,
       "coreSyntheticOdds": 1.4,
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.87<0.88)",
+      "passReason": "◎オッズ1.2倍が上位軸適正帯(1.4-4.0)外",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.87<0.88))"
+      "resultStatus": "💤 見送りPass (◎オッズ1.2倍が上位軸適正帯(1.4-4.0)外)",
+      "avgCoreWide": 2.85
     },
     {
       "raceId": "202605050703",
@@ -6111,21 +5984,25 @@
         [
           14,
           6
+        ],
+        [
+          13,
+          9
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎13番破綻時は◯14-▲6の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京3R(芝1800m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.65, M3=54.6%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全18頭を厳密演算。",
       "maxEv": 0.8,
-      "coreSyntheticOdds": 1.12,
+      "coreSyntheticOdds": 0.94,
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.8<0.88)",
+      "passReason": "Core低配当圧縮(合成0.94倍/平均W 4.02倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -6216,7 +6093,8 @@
           }
         ]
       },
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.8<0.88))"
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.94倍/平均W 4.02倍))",
+      "avgCoreWide": 4.02
     },
     {
       "raceId": "202605050704",
@@ -6227,7 +6105,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1400m",
       "postTime": "11:20",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "aiPredicted": false,
@@ -6414,18 +6292,22 @@
         [
           1,
           2
+        ],
+        [
+          8,
+          3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎8番破綻時は◯1-▲2の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京4R(ダ1400m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.72, M3=58.9%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全10頭を厳密演算。",
-      "evalDone": true,
+      "evalDone": false,
       "wideOddsMap": {
         "1-2": 3.6,
         "1-3": 4.9,
@@ -6476,9 +6358,9 @@
       "hasLiveOdds": true,
       "isGraded": false,
       "maxEv": 0.83,
-      "coreSyntheticOdds": 1.1,
+      "coreSyntheticOdds": 0.83,
       "pivotType": "Pass",
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
@@ -6568,7 +6450,9 @@
           }
         ]
       },
-      "resultStatus": "❌ 不的中 回収率0.0%"
+      "resultStatus": "💤 見送りPass (新馬低配当圧縮(合成0.83倍/平均W 3.35倍))",
+      "avgCoreWide": 3.35,
+      "passReason": "新馬低配当圧縮(合成0.83倍/平均W 3.35倍)"
     },
     {
       "raceId": "202605050705",
@@ -6798,16 +6682,20 @@
         [
           2,
           8
+        ],
+        [
+          3,
+          1
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎3出遅れ・内詰まり時は◯2−▲8結線で防衛。但し調教・馬体重未発表で期待値不足かつ低配当圧縮のため見送り。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "S1(45%):標準〜スロー外目好位差し / S2(35%):スロー瞬発力勝負 / S3(20%):外枠先行粘り込み・ショック分岐（午前2R内0/外2を±5%上限で反映）",
       "evalDone": true,
       "wideOddsMap": {
@@ -6860,14 +6748,15 @@
       "hasLiveOdds": true,
       "isGraded": false,
       "maxEv": 0.99,
-      "coreSyntheticOdds": 1.6,
+      "coreSyntheticOdds": 1.12,
       "pivotType": "Pass",
       "investedYen": 10000,
-      "returnYen": 7770,
-      "actualRoi": 77.7,
+      "returnYen": 8020,
+      "actualRoi": 80.2,
       "isHit": true,
       "hitTickets": [
-        "ワイド 3-8 (◎-▲ Core) (7,770円)"
+        "ワイド 3-8 (◎-▲ Core) (5,920円)",
+        "単勝 3 (◎ デカントラップ 本線保護) (2,100円)"
       ],
       "usedModel": "gemini-4-neon(MEDIUM)",
       "hitRate": 54.2,
@@ -6958,7 +6847,8 @@
           }
         ]
       },
-      "resultStatus": "🎯 的中 払戻7,770円 (回収率77.7% / -2,230円)"
+      "resultStatus": "🎯 的中 払戻8,020円 (回収率80.2% / -1,980円)",
+      "avgCoreWide": 5.17
     },
     {
       "raceId": "202605050706",
@@ -7124,16 +7014,20 @@
         [
           6,
           2
+        ],
+        [
+          7,
+          8
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎7番破綻時は◯6-▲2の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京6R(ダ1600m・良) 実測N_lead=1頭 / 2-Stage融合(wR=0.72, M3=61.5%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全8頭を厳密演算。",
       "evalDone": false,
       "wideOddsMap": {
@@ -7169,9 +7063,9 @@
       "hasLiveOdds": true,
       "isGraded": false,
       "maxEv": 1.04,
-      "coreSyntheticOdds": 0.77,
+      "coreSyntheticOdds": 0.66,
       "pivotType": "Pass",
-      "passReason": "少頭数(8頭)・低配当圧縮(平均W 2.33倍)",
+      "passReason": "少頭数(8頭)・低配当圧縮(平均W 2.92倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -7261,7 +7155,8 @@
           }
         ]
       },
-      "resultStatus": "💤 見送りPass (少頭数(8頭)・低配当圧縮(平均W 2.33倍))"
+      "resultStatus": "💤 見送りPass (少頭数(8頭)・低配当圧縮(平均W 2.92倍))",
+      "avgCoreWide": 2.92
     },
     {
       "raceId": "202605050707",
@@ -7541,21 +7436,25 @@
         [
           12,
           9
+        ],
+        [
+          3,
+          11
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎3番破綻時は◯12-▲9の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京7R(ダ2100m・良) 実測N_lead=2頭 / 2-Stage融合(wR=0.65, M3=46.2%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全12頭を厳密演算。",
       "maxEv": 0.85,
-      "coreSyntheticOdds": 1.06,
+      "coreSyntheticOdds": 0.95,
       "pivotType": "Pass",
-      "passReason": "Core合成1.06倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.95倍/平均W 4.75倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -7646,7 +7545,8 @@
           }
         ]
       },
-      "resultStatus": "💤 見送りPass (Core合成1.06倍<1.12(低配当圧縮回避))"
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.95倍/平均W 4.75倍))",
+      "avgCoreWide": 4.75
     },
     {
       "raceId": "202605050708",
@@ -7974,21 +7874,25 @@
         [
           10,
           15
+        ],
+        [
+          2,
+          7
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎2番破綻時は◯10-▲15の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京8R(芝1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.65, M3=47.6%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全15頭を厳密演算。",
       "maxEv": 0.87,
-      "coreSyntheticOdds": 1.38,
+      "coreSyntheticOdds": 1.05,
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.87<0.88)",
+      "passReason": "Core低配当圧縮(合成1.05倍/平均W 4.4倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -8018,7 +7922,8 @@
         "umatan": [],
         "sanrenpuku": []
       },
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.87<0.88))"
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成1.05倍/平均W 4.4倍))",
+      "avgCoreWide": 4.4
     },
     {
       "raceId": "202605050709",
@@ -8280,16 +8185,20 @@
         [
           11,
           10
+        ],
+        [
+          14,
+          6
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎14番が外回し届かず4着以下時は11-10・11-6のAlpha馬連・3連複で防衛。+10kgの3番単騎逃げ残りに警戒。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "S1(45%)3番単騎マイペース好位外目決着 / S2(35%)中盤締まり外差し台頭 / S3(20%)スロー前残り",
       "evalDone": true,
       "wideOddsMap": {
@@ -8342,17 +8251,16 @@
       "hasLiveOdds": true,
       "isGraded": false,
       "maxEv": 1.31,
-      "coreSyntheticOdds": 1.71,
+      "coreSyntheticOdds": 1.42,
       "pivotType": "Single-Anchor Core",
       "investedYen": 10000,
-      "returnYen": 24650,
-      "actualRoi": 246.5,
+      "returnYen": 19140,
+      "actualRoi": 191.4,
       "isHit": true,
       "hitTickets": [
-        "ワイド 14-11 (◎-◯ Core) (7,260円)",
-        "ワイド 14-10 (◎-▲ Core) (5,130円)",
-        "ワイド 11-10 (◯-▲ タテ目防衛) (7,000円)",
-        "単勝 11 (◯ ウィロークリーク Alpha) (4,080円)",
+        "ワイド 14-11 (◎-◯ Core) (6,600円)",
+        "ワイド 14-10 (◎-▲ Core) (4,860円)",
+        "ワイド 11-10 (◯-▲ タテ目防衛) (6,500円)",
         "3連複F (1,180円)"
       ],
       "weightsAnnounced": true,
@@ -8446,7 +8354,8 @@
           }
         ]
       },
-      "resultStatus": "🎯 的中 払戻24,650円 (回収率246.5% / +14,650円)"
+      "resultStatus": "🎯 的中 払戻19,140円 (回収率191.4% / +9,140円)",
+      "avgCoreWide": 6.05
     },
     {
       "raceId": "202605050710",
@@ -8738,20 +8647,24 @@
           14
         ],
         [
+          9,
+          14
+        ],
+        [
           12,
           6
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "15が揉まれ崩れでも18-12-11の6〜8枠差し網で防衛可",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "芝発進16頭立てTypeB+。1.7倍6番の砂被り警戒しつつ7-8枠先行と差し1番手を評価。",
-      "coreSyntheticOdds": 6.82,
+      "coreSyntheticOdds": 5.86,
       "pivotType": "Pass",
       "usedModel": "gemini-4-neon(MEDIUM)",
       "hitRate": 62.5,
@@ -8808,7 +8721,7 @@
         "15-16": 13.4
       },
       "hasLiveOdds": true,
-      "passReason": "◎オッズ96.0倍が適正収益帯(1.9-11.5)外",
+      "passReason": "◎オッズ96.0倍が上位軸適正帯(1.4-4.0)外",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -8899,7 +8812,8 @@
           }
         ]
       },
-      "resultStatus": "💤 見送りPass (◎オッズ96.0倍が適正収益帯(1.9-11.5)外)"
+      "resultStatus": "💤 見送りPass (◎オッズ96.0倍が上位軸適正帯(1.4-4.0)外)",
+      "avgCoreWide": 37.67
     },
     {
       "raceId": "202605050711",
@@ -9223,22 +9137,26 @@
           7
         ],
         [
+          2,
+          7
+        ],
+        [
           5,
           4
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎4番破綻時は◯15-▲3の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京芝1600の瞬発戦。好仕上げ4・15番を核に、内枠先行3番と絞り11番の中穴を翼優先。",
-      "coreSyntheticOdds": 11.53,
+      "coreSyntheticOdds": 9.16,
       "pivotType": "Pass",
-      "passReason": "◎オッズ28.6倍が適正収益帯(1.9-11.5)外",
+      "passReason": "◎オッズ28.6倍が上位軸適正帯(1.4-4.0)外",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -9380,8 +9298,9 @@
           }
         ]
       },
-      "resultStatus": "💤 見送りPass (◎オッズ28.6倍が適正収益帯(1.9-11.5)外)",
-      "usedModel": "gemini-4-neon(MEDIUM)"
+      "resultStatus": "💤 見送りPass (◎オッズ28.6倍が上位軸適正帯(1.4-4.0)外)",
+      "usedModel": "gemini-4-neon(MEDIUM)",
+      "avgCoreWide": 48.7
     },
     {
       "raceId": "202605050712",
@@ -9757,21 +9676,25 @@
         [
           10,
           8
+        ],
+        [
+          14,
+          16
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎14番破綻時は◯8-▲10の防衛線カバー。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "東京12R(芝2400m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.65, M3=43.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全18頭を厳密演算。",
       "maxEv": 0.87,
-      "coreSyntheticOdds": 1.19,
+      "coreSyntheticOdds": 1.05,
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.87<0.88)",
+      "passReason": "Core低配当圧縮(合成1.05倍/平均W 4.92倍)",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
@@ -9802,25 +9725,26 @@
         "umatan": [],
         "sanrenpuku": []
       },
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.87<0.88))"
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成1.05倍/平均W 4.92倍))",
+      "avgCoreWide": 4.92
     }
   ],
   "trackBiases": [
     {
       "venue": "京都",
-      "surf": "Neon v11.9 (JRA:plan2_neon)",
-      "trend": "京都当日実測(11R一致検証済): 1着内枠1回/外枠9回 → 【外枠(6〜8枠)優勢】",
+      "surf": "Neon v12.0 (JRA:plan2_neon)",
+      "trend": "京都当日実測(11R一致検証済): 1着内枠0回/外枠10回 → 【外枠(6〜8枠)優勢】",
       "consistentR": 11
     },
     {
       "venue": "東京",
-      "surf": "Neon v11.9 (JRA:plan2_neon)",
+      "surf": "Neon v12.0 (JRA:plan2_neon)",
       "trend": "東京当日実測(12R一致検証済): 1着内枠4回/外枠6回 → 【外枠(6〜8枠)優勢】",
       "consistentR": 12
     }
   ],
-  "engineVer": "v11.9-neon",
-  "updatedAt": "2026-11-28 16:07 JST",
+  "engineVer": "v12.0-neon",
+  "updatedAt": "2026-11-28 20:12 JST",
   "aiPlan": "JRA:plan2_neon(Neon統一) / NAR:無料枠",
   "multiLeg": {
     "summary": "Leg2芝発進ダ1400のTypeB+波乱警戒を軸にT1核48点(2×3×2×2×2)へ抑制。5〜15倍帯の内枠・差し中穴を3レグ以上の直交翼へ配分し、50倍超の過大評価を排除。",
@@ -9837,9 +9761,9 @@
           {
             "num": 1,
             "name": "ロイスター",
-            "f": 0.232,
-            "fFund": 0.22,
-            "q": 0.251,
+            "f": 23.2,
+            "fFund": 22.0,
+            "q": 25.1,
             "odds": 3.4,
             "shell": "Core",
             "note": "F:馬体-4kg好仕上/1枠減点ソフト上限でH展開向き"
@@ -9847,9 +9771,9 @@
           {
             "num": 11,
             "name": "アートレスマインド",
-            "f": 0.175,
-            "fFund": 0.19,
-            "q": 0.14,
+            "f": 17.5,
+            "fFund": 19.0,
+            "q": 14.0,
             "odds": 5.8,
             "shell": "Core",
             "note": "F:馬体-8kg絞り+7枠スムーズ先行+ダ適性血統"
@@ -9857,9 +9781,9 @@
           {
             "num": 13,
             "name": "ナイトスラッガー",
-            "f": 0.128,
-            "fFund": 0.155,
-            "q": 0.078,
+            "f": 12.8,
+            "fFund": 15.5,
+            "q": 7.8,
             "odds": 9.9,
             "shell": "Wing",
             "note": "F:-4kg+モレイラ騎手/5-15倍帯の外枠差し筆頭"
@@ -9867,9 +9791,9 @@
           {
             "num": 7,
             "name": "リメンバーヒム",
-            "f": 0.121,
-            "fFund": 0.115,
-            "q": 0.132,
+            "f": 12.1,
+            "fFund": 11.5,
+            "q": 13.2,
             "odds": 6.1,
             "shell": "Wing",
             "note": "H:先行激化で差し台頭/5-15倍帯の堅実中穴"
@@ -9877,9 +9801,9 @@
           {
             "num": 2,
             "name": "テイエムパイロット",
-            "f": 0.103,
-            "fFund": 0.095,
-            "q": 0.119,
+            "f": 10.3,
+            "fFund": 9.5,
+            "q": 11.9,
             "odds": 6.7,
             "shell": "Wing",
             "note": "F:-2kg+パイロ血統/2枠砂被り警戒も内好位圏"
@@ -9929,9 +9853,9 @@
           {
             "num": 6,
             "name": "マジッククッキー",
-            "f": 0.275,
-            "fFund": 0.195,
-            "q": 0.52,
+            "f": 27.5,
+            "fFund": 19.5,
+            "q": 52.0,
             "odds": 1.7,
             "shell": "Core",
             "note": "F:圧倒的市場支持/3枠砂被り減点はソフト上限留め"
@@ -9939,9 +9863,9 @@
           {
             "num": 15,
             "name": "セギレエルビエント",
-            "f": 0.168,
-            "fFund": 0.21,
-            "q": 0.058,
+            "f": 16.8,
+            "fFund": 21.0,
+            "q": 5.8,
             "odds": 12.4,
             "shell": "Core",
             "note": "F:芝発進8枠先行+0.2s差実績/Mod2でTop3昇格"
@@ -9949,9 +9873,9 @@
           {
             "num": 13,
             "name": "カルパ",
-            "f": 0.148,
-            "fFund": 0.155,
-            "q": 0.1,
+            "f": 14.8,
+            "fFund": 15.5,
+            "q": 10.0,
             "odds": 7.6,
             "shell": "Core",
             "note": "F:芝発進7枠先行/外芝加速利と5-15倍帯で昇格"
@@ -9959,9 +9883,9 @@
           {
             "num": 11,
             "name": "アルデトップガン",
-            "f": 0.112,
-            "fFund": 0.13,
-            "q": 0.053,
+            "f": 11.2,
+            "fFund": 13.0,
+            "q": 5.3,
             "odds": 13.6,
             "shell": "Wing",
             "note": "F:6枠外目差し安定/乾燥ダTop4純差し強制枠"
@@ -9969,9 +9893,9 @@
           {
             "num": 7,
             "name": "ジャンヌドゥレーヴ",
-            "f": 0.077,
-            "fFund": 0.075,
-            "q": 0.068,
+            "f": 7.7,
+            "fFund": 7.5,
+            "q": 6.8,
             "odds": 10.8,
             "shell": "Wing",
             "note": "F:0.2s差実績の5-15倍帯追込/前崩れ時の翼抑え"
@@ -10021,9 +9945,9 @@
           {
             "num": 3,
             "name": "サンタンカ",
-            "f": 0.246,
-            "fFund": 0.255,
-            "q": 0.215,
+            "f": 24.6,
+            "fFund": 25.5,
+            "q": 21.5,
             "odds": 4.0,
             "shell": "Core",
             "note": "F:2枠内ポケット+武豊騎手+0.2s差実績で最安定"
@@ -10031,9 +9955,9 @@
           {
             "num": 15,
             "name": "アンダースコア",
-            "f": 0.199,
-            "fFund": 0.195,
-            "q": 0.198,
+            "f": 19.9,
+            "fFund": 19.5,
+            "q": 19.8,
             "odds": 4.3,
             "shell": "Core",
             "note": "F:現級0.2s差実績/外枠克服する地力上位"
@@ -10041,9 +9965,9 @@
           {
             "num": 13,
             "name": "シャイフ",
-            "f": 0.108,
-            "fFund": 0.105,
-            "q": 0.109,
+            "f": 10.8,
+            "fFund": 10.5,
+            "q": 10.9,
             "odds": 7.4,
             "shell": "Wing",
             "note": "H:7枠スムーズ差し/5-15倍帯の相手筆頭"
@@ -10051,9 +9975,9 @@
           {
             "num": 12,
             "name": "キタサンダムール",
-            "f": 0.085,
-            "fFund": 0.095,
-            "q": 0.062,
+            "f": 8.5,
+            "fFund": 9.5,
+            "q": 6.2,
             "odds": 12.4,
             "shell": "Wing",
             "note": "F:0.2s差実績+キタサン産駒/5-15倍帯の末脚翼"
@@ -10061,9 +9985,9 @@
           {
             "num": 11,
             "name": "セシリエプラージュ",
-            "f": 0.083,
-            "fFund": 0.09,
-            "q": 0.067,
+            "f": 8.3,
+            "fFund": 9.0,
+            "q": 6.7,
             "odds": 11.5,
             "shell": "Wing",
             "note": "F:0.2s差実績/5-15倍帯の差し一角として翼編入"
@@ -10071,9 +9995,9 @@
           {
             "num": 5,
             "name": "ラージギャラリー",
-            "f": 0.07,
-            "fFund": 0.08,
-            "q": 0.048,
+            "f": 7.0,
+            "fFund": 8.0,
+            "q": 4.8,
             "odds": 15.7,
             "shell": "Wing",
             "note": "F:0.2s差実績/逃げ2頭構成の単騎残り警戒"
@@ -10123,9 +10047,9 @@
           {
             "num": 4,
             "name": "マジックサンズ",
-            "f": 0.223,
-            "fFund": 0.22,
-            "q": 0.219,
+            "f": 22.3,
+            "fFund": 22.0,
+            "q": 21.9,
             "odds": 3.9,
             "shell": "Core",
             "note": "F:馬体-2kg好仕上+キズナ血統/2枠から末脚信頼"
@@ -10133,9 +10057,9 @@
           {
             "num": 15,
             "name": "ダノンセンチュリー",
-            "f": 0.195,
-            "fFund": 0.195,
-            "q": 0.187,
+            "f": 19.5,
+            "fFund": 19.5,
+            "q": 18.7,
             "odds": 4.5,
             "shell": "Core",
             "note": "F:馬体-4kg好仕上/東京マイル適性の高い差し馬"
@@ -10143,9 +10067,9 @@
           {
             "num": 3,
             "name": "アドマイヤクワッズ",
-            "f": 0.165,
-            "fFund": 0.175,
-            "q": 0.139,
+            "f": 16.5,
+            "fFund": 17.5,
+            "q": 13.9,
             "odds": 5.9,
             "shell": "Wing",
             "note": "F:2枠内ポケット先行+0.2s差/5-15倍帯の最優先翼"
@@ -10153,9 +10077,9 @@
           {
             "num": 11,
             "name": "ディアナザール",
-            "f": 0.137,
-            "fFund": 0.145,
-            "q": 0.113,
+            "f": 13.7,
+            "fFund": 14.5,
+            "q": 11.3,
             "odds": 7.1,
             "shell": "Wing",
             "note": "F:馬体-8kg絞り+0.2s差実績/5-15倍帯の差し翼"
@@ -10163,9 +10087,9 @@
           {
             "num": 16,
             "name": "カヴァレリッツォ",
-            "f": 0.095,
-            "fFund": 0.08,
-            "q": 0.131,
+            "f": 9.5,
+            "fFund": 8.0,
+            "q": 13.1,
             "odds": 6.2,
             "shell": "Wing",
             "note": "F:マーカン騎手も+14kg大幅増で核回避し翼留め"
@@ -10173,9 +10097,9 @@
           {
             "num": 10,
             "name": "シュトラウス",
-            "f": 0.058,
-            "fFund": 0.06,
-            "q": 0.051,
+            "f": 5.8,
+            "fFund": 6.0,
+            "q": 5.1,
             "odds": 14.7,
             "shell": "Wing",
             "note": "H:モーリス産駒の5-15倍帯差し穴/展開嵌り抑え"
@@ -10225,9 +10149,9 @@
           {
             "num": 10,
             "name": "ドラゴンバルド",
-            "f": 0.285,
-            "fFund": 0.29,
-            "q": 0.269,
+            "f": 28.5,
+            "fFund": 29.0,
+            "q": 26.9,
             "odds": 3.1,
             "shell": "Core",
             "note": "F:-2kg好仕上+0.2s差+モレイラ/2歳分散30%上限"
@@ -10235,9 +10159,9 @@
           {
             "num": 8,
             "name": "ノヴァヴェローチェ",
-            "f": 0.244,
-            "fFund": 0.22,
-            "q": 0.279,
+            "f": 24.4,
+            "fFund": 22.0,
+            "q": 27.9,
             "odds": 3.0,
             "shell": "Core",
             "note": "F:市場支持トップの逃げ脚質/単騎なら押し切り"
@@ -10245,9 +10169,9 @@
           {
             "num": 6,
             "name": "ゴールデンプロミス",
-            "f": 0.141,
-            "fFund": 0.16,
-            "q": 0.112,
+            "f": 14.1,
+            "fFund": 16.0,
+            "q": 11.2,
             "odds": 6.9,
             "shell": "Wing",
             "note": "F:0.2s差+坂井騎手+コントレイル/5-15倍帯筆頭翼"
@@ -10255,9 +10179,9 @@
           {
             "num": 5,
             "name": "エトワールハマー",
-            "f": 0.122,
-            "fFund": 0.135,
-            "q": 0.102,
+            "f": 12.2,
+            "fFund": 13.5,
+            "q": 10.2,
             "odds": 7.5,
             "shell": "Wing",
             "note": "F:0.2s差実績+武豊騎手/5-15倍帯の好位翼"
@@ -10265,9 +10189,9 @@
           {
             "num": 3,
             "name": "ショウナンバトレニ",
-            "f": 0.088,
-            "fFund": 0.07,
-            "q": 0.117,
+            "f": 8.8,
+            "fFund": 7.0,
+            "q": 11.7,
             "odds": 6.6,
             "shell": "Wing",
             "note": "F:3枠内ポケット+0.2s差も+14kg大幅増で割引"
@@ -10275,9 +10199,9 @@
           {
             "num": 2,
             "name": "シャローチャンプ",
-            "f": 0.062,
-            "fFund": 0.065,
-            "q": 0.056,
+            "f": 6.2,
+            "fFund": 6.5,
+            "q": 5.6,
             "odds": 12.9,
             "shell": "Wing",
             "note": "H:2枠内ポケット差し/逃げ3頭で前崩れ時の穴翼"

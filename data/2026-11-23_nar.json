@@ -198,16 +198,20 @@
         [
           4,
           1
+        ],
+        [
+          9,
+          6
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎9番破綻時は◯4-▲1のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "水沢9R(ダ1600m・重) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=32.8%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全10頭を厳密演算。",
       "actualTop3": [
         {
@@ -301,10 +305,11 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.62,
+      "coreSyntheticOdds": 1.25,
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
-      "maxEv": 0.8
+      "maxEv": 0.8,
+      "avgCoreWide": 5.05
     },
     {
       "raceId": "202636112310",
@@ -502,16 +507,20 @@
         [
           10,
           4
+        ],
+        [
+          1,
+          6
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎1番破綻時は◯10-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "水沢10R(ダ1600m・重) 実測N_lead=1頭 / 2-Stage融合(wR=0.38, M3=34.0%)。3シナリオ混合(S1:50% / S2:35% / S3:15%)で全10頭を厳密演算。",
       "actualTop3": [
         {
@@ -605,10 +614,11 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.58,
+      "coreSyntheticOdds": 1.22,
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
-      "maxEv": 0.8
+      "maxEv": 0.8,
+      "avgCoreWide": 4.92
     },
     {
       "raceId": "202636112311",
@@ -806,16 +816,20 @@
         [
           7,
           8
+        ],
+        [
+          5,
+          4
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎5番破綻時は◯7-▲8のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "水沢11R(ダ1600m・重) 実測N_lead=5頭 / 2-Stage融合(wR=0.38, M3=32.7%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全10頭を厳密演算。",
       "actualTop3": [
         {
@@ -909,10 +923,11 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.65,
+      "coreSyntheticOdds": 1.28,
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
-      "maxEv": 0.81
+      "maxEv": 0.81,
+      "avgCoreWide": 5.15
     },
     {
       "raceId": "202636112312",
@@ -1126,16 +1141,20 @@
         [
           8,
           4
+        ],
+        [
+          10,
+          5
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎10番破綻時は◯8-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "水沢12R(ダ1600m・重) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=30.4%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全11頭を厳密演算。",
       "actualTop3": [
         {
@@ -1229,10 +1248,11 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (ライブオッズ未取得のため見送り)",
       "isGraded": true,
-      "coreSyntheticOdds": 1.77,
+      "coreSyntheticOdds": 1.36,
       "maxEv": 0.81,
       "pivotType": "Pass",
-      "passReason": "ライブオッズ未取得のため見送り"
+      "passReason": "ライブオッズ未取得のため見送り",
+      "avgCoreWide": 5.5
     },
     {
       "raceId": "202646112309",
@@ -1430,16 +1450,20 @@
         [
           2,
           3
+        ],
+        [
+          1,
+          7
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎1番破綻時は◯2-▲3のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "金沢9R(ダ1600m・重) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=57.3%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全10頭を厳密演算。",
       "actualTop3": [
         {
@@ -1531,12 +1555,13 @@
       "isHit": false,
       "hitTickets": [],
       "evalDone": false,
-      "resultStatus": "💤 見送りPass (Core合成1.04倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.85倍/平均W 3.8倍))",
       "isGraded": true,
-      "coreSyntheticOdds": 1.04,
+      "coreSyntheticOdds": 0.85,
       "pivotType": "Pass",
-      "passReason": "Core合成1.04倍<1.12(低配当圧縮回避)",
-      "maxEv": 0.81
+      "passReason": "Core低配当圧縮(合成0.85倍/平均W 3.8倍)",
+      "maxEv": 0.81,
+      "avgCoreWide": 3.8
     },
     {
       "raceId": "202646112310",
@@ -1766,16 +1791,20 @@
         [
           2,
           4
+        ],
+        [
+          8,
+          1
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎8番破綻時は◯2-▲4のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "金沢10R(ダ1600m・重) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=34.2%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全12頭を厳密演算。",
       "actualTop3": [
         {
@@ -1869,10 +1898,11 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.59,
+      "coreSyntheticOdds": 1.22,
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
-      "maxEv": 0.81
+      "maxEv": 0.81,
+      "avgCoreWide": 5.02
     },
     {
       "raceId": "202655112309",
@@ -2070,16 +2100,20 @@
         [
           10,
           1
+        ],
+        [
+          2,
+          3
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎2番破綻時は◯10-▲1のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "佐賀9R(ダ1600m・良) 実測N_lead=5頭 / 2-Stage融合(wR=0.38, M3=32.2%)。3シナリオ混合(S1:25% / S2:35% / S3:40%)で全10頭を厳密演算。",
       "actualTop3": [
         {
@@ -2173,10 +2207,11 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.66,
+      "coreSyntheticOdds": 1.29,
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
-      "maxEv": 0.8
+      "maxEv": 0.8,
+      "avgCoreWide": 5.2
     },
     {
       "raceId": "202655112310",
@@ -2374,16 +2409,20 @@
         [
           1,
           2
+        ],
+        [
+          7,
+          4
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎7番破綻時は◯1-▲2のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "佐賀10R(ダ1600m・良) 実測N_lead=4頭 / 2-Stage融合(wR=0.38, M3=30.9%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全10頭を厳密演算。",
       "actualTop3": [
         {
@@ -2477,10 +2516,11 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 1.73,
+      "coreSyntheticOdds": 1.33,
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
-      "maxEv": 0.8
+      "maxEv": 0.8,
+      "avgCoreWide": 5.35
     },
     {
       "raceId": "202655112311",
@@ -2742,16 +2782,20 @@
         [
           2,
           9
+        ],
+        [
+          14,
+          1
         ]
       ],
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
       "counterfactualAudit": "◎14番破綻時は◯2-▲9のCore結線で元返し防衛。",
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "scenario": "佐賀11R(ダ1600m・良) 実測N_lead=3頭 / 2-Stage融合(wR=0.38, M3=24.9%)。3シナリオ混合(S1:35% / S2:40% / S3:25%)で全14頭を厳密演算。",
       "actualTop3": [
         {
@@ -2845,10 +2889,11 @@
       "evalDone": false,
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
-      "coreSyntheticOdds": 2.16,
+      "coreSyntheticOdds": 1.69,
       "maxEv": 0.8,
       "pivotType": "Pass",
-      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)"
+      "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
+      "avgCoreWide": 6.83
     }
   ],
   "trackBiases": [
@@ -2877,6 +2922,6 @@
       "consistentR": 2
     }
   ],
-  "engineVer": "v11.9-neon",
+  "engineVer": "v12.0-neon",
   "updatedAt": "2026-11-23 22:26 JST"
 }

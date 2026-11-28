@@ -258,9 +258,9 @@
         }
       ],
       "investedYen": 10000,
-      "returnYen": 15870,
+      "returnYen": 19300,
       "isHit": true,
-      "resultStatus": "🎯 的中 払戻15,870円 (回収率158.7% / +5,870円)",
+      "resultStatus": "🎯 的中 払戻19,300円 (回収率193.0% / +9,300円)",
       "payouts": {
         "win": [
           {
@@ -322,9 +322,10 @@
           }
         ]
       },
-      "actualRoi": 158.7,
+      "actualRoi": 193.0,
       "hitTickets": [
-        "ワイド 10-16 (◎-☆ 2点Core) (15,870円)"
+        "ワイド 10-16 (◎-☆ 2点Core) (17,940円)",
+        "単勝 10 (◎ アウダチェ 本線保護) (1,360円)"
       ],
       "evalDone": true,
       "isGraded": false,
@@ -342,12 +343,13 @@
       ],
       "maxEv": 0.98,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.3
     },
     {
       "raceId": "202608050506",
@@ -487,7 +489,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (少頭数(7頭)・低配当圧縮(平均W 2.23倍))",
+      "resultStatus": "💤 見送りPass (少頭数(7頭)・低配当圧縮(平均W 2.4倍))",
       "payouts": {
         "win": [
           {
@@ -554,7 +556,7 @@
       "evalDone": false,
       "isGraded": false,
       "m3": 67.8,
-      "coreSyntheticOdds": 0.74,
+      "coreSyntheticOdds": 0.59,
       "coreConnections": [
         [
           7,
@@ -567,18 +569,23 @@
         [
           5,
           1
+        ],
+        [
+          7,
+          6
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "少頭数(7頭)・低配当圧縮(平均W 2.23倍)",
+      "passReason": "少頭数(7頭)・低配当圧縮(平均W 2.4倍)",
       "maxEv": 0.82,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.4
     },
     {
       "raceId": "202608050509",
@@ -588,7 +595,7 @@
       "name": "秋明菊賞",
       "surfaceDist": "芝1400m",
       "postTime": "14:25",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -767,10 +774,10 @@
           "odds": "21.5"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "resultStatus": "💤 見送りPass (◎オッズ10.4倍が上位軸適正帯(1.4-4.0)外)",
       "payouts": {
         "win": [
           {
@@ -834,10 +841,10 @@
       },
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": true,
+      "evalDone": false,
       "isGraded": false,
       "m3": 69.1,
-      "coreSyntheticOdds": 1.55,
+      "coreSyntheticOdds": 1.23,
       "coreConnections": [
         [
           4,
@@ -848,6 +855,10 @@
           8
         ],
         [
+          6,
+          8
+        ],
+        [
           4,
           3
         ]
@@ -855,12 +866,14 @@
       "pivotType": "Pass",
       "maxEv": 2.93,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 5.33,
+      "passReason": "◎オッズ10.4倍が上位軸適正帯(1.4-4.0)外"
     },
     {
       "raceId": "202608050510",
@@ -870,7 +883,7 @@
       "name": "比叡S",
       "surfaceDist": "芝2400m",
       "postTime": "15:01",
-      "rank": "Pass",
+      "rank": "S",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -1172,10 +1185,10 @@
           "odds": "29.6"
         }
       ],
-      "investedYen": 0,
-      "returnYen": 0,
-      "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.41<0.88))",
+      "investedYen": 10000,
+      "returnYen": 18320,
+      "isHit": true,
+      "resultStatus": "🎯 的中 払戻18,320円 (回収率183.2% / +8,320円)",
       "payouts": {
         "win": [
           {
@@ -1237,12 +1250,15 @@
           }
         ]
       },
-      "actualRoi": 0.0,
-      "hitTickets": [],
-      "evalDone": false,
+      "actualRoi": 183.2,
+      "hitTickets": [
+        "ワイド 7-5 (◎-☆ 強制Core) (14,960円)",
+        "単勝 7 (◎ ロードフィレール 本線保護) (3,360円)"
+      ],
+      "evalDone": true,
       "isGraded": false,
       "m3": 47.9,
-      "coreSyntheticOdds": 5.57,
+      "coreSyntheticOdds": 1.58,
       "coreConnections": [
         [
           7,
@@ -1255,17 +1271,21 @@
         [
           3,
           10
+        ],
+        [
+          7,
+          5
         ]
       ],
       "maxEv": 0.41,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
-      "passReason": "期待値エッジ不足(最大EV 0.41<0.88)"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 33.45
     },
     {
       "raceId": "202608050511",
@@ -1615,7 +1635,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ13.3倍が適正収益帯(1.9-11.5)外)",
+      "resultStatus": "💤 見送りPass (◎オッズ13.3倍が上位軸適正帯(1.4-4.0)外)",
       "payouts": {
         "win": [
           {
@@ -1682,7 +1702,7 @@
       "evalDone": false,
       "isGraded": false,
       "m3": 54.9,
-      "coreSyntheticOdds": 2.07,
+      "coreSyntheticOdds": 1.64,
       "coreConnections": [
         [
           3,
@@ -1693,19 +1713,24 @@
           10
         ],
         [
+          4,
+          10
+        ],
+        [
           3,
           14
         ]
       ],
       "maxEv": 3.45,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
-      "passReason": "◎オッズ13.3倍が適正収益帯(1.9-11.5)外"
+      "strategyProfile": "v12_balanced_roi",
+      "passReason": "◎オッズ13.3倍が上位軸適正帯(1.4-4.0)外",
+      "avgCoreWide": 7.9
     },
     {
       "raceId": "202603030509",
@@ -1988,7 +2013,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ14.4倍が適正収益帯(1.9-11.5)外)",
+      "resultStatus": "💤 見送りPass (◎オッズ14.4倍が上位軸適正帯(1.4-4.0)外)",
       "payouts": {
         "win": [
           {
@@ -2055,7 +2080,7 @@
       "evalDone": false,
       "isGraded": false,
       "m3": 47.9,
-      "coreSyntheticOdds": 6.56,
+      "coreSyntheticOdds": 4.64,
       "coreConnections": [
         [
           17,
@@ -2068,18 +2093,23 @@
         [
           4,
           5
+        ],
+        [
+          17,
+          6
         ]
       ],
       "maxEv": 4.11,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
-      "passReason": "◎オッズ14.4倍が適正収益帯(1.9-11.5)外"
+      "passReason": "◎オッズ14.4倍が上位軸適正帯(1.4-4.0)外",
+      "avgCoreWide": 20.27
     },
     {
       "raceId": "202603030510",
@@ -2362,7 +2392,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ121.5倍が適正収益帯(1.9-11.5)外)",
+      "resultStatus": "💤 見送りPass (◎オッズ121.5倍が上位軸適正帯(1.4-4.0)外)",
       "payouts": {
         "win": [
           {
@@ -2429,7 +2459,7 @@
       "evalDone": false,
       "isGraded": false,
       "m3": 42.1,
-      "coreSyntheticOdds": 5.53,
+      "coreSyntheticOdds": 2.18,
       "coreConnections": [
         [
           12,
@@ -2440,20 +2470,25 @@
           7
         ],
         [
+          6,
+          7
+        ],
+        [
           12,
           1
         ]
       ],
       "maxEv": 0.91,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
-      "passReason": "◎オッズ121.5倍が適正収益帯(1.9-11.5)外"
+      "passReason": "◎オッズ121.5倍が上位軸適正帯(1.4-4.0)外",
+      "avgCoreWide": 13.4
     },
     {
       "raceId": "202603030511",
@@ -2463,7 +2498,7 @@
       "name": "福島記念",
       "surfaceDist": "芝2000m",
       "postTime": "15:20",
-      "rank": "S",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -2759,7 +2794,7 @@
         }
       ],
       "scenario": "ショウナンマグマ牽引で締まったペース。Bコース持続力と斤量恩恵の3歳馬・小回り実績先行馬が台頭。",
-      "pivotType": "Dual-Pivot",
+      "pivotType": "Pass",
       "nLead": 1,
       "usedModel": "gemini-3.8-flash",
       "trackCond": "良",
@@ -2791,10 +2826,10 @@
           "odds": "8.1"
         }
       ],
-      "investedYen": 10000,
+      "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "❌ 不的中 回収率0.0%",
+      "resultStatus": "💤 見送りPass (◎オッズ5.4倍が上位軸適正帯(1.4-4.0)外)",
       "payouts": {
         "win": [
           {
@@ -2858,10 +2893,10 @@
       },
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": true,
+      "evalDone": false,
       "isGraded": true,
       "m3": 44.7,
-      "coreSyntheticOdds": 3.56,
+      "coreSyntheticOdds": 2.8,
       "coreConnections": [
         [
           11,
@@ -2874,16 +2909,22 @@
         [
           5,
           9
+        ],
+        [
+          11,
+          6
         ]
       ],
       "maxEv": 2.31,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 13.95,
+      "passReason": "◎オッズ5.4倍が上位軸適正帯(1.4-4.0)外"
     }
   ],
   "updatedAt": "2026-11-22 14:41 JST",
@@ -2900,5 +2941,5 @@
       "trend": "福島当日実測(3R集計): 1着内枠1回/外枠2回 → 【内外フラット】"
     }
   ],
-  "engineVer": "v11.9-neon"
+  "engineVer": "v12.0-neon"
 }

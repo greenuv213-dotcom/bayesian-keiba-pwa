@@ -201,7 +201,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 48.0,
-      "coreSyntheticOdds": 1.28,
+      "coreSyntheticOdds": 0.97,
       "coreConnections": [
         [
           5,
@@ -214,6 +214,10 @@
         [
           6,
           8
+        ],
+        [
+          5,
+          7
         ]
       ],
       "pivotType": "Pass",
@@ -223,12 +227,13 @@
       "evalDone": false,
       "maxEv": 1.04,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.12
     },
     {
       "raceId": "202644112002",
@@ -428,7 +433,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 48.3,
-      "coreSyntheticOdds": 1.19,
+      "coreSyntheticOdds": 0.96,
       "coreConnections": [
         [
           5,
@@ -441,6 +446,10 @@
         [
           6,
           7
+        ],
+        [
+          5,
+          9
         ]
       ],
       "pivotType": "Pass",
@@ -450,12 +459,13 @@
       "evalDone": false,
       "maxEv": 1.13,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.08
     },
     {
       "raceId": "202644112003",
@@ -616,7 +626,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 47.6,
-      "coreSyntheticOdds": 2.32,
+      "coreSyntheticOdds": 1.79,
       "coreConnections": [
         [
           4,
@@ -629,21 +639,26 @@
         [
           2,
           6
+        ],
+        [
+          4,
+          8
         ]
       ],
       "maxEv": 1.83,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 7.2
     },
     {
       "raceId": "202644112004",
@@ -830,7 +845,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 45.9,
-      "coreSyntheticOdds": 1.55,
+      "coreSyntheticOdds": 1.27,
       "coreConnections": [
         [
           8,
@@ -843,6 +858,10 @@
         [
           3,
           9
+        ],
+        [
+          8,
+          10
         ]
       ],
       "pivotType": "Pass",
@@ -852,12 +871,13 @@
       "evalDone": false,
       "maxEv": 1.55,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 5.38
     },
     {
       "raceId": "202644112005",
@@ -1096,7 +1116,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 44.3,
-      "coreSyntheticOdds": 1.71,
+      "coreSyntheticOdds": 1.32,
       "coreConnections": [
         [
           11,
@@ -1109,6 +1129,10 @@
         [
           4,
           9
+        ],
+        [
+          11,
+          3
         ]
       ],
       "pivotType": "Pass",
@@ -1118,12 +1142,13 @@
       "evalDone": false,
       "maxEv": 1.26,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 5.6
     },
     {
       "raceId": "202644112006",
@@ -1362,7 +1387,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 43.8,
-      "coreSyntheticOdds": 1.55,
+      "coreSyntheticOdds": 1.22,
       "coreConnections": [
         [
           4,
@@ -1375,6 +1400,10 @@
         [
           11,
           10
+        ],
+        [
+          4,
+          3
         ]
       ],
       "pivotType": "Pass",
@@ -1384,12 +1413,13 @@
       "evalDone": false,
       "maxEv": 0.99,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 5.08
     },
     {
       "raceId": "202644112007",
@@ -1563,7 +1593,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 52.0,
-      "coreSyntheticOdds": 1.29,
+      "coreSyntheticOdds": 1.08,
       "coreConnections": [
         [
           5,
@@ -1576,6 +1606,10 @@
         [
           8,
           2
+        ],
+        [
+          5,
+          3
         ]
       ],
       "pivotType": "Pass",
@@ -1585,12 +1619,13 @@
       "evalDone": false,
       "maxEv": 1.16,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.53
     },
     {
       "raceId": "202644112008",
@@ -1786,7 +1821,7 @@
       "scenario": "大井8R(ダ1600m・良) 実測N_lead=2頭。3シナリオ混合(S1前残り50% / S2標準35% / S3前崩れ15%)＋血統・斤量・善戦マン補正で全13頭を推論。",
       "isGraded": false,
       "m3": 49.6,
-      "coreSyntheticOdds": 1.35,
+      "coreSyntheticOdds": 1.01,
       "coreConnections": [
         [
           8,
@@ -1799,6 +1834,10 @@
         [
           7,
           4
+        ],
+        [
+          8,
+          6
         ]
       ],
       "pivotType": "Pass",
@@ -1811,12 +1850,13 @@
       "evalDone": false,
       "maxEv": 1.31,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.38
     },
     {
       "raceId": "202644112009",
@@ -1986,7 +2026,7 @@
       "scenario": "大井9R(ダ1600m・良) 実測N_lead=4頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全11頭を推論。",
       "isGraded": false,
       "m3": 47.4,
-      "coreSyntheticOdds": 1.19,
+      "coreSyntheticOdds": 0.96,
       "coreConnections": [
         [
           5,
@@ -1999,6 +2039,10 @@
         [
           6,
           7
+        ],
+        [
+          5,
+          9
         ]
       ],
       "pivotType": "Pass",
@@ -2011,12 +2055,13 @@
       "evalDone": false,
       "maxEv": 1.14,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.08
     },
     {
       "raceId": "202644112010",
@@ -2027,7 +2072,7 @@
       "name": "黄葉特別(C1五)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2212,7 +2257,7 @@
       "scenario": "大井10R(ダ1600m・良) 実測N_lead=5頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)＋血統・斤量・善戦マン補正で全13頭を推論。",
       "isGraded": false,
       "m3": 42.3,
-      "coreSyntheticOdds": 1.28,
+      "coreSyntheticOdds": 0.97,
       "coreConnections": [
         [
           8,
@@ -2225,6 +2270,10 @@
         [
           7,
           5
+        ],
+        [
+          8,
+          6
         ]
       ],
       "pivotType": "Pass",
@@ -2236,12 +2285,14 @@
       "evalDone": false,
       "maxEv": 1.03,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.12,
+      "passReason": "Core低配当圧縮(合成0.97倍/平均W 4.12倍)"
     },
     {
       "raceId": "202644112011",
@@ -2476,7 +2527,7 @@
       "scenario": "大井11R(ダ1600m・良) 実測N_lead=5頭。3シナリオ混合(S1前残り25% / S2標準35% / S3前崩れ40%)＋血統・斤量・善戦マン補正で全16頭を推論。",
       "isGraded": false,
       "m3": 31.3,
-      "coreSyntheticOdds": 2.32,
+      "coreSyntheticOdds": 1.79,
       "coreConnections": [
         [
           2,
@@ -2489,24 +2540,29 @@
         [
           6,
           10
+        ],
+        [
+          2,
+          14
         ]
       ],
       "maxEv": 1.11,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
-      "passReason": "混戦カオス(M3 31.3%<34%)",
+      "passReason": "◎オッズ10.4倍が上位軸適正帯(1.4-4.0)外",
       "investedYen": 0,
       "returnYen": 0,
       "actualRoi": 0.0,
       "isHit": false,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 7.2
     },
     {
       "raceId": "202644112012",
@@ -2517,7 +2573,7 @@
       "name": "神楽月賞(B2)",
       "surfaceDist": "ダ1600m",
       "postTime": "20:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-nar",
       "predicted": true,
       "aiPredicted": false,
@@ -2715,7 +2771,7 @@
       "scenario": "大井12R(ダ1600m・良) 実測N_lead=3頭。3シナリオ混合(S1前残り35% / S2標準40% / S3前崩れ25%)＋血統・斤量・善戦マン補正で全14頭を推論。",
       "isGraded": false,
       "m3": 42.7,
-      "coreSyntheticOdds": 1.55,
+      "coreSyntheticOdds": 1.22,
       "coreConnections": [
         [
           4,
@@ -2728,6 +2784,10 @@
         [
           11,
           10
+        ],
+        [
+          4,
+          3
         ]
       ],
       "pivotType": "Pass",
@@ -2739,12 +2799,14 @@
       "evalDone": false,
       "maxEv": 1.02,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 5.08,
+      "passReason": "◎オッズ5.8倍が上位軸適正帯(1.4-4.0)外"
     },
     {
       "raceId": "202647112009",
@@ -2905,7 +2967,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 48.8,
-      "coreSyntheticOdds": 2.32,
+      "coreSyntheticOdds": 1.79,
       "coreConnections": [
         [
           6,
@@ -2918,21 +2980,26 @@
         [
           2,
           4
+        ],
+        [
+          6,
+          8
         ]
       ],
       "maxEv": 1.87,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 7.2
     },
     {
       "raceId": "202647112010",
@@ -3119,7 +3186,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 46.7,
-      "coreSyntheticOdds": 1.55,
+      "coreSyntheticOdds": 1.22,
       "coreConnections": [
         [
           8,
@@ -3132,6 +3199,10 @@
         [
           3,
           4
+        ],
+        [
+          8,
+          9
         ]
       ],
       "pivotType": "Pass",
@@ -3141,12 +3212,13 @@
       "evalDone": false,
       "maxEv": 1.11,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 5.08
     },
     {
       "raceId": "202647112011",
@@ -3359,7 +3431,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 27.3,
-      "coreSyntheticOdds": 4.38,
+      "coreSyntheticOdds": 3.38,
       "coreConnections": [
         [
           3,
@@ -3372,21 +3444,26 @@
         [
           4,
           7
+        ],
+        [
+          3,
+          10
         ]
       ],
       "maxEv": 1.78,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 13.57
     },
     {
       "raceId": "202647112012",
@@ -3560,7 +3637,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 51.1,
-      "coreSyntheticOdds": 1.29,
+      "coreSyntheticOdds": 1.08,
       "coreConnections": [
         [
           2,
@@ -3573,6 +3650,10 @@
         [
           5,
           8
+        ],
+        [
+          2,
+          6
         ]
       ],
       "pivotType": "Pass",
@@ -3582,12 +3663,13 @@
       "evalDone": false,
       "maxEv": 1.24,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.53
     },
     {
       "raceId": "202650112009",
@@ -3787,7 +3869,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 47.4,
-      "coreSyntheticOdds": 1.19,
+      "coreSyntheticOdds": 0.94,
       "coreConnections": [
         [
           5,
@@ -3800,6 +3882,10 @@
         [
           6,
           7
+        ],
+        [
+          5,
+          8
         ]
       ],
       "pivotType": "Pass",
@@ -3809,12 +3895,13 @@
       "evalDone": false,
       "maxEv": 1.03,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.95
     },
     {
       "raceId": "202650112010",
@@ -4027,7 +4114,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 27.5,
-      "coreSyntheticOdds": 4.38,
+      "coreSyntheticOdds": 3.38,
       "coreConnections": [
         [
           1,
@@ -4040,21 +4127,26 @@
         [
           3,
           7
+        ],
+        [
+          1,
+          8
         ]
       ],
       "maxEv": 1.86,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 13.57
     },
     {
       "raceId": "202650112011",
@@ -4254,7 +4346,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 46.7,
-      "coreSyntheticOdds": 1.19,
+      "coreSyntheticOdds": 0.94,
       "coreConnections": [
         [
           5,
@@ -4267,6 +4359,10 @@
         [
           6,
           7
+        ],
+        [
+          5,
+          8
         ]
       ],
       "pivotType": "Pass",
@@ -4276,12 +4372,13 @@
       "evalDone": false,
       "maxEv": 1.02,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.95
     },
     {
       "raceId": "202650112012",
@@ -4494,7 +4591,7 @@
       "resultStatus": "💤 見送りPass (NAR下級平場・対象外見送り(南関10-12R/重賞限定))",
       "isGraded": false,
       "m3": 27.3,
-      "coreSyntheticOdds": 4.38,
+      "coreSyntheticOdds": 3.38,
       "coreConnections": [
         [
           1,
@@ -4507,21 +4604,26 @@
         [
           3,
           12
+        ],
+        [
+          1,
+          4
         ]
       ],
       "maxEv": 1.78,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "passReason": "NAR下級平場・対象外見送り(南関10-12R/重賞限定)",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 13.57
     }
   ],
   "trackBiases": [
@@ -4542,5 +4644,5 @@
     }
   ],
   "updatedAt": "2026-11-20 18:15 JST",
-  "engineVer": "v11.9-neon"
+  "engineVer": "v12.0-neon"
 }

@@ -10,7 +10,7 @@
       "name": "2歳未勝利",
       "surfaceDist": "ダ1400m",
       "postTime": "09:45",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -263,10 +263,10 @@
           "passing": "2-2"
         }
       ],
-      "investedYen": 10000,
-      "returnYen": 13000,
-      "isHit": true,
-      "resultStatus": "🎯 的中 (1着:7番 オーケーエース / 回収13,000円)",
+      "investedYen": 0,
+      "returnYen": 0,
+      "isHit": false,
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.79倍/平均W 2.83倍))",
       "nLead": 4,
       "trackCond": "良",
       "scenarioWeights": {
@@ -276,25 +276,35 @@
       },
       "isGraded": false,
       "m3": 63.0,
-      "coreSyntheticOdds": 1.66,
+      "coreSyntheticOdds": 0.79,
       "coreConnections": [
         [
           7,
-          14
+          3
         ],
         [
           7,
           12
+        ],
+        [
+          7,
+          14
         ]
       ],
       "maxEv": 1.27,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 2,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 3,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.83,
+      "pivotType": "Pass",
+      "passReason": "Core低配当圧縮(合成0.79倍/平均W 2.83倍)",
+      "actualRoi": 0.0,
+      "hitTickets": [],
+      "evalDone": false
     },
     {
       "raceId": "202605050402",
@@ -573,7 +583,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.76倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.62倍/平均W 2.58倍))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -583,7 +593,7 @@
       },
       "isGraded": false,
       "m3": 56.9,
-      "coreSyntheticOdds": 0.76,
+      "coreSyntheticOdds": 0.62,
       "coreConnections": [
         [
           1,
@@ -596,21 +606,26 @@
         [
           11,
           8
+        ],
+        [
+          1,
+          4
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.76倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.62倍/平均W 2.58倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.8,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.58
     },
     {
       "raceId": "202605050403",
@@ -876,7 +891,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.94倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.75倍/平均W 3.12倍))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -886,7 +901,7 @@
       },
       "isGraded": false,
       "m3": 52.9,
-      "coreSyntheticOdds": 0.94,
+      "coreSyntheticOdds": 0.75,
       "coreConnections": [
         [
           11,
@@ -899,21 +914,26 @@
         [
           8,
           14
+        ],
+        [
+          11,
+          12
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.94倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.75倍/平均W 3.12倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.85,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.12
     },
     {
       "raceId": "202605050404",
@@ -923,7 +943,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1600m",
       "postTime": "11:15",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "horses": [
@@ -1127,7 +1147,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (新馬Core合成1.4倍<1.48(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (新馬低配当圧縮(合成0.9倍/平均W 2.7倍))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -1137,29 +1157,35 @@
       },
       "isGraded": false,
       "m3": 53.3,
-      "coreSyntheticOdds": 1.4,
+      "coreSyntheticOdds": 0.9,
       "coreConnections": [
         [
           12,
-          3
+          8
         ],
         [
           12,
           9
+        ],
+        [
+          12,
+          3
         ]
       ],
       "maxEv": 0.92,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 2,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 3,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 2.7,
+      "passReason": "新馬低配当圧縮(合成0.9倍/平均W 2.7倍)"
     },
     {
       "raceId": "202605050405",
@@ -1169,7 +1195,7 @@
       "name": "2歳新馬",
       "surfaceDist": "芝1600m",
       "postTime": "12:05",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "horses": [
@@ -1327,7 +1353,7 @@
           "passing": "3-3"
         }
       ],
-      "resultStatus": "💤 見送りPass (新馬Core合成1.15倍<1.48(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (新馬低配当圧縮(合成0.91倍/平均W 3.73倍))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 50,
@@ -1339,7 +1365,7 @@
       "isHit": false,
       "isGraded": false,
       "m3": 48.5,
-      "coreSyntheticOdds": 1.15,
+      "coreSyntheticOdds": 0.91,
       "coreConnections": [
         [
           10,
@@ -1352,6 +1378,10 @@
         [
           8,
           5
+        ],
+        [
+          10,
+          2
         ]
       ],
       "actualRoi": 0.0,
@@ -1359,12 +1389,14 @@
       "evalDone": false,
       "maxEv": 0.9,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.73,
+      "passReason": "新馬低配当圧縮(合成0.91倍/平均W 3.73倍)"
     },
     {
       "raceId": "202605050406",
@@ -1630,7 +1662,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ1.8倍が適正収益帯(1.9-11.5)外)",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成1.32倍/平均W 2.65倍))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
@@ -1652,18 +1684,19 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "◎オッズ1.8倍が適正収益帯(1.9-11.5)外",
+      "passReason": "Core低配当圧縮(合成1.32倍/平均W 2.65倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.95,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.65
     },
     {
       "raceId": "202605050407",
@@ -1903,7 +1936,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.89倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.69倍/平均W 2.83倍))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -1913,7 +1946,7 @@
       },
       "isGraded": false,
       "m3": 50.2,
-      "coreSyntheticOdds": 0.89,
+      "coreSyntheticOdds": 0.69,
       "coreConnections": [
         [
           7,
@@ -1926,21 +1959,26 @@
         [
           8,
           13
+        ],
+        [
+          7,
+          2
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.89倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.69倍/平均W 2.83倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.71,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.83
     },
     {
       "raceId": "202605050408",
@@ -2154,7 +2192,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ1.7倍が適正収益帯(1.9-11.5)外)",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成1.16倍/平均W 2.45倍))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -2176,18 +2214,19 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "◎オッズ1.7倍が適正収益帯(1.9-11.5)外",
+      "passReason": "Core低配当圧縮(合成1.16倍/平均W 2.45倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.88,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.45
     },
     {
       "raceId": "202605050409",
@@ -2197,7 +2236,7 @@
       "name": "銀嶺S",
       "surfaceDist": "ダ1400m",
       "postTime": "14:10",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -2453,7 +2492,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.99<1.02))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.92倍/平均W 2.83倍))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
@@ -2463,29 +2502,35 @@
       },
       "isGraded": false,
       "m3": 48.6,
-      "coreSyntheticOdds": 1.54,
+      "coreSyntheticOdds": 0.92,
       "coreConnections": [
         [
           8,
-          1
+          11
         ],
         [
           8,
           14
+        ],
+        [
+          8,
+          1
         ]
       ],
       "maxEv": 0.99,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 2,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 3,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 2.83,
+      "passReason": "Core低配当圧縮(合成0.92倍/平均W 2.83倍)"
     },
     {
       "raceId": "202605050410",
@@ -2722,7 +2767,7 @@
           "passing": "10-9-10"
         }
       ],
-      "resultStatus": "💤 見送りPass (少頭数(8頭)・低配当圧縮(平均W 2.53倍))",
+      "resultStatus": "💤 見送りPass (少頭数(8頭)・低配当圧縮(平均W 2.92倍))",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 35,
@@ -2734,7 +2779,7 @@
       "isHit": false,
       "isGraded": false,
       "m3": 65.5,
-      "coreSyntheticOdds": 0.81,
+      "coreSyntheticOdds": 0.68,
       "coreConnections": [
         [
           11,
@@ -2747,20 +2792,25 @@
         [
           1,
           9
+        ],
+        [
+          11,
+          2
         ]
       ],
-      "passReason": "少頭数(8頭)・低配当圧縮(平均W 2.53倍)",
+      "passReason": "少頭数(8頭)・低配当圧縮(平均W 2.92倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.98,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.92
     },
     {
       "raceId": "202605050411",
@@ -3039,7 +3089,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.09倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.85倍/平均W 3.52倍))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -3049,7 +3099,7 @@
       },
       "isGraded": false,
       "m3": 44.8,
-      "coreSyntheticOdds": 1.09,
+      "coreSyntheticOdds": 0.85,
       "coreConnections": [
         [
           15,
@@ -3062,21 +3112,26 @@
         [
           5,
           18
+        ],
+        [
+          15,
+          14
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.09倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.85倍/平均W 3.52倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.79,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.52
     },
     {
       "raceId": "202605050412",
@@ -3308,7 +3363,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.07倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (◎オッズ4.2倍が上位軸適正帯(1.4-4.0)外)",
       "trackCond": "良",
       "scenarioWeights": {
         "s1": 35,
@@ -3317,7 +3372,7 @@
       },
       "isGraded": false,
       "m3": 58.0,
-      "coreSyntheticOdds": 1.07,
+      "coreSyntheticOdds": 0.89,
       "coreConnections": [
         [
           3,
@@ -3330,20 +3385,25 @@
         [
           18,
           1
+        ],
+        [
+          3,
+          14
         ]
       ],
-      "passReason": "Core合成1.07倍<1.12(低配当圧縮回避)",
+      "passReason": "◎オッズ4.2倍が上位軸適正帯(1.4-4.0)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 1.06,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.73
     },
     {
       "raceId": "202608050401",
@@ -3518,7 +3578,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.87<0.88))",
+      "resultStatus": "💤 見送りPass (◎オッズ1.3倍が上位軸適正帯(1.4-4.0)外)",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -3540,18 +3600,19 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.87<0.88)",
+      "passReason": "◎オッズ1.3倍が上位軸適正帯(1.4-4.0)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.87,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.45
     },
     {
       "raceId": "202608050402",
@@ -3765,7 +3826,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.82倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.65倍/平均W 2.7倍))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -3775,7 +3836,7 @@
       },
       "isGraded": false,
       "m3": 51.4,
-      "coreSyntheticOdds": 0.82,
+      "coreSyntheticOdds": 0.65,
       "coreConnections": [
         [
           2,
@@ -3788,21 +3849,26 @@
         [
           6,
           1
+        ],
+        [
+          2,
+          10
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.82倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.65倍/平均W 2.7倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.78,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.7
     },
     {
       "raceId": "202608050403",
@@ -3990,7 +4056,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ1.8倍が適正収益帯(1.9-11.5)外)",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成1.23倍/平均W 2.5倍))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -4012,18 +4078,19 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "◎オッズ1.8倍が適正収益帯(1.9-11.5)外",
+      "passReason": "Core低配当圧縮(合成1.23倍/平均W 2.5倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.95,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.5
     },
     {
       "raceId": "202608050404",
@@ -4312,16 +4379,17 @@
       ],
       "maxEv": 0.88,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 2.9
     },
     {
       "raceId": "202608050405",
@@ -4600,7 +4668,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (新馬Core合成0.88倍<1.08(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (新馬低配当圧縮(合成0.74倍/平均W 3.15倍))",
       "nLead": 3,
       "trackCond": "重",
       "scenarioWeights": {
@@ -4610,7 +4678,7 @@
       },
       "isGraded": false,
       "m3": 51.7,
-      "coreSyntheticOdds": 0.88,
+      "coreSyntheticOdds": 0.74,
       "coreConnections": [
         [
           11,
@@ -4623,21 +4691,26 @@
         [
           18,
           7
+        ],
+        [
+          11,
+          9
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "新馬Core合成0.88倍<1.08(トリガミ回避)",
+      "passReason": "新馬低配当圧縮(合成0.74倍/平均W 3.15倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.91,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.15
     },
     {
       "raceId": "202608050406",
@@ -4903,7 +4976,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.89倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.7倍/平均W 3.0倍))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -4913,7 +4986,7 @@
       },
       "isGraded": false,
       "m3": 49.1,
-      "coreSyntheticOdds": 0.89,
+      "coreSyntheticOdds": 0.7,
       "coreConnections": [
         [
           2,
@@ -4926,21 +4999,26 @@
         [
           8,
           10
+        ],
+        [
+          2,
+          11
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.89倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.7倍/平均W 3.0倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.81,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.0
     },
     {
       "raceId": "202608050407",
@@ -5219,7 +5297,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.97倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.8倍/平均W 3.35倍))",
       "nLead": 6,
       "trackCond": "重",
       "scenarioWeights": {
@@ -5229,7 +5307,7 @@
       },
       "isGraded": false,
       "m3": 43.5,
-      "coreSyntheticOdds": 0.97,
+      "coreSyntheticOdds": 0.8,
       "coreConnections": [
         [
           7,
@@ -5242,21 +5320,26 @@
         [
           17,
           5
+        ],
+        [
+          7,
+          10
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.97倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.8倍/平均W 3.35倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.92,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.35
     },
     {
       "raceId": "202608050408",
@@ -5266,7 +5349,7 @@
       "name": "3歳以上2勝クラス",
       "surfaceDist": "ダ1200m",
       "postTime": "13:50",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -5431,7 +5514,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 1.0<1.02))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.88倍/平均W 2.73倍))",
       "nLead": 4,
       "trackCond": "良",
       "scenarioWeights": {
@@ -5441,29 +5524,35 @@
       },
       "isGraded": false,
       "m3": 52.3,
-      "coreSyntheticOdds": 1.52,
+      "coreSyntheticOdds": 0.88,
       "coreConnections": [
         [
           3,
-          6
+          1
         ],
         [
           3,
           9
+        ],
+        [
+          3,
+          6
         ]
       ],
       "maxEv": 1.0,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 2,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 3,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 2.73,
+      "passReason": "Core低配当圧縮(合成0.88倍/平均W 2.73倍)"
     },
     {
       "raceId": "202608050409",
@@ -5638,7 +5727,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.94倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.71倍/平均W 2.88倍))",
       "nLead": 5,
       "trackCond": "重",
       "scenarioWeights": {
@@ -5648,7 +5737,7 @@
       },
       "isGraded": false,
       "m3": 50.1,
-      "coreSyntheticOdds": 0.94,
+      "coreSyntheticOdds": 0.71,
       "coreConnections": [
         [
           1,
@@ -5661,21 +5750,26 @@
         [
           5,
           3
+        ],
+        [
+          1,
+          6
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.94倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.71倍/平均W 2.88倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.76,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.88
     },
     {
       "raceId": "202608050410",
@@ -5863,7 +5957,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ1.7倍が適正収益帯(1.9-11.5)外)",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成1.31倍/平均W 2.8倍))",
       "nLead": 1,
       "trackCond": "良",
       "scenarioWeights": {
@@ -5885,18 +5979,19 @@
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "◎オッズ1.7倍が適正収益帯(1.9-11.5)外",
+      "passReason": "Core低配当圧縮(合成1.31倍/平均W 2.8倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.96,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
         "coreLineCap": 2,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.8
     },
     {
       "raceId": "202608050411",
@@ -5906,7 +6001,7 @@
       "name": "エリザベス杯",
       "surfaceDist": "芝2200m",
       "postTime": "15:40",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -6175,7 +6270,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.44倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (◎オッズ4.2倍が上位軸適正帯(1.4-4.0)外)",
       "nLead": 3,
       "trackCond": "重",
       "scenarioWeights": {
@@ -6185,7 +6280,7 @@
       },
       "isGraded": true,
       "m3": 37.8,
-      "coreSyntheticOdds": 1.44,
+      "coreSyntheticOdds": 1.08,
       "coreConnections": [
         [
           7,
@@ -6198,6 +6293,10 @@
         [
           16,
           13
+        ],
+        [
+          7,
+          9
         ]
       ],
       "pivotType": "Pass",
@@ -6206,12 +6305,14 @@
       "evalDone": false,
       "maxEv": 0.9,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.5,
+      "passReason": "◎オッズ4.2倍が上位軸適正帯(1.4-4.0)外"
     },
     {
       "raceId": "202608050412",
@@ -6477,7 +6578,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.83<0.88))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成1.06倍/平均W 4.4倍))",
       "nLead": 3,
       "trackCond": "重",
       "scenarioWeights": {
@@ -6487,7 +6588,7 @@
       },
       "isGraded": false,
       "m3": 35.3,
-      "coreSyntheticOdds": 1.38,
+      "coreSyntheticOdds": 1.06,
       "coreConnections": [
         [
           7,
@@ -6500,21 +6601,26 @@
         [
           11,
           16
+        ],
+        [
+          7,
+          14
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.83<0.88)",
+      "passReason": "Core低配当圧縮(合成1.06倍/平均W 4.4倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.83,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.4
     },
     {
       "raceId": "202603030401",
@@ -6780,7 +6886,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.82倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.66倍/平均W 2.8倍))",
       "nLead": 6,
       "trackCond": "良",
       "scenarioWeights": {
@@ -6790,7 +6896,7 @@
       },
       "isGraded": false,
       "m3": 52.1,
-      "coreSyntheticOdds": 0.82,
+      "coreSyntheticOdds": 0.66,
       "coreConnections": [
         [
           8,
@@ -6803,21 +6909,26 @@
         [
           7,
           10
+        ],
+        [
+          8,
+          11
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.82倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.66倍/平均W 2.8倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.88,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.8
     },
     {
       "raceId": "202603030402",
@@ -6827,7 +6938,7 @@
       "name": "2歳未勝利",
       "surfaceDist": "芝1800m",
       "postTime": "10:05",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -7083,7 +7194,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.14倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.87倍/平均W 3.75倍))",
       "nLead": 4,
       "trackCond": "良",
       "scenarioWeights": {
@@ -7093,7 +7204,7 @@
       },
       "isGraded": false,
       "m3": 44.4,
-      "coreSyntheticOdds": 1.14,
+      "coreSyntheticOdds": 0.87,
       "coreConnections": [
         [
           5,
@@ -7106,6 +7217,10 @@
         [
           11,
           7
+        ],
+        [
+          5,
+          16
         ]
       ],
       "pivotType": "Pass",
@@ -7114,12 +7229,14 @@
       "evalDone": false,
       "maxEv": 0.89,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.75,
+      "passReason": "Core低配当圧縮(合成0.87倍/平均W 3.75倍)"
     },
     {
       "raceId": "202603030403",
@@ -7372,7 +7489,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.06倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.78倍/平均W 3.42倍))",
       "nLead": 7,
       "trackCond": "良",
       "scenarioWeights": {
@@ -7382,7 +7499,7 @@
       },
       "isGraded": false,
       "m3": 46.2,
-      "coreSyntheticOdds": 1.06,
+      "coreSyntheticOdds": 0.78,
       "coreConnections": [
         [
           3,
@@ -7395,480 +7512,26 @@
         [
           12,
           11
+        ],
+        [
+          3,
+          10
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成1.06倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.78倍/平均W 3.42倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.91,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
-    },
-    {
-      "raceId": "202603030404",
-      "venue": "福島",
-      "raceNumber": 4,
-      "venueLabel": "福島4R",
-      "name": "3歳以上障害未勝利",
-      "surfaceDist": "芝1600m",
-      "postTime": "11:05",
-      "rank": "Pass",
-      "skill": "app-bayesian-horse-racing-text",
-      "predicted": true,
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "1着妙味主軸",
-          "num": 12,
-          "name": "バトラーズワーフ",
-          "style": "先",
-          "f": 22.8,
-          "q": 25.4,
-          "top2": 46.1,
-          "top3": 69.2,
-          "odds": 3.0,
-          "comment": "F:セ4黒騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10) / F:近走連"
-        },
-        {
-          "mark": "◯",
-          "role": "双頭対抗軸",
-          "num": 1,
-          "name": "ブランフォルテ",
-          "style": "先",
-          "f": 14.1,
-          "q": 15.3,
-          "top2": 27.4,
-          "top3": 41.0,
-          "odds": 5.0,
-          "comment": "F:牡4鹿騎手 / F:最内1枠(H:包まれ・砂被り注意) / F:近走連対実績あり"
-        },
-        {
-          "mark": "▲",
-          "role": "3着内Anchor",
-          "num": 9,
-          "name": "スカイロケット",
-          "style": "先",
-          "f": 13.0,
-          "q": 13.2,
-          "top2": 26.2,
-          "top3": 39.4,
-          "odds": 5.8,
-          "comment": "F:牡6鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10) / F:馬体-"
-        },
-        {
-          "mark": "☆",
-          "role": "展開特注穴",
-          "num": 10,
-          "name": "フレイムジョーカー",
-          "style": "先",
-          "f": 10.6,
-          "q": 11.2,
-          "top2": 21.5,
-          "top3": 32.2,
-          "odds": 6.8,
-          "comment": "F:牡7鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
-        },
-        {
-          "mark": "△",
-          "role": "連下押さえ",
-          "num": 11,
-          "name": "スズカダブル",
-          "style": "先",
-          "f": 8.4,
-          "q": 10.5,
-          "top2": 16.1,
-          "top3": 24.1,
-          "odds": 7.3,
-          "comment": "F:牡6栗騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10) / F:馬体+"
-        },
-        {
-          "mark": "△",
-          "role": "連下押さえ",
-          "num": 6,
-          "name": "フラムリンガム",
-          "style": "先",
-          "f": 6.7,
-          "q": 6.9,
-          "top2": 13.5,
-          "top3": 20.2,
-          "odds": 11.1,
-          "comment": "F:セ5栗騎手"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 2,
-          "name": "イフルジャンス",
-          "style": "先",
-          "f": 6.1,
-          "q": 5.0,
-          "top2": 12.4,
-          "top3": 18.5,
-          "odds": 15.2,
-          "comment": "F:セ4芦騎手 / F:近走連対実績あり"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 8,
-          "name": "メイショウゴッホ",
-          "style": "先",
-          "f": 5.4,
-          "q": 4.1,
-          "top2": 10.9,
-          "top3": 16.3,
-          "odds": 18.8,
-          "comment": "F:牡3鹿騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10) / F:馬体-"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 13,
-          "name": "[馬記号]馬名[ブリンカー]",
-          "style": "先",
-          "f": 4.3,
-          "q": 3.3,
-          "top2": 8.6,
-          "top3": 12.9,
-          "odds": 23.0,
-          "comment": "F:性齢、騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 7,
-          "name": "アウルムレガリア",
-          "style": "先",
-          "f": 3.0,
-          "q": 1.9,
-          "top2": 6.1,
-          "top3": 9.1,
-          "odds": 41.0,
-          "comment": "F:牝4黒騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10) / F:馬体-"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 5,
-          "name": "サトノドルチェ",
-          "style": "先",
-          "f": 2.8,
-          "q": 1.8,
-          "top2": 5.7,
-          "top3": 8.5,
-          "odds": 43.0,
-          "comment": "F:セ7鹿騎手 / F:近走連対実績あり"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 4,
-          "name": "クラウンウルル",
-          "style": "先",
-          "f": 1.5,
-          "q": 0.8,
-          "top2": 3.1,
-          "top3": 4.6,
-          "odds": 96.7,
-          "comment": "F:牡4芦騎手 / F:近走連対実績あり"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 3,
-          "name": "オーキーベルセルク",
-          "style": "差",
-          "f": 1.3,
-          "q": 0.8,
-          "top2": 2.6,
-          "top3": 3.9,
-          "odds": 98.6,
-          "comment": "F:牡3栗騎手"
-        }
-      ],
-      "scenario": "福島4R(芝1600m) 全13頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 1,
-          "num": 1,
-          "name": "ブランフォルテ",
-          "odds": "5.0",
-          "passing": "1-1-1-1"
-        },
-        {
-          "rank": "2",
-          "waku": 7,
-          "num": 10,
-          "name": "フレイムジョーカー",
-          "odds": "6.8",
-          "passing": "2-2-2-2"
-        },
-        {
-          "rank": "3",
-          "waku": 8,
-          "num": 12,
-          "name": "バトラーズワーフ",
-          "odds": "3.0",
-          "passing": "5-5-5-5"
-        }
-      ],
-      "investedYen": 0,
-      "returnYen": 0,
-      "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.97倍<1.12(低配当圧縮回避))",
-      "nLead": 5,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 30,
-        "s2": 35,
-        "s3": 35
-      },
-      "isGraded": false,
-      "m3": 49.9,
-      "coreSyntheticOdds": 0.97,
-      "coreConnections": [
-        [
-          12,
-          1
-        ],
-        [
-          12,
-          9
-        ],
-        [
-          1,
-          9
-        ]
-      ],
-      "pivotType": "Pass",
-      "passReason": "Core合成0.97倍<1.12(低配当圧縮回避)",
-      "actualRoi": 0.0,
-      "hitTickets": [],
-      "evalDone": false,
-      "maxEv": 0.75,
-      "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
-        "singleLongshotCapPct": 0.3
-      },
-      "strategyProfile": "roi_100_plus"
-    },
-    {
-      "raceId": "202603030405",
-      "venue": "福島",
-      "raceNumber": 5,
-      "venueLabel": "福島5R",
-      "name": "3歳以上障害未勝利",
-      "surfaceDist": "芝1600m",
-      "postTime": "11:55",
-      "rank": "Pass",
-      "skill": "app-bayesian-horse-racing-text",
-      "predicted": true,
-      "horses": [
-        {
-          "mark": "◎",
-          "role": "1着妙味主軸",
-          "num": 6,
-          "name": "キャプテンシー",
-          "style": "先",
-          "f": 41.1,
-          "q": 49.3,
-          "top2": 82.6,
-          "top3": 96.0,
-          "odds": 1.5,
-          "comment": "F:セ5鹿騎手 / F:6枠外目(H:砂被り回避スムーズ+0.10) / F:馬体-"
-        },
-        {
-          "mark": "◯",
-          "role": "双頭対抗軸",
-          "num": 2,
-          "name": "アップストローク",
-          "style": "先",
-          "f": 22.7,
-          "q": 25.5,
-          "top2": 45.6,
-          "top3": 68.4,
-          "odds": 2.9,
-          "comment": "F:セ7黒騎手 / F:馬体-6kg絞り(H:TypeI好仕上)"
-        },
-        {
-          "mark": "▲",
-          "role": "3着内Anchor",
-          "num": 7,
-          "name": "ゴールドストーム",
-          "style": "先",
-          "f": 6.7,
-          "q": 4.9,
-          "top2": 13.5,
-          "top3": 20.2,
-          "odds": 15.1,
-          "comment": "F:セ4鹿騎手 / F:7枠外目(H:砂被り回避スムーズ+0.10)"
-        },
-        {
-          "mark": "☆",
-          "role": "展開特注穴",
-          "num": 4,
-          "name": "ヴォンヌヴォー",
-          "style": "先",
-          "f": 6.4,
-          "q": 5.2,
-          "top2": 12.9,
-          "top3": 19.3,
-          "odds": 14.1,
-          "comment": "F:牝6鹿騎手"
-        },
-        {
-          "mark": "△",
-          "role": "連下押さえ",
-          "num": 10,
-          "name": "[馬記号]馬名[ブリンカー]",
-          "style": "先",
-          "f": 5.9,
-          "q": 4.7,
-          "top2": 11.8,
-          "top3": 17.7,
-          "odds": 15.8,
-          "comment": "F:性齢、騎手"
-        },
-        {
-          "mark": "△",
-          "role": "連下押さえ",
-          "num": 8,
-          "name": "リードアクトレス",
-          "style": "先",
-          "f": 5.1,
-          "q": 3.4,
-          "top2": 10.3,
-          "top3": 15.5,
-          "odds": 21.6,
-          "comment": "F:牝5鹿騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10)"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 9,
-          "name": "マイレーヌ",
-          "style": "先",
-          "f": 4.0,
-          "q": 1.8,
-          "top2": 8.0,
-          "top3": 12.0,
-          "odds": 41.3,
-          "comment": "F:牝6青騎手 / F:8枠外目(H:砂被り回避スムーズ+0.10) / F:馬体-"
-        },
-        {
-          "mark": "無",
-          "role": "強調材料乏しい",
-          "num": 5,
-          "name": "ヘルメスギャング",
-          "style": "先",
-          "f": 3.8,
-          "q": 2.7,
-          "top2": 7.2,
-          "top3": 10.8,
-          "odds": 27.1,
-          "comment": "F:セ3芦騎手 / F:馬体+12kg(H:大幅増TypeII減点) / F:近走連"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 1,
-          "name": "スティルシャイニン",
-          "style": "先",
-          "f": 2.9,
-          "q": 1.5,
-          "top2": 5.6,
-          "top3": 8.4,
-          "odds": 49.2,
-          "comment": "F:牡4青騎手 / F:最内1枠(H:包まれ・砂被り注意) / F:近走連対実績あり"
-        },
-        {
-          "mark": "消",
-          "role": "時計・展開劣勢",
-          "num": 3,
-          "name": "ヴィシュヴァナート",
-          "style": "差",
-          "f": 1.4,
-          "q": 0.8,
-          "top2": 2.6,
-          "top3": 3.8,
-          "odds": 88.0,
-          "comment": "F:牡3黒騎手 / F:馬体+20kg(H:大幅増TypeII減点)"
-        }
-      ],
-      "scenario": "福島5R(芝1600m) 全10頭の枠順・騎手・馬体重・近走ラップからPlackett-Luce確率を算出。",
-      "actualTop3": [
-        {
-          "rank": "1",
-          "waku": 6,
-          "num": 6,
-          "name": "キャプテンシー",
-          "odds": "1.5",
-          "passing": "3-3-2-2"
-        },
-        {
-          "rank": "2",
-          "waku": 2,
-          "num": 2,
-          "name": "アップストローク",
-          "odds": "2.9",
-          "passing": "7-6-4-3"
-        },
-        {
-          "rank": "3",
-          "waku": 8,
-          "num": 9,
-          "name": "マイレーヌ",
-          "odds": "41.3",
-          "passing": "1-1-1-1"
-        }
-      ],
-      "investedYen": 0,
-      "returnYen": 0,
-      "isHit": false,
-      "resultStatus": "💤 見送りPass (◎オッズ1.5倍が適正収益帯(1.9-11.5)外)",
-      "nLead": 3,
-      "trackCond": "良",
-      "scenarioWeights": {
-        "s1": 35,
-        "s2": 40,
-        "s3": 25
-      },
-      "isGraded": false,
-      "m3": 70.5,
-      "coreSyntheticOdds": 1.65,
-      "coreConnections": [
-        [
-          6,
-          4
-        ],
-        [
-          6,
-          7
-        ]
-      ],
-      "maxEv": 1.01,
-      "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 2,
-        "singleLongshotCapPct": 0.3
-      },
-      "strategyProfile": "roi_100_plus",
-      "pivotType": "Pass",
-      "passReason": "◎オッズ1.5倍が適正収益帯(1.9-11.5)外",
-      "actualRoi": 0.0,
-      "hitTickets": [],
-      "evalDone": false
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.42
     },
     {
       "raceId": "202603030406",
@@ -7878,7 +7541,7 @@
       "name": "2歳新馬",
       "surfaceDist": "ダ1700m",
       "postTime": "12:30",
-      "rank": "New",
+      "rank": "Pass",
       "skill": "app-bayesian-make-debut",
       "predicted": true,
       "horses": [
@@ -8056,7 +7719,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (新馬Core合成1.39倍<1.48(トリガミ回避))",
+      "resultStatus": "💤 見送りPass (新馬低配当圧縮(合成0.74倍/平均W 2.4倍))",
       "nLead": 2,
       "trackCond": "良",
       "scenarioWeights": {
@@ -8066,29 +7729,35 @@
       },
       "isGraded": false,
       "m3": 60.8,
-      "coreSyntheticOdds": 1.39,
+      "coreSyntheticOdds": 0.74,
       "coreConnections": [
         [
           4,
-          3
+          8
         ],
         [
           4,
           2
+        ],
+        [
+          4,
+          3
         ]
       ],
       "maxEv": 0.81,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 2,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 3,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus",
+      "strategyProfile": "v12_balanced_roi",
       "pivotType": "Pass",
       "actualRoi": 0.0,
       "hitTickets": [],
-      "evalDone": false
+      "evalDone": false,
+      "avgCoreWide": 2.4,
+      "passReason": "新馬低配当圧縮(合成0.74倍/平均W 2.4倍)"
     },
     {
       "raceId": "202603030407",
@@ -8354,7 +8023,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.99倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.8倍/平均W 3.57倍))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
@@ -8364,7 +8033,7 @@
       },
       "isGraded": false,
       "m3": 47.3,
-      "coreSyntheticOdds": 0.99,
+      "coreSyntheticOdds": 0.8,
       "coreConnections": [
         [
           6,
@@ -8377,21 +8046,26 @@
         [
           15,
           11
+        ],
+        [
+          6,
+          10
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.99倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.8倍/平均W 3.57倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.95,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.57
     },
     {
       "raceId": "202603030408",
@@ -8644,7 +8318,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.88倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.74倍/平均W 3.33倍))",
       "nLead": 8,
       "trackCond": "良",
       "scenarioWeights": {
@@ -8654,7 +8328,7 @@
       },
       "isGraded": false,
       "m3": 52.7,
-      "coreSyntheticOdds": 0.88,
+      "coreSyntheticOdds": 0.74,
       "coreConnections": [
         [
           11,
@@ -8667,21 +8341,26 @@
         [
           13,
           14
+        ],
+        [
+          11,
+          12
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.88倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.74倍/平均W 3.33倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.99,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.33
     },
     {
       "raceId": "202603030409",
@@ -8895,7 +8574,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成0.9倍<1.12(低配当圧縮回避))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.7倍/平均W 2.9倍))",
       "nLead": 5,
       "trackCond": "良",
       "scenarioWeights": {
@@ -8905,7 +8584,7 @@
       },
       "isGraded": true,
       "m3": 50.0,
-      "coreSyntheticOdds": 0.9,
+      "coreSyntheticOdds": 0.7,
       "coreConnections": [
         [
           12,
@@ -8918,21 +8597,26 @@
         [
           4,
           6
+        ],
+        [
+          12,
+          1
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "Core合成0.9倍<1.12(低配当圧縮回避)",
+      "passReason": "Core低配当圧縮(合成0.7倍/平均W 2.9倍)",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.68,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 2.9
     },
     {
       "raceId": "202603030410",
@@ -8942,7 +8626,7 @@
       "name": "三陸特別",
       "surfaceDist": "芝2600m",
       "postTime": "14:35",
-      "rank": "A",
+      "rank": "Pass",
       "skill": "app-bayesian-horse-racing-text",
       "predicted": true,
       "horses": [
@@ -9198,7 +8882,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (Core合成1.2倍<1.52(高期待値基準未達))",
+      "resultStatus": "💤 見送りPass (Core低配当圧縮(合成0.92倍/平均W 3.83倍))",
       "nLead": 3,
       "trackCond": "良",
       "scenarioWeights": {
@@ -9208,7 +8892,7 @@
       },
       "isGraded": false,
       "m3": 45.2,
-      "coreSyntheticOdds": 1.2,
+      "coreSyntheticOdds": 0.92,
       "coreConnections": [
         [
           5,
@@ -9221,6 +8905,10 @@
         [
           12,
           16
+        ],
+        [
+          5,
+          7
         ]
       ],
       "pivotType": "Pass",
@@ -9229,12 +8917,14 @@
       "evalDone": false,
       "maxEv": 0.9,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.83,
+      "passReason": "Core低配当圧縮(合成0.92倍/平均W 3.83倍)"
     },
     {
       "raceId": "202603030411",
@@ -9487,7 +9177,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.84<0.88))",
+      "resultStatus": "💤 見送りPass (◎オッズ4.7倍が上位軸適正帯(1.4-4.0)外)",
       "nLead": 7,
       "trackCond": "良",
       "scenarioWeights": {
@@ -9497,7 +9187,7 @@
       },
       "isGraded": false,
       "m3": 36.9,
-      "coreSyntheticOdds": 1.25,
+      "coreSyntheticOdds": 0.97,
       "coreConnections": [
         [
           6,
@@ -9510,21 +9200,26 @@
         [
           1,
           13
+        ],
+        [
+          6,
+          14
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.84<0.88)",
+      "passReason": "◎オッズ4.7倍が上位軸適正帯(1.4-4.0)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.84,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 4.0
     },
     {
       "raceId": "202603030412",
@@ -9790,7 +9485,7 @@
       "investedYen": 0,
       "returnYen": 0,
       "isHit": false,
-      "resultStatus": "💤 見送りPass (期待値エッジ不足(最大EV 0.74<0.88))",
+      "resultStatus": "💤 見送りPass (◎オッズ4.2倍が上位軸適正帯(1.4-4.0)外)",
       "nLead": 2,
       "trackCond": "重",
       "scenarioWeights": {
@@ -9800,7 +9495,7 @@
       },
       "isGraded": false,
       "m3": 45.4,
-      "coreSyntheticOdds": 1.13,
+      "coreSyntheticOdds": 0.86,
       "coreConnections": [
         [
           5,
@@ -9813,21 +9508,26 @@
         [
           15,
           7
+        ],
+        [
+          5,
+          10
         ]
       ],
       "pivotType": "Pass",
-      "passReason": "期待値エッジ不足(最大EV 0.74<0.88)",
+      "passReason": "◎オッズ4.2倍が上位軸適正帯(1.4-4.0)外",
       "actualRoi": 0.0,
       "hitTickets": [],
       "evalDone": false,
       "maxEv": 0.74,
       "portfolioRules": {
-        "coreRatio": 0.55,
-        "alphaRatio": 0.45,
-        "coreLineCap": 3,
+        "coreRatio": 0.62,
+        "alphaRatio": 0.38,
+        "coreLineCap": 4,
         "singleLongshotCapPct": 0.3
       },
-      "strategyProfile": "roi_100_plus"
+      "strategyProfile": "v12_balanced_roi",
+      "avgCoreWide": 3.48
     }
   ],
   "win5": {},
@@ -10167,5 +9867,5 @@
       "trend": "福島当日実測(12R集計): 1着内枠3回/外枠5回 → 【外枠(6〜8枠)スムーズ先行・外差し優勢】"
     }
   ],
-  "engineVer": "v11.9-neon"
+  "engineVer": "v12.0-neon"
 }
